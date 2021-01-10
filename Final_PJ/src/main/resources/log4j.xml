@@ -12,7 +12,7 @@
 	</appender>
 	
 	<appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="H:\\logs\\debug.log" />
+		<param name="File" value="c:\\logs\\debug.log" />
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
