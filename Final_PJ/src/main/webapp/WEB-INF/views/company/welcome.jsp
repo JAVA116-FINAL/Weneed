@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Wanted for Employers</title>
+<title>Wanted for Employer</title>
 </head>
 <body>
 테스트

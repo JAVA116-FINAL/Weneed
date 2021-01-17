@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>company_top.jsp</title>
 </head>
 <body>
-
+탑 테스트
 </body>
 </html>
