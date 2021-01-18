@@ -8,7 +8,7 @@ body{
 				"hiragino kaku gothic pro", meiryo, "ms pgothic", "Nanum Gothic", "Malgun Gothic", sans-serif;
 }
 
-section{
+.section-intro{
 	padding: 100px 0px;
 }
 
@@ -38,7 +38,7 @@ $('#myModal').on('shown.bs.modal', function () {
 	});
 	
 </script>
-<section>
+<section class="section-intro">
 	<div class="container">
 		<h1>
 			<span>

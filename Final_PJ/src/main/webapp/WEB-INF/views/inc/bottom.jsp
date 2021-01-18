@@ -65,7 +65,6 @@
     Essential Scripts
     =====================================-->
 
-    
     <!-- Main jQuery -->
     <script src="<%=request.getContextPath() %>/resources/plugins/jquery/jquery.js"></script>
     <!-- Bootstrap 4.3.2 -->
