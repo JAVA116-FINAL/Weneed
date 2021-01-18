@@ -14,4 +14,14 @@ public class IndexController {
 	public void index() {
 		logger.info("index화면 보여주기");
 	}
+	
+	@RequestMapping("/inc/top.do")
+	public void top() {
+		logger.info("top화면 보여주기");
+	}
+	
+	@RequestMapping("/inc/bottom.do")
+	public void bottom() {
+		logger.info("bottom화면 보여주기");
+	}
 }
