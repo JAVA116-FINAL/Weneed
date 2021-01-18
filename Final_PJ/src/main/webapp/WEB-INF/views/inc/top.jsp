@@ -32,7 +32,8 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/gaeun.css">
   
   <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
-  
+  <!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->
+  <script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>
 </head>
 
 <body id="top">
