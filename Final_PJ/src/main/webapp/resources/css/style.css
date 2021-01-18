@@ -716,19 +716,21 @@ a:focus {
 }
 
 .doctors .btn-group .btn {
-  border-radius: 0px;
+  border-radius: 0.3em;
   margin: 0px 2px;
   text-transform: capitalize;
-  font-size: 16px;
+  font-size: 13px;
   padding: .6rem 1.5rem;
+  background: #eef0f4;
+  color: #000000;
   cursor: pointer;
 }
 
 .doctors .btn-group .btn.active {
   box-shadow: none !important;
   border-color: transparent;
-  background: #e12454;
-  color: #fff;
+  background: #eef0f4;
+  color: #000000;
 }
 
 .doctors .btn-group .btn.focus {
@@ -739,15 +741,15 @@ a:focus {
 .doctors .btn-group .btn:focus {
   box-shadow: none !important;
   border-color: transparent;
-  background: #e12454;
+  background: #eef0f4;
   color: #fff;
 }
 
 .doctors .btn-group .btn:hover {
   box-shadow: none !important;
   border-color: transparent;
-  background: #e12454;
-  color: #fff;
+  background: #ffffff;
+  color: #000000;
 }
 
 .doctors .btn-group > .btn-group:not(:last-child) > .btn, .doctors .btn-group > .btn:not(:last-child):not(.dropdown-toggle), .doctors .btn-group > .btn:not(:first-child) {
