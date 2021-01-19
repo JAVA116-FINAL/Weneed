@@ -9,11 +9,12 @@ i{
 }
 
 h2{
-	padding: 50px 0 20px 0;
 	font-size: 1.2em;
 	font-weight: bold;
 }
-
+.mypageTitle {
+	padding: 50px 0 20px 0;
+}
 .divWrapper{
 	display: flex;
 	
@@ -59,18 +60,19 @@ h2{
 
 dt{
 	color: black;
-	font-size: 1.1em;
+	font-size: 1.2em;
 	padding-top: 30px;
 	padding-bottom: 20px;
 }
-dl{
+dd{
 	color: #767676;
-	font-size: 0.8em;
+	font-size: 0.9em;
+	padding-bottom: 0px;
 }
-dl:first-child{
+dd:first-child{
 	padding-bottom: 10px;
 }
-dl:last-child{
+dd:last-child{
 	padding-bottom: 20px;
 }
 
@@ -79,11 +81,11 @@ dl:last-child{
 	height:40px;
 	border: 0.5px solid #e1e2e3;
 	border-radius: 20px;
-	padding: 11px 34px 10px;
+	padding: 11px 30px 10px;
 }
 
-a:hover{
-	background-color:#f8f8fa;
+.basicInfoLink a:hover{
+	background-color:#ffffff;
 	color: black;	
 }
 
@@ -150,6 +152,10 @@ strong{
 	font-size: 2em;
 	display: block;
 }
+.applyStatusNum a:hover{
+	color:black;
+	background-color: #ffffff;
+}
 
 .applyStatusNum:first-child,
 .applyStatusNum:nth-child(2),
@@ -169,8 +175,18 @@ strong{
 	height: 211px;
 	padding: 26px 30px 30px;
 }
-.booklikeBody{
+.booklikeTop{
 	display: flex;
+	justify-content: space-between;
+}
+.seeMore{
+	color: #3366ff;
+	font-size: 0.9em;
+}
+.bookLikeAllBody{
+	display: flex;
+	width: 332px;
+	height: 100px;
 }
 .booklikeLogo{
 	width: 100px;
@@ -182,7 +198,9 @@ strong{
 	margin-bottom: 90px;
 	padding: 26px 30px 30px;
 }
-
+.eventMother{
+	position: relative;
+}
 .gotoEvent{
 	border: 1px solid #3366ff;
 	color: #3366ff;
@@ -190,10 +208,46 @@ strong{
 	width: 230px;
 	height: 48px; 
 	border-radius: 25px;
-	padding: 15px 45px;
+	padding: 10px 40px 15px 40px;
+	position: absolute;
+	bottom: 30px;
+	right: 25px;
+	text-align: center;
 }
 
+.booklikeUL{
+	list-style:none;
+    margin:0;
+    padding:0;
+    margin-top:30px;
+}
+.booklikeLi{
+	  margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+}
+
+.seeMore a:hover{
+	color: #3366ff;
+}
 .gotoEvent a:hover{
 	color: #3366ff;
 	background-color:#ffffff; 
+}
+
+p{
+	color: black;
+}
+
+.booklikeContent{
+	padding-left: 20px;	
+}
+
+.booklikeContent p{
+	font-weight: bold;
+}
+.booklikeContent span{
+	color: #999999;
+	font-size: 0.8em;
 }

@@ -2,9 +2,8 @@
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/mypageMain.css">
 <div class="container">
-	<h2>MY 원티드</h2>
+	<h2 class="mypageTitle">MY 원티드</h2>
 	<div class="divWrapper">
-		
 		<div class="leftSideDivGroup">
 			<div class="leftDiv">
 				<div class="proImg">
@@ -15,11 +14,13 @@
 					</div>
 				</div>
 				<div>
-					<dt>이이름</dt>
-					<dl>이메일주소</dl>
-					<dl>휴대폰번호</dl>
+					<dl>
+						<dt>이이름</dt>
+						<dd>이메일주소</dd>
+						<dd>휴대폰번호</dd>
+					</dl>
 				</div>
-				<a class="basicInfoLink" href="">기본정보수정</a>
+				<a class="basicInfoLink" href="#"><span>기본정보수정</span></a>
 			</div>
 			<div class="leftDiv leftPoint">
 				<span>포인트</span><span class="number">1,000P</span>
@@ -56,37 +57,57 @@
 				</div>
 			</div>
 			<div class="rightDiv">
-				<ul>
-					<li>
-						<a>
-							<div class="booklikeTop">
-								<h2 class="subTitleinRightDivsSecond">북마크</h2>
-							</div>
-							<div class="booklikeBody">
+				<div class="booklikeTop">
+					<h2 class="subTitleinRightDivsSecond">북마크</h2>
+					<a class="seeMore" href="#">총 4개 전체보기 
+						<i class="seeMore fas fa-chevron-right"></i></a>
+				</div>
+				<div class="booklikeBody">
+					<ul class="booklikeUL">
+						<li class="booklikeLi">
+							<a class="bookLikeAllBody" href="#">
 								<div class="booklikeLogo">
-								<!-- 기업로고이미지 -->
+									<!-- 기업로고이미지 -->
 								</div>
 								<div class="booklikeContent">
 									<h2>포지션 종류</h2>
 									<p>기업명</p>
 									<span>지역·국가</span>
 								</div>
-							</div>
-						</a>
-					</li>
-				</ul>
+							</a>
+						</li>
+						<li class="booklikeLi">
+							<a class="bookLikeAllBody" href="#">
+								<div class="booklikeLogo">
+									<!-- 기업로고이미지 -->
+								</div>
+								<div class="booklikeContent">
+									<h2>포지션 종류</h2>
+									<p>기업명</p>
+									<span>지역·국가</span>
+								</div>
+							</a>
+						</li>
+						
+					</ul>
+				</div>
 				
 			</div>
 			<div class="rightDiv">
-				<h2 class="subTitleinRightDivsSecond">좋아요</h2>
+				<div class="booklikeTop">
+					<h2 class="subTitleinRightDivsSecond">좋아요</h2>
+					<a class="seeMore" href="#">총 4개 전체보기 
+						<i class="seeMore fas fa-chevron-right"></i></a>
+				</div>
 			</div>
-			<div class="rightDiv">
+			<div class="rightDiv eventMother">
 				<h2 class="subTitleinRightDivsSecond">MY 영상</h2>
 				<!-- 구매한 영상이 있을 때 -->
 				
 				<!-- 구매한 영상이 없을 때 -->
 				<p>이벤트 메뉴에서 영상을 구매·추가해보세요</p>
-				<a class="gotoEvent" href="">이벤트 바로가기</a>
+				<a class="gotoEvent" href="">
+					<span>이벤트 바로가기</span></a>
 			</div>
 		</div>
 	</div>
