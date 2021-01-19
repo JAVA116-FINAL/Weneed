@@ -122,8 +122,6 @@ button{
 }
 
 
-
-
 /* bottom */
 .footer-top-left{
 	float:left;
@@ -219,6 +217,364 @@ button{
 }
 
 
+/* main - 로그인 전 */
+.beforeLogin-wrapper{
+	width:100%;
+	overflow:hidden;
+	background:#fff;
+	color:#000;
+}
+
+.beforeWrap1{
+	/* background-image:url("../images/main_kr_pc.jpg") center/cover no-repeat; */
+	position:relative;
+	display:flex;
+	width:100%;
+	height:550px;
+	align-items:center;
+}
+
+.beforeLogin-content{
+	float:left;
+}
+
+.beforeLogin-content h1{
+	font-size:48px;
+	line-height:62px;
+	margin-bottom:20px;
+	font-weight: bold;
+}
+
+.beforeLogin-content h3{
+	font-size:18px;
+	line-height:28px;
+	margin-bottom:30px;
+	font-weight:500;
+}
+
+.startbtn{
+	height:64px;
+	width:230px;
+	border-radius:32px;
+	background-color:#3a68f9;
+	color:#fff;
+	font-size:20px;
+	line-height:17px;
+	border:none;
+	outline:none;
+	cursor:pointer;
+}
+
+.beforeWrap2{
+	position:relative;
+	display:flex;
+	width:100%;
+	height:480px;
+	flex-direction:row;
+	justify-content:center;
+	align-items:center;
+}
+
+.beforeLogin-content2{
+	width:530px;
+	height:380px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+.beforeLogin-content3{
+	text-align:left;
+	padding-left:60px;
+	width:530px;
+	height:380px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+.beforeLogin-content3 h1{
+	font-size:36px;
+	line-height:48px;
+	margin-bottom:20px;
+	font-weight:600;
+}
+
+.beforeLogin-content3 h3{
+	font-size:16px;
+	line-height:28px;
+	font-weight:500;
+}
+
+.beforeWrap3{
+	position:relative;
+	display:flex;
+	width:100%;
+	height:480px;
+	flex-direction:row;
+	justify-content:center;
+	align-items:center;
+}
+
+.beforeLogin-content4{
+	width:530px;
+	height:380px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+
+.beforeLogin-content5{
+	text-align:left;
+	padding-left:60px;
+	width:530px;
+	height:380px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+
+.beforeLogin-content5 h1{
+	font-size: 36px;
+	line-height:48px;
+	margin-bottom:20px;
+	font-weight:600;
+}
+
+.beforeLogin-content5 h3{
+	font-size:16px;
+	line-height:28px;
+	font-weight:500;
+}
+
+.dot{
+	position:absolute;
+	top:-51.5px;
+	left:50%;
+	transform:translate(-50%, 0);
+}
+
+.beforeWrap4{
+	position:relative;
+	display:flex;
+	width:100%;
+	height:480px;
+	flex-direction:row;
+	justify-content:center;
+	align-items:center;
+}
+
+.beforeLogin-content6{
+	width:530px;
+	height:380px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+
+.beforeLogin-content7{
+	width:530px;
+	height:380px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+
+.beforeLogin-content7 h1{
+	font-size:36px;
+	line-height:48px;
+	margin-bottom:20px;
+	font-weight:600;
+}
+
+.beforeLogin-content7 h3{
+	font-size:16px;
+	line-height:28px;
+	font-weight:500;
+}
+
+.beforeWrap5{
+	position:relative;
+	display:flex;
+	width:100%;
+	height:520px;
+	flex-direction:column;
+	padding:140px;
+	text-align:center;
+	color:#fff;
+}
+
+.beforeLogin-content8 h1{
+	font-size:36px;
+	line-height:48px;
+	margin-bottom:20px;
+	font-weight:600;
+	color:#fff;
+}
+
+.beforeLogin-content8 h3{
+	font-size:18px;
+	line-height:28px;
+	margin-bottom:30px;
+	font-weight:500;
+	color:#fff;
+}
+
+/*로그인/회원가입modal*/
+body.modal-open {
+    overflow: auto;
+}
+
+body.modal-open[style] {
+    padding-right: 0px !important;
+}
+
+/* Important part */
+.modal-content{
+overflow-y: initial !important
+}
+.modal-body{
+height: calc(100vh - 248px);
+overflow-y: auto;
+}
+
+img.modalLogin-logo{
+	width:100px;
+	margin:0 auto;
+}
+
+h5.modal-wanted-title{
+	width:400px;
+	text-align:center;	
+	padding-left:24px;
+}
+.gaeun-modal-header{
+	border-bottom:none;
+}
+
+.gaeun-modal-body{
+	background-color:#fff;
+	padding:20px;
+}
+
+.gaeun-modal-body-con1{
+	text-align:center;
+	word-break:break-word;
+	margin-top:24px;
+	margin-bottom:40px;
+}
+
+.gaeun-modal-body-con1 h1{
+	line-height:40px;
+	font-size:26px;
+	font-weight:600;
+	color:#333;
+}
+
+.gaeun-modal-body-con1 h2{
+	margin-top:16px;
+	line-height:1.5;
+	font-size:16px;
+	font-weight:400;
+	color:#666;
+}
+
+.gaeun-modal-body-con2{
+	position:relative;
+	overflow:hidden;
+	z-index:1;
+	margin-bottom:20px;
+}
+
+.gaeun-login-emailBox{
+	position:relative;
+	padding-bottom:22px;
+	color:#767676;
+}
+
+.ge-labelEmail{
+	font-size:14px;
+	font-weight:400;
+	margin-bottom:0;
+}
+
+.ge-emailBox{
+	margin-top:11px;
+}
+
+.ge-inputEmail{
+	width:100%;
+	height:50px;
+	padding-right:15px;
+	padding-left:15px;
+	border-radius:5px;
+	border:1px solid #e1e2e3;
+	background-color:#fff;
+	font-size:15px;
+	color:#333;
+	appearance:none;
+}
+
+.email-login-btn{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	width:100%;
+	height:54px;
+	border:0;
+	border-radius:27px;
+	background-color:#3366ff;
+	font-size:16px;
+	font-weight:600;
+	color:#fff;
+	cursor:pointer;
+}
+
+.or:before{
+	display:block;
+	content:'or';
+	color:#969696;
+	font-size:14px;
+	font-weight:500;
+	line-height:1;
+	text-align:center;
+	margin:10px auto;
+}
+
+.social-login-btn{
+	color:#737373;
+	border-radius:27px;
+	border:solid 1px #e1e2e3;
+	background-color:#fff;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	width:100%;
+	height:54px;
+	font-size:16px;
+	font-weight:600;
+	cursor:pointer;
+}
+
+.social-login-btn:not(:last-child){
+	margin-bottom:10px;
+}
+
+.login-modal-desc{
+	margin-top:26px;
+	text-align:center;
+	font-size:12px;
+	line-height:18px;
+	color:#999;
+}
+
+.login-modal-anchor{
+	color:#3336ff;
+	text-decoration:underline;
+}
+
+.fa-facebook:before{
+	content="\f09a";
+	display:block;
+}
 
 
 

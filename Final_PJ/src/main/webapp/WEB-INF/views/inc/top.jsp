@@ -74,8 +74,48 @@
 			  
 				<aside class="beforeLoginAside">
 					<ul>
-						<li><button class="searchBtn"><i class="icon-search"></i></button></li>
-						<li><button class="signUpButton">회원가입/로그인</button></li>
+						<li><button class="searchBtn" style="outline:none;"><i class="icon-search"></i></button></li>
+						<li><button class="signUpButton" data-toggle="modal" data-target=".docs-example-modal-sm" style="outline:none;">회원가입/로그인</button></li>
+						<!-- 회원가입/로그인 modal 시작-->
+						<div class="modal fade docs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+						  <div class="modal-dialog" style="padding-left:45px; top:8%;">
+						    <div class="modal-content" style="width:400px; overflow-y:auto;">
+						      <div class="modal-header gaeun-modal-header">
+						        <h5 class="modal-title h6 modal-wanted-title" id="mySmallModalLabel"><img src="${pageContext.request.contextPath}/resources/images/wantedLogo.png" alt="" class="img-fluid modalLogin-logo"></h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none;">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body gaeun-modal-body">
+						        <div class="gaeun-modal-body-con1">
+						        	<h1>직장인을 위한<br>커리어 플랫폼, 원티드!</h1>
+						        	<h2>커리어 성장과 행복을 위한 여정<br>지금 원티드에서 시작하세요.</h2>
+						        </div>
+						        <div class="gaeun-modal-body-con2">
+						        	<div class="gaeun-login-emailBox">
+						        		<label for="email" class="ge-labelEmail">이메일</label>
+						        		<div class="ge-emailBox">
+						        			<input type="email" placeholder="이메일을 입력해주세요." id="email" class="ge-inputEmail" value="">
+						        		</div>
+						        	</div>
+						        	<div class="other-login">
+						        		<button class="email-login-btn" style="outline:none;">이메일로 시작하기</button>
+						        		<div class="or"></div>
+						        		<button class="facebook-login-btn social-login-btn" style="outline:none;"><i class="fab fa-facebook"></i>페이스북으로 시작하기</button>
+						        		<button class="apple-login-btn social-login-btn" style="outline:none;">Apple로 시작하기</button>
+						        		<button class="google-login-btn social-login-btn" style="outline:none;">Google로 시작하기</button>
+						        	</div>
+						        	<p class="login-modal-desc">
+						        		걱정마세요! 여러분의 지원 활동은 SNS에 노출되지 않습니다.<br>
+						        		회원가입 시 <a class="login-modal-anchor" href="#">개인정보 처리방침</a>과
+						        		<a class="login-modal-anchor" href="#">이용약관</a>을 확인하였으며, 동의합니다.
+						        	</p>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						<!-- 회원가입/로그인 modal 끝-->
 						<li><a href="#" class="dashboardButton">기업 서비스</a></li>
 					</ul>
 				</aside>
