@@ -14,15 +14,13 @@
 			    <li class="nav-item"><a class="nav-link" href="#title4">참가비용</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title5">후기</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title6">안내/설문</a></li>
-			</ul>
-			  </div>
-</div>
-		
-	</nav>
+				</ul>	
+			 </div>
 		</div>
+		</nav>
+</div>
 	
 <body>
-
 	<section class="section blog-wrap">
 		<div class="container">
 			<div class="row">
@@ -30,7 +28,7 @@
 					<div class="row">
 						<div class="col-lg-12 mb-5">
 							<div class="single-blog-item">
-								<img src="<c:url value='/resources/images/blog/blog-1.jpg'/>"
+								<img src="<c:url value='/resources/images/career/bookclub.PNG'/>"
 									alt="" class="img-fluid">
 
 								<div class="blog-item-content mt-5">
@@ -54,18 +52,10 @@
 										laboriosam minima animi. Consectetur accusantium pariatur
 										repudiandae!</p>
 
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit. Possimus natus, consectetur? Illum libero vel nihil nisi
-										quae, voluptatem, sapiente necessitatibus distinctio
-										voluptates, iusto qui. Laboriosam autem, nam voluptate in
-										beatae. Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit. Quae iure officia nihil nemo, repudiandae itaque
-										similique praesentium non aut nesciunt facere nulla, sequi
-										sunt nam temporibus atque earum, ratione, labore.</p>
-
+									<!-- 
 									<blockquote class="quote">A brand for a company is
 										like a reputation for a person. You earn reputation by trying
-										to do hard things well.</blockquote>
+										to do hard things well.</blockquote> -->
 
 
 									<p class="lead mb-4 font-weight-normal text-black">The same
@@ -73,11 +63,7 @@
 										from our first instances of social rejection ridicule. We
 										quickly learn to fear and thus automatically.</p>
 
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit. Iste, rerum beatae repellat tenetur incidunt quisquam
-										libero dolores laudantium. Nesciunt quis itaque quidem,
-										voluptatem autem eos animi laborum iusto expedita sapiente.</p>
-
+								
 
 
 									<div style="height: 300px;">
@@ -114,26 +100,23 @@
 					<div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" >
 
 
-						<div class="sidebar-widget schedule-widget mb-3" style="background-color:#fff; margin-left:-20px; width:380px">
-							<h5 class="mb-4">북클럽: 작가는 아니지만 글은 쓰고싶어</h5>
+						<div class="sidebar-widget schedule-widget mb-3" style="background-color:#fff; margin-left:-60px; margin-top:-20px; width:380px">
+							<h5 class="mb-4"><b>북클럽: 작가는 아니지만 글은 쓰고싶어</b></h5>
 
 							<ul class="list-unstyled">
-								<li class="d-flex justify-content-between align-items-center">
-									<a href="#">일자</a> <span>2021 Jan 16</span>
-								</li>
-								<li class="d-flex justify-content-between align-items-center">
-									<a href="#">장소</a> <span>세종 S씨어터</span>
-								</li>
-								<li class="d-flex justify-content-between align-items-center">
-									<a href="#">주최자</a> <span>-</span>
-								</li>
+							
+									<div style="font:12px;"><span>일자</span></div>
+									<div style="color:black; font:12px;"><span>2021 Jan 16</span></div><br>
+									<div style="font:12px;"><span>장소</span></div>
+									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br>
+									<div style="font:12px;"><span>주최자</span></div>
+									<div style="color:black; font:12px;"><span></span></div>
+							
 							</ul>
 							<br><br><br>
-							<div class="sidebar-contatct-info mt-4">
-								<button onclick="showPopup(true)" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:150px; height:40px;padding:10px, 7px; background-color:#3366ff; font-size:11px; color:white">
-	<i class="far fa-bell"></i>	참가신청</button>
-	<button onclick="showPopup(true)" class="btnFilter" style="border:0.3px solid gray; border-radius:3em; outline:none; width:150px; height:40px;padding:10px, 7px; background-color:#fff; font-size:11px; color:black">
-	<i class="far fa-bell"></i>	구독하고 할인받기</button>
+							<div class="sidebar-contatct-info mt-4" style="padding-top:10px;">
+								<button onclick="showPopup(true)" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:150px; height:50px;padding:10px, 7px; background-color:#3366ff; font-size:12px; color:white">참가신청</button>
+								<button onclick="showPopup(true)" class="btnFilter" style="border:0.3px solid gray; border-radius:3em; outline:none; width:150px; height:50px; margin-left: 20px; padding:10px, 7px; background-color:#fff; font-size:12px; color:black">구독하고 할인받기</button>
 							</div>
 						</div>
 
@@ -213,21 +196,34 @@
 
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
-$( document ).ready( function() {
-    var jbOffset = $( '.jbMenu' ).offset();
+/* $( document ).ready( function() {
+    var jbOffset = $( '.navbar-nav' ).offset();
     $( window ).scroll( function() {
       if ( $( document ).scrollTop() > jbOffset.top ) {
-        $( '.jbMenu' ).addClass( 'jbFixed' );
+        $( '.navbar-nav' ).addClass( 'jbFixed' );
       }
       else {
-        $( '.jbMenu' ).removeClass( 'jbFixed' );
+        $( '.navbar-nav' ).removeClass( 'jbFixed' );
       }
     });
   } );
+$( document ).ready( function() {
+    var jbOffsetBtn = $( '.sidebar-contatct-info' ).offset();
+    $( window ).scroll( function() {
+      if ( $( document ).scrollTop() > jbOffsetBtn.top ) {
+        $( '.sidebar-contatct-info' ).addClass( 'jbFixed' );
+      }
+      else {
+        $( '.sidebar-contatct-info' ).removeClass( 'jbFixed' );
+      }
+    });
+  } );
+   */
+
 </script>
 
 <style="type="text/css">
-body{
+/* body{
 	margin:0px;
 	padding:0px;
 }
@@ -235,6 +231,9 @@ body{
      position: fixed;
      top: 0px;
 }
+.jbContent {
+        height: 2000px;
+      } */
 </style>
 
 </body>

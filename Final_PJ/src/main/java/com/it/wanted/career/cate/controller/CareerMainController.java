@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/career/mainpage")
+@RequestMapping("/career/Mainpage")
 
 public class CareerMainController {
 
@@ -18,5 +18,14 @@ public class CareerMainController {
 		
 	}
 	
+	@RequestMapping("/programList.do")
+	public void programList() {
+		logger.info("pogramList를 careerMain페이지에 뿌려주기");
+	}
+	
+	@RequestMapping("/subscription.do")
+	public void subscription() {
+		logger.info("subscription (구독신청) 페이지 보여주기");
+	}
 	
 }
