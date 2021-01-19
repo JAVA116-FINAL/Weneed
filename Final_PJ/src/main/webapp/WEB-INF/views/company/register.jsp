@@ -212,7 +212,7 @@
 	                               name="comMemAgree" id="comMemAgree" type="text" class="form-control comServFormInput" >
 	                               <iframe src="<c:url value='/inc2/comServProvision.html'/>"></iframe>
 	                               </textarea> --%>
-	                               <iframe src="<c:url value='/inc2/comServiceProvision.html'/>" width="207%" class="comServIFrame"></iframe>
+	                               <iframe src="<c:url value='/inc2/comServProvision.html'/>" width="207%" class="comServIFrame"></iframe>
 	                           </div>
 	                       </div>
                     </div>
