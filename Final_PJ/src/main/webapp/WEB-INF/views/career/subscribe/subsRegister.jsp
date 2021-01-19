@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Wanted Plus 구독신청</title>
+
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/images/favicon.ico'/>" />
 

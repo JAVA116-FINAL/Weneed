@@ -12,7 +12,6 @@
 </div>     
 
 
-
 <!-- 필터 팝업창 내용  -->
 <div id="popup" class="hide">
   <div class="content">
