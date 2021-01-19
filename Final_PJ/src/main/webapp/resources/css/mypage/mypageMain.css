@@ -1,0 +1,253 @@
+/*공통*/
+
+body{
+	background: #f8f8fa;
+}
+
+i{
+	color: #999999;
+}
+
+h2{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.mypageTitle {
+	padding: 50px 0 20px 0;
+}
+.divWrapper{
+	display: flex;
+	
+}
+.leftSideDivGroup{
+	width: 248px;
+}
+.leftDiv,
+.rightDiv{
+	background: #ffffff;
+	border: 0.5px solid #e1e2e3;
+}
+
+/* 프로필 영역 */
+.leftDiv:first-child {
+	height: 329px;
+	padding: 42px 20px 30px;
+	text-align: center;
+	align-items: center;
+}
+
+.proImg{
+	border: none;
+	width: 77px;
+	height: 77px;
+	border-radius: 50%;
+	position: relative;
+	display: inline-block;
+	width: 50%;
+}
+
+.cameraIcon{
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	background: #ffffff;
+	border: 0.5px solid #e1e2e3;
+	border-radius: 50%;
+	bottom:-10px;
+	right:0;
+	text-align: center;
+}
+
+dt{
+	color: black;
+	font-size: 1.2em;
+	padding-top: 30px;
+	padding-bottom: 20px;
+}
+dd{
+	color: #767676;
+	font-size: 0.9em;
+	padding-bottom: 0px;
+}
+dd:first-child{
+	padding-bottom: 10px;
+}
+dd:last-child{
+	padding-bottom: 20px;
+}
+
+.basicInfoLink{
+	width:170px;
+	height:40px;
+	border: 0.5px solid #e1e2e3;
+	border-radius: 20px;
+	padding: 11px 30px 10px;
+}
+
+.basicInfoLink a:hover{
+	background-color:#ffffff;
+	color: black;	
+}
+
+/* 포인트, 원해요, 열람, 받은 제안 */
+.leftDiv:nth-child(2) {
+	height: 80px;
+}
+
+.leftDiv:nth-child(3) {
+	height: 164px;
+}
+
+.leftDiv:nth-child(4) {
+	height: 78px;
+}
+.leftDiv span{
+	color: black;
+}
+.leftDiv{
+	padding: 25px 25px 30px 20px;
+}
+.leftPoint,
+.leftProposals > div{
+	display: flex;
+	justify-content: space-between;
+}
+.leftProposals > div:first-child{
+	padding-bottom: 20px;
+}
+.leftProposals > div:nth-child(2){
+	padding-bottom: 20px;
+}
+.number{
+	font-weight: bold;
+}
+
+
+
+/*오른쪽 시작*/
+.subTitleinRightDivs{
+	padding: 0 32px 26px;
+}
+.rightDiv{
+	width: 790px;
+	margin-left: 20px;
+}
+.onlyStatus{
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+}
+.onlyStatus a{
+	width: 197px;
+	height: 70px;
+	text-align: center;
+}
+.rightDiv:first-child {
+	height: 180px;
+	margin-bottom: 20px;
+	padding:26px 0 24px 0;
+}
+
+strong{
+	font-size: 2em;
+	display: block;
+}
+.applyStatusNum a:hover{
+	color:black;
+	background-color: #ffffff;
+}
+
+.applyStatusNum:first-child,
+.applyStatusNum:nth-child(2),
+.applyStatusNum:nth-child(3){
+	border-right: 0.5px solid #e1e2e3;
+}
+
+.subTitleinRightDivsSecond{
+	padding: 0 0 0 0;
+}
+.rightDiv:nth-child(2) {
+	height: 213px;
+	padding: 26px 30px 30px;
+}
+
+.rightDiv:nth-child(3) {
+	height: 211px;
+	padding: 26px 30px 30px;
+}
+.booklikeTop{
+	display: flex;
+	justify-content: space-between;
+}
+.seeMore{
+	color: #3366ff;
+	font-size: 0.9em;
+}
+.bookLikeAllBody{
+	display: flex;
+	width: 332px;
+	height: 100px;
+}
+.booklikeLogo{
+	width: 100px;
+	height: 100px;
+	border: 0.5px solid #e1e2e3;
+}
+.rightDiv:nth-child(4) {
+	height: 214px;
+	margin-bottom: 90px;
+	padding: 26px 30px 30px;
+}
+.eventMother{
+	position: relative;
+}
+.gotoEvent{
+	border: 1px solid #3366ff;
+	color: #3366ff;
+	font-weight: bold;
+	width: 230px;
+	height: 48px; 
+	border-radius: 25px;
+	padding: 10px 40px 15px 40px;
+	position: absolute;
+	bottom: 30px;
+	right: 25px;
+	text-align: center;
+}
+
+.booklikeUL{
+	list-style:none;
+    margin:0;
+    padding:0;
+    margin-top:30px;
+}
+.booklikeLi{
+	  margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+}
+
+.seeMore a:hover{
+	color: #3366ff;
+}
+.gotoEvent a:hover{
+	color: #3366ff;
+	background-color:#ffffff; 
+}
+
+p{
+	color: black;
+}
+
+.booklikeContent{
+	padding-left: 20px;	
+}
+
+.booklikeContent p{
+	font-weight: bold;
+}
+.booklikeContent span{
+	color: #999999;
+	font-size: 0.8em;
+}

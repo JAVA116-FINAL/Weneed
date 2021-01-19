@@ -1,0 +1,194 @@
+/* top */
+ .header-wrapper1{
+	background: black;
+	height: 50px;
+	display:table-cell;
+ 	vertical-align:middle;
+ 	width: 100vw;
+ }
+ .header-wrapper2{
+ 	display: flex;
+ 	justify-content: space-between;
+ }
+ .comServNavbar-logo-link{
+ 	color: white;
+ 	font-size: 0.8em;
+ 	font-weight: bold;
+ }
+ .comServNavs{
+ 	height: inherit;
+ }
+ 
+.comServNav-item {
+	float:left;
+}
+.comServNav-item > a:hover{
+	color: #999999;
+}
+
+a.comServNav-item-link{
+	color: white;
+	font-size: 0.8em;
+	font-weight: bold;
+	margin-left: 40px;
+}
+
+strong{
+	color: black;
+}
+
+.header-logo > a:hover{
+	color: #999999;
+}
+
+button.comServBtn {
+	color: white;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+button.comServBtn.gotoWantedMain{
+	border: 1px solid white;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+/* welcome body */
+
+body{
+	font-family: -apple-system, system-ui, "Apple SD Gothic Neo", Helvetica, Arial, 
+				"hiragino kaku gothic pro", meiryo, "ms pgothic", "Nanum Gothic", "Malgun Gothic", sans-serif;
+}
+
+.firstSec{
+	height: 542px;
+	background-color: #ffffff;
+	text-align: center;
+}
+
+h1.firstSecText {
+    font-size: 3.5em;
+    color: #999999;
+    padding: 100px 150px;
+   	font-weight: lighter;
+}
+
+.comServIntroDoc{
+	font-size: 1.2em;
+	padding-right: 30px;
+	padding-left: 30px;
+}
+
+.comServJoin{
+	font-size: 1.2em;
+	padding-right: 30px;
+	padding-left: 30px;
+	
+}
+.secondSec{
+	height: 506px;
+	background-image: url("../images/company/welcome_1.jpg");
+	/* url(//static.wanted.co.kr/images/recruit/welcome_1.jpg); */
+}
+
+.fifSecCon,
+.fourthSecCon,
+.rdSecCon,
+.secondSecCon{
+	display: flex;
+	justify-content: space-between;
+	padding: 120px 30px;
+}
+
+.fourthSecTitleH2,
+.ndSecTitleH2{
+	font-size: 2.6em;
+	color: white;
+	font-weight: lighter;
+}
+
+.ndSecConLi{
+	font-size: 1.8em;
+	color: white;
+	margin-bottom: 20px;
+}
+
+.thirdSec{
+	height: 665px;
+}
+
+.rdSecTitle{
+	width: 
+}
+.rdSecTitleH2{
+	color: black;
+	font-size: 2.6em;
+	margin-right: 80px;
+	font-weight: lighter;
+}
+
+.rdSubTitle1,
+.rdSubTitle2,
+.rdSubTitle3{
+	font-size: 1.6em;
+}
+
+.rdSubTitle1{
+	color: #21c16c;
+}
+
+.rdSubTitle2{
+	color: #2a91fc;
+}
+
+.rdSubTitle3{
+	color: #ed9a23;
+}
+
+.rdContent{
+	color: #999999;
+	font-size: 1.6em;
+	margin-bottom: 20px;
+}
+
+.fourthSec{
+	height: 1180px;
+	background-image: url("../images/company/welcome_2.jpg");
+	/* background-image: url(//static.wanted.co.kr/images/recruit/welcome_2.jpg); */
+}
+.fourthSecContents{
+	margin-left: 40px;
+}
+.fourSecCon{
+	padding: 30px;
+	background-color: rgba(0,0,0,0.5);
+	margin-bottom: 30px;
+	width: 696px;
+}
+.fourSecCon > span{
+	color: white;
+	opacity: 0.8;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+.fourSecCon > div{
+	margin-top: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+.forSecLogos > img{
+	width: 150px;
+}
+.fifthSec{
+	height: 404px;
+}
+
+.fifSecTitleH2{
+	font-size: 2.6em;
+	color: black;
+	font-weight: lighter;
+}
