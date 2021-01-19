@@ -5,6 +5,7 @@
 
     
     
+    
 <!-- 프로젝트 리스트 섹션!!!!!!! -->
 <div class="row shuffle-wrapper portfolio-gallery" style="margin-top:30px;">
       	<div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat1&quot;,&quot;cat2&quot;]">

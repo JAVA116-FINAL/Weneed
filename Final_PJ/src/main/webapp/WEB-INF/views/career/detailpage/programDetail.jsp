@@ -20,6 +20,7 @@
 		</nav>
 </div>
 	
+	
 <body>
 	<section class="section blog-wrap">
 		<div class="container">
