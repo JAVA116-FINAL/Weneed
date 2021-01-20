@@ -454,6 +454,8 @@ h5.modal-wanted-title{
 .gaeun-modal-body{
 	background-color:#fff;
 	padding:20px;
+	border-bottom-left-radius:.3rem;
+	border-bottom-right-radius:.3rem;
 }
 
 .gaeun-modal-body-con1{
