@@ -5,24 +5,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-  <link rel="stylesheet" href="<c:url value='/resources/css/resumeList.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/resumeList.css'/>">
+
 <section class="section contact-info pb-0 RWSection_jy">
 	
 	<div class="container RWcontainer_jy">
 	
 		<div class="RWTop-Wrapper_jy">
-			<div class="resumeListTitle1_jy"><b>최근문서</b></div>
-			<div class="resumeListTitle2_jy"><b> <a href="<c:url value='#'/>">원티드 이력서 소개ⓘ</a></b></div><br>
+			<div class="resumeListTitle1_jy">
+				<span class="sp-rwtop_jy">최근 문서 </span>
+				 <button class="bt-rwtop_jy" onClick='location.href="<c:url value='/resume/resumeIntro.do'/>"'>원티드 이력서 소개 ⓘ</button><br>
+			 </div>
 		</div>
 		
 		<div class="row RWRow_jy">
 			<div class="col-lg-3 col-sm-6 col-md-6">
 				 <div class="contact-block mb-4 mb-lg-0 block_jy">
-					 <a href="#" class="RWLink_jy"> <!-- 버튼?/파란동그라미 만들어서 링크연결 -->
+					 <a href="<c:url value='/resume/resumeWrite.do'/>" class="RWLink_jy">
 				 		<span class="blueBox_jy">
 				 			<i class="icon-new_resume :before NewResumeIcon_jy"></i>
 						</span>
-						<span class="resumeTitle_jy"> <h3>새 이력서 작성 </h3> </span>
+						
+							<span class="resumeTitle_jy"> <h3>새 이력서 작성 </h3> </span>
+						
 						</a>					
 					
 				</div>
@@ -61,7 +66,7 @@
 								
 							</div>
 							
-							<hr>	
+							<hr class="rwhrLine_jy">	
 							<div class="resumeB_jy">
 								<i class="icon-joblist_bottombar_cv :before icon_jy"></i>
 								<span>첨부완료</span>
