@@ -12,7 +12,6 @@
 <meta name="author" content="themefisher.com">
 <title>커리어 여정을 행복하게, 원티드</title>
 </head>
-
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 
@@ -34,36 +33,11 @@
   <!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->
   <script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>
   
-   <!-- 
-    Essential Scripts
-    =====================================-->
-
-    <!-- Main jQuery -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/jquery/jquery.js"></script>
-    <!-- Bootstrap 4.3.2 -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/popper.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.easing.js"></script>
-    <!-- Slick Slider -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/slick-carousel/slick/slick.min.js"></script>
-    <!-- Counterup -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.waypoints.min.js"></script>
-    
-    <script src="<%=request.getContextPath() %>/resources/plugins/shuffle/shuffle.min.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.counterup.min.js"></script>
-    <!-- Google Map -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/google-map/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
-    
-    <script src="<%=request.getContextPath() %>/resources/js/script.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/js/contact.js"></script>
-  
   <script type="text/javascript">
   	$(function(){
   		
   	});
   </script>
-  
   
 </head>
 
@@ -108,7 +82,6 @@
 					<ul>
 						<li><button class="searchBtn" style="outline:none;"><i class="icon-search"></i></button></li>
 						<li><button class="signUpButton" data-toggle="modal" data-target=".docs-example-modal-sm" style="outline:none;">회원가입/로그인</button></li>
-						
 						 <!-- modal#1 로그인 시작-->
 						 <div class="modal fade docs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 						  <div class="modal-dialog" style="padding-left:45px; top:2%;">
@@ -119,7 +92,7 @@
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
-						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 130px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
+						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 130px);overflow-y: auto;">
 						        <div class="gaeun-modal-body-con1">
 						        	<h1>직장인을 위한<br>커리어 플랫폼, 원티드!</h1>
 						        	<h2>커리어 성장과 행복을 위한 여정<br>지금 원티드에서 시작하세요.</h2>
@@ -172,9 +145,9 @@
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
-						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 135px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
+						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 135px);overflow-y: auto;">
 						        <div class="gaeun-modal-body-con2">
-							        <form name="frm1" method="post" action="<c:url value='/inc/top.do'/>">
+							        <form name="frm1" method="post" action="">
 							        	<div class="gaeun-login-emailBox">
 							        		<label for="email" class="ge-labelEmail">이메일</label>
 							        		<div class="ge-emailBox">
@@ -235,7 +208,6 @@
 						  </div>
 						</div>
 						<!-- modal#2 회원가입 끝 -->
-						
 						<!-- modal#3 비밀번호찾기 -->
 						<div class="modal fade docs-example-modal-sm" id="lost-pwd" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 						  <div class="modal-dialog" style="padding-left:45px; top:20%;">
@@ -246,7 +218,7 @@
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
-						      <div class="modal-body gaeun-modal-body" style="border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
+						      <div class="modal-body gaeun-modal-body">
 						        <div class="gaeun-modal-body-con2">
 							        <form name="frm1" method="post" action="">
 							        	<div class="gaeun-login-emailBox">
@@ -264,7 +236,6 @@
 						  </div>
 						</div>
 						<!-- modal#3 비밀번호찾기 끝 -->
-						
 						<li><a href="#" class="dashboardButton" >기업 서비스</a></li>
 					</ul>
 				</aside>

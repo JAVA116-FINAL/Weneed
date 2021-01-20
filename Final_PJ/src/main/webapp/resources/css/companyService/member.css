@@ -1,0 +1,67 @@
+.modal-comServHeader{
+	text-align: center;
+}
+
+.modal-comServHeader{
+	display: flex;
+	justify-content: space-between;
+}
+.modal-comServTitle{
+	font-weight: bold;
+}
+
+
+.close{
+	margin: 0;
+}
+
+.comServ-input{
+	margin-bottom: 20px;
+	padding: 0px 10px;
+}
+.input-long{
+	width: 400px;
+}
+.input-long:last-child{
+	margin-bottom: 0px;
+}
+.input-half{
+	width: 190px;
+}
+
+.input-half:first-child{
+	margin-right: 20px;
+}
+
+.comServSubmitBtn{
+	width: 400px;
+	margin-bottom: 5px;
+	display: inline-block;
+	font-size: 1.1em;
+}
+
+.div-input-onOneLine{
+	display: flex;
+}
+
+.comServModalFooterCon{
+	text-align: center;
+}
+
+.comServ-joinAgree{
+	font-size: 0.8em;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
+.comServ-joinProvsLink{
+	color: #258bf7;
+}
+.comServ-joinProvsLink:hover{
+	color: #258bf7;
+}
+
+hr{
+	margin-top:0px;
+	margin-bottom: 20px;
+}

@@ -33,6 +33,13 @@ public class RegisterController {
 		return "company/member/modalTest";
 	}
 	
+	@RequestMapping("/member/modalTest2.do")
+	public String modalTest2() {
+		logger.info("모달팝업 테스트2");
+		
+		return "company/member/modalTest2";
+	}
+	
 	@RequestMapping("/register.do")
 	public void register_get() {
 		logger.info("회사정보등록 페이지 조회");

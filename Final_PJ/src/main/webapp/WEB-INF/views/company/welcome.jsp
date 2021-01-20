@@ -1,5 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../inc/company_top.jsp" %>
+
+<!-- 회원가입/로그인 modal 시작-->
+<div class="modal fade docs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" style="padding-left:45px; top:8%;">
+    <div class="modal-content" style="width:400px; overflow-y:auto;">
+      <div class="modal-header gaeun-modal-header">
+        <h5 class="modal-title h6 modal-wanted-title" id="mySmallModalLabel">관리자 계정 만들기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body gaeun-modal-body">
+        <div class="gaeun-modal-body-con1">
+        	
+        	
+        </div>
+        <div class="gaeun-modal-body-con2">
+        	<div class="gaeun-login-emailBox">
+        		<label for="email" class="ge-labelEmail">이메일</label>
+        		<div class="ge-emailBox">
+        			<input type="email" placeholder="이메일을 입력해주세요." id="email" class="ge-inputEmail" value="">
+        		</div>
+        	</div>
+        	<div class="other-login">
+        		<button class="email-login-btn" style="outline:none;">관리자 계정 생성</button>
+        		<div class="or"></div>
+        	</div>
+        	<p class="login-modal-desc">
+        		걱정마세요! 여러분의 지원 활동은 SNS에 노출되지 않습니다.<br>
+        		회원가입 시 <a class="login-modal-anchor" href="#">개인정보 처리방침</a>과
+        		<a class="login-modal-anchor" href="#">이용약관</a>을 확인하였으며, 동의합니다.
+        	</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 회원가입/로그인 modal 끝-->
+
+
 <section class="firstSec">
 	<h1 class="firstSecText">
 		<strong>사람</strong>과 <strong>일자리</strong>를 가장 <br>
@@ -26,7 +66,7 @@
 		<div class="rdSecTitle">
 			<div class="rdSecTitleH2">원티드 서비스</div>
 		</div>
-		<div style="left:100px;">
+		<div style="width:696px;">
 			<div class="rdSubTitle1">추천 채용</div>
 			<div class="rdContent">
 				채용 확정 전까지 아무런 비용 부담없이, 200만 명의 추천인들로부터 최적의 인재를 추천 받으세요</div>
