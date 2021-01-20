@@ -61,29 +61,7 @@
 
    
 
-    <!-- 
-    Essential Scripts
-    =====================================-->
-
-    <!-- Main jQuery -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/jquery/jquery.js"></script>
-    <!-- Bootstrap 4.3.2 -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/popper.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.easing.js"></script>
-    <!-- Slick Slider -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/slick-carousel/slick/slick.min.js"></script>
-    <!-- Counterup -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.waypoints.min.js"></script>
-    
-    <script src="<%=request.getContextPath() %>/resources/plugins/shuffle/shuffle.min.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.counterup.min.js"></script>
-    <!-- Google Map -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/google-map/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
-    
-    <script src="<%=request.getContextPath() %>/resources/js/script.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/js/contact.js"></script>
+   
 
   </body>
   </html>
