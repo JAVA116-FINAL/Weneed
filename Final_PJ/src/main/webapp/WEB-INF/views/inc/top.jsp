@@ -93,6 +93,7 @@
 			 	 <a class="navbar-logo" href="index.html">
 				  	<img src="${pageContext.request.contextPath}/resources/images/wantedLogo.png" alt="" class="img-fluid top-logo">
 				  </a>
+				  <div></div>
 	
 			  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="icofont-navigation-menu"></span>

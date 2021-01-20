@@ -20,7 +20,7 @@ public class MemberController {
 		= LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired private MemberService memberService;
-	
+	/*
 	/*
 	 * @ResponseBody
 	 * 

@@ -94,7 +94,7 @@
 		
 		<!-- 커리어 성장의 기회 -->
 		<div class="career-chance-box">
-		
+			<div></div>
 		</div>
 </div>
 </div>
