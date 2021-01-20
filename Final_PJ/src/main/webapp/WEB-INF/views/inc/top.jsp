@@ -12,8 +12,6 @@
 <meta name="author" content="themefisher.com">
 <title>커리어 여정을 행복하게, 원티드</title>
 </head>
-<body>
-
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 

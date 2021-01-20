@@ -175,6 +175,11 @@ strong{
 	height: 211px;
 	padding: 26px 30px 30px;
 }
+
+
+
+
+/* 북마크, 좋아요 */
 .booklikeTop{
 	display: flex;
 	justify-content: space-between;
@@ -226,6 +231,12 @@ strong{
     padding: 0 0 0 0;
     border : 0;
     float: left;
+}
+
+.nonebookLikeBody{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
 }
 
 .seeMore a:hover{

@@ -60,7 +60,12 @@
 					</nav>
 					<div class="comServHeaderBtns">
 						<button class="comServBtn comServLoginBtn">채용담당자 로그인</button>
+						<!-- 기업서비스 로그인 모달 인클루드-->
+						<%@include file="../company/member/login.jsp" %>
 						<button class="comServBtn comServJoinBtn">관리자 가입</button>
+						<!-- 기업서비스 가입 모달 인클루드-->
+						<%@include file="../company/member/join.jsp" %>
+						
 						<button class="comServBtn gotoWantedMain">원티드 홈</button>
 					</div>
 				</div>
