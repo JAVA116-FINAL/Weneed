@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+section.page-title.bg-1.section-resumeIntro_jy.white_jy {
+    background-color: white;
+    color: #333;
+}
+
+.divbackgroundIMG_jy {
+    background-image: url(https://s3.ap-northeast-2.amazonaws.com/wanted-public/resume_intro/resume_03_ko.png) !important;
+}
+
+section.page-title.section2-resumeIntro_jy {
+    background-image: url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/resume_intro/resume_02.jpg");
+}
+
+section.page-title.section4-resumeIntro_jy {
+    background-image: url(https://s3.ap-northeast-2.amazonaws.com/wanted-public/resume_intro/resume_04.jpg);
+}
+
+section.page-title.section1-resumeIntro_jy.white_jy {
+    color: black;
+}
+
+h1.text-capitalize.mb-5.text-lg.resumeIntro-title_jy {
+    font-weight: bold;
+    color: black;
+}
+
+.divbackgroundIMG_jy {
+    height: 190px;
+    background: 50%;
+    /* margin-bottom: 150px; */
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+section.page-title.section3-resumeIntro_jy.white_jy {
+    padding-bottom: 0;
+}
+
+span.text-resumeIntro_jy {}
+
+section2-resumeIntro_jy .text-resumeIntro_jy {
+    color: black;
+    text-decoration-color: black;
+    margin-bottom: 5px;
+}
+
+section.page-title.section1-resumeIntro_jy.white_jy {
+    padding-bottom: 0;
+}
+
+button.bt1-resumeIntro_jy {
+    margin: 0 5px;
+    padding: 11px 46px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 79px;
+    background-color: white;
+    color: #3a68f9;
+    border-width: 1px;
+    border: 1px solid;
+    margin: 20px 5px 60px 0;
+}
+
+button.bt2-resumeIntro_jy {
+    margin: 0 5px;
+    padding: 12px 38px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 79px;
+    background-color: #3a68f9;
+    color: white;
+    border-width: 1px;
+    border: 1px solid #3a68f9;
+    margin: 20px 10px 60px 0;
+    /* font-size: 17px; */
+}
+
+button.bt1-resumeIntro_jy.bt-borderNon_jy {
+    border: none;
+}
+
+.divbackgroundIMG2_jy {
+    background-image: url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/resume_intro/resume_01_en.png");
+    background-repeat: no-repeat;
+    height: 250px;
+    background-size: cover;
+    background-position: bottom;
+}
+
+.divbt-resumeIntro_jy {}
+
+button.bt1-resumeIntro_jy {
+    margin-bottom: 15px;
+    outline:none;
+}
+
+button.bt2-resumeIntro_jy {
+    margin-bottom: 15px;
+    outline:none;
+}
+
+section.page-title.section2-resumeIntro_jy {
+    height: 430px;
+}
+
+section.page-title.section4-resumeIntro_jy {
+    height: 586px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+section.page-title.section3-resumeIntro_jy.white_jy {
+    color: black;
+}

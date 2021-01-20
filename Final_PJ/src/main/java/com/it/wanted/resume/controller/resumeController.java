@@ -26,4 +26,10 @@ public class resumeController {
 		return "resume/resumeWrite";
 	}
 	
+	@RequestMapping("/resumeIntro.do")
+	public String resumeIntro() {
+		logger.info("이력서소개 화면 보여주기");
+		return "resume/resumeIntro";
+	}
+	
 }

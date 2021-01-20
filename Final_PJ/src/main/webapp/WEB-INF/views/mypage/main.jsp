@@ -28,13 +28,14 @@
 			<div class="leftDiv leftProposals">
 				<div>
 					<span>원해요 
-					<i style="color:#bbbbbb;" class="far fa-question-circle"></i></span><span class="number">0</span>
+					<i style="color:#bbbbbb;" class="far fa-question-circle"></i>
+					</span><a href="#" class="number">0</a>
 				</div>
 				<div>
-					<span>열람</span><span class="number">0</span>
+					<span>열람</span><a href="#" class="number">0</a>
 				</div>
 				<div>
-					<span>받은 제안</span><span class="number">0</span>
+					<span>받은 제안</span><a href="#" class="number">0</a>
 				</div>
 			</div>
 			<div class="leftDiv">
@@ -59,6 +60,7 @@
 			<div class="rightDiv">
 				<div class="booklikeTop">
 					<h2 class="subTitleinRightDivsSecond">북마크</h2>
+					<!-- 전체보기는 북마크 리스트가 있을때만 -->
 					<a class="seeMore" href="#">총 4개 전체보기 
 						<i class="seeMore fas fa-chevron-right"></i></a>
 				</div>
@@ -76,28 +78,24 @@
 								</div>
 							</a>
 						</li>
-						<li class="booklikeLi">
-							<a class="bookLikeAllBody" href="#">
-								<div class="booklikeLogo">
-									<!-- 기업로고이미지 -->
-								</div>
-								<div class="booklikeContent">
-									<h2>포지션 종류</h2>
-									<p>기업명</p>
-									<span>지역·국가</span>
-								</div>
-							</a>
-						</li>
-						
 					</ul>
 				</div>
-				
 			</div>
 			<div class="rightDiv">
 				<div class="booklikeTop">
 					<h2 class="subTitleinRightDivsSecond">좋아요</h2>
+					<!-- 전체보기는 좋아요 리스트가 있을 때만 -->
 					<a class="seeMore" href="#">총 4개 전체보기 
 						<i class="seeMore fas fa-chevron-right"></i></a>
+				</div>
+				<!-- 등록한 기업이 없을 때 -->
+				<div class="nonebookLikeBody">
+					<span class="nonebookLike">아직 등록한 기업이 없습니다.</span>
+				</div>
+				
+					<!-- 등록한 기업이 있을 때 -->
+				<div class="booklikeBody">
+					
 				</div>
 			</div>
 			<div class="rightDiv eventMother">
