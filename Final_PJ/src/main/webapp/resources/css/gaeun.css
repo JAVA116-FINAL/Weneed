@@ -1,4 +1,5 @@
 /* top */
+body { padding-right: 0 !important }
 button{
 	background: inherit ; 
 	border:none; 
@@ -431,10 +432,10 @@ body.modal-open[style] {
 .modal-content{
 overflow-y: initial !important
 }
-.modal-body{
-height: calc(100vh - 248px);
+/* .modal-body{
+height: calc(100vh - 130px);
 overflow-y: auto;
-}
+} */
 
 img.modalLogin-logo{
 	width:100px;
@@ -486,7 +487,7 @@ h5.modal-wanted-title{
 
 .gaeun-login-emailBox{
 	position:relative;
-	padding-bottom:22px;
+	padding-bottom:16px;
 	color:#767676;
 }
 
@@ -501,6 +502,35 @@ h5.modal-wanted-title{
 }
 
 .ge-inputEmail{
+	width:100%;
+	height:50px;
+	padding-right:15px;
+	padding-left:15px;
+	border-radius:5px;
+	border:1px solid #e1e2e3;
+	background-color:#fff;
+	font-size:15px;
+	color:#333;
+	appearance:none;
+}
+
+.gaeun-login-pwdBox{
+	position:relative;
+	padding-bottom:16px;
+	color:#767676;
+}
+
+.ge-labelPwd{
+	font-size:14px;
+	font-weight:400;
+	margin-bottom:0;
+}
+
+.ge-pwdBox{
+	margin-top:11px;
+}
+
+.ge-inputPwd{
 	width:100%;
 	height:50px;
 	padding-right:15px;
@@ -577,15 +607,196 @@ h5.modal-wanted-title{
 }
 
 
+/*회원가입modal*/
+.gaeun-joinBox{
+	position:relative;
+	padding-bottom:20px;
+	color:#767676;
+}
 
+.ge-labelName{
+	font-size:14px;
+	font-weight:400;
+	margin-bottom:0;
+}
 
+.ge-joinBox{
+	margin-top:11px;
+}
 
+.ge-inputName{
+	width:100%;
+	height:50px;
+	padding-right:15px;
+	padding-left:15px;
+	border-radius:5px;
+	border:1px solid #e1e2e3;
+	background-color:#fff;
+	font-size:15px;
+	color:#333;
+	appearance:none;
+}
 
+.ge-labelHp{
+	font-size:14px;
+	font-weight:400;
+	margin-bottom:0;
+}
 
+.ge-inputHp{
+	width:100%;
+	height:50px;
+	padding-right:15px;
+	padding-left:15px;
+	border-radius:5px;
+	border:1px solid #e1e2e3;
+	background-color:#fff;
+	font-size:15px;
+	color:#333;
+	appearance:none;
+}
 
+.ge-labelPwd{
+	font-size:14px;
+	font-weight:400;
+	margin-bottom:0;
+}
 
+.ge-inputPwd{
+	width:100%;
+	height:50px;
+	padding-right:15px;
+	padding-left:15px;
+	border-radius:5px;
+	border:1px solid #e1e2e3;
+	background-color:#fff;
+	font-size:15px;
+	color:#333;
+	appearance:none;
+}
 
+.ge-labelPwdOk{
+	font-size:14px;
+	font-weight:400;
+	margin-bottom:0;
+}
 
+.ge-inputPwdOk{
+	width:100%;
+	height:50px;
+	padding-right:15px;
+	padding-left:15px;
+	border-radius:5px;
+	border:1px solid #e1e2e3;
+	background-color:#fff;
+	font-size:15px;
+	color:#333;
+	appearance:none;
+}
 
+.gaeun-agreeBox{
+	height:initial;
+	padding-bottom:12px;
+	border-bottom:1px solid #ececec;
+	margin-top:10px;
+	margin-bottom:12px;
+	color:#333;
+	font-size:15px;
+}
+.gaeun-joinAgree{
+	color:#ececec;
+	position:relative;
+}
 
+.ge-chkAll{
+	width:13px;
+	height:13px;
+	margin-right:10px;
+	color:#ececec;
+}
 
+.agree1{
+	color:#939393;
+	flex:1;
+	font-size:15px;
+	display:inline-flex;
+	align-items:baseline;
+	width:100%;
+}
+
+.ge-agree1{
+	width:13px;
+	height:13px;
+	margin-right:10px;
+	color:#ececec;
+}
+
+.ge-agree1Con{
+	color:#939393;
+	font-size:15px;
+	flex:1;
+}
+
+.ge-agree1Con >a{
+	float:right;
+	font-size:13px;
+	line-height:26px;
+	color:#767676 !important;
+}
+
+.registerBtn{
+	margin-top:30px;
+	width:100%;
+	height:54px;
+	border-radius:27px;
+	background-color:#3366ff;
+	font-size:16px;
+	font-weight:600;
+	color:#fff;
+	border:0;
+}
+
+/*비번찾기/회원가입 모달 적용*/
+.lostOrJoin {
+	text-align:center;
+	margin-bottom:16px;
+}
+.lostOrJoin >span >a{
+	font-size:14px;
+	color:#3366ff;
+	font-weight:600;
+}
+
+.sendBtn{
+	margin-top:8px;
+	width:100%;
+	height:54px;
+	border-radius:27px;
+	background-color:#3366ff;
+	font-size:16px;
+	font-weight:600;
+	color:#fff;
+	border:0;
+}
+
+.gaeun-modal-body-con2 >p{
+	font-size:12px;
+	line-height:18px;
+	color:#999;
+	margin-top:20px;
+	text-align:center;
+}
+
+.reLogin{
+	font-size:14px;
+	line-height:18px;
+	color:#999;
+	margin-top:34px;
+	text-align:center;
+}
+
+.reLogin >a{
+	font-size:14px;
+	color:#3366ff;
+	font-weight:600;
+}

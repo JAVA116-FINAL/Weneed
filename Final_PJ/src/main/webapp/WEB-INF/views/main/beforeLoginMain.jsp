@@ -7,7 +7,7 @@
 		<div class="container beforeLogin-content">
 			<h1>직장인의 커리어 여정을<br>행복하게, 원티드</h1>
 			<h3>지금 원티드와 커리어 여정을 시작하세요.</h3>
-			<button type="button" class="startbtn" style="border:none; outline:none;">지금 시작하기</button>
+			<button type="button" class="startbtn" data-toggle="modal" data-target=".docs-example-modal-sm" style="outline:none;">지금 시작하기</button>
 		</div>
 	</div>
 	<div class="beforeWrap2">
@@ -16,7 +16,7 @@
 			<h1>더 나은 커리어를 위한<br>새로운 기회</h1>
 			<h3>나에게 딱 맞는 회사를 찾거나<br>나에게 딱 맞는 회사가 커리어를 제안합니다.</h3>
 		</div>
-	</div>
+	</div> 
 	<div class="beforeWrap3">
 		<span class="dot"><img src="${pageContext.request.contextPath}/resources/images/dot.png" style="width:4px;"></span>
 		<div class="beforeLogin-content4" style="background:url('${pageContext.request.contextPath}/resources/images/main_002.jpg') center/cover no-repeat;"></div>
@@ -39,7 +39,7 @@
 			<h3>200만 직장인과 10,000개 기업이 <br>원티드와 커리어 여정을 함께합니다.</h3>
 		</div>
 		<div class="beforeLogin-content8-btn">
-			<button type="button" class="startbtn" style="border:none; outline:none;">지금 시작하기</button>
+			<button type="button" class="startbtn" data-toggle="modal" data-target=".docs-example-modal-sm" style="outline:none;">지금 시작하기</button>
 		</div>
 	</div>
 </div>
