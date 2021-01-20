@@ -12,6 +12,7 @@
 <meta name="author" content="themefisher.com">
 <title>커리어 여정을 행복하게, 원티드</title>
 </head>
+
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 
@@ -58,9 +59,28 @@
   
   <script type="text/javascript">
   	$(function(){
-  		
+  		$("#registerBtn").click(function(){
+	  		//회원가입처리
+	  	  		$.ajax({
+	  				url:"<c:url value='/memberJoin.do'/>",
+	  				type:"POST",
+	  				data:{
+	  					'name':$("#join-name").val(),
+	  					'hp':$("#join-hp").val(),
+	  					'email':$("#join-email").val(),
+	  					'pwd': $("#join-pwd").val()
+	  				},
+	  				success:function(res){
+	  					alert(res);
+	  				},
+	  				error:function(xhr, status, error){
+	  					alert('error! : ' + error);
+	  				}
+	  			});
+  		});
   	});
   </script>
+  
   
 </head>
 
@@ -73,7 +93,6 @@
 			 	 <a class="navbar-logo" href="index.html">
 				  	<img src="${pageContext.request.contextPath}/resources/images/wantedLogo.png" alt="" class="img-fluid top-logo">
 				  </a>
-				  <div></div>
 	
 			  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="icofont-navigation-menu"></span>
@@ -106,6 +125,7 @@
 					<ul>
 						<li><button class="searchBtn" style="outline:none;"><i class="icon-search"></i></button></li>
 						<li><button class="signUpButton" data-toggle="modal" data-target=".docs-example-modal-sm" style="outline:none;">회원가입/로그인</button></li>
+						
 						 <!-- modal#1 로그인 시작-->
 						 <div class="modal fade docs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 						  <div class="modal-dialog" style="padding-left:45px; top:2%;">
@@ -116,7 +136,7 @@
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
-						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 130px);overflow-y: auto;">
+						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 130px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
 						        <div class="gaeun-modal-body-con1">
 						        	<h1>직장인을 위한<br>커리어 플랫폼, 원티드!</h1>
 						        	<h2>커리어 성장과 행복을 위한 여정<br>지금 원티드에서 시작하세요.</h2>
@@ -169,7 +189,7 @@
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
-						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 135px);overflow-y: auto;">
+						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 135px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
 						        <div class="gaeun-modal-body-con2">
 							       <form name="frmJoin" method="post" action="<c:url value='/index.do'/>">
 							        	<div class="gaeun-login-emailBox">
@@ -232,6 +252,7 @@
 						  </div>
 						</div>
 						<!-- modal#2 회원가입 끝 -->
+						
 						<!-- modal#3 비밀번호찾기 -->
 						<div class="modal fade docs-example-modal-sm" id="lost-pwd" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 						  <div class="modal-dialog" style="padding-left:45px; top:20%;">
@@ -242,7 +263,7 @@
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
-						      <div class="modal-body gaeun-modal-body">
+						      <div class="modal-body gaeun-modal-body" style="border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
 						        <div class="gaeun-modal-body-con2">
 							        <form name="frmSearchPwd" method="post" action="">
 							        	<div class="gaeun-login-emailBox">
@@ -260,6 +281,7 @@
 						  </div>
 						</div>
 						<!-- modal#3 비밀번호찾기 끝 -->
+						
 						<li><a href="#" class="dashboardButton" >기업 서비스</a></li>
 					</ul>
 				</aside>
