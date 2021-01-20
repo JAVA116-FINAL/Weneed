@@ -802,3 +802,274 @@ h5.modal-wanted-title{
 	color:#3366ff;
 	font-weight:600;
 }
+
+
+/*로그인 후 메인*/
+.mainTopSlider{
+	height:300px;
+	overflow:hidden;
+	background:#f2f2f2;
+}
+
+.profile-matching-area{
+	margin:80px auto;
+	height:90px;
+	display:block;
+	position:relative;
+	padding-right:30px;
+	padding-left:30px;
+	background:#258bf7;
+	border-radius:3px;
+}
+
+.profile-matching-area >h3{
+	display:flex;
+	align-items:center;
+	padding-right:225px;
+	color:#fff;
+	font-size:18px;
+	font-weight: 400;
+	top:50%;
+	position:absolute;
+	transform:translateY(-50%);
+}
+
+.matching-percent-box{
+	display:inline-block;
+	background-image:none;
+	border-left-color:white;
+	border-right-color:white;
+	border-bottom-color:white;
+	min-width:62px;
+	height: 62xp;
+	margin:0 20px 0 0;
+	position:relative;
+	vertical-align:middle;
+	transform:rotate(-45deg);
+	border:4px solid #0161d1;
+	border-radius:100%;
+}
+
+.matching-percent{
+	top:50%;
+	left:50%;
+	position:absolute;
+	color:white;
+	font-size: 16px;
+	font-weight:500;
+	transform:translate(-50%, -50%) rotate(45deg);
+}
+
+.matching-area-desc{
+	display:inline-block;
+	line-height:1.4;
+}
+
+.profile-matching-area >button{
+	right:30px;
+	color:#258bf7;
+	font-size:15px;
+	font-weight:600;
+	padding:10px 40px;
+	border-radius:3px;
+	background-color:white;
+	float:right;
+	margin-top:22px;
+}
+
+.refer-box{
+	margin:80px auto;
+	position:relative;
+}
+
+.refer-box-title-wrap{
+	position:relative;
+	margin-bottom:20px;
+}
+.refer-box-title-div{
+	margin-bottom:20px;
+}
+
+.refer-box-title{
+	display:inline-block;
+	padding:0;
+	margin:0;
+	font-size:22px;
+	font-weight:600;
+	letter-spacing:normal;
+	text-align:left;
+	color:#333;
+}
+.refer-box-title-icon{
+	font-size:21px;
+	color:#9d9d9d;
+	margin-left:14px;
+	position:relative;
+	top:1px;
+}
+
+.icon-setting:before{
+	content:"\e929";
+}
+
+.refer-innerBox{
+	position:relative;
+	margin: 0;
+	padding:20px 80px;
+	border-radius:3px;
+	border:solid 1px #e0e0e0;
+	overflow:hideen;
+	height:90px;
+}
+.refer-innerBox:before{
+	position:absolute;
+	content:'';
+	width:100%;
+	height:100%;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	border-radius:3px;
+	border-left:solid 5px #258bf7;
+}
+
+.network-icon-box{
+	position:absolute;
+	left:60px;
+	padding-top:4px;
+}
+
+.network-icon-box img{
+	margin:0;
+	padding:0;
+	background-repeat:no-repeat;
+	background-position:center;
+	width:100px;
+	height:40px;
+}
+
+.refer-innerBox-con{
+	position:absolute;
+	left:200px;
+	font-size:18px;
+	color:#333;
+	margin:0;
+	padding-top:10px;
+}
+
+.connect-network{
+	color:#258bf7;
+	position:absolute;
+	right:30px;
+	display:inline-block;
+	border-radius:3px;
+	border:solid 1px #39f;
+	padding:12px 40px;
+	font-size:15px;
+	font-weight:600;
+}
+
+.passPredic-box{
+	margin:60px auto;
+	position:relative;
+}
+
+.passPredic-title-div{
+	position:relative;
+	margin-bottom:20px;
+}
+
+.passPredic-title{
+	display:inline-block;
+	padding:0;
+	margin:0;
+	font-size:22px;
+	font-weight:600;
+	letter-spacing:normal;
+	text-align:left;
+	color:#333;
+}
+.passPredic-title-div >a{
+	position:absolute;
+	right:0;
+	display:inline-block;
+	padding:0;
+	margin:0;
+	font-size:20px;
+	font-weight:400;
+	color:#999;
+}
+
+.passPredic-pic-title{
+	color:#333;
+	font-size:18px;
+	font-weight:600;
+	text-align:left;
+}
+
+.ge-job-card-company-name{
+	color:#333;
+	font-weight:600;
+	margin-top:4px;
+	font-size:14px;
+	line-height:1.6;
+	text-align:left;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
+.ge-job-card-company-location{
+	font-weight:400;
+	margin-top:6px;
+	color:#999;
+	font-size:14px;
+	line-height:1.6;
+	text-align:left;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
+.ge-addressDot{
+	margin:0 3px;
+	top:-4px;
+	position:relative;
+}
+
+.ge-reward{
+	text-align:left;
+	margin-top:6px;
+	color:#666;
+	font-size:13px;
+	font-weight:400;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
