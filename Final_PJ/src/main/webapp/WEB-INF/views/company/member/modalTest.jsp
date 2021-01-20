@@ -1,76 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="description" content="Orbitor,business,company,agency,modern,bootstrap4,tech,software">
-<meta name="author" content="themefisher.com">
-<title>WANTED</title>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
-<style>
-#modal {
-  display:none;
-  position:relative;
-  width:100%;
-  height:100%;
-  z-index:1;
-}
-
-#modal h2 {
-  margin:0;   
-}
-
-#modal button {
-  display:inline-block;
-  width:100px;
-  margin-left:calc(100% - 100px - 10px);
-}
-
-#modal .modal_content {
-  width:300px;
-  margin:100px auto;
-  padding:20px 10px;
-  background:#fff;
-  border:2px solid #666;
-}
-
-#modal .modal_layer {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0, 0, 0, 0.5);
-  z-index:-1;
-}   
-</style>
-<script>
-    $("#modal_open_btn").click(function(){
-        $("#modal").attr("style", "display:block");
-    });
-   
-     $("#modal_close_btn").click(function(){
-        $("#modal").attr("style", "display:none");
-    });      
-</script>
-</head>
-<body>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="../../inc/top.jsp" %>
 	<div id="root">
-		<button type="button" id="modal_open_btn">모달 창 열기</button>
-	</div>
-	
-	<div id="modal">
-		<div class="modal_content">
-			<h2>모달 창</h2>
-			<p>모달 창입니다.</p>
-			<button type="button" id="modal_close_btn">모달 창 닫기</button>
-		</div>
-		<div class="modal_layer"></div>
+		<button type="button" id="modal_open_btn" data-toggle="modal" data-target=".docs-example-modal-sm">모달 창 열기</button>
+		<div class="modal fade docs-example-modal-sm " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+						  <div class="modal-dialog" style="padding-left:45px; top:2%;">
+						    <div class="modal-content" style="width:400px; overflow-y:auto;">
+						      <div class="modal-header gaeun-modal-header">
+						        <h5 class="modal-title h6 modal-wanted-title" id="mySmallModalLabel"><img src="${pageContext.request.contextPath}/resources/images/wantedLogo.png" alt="" class="img-fluid modalLogin-logo"></h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none;">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 130px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
+						        <div class="gaeun-modal-body-con1">
+						        	<h1>직장인을 위한<br>커리어 플랫폼, 원티드!</h1>
+						        	<h2>커리어 성장과 행복을 위한 여정<br>지금 원티드에서 시작하세요.</h2>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+		</div> 
 	</div>
 
-</body>
-</html>
+
+<%@ include file="../../inc/bottom.jsp" %>
