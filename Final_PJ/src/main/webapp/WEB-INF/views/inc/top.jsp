@@ -34,11 +34,36 @@
   <!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->
   <script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>
   
+   <!-- 
+    Essential Scripts
+    =====================================-->
+
+    <!-- Main jQuery -->
+    <script src="<%=request.getContextPath() %>/resources/plugins/jquery/jquery.js"></script>
+    <!-- Bootstrap 4.3.2 -->
+    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/popper.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.easing.js"></script>
+    <!-- Slick Slider -->
+    <script src="<%=request.getContextPath() %>/resources/plugins/slick-carousel/slick/slick.min.js"></script>
+    <!-- Counterup -->
+    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.waypoints.min.js"></script>
+    
+    <script src="<%=request.getContextPath() %>/resources/plugins/shuffle/shuffle.min.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.counterup.min.js"></script>
+    <!-- Google Map -->
+    <script src="<%=request.getContextPath() %>/resources/plugins/google-map/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
+    
+    <script src="<%=request.getContextPath() %>/resources/js/script.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/js/contact.js"></script>
+  
   <script type="text/javascript">
   	$(function(){
   		
   	});
   </script>
+  
   
 </head>
 
@@ -149,7 +174,7 @@
 						      </div>
 						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 135px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
 						        <div class="gaeun-modal-body-con2">
-							        <form name="frm1" method="post" action="">
+							        <form name="frm1" method="post" action="<c:url value='/inc/top.do'/>">
 							        	<div class="gaeun-login-emailBox">
 							        		<label for="email" class="ge-labelEmail">이메일</label>
 							        		<div class="ge-emailBox">
