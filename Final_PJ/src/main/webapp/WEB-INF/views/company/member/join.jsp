@@ -7,11 +7,15 @@ $(function(){
 	$('#comServLoginForm').submit(function(){
 		var msg="";
 		//여기는 유효성 확인 부분
-		if($('#comMemName').val().length<1){ //이름입력
+		if($('#comMemName').val().length<1){ //이름
 			
-		}else if(){ //비밀번호 입력 안 했을 때 
+		}else if($('#comMemTeam').val().length<1){ //팀 직책
 			
-		}else if(){
+		}else if($('#comMemMobile').val().length<1){ //연락처
+			
+		}else if($('#comMemId').val().length<1){ //아이디
+			
+		}else if($('#comMemPwd').val().length<6){ //비밀번호
 			
 		}
 		
