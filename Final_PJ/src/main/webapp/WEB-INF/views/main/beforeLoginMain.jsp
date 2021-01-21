@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../inc/top.jsp" %> 
 
 <div class="beforeLogin-wrapper">
 	<div class="beforeWrap1" style="background:url('${pageContext.request.contextPath}/resources/images/main/main_kr_pc.jpg') center/cover no-repeat;">
@@ -18,7 +19,7 @@
 		</div>
 	</div> 
 	<div class="beforeWrap3">
-		<span class="dot"><img src="${pageContext.request.contextPath}/resources/images/dot.png" style="width:4px;"></span>
+		<span class="dot"><img src="${pageContext.request.contextPath}/resources/images/main/dot.png" style="width:4px;"></span>
 		<div class="beforeLogin-content4" style="background:url('${pageContext.request.contextPath}/resources/images/main/main_002.jpg') center/cover no-repeat;"></div>
 		<div class="beforeLogin-content5">
 			<h1>실력있는 사람들과<br>함께하는 성장</h1>
@@ -26,7 +27,7 @@
 		</div>
 	</div>
 	<div class="beforeWrap4">
-		<span class="dot"><img src="${pageContext.request.contextPath}/resources/images/dot.png" style="width:4px;"></span>
+		<span class="dot"><img src="${pageContext.request.contextPath}/resources/images/main/dot.png" style="width:4px;"></span>
 		<div class="beforeLogin-content6" style="background:url('${pageContext.request.contextPath}/resources/images/main/main_003.jpg') center/cover no-repeat;"></div>
 		<div class="beforeLogin-content7">
 			<h1>원티드와 요즘 직잔인이<br>만드는 행복</h1>
@@ -43,3 +44,4 @@
 		</div>
 	</div>
 </div>
+<%@ include file="../inc/bottom.jsp" %>

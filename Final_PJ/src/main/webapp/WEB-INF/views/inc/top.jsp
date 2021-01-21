@@ -33,6 +33,7 @@
   <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
   <!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->
   <script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src = "<c:url value='/resources/js/member.js'/>"></script>
   
    <!-- 
     Essential Scripts
@@ -59,11 +60,7 @@
   
   <script type="text/javascript">
   	$(function(){
-  		$("#registerBtn").click(function(){
-  			
-  			
-  			
-  			
+  		$('#joinPwdOk-error').hide();  		$("#registerBtn").click(function(){
 	  			//회원가입처리
 	  	  		$.ajax({
 	  				url:"<c:url value='/memberJoin.do'/>",
@@ -79,10 +76,20 @@
 	  					var msg =""
 	  					if(res){ //true이면 회원가입 성공
 	  						msg="회원가입 성공! 로그인을 해주세요.";
-	  						location.href="<c:url value='/index.do'/>";
+	  						$('#join').modal('hide');
+	  						$('#join-email').val('');
+	  						$('#join-name').val('');
+	  						$('#join-hp').val('');
+	  						$('#join-pwd').val('');
+	  						$('#join-pwdOk').val('');
 	  					}else{
 	  						msg="회원가입 실패";
-	  						location.href="<c:url value='/index.do'/>";
+	  						$('#join').modal('hide');
+	  						$('#join-email').val('');
+	  						$('#join-name').val('');
+	  						$('#join-hp').val('');
+	  						$('#join-pwd').val('');
+	  						$('#join-pwdOk').val('');
 	  					}
 	  					alert(msg);
 	  				},
@@ -91,10 +98,103 @@
 	  				}
 	  			});
   		});
+  		
+  		$('#join-email').keyup(function(){
+  			var email = $(this).val();
+  			
+  			if(validate_email(email) && email.length>=2){
+  				$.ajax({
+  					url:"<c:url value='/ajaxCheckEmail.do'/>",
+  					type:"get",
+  					data:{
+  						email:email
+  					},
+  					success:function(res){
+  						var msg = ""
+  						if(res){ //true면 이미 존재
+  							msg = "이미 등록된 이메일 입니다.";
+  						}else{ //사용 가능
+  							//msg = "사용 가능한 이메일 입니다.";
+  						}
+  						$('#joinEmail-error').html(msg);
+  					}
+  				});
+  			}else if(!validate_email(email)){
+  				$('#joinEmail-error').html("이메일 규칙에 맞지 않습니다.");
+  			}
+  			
+  			if(email.length==0){
+  				$('#joinEmail-error').html("");
+  			}
+  		});
+  		
+  		$('#join-hp').keyup(function(){
+  			var hp = $(this).val();
+  			
+  			if(validate_hp(hp)){
+  				$.ajax({
+  					url:"<c:url value='/ajaxCheckHp.do'/>",
+  					type:"get",
+  					data:{
+  						hp:hp
+  					},
+  					success:function(res){
+  						var msg = ""
+  						if(res){ //true면 이미 존재
+  							msg = "이미 등록된 휴대폰 번호입니다.";
+  						}else{ //사용 가능
+  							//msg = "사용 가능한 이메일 입니다.";
+  						}
+  						$('#joinHp-error').html(msg);
+  					}
+  				});
+  			}else if(!validate_hp(hp)){
+  				$('#joinHp-error').html("올바른 휴대폰 번호 형식이 아닙니다.");
+  			}
+  			
+  			if(hp.length==0){
+  				$('#joinHp-error').html("");
+  			}
+  		});
+  		
+  		$('#join-pwdOk').keyup(function(){
+  			var pwd = $('#join-pwd').val();
+  			var pwdOk = $('#join-pwdOk').val();
+  			if(pwd !="" || pwdOk !=""){
+  				if(pwd==pwdOk || pwdOk.length<1){
+  					$('#joinPwdOk-error').hide();
+  				}else{
+  					$('#joinPwdOk-error').show();
+  				}
+  			}
+  		});
+  		
+  		$('input[name=chkAll]').click(function(){
+  			$('.gaeun-joinAgree').find('input[type=checkbox]').prop('checked', this.checked);
+  		});
+  		
   	});
   </script>
-  
-  
+<style type="text/css">
+#joinEmail-error{
+	font-size:12px;
+	font-weight:600;
+	color:red;
+	padding:5px 0 0 5px;
+}
+#joinHp-error{
+	font-size:12px;
+	font-weight:600;
+	color:red;
+	padding:5px 0 0 5px;
+}
+#joinPwdOk-error{
+	font-size:12px;
+	font-weight:600;
+	color:red;
+	padding:5px 0 0 5px;
+}
+</style>  
 </head>
 
 <body id="top">
@@ -206,33 +306,36 @@
 						        <div class="gaeun-modal-body-con2">
 							       <form name="frmJoin" method="post">
 							        	<div class="gaeun-login-emailBox">
-							        		<label for="email" class="ge-labelEmail">이메일</label>
+							        		<label for="email" class="ge-labelEmail">이메일</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
 							        		<div class="ge-emailBox">
 							        			<input type="email" placeholder="이메일을 입력해주세요." id="join-email" class="ge-inputEmail" value="">
+							        			<div id="joinEmail-error"></div>
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
-							        		<label for="userName" class="ge-labelName">이름</label>
+							        		<label for="userName" class="ge-labelName">이름</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
 							        		<div class="ge-joinBox">
 							        			<input type="text" placeholder="이름을 입력해주세요." id="join-name" class="ge-inputName" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
-							        		<label for="hp" class="ge-labelHp">휴대폰 번호</label>
+							        		<label for="hp" class="ge-labelHp">휴대폰 번호</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
 							        		<div class="ge-joinBox">
 							        			<input type="text" placeholder="(예시)01034567890" id="join-hp" class="ge-inputHp" value="">
+							        			<div id="joinHp-error"></div>
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
-							        		<label for="pwd" class="ge-labelPwd">비밀번호</label>
+							        		<label for="pwd" class="ge-labelPwd">비밀번호</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
 							        		<div class="ge-joinBox">
-							        			<input type="Password" placeholder="비밀번호를 6자 이상 입력해 주세요" id="join-pwd" class="ge-inputPwd" value="">
+							        			<input type="Password" placeholder="비밀번호를 입력해 주세요" id="join-pwd" class="ge-inputPwd" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
-							        		<label for="pwd" class="ge-labelPwdOk">비밀번호 확인</label>
+							        		<label for="pwd" class="ge-labelPwdOk">비밀번호 확인</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
 							        		<div class="ge-joinBox">
 							        			<input type="Password" placeholder="비밀번호를 다시 한번 입력해 주세요." id="join-pwdOk" class="ge-inputPwdOk" value="">
+							        			<div id="joinPwdOk-error">비밀번호가 일치하지 않습니다.</div>
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-agreeBox">
@@ -242,7 +345,7 @@
 							        	</div>
 							        	<div class="gaeun-joinAgree">
 							        		<div class="agree1">
-							        			<input type="checkbox" name="agree1" class="ge-agree1">
+							        			<input type="checkbox" name="agree" class="ge-agree1">
 							        			<div class="ge-agree1Con">
 							        				개인정보 수집 및 이용 동의 (필수)<a href="#">자세히</a>
 							        			</div>
@@ -250,7 +353,7 @@
 							        	</div>
 							        	<div class="gaeun-joinAgree">
 							        		<div class="agree1">
-							        			<input type="checkbox" name="agree1" class="ge-agree1">
+							        			<input type="checkbox" name="agree" class="ge-agree1">
 							        			<div class="ge-agree1Con">
 							        				이벤트 소식 등 알림 정보 받기<a href="#">자세히</a>
 							        			</div>
