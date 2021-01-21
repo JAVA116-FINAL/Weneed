@@ -58,6 +58,24 @@
 		const popup = document.querySelector('#popup2');
 	  popup.classList.add('hide');
 	}
+
+/* 결제 팝업창  */
+  function showPopup(multipleFilter) {
+		const popup = document.querySelector('#popupPay');
+	  
+	  if (multipleFilter) {
+	  	popup.classList.add('multiple-filter');
+	  } else {
+	  	popup.classList.remove('multiple-filter');
+	  }
+	  
+	  popup.classList.remove('hide');
+	}
+
+	function closePopup() {
+		const popup = document.querySelector('#popupPay');
+	  popup.classList.add('hide');
+	}
   
   
   
@@ -75,7 +93,7 @@
             <div class="feature-icon mb-3">
              <img alt="" src="https://static.wanted.co.kr/images/events/wanted-symbol-logo3x.png" style="width:150px;">
             </div>
-            <div style="font-size:25px; color:gray; margin-top:30px;">Wanted Plus / 6개월권 구독</div>
+            <div style="font-size:25px; color:gray; margin-top:30px;">Wanted Plus / 6개월권 구독</div>    <!-- 3개월 구독시: 무제한으로 즐기는 직군별 커리어 콘텐츠 라고 뜸 -->
               <div style="font-size:13px; color:gray; margin-top:30px;"><p>20,000명 이상의 직장인이 선택한 원티드의 모든 강연, 컨퍼런스 영상을 무제한으로 시청하고, 업계 최고의 전문가와 함께하는 온오프라인 세미나, 북클럽에 참여할 수 있는 기회 </p></div><br>
               <div class="filter" style="width: 100%; height: 70px; margin-top:-20px;">
               <button onclick="showPopup(true)" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:190px; height:40px;padding:0px,0px; 
@@ -92,7 +110,7 @@
            <!-- 기본정보, 추가정보 아코디언!!!!!! -->
 		        <div id="accordion" style="margin-top: 50px; ">
 						  <h3><i class="far fa-edit"></i><b>기본 정보</b></h3>
-						    <form id="#" class="appoinment-form" method="post" action="#">
+						    <form id="#" class="appoinment-form" method="post" action="#">   <!-- subsRegistComplete.do로보내기 -->
                     <div class="row">
                        
                        
@@ -143,7 +161,7 @@
 						
 						
 						  <h3><i class="far fa-edit"></i><b>추가 정보</b></h3>
-						  <form action="">
+						  <form action="">  <!-- subsRegistComplete.do로보내기 -->
 						  <div>
 						    <p>
 						    Q. 상단에 기입하신 이메일, 핸드폰으로 구독 정보 및 알림이 전달됩니다. 정확히 입력했는지 다시 한번 확인해 주세요*
@@ -174,7 +192,7 @@
 						
 				<!-- 추가정보까지 작성하면 보이는 신청버튼과 추가설명 섹션 -->
 				 <div class="almostDoneRegister"> 
-				  <button onclick="location.href=''" style="float:right; margin-top: -60px; margin-left:10px;background-color:#3366ff; outline:none; border-radius:2em; border:none; width: 120px; color:#fff">신청하기<i class="icofont-simple-right ml-2"></i></button>
+				  <button onclick="showPopup(true)" class="btnFilter" style="float:right; margin-top: -60px; margin-left:10px;background-color:#3366ff; outline:none; border-radius:2em; border:none; width: 120px; color:#fff">신청하기<i class="icofont-simple-right ml-2"></i></button>
 					<div style="color:gray; font-size:11px; margin-top:120px;">
 					<hr>
 					<p>이벤트 신청시의 불편한 부분 또는 의문점이 있으시면 부담없이 문의해 주세요. 문의에 대한 대응은 접수일부터 3영업일 이내로 답변 드리겠습니다. 고객센터 : help@wantedlab.com</p>
@@ -195,7 +213,7 @@
 
 
 <!-- 팝업창 내용 -->
-	<div id="popup2" class="hide">
+<div id="popup2" class="hide">
   <div class="content2">
     <div style="font-size:17px; color:black; text-align:center; margin-top:30px;">
   <i class="fas fa-exclamation"  style="width: 150px; height:50px;"></i>
@@ -205,6 +223,51 @@
     <div style="padding-top:20px;">
     <button onclick="closePopup()" style="margin-left: 75px;background-color:#fff; border-radius:2em; border:0.3px solid #d2d3d4; outline:none; width: 120px;">취소</button>
     <button onclick="location.href='<c:url value='/career/Mainpage/subscription.do'/>'" style=" margin-left:10px;background-color:#3366ff; outline:none; border-radius:2em; border:none; width: 120px; color:#fff">확인</button>
+  	</div>
+  </div>
+</div>
+
+<!-- 결제 팝업창 -->
+<div id="popupPay" class="hide">
+  <div class="contentPay">
+    <div style="font-size:14px; color:black; margin-top:0px;">
+  <i class="fas fa-exclamation"  style="width: 150px; height:50px;"></i>
+		<p><b>카드정보등록</b></p> 
+		<p>주문자 정보: 허지원 / royalceramic918@gmail.com</p>  <!-- 회원정보 받아서 뿌려주기 -->
+		<p>Wanted Plus : 무제한으로 즐기는 직군별 커리어 콘텐츠 참가신청비: 120000 KRW</p>    <!-- 6개월 구독이면 21만원임 -->
+		<hr>
+	</div>
+
+	<div id=#subsPay>
+	<form action="">
+		<label class="" >
+	     	<input type="radio" name="" value="" style="width:20px;"/>개인
+	    </label>
+	    <label class="">
+			<input type="radio" name="" value="" checked="checked" style="width:20px;"/>법인
+		</label><br>
+		<label class="">카드번호<br>
+			<input type="text" name="" value="" placeholder="0000 0000 0000 0000" style="width:200px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/>
+		</label><br>
+		<label class="">만료일자<br>
+			<input type="text" name="" value="" placeholder="MM" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/> / 
+			<input type="text" name="" value="" placeholder="YY" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/>
+		</label><br>
+		<label class="">생일<br>
+			<input type="text" name="" value="" placeholder="YY" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/> / 
+			<input type="text" name="" value="" placeholder="MM" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/> / 
+			<input type="text" name="" value="" placeholder="DD" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/>
+		</label><br>
+		<label class="">비밀번호 앞 두자리<br>
+			<input type="text" name="" value="" placeholder="**" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/>
+		</label><br>
+	
+	</form>
+	</div>
+<hr>
+    <div style="padding-top:60px;">
+    <button onclick="location.href='<c:url value='/career/Mainpage/careerMain.do'/>'" style="margin-left:20px;background-color:#3366ff; outline:none; border-radius:2em; border:none; width: 120px; color:#fff">결제</button>
+    <button onclick="closePopup()" style="margin-left: 15px;background-color:#fff; border-radius:2em; border:0.3px solid #d2d3d4; outline:none; width: 120px;">취소</button>
   	</div>
   </div>
 </div>
