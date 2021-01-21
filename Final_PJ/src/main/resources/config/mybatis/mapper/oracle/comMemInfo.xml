@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.comMemInfo">
+	<select id="checkId" parameterType="String" resultType="int">
+		select count(*) as cnt from commeminfo where com_Mem_Id=#{userid}
+	</select>
+	
+	<select id="selectPwd" parameterType="String" resultType="String">
+		select com_mem_pwd from commeminfo where com_mem_id=#{comMemId}
+	</select>
+	
+	<select id="selectMemNo" parameterType="String" resultType="int">
+		select com_mem_no from commeminfo where com_mem_id=#{comMemId}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
