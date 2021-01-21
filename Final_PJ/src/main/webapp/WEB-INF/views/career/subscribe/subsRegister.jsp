@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
+  <script type="text/javascript">
   $( function() {
     $( "#accordion" ).accordion();
   } );
@@ -59,6 +59,7 @@
 	  popup.classList.add('hide');
 	}
 
+	
 /* 결제 팝업창  */
   function showPopup(multipleFilter) {
 		const popup = document.querySelector('#popupPay');
@@ -144,7 +145,8 @@
                             
                         
                         <!-- 직군/주요 직무/경력 -->
-						<label>직군/주요 직무/경력</label>
+						<label>직군/주요 직무/경력</label><br>
+						
                          <label class="" >
 	            			<input type="radio" name="" value="" style="width:20px;"/>직군 선택
 	          			 </label><br>
@@ -227,7 +229,8 @@
   </div>
 </div>
 
-<!-- 결제 팝업창 -->
+
+<!-- 결제 팝업창 내용-->
 <div id="popupPay" class="hide">
   <div class="contentPay">
     <div style="font-size:14px; color:black; margin-top:0px;">
@@ -247,19 +250,19 @@
 			<input type="radio" name="" value="" checked="checked" style="width:20px;"/>법인
 		</label><br>
 		<label class="">카드번호<br>
-			<input type="text" name="" value="" placeholder="0000 0000 0000 0000" style="width:200px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/>
+			<input type="text" name="" value="" placeholder="0000 0000 0000 0000" style="width:200px; height:28px; border:0.1px solid gray; border-radius:0.5em;"/>
 		</label><br>
 		<label class="">만료일자<br>
-			<input type="text" name="" value="" placeholder="MM" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/> / 
-			<input type="text" name="" value="" placeholder="YY" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/>
+			<input type="text" name="" value="" placeholder="MM" style="width:40px; height:28px; border:0.1px solid gray; border-radius:0.5em;"/> / 
+			<input type="text" name="" value="" placeholder="YY" style="width:40px; height:28px; border:0.1px solid gray; border-radius:0.5em;"/>
 		</label><br>
 		<label class="">생일<br>
-			<input type="text" name="" value="" placeholder="YY" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/> / 
-			<input type="text" name="" value="" placeholder="MM" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/> / 
-			<input type="text" name="" value="" placeholder="DD" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/>
+			<input type="text" name="" value="" placeholder="YY" style="width:40px; height:28px; border:0.1px solid gray; border-radius:0.5em;"/> / 
+			<input type="text" name="" value="" placeholder="MM" style="width:40px; height:28px; border:0.1px solid gray; border-radius:0.5em;"/> / 
+			<input type="text" name="" value="" placeholder="DD" style="width:40px; height:28px; border:0.1px solid gray; border-radius:0.5em;"/>
 		</label><br>
 		<label class="">비밀번호 앞 두자리<br>
-			<input type="text" name="" value="" placeholder="**" style="width:40px; height:25px; border:0.1px solid gray; border-radius:0.5em;"/>
+			<input type="text" name="" value="" placeholder="**" style="width:40px; height:28px; border:0.1px solid gray; border-radius:0.5em;"/>
 		</label><br>
 	
 	</form>
