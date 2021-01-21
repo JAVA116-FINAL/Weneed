@@ -15,6 +15,11 @@ public class IndexController {
 		logger.info("index화면 보여주기");
 	}
 	
+	@RequestMapping("/main/beforeLoginMain.do")
+	public void beforeLoginMain() {
+		logger.info("로그인 전 메인 화면 보여주기");
+	}
+	
 	@RequestMapping("/main/afterLoginMain.do")
 	public void afterLoginMain() {
 		logger.info("로그인 후 메인 화면 보여주기");

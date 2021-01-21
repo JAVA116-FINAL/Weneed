@@ -12,9 +12,18 @@ public class MemberDAOMybatis implements MemberDAO{
 	
 	private String namespace="config.mybatis.mapper.oracle.member.";
 
-	@Override
 	public int insertMember(MemberVO vo) {
 		int cnt = sqlSession.insert(namespace+"insertMember", vo);
+		return cnt;
+	}
+	
+	public int checkEmail(String email) {
+		int cnt = sqlSession.selectOne(namespace+"emailCheck", email);
+		return cnt;
+	}
+
+	public int checkHp(String hp) {
+		int cnt = sqlSession.selectOne(namespace+"hpCheck", hp);
 		return cnt;
 	}
 
