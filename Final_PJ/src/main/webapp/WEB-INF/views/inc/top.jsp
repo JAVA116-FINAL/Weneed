@@ -60,7 +60,11 @@
   <script type="text/javascript">
   	$(function(){
   		$("#registerBtn").click(function(){
-	  		//회원가입처리
+  			
+  			
+  			
+  			
+	  			//회원가입처리
 	  	  		$.ajax({
 	  				url:"<c:url value='/memberJoin.do'/>",
 	  				type:"POST",
@@ -71,7 +75,16 @@
 	  					'pwd': $("#join-pwd").val()
 	  				},
 	  				success:function(res){
-	  					alert(res);
+	  					//alert(res);
+	  					var msg =""
+	  					if(res){ //true이면 회원가입 성공
+	  						msg="회원가입 성공! 로그인을 해주세요.";
+	  						location.href="<c:url value='/index.do'/>";
+	  					}else{
+	  						msg="회원가입 실패";
+	  						location.href="<c:url value='/index.do'/>";
+	  					}
+	  					alert(msg);
 	  				},
 	  				error:function(xhr, status, error){
 	  					alert('error! : ' + error);
@@ -152,7 +165,7 @@
 							        	<div class="gaeun-login-pwdBox">
 							        		<label for="password" class="ge-labelPwd">비밀번호</label>
 							        		<div class="ge-pwdBox">
-							        			<input type="password" placeholder="비밀번호를 입력해주세요." id="login-pwd" class="ge-inputPwd" value="">
+							        			<input type="Password" placeholder="비밀번호를 입력해주세요." id="login-pwd" class="ge-inputPwd" value="">
 							        		</div>
 							        	</div>
 							        	<div class="lostOrJoin">
@@ -191,7 +204,7 @@
 						      </div>
 						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 135px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
 						        <div class="gaeun-modal-body-con2">
-							       <form name="frmJoin" method="post" action="<c:url value='/index.do'/>">
+							       <form name="frmJoin" method="post">
 							        	<div class="gaeun-login-emailBox">
 							        		<label for="email" class="ge-labelEmail">이메일</label>
 							        		<div class="ge-emailBox">
@@ -213,13 +226,13 @@
 							        	<div class="gaeun-joinBox">
 							        		<label for="pwd" class="ge-labelPwd">비밀번호</label>
 							        		<div class="ge-joinBox">
-							        			<input type="text" placeholder="비밀번호를 6자 이상 입력해 주세요" id="join-pwd" class="ge-inputPwd" value="">
+							        			<input type="Password" placeholder="비밀번호를 6자 이상 입력해 주세요" id="join-pwd" class="ge-inputPwd" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
 							        		<label for="pwd" class="ge-labelPwdOk">비밀번호 확인</label>
 							        		<div class="ge-joinBox">
-							        			<input type="text" placeholder="비밀번호를 다시 한번 입력해 주세요." id="join-pwdOk" class="ge-inputPwdOk" value="">
+							        			<input type="Password" placeholder="비밀번호를 다시 한번 입력해 주세요." id="join-pwdOk" class="ge-inputPwdOk" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-agreeBox">
