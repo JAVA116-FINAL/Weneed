@@ -101,7 +101,7 @@ $( document ).ready( function() {
 	});
 </script>
 
-
+<!-- 
 <style="type="text/css">
 body{
 	margin:0px;
@@ -114,6 +114,6 @@ body{
 .subscribeBody {
         height: 2000px;
  } 
-</style>
+</style> -->
 </body>
 </html>
