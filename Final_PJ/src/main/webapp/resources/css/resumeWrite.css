@@ -1,6 +1,9 @@
 @charset "UTF-8";
 
-select.realselect_jy {border: none;}
+select.realselect_jy {
+	border: none;
+	outline:none;
+}
 
 .langselectBox_jy {
     display: inline-block;
@@ -10,7 +13,10 @@ select.realselect_jy {border: none;}
     padding: 5px;
 }
 
-input.title-input_jy {border: none;font-size: xx-large;color: #383333;}
+input.title-input_jy {
+	border: none;font-size: xx-large;color: #383333;
+	outline:none;
+	}
 
 button.btResume-down_jy {
     display: inline-block;
@@ -43,14 +49,14 @@ input.endMonth_jy {
     text-decoration: gray;
 }
 
-form {}
-
 input.name_jy {
     border: none;
+    outline:none;
 }
 
 input.dep_jy {
     border: none;
+    outline:none;
 }
 button.btResume-down_jy {
     border: 1px solid gray;
@@ -70,7 +76,8 @@ button.btResume-down_jy {
 }
 
 input.content-input_jy {
-    border: none;
+    border:0;
+    outline:none;
 }
 
 .reumeBasicInfo_jy {
@@ -119,6 +126,7 @@ input.buttons_jy {
     height: 48px;
     font-size: 15px;
     margin-top: 15px;
+    outline:none;
 }
 
 button.buttons_jy {
@@ -132,6 +140,7 @@ button.buttons_jy {
     margin-top: 15px;
     margin-left: 5px;
     margin-right: 46px;
+    outline:none;
 }
 
 .RWcomponent_jy {
@@ -150,4 +159,72 @@ textarea.content-textArea_jy {
 
 section.resumeWriteSection_jy {
     margin-bottom: 155px;
+}
+
+input.title-input_jy {
+    border-color: white;
+}
+
+input.title-input_jy:focus {
+    border: none;
+}
+
+.reumeBasicInfo_jy {}
+
+input.content-input_jy:focus {
+    border: none;
+}
+
+input.content-input_jy:focus {
+    border: none;
+}
+
+textarea.content-textArea_jy:focus {
+    border: none;
+}
+
+input.startYear_jy:focus {
+    border: none;
+}
+
+input.startYear_jy:focus {
+    border: none;
+}
+
+
+input.startMonth_jy:focus {
+    border: none;
+}
+
+input.endYear_jy:focus {
+    border: none;
+}
+
+input.endMonth_jy:focus {
+    border: none;
+}
+
+input.name_jy:focus {
+    border: none;
+}
+
+input.dep_jy:focus {
+    border: none;
+}
+
+textarea.content-textArea_jy:focus {
+    border: 0 none white;
+}
+textarea.content-textArea_jy:focus {
+    border-color: rgb(255 255 255);
+    box-shadow: 0 1px 1px rgb(255 255 255) inset, 0 0 8px rgb(255 255 255);
+    outline: 0 none;
+}
+
+button#btcareer_jy {
+    outline: none;
+}
+
+button.btAdd_jy {
+    outline: none;
 }

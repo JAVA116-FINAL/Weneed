@@ -12,6 +12,7 @@
 <meta name="author" content="themefisher.com">
 <title>커리어 여정을 행복하게, 원티드</title>
 </head>
+
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
 
@@ -33,11 +34,53 @@
   <!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->
   <script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>
   
+   <!-- 
+    Essential Scripts
+    =====================================-->
+
+    <!-- Main jQuery -->
+    <!-- Bootstrap 4.3.2 -->
+    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/popper.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.easing.js"></script>
+    <!-- Slick Slider -->
+    <script src="<%=request.getContextPath() %>/resources/plugins/slick-carousel/slick/slick.min.js"></script>
+    <!-- Counterup -->
+    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.waypoints.min.js"></script>
+    
+    <script src="<%=request.getContextPath() %>/resources/plugins/shuffle/shuffle.min.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.counterup.min.js"></script>
+    <!-- Google Map -->
+    <script src="<%=request.getContextPath() %>/resources/plugins/google-map/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
+    
+    <script src="<%=request.getContextPath() %>/resources/js/script.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/js/contact.js"></script>
+  
   <script type="text/javascript">
   	$(function(){
-  		
+  		$("#registerBtn").click(function(){
+	  		//회원가입처리
+	  	  		$.ajax({
+	  				url:"<c:url value='/memberJoin.do'/>",
+	  				type:"POST",
+	  				data:{
+	  					'name':$("#join-name").val(),
+	  					'hp':$("#join-hp").val(),
+	  					'email':$("#join-email").val(),
+	  					'pwd': $("#join-pwd").val()
+	  				},
+	  				success:function(res){
+	  					alert(res);
+	  				},
+	  				error:function(xhr, status, error){
+	  					alert('error! : ' + error);
+	  				}
+	  			});
+  		});
   	});
   </script>
+  
   
 </head>
 
@@ -82,6 +125,7 @@
 					<ul>
 						<li><button class="searchBtn" style="outline:none;"><i class="icon-search"></i></button></li>
 						<li><button class="signUpButton" data-toggle="modal" data-target=".docs-example-modal-sm" style="outline:none;">회원가입/로그인</button></li>
+						
 						 <!-- modal#1 로그인 시작-->
 						 <div class="modal fade docs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 						  <div class="modal-dialog" style="padding-left:45px; top:2%;">
@@ -92,7 +136,7 @@
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
-						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 130px);overflow-y: auto;">
+						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 130px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
 						        <div class="gaeun-modal-body-con1">
 						        	<h1>직장인을 위한<br>커리어 플랫폼, 원티드!</h1>
 						        	<h2>커리어 성장과 행복을 위한 여정<br>지금 원티드에서 시작하세요.</h2>
@@ -102,13 +146,13 @@
 							        	<div class="gaeun-login-emailBox">
 							        		<label for="email" class="ge-labelEmail">이메일</label>
 							        		<div class="ge-emailBox">
-							        			<input type="email" placeholder="이메일을 입력해주세요." id="email" class="ge-inputEmail" value="">
+							        			<input type="email" placeholder="이메일을 입력해주세요." id="login-email" class="ge-inputEmail" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-login-pwdBox">
 							        		<label for="password" class="ge-labelPwd">비밀번호</label>
 							        		<div class="ge-pwdBox">
-							        			<input type="password" placeholder="비밀번호를 입력해주세요." id="pwd" class="ge-inputPwd" value="">
+							        			<input type="password" placeholder="비밀번호를 입력해주세요." id="login-pwd" class="ge-inputPwd" value="">
 							        		</div>
 							        	</div>
 							        	<div class="lostOrJoin">
@@ -145,37 +189,37 @@
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
-						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 135px);overflow-y: auto;">
+						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 135px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
 						        <div class="gaeun-modal-body-con2">
-							        <form name="frm1" method="post" action="">
+							       <form name="frmJoin" method="post" action="<c:url value='/index.do'/>">
 							        	<div class="gaeun-login-emailBox">
 							        		<label for="email" class="ge-labelEmail">이메일</label>
 							        		<div class="ge-emailBox">
-							        			<input type="email" placeholder="이메일을 입력해주세요." id="email" class="ge-inputEmail" value="">
+							        			<input type="email" placeholder="이메일을 입력해주세요." id="join-email" class="ge-inputEmail" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
 							        		<label for="userName" class="ge-labelName">이름</label>
 							        		<div class="ge-joinBox">
-							        			<input type="text" placeholder="이름을 입력해주세요." id="name" class="ge-inputName" value="">
+							        			<input type="text" placeholder="이름을 입력해주세요." id="join-name" class="ge-inputName" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
 							        		<label for="hp" class="ge-labelHp">휴대폰 번호</label>
 							        		<div class="ge-joinBox">
-							        			<input type="text" placeholder="(예시)01034567890" id="hp" class="ge-inputHp" value="">
+							        			<input type="text" placeholder="(예시)01034567890" id="join-hp" class="ge-inputHp" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
 							        		<label for="pwd" class="ge-labelPwd">비밀번호</label>
 							        		<div class="ge-joinBox">
-							        			<input type="text" placeholder="비밀번호를 6자 이상 입력해 주세요" id="pwd" class="ge-inputPwd" value="">
+							        			<input type="text" placeholder="비밀번호를 6자 이상 입력해 주세요" id="join-pwd" class="ge-inputPwd" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
 							        		<label for="pwd" class="ge-labelPwdOk">비밀번호 확인</label>
 							        		<div class="ge-joinBox">
-							        			<input type="text" placeholder="비밀번호를 다시 한번 입력해 주세요." id="pwdOk" class="ge-inputPwdOk" value="">
+							        			<input type="text" placeholder="비밀번호를 다시 한번 입력해 주세요." id="join-pwdOk" class="ge-inputPwdOk" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-agreeBox">
@@ -199,15 +243,16 @@
 							        			</div>
 							        		</div>
 							        	</div>
-							        	<input type ="submit" class="registerBtn" value="회원가입하기" style="outline:none;">
+							        	<input type ="button" id="registerBtn" class="registerBtn" value="회원가입하기" style="outline:none;">
 							        	<p class="reLogin">* 이미 회원이신 가요?<a data-toggle="modal" data-target=".docs-example-modal-sm" href="#" data-dismiss="modal">&nbsp;로그인 하기</a></p>
-							        </form>
+							        <!--  </form>--> 
 						        </div>
 						      </div>
 						    </div>
 						  </div>
 						</div>
 						<!-- modal#2 회원가입 끝 -->
+						
 						<!-- modal#3 비밀번호찾기 -->
 						<div class="modal fade docs-example-modal-sm" id="lost-pwd" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 						  <div class="modal-dialog" style="padding-left:45px; top:20%;">
@@ -218,9 +263,9 @@
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
-						      <div class="modal-body gaeun-modal-body">
+						      <div class="modal-body gaeun-modal-body" style="border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
 						        <div class="gaeun-modal-body-con2">
-							        <form name="frm1" method="post" action="">
+							        <form name="frmSearchPwd" method="post" action="">
 							        	<div class="gaeun-login-emailBox">
 							        		<label for="email" class="ge-labelEmail">이메일</label>
 							        		<div class="ge-emailBox">
@@ -236,6 +281,7 @@
 						  </div>
 						</div>
 						<!-- modal#3 비밀번호찾기 끝 -->
+						
 						<li><a href="#" class="dashboardButton" >기업 서비스</a></li>
 					</ul>
 				</aside>
