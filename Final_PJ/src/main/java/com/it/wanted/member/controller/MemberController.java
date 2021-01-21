@@ -20,40 +20,23 @@ public class MemberController {
 		= LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired private MemberService memberService;
-	/*
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/memberJoin.do", method = RequestMethod.POST) public
-	 * String memberJoin(@RequestParam String email,String pwd) {
-	 * logger.info("회원가입 성공 " + email); System.out.println("AAAA" +email); return
-	 * "thank you join";
-	 * 
-	 * }
-	 */
 	
 	@ResponseBody
 	@RequestMapping(value="/memberJoin.do")
-	public String memberJoin(@ModelAttribute MemberVO vo, Model model) {
+	public boolean memberJoin(@ModelAttribute MemberVO vo, Model model) {
 		//1.
 		logger.info("회원가입 처리 파라미터 vo ={}", vo);
 		
 		//2.
+		boolean bool = false;
 		int cnt = memberService.insertMember(vo);
 		logger.info("회원가입 결과, cnt={}", cnt);
-		
-		String msg="회원가입 실패!", url="/index.do";
-		if(cnt>0) {
-			msg="회원가입되었습니다.";
-			url="/index.do";
+		if(cnt>0) { //회원가입 성공
+			bool = true;
 		}
 		
-		//3.
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-		
 		//4.
-		return "common/message";
+		return bool;
 		
 	}
 	
