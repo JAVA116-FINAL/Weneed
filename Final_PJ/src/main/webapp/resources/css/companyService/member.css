@@ -10,29 +10,32 @@
 	font-weight: bold;
 }
 
-
 .close{
 	margin: 0;
 }
 
 .comServ-input{
-	margin-bottom: 20px;
 	padding: 0px 10px;
 }
 .input-long{
 	width: 400px;
+	border: 1px solid #e1e2e3;
+	border-radius: 2px;
 }
 .input-long:last-child{
 	margin-bottom: 0px;
 }
 .input-half{
 	width: 190px;
+	border: 1px solid #e1e2e3;
+	border-radius: 2px;
 }
 
 .input-half:first-child{
 	margin-right: 20px;
 }
 
+.comServFBBtn,
 .comServSubmitBtn{
 	width: 400px;
 	margin-bottom: 5px;
@@ -64,4 +67,22 @@
 hr{
 	margin-top:0px;
 	margin-bottom: 20px;
+}
+
+#comServLoginForm{
+	text-align: center;
+}
+.comServFBBtn{
+	margin-top: 20px;
+	background-color: #395a9c;
+}
+
+.boundDivSpan{
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.alertSpan{
+	color: red;
+	font-size: 0.8em;
 }
