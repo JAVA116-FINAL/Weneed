@@ -32,7 +32,7 @@
 <!-- 구독신청 배너부분!!!!!!!!! -->
 <section class="page-title bg-1" style="padding:0px;">
     <a href="<c:url value='subscription.do'/>">
-         <section class="_2LiFavTzcqjq8ansnAqKSQ _2bqGiY6XO2ke3gSGZbbVm3" style="width:100%; padding-bottom: 15%; background-image: url(&quot;https://static.wanted.co.kr/banner/Web_Event_Banner_C.jpg&quot;);"></section>
+         <section class="_2LiFavTzcqjq8ansnAqKSQ _2bqGiY6XO2ke3gSGZbbVm3" style="padding-bottom: 15%; background-image: url(&quot;https://static.wanted.co.kr/banner/Web_Event_Banner_C.jpg&quot;);"></section>
 	</a>
 </section>
 <!-- 구독신청 배너부분 끝  -->

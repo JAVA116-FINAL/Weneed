@@ -11,4 +11,12 @@
 		values(#{mem_no}, #{name}, #{hp}, #{email}, #{pwd})
 	</insert>
 	
+	<select id="emailCheck" parameterType="string" resultType="int">
+		select count(*) from MEMBERINFO where email=#{email}
+	</select>
+	
+	<select id="hpCheck" parameterType="string" resultType="int">
+		select count(*) from MEMBERINFO where hp=#{hp}
+	</select>
+	
 </mapper>

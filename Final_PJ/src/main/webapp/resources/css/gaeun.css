@@ -809,6 +809,47 @@ h5.modal-wanted-title{
 	background:#f2f2f2;
 }
 
+.mainTopSlider-con{
+	position:relative;
+	height:300px;
+	background-position:center center;
+}
+
+.mainTopSlider-con-box{
+	position:absolute;
+	bottom:20px;
+	width:340px;
+	height:150px;
+	border-radius:3px;
+	background:#fff;
+	padding:20px 30px 14px;
+}
+
+.mainTopSlider-con-box >div >h2{
+	font-size:22px;
+	font-weight:600;
+	line-height:1.4;
+	letter-spacing:normal;
+	word-break:keep-all;
+	text-align:left;
+	color:#333;
+	margin-bottom:5px;
+	display:block;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+.mainTopSlider-con-box >div >h3{
+	font-size:14px;
+	font-weight:600;
+	line-height:1.4;
+	text-align:left;
+	color:#666;
+	margin-bottom:20px;
+	overflow:hidden;
+	position:relative;
+}
+
 .profile-matching-area{
 	margin:80px auto;
 	height:90px;
@@ -1042,32 +1083,238 @@ h5.modal-wanted-title{
 	font-weight:400;
 }
 
+.career-chance-box{
+	margin:80px auto;
+	position:relative;
+}
+
+.carrer-chance-title-wrap{
+	position:relative;
+	margin-bottom:20px;
+}
+.carrer-box-title-div{
+	margin-bottom:20px;
+}
+
+.carrer-box-title{
+	display:inline-block;
+	padding:0;
+	margin:0;
+	font-size:22px;
+	font-weight:600;
+	letter-spacing:normal;
+	text-align:left;
+	color:#333;
+}
+
+.newJob-box{
+	margin:80px auto;
+	position:relative;
+}
+
+.newJob-title-wrap{
+	position:relative;
+	margin-bottom:20px;
+}
+.newJob-box-title-div{
+	margin-bottom:20px;
+}
+
+.newJob-box-title{
+	display:inline-block;
+	padding:0;
+	margin:0;
+	font-size:22px;
+	font-weight:600;
+	letter-spacing:normal;
+	text-align:left;
+	color:#333;
+}
+
+.theme-box{
+	margin:80px auto;
+	position:relative;
+}
+
+.theme-title-wrap{
+	position:relative;
+	margin-bottom:20px;
+}
+.theme-box-title-div{
+	margin-bottom:20px;
+}
+
+.theme-box-title{
+	display:inline-block;
+	padding:0;
+	margin:0;
+	font-size:22px;
+	font-weight:600;
+	letter-spacing:normal;
+	text-align:left;
+	color:#333;
+}
+
+.weekRefer-box{
+	margin:80px auto;
+	position:relative;
+}
+
+.weekRefer-title-wrap{
+	position:relative;
+	margin-bottom:20px;
+}
+.weekRefer-box-title-div{
+	margin-bottom:20px;
+}
+
+.weekRefer-box-title{
+	display:inline-block;
+	padding:0;
+	margin:0;
+	font-size:22px;
+	font-weight:600;
+	letter-spacing:normal;
+	text-align:left;
+	color:#333;
+}
 
 
 
+/*회원가입 후 onboarding 화면*/
+#onboardingBody{
+	font-size:14px;
+	color:#333;
+	background-color:#f8f8fa;
+}
 
+.ob-wrapper{
+	display:flex;
+	padding-top:90px;
+	padding-bottom:105px;
+	background-color:#f8f8fa;
+	justify-content:center;
+}
 
+.ob-content{
+	width:370px;
+}
 
+.ob-con-logo img{
+	width:130px;
+	display:flex;
+	margin:0 auto;
+}
 
+.ob-con-box{
+	padding:51px 20px 25px;
+	border:1px solid #ececec;
+	border-radius:5px;
+	margin-top:39px;
+	background-color:#fff;
+}
 
+.ob-con-box-top{
+	margin-bottom:42px;
+	font-size:15px;
+	text-align:center;
+	color:#333;
+}
 
+.ob-con-box-top >h1{
+	margin-bottom:16px;
+	font-size:20px;
+	font-weight:bold;
+}
 
+.ob-con-box-top >p{
+	line-height:1.5;
+	white-spacing:pre-line;
+	font-size:15px;
+	text-align:center;
+	color:#333;
+}
 
+.ob-category-id-select{
+	border:none;
+	outline:none;
+	width:100%;
+}
 
+.ob-matching-wrapper{
+	position:relative;
+	padding-bottom:22px;
+	color:#767676;
+}
 
+.ob-matching-label{
+	font-size:14px;
+	font-weight:400;
+	margin-bottom:0;
+}
 
+.ob-matching-selectBox-wrapper{
+	margin-top:11px;
+}
 
+.ob-matching-selectBox{
+	display:flex;
+	position:relative;
+	width:100%;
+	height:50px;
+	padding-right:15px;
+	padding-left:15px;
+	border-radius:5px;
+	border:1px solid #e1e2e3;
+	background-color:#fff;
+	font-size:15px;
+}
 
+.ob-button-wrapper{
+	margin-top:12px;
+}
 
+.ob-next-btn{
+	background-color:#3366ff;
+	color:#fff;
+	width:100%;
+	height:54px;
+	border-radius:27px;
+	font-size:14px;
+	font-weight:600;
+}
 
+.ob-or{
+	height:24px;
+	font-weight:600;
+	color:#3366ff;
+	display:flex;
+	justify-content:center;
+}
 
+.ob-upload-btn{
+	border:1px solid #3366ff;
+	background-color:#fff;
+	color:#3366ff;
+	width:100%;
+	height:54px;
+	border-radius:27px;
+	font-size:14px;
+	font-weight:600;
+}
 
+.ob-after-input-wrapper{
+	margin-top:20px;
+	text-align:center;
+}
 
-
-
-
-
-
-
-
+.ob-after-input-btn{
+	margin:0;
+	padding:0;
+	border:0;
+	background:none;
+	font-size:14px;
+	font-weight:bold;
+	color:#767676;
+}
 

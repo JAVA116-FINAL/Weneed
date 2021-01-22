@@ -5,14 +5,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <link rel="stylesheet" href="<c:url value='/resources/css/resumeIntro.css'/>">
 
-<section class="section blog-wrap">
+
+
+<section class="section blog-wrap" style="margin-top:-70px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
                 <div class="row">
 					<div class="col-lg-12 mb-5">
 						<div class="single-blog-item">
-							<img src="../resources/images/blog/blog-1.jpg" alt="" class="img-fluid">
+							<img src="<c:url value='/resources/images/career/servicon.PNG'/>" alt="" class="img-fluid">
 				
 							<div class="blog-item-content mt-5">
 				<!-- 상세페이지 제목/ 직무 -->
@@ -117,36 +119,38 @@
 								</div><!-- jobsearchcontents div -->
 								<hr>
 <!-- 마감일, 회사주소, 지도-->									
-								<div>
-									마감일  상시
-									근무지역 강남구 언주로 134길 4 IB타워 4층
+								<div style="margin: 15px; color: black; font-size:15px;">
+									<span style="color:gray;">마감일 &nbsp;&nbsp;&emsp;</span><span><b>상시</b></span><br>
+									<span style="color:gray;">근무지역 &nbsp;&nbsp;</span><span><b>강남구 언주로 134길 4 IB타워 4층</b></span>
 								</div>
+								
+								<div class="google-map ">
 						
+									<%@ include file="map.jsp" %>
+							
+								</div>
 								
-								
-<!-- 여기다가 회사 네임카드랑 팔로두 -->								
-								<div class="mt-5 clearfix comPageBox_jy">
-								   <section>
-									   	<button>
-								   			<div class="loge_jy" style='background-image: url("https://static.wanted.co.kr/images/wdes/0_5.18dfe4ff.jpg")' >
-								   			</div>
-								   			<div>
-								   				<h5>바바리퍼블리카(토스)</h5>
-								   				<h6>IT, 컨텐츠</h6>
-								   			</div>
-									   	</button>
-									   	<button type="button" class="followButton" onClick="location.href='#'">
-									   		팔로우
-									   	</button>
-									   	
-								   </section>
-								    <!-- <ul class="float-left list-inline tag-option"> 
-								    	<li class="list-inline-item"><a href="#">팔로우</a></li>
+								<!-- 여기다가 회사 네임카드랑 팔로우 -->								
+									
+								<div style="width: 730px; height:80px; border: 0.3px solid gray">
+										   	<button type="button" class="btnCompan" onClick="location.href='companyDetail.do'" style="outline:none;">
+										   	<div style="width:280px; margin:15px;">
+									   			<div>
+									   				<img alt="" src="<c:url value='https://static.wanted.co.kr/images/wdes/0_5.79fe6c9d.jpg'/>" style="width:50px; height:50px; float:left;">
+									   			</div>
+									   			<div style="float:left; margin-left:10px; text-align:left; font-size:13px; font-weight:bold;">
+									   				<p>바바리퍼블리카(토스)</p>
+									   				<p style="color:gray; margin-top:-8px;">IT, 컨텐츠</p>
+									   			</div>
+									   			</div>
+										   	</button>
+										   
+										   	<button type="button" class="followButton" onClick="location.href='#'" style="font-weight: bold; width:85px; height:30px; background-color:#258bf7; border-radius: 3px; color: #fff; float:right; margin:21px;">
+										   		팔로우
+										   	</button>
+								</div>
 
-								   	</ul>        
- -->				
-								    
-							    </div>
+
 							    
 							</div>
 						</div>
@@ -154,8 +158,8 @@
 				</div>
             </div>
 <!-- 여기부터 aside -->
-			 <aside class="col-lg-4 asideApply_jy"> 
-				   <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
+			 <aside class="col-lg-4 asideApply_jy" style="margin-left:-30px;"> 
+				   <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" style="width:350px;">
 						<div class="sidebar-widget schedule-widget mb-3">
 							<div>
 								<h5 class="mb-4">채용보상금</h5>
@@ -216,7 +220,7 @@
 						<div class="col-lg-7 text-center">
 							<div class="section-title">
 			<!-- 세션에서 이름가져와서 뿌리기 -->				
-								<h2>이자연님, 이 포지션을 찾고 계셨나요?</h2>					
+								<h2>(회원)님, 이 포지션을 찾고 계셨나요?</h2>					
 							</div>
 						</div>
 					</div>

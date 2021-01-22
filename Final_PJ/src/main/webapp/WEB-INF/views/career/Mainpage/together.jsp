@@ -15,13 +15,19 @@
 		      	<div class="position-relative doctor-inner-box">
 			        <div class="doctor-profile">
 		               <div class="doctor-img">
-		               		<img src="<c:url value='/resources/images/team/1.jpg'/>" alt="" class="img-fluid w-100">
+		               		<img src="<c:url value='/resources/images/career/bookclub2.PNG'/>" alt="" class="img-fluid w-100">
 		               </div>
 		            </div>
 	                <div class="content mt-3">
 	                	<h4 class="mb-0"><a href="doctor-single.html">컴퓨터는 잘못이 없다</a></h4>
 	                	<p>가나다라</p>
-	                </div> 
+	                	<div>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+	                	</div>
+                	</div> 
 		      	</div>
 	      	</div>
 	
@@ -29,13 +35,19 @@
 	        	<div class="position-relative doctor-inner-box">
 			        <div class="doctor-profile">
 			        	<div class="doctor-img">
-			               <img src="<c:url value='/resources/images/team/2.jpg'/>" alt="" class="img-fluid w-100">
+			               <img src="<c:url value='/resources/images/career/hrhr.PNG'/>" alt="" class="img-fluid w-100">
 			            </div>
 		            </div>
 	                <div class="content mt-3">
 	                	<h4 class="mb-0"><a href="doctor-single.html">북클럽: 코드가 문제야</a></h4>
 	                	<p>가나다라</p>
-	                </div> 
+	                	<div>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+                		</div>	               
+                	</div> 
 		      	</div>
 	      </div>
 	
@@ -43,13 +55,19 @@
 	        	<div class="position-relative doctor-inner-box">
 			        <div class="doctor-profile">
 			        	<div class="doctor-img">
-			               <img src="<c:url value='/resources/images/team/3.jpg'/>" alt="" class="img-fluid w-100">
+			               <img src="<c:url value='/resources/images/career/learnPython.PNG'/>" alt="" class="img-fluid w-100">
 			            </div>
 		            </div>
 	                <div class="content mt-3">
 	                	<h4 class="mb-0"><a href="doctor-single.html">북클럽: 정신차리자</a></h4>
 	                	<p>가나다라</p>
-	                </div> 
+	                	<div>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+	                		<p>가나다라</p>
+	                	</div>
+                    </div> 
 		      	</div>
 	      </div>
 	
@@ -57,12 +75,18 @@
 	        	<div class="position-relative doctor-inner-box">
 			        <div class="doctor-profile">
 			        	<div class="doctor-img">
-			               <img src="<c:url value='/resources/images/team/4.jpg'/>" alt="" class="img-fluid w-100">
+			               <img src="<c:url value='/resources/images/career/recruit.PNG'/>" alt="" class="img-fluid w-100">
 			            </div>
 		            </div>
 	                <div class="content mt-3">
 	                	<h4 class="mb-0"><a href="doctor-single.html">이벤트: 맥주한잔하면서</a></h4>
 	                	<p>가나다라</p>
+	                	<div>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+		                	<p>가나다라</p>
+	                	</div>
 	                </div> 
 		      	</div>
 	      </div>
