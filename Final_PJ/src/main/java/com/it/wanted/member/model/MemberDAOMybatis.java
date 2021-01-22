@@ -26,5 +26,26 @@ public class MemberDAOMybatis implements MemberDAO{
 		int cnt = sqlSession.selectOne(namespace+"hpCheck", hp);
 		return cnt;
 	}
+	
+	public String selectPwd(String email) {
+		String pwd = sqlSession.selectOne(namespace+"selectPwd", email);
+		return pwd;
+	}
+
+	public MemberVO selectMember(String email) {
+		return sqlSession.selectOne(namespace + "selectMember", email);
+	}
+
+	public int checkLoginEmail(String email) {
+		int cnt = sqlSession.selectOne(namespace+"selectMember", email);
+		return cnt;
+	}
 
 }
+
+
+
+
+
+
+

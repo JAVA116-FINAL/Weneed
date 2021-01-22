@@ -1,5 +1,10 @@
 package com.it.wanted.member.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +76,58 @@ public class MemberController {
 		
 		return bool;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/memberLogin.do",produces = "application/text; charset=utf-8")
+	public String memberLogin(@ModelAttribute MemberVO vo,
+			HttpServletRequest request, HttpServletResponse response, Model model) {
+		//1.
+		logger.info("로그인 처리 파라미터 vo ={}", vo);
+		
+		//2.
+		int result = memberService.loginCheck(vo.getEmail(), vo.getPwd());
+		logger.info("로그인 처리 결과, result={}", result);
+		
+		MemberVO memVo = null;
+		String name = "";
+		if(result==MemberService.LOGIN_OK) {
+			memVo =memberService.selectMember(vo.getEmail());
+			
+			//[1] session
+			HttpSession session = request.getSession();
+			session.setAttribute("email", vo.getEmail());
+			session.setAttribute("name", memVo.getName());
+			session.setAttribute("mem_no", memVo.getMemNo());
+			session.setAttribute("fileName", memVo.getFileName());
+			
+			logger.info("Session={}", session.getAttribute("email"));
+			logger.info("Session={}", session.getAttribute("name"));
+			logger.info("Session={}", session.getAttribute("mem_no"));
+			logger.info("Session={}", session.getAttribute("fileName"));
+			
+			//[2] cookie저장x
+			
+			name = memVo.getName();
+		}
+		
+		//4.
+		return name;
+	}
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		String email = (String) session.getAttribute("email");
+		
+		logger.info("로그아웃 처리, 파라미터 email={}", email);
+		
+		session.removeAttribute("email");
+		session.removeAttribute("name");
+		session.removeAttribute("mem_no");
+		session.removeAttribute("fileName");
+		
+		return "redirect:/index.do";
+	}
+	
 	
 }
 

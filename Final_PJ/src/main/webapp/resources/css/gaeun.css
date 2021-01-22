@@ -122,6 +122,16 @@ button{
 	color:#555;
 }
 
+/*로그인 후 top*/
+.icon-bell:before{
+	content: "\e925";
+	font-size:14px;
+	color:#333;
+	font-weight:400;
+	vertical-align:middle;
+}
+
+
 
 /* bottom */
 .footer-top-left{
@@ -543,7 +553,7 @@ h5.modal-wanted-title{
 	appearance:none;
 }
 
-.email-login-btn{
+.loginBtn{
 	display:flex;
 	justify-content:center;
 	align-items:center;

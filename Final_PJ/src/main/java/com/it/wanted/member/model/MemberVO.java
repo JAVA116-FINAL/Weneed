@@ -3,7 +3,7 @@ package com.it.wanted.member.model;
 import java.security.Timestamp;
 
 public class MemberVO {
-	private int mem_no;
+	private int memNo;
 	private String name;
 	private String hp;
 	private String email;
@@ -16,11 +16,12 @@ public class MemberVO {
 	private String originalFileName;
 	private String jikgun_code;
 	
-	public int getMem_no() {
-		return mem_no;
+	
+	public int getMemNo() {
+		return memNo;
 	}
-	public void setMem_no(int mem_no) {
-		this.mem_no = mem_no;
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
 	}
 	public String getName() {
 		return name;
@@ -91,11 +92,10 @@ public class MemberVO {
 	
 	@Override
 	public String toString() {
-		return "MemberVO [mem_no=" + mem_no + ", name=" + name + ", hp=" + hp + ", email=" + email + ", pwd=" + pwd
+		return "MemberVO [memNo=" + memNo + ", name=" + name + ", hp=" + hp + ", email=" + email + ", pwd=" + pwd
 				+ ", joindate=" + joindate + ", outdate=" + outdate + ", point=" + point + ", fileName=" + fileName
 				+ ", fileSize=" + fileSize + ", originalFileName=" + originalFileName + ", jikgun_code=" + jikgun_code
 				+ "]";
 	}
-	
 	
 }
