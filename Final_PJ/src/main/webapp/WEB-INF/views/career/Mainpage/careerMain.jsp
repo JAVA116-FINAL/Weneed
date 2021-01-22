@@ -3,20 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../../inc/top.jsp" %>
     
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/images/favicon.ico'/>" />
-
-  <!-- bootstrap.min css -->
-  <link rel="stylesheet" href="<c:url value='/resources/plugins/bootstrap/css/bootstrap.min.css'/>">
-  <!-- Icon Font Css -->
-  <link rel="stylesheet" href="<c:url value='/resources/plugins/icofont/icofont.min.css'/>">
-<%--   <!-- Slick Slider  CSS -->
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick.css'/>">
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick-theme.css'/>">
- --%>
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
   
   <!-- 커리어성장 카테고리메뉴 css -->
   <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick.css'/>">
@@ -30,11 +16,14 @@
 
 
 <!-- 구독신청 배너부분!!!!!!!!! -->
-<section class="page-title bg-1" style="padding:0px;">
+<section class="page-title bg-1" style="padding:0px; margin:auto;">
     <a href="<c:url value='subscription.do'/>">
-         <section class="_2LiFavTzcqjq8ansnAqKSQ _2bqGiY6XO2ke3gSGZbbVm3" style="padding-bottom: 15%; background-image: url(&quot;https://static.wanted.co.kr/banner/Web_Event_Banner_C.jpg&quot;);"></section>
+<section class="_2LiFavTzcqjq8ansnAqKSQ _2bqGiY6XO2ke3gSGZbbVm3" style="padding-bottom: 15%; background-image: url(&quot;https://static.wanted.co.kr/banner/Web_Event_Banner_C.jpg&quot;);"></section>
 	</a>
 </section>
+
+
+
 <!-- 구독신청 배너부분 끝  -->
 
 
@@ -139,30 +128,7 @@
 
 
 
-    <!-- 
-    Essential Scripts
-    =====================================-->
 
-    
-    <!-- Main jQuery -->
-    <script src="<c:url value='/resources/plugins/jquery/jquery.js'/>"></script>
-    <!-- Bootstrap 4.3.2 -->
-    <script src="<c:url value='/resources/plugins/bootstrap/js/popper.js'/>"></script>
-    <script src="<c:url value='/resources/plugins/bootstrap/js/bootstrap.min.js'/>"></script>
-    <script src="<c:url value='/resources/plugins/counterup/jquery.easing.js'/>"></script>
-    <!-- Slick Slider -->
-    <script src="<c:url value='/resources/plugins/slick-carousel/slick/slick.min.js'/>"></script>
-    <!-- Counterup -->
-    <script src="<c:url value='/plugins/counterup/jquery.waypoints.min.js'/>"></script>
-    
-    <script src="<c:url value='/resources/plugins/shuffle/shuffle.min.js'/>"></script>
-    <script src="<c:url value='/resources/plugins/counterup/jquery.counterup.min.js'/>"></script>
-    <!-- Google Map -->
-    <script src="<c:url value='/resources/plugins/google-map/map.js'/>"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
-    
-    <script src="<c:url value='/resources/js/script.js'/>"></script>
-    <script src="<c:url value='/resources/js/contact.js'/>"></script>
 
 	<!-- 커리어성장 카테고리메뉴 쿼리문 -->
 	<script type="text/javascript" src="<c:url value='/resources/code.jquery.com/jquery-1.11.0.min.js'/>"></script>
@@ -225,7 +191,23 @@
 }
 .slick-prev slick-arrow{
 }
-
+._2bqGiY6XO2ke3gSGZbbVm3 {
+    position: relative;
+    background-color: #fff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 300px;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1);
+    height: 300px;
+}
+._2LiFavTzcqjq8ansnAqKSQ {
+    background-color: #f1f2f3;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
 
 </style>
 </body>
