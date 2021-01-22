@@ -3,68 +3,8 @@
 <html>
 <head>
 <%@ include file="../inc/company_top.jsp" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/register.css">
 <title>Wanted - 회사 정보 등록</title>
-<style>
-.comServ{
-	display: block;
-}
-
-.comServ_oneLineDiv {
-	display: block;
-}
-
-.comServRequired {
-	color: red;
-}
-
-.comServFormTitle{
-	color: #000000;
-}
-
-.comServRegiBigTitle {
-	font-size: 1.6em;
-}
-
-.comServRegiSmallTitle {
-	color: #757575;
-	font-weight: bold;
-}
-
-.comServFormInput{
-	margin: 10px 0px;
-	background-color: #ffffff;
-	outline-color: #dbdbdb;
-}
-
-.comServInfoSentence{
-	color: black;
-	font-size: 0.8em;
-}
-
-.section-comRegi{
-	margin-top: 40px;
-}
-
-.comServIFrame{
-	border: 1px solid #f2f2f2;
-	margin-top: 10px;
-	margin-bottom: 70px;
-}
-
-.comServRegiBottom{
-	left: 0;
-	width: 100%;
-	background-color: #ffffff; 
-	position: fixed;
-	bottom: 0px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 10px 0px;
-	border-top: 1px solid #dddddd;
-}
-
-</style>
 </head>
 <body>
 <section class="appoinment section-comRegi">
@@ -73,7 +13,7 @@
            	<h2 class="mb-2 comServRegiBigTitle" style="font-weight: bold;">회사 정보를 등록해 주세요.</h2>
            	<p class="mb-4 comServRegiSmallTitle">
            		원티드는 추천인/후보자들에게 좋은 일자리를 제공하기 위해, 다음 정보를 리뷰하여 회사등록을 승인하고 있습니다.</p>
-              	<form id="#" class="appoinment-form" method="post" action="#">
+              	<form id="comServInfoRegiForm" class="appoinment-form" method="post" action="#">
                	<div class="row">
                    	<div class="col-lg-6">
                        	<div class="form-group">
@@ -205,16 +145,16 @@
                        </div>
                     </div>
                     <div class="row">
-	                       <div class="col-lg-6">
-	                       	<span class="comServFormTitle">기업회원 이용약관</span>
-	                           <div class="form-group">
-	                               <%-- <textarea style="background-color: #ffffff;outline-color: #dbdbdb;display:block;width:207%" rows="6"
-	                               name="comMemAgree" id="comMemAgree" type="text" class="form-control comServFormInput" >
-	                               <iframe src="<c:url value='/inc2/comServProvision.html'/>"></iframe>
-	                               </textarea> --%>
-	                               <iframe src="<c:url value='/inc2/comServProvision.html'/>" width="207%" class="comServIFrame"></iframe>
-	                           </div>
-	                       </div>
+                       <div class="col-lg-6">
+                       	<span class="comServFormTitle">기업회원 이용약관</span>
+                           <div class="form-group">
+                               <%-- <textarea style="background-color: #ffffff;outline-color: #dbdbdb;display:block;width:207%" rows="6"
+                               name="comMemAgree" id="comMemAgree" type="text" class="form-control comServFormInput" >
+                               <iframe src="<c:url value='/inc2/comServProvision.html'/>"></iframe>
+                               </textarea> --%>
+                               <iframe src="<c:url value='/inc2/comServProvision.html'/>" width="207%" class="comServIFrame"></iframe>
+                           </div>
+                       </div>
                     </div>
                </form>
            </div>

@@ -1,33 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/member.css">
+<script type="text/javascript" src="<c:url value='/resources/js/hyunbin.js'/>"></script>
 <script type="text/javascript">
 $(function(){
 	$('#comServLoginSubmit').click(function(){
 		//여기는 유효성 확인 부분
 		var msg="";
 		
-		if($('#comMemId').val().length<1){ //아이디 빈칸일 때
+		if($('#comMemLoginId').val().length<1){ //아이디 빈칸일 때
 			msg="아이디를 입력하세요.";
-			$('#alertSpanId').text(msg);
-			$('#comMemId').focus();
+			$('#alertSpanLoginId').text(msg);
+			$('#comMemLoginId').focus();
 			event.preventDefault();
 			return false;
-		}else if($('#comMemPwd').val().length<1){ //비밀번호 입력 안 했을 때
+		}else if($('#comMemLoginPwd').val().length<1){ //비밀번호 입력 안 했을 때
 			msg="비밀번호를 입력하세요.";
-			$('#alertSpanPwd').html(msg);
-			$('#comMemPwd').focus();
+			$('#alertSpanLoginPwd').html(msg);
+			$('#comMemLoginPwd').focus();
 			event.preventDefault();
 			return false;
 		}
-		
-		$('#comMemId').keyup(function(){ //아이디 인풋박스에 키업이벤트
-			keyupCheck($('#comMemId'), '아이디', $('#alertSpanId'));
-		});
-		
-		$('#comMemPwd').keyup(function(){ //인풋박스에 키업이벤트
-			keyupCheck($('#comMemPwd'), '비밀번호', $('#alertSpanPwd'));
-		});
 		
 		/* //아이디 비밀번호 다 입력했으면 db에서 체크해보기 ajax 사용
 		var id=$('#comMemId').val();
@@ -60,9 +53,18 @@ $(function(){
 				
 		});//ajax 로그인처리 */
 	}); //click
+	
+	$('#comMemLoginId').keyup(function(){ //아이디 인풋박스에 키업이벤트
+		console.log('키업이벤트 아이디');
+		keyupCheck($('#comMemLoginId'), '아이디를', $('#alertSpanLoginId'));
+	});
+	
+	$('#comMemLoginPwd').keyup(function(){ //인풋박스에 키업이벤트
+		keyupCheck($('#comMemLoginPwd'), '비밀번호를', $('#alertSpanLoginPwd'));
+	});
 });
 
-function keyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아이디 전체,인풋이름,얼럿표시할곳을 준다
+ /* function keyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아이디 전체,인풋이름,얼럿표시할곳을 준다
 	if(inputId.val().length<1){
 		var msg=inputName+"를 입력하세요.";
 		alertId.text(msg);
@@ -71,8 +73,8 @@ function keyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아이
 		event.preventDefault();
 	}else{ //입력을 뭐라도 했을 때
 		alertId.hide();
-	}
-}
+	} 
+} */
 		
 </script>
 <!-- 기업서비스 관리자 계정 로그인 모달 시작-->
@@ -94,13 +96,13 @@ function keyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아이
 			        		<form id="comServLoginForm" name="comServLoginForm" method="post" action="<c:url value='/company/member/login.do'/>">
 						        <div class="boundDivSpan">
 							        <input class="comServ-input input-long" type="text" placeholder="로그인 아이디(회사 이메일)"
-							        	id="comMemId" name="comMemId"/>
-									<span class="alertSpan" id="alertSpanId"></span>
+							        	id="comMemLoginId" name="comMemLoginId"/>
+									<span class="alertSpan" id="alertSpanLoginId"></span>
 						        </div>
 						        <div class="boundDivSpan">
 								<input class="comServ-input input-long" type="password" placeholder="비밀번호"
-									id="comMemPwd" name="comMemPwd"/><br>
-								<span class="alertSpan" id="alertSpanPwd"></span>
+									id="comMemLoginPwd" name="comMemLoginPwd"/><br>
+								<span class="alertSpan" id="alertSpanLoginPwd"></span>
 						        </div>
 		        				<input class="btn btn-primary comServSubmitBtn" id="comServLoginSubmit" type="submit" value="로그인">
 		        				<a class="comServ-joinProvsLink" href="#">비밀번호 초기화/변경</a>

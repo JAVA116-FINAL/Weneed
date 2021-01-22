@@ -6,7 +6,8 @@
 		인간적이고 효율적으로<br> 
 		<strong>연결</strong>합니다</h1>
 	<a href="#" class="btn btn-outline-primary comServIntroDoc">서비스 소개서</a>
-	<a href="#" class="btn btn-primary comServJoin">시작하기</a>
+	<button class="btn btn-primary comServJoin"	data-toggle="modal" 
+		data-target=".comServJoinMD" style="outline:none;">시작하기</button>
 </section>
 <section class="secondSec" style="background:url('${pageContext.request.contextPath}/resources/images/company/welcome_1.jpg') center/cover no-repeat;">
 	<div class="container secondSecCon">
@@ -86,7 +87,8 @@
 		<div class="fifSecTitleH2">이제 원티드를 통해<br>최적의 후보자를<br>만나세요</div>
 		<div style="display:table-cell;vertical-align:middle;">
 			<a href="#" class="btn btn-outline-primary comServIntroDoc">서비스 문의</a>
-			<a href="#" class="btn btn-primary comServJoin">시작하기</a>
+			<button class="btn btn-primary comServJoin"	data-toggle="modal" 
+				data-target=".comServJoinMD" style="outline:none;">시작하기</button>
 		</div>
 	</div>
 </section>

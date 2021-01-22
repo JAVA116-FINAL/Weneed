@@ -31,21 +31,21 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)
-	public String checkId(@RequestParam String comMemId, @RequestParam String comMemPwd,
+	public String checkId(@RequestParam String comMemLoginId, @RequestParam String comMemLoginPwd,
 			HttpServletRequest request) {
-		logger.info("ajax 연습 - 로그인, 파라미터 comMemId={}, comMemPwd={}", comMemId, comMemPwd);
+		logger.info("ajax 연습 - 로그인, 파라미터 comMemId={}, comMemPwd={}", comMemLoginId, comMemLoginPwd);
 		
-		int res=comMemService.loginCheck(comMemId, comMemPwd);
+		int res=comMemService.loginCheck(comMemLoginId, comMemLoginPwd);
 		logger.info("로그인 확인 결과 res={}", res);
 		
 		String loc="";
 		if(res==ComMemInfoService.LOGIN_SUCCESS) { //한번 더 해야돼 기업정보 등록 돼있는지 안돼있는지
 			//일단 세션처리부터, 쿠키는 아이디저장기능 별도로 없어서 저장하지 않음.. 이걸로 되나? ajax 써서 뭔가 안되는거 아닌가? 불안쓰
 			HttpSession session=request.getSession();
-			session.setAttribute("comMemId", comMemId);
+			session.setAttribute("comMemId", comMemLoginId);
 			
 			//기업정보 등록 여부 확인
-			int regedCheck=comMemListService.checkComReged(comMemId);
+			int regedCheck=comMemListService.checkComReged(comMemLoginId);
 			logger.info("기업정보 등록 여부 확인 결과 regedCheck={}", regedCheck);
 			
 			//ajax 버림

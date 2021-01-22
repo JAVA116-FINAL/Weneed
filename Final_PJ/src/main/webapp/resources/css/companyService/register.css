@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+
+.comServ{
+	display: block;
+}
+
+.comServ_oneLineDiv {
+	display: block;
+}
+
+.comServRequired {
+	color: red;
+}
+
+.comServFormTitle{
+	color: #000000;
+}
+
+.comServRegiBigTitle {
+	font-size: 1.6em;
+}
+
+.comServRegiSmallTitle {
+	color: #757575;
+	font-weight: bold;
+}
+
+.comServFormInput{
+	margin: 10px 0px;
+	background-color: #ffffff;
+	outline-color: #dbdbdb;
+}
+
+.comServInfoSentence{
+	color: black;
+	font-size: 0.8em;
+}
+
+.section-comRegi{
+	margin-top: 40px;
+}
+
+.comServIFrame{
+	border: 1px solid #f2f2f2;
+	margin-top: 10px;
+	margin-bottom: 70px;
+}
+
+.comServIFrameModi{
+	margin-bottom: 30px;
+}
+
+.comServRegiBottom{
+	left: 0;
+	width: 100%;
+	background-color: #ffffff; 
+	position: fixed;
+	bottom: 0px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0px;
+	border-top: 1px solid #dddddd;
+}

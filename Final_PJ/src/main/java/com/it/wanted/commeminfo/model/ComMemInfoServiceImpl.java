@@ -28,9 +28,17 @@ public class ComMemInfoServiceImpl implements ComMemInfoService{
 
 	@Override
 	public int joinComMem(ComMemInfoVO vo) {
+		//아이디 중복체크
+		int result=0;
+		int cnt=comMemDao.checkId(vo.getComMemId());
+		if(cnt<1) { //없는 아이디다
+			result=comMemDao.joinComMem(vo); //성공하면 카운트 1이겠지
+		}else { //있는 아이디다
+			result=ID_EXIST;
+		}
+		//메일인증 나중에 생각할까.. 이번에 또 해야하나.. 할까.. 말까.. 
 		
-		
-		return ;
+		return result;
 	}
 	
 }

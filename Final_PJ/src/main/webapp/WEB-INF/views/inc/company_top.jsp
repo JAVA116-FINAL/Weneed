@@ -93,7 +93,7 @@
 							data-toggle="modal" data-target=".comServJoinMD" style="outline:none;">관리자 가입</button>
 						<!-- 관리자 계정 가입 인클루드 -->
 						<%@include file="../company/member/join.jsp" %>
-						<a href="#" class="comServBtn gotoWantedMain">원티드 홈</a>
+						<a href="<c:url value='/index.do'/>" class="comServBtn gotoWantedMain">원티드 홈</a>
 					</div>
 				</div>
 			</div>
