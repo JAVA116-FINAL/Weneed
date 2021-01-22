@@ -3,12 +3,19 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.member">
-	<insert id="insertMember" parameterType="memberVo">
+	<!-- <insert id="insertMember" parameterType="memberVo">
 		<selectKey keyProperty="mem_no" resultType="int" order="BEFORE">
 			select mem_no_seq.nextval from dual
 		</selectKey>
 		insert into MEMBERINFO(mem_no, name, hp, email, pwd) 
 		values(#{mem_no}, #{name}, #{hp}, #{email}, #{pwd})
+	</insert> -->
+	<insert id="insertMember" parameterType="memberVo">
+		<selectKey keyProperty="memNo" resultType="int" order="BEFORE">
+			select mem_no_seq.nextval from dual
+		</selectKey>
+		insert into MEMBERINFO(mem_no, name, hp, email, pwd) 
+		values(#{memNo}, #{name}, #{hp}, #{email}, #{pwd})
 	</insert>
 	
 	<select id="emailCheck" parameterType="string" resultType="int">
@@ -17,6 +24,17 @@
 	
 	<select id="hpCheck" parameterType="string" resultType="int">
 		select count(*) from MEMBERINFO where hp=#{hp}
+	</select>
+	
+	<select id="selectPwd" parameterType="string" resultType="string">
+		select pwd from MEMBERINFO
+		where email=#{email} and outdate is null
+	</select>
+	
+	<select id="selectMember" parameterType="string" resultType="memberVo">
+	    <![CDATA[
+		select * from MEMBERINFO where email=#{email}
+		]]>
 	</select>
 	
 </mapper>

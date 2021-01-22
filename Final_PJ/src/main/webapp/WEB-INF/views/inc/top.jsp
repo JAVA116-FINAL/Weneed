@@ -60,8 +60,11 @@
   
   <script type="text/javascript">
   	$(function(){
+  		$('#login-email').focus();
+  		$('#join-email').focus();
+  		
+  		//회원가입처리
   		$('#joinPwdOk-error').hide();  		$("#registerBtn").click(function(){
-	  			//회원가입처리
 	  	  		$.ajax({
 	  				url:"<c:url value='/memberJoin.do'/>",
 	  				type:"POST",
@@ -169,30 +172,167 @@
   			}
   		});
   		
-  		$('input[name=chkAll]').click(function(){
-  			$('.gaeun-joinAgree').find('input[type=checkbox]').prop('checked', this.checked);
+  		//체크박스 전체 선택, 해제
+  		$('input[name="chkAll"]').click(function(){
+  			var checked = $(this).is(':checked');
+  			
+  			if(checked){
+  				$('.checkbox-group').find('input[type=checkbox]').prop('checked', true);
+  			}else{
+  				$('.checkbox-group').find('input[type=checkbox]').prop('checked', false);
+  			}
   		});
+  		
+  		//체크박스 개별 선택
+  		$('.ge-agree1').click(function(){
+  			var is_checked = true;
+  			
+  			$('.ge-agree1').each(function(){
+  				is_checked = is_checked && $(this).is(':checked');
+  			});
+  			
+  			$('input[name="chkAll"]').prop('checked', is_checked);
+  		});
+  		
+  		//모달 닫히면 체크박스 초기화
+  		$('.modal').on('hidden.bs.modal', function(){
+  			$('input[type=checkbox]').prop('checked', false);
+  		});
+  		
+  		//회원가입버튼 비활성화, 활성화 여부
+  		btnDisabled();
+  		
+  		$('#join-email').on('input', setToggleEmail);
+  		$('#join-name').on('input', setToggleName);
+  		$('#join-hp').on('input', setToggleHp);
+  		$('#join-pwd').on('input', setTogglePwd);
+  		$('#join-pwdOk').on('input', setTogglePwdOk);
+  		var toggleEmail = 0;
+  		var toggleName = 0;
+  		var toggleHp = 0;
+  		var togglePwd = 0;
+  		var togglePwdOk = 0;
+  		
+  		function btnDisabled(){
+  			$('#registerBtn').css('background-color', '#9b9b9b');
+  			$('#registerBtn').attr('disabled', true);
+  		}
+  		
+  		function btnEnabled(){
+  			$('#registerBtn').css('background-color', '#3366ff');
+  			$('#registerBtn').attr('disabled', false);
+  		}
+  		
+  		function setToggleEmail(){
+  			var input = $("#join-email").val();
+  			if(input.length >0){
+  				toggleEmail = 1;
+  			}else{
+  				toggleEmail = 0;
+  			}
+  			judgeBtn();
+  		}
+  		
+  		function setToggleName(){
+  			var input = $("#join-name").val();
+  			if(input.length >0){
+  				toggleName = 1;
+  			}else{
+  				toggleName = 0;
+  			}
+  			judgeBtn();
+  		}
+  		
+  		function setToggleHp(){
+  			var input = $("#join-hp").val();
+  			if(input.length >0){
+  				toggleHp = 1;
+  			}else{
+  				toggleHp = 0;
+  			}
+  			judgeBtn();
+  		}
+  		
+  		function setTogglePwd(){
+  			var input = $("#join-pwd").val();
+  			if(input.length >0){
+  				togglePwd = 1;
+  			}else{
+  				togglePwd = 0;
+  			}
+  			judgeBtn();
+  		}
+  		
+  		function setTogglePwdOk(){
+  			var input = $("#join-pwdOk").val();
+  			if(input.length >0){
+  				togglePwdOk = 1;
+  			}else{
+  				togglePwdOk = 0;
+  			}
+  			judgeBtn();
+  		}
+  		
+  		function judgeBtn(){
+  			if(toggleEmail==1 && toggleName==1 && toggleHp==1 && togglePwd==1 && togglePwdOk==1){
+  				btnEnabled();
+  			}else{
+  				btnDisabled();
+  			}
+  		}
+  		//회원가입버튼 비활성화, 활성화 여부 끝
+  		
+  		
+  		////////////////////////////////
+  		//로그인 처리
+  		$("#loginBtn").click(function(){
+  	  		$.ajax({
+  				url:"<c:url value='/memberLogin.do'/>",
+  				type:"POST",
+  				data:{
+  					'email':$("#login-email").val(),
+  					'pwd': $("#login-pwd").val()
+  				},
+  				async:false,
+  				success:function(res){
+  					//alert(res);
+  					var msg =""
+  					if(res!=""){
+  						var sessionName = res;
+  						msg = sessionName + "님, 로그인되었습니다.";
+  						$('#login-email').val('');
+  						$('#login-pwd').val('');
+  					}else{
+  						msg="이메일이 존재하지 않거나, 비밀번호가 일치하지 않습니다.";
+  						$('#login-email').val('');
+  						$('#login-pwd').val('');
+  					}
+  					alert(msg);
+  				},
+  				error:function(xhr, status, error){
+  					alert('error! : ' + error);
+  				}  				
+  			});
+		});
+  		
+  		$('.profileButton').click(function(){
+  			$('.profileImg').toggleClass('profile-border');
+  		})
   		
   	});
   </script>
 <style type="text/css">
-#joinEmail-error{
+.error{
 	font-size:12px;
 	font-weight:600;
 	color:red;
 	padding:5px 0 0 5px;
 }
-#joinHp-error{
-	font-size:12px;
-	font-weight:600;
-	color:red;
-	padding:5px 0 0 5px;
+#profile-li:hover{
+	background-color:#fff;
 }
-#joinPwdOk-error{
-	font-size:12px;
-	font-weight:600;
-	color:red;
-	padding:5px 0 0 5px;
+.profile-border{
+	border:1px solid #3366ff;
 }
 </style>  
 </head>
@@ -214,7 +354,7 @@
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색 </a>
-						<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; border-top:none; line-height:17px;">
+						<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; border-top:0; margin-top:0; line-height:17px; border-radius:0;">
 							<li><a class="dropdown-item" href="department.html" style="border-bottom:none;">개발<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
 							<li><a class="dropdown-item" href="department-single.html" style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">서버 개발자</a></li>
 							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">웹 개발자</a></li>
@@ -237,10 +377,36 @@
 				<aside class="beforeLoginAside">
 					<ul>
 						<li><button class="searchBtn" style="outline:none;"><i class="icon-search"></i></button></li>
-						<li><button class="signUpButton" data-toggle="modal" data-target=".docs-example-modal-sm" style="outline:none;">회원가입/로그인</button></li>
+						<!-- 로그인 안된 경우 -->
+						<c:if test="${empty sessionScope.email }">
+							<li><button class="signUpButton" data-toggle="modal" data-target=".docs-example-modal-sm" style="outline:none;">회원가입/로그인</button></li>
+						</c:if>
 						
+						<!-- 로그인 된 경우 -->
+						<c:if test="${!empty sessionScope.email }">
+							<li><button type="button" class="notiButton" style="outline:none;padding: 0 6px;margin-right:8px;">
+								<i class="icon-bell" style="font-size:14px;color:#333;font-weight:400;"></i>
+							</button></li>
+							<li><button type="button" class="profileButton nav-link dropdown-toggl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="outline:none;">
+								<img src="${pageContext.request.contextPath}/resources/images/main/profile_default.png" alt="" class="profileImg"
+									style="width:32px;height:32px; border-radius:9999px;">
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; left:-115%; margin-top:0; line-height:17px; border-radius:0; padding:0;">
+								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:20px 0 10px 0;">MY 원티드</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">프로필</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;margin-top:10px; border-top:1px solid #e1e2e3;padding:21px 0 11px 0;">지원현황</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">제안받기 현황</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">좋아요</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">북마크</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:21px 0 11px 0;margin-top:10px; border-top:1px solid #e1e2e3;">추천</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">포인트</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="<c:url value='/logout.do'/>" style="border-bottom:none; text-align:center; font-size:15px; color:#767676;padding:12px 0px 12px 0; background-color:#f2f4f7;">로그아웃</a></li>
+							</ul>	
+						</li>
+						</c:if>				
+								
 						 <!-- modal#1 로그인 시작-->
-						 <div class="modal fade docs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+						 <div class="modal fade docs-example-modal-sm" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 						  <div class="modal-dialog" style="padding-left:45px; top:2%;">
 						    <div class="modal-content" style="width:400px; overflow-y:auto;">
 						      <div class="modal-header gaeun-modal-header">
@@ -260,12 +426,14 @@
 							        		<label for="email" class="ge-labelEmail">이메일</label>
 							        		<div class="ge-emailBox">
 							        			<input type="email" placeholder="이메일을 입력해주세요." id="login-email" class="ge-inputEmail" value="">
+							        			<div id="loginEmail-error" class="error"></div>
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-login-pwdBox">
 							        		<label for="password" class="ge-labelPwd">비밀번호</label>
 							        		<div class="ge-pwdBox">
 							        			<input type="Password" placeholder="비밀번호를 입력해주세요." id="login-pwd" class="ge-inputPwd" value="">
+							        			<div id="loginPwd-error" class="error"></div>
 							        		</div>
 							        	</div>
 							        	<div class="lostOrJoin">
@@ -273,7 +441,7 @@
 							        		<span><a data-toggle="modal" data-target="#join" href="#" data-dismiss="modal"> | 회원가입</a></span>
 							        	</div>
 							        	<div class="other-login">
-							        		<button type="submit" class="email-login-btn" style="outline:none;">로그인</button>
+							        		<button type="submit" class="loginBtn" id="loginBtn" style="outline:none;">로그인</button>
 							        		<div class="or"></div>
 							        		<button class="facebook-login-btn social-login-btn" style="outline:none;"><i class="fab fa-facebook" style="color:#3366ff;margin-right:10px;"></i>페이스북으로 시작하기</button>
 							        		<button class="apple-login-btn social-login-btn" style="outline:none;"><i class="fab fa-apple" style="color:#000;margin-right:10px;"></i>Apple로 시작하기</button>
@@ -306,58 +474,56 @@
 						        <div class="gaeun-modal-body-con2">
 							       <form name="frmJoin" method="post">
 							        	<div class="gaeun-login-emailBox">
-							        		<label for="email" class="ge-labelEmail">이메일</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
+							        		<label for="email" class="ge-labelEmail">이메일</label>
 							        		<div class="ge-emailBox">
 							        			<input type="email" placeholder="이메일을 입력해주세요." id="join-email" class="ge-inputEmail" value="">
-							        			<div id="joinEmail-error"></div>
+							        			<div id="joinEmail-error" class="error"></div>
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
-							        		<label for="userName" class="ge-labelName">이름</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
+							        		<label for="userName" class="ge-labelName">이름</label>
 							        		<div class="ge-joinBox">
 							        			<input type="text" placeholder="이름을 입력해주세요." id="join-name" class="ge-inputName" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
-							        		<label for="hp" class="ge-labelHp">휴대폰 번호</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
+							        		<label for="hp" class="ge-labelHp">휴대폰 번호</label>
 							        		<div class="ge-joinBox">
 							        			<input type="text" placeholder="(예시)01034567890" id="join-hp" class="ge-inputHp" value="">
-							        			<div id="joinHp-error"></div>
+							        			<div id="joinHp-error" class="error"></div>
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
-							        		<label for="pwd" class="ge-labelPwd">비밀번호</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
+							        		<label for="pwd" class="ge-labelPwd">비밀번호</label>
 							        		<div class="ge-joinBox">
 							        			<input type="Password" placeholder="비밀번호를 입력해 주세요" id="join-pwd" class="ge-inputPwd" value="">
 							        		</div>
 							        	</div>
 							        	<div class="gaeun-joinBox">
-							        		<label for="pwd" class="ge-labelPwdOk">비밀번호 확인</label><span style="color:red; font-size:14px; margin-left:5px;">*</span>
+							        		<label for="pwd" class="ge-labelPwdOk">비밀번호 확인</label>
 							        		<div class="ge-joinBox">
 							        			<input type="Password" placeholder="비밀번호를 다시 한번 입력해 주세요." id="join-pwdOk" class="ge-inputPwdOk" value="">
-							        			<div id="joinPwdOk-error">비밀번호가 일치하지 않습니다.</div>
+							        			<div id="joinPwdOk-error" class="error">비밀번호가 일치하지 않습니다.</div>
 							        		</div>
 							        	</div>
-							        	<div class="gaeun-agreeBox">
-							        		<div class="all-agree">
-							        			<input type="checkbox" name="chkAll" class="ge-chkAll"><span>전체 동의</span>
-							        		</div>
-							        	</div>
-							        	<div class="gaeun-joinAgree">
-							        		<div class="agree1">
-							        			<input type="checkbox" name="agree" class="ge-agree1">
-							        			<div class="ge-agree1Con">
-							        				개인정보 수집 및 이용 동의 (필수)<a href="#">자세히</a>
-							        			</div>
-							        		</div>
-							        	</div>
-							        	<div class="gaeun-joinAgree">
-							        		<div class="agree1">
-							        			<input type="checkbox" name="agree" class="ge-agree1">
-							        			<div class="ge-agree1Con">
-							        				이벤트 소식 등 알림 정보 받기<a href="#">자세히</a>
-							        			</div>
-							        		</div>
+							        	<div class="checkbox-group">
+								        	<div class="gaeun-agreeBox">
+								        		<div class="all-agree">
+								        			<input type="checkbox" name="chkAll" class="ge-chkAll" style="outline:none;"><span>전체 동의</span>
+								        		</div>
+								        	</div>
+								        	<div class="gaeun-joinAgree">
+								        		<div class="agree1">
+								        			<input type="checkbox" name="agree" class="ge-agree1" style="outline:none;">
+								        			<div class="ge-agree1Con">개인정보 수집 및 이용 동의 (필수)<a href="#">자세히</a></div>
+								        		</div>
+								        	</div>
+								        	<div class="gaeun-joinAgree">
+								        		<div class="agree1">
+								        			<input type="checkbox" name="agree" class="ge-agree1" style="outline:none;">
+								        			<div class="ge-agree1Con">이벤트 소식 등 알림 정보 받기<a href="#">자세히</a></div>
+								        		</div>
+								        	</div>
 							        	</div>
 							        	<input type ="button" id="registerBtn" class="registerBtn" value="회원가입하기" style="outline:none;">
 							        	<p class="reLogin">* 이미 회원이신 가요?<a data-toggle="modal" data-target=".docs-example-modal-sm" href="#" data-dismiss="modal">&nbsp;로그인 하기</a></p>
@@ -388,7 +554,7 @@
 							        			<input type="email" placeholder="이메일을 입력해주세요." id="email" class="ge-inputEmail" value="">
 							        		</div>
 							        	</div>
-							        	<input type ="submit" class="sendBtn" value="전송" style="outline:none;">
+							        	<input type ="button" class="sendBtn" id="pwdSearchBtn" value="전송" style="outline:none;">
 							        </form>
 							        <p>* 가입하신 이메일 계정으로 임시 비밀번호를 전송해 드립니다.</p>
 						        </div>

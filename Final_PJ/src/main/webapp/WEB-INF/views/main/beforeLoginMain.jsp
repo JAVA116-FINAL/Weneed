@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../inc/top.jsp" %> 
 
 <div class="beforeLogin-wrapper">
 	<div class="beforeWrap1" style="background:url('${pageContext.request.contextPath}/resources/images/main/main_kr_pc.jpg') center/cover no-repeat;">
@@ -44,4 +43,3 @@
 		</div>
 	</div>
 </div>
-<%@ include file="../inc/bottom.jsp" %>
