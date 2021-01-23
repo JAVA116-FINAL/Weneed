@@ -1,14 +1,33 @@
 /* top */
- .header-wrapper1{
+
+.hide{
+	display:none;	
+}
+
+.header-wrapper1{
 	background: black;
-	height: 50px;
+	height: 80px;
 	display:table-cell;
  	vertical-align:middle;
  	width: 100vw;
  }
- .header-wrapper2{
+ .header-wrapper21{
  	display: flex;
  	justify-content: space-between;
+ 	align-items: center;
+ }
+ 
+ .header-wrapper22{
+ 	display: flex;
+ 	justify-content: space-between;
+ 	align-items: center;
+ }
+ .header-logo > a:visited{
+ 	color: white;
+ }
+ 
+  .header-logo > a:hover{
+ 	color: white;
  }
  .comServNavbar-logo-link{
  	color: white;
@@ -22,15 +41,17 @@
 .comServNav-item {
 	float:left;
 }
-.comServNav-item > a:hover{
+.comServNav-item > a{
 	color: #999999;
-}
-
-a.comServNav-item-link{
-	color: white;
 	font-size: 0.8em;
 	font-weight: bold;
-	margin-left: 40px;
+	margin-right: 40px;
+}
+.comServNav-item > a:hover{
+	color: white;
+}
+.comServNav-item > a:visited{
+	color: color: #999999;
 }
 
 strong{
@@ -57,6 +78,9 @@ button.comServBtn {
 	border-radius: 5px;
 	margin-left: 10px;
 }
+
+
+
 
 /* welcome body */
 

@@ -1,0 +1,302 @@
+input, label, span, p, li, i, button{
+	color: #444444;
+}
+
+body{
+	background-color: #f4f4f4;
+}
+
+li{
+	list-style: none;
+}
+
+.appli-wrapper{
+	display: flex;
+	margin: 20px 0;
+}
+
+
+/* 사이드 메뉴바 */
+aside{
+	width: 20%;
+	margin-right: 20px;
+}
+
+.appli-positionList{
+	margin-bottom: 20px;
+}
+
+.appli-positionList:first-child{
+	padding-bottom: 20px;
+	border-bottom: 1px solid #acacac;
+}
+.appli-positionList-title{
+	font-weight: bold;	
+	font-size: 0.8em;
+	margin-bottom: 10px;
+}
+
+.appli-positionList-pos{
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.appli-positionList-pos_selected{
+	color: #2d89cc;
+}
+
+
+
+
+/* 섹션1 응답률 / 안내문구 */
+.appli-responseInfo{
+	background: #ffffff;
+	padding: 20px 0px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.appli-responseInfo ~ p{
+	font-size: 0.8em;
+}
+
+.appli-responseInfo_obj{
+	width: 50%;
+}
+
+.appli-responseInfo_obj > span {
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.appli-span-allResponse {
+	border-left: 3px solid #2f8bde;
+}
+
+.appli-responseInfo_obj > strong{
+	font-weight: bold;
+}
+
+.appli-bigNumber-blue{
+	color: #2f8bde;
+}
+.appli-bigNumber-red{
+	color: #e44c72;
+}
+
+.appli-notiGuide{
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+
+
+
+
+/* 섹션2 라디오버튼 메뉴바, 검색창 */
+
+.appli-filterNsearch{
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0px;
+	height: 32px;
+}
+
+.appli-ul-filter{
+	display: inline-block;
+	border-bottom: 1px solid #c1c1c1;
+}
+.appli-li-filter{
+	float: left;
+	margin-right: 10px;
+	height: 100%;
+}
+
+.appli-li-filter:last-child{
+	margin-rignt: 0px;
+}
+
+.lb-appliPassedFilter:hover{
+	color: #444444;
+	cursor: pointer;
+}
+
+.lb-appliPassedFilter{
+	font-size: 0.8em;
+	font-weight: bold;
+	color: #c1c1c1;
+	padding: 5px 10px;
+	margin-bottom: 0px;
+}
+
+.lb-appliPassedFilter-selected{
+	color: #444444;
+	border-bottom: 2px solid #444444;
+}
+
+.appli-li-filter > input{
+	display:none;
+}
+
+.appli-statusChangeDiv{
+	display: flex;
+	justify-content: space-between;
+}
+
+.appli-searchDiv{
+	position: relative;
+}
+
+.appli-searchInput{
+	border: none;
+	background-color: #f4f4f4;
+	border-bottom: 1px solid #c1c1c1;
+	font-size: 0.8em;
+	font-weight: bold;
+	height: 32px;
+	width: 170px;
+}
+
+.appli-searchIcon{
+	position: absolute;
+	right: 5px;
+	top: 7px;
+}
+
+
+
+
+
+
+/* 체크올, 상태변경, 지원자에게 결과알림 온오프 */
+.appli-statusChangeDiv{
+	margin-bottom: 5px;
+}
+.appli-checkAll{
+	border: 1px solid #c1c1c1;
+	padding: 5px;
+	width: 33px;
+	height: 33px;
+	margin-right: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.appli-btn-statusChange{
+	border: 1px solid #c1c1c1;
+	font-size: 0.8em;
+	font-weight: bold;
+	padding: 5px 10px;
+	margin-right: 10px;
+}
+
+.chkBox-staredApplis{
+	font-size: 0.8em;
+}
+
+
+
+
+
+
+/* 리스트 객체 */
+.appli-list-object,
+.appli-list-object_info,
+.appli-list-object_infoResume{
+	display: flex;
+	justify-content: space-between;
+}
+
+.appli-list-object,
+.appli-list-object-none{
+	border: 1px solid #e1e2e3;
+	padding: 5px 10px;	
+	background-color: #ffffff;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.appli-list-object-none{
+	display: flex;
+	height: 72px;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.appli-list-object-none > p{
+	color: #c1c1c1;
+	font-size: 0.8em;
+}
+
+.appli-list-object_info{
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+.appli-list-object_infoResume{
+	align-items: center;
+}
+
+.appli-list-object_infoResumeImg{
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+	border-radius: 50%;
+	border: 1px solid #e1e2e3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.appli-resume-no{
+	font-size: 0.8em;
+	color: #444444;
+}
+
+.appli-name-posJikgun{
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
+.appli-object-ele{
+	margin-right: 10px;
+}
+
+.appli-object-ele_gold{
+	color: gold;
+}
+
+.appli-waitingDays{
+	font-size: 0.8em;	
+}
+
+
+
+/* 페이징 영역*/
+.appli-paging-divs{
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.appli-paging-div{
+	border: 1px solid #c1c1c1;
+	padding: 5px 10px;
+}
+
+.appli-paging-div > button{
+	font-size: 0.8em;	
+}
+
+.appli-paging-div_prev{
+	margin-right: 20px;
+}
+
+.appli-paging-div_next{
+	margin-left: 20px;
+	
+}

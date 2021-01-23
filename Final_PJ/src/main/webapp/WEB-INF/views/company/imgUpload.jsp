@@ -3,7 +3,30 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/register.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/imgUpload.css">
 <script type="text/javascript">
+$(function(){
+	$('#tabImg').attr("checked", 'checked');
+	
+	//[이미지 / 정보] 탭 기능 구현
+	$('#tabImg').click(function(){
+		$('.infoSection').addClass('hide');
+		$('.imgSection').removeClass('hide');
+		
+		$('#tabImgLabel').addClass('selectedTab');
+		$('#tabInfoLabel').removeClass('selectedTab');
+		
+		
+	});
+	$('#tabInfo').click(function(){
+		$('.imgSection').addClass('hide');
+		$('.infoSection').removeClass('hide');
+		
+		$('#tabInfoLabel').addClass('selectedTab');
+		$('#tabImgLabel').removeClass('selectedTab');
+	});
+});
 
+
+//이미지 업로드 기능 구현
 	const imgFileInput= document.querySelector('#imgFileInput');
 	
 	$('#comServImgAddBtn').click(function(){
@@ -14,14 +37,15 @@
 	<div class="container">
 		<!-- 탭 섹션 -->
 		<section class="tabSection">
-			<input type="radio" id="tabImg" name="comInfoRegi" checked="checked" />
-			<label for="tabImg" class="comInfoRegiTab selectedTab">이미지</label>
+			<input type="radio" id="tabImg" name="comInfoRegi" />
+			<label for="tabImg" id="tabImgLabel" class="comInfoRegiTab selectedTab">이미지</label>
 			<input type="radio" id="tabInfo" name="comInfoRegi" class="comInfoRegiTab" />
-			<label for="tabInfo" class="comInfoRegiTab">정보</label>
+			<label for="tabInfo" id="tabInfoLabel" class="comInfoRegiTab">정보</label>
 		</section>
 		<!-- 이미지등록 탭 -->
 		<section class="imgSection">
 			<h2 class="comServTitle">대표 이미지</h2>
+			<p class="comServTitle-imageCountGuide">*대표 이미지는 최대 8개까지 등록 가능합니다.</p>
 			<div class="imgBoxWrapper">
 				<div class="imgBox imgPreviewBox">
 					등록된 이미지
@@ -42,7 +66,7 @@
 			</div>
 		</section>
 		<!-- 기업정보 수정 탭 -->
-		<section class="infoSection" class="hide">
+		<section class="infoSection hide">
 			<h2 class="comServTitle">기업정보 수정</h2>
 			<form id="comServInfoModiForm" class="appoinment-form" method="post" action="#">
 	           	<div class="row">
@@ -187,8 +211,8 @@
 	                       </div>
 	                   </div>
 	                </div>
-	                <div class="comServSumbitWrapper">
-		                <input type="submit" class="btn btn-main btn-round-full btnComServInfoSubmit" value="제출하기">
+	                <div class="comServModiSumbitWrapper">
+		                <input type="submit" class="btn btn-main btn-round-full btnComServModiSubmit" value="제출하기">
 	                </div>
 	           </form>
 	     </section>
