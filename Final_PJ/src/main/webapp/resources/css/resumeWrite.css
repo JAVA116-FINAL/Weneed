@@ -228,3 +228,26 @@ button#btcareer_jy {
 button.btAdd_jy {
     outline: none;
 }
+
+/* 210121 */
+.langselectBox_jy {
+    position: absolute;
+    /* overflow: hidden; */
+}
+
+.resume-select-lang_jy {
+    overflow: hidden;
+}
+
+.langselectBox_jy {
+    width: 126px;
+    border-radius: 2px;
+}
+
+select.realselect_jy {
+    width: 80%;
+}
+
+button.btResume-down_jy {
+    margin-top: 17px;
+}

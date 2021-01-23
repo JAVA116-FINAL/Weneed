@@ -6,53 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta namae="viewport" content="width=device-width, initial-scale=1">
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/images/favicon.ico'/>" />
+    
+  <!-- 지원 css -->
 
-  <!-- bootstrap.min css -->
-  <link rel="stylesheet" href="<c:url value='/resources/plugins/bootstrap/css/bootstrap.min.css'/>">
-  <!-- Icon Font Css -->
-  <link rel="stylesheet" href="<c:url value='/resources/plugins/icofont/icofont.min.css'/>">
-<%--   <!-- Slick Slider  CSS -->
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick.css'/>">
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick-theme.css'/>">
- --%>
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
-  
-  <!-- 커리어성장 카테고리메뉴 css -->
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick.css'/>">
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick-theme.css'/>">
-    
-  <!-- 커리어성장 필터 팝업창 css -->
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jiwonPopup.css'/>">
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
-  
-     <!-- 
-    Essential Scripts
-    =====================================-->
+  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programJiwon.css'/>">
 
-    <!-- Main jQuery -->
-    <!-- Bootstrap 4.3.2 -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/popper.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.easing.js"></script>
-    <!-- Slick Slider -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/slick-carousel/slick/slick.min.js"></script>
-    <!-- Counterup -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.waypoints.min.js"></script>
-    
-    <script src="<%=request.getContextPath() %>/resources/plugins/shuffle/shuffle.min.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/plugins/counterup/jquery.counterup.min.js"></script>
-    <!-- Google Map -->
-    <script src="<%=request.getContextPath() %>/resources/plugins/google-map/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
-    
-    <script src="<%=request.getContextPath() %>/resources/js/script.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/js/contact.js"></script>
     
     
+    <!-- ck에디터 -->
+	<script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
 $( document ).ready( function() {
@@ -102,14 +65,34 @@ $( document ).ready( function() {
 
 <section class="section blog-wrap">
 
+<div style = "width:980px; max-width: 100%; margin:auto;">
+<form action="projectDetail.do?proNo=" method="post">
+
+<!-- 프로젝트 이름 -->
+<label> 프로젝트 이름: </label>
+<input type="text" class="programTitleTextField" id="proTitle1" name="proTitle1" placeholder="첫번째 목차의 제목을 적어주세요">
+
+
+<label> 제목 1: </label>
+<input type="text" class="programTitleTextField" id="proTitle1" name="proTitle1" placeholder="첫번째 목차의 제목을 적어주세요">
+<textarea id = "description" name = "description" rows = "5" cols = "80"
+placeholder = "상품설명을 입력하세요"></textarea> <!-- //이런 textarea가 있을때 주로 스마트에디터를 많이 사용 -->
+</div>
+</form>
+
 
 
 
 
 </section>
 
+<%@ include file="../../inc/bottom.jsp" %>  
 
-
+<script type="text/javascript">
+CKEDITOR.replace("description");
+</script>
+</body>
+</html>
 
 
 
