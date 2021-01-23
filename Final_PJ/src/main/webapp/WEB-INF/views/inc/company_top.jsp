@@ -11,67 +11,61 @@
 <meta name="author" content="themefisher.com">
 
 <title>WANTED</title>
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" />
-
-  <!-- bootstrap.min css -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/bootstrap/css/bootstrap.min.css">
-  <!-- Icon Font Css -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/icofont/icofont.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/icofont/icomoon.css">
-  <!-- Slick Slider  CSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/slick-carousel/slick/slick.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/slick-carousel/slick/slick-theme.css">
-
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/clear.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/gaeun.css">
-  
-  <!-- Company Service StyleSheet -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/welcome.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/member.css">
-  
-   <!-- Essential Scripts =====================================-->
-
-    <!-- Main jQuery -->
-    <script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.js"></script>
-    <!-- Bootstrap 4.3.2 -->
-    <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap/js/popper.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/plugins/counterup/jquery.easing.js"></script>
-    <!-- Slick Slider -->
-    <script src="${pageContext.request.contextPath}/resources/plugins/slick-carousel/slick/slick.min.js"></script>
-    <!-- Counterup -->
-    <script src="${pageContext.request.contextPath}/resources/plugins/counterup/jquery.waypoints.min.js"></script>
-    
-    <script src="${pageContext.request.contextPath}/resources/plugins/shuffle/shuffle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/plugins/counterup/jquery.counterup.min.js"></script>
-    <!-- Google Map -->
-    <script src="${pageContext.request.contextPath}/resources/plugins/google-map/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
-    
-    <script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
-  
- 
-  <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
-  <!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->
-  <script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>
-  
+<%@ include file="cssJsImports.jsp" %>
 </head>
 <body>
 	<header>
 		<div class="header-wrapper1">
 			<div class="container">
-				<div class="header-wrapper2">
-				<!-- 로그인 전 -->
-				
-				<!-- 로그인 후 -->
-					<div class="header-logo">
-						<a class="comServNavbar-logo-link" href="#">Wanted for Employer</a>
+				<!-- 로그인 전, 기업서비스 상단-1번 바 -->
+				<div class="header-wrapper21" id="comServHeader1st">
+					<div class="header-logo" id="comServHeaderLogo">
+						<!-- 로그인 후 기업로고 + 기업명으로 변경? -->
+						<c:if test="${empty comMemId}">
+							<a class="comServNavbar-logo-link" href="#">Wanted for Employer</a>
+						</c:if>
+						<c:if test="${!empty comMemId}">
+							<c:if test="${empty comInfoVo.comName }">
+								<img src="#">
+								<span class="comServNavbar-logo-link">
+									소속기업명		
+								</span>
+							</c:if>
+							<c:if test="${!empty comInfoVo.comName }">
+								<img src="#">
+								<span class="comServNavbar-logo-link">
+									${comInfoVo.comName}	
+								</span>
+							</c:if>
+						</c:if>
 					</div>
+					<div class="comServHeaderBtns">
+						<c:if test="${empty comMemId}">
+							<!-- 기업서비스 로그인 -->
+							<button class="comServBtn comServLoginBtn"
+								data-toggle="modal" data-target=".comServLoginMD" style="outline:none;">채용담당자 로그인</button>
+							<%@include file="../company/member/login.jsp" %>
+							<!-- 기업서비스 관리자 회원가입 -->
+							<button class="comServBtn comServJoinBtn"
+								data-toggle="modal" data-target=".comServJoinMD" style="outline:none;">관리자 가입</button>
+							<%@include file="../company/member/join.jsp" %>
+						</c:if>
+						<c:if test="${!empty comMemId}">
+						<!-- 기업서비스 로그인 후 담당자명+님 띄워줄 곳  -->
+							<div class="comServDropdown">
+								<button class="comServBtn comServBtn-name">${comMemVo.comMemName} 님 <i class="fas fa-chevron-down"></i></button>
+								<div class="comServOptionMenu"> <!-- 내 프로필 / 로그아웃 링크 있는 곳 -->
+									<a href="#">내 프로필</a>
+									<a href="<c:url value='/company/logout.do'/>">로그아웃</a>
+								</div>
+							</div>
+						</c:if>
+						<a href="<c:url value='/index.do'/>" class="comServBtn gotoWantedMain">원티드 홈</a>
+					</div>
+				</div>
+				<c:if test="${!empty comMemId}">
+				<!-- 로그인 후, 기업서비스 상단-2번 바 추가 노출 -->
+				<div class="header-wrapper22" id="comServHeader2nd">
 					<nav class="comServNavbar">
 						<ul class="comServNavs ml-auto">
 							<li class="comServNav-item">
@@ -82,20 +76,12 @@
 								<a class="comServNav-item-link" href="#">매치업</a></li>
 							<li class="comServNav-item">
 								<a class="comServNav-item-link" href="#">기업정보</a></li>
+							<li class="comServNav-item">
+								<a class="comServNav-item-link" href="#">계정관리</a></li>
 						</ul>
 					</nav>
-					<div class="comServHeaderBtns">
-						<!-- 기업서비스 로그인 모달 인클루드-->
-						<button class="comServBtn comServLoginBtn"
-							data-toggle="modal" data-target=".comServLoginMD" style="outline:none;">채용담당자 로그인</button>
-						<%@include file="../company/member/login.jsp" %>
-						<button class="comServBtn comServJoinBtn" 
-							data-toggle="modal" data-target=".comServJoinMD" style="outline:none;">관리자 가입</button>
-						<!-- 관리자 계정 가입 인클루드 -->
-						<%@include file="../company/member/join.jsp" %>
-						<a href="#" class="comServBtn gotoWantedMain">원티드 홈</a>
-					</div>
 				</div>
+				</c:if>
 			</div>
 		</div>
 	</header>

@@ -4,7 +4,7 @@
 
 <mapper namespace="com.mybatis.mapper.comMemInfo">
 	<select id="checkId" parameterType="String" resultType="int">
-		select count(*) as cnt from commeminfo where com_Mem_Id=#{userid}
+		select count(*) as cnt from commeminfo where com_Mem_Id=#{comMemId}
 	</select>
 	
 	<select id="selectPwd" parameterType="String" resultType="String">
@@ -13,6 +13,18 @@
 	
 	<select id="selectMemNo" parameterType="String" resultType="int">
 		select com_mem_no from commeminfo where com_mem_id=#{comMemId}
+	</select>
+	
+	<insert id="joinComMem" parameterType="comMemInfoVo">
+	<selectKey resultType="int" keyProperty="comMemNo" order="BEFORE">
+		select commeminfo_seq.nextval from dual
+	</selectKey>
+		insert into commeminfo(com_mem_no, com_mem_id, com_mem_pwd, com_mem_name, com_team, com_mobile)
+		values(#{comMemNo}, #{comMemId}, #{comMemPwd}, #{comMemName}, #{comTeam}, #{comMobile})
+	</insert>
+	
+	<select id="selectComMem" parameterType="string" resultType="comMemInfoVo">
+		select * from comMemInfo where com_mem_id=#{comMemLoginId}
 	</select>
 </mapper>
 

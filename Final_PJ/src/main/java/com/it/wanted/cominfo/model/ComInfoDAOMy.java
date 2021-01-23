@@ -9,5 +9,10 @@ public class ComInfoDAOMy implements ComInfoDAO{
 	@Autowired SqlSessionTemplate sqlSession;
 	private String namespace="com.mybatis.mapper.comInfo.";
 	
+	@Override
+	public ComInfoVO selectCompany(int comMemNo) {
+		return sqlSession.selectOne(namespace+"selectCompany", comMemNo);
+	}
+	
 	
 }

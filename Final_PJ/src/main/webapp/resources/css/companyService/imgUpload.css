@@ -1,0 +1,99 @@
+@charset "UTF-8";
+span, label, div{
+	color: #454547;
+}
+.tabSection{
+	margin: 30px 0px;	
+}
+
+.infoSection{
+	margin-bottom: 130px;
+}
+
+.comInfoRegiTab{
+	font-size: 0.8em;
+	font-weight: bold;
+	border: 1px solid #e1e2e3;
+	padding: 10px 15px;
+	border-radius: 30px;
+	margin-right: 10px;
+}
+
+.comInfoRegiTab:hover{
+	cursor: pointer;
+}
+
+.selectedTab{
+	background: #e1e2e3;
+	color: black;
+}
+
+#tabImg, #tabInfo{
+	display: none;
+}
+
+.comServTitle{
+	font-size: 1.6em;
+	font-weight: bold;
+	padding-bottom: 20px;
+}
+
+.comServTitle-imageCountGuide{
+	font-size: 0.8em;
+	color: 
+}
+
+/* 이미지 등록 박스 */
+.imgBoxWrapper{
+	display: flex;
+	margin-bottom: 30px;
+	flex-flow: wrap;
+}
+
+.imgBox{
+	width: 225px;
+	height: 170px;
+	border: 1px solid #e1e2e3;
+	margin: 0 20px 20px 0;
+}
+
+.imgBox:hover{
+	cursor: pointer;
+}
+
+.imgPlusBox{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.imgPlusBtn{
+	width: 50px;
+	height: 50px;
+	text-align: center;
+}
+
+.sizeInfoSpan{
+	font-size: 0.8em;
+}
+
+.hide{
+	display:none; 
+}
+
+.comServModiSumbitWrapper{
+	display: flex;
+	align-items: right;
+}
+
+
+.comServModiSumbitWrapper{
+	position: relative;
+}
+
+.btnComServModiSubmit{
+	position: absolute;
+	right: 0;
+	margin-bottom: 30px;
+}

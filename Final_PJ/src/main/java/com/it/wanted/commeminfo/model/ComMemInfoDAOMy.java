@@ -11,8 +11,8 @@ public class ComMemInfoDAOMy implements ComMemInfoDAO{
 	private String namespace="com.mybatis.mapper.comMemInfo.";
 	
 	@Override
-	public int checkId(String userid) {
-		return sqlSession.selectOne(namespace+"checkId", userid);
+	public int checkId(String comMemId) {
+		return sqlSession.selectOne(namespace+"checkId", comMemId);
 	}
 
 	@Override
@@ -23,6 +23,16 @@ public class ComMemInfoDAOMy implements ComMemInfoDAO{
 	@Override
 	public int selectMemNo(String comMemId) {
 		return sqlSession.selectOne(namespace+"selectMemNo", comMemId);
+	}
+
+	@Override
+	public int joinComMem(ComMemInfoVO vo) {
+		return sqlSession.insert(namespace+"joinComMem", vo);
+	}
+
+	@Override
+	public ComMemInfoVO selectComMem(String comMemLoginId) {
+		return sqlSession.selectOne(namespace+"selectComMem", comMemLoginId);
 	}
 	
 	

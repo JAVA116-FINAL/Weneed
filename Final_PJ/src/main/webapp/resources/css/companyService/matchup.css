@@ -1,0 +1,189 @@
+p, span, h5, h1, h2, a, button, i{
+	color: #444444;
+}
+
+/* 첫번째 섹션*/
+.matchupMain-1stSec{
+	padding: 100px 300px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+h1{
+	font-size: 2.4em;
+	font-weight: lighter;
+	color: white;
+	margin-bottom: 20px;
+}
+
+.matchupMainH2-white{
+	font-size: 1.4em;
+	color: white;
+	margin-bottom: 40px;
+	font-weight: lighter;
+	
+}
+
+.matchupMain-btn-gotoSearchPage{
+	color: black;
+	background: white;
+	padding: 15px 20px;
+	border-radius: 30px;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+.matchupMain-btn-gotoSearchPage:hover{
+	color: black;
+}
+
+.matchupMain-2ndSec{
+	background-color: #f4f4f4;
+	padding: 100px 250px;
+	text-align: center;
+	
+}
+
+.matchupMainH2-dark{
+	font-size: 1.8em;
+	color: #444444;
+	margin-bottom: 40px;
+	font-weight: bold;
+}
+
+.matchupMain-3parts-wrapper{
+	display: flex;
+	justify-content: space-between;
+}
+
+.matchupMain-3parts{
+	align-items: center;
+	background: #ffffff;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+}
+
+.matchupMain-3parts-one{
+	width: 31%;
+	padding: 20px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.matchupMain-3parts-title{
+	font-weight: bold;
+	font-size: 1.4em;
+	margin: 20px 0px;
+}
+
+.matchupMain-3parts-contents{
+	font-size: 0.8em;
+	color: #444444;
+}
+
+.matchup-productIntro-wrapper{
+	padding: 100px 200px;
+	background-color: #7072f6;
+	text-align: center;
+}
+
+.matchup-productIntro-wrapper>h1{
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.matchup-productIntro-3items{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.matchup-productIntro-item{
+	background-color: #ffffff;
+	width:30%;
+	padding: 20px 20px 40px 20px;
+	
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.matchup-productIntro-item > h2{
+	font-size: 1.6em;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.matchup-productIntro-item-price:first-child,
+.matchup-productIntro-item-title:first-child{
+	color:#728beb;
+}
+.matchup-productIntro-item > span{
+	display: block;
+	
+}
+.matchup-extraFee{
+	font-size: 0.8em;
+}
+
+.matchup-posCnt{
+	font-weight: bold;
+}
+
+.matchup-fakespan{
+	align-items: center;
+	text-align: center;
+	width: 30px;
+	border-bottom: 3px solid #7072f6;
+	display: inline-block;
+	right: 50%;
+	
+}
+
+.matupChooseBtn{
+	background-color: #5764f2;
+	padding: 15px 30px;
+	border-radius: 30px;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+.matchup-Strong-text{
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+.matupChooseBtn:hover {
+	color: white;
+}
+
+.matchup-Strong-text1,
+.matchup-productIntro-item-title1,
+.matchup-productIntro-item-price1{
+	color: #728beb;
+}
+
+.matchup-Strong-text2,
+.matchup-productIntro-item-title2,
+.matchup-productIntro-item-price2{
+	color: #5764f2;
+}
+
+.matchup-Strong-text3,
+.matchup-productIntro-item-title3,
+.matchup-productIntro-item-price3{
+	color: #855af0;
+}
+
+.matupChooseBtn1{
+	background-color: #728beb;
+}
+.matupChooseBtn2{
+	background-color: #5764f2;
+}
+.matupChooseBtn3{
+	background-color: #855af0;
+}
+
+.matupChooseBtn:visited{
+	color: #ffffff;
+}

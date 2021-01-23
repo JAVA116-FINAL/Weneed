@@ -7,10 +7,9 @@ public class ComMemInfoVO {
 	private String comMemId;
 	private String comMemPwd;
 	private String comMemName;
-	private String comMemTeam;
-	private String comMemMobile;
+	private String comTeam;
+	private String comMobile;
 	private Timestamp comMemRegdate;
-	
 	public int getComMemNo() {
 		return comMemNo;
 	}
@@ -35,17 +34,17 @@ public class ComMemInfoVO {
 	public void setComMemName(String comMemName) {
 		this.comMemName = comMemName;
 	}
-	public String getComMemTeam() {
-		return comMemTeam;
+	public String getComTeam() {
+		return comTeam;
 	}
-	public void setComMemTeam(String comMemTeam) {
-		this.comMemTeam = comMemTeam;
+	public void setComTeam(String comTeam) {
+		this.comTeam = comTeam;
 	}
-	public String getComMemMobile() {
-		return comMemMobile;
+	public String getComMobile() {
+		return comMobile;
 	}
-	public void setComMemMobile(String comMemMobile) {
-		this.comMemMobile = comMemMobile;
+	public void setComMobile(String comMobile) {
+		this.comMobile = comMobile;
 	}
 	public Timestamp getComMemRegdate() {
 		return comMemRegdate;
@@ -53,10 +52,11 @@ public class ComMemInfoVO {
 	public void setComMemRegdate(Timestamp comMemRegdate) {
 		this.comMemRegdate = comMemRegdate;
 	}
+	
 	@Override
 	public String toString() {
 		return "ComMemInfoVO [comMemNo=" + comMemNo + ", comMemId=" + comMemId + ", comMemPwd=" + comMemPwd
-				+ ", comMemName=" + comMemName + ", comMemTeam=" + comMemTeam + ", comMemMobile=" + comMemMobile
+				+ ", comMemName=" + comMemName + ", comTeam=" + comTeam + ", comMobile=" + comMobile
 				+ ", comMemRegdate=" + comMemRegdate + "]";
 	}
 	

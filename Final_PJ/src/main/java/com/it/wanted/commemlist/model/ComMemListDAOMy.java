@@ -9,14 +9,22 @@ public class ComMemListDAOMy implements ComMemListDAO{
 	@Autowired SqlSessionTemplate sqlSession;
 	private String namespace="com.mybatis.mapper.comMemList.";
 	
+	/*
+	 * @Override public int checkComReged(int memNo) { return
+	 * sqlSession.selectOne(namespace+"checkComReged", memNo); }
+	 * 
+	 * @Override public String selectComCode(int memNo) { return
+	 * sqlSession.selectOne(namespace+"selectComCode", memNo); }
+	 */
+
 	@Override
-	public int checkComReged(int memNo) {
-		return sqlSession.selectOne(namespace+"checkComReged", memNo);
+	public int checkComReged(String comMemId) {
+		return sqlSession.selectOne(namespace+"checkComReged", comMemId);
 	}
 
 	@Override
-	public String selectComCode(int memNo) {
-		return sqlSession.selectOne(namespace+"selectComCode", memNo);
+	public String selectComCode(int comMemNo) {
+		return sqlSession.selectOne(namespace+"selectComCode", comMemNo);
 	}
 	
 }
