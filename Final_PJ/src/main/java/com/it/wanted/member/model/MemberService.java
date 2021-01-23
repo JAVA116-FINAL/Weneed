@@ -9,7 +9,15 @@ public interface MemberService {
 	public static final int EXIST_HP=1; //휴대폰번호가 이미 존재하는 경우
 	public static final int NON_EXIST_HP=2;	//존재하지 않는 경우
 	
+	//로그인 처리시 사용
+	public static final int LOGIN_OK=1;	//로그인 성공
+	public static final int EMAIL_NONE=2;	//아이디가 없는 경우
+	public static final int PWD_DISAGREE=3;	//비밀번호 불일치
+	
 	public int insertMember(MemberVO vo);
 	public int checkEmail(String email);
 	public int checkHp(String hp);
+	public int loginCheck(String email, String pwd);
+	public MemberVO selectMember(String email);
+	public int checkLoginEmail(String email);
 }

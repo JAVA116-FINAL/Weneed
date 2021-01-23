@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.program.">
+	
+	<!-- 프로그램 등록하기 -->
+		<insert id="insertProgram" parameterType="programVo">
+		<selectKey keyProperty="proNo" resultType="int" order="BEFORE">
+			select program_seq.nextval from dual
+		</selectKey>
+		
+		insert into program(proNo, adminNo, proCateNo, proName, proSponsor, proPrice, proStartDate, regdate, proType, imageUrl, regiEndDate)
+		values(#{proNo}, #{adminNo}, #{proCateNo}, #{proName}, #{proSponsor}, #{proPrice}, #{proStartDate}, #{regdate}, #{proType}, #{imageUrl}, #{regiEndDate})
+		</insert>
+		
+		
+	
+</mapper>
+
+
+
+
+
+
+
+
+

@@ -92,7 +92,7 @@
       <div class="col-lg-4">
           <div style="margin-left:0px; width:400px; margin-top:-30px;">
             <div class="feature-icon mb-3">
-             <img alt="" src="https://static.wanted.co.kr/images/events/wanted-symbol-logo3x.png" style="width:150px;">
+             <button type="button" onclick="location.href='/main/afterLoginMain.do'" id="img_btn" style="background-color:#fff; outline:none; border:none;"><img src="https://static.wanted.co.kr/images/events/wanted-symbol-logo3x.png" style="width:150px;"></button>
             </div>
             <div style="font-size:25px; color:gray; margin-top:30px;">Wanted Plus / 6개월권 구독</div>    <!-- 3개월 구독시: 무제한으로 즐기는 직군별 커리어 콘텐츠 라고 뜸 -->
               <div style="font-size:13px; color:gray; margin-top:30px;"><p>20,000명 이상의 직장인이 선택한 원티드의 모든 강연, 컨퍼런스 영상을 무제한으로 시청하고, 업계 최고의 전문가와 함께하는 온오프라인 세미나, 북클럽에 참여할 수 있는 기회 </p></div><br>

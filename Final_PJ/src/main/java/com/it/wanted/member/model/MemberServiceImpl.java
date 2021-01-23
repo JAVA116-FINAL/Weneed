@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
 		if(cnt>0) {
 			result=EXIST_EMAIL; //이미 해당 이메일 존재
 		}else {
-			result=NON_EXIST_EMAIL;	//해당 아이디 없음
+			result=NON_EXIST_EMAIL;	//해당 이메일 없음
 		}
 		
 		return result;
@@ -38,5 +38,55 @@ public class MemberServiceImpl implements MemberService{
 		
 		return result;
 	}
+
+	public int loginCheck(String email, String pwd) {
+		String dbPwd = memberDao.selectPwd(email);
+		
+		int result = 0;
+		if(dbPwd==null || dbPwd.isEmpty()) {
+			result=EMAIL_NONE;
+		}else {
+			if(dbPwd.equals(pwd)) {
+				result=LOGIN_OK;
+			}else {
+				result=PWD_DISAGREE;
+			}
+		}
+		return result;
+	}
+	
+	public MemberVO selectMember(String email) {
+		return memberDao.selectMember(email);
+	}
+
+	public int checkLoginEmail(String email) {
+		int cnt = memberDao.checkLoginEmail(email);
+		
+		int result = 0;
+		if(cnt>0) {
+			result=LOGIN_OK; //해당 이메일 존재
+		}else {
+			result=EMAIL_NONE;	//해당 이메일 없음
+		}
+		
+		return result;
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
