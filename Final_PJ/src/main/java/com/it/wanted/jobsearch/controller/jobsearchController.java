@@ -14,4 +14,10 @@ public class jobsearchController {
 	public void jobsearchDetail() {
 		logger.info("탐색 상세보기 화면보여주기");
 	}
+	
+	@RequestMapping("/apply.do")
+	public void apply() {
+		logger.info("지원하기 화면보여주기");
+	}
+	
 }
