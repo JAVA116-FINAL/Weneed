@@ -1,0 +1,822 @@
+@charset "UTF-8";
+
+
+section.banner.mcuIntrobanner_jy {
+    background: white;
+}
+
+.col-lg-12.col-md-12.col-xl-7.mcuIntrodiv-col_jy {
+    width: 100%;
+    display: inline-block;
+    max-width: inherit;
+    text-align: center;
+    font-weight: 400;
+}
+
+h1.mb-3.mt-3.mcuIntroTitle_jy {
+    color: black;
+    font-weight: 600;
+}
+
+p.mb-4.pr-5.mcuIntro-p_jy {
+    color: black;
+    font-size: 19px;
+}
+
+button.btn.btn-main-2.btn-icon.btn-round-full.mcuRegisterbt_jy {
+    color: white;
+    font-size: 19px;
+    background: #217ff3;
+    border: none;
+    width: 251px;
+}
+
+section.features.mcuIntrofeatures_jy {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/02_01.jpg);
+    height: 600px;
+    overflow: hidden;
+    margin: 0 auto;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    /* height: auto; */
+}
+
+.mcuIntrocontainer_jy {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 132px 2% 122px;
+}
+
+.mcuIntrorow_jy {
+    /* flex-basis: 342px; */
+    /* min-width: 244px; */
+    /* padding: 0 30px 66px; */
+    /* margin-left: 19px; */
+    /* border-radius: 10px; */
+    /* -webkit-box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05); */
+    /* box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05); */
+    /* background-color: #ffffff; */
+}
+
+.feature-item.mb-5.mb-lg-0.featureItem_jy {
+    flex-basis: 342px;
+    min-width: 244px;
+    padding: 0 30px 66px;
+    margin-left: 19px;
+    border-radius: 10px;
+    -webkit-box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+}
+
+.feature-icon.mb-4.featureIcon_jy {
+    /* background: url("https://static.wanted.co.kr/images/matchup/intro/icon_01.png"); */
+    /* width: 100%; */
+    /* height: 42px; */
+    /* margin-top: 80px; */
+    /* color: #333333; */
+    /* background-position: 50% 0; */
+    /* background-repeat: no-repeat; */
+}
+
+.icon.pen {
+    background: url(https://static.wanted.co.kr/images/matchup/intro/icon_01.png);
+    width: 100%;
+    height: 42px;
+    margin-top: 80px;
+    color: #333333;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+}
+
+.icon.lock {
+    background:     background: url(https://static.wanted.co.kr/images/matchup/intro/icon_01.png);
+    /* width: 100%; */
+    /* height: 42px; */
+    /* margin-top: 80px; */
+    /* color: #333333; */
+    /* background-position: 50% 0; */
+    /* background-repeat: no-repeat; */
+}
+
+.icon.lock {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/icon_02.png);
+    width: 100%;
+    height: 42px;
+    margin-top: 80px;
+    color: #333333;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+}
+
+
+
+.icon.kr {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/icon_03_kr.png);
+    width: 100%;
+    height: 42px;
+    margin-top: 80px;
+    color: #333333;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+}
+
+.mcuIntrocontainer_jy {
+    overflow: hidden;
+}
+
+section.section.service.gray-bg.mcuIntroSectionGray_jy {
+    overflow: hidden;
+}
+
+section.section.service.gray-bg.mcuIntroSectionGray_jy {
+    background: #d3d3d338;
+    padding: 0px;
+}
+
+.matchupIntroimg_jy {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/01_kr_20200326.jpg);
+    margin-top: 65px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 276px;
+}
+
+h1.col-lg-12.mt-3.mcuIntroTitle_jy {
+    font-weight: 600;
+    color: black;
+    margin-bottom: 23px;
+}
+
+.mcuIntrocontainer_jy {
+    padding: 0;
+}
+
+h1.col-lg-12.mt-3.mcuIntroTitle_jy {}
+
+p.col-lg-12.pr-5.mcuIntro-p_jy {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 25px;
+}
+
+.btn-container.mcuIntrobtContainerdiv_jy {
+    /* height: 0; */
+}
+
+button.btn.btn-main-2.btn-icon.btn-round-full.mcuRegisterbt_jy {
+    height: 60px;
+}
+
+.block.mcuIntroblock_jy {
+    padding-bottom: 0;
+}
+
+.mcuIntrocontainer_jy {}
+
+.mcuIntrocontainer_jy {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 132px 2% 122px;
+}
+
+.feature-item.mb-5.mb-lg-0.featureItem_jy {
+    flex-basis: 342px;
+    min-width: 244px;
+    padding: 0 30px 66px;
+    margin-left: 19px;
+    border-radius: 10px;
+    -webkit-box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    text-align: center;
+}
+
+h4.mb-3.featureSectionTitle_jy {
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+    display: inline-block;
+    text-align: center;
+}
+
+p.mb-4.featureSectionContents_jy {}
+
+p.mb-4.featureSectionContents_jy {
+    color: #000000c4;
+    font-size: 15px;
+}
+
+h2.mcuIntrosectionGray-h2_jy {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: pre;
+}
+
+section.section.service.gray-bg.mcuIntroSectionGray_jy {
+    background: -webkit-gradient(linear, left bottom, left top, from(#ffffff), to(#f6f6f6));
+    background: linear-gradient(to top, #ffffff, #f6f6f6);
+}
+
+.mcuIntroContentCenter_jy {
+    padding: 80px 0 0 0;
+    FONT-VARIANT: JIS04;
+    /* FONT-VARIANT: JIS04; */
+}
+
+p.mcuIntro-p_jy {
+    white-space: pre;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: pre;
+}
+
+.mcuIntrocontainer_jy {
+    margin-top: 60px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 0 2%;
+}
+
+.col-lg-4.col-md-6.col-sm-6.mcuIntroCol4_jy {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -ms-flex-preferred-size: 340px;
+    flex-basis: 340px;
+    min-width: 244px;
+    margin-right: 20px;
+}
+
+.section-title.mcuIntroSectionTitle_jy {
+    text-align: center;
+    color: black;
+}
+
+h2.mcuIntrosectionGray-h2_jy {
+    color: black;
+}
+
+
+@charset "UTF-8";
+
+
+section.banner.mcuIntrobanner_jy {
+    background: white;
+}
+
+.col-lg-12.col-md-12.col-xl-7.mcuIntrodiv-col_jy {
+    width: 100%;
+    display: inline-block;
+    max-width: inherit;
+    text-align: center;
+    font-weight: 400;
+}
+
+h1.mb-3.mt-3.mcuIntroTitle_jy {
+    color: black;
+    font-weight: 600;
+}
+
+p.mb-4.pr-5.mcuIntro-p_jy {
+    color: black;
+    font-size: 19px;
+}
+
+button.btn.btn-main-2.btn-icon.btn-round-full.mcuRegisterbt_jy {
+    color: white;
+    font-size: 19px;
+    background: #217ff3;
+    border: none;
+    width: 251px;
+}
+
+section.features.mcuIntrofeatures_jy {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/02_01.jpg);
+    height: 600px;
+    overflow: hidden;
+    margin: 0 auto;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    /* height: auto; */
+}
+
+.mcuIntrocontainer_jy {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 132px 2% 122px;
+}
+
+.mcuIntrorow_jy {
+    /* flex-basis: 342px; */
+    /* min-width: 244px; */
+    /* padding: 0 30px 66px; */
+    /* margin-left: 19px; */
+    /* border-radius: 10px; */
+    /* -webkit-box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05); */
+    /* box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05); */
+    /* background-color: #ffffff; */
+}
+
+.feature-item.mb-5.mb-lg-0.featureItem_jy {
+    flex-basis: 342px;
+    min-width: 244px;
+    padding: 0 30px 66px;
+    margin-left: 19px;
+    border-radius: 10px;
+    -webkit-box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+}
+
+.feature-icon.mb-4.featureIcon_jy {
+    /* background: url("https://static.wanted.co.kr/images/matchup/intro/icon_01.png"); */
+    /* width: 100%; */
+    /* height: 42px; */
+    /* margin-top: 80px; */
+    /* color: #333333; */
+    /* background-position: 50% 0; */
+    /* background-repeat: no-repeat; */
+}
+
+.icon.pen {
+    background: url(https://static.wanted.co.kr/images/matchup/intro/icon_01.png);
+    width: 100%;
+    height: 42px;
+    margin-top: 80px;
+    color: #333333;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+}
+
+.icon.lock {
+    background:     background: url(https://static.wanted.co.kr/images/matchup/intro/icon_01.png);
+    /* width: 100%; */
+    /* height: 42px; */
+    /* margin-top: 80px; */
+    /* color: #333333; */
+    /* background-position: 50% 0; */
+    /* background-repeat: no-repeat; */
+}
+
+.icon.lock {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/icon_02.png);
+    width: 100%;
+    height: 42px;
+    margin-top: 80px;
+    color: #333333;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+}
+
+
+
+.icon.kr {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/icon_03_kr.png);
+    width: 100%;
+    height: 42px;
+    margin-top: 80px;
+    color: #333333;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+}
+
+.mcuIntrocontainer_jy {
+    overflow: hidden;
+}
+
+section.section.service.gray-bg.mcuIntroSectionGray_jy {
+    overflow: hidden;
+}
+
+section.section.service.gray-bg.mcuIntroSectionGray_jy {
+    background: #d3d3d338;
+    padding: 0px;
+}
+
+.matchupIntroimg_jy {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/01_kr_20200326.jpg);
+    margin-top: 65px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 276px;
+}
+
+h1.col-lg-12.mt-3.mcuIntroTitle_jy {
+    font-weight: 600;
+    color: black;
+    margin-bottom: 23px;
+}
+
+.mcuIntrocontainer_jy {
+    padding: 0;
+}
+
+h1.col-lg-12.mt-3.mcuIntroTitle_jy {}
+
+p.col-lg-12.pr-5.mcuIntro-p_jy {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 25px;
+}
+
+.btn-container.mcuIntrobtContainerdiv_jy {
+    /* height: 0; */
+}
+
+button.btn.btn-main-2.btn-icon.btn-round-full.mcuRegisterbt_jy {
+    height: 60px;
+}
+
+.block.mcuIntroblock_jy {
+    padding-bottom: 0;
+}
+
+.mcuIntrocontainer_jy {}
+
+.mcuIntrocontainer_jy {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 132px 2% 122px;
+}
+
+.feature-item.mb-5.mb-lg-0.featureItem_jy {
+    flex-basis: 342px;
+    min-width: 244px;
+    padding: 0 30px 66px;
+    margin-left: 19px;
+    border-radius: 10px;
+    -webkit-box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    text-align: center;
+}
+
+h4.mb-3.featureSectionTitle_jy {
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+    display: inline-block;
+    text-align: center;
+}
+
+p.mb-4.featureSectionContents_jy {}
+
+p.mb-4.featureSectionContents_jy {
+    color: #000000c4;
+    font-size: 15px;
+}
+
+h2.mcuIntrosectionGray-h2_jy {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: pre;
+}
+
+section.section.service.gray-bg.mcuIntroSectionGray_jy {
+    background: -webkit-gradient(linear, left bottom, left top, from(#ffffff), to(#f6f6f6));
+    background: linear-gradient(to top, #ffffff, #f6f6f6);
+}
+
+.mcuIntroContentCenter_jy {
+    padding: 80px 0 0 0;
+    FONT-VARIANT: JIS04;
+    /* FONT-VARIANT: JIS04; */
+}
+
+p.mcuIntro-p_jy {
+    white-space: pre;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: pre;
+}
+
+.mcuIntrocontainer_jy {
+    margin-top: 60px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 0 2%;
+}
+
+.col-lg-4.col-md-6.col-sm-6.mcuIntroCol4_jy {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -ms-flex-preferred-size: 340px;
+    flex-basis: 340px;
+    min-width: 244px;
+    margin-right: 20px;
+}
+
+.section-title.mcuIntroSectionTitle_jy {
+    text-align: center;
+    color: black;
+}
+
+h2.mcuIntrosectionGray-h2_jy {
+    color: black;
+}
+
+.mcuIntrorow_jy.mcuIntrofSectionrow_jy {
+    text-align: center;
+}
+
+.feature-block.d-lg-flex {
+
+    justify-content: center;
+}
+
+
+.mcuIntrorow_jy.mcuIntrofSectionrow_jy {
+    margin-top: 50px;
+}
+
+section.section.service.gray-bg.mcuIntroSectionGray_jy {gradient(
+    linear, left bottom, left top, from(#ffffff), to(#f6f6f6));
+    background: linear-gradient(to top, #ffffff, #f6f6f6);
+}
+
+.mcuIntroContentCenter_jy {}
+
+h2.mcuIntrosectionGray-h2_jy {
+    font-size: 24px;
+    font-weight: 600;
+    white-space: normal;
+    word-break: normal;
+}
+
+p.mcuIntro-p_jy {
+    white-space: pre;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.mcuIntrocontainer2_jy {
+    /* margin-top: 60px; */
+    /* display: -webkit-box; */
+    display: -ms-flexbox;
+    /* display: flex; */
+    /* -webkit-box-pack: center; */
+    -ms-flex-pack: center;
+    /* justify-content: center; */
+    /* padding: 0 2%; */
+}
+
+.mb-3.mcuIntroCol2_jy {}
+
+.mb-3.mcuIntroCol2_jy {
+    /* display: -webkit-box; */
+    display: -ms-flexbox;
+    /* display: flex; */
+    /* -webkit-box-orient: vertical; */
+    /* -webkit-box-direction: normal; */
+    /* flex-direction: column; */
+    -ms-flex-direction: column;
+    -ms-flex-preferred-size: 340px;
+    /* flex-basis: 340px; */
+    /* min-width: 244px; */
+    /* margin-right: 20px; */
+}
+
+.mb-4.mcuIntroServiceItem2_jy {
+    /* display: -webkit-box; */
+    display: -ms-flexbox;
+    /* display: flex; */
+    /* -webkit-box-orient: vertical; */
+    /* -webkit-box-direction: normal; */
+    /* flex-direction: column; */
+    -ms-flex-direction: column;
+    -ms-flex-preferred-size: 340px;
+    /* flex-basis: 340px; */
+    min-width: 244px;
+    margin-right: 20px;
+    /* justify-content: center; */
+}
+
+.mcuIntroContent2_jy {
+    webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    max-height: 250px;
+    border-radius: 10px;
+    -webkit-box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 40px 69.3px 100px 0 rgba(0, 0, 0, 0.05);
+    padding: 50px 30px;
+    font-size: 19px;
+    background-color: #ffffff;
+    line-height: 1.88;
+    text-align: left;
+}
+
+.mcuIntrorivuewSectionlinearrow_jy {
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #fff;
+}
+
+.icon.d-flex.align-items-center.mcuIntroAlignItem_jy {
+    margin-top: 30px;
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.mb-3.mcuIntroCol2_jy {
+    /* margin-top: 60px; */
+    /* display: -webkit-box; */
+    display: -ms-flexbox;
+    /* display: flex; */
+    /* -webkit-box-pack: center; */
+    -ms-flex-pack: center;
+    /* justify-content: center; */
+    /* padding: 0 2%; */
+    /* width: 19%; */
+}
+
+.mb-3.mcuIntroCol2_jy {}
+
+.mcuIntrocontainer2_jy {
+    justify-content: center;
+    display: flex;
+}
+
+.mcuIntrocontainer2_jy {}
+
+.mcuIntrorow2_jy {
+    margin-top: 60px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    /* justify-content: center; */
+    padding: 0 2%;
+    width: 57%;
+}
+
+p.mb-4.featureSectionContents_jy {}
+
+.icon.d-flex.align-items-center.mcuIntroAlignItem_jy {
+    text-align: center;
+    left: 50%;
+}
+
+.mb-3.mcuIntroCol2_jy {
+    /* justify-content: center; */
+    width: 35%;
+}
+
+.point-starts.nCompany_jy {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/review_01.png);
+    margin-top: 20px;
+    height: 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.mb-4.mcuIntroServiceItem2_jy {}
+
+h4.mt-3.mb-3.featureSectionTitle_jy {}
+
+h4.mt-3.mb-3.featureSectionTitle_jy {
+    margin-left: 13px;
+}
+
+h4.mt-3.mb-3.featureSectionTitle_jy {
+    font-size: 20px;
+    width: 100%;
+    display: inline-block;
+    margin-left: 0;
+}
+
+.icon.d-flex.align-items-center.mcuIntroAlignItem_jy {
+    width: 100%;
+    /* height: 200px; */
+}
+
+.point-starts.aCompany_jy {
+    background-image: url("https://static.wanted.co.kr/images/matchup/intro/review_02.png");
+    margin-top: 20px;
+    height: 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    /* width: 500px; */
+    display: inline-block;
+    width: 309px;
+    position: absolute;
+    margin-top: 84px;
+    margin-left: 29px;
+}
+
+.point-starts.cCompany_jy {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/review_03.png);
+    margin-top: 20px;
+    height: 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    /* width: 500px; */
+    display: inline-block;
+    width: 309px;
+    position: absolute;
+    margin-top: 84px;
+    margin-left: 29px;
+}
+
+section.section.clients.mcuIntroSectionReview_jy {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/04_bg.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* margin-bottom: 69px; */
+}
+
+.mcuIntrocontainer3_jy {
+    /* padding-top: 100px; */
+    text-align: center;
+}
+
+section.section.service.gray-bg.mcuIntroSectionGray_jy {
+    margin-bottom: 103px;
+}
+
+h2.mcuIntroh2Title_jy {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: pre;
+    color: white;
+}
+
+.companies-images_jy {
+    background-image: url(https://static.wanted.co.kr/images/matchup/intro/logos.png);
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    margin: 30px auto 50px;
+    height: 120px;
+    /* color: white; */
+    width: 860px;
+}
+
+.btn-container.mcuIntrobtContainerdiv_jy {
+    text-align: center;
+}
+
+.mcuIntrocontainer_jy {}
+
+h2.mcuIntrosectionGray-h2_jy {
+    font-size: 39px;
+}
+
+p.mcuIntro-p_jy {
+    font-size: 18px;
+}
+
+
+
+

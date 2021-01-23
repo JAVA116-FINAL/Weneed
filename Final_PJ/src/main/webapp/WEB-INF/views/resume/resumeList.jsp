@@ -61,7 +61,7 @@
 						 			<a href="#">
 										 <span class="RWName"><h3> 이력서 이름 </h3></span>
 										<span class="RWRegdate"><p> 이력서 작성일자 </p></span>
-										<span class="RWMachupFlag"><p> 매치업이력서?어떻게받지 </p></span>
+										<span class="RWMachupFlag"><p> 매치업이력서여부</p></span>
 									</a>
 								
 							</div>
