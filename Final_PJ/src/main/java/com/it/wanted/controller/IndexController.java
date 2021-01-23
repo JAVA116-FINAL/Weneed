@@ -41,4 +41,9 @@ public class IndexController {
 	public void bottom() {
 		logger.info("bottom화면 보여주기");
 	}
+	
+	@RequestMapping("/jobSalary/jobSalary.do")
+	public void jobSalary() {
+		logger.info("직군별 연봉 화면 보여주기");
+	}
 }
