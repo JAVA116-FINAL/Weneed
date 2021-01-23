@@ -134,7 +134,7 @@ $( document ).ready( function() {
 <!-- 채팅 섹션 -->
 <a name="title3"></a>
 <div class="img_admin_career">
-	<a href="wantedChat.do"><img alt="" src="<c:url value='/resources/images/career/wantedbal.JPG'/>" class="campus-recruit-img" style="width:100%; margin-top:-40px;"></a>
+	<a href="wantedChat.do"><img alt="" src="<c:url value='/resources/images/career/wantedbal.JPG'/>" class="campus-recruit-img" style="width:100%; margin-top:-65px;"></a>
 </div>
 
 
