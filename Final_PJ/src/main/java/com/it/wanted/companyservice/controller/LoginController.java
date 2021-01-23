@@ -8,12 +8,15 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.wanted.cominfo.model.ComInfoService;
+import com.it.wanted.cominfo.model.ComInfoVO;
 import com.it.wanted.commeminfo.model.ComMemInfoService;
 import com.it.wanted.commeminfo.model.ComMemInfoVO;
 import com.it.wanted.commemlist.model.ComMemListService;
@@ -25,33 +28,48 @@ public class LoginController {
 	
 	@Autowired ComMemInfoService comMemService;
 	@Autowired ComMemListService comMemListService;
+	@Autowired ComInfoService comInfoService;
 	
 	public void login_get() { //로그인 팝업화면 노출시키는 거
 		logger.info("로그인 화면 출력");
 	}
 	
 	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)
-	public String checkId(@RequestParam String comMemLoginId, @RequestParam String comMemLoginPwd,
-			HttpServletRequest request) {
-		logger.info("ajax 연습 - 로그인, 파라미터 comMemId={}, comMemPwd={}", comMemLoginId, comMemLoginPwd);
+	public String login(@RequestParam String comMemLoginId, @RequestParam String comMemLoginPwd,
+			HttpServletRequest request, Model model) {
+		logger.info("로그인, 파라미터 comMemId={}, comMemPwd={}", comMemLoginId, comMemLoginPwd);
 		
 		int res=comMemService.loginCheck(comMemLoginId, comMemLoginPwd);
 		logger.info("로그인 확인 결과 res={}", res);
 		
 		String loc="";
-		if(res==ComMemInfoService.LOGIN_SUCCESS) { //한번 더 해야돼 기업정보 등록 돼있는지 안돼있는지
-			//일단 세션처리부터, 쿠키는 아이디저장기능 별도로 없어서 저장하지 않음.. 이걸로 되나? ajax 써서 뭔가 안되는거 아닌가? 불안쓰
+		if(res==ComMemInfoService.LOGIN_SUCCESS) { //일단 로그인 성공
+			//일단 세션처리부터, 쿠키는 아이디저장기능 별도로 없어서 저장하지 않음
 			HttpSession session=request.getSession();
 			session.setAttribute("comMemId", comMemLoginId);
 			
-			//기업정보 등록 여부 확인
+			ComMemInfoVO comMemVo=comMemService.selectComMem(comMemLoginId);
+			//멤버정보를 통째로 가져와서 사용할 수 있는 것들 
+			// 1 멤버번호, 2 멤버이름, 3 멤버번호를 사용해서 기업정보 불러오기 
+			
+			//기업정보 등록 여부 확인.. 있는거 말고 승인됐는지 확인한다
 			int regedCheck=comMemListService.checkComReged(comMemLoginId);
 			logger.info("기업정보 등록 여부 확인 결과 regedCheck={}", regedCheck);
 			
+			//등록여부에 따라 기업명 세팅
+			ComInfoVO comInfoVo=new ComInfoVO();
+			if(regedCheck==ComMemListService.REGED_COMPANY || regedCheck==ComMemListService.IMG_NOT_REGED) {
+				comInfoVo=comInfoService.selectCompany(comMemVo.getComMemNo());
+				model.addAttribute("comInfoVo", comInfoVo);
+				//번호를 넣어서 회사정보를 가져옴
+			}
+			logger.info("파라미터로 세팅할 comMemVo={}", comMemVo);
+			model.addAttribute("comMemVo", comMemVo);
+			
 			//ajax 버림
-			if(regedCheck==ComMemListService.REGED_COMPANY) { //기업정보가 등록된 경우
+			if(regedCheck==ComMemListService.REGED_COMPANY) { //기업정보와 이미지 모두 등록승인된 경우
 				loc="redirect:/company/applicants.do";
-			}else if(regedCheck==ComMemListService.IMG_NOT_REGED){ //정보만 등록되고 이미지 미등록시
+			}else if(regedCheck==ComMemListService.IMG_NOT_REGED){ //정보만 등록승인되고 이미지 미등록시
 				loc="redirect:/company/imgUpload.do";
 			}else if(regedCheck==ComMemListService.INFO_NOT_REGED){ //정보도 미등록됨
 				loc="redirect:/company/register.do";
@@ -61,5 +79,15 @@ public class LoginController {
 		}
 		
 		return loc;
+	}
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		String comMemId=(String) session.getAttribute("comMemId");
+		logger.info("로그아웃 처리, 파라미터 comMemId={}", comMemId);
+		
+		session.removeAttribute("comMemId");
+		
+		return "redirect:/company/welcome.do";
 	}
 }

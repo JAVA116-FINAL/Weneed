@@ -3,12 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mybatis.mapper.comMemList">
-	<select id="checkComReged" parameterType="int" resultType="int">
-		select count(*) as cnt from comMemList where com_mem_no=#{memNo}
+	<select id="checkComReged" parameterType="string" resultType="int">
+		select count(*) as cnt from comMemList where com_mem_no=#{comMemNo}
 	</select>
 	
 	<select id="selectComCode" parameterType="int" resultType="string">
-		select com_code from comMemList where com_mem_no=#{memNo}
+		select com_code from comMemList where com_mem_id=#{comMemId}
 	</select>
 </mapper>
 

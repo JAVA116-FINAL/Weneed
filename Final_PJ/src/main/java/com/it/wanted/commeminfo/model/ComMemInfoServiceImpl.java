@@ -40,5 +40,10 @@ public class ComMemInfoServiceImpl implements ComMemInfoService{
 		
 		return result;
 	}
+
+	@Override
+	public ComMemInfoVO selectComMem(String comMemLoginId) {
+		return comMemDao.selectComMem(comMemLoginId);
+	}
 	
 }

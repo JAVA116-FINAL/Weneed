@@ -22,6 +22,10 @@
 		insert into commeminfo(com_mem_no, com_mem_id, com_mem_pwd, com_mem_name, com_team, com_mobile)
 		values(#{comMemNo}, #{comMemId}, #{comMemPwd}, #{comMemName}, #{comTeam}, #{comMobile})
 	</insert>
+	
+	<select id="selectComMem" parameterType="string" resultType="comMemInfoVo">
+		select * from comMemInfo where com_mem_id=#{comMemLoginId}
+	</select>
 </mapper>
 
 

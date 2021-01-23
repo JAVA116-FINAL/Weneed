@@ -14,11 +14,11 @@ public class ComMemListServiceImpl implements ComMemListService{
 	
 	@Override
 	public int checkComReged(String comMemId) {
-		//여기서 멤버아이디로 번호 가져와서 번호로 다시 컴코드 불러와봐 
-		int memNo=comMemInfoDao.selectMemNo(comMemId);
-		int cnt=comMemListDao.checkComReged(memNo); //멤노에 해당하는 컴코드 개수 확인.. 승인된!!! 기업정보 있는지 없는지 
-
+		//멤버아이디로 컴코드 개수 체크
 		int result;
+		int cnt=comMemListDao.checkComReged(comMemId); //멤노에 해당하는 컴코드 개수 확인.. 승인된!!! 기업정보 있는지 없는지 
+		//멤노 다시 받아야좨 ^^ 
+		int memNo=comMemInfoDao.selectMemNo(comMemId);
 		if(cnt>0) { //등록돼 있다
 			String comCode=comMemListDao.selectComCode(memNo); //컴코드 가져와서
 			int imgcnt=comImgInfoDao.selectRegedImgCnt(comCode); //승인된 이미지 개수를 확인한다

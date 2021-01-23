@@ -29,6 +29,11 @@ public class ComMemInfoDAOMy implements ComMemInfoDAO{
 	public int joinComMem(ComMemInfoVO vo) {
 		return sqlSession.insert(namespace+"joinComMem", vo);
 	}
+
+	@Override
+	public ComMemInfoVO selectComMem(String comMemLoginId) {
+		return sqlSession.selectOne(namespace+"selectComMem", comMemLoginId);
+	}
 	
 	
 }

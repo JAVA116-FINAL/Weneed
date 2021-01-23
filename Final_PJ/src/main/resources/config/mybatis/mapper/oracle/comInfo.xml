@@ -3,7 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mybatis.mapper.comInfo">
-	
+	<select id="selectCompany" parameterType="int" resultType="comInfoVo">
+		select * from comInfo
+		where com_code=(select com_code 
+               			from comMemList where com_mem_no=#{comMemNo})
+	</select>
 </mapper>
 
 
