@@ -15,6 +15,11 @@ public class CareerAdminMainController {
 	public void careerAdminMain() {
 		logger.info("careerAdminMain 커리어성장 관리자 메인페이지 보여주기");
 	}
+
+	@RequestMapping("/programWrite.do")
+	public void programWrite() {
+		logger.info("programWrite 관리자 프로그램 등록 페이지 보여주기");
+	}
 	
 
 }

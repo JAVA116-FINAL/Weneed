@@ -36,7 +36,7 @@ public class ProgramWriteController {
 		int cnt=programService.insertProgram(proVo);
 		logger.info("프로그램 등록 결과, cnt=", cnt);
 		
-		return "redirect:programList.do";		
+		return "redirect:programDetail.do";		
 		
 	}
 	
