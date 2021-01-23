@@ -116,3 +116,5 @@ section.page-title.section4-resumeIntro_jy {
 section.page-title.section3-resumeIntro_jy.white_jy {
     color: black;
 }
+
+.divbackgroundIMG_jy {background-repeat: no-repeat;height: 250px;background-size: cover;background-position: bottom;margin-top: 30px;}

@@ -1,0 +1,221 @@
+@charset "UTF-8";
+
+.jobarea_jy.mcuEditjabarea_jy {
+    /* display: inline-flex; */
+}
+
+.jobarea_jy.mcuEditjabarea_jy {}
+
+.form-group.mcuEditformgroup_jy {
+    /* display: inline; */
+    /* width: 51px; */
+}
+
+.form-group.mcuEditformgroup_jy {
+    display: inline-block;
+    width: 580px;
+    /* color: gray; */
+    /* background-color: gray; */
+}
+
+.staticlabel_jy.mcuEditstaticlabel_jy {
+    display: inline-block;
+    margin-right: 88px;
+}
+
+.staticlabel_jy.mcuEditstaticlabel_jy {
+    margin-bottom: 16px;
+}
+
+select#exampleFormControlSelect1 {
+    background: #80808012;
+    border: none;
+}
+
+.jobarea_jy.mcuEditjabarea_jy {
+}
+
+select#exampleFormControlSelect2 {
+    background: #80808012;
+    border: none;
+}
+
+ button.navbar-toggler.mcuEdit-togglebt_jy.collapsed {
+    border: 1px dashed #80808063;
+    border-radius: 0;
+    color: #808080b5;
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
+    margin: 11px 0 28px 0;
+}
+
+
+button.navbar-toggler.mcuEdit-togglebt_jy {
+    border: 1px dashed #80808063;
+    border-radius: 0;
+    color: #808080b5;
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
+    display: inline-block;
+}
+
+div#navbarjikmu_jy {
+    display: inline-block;
+    width: 80%;
+}
+
+.mcuEditmoreInfo_jy {
+    text-align: center;
+}
+
+button.navbar-toggler.mcuEdittogglebt2_jy {
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto;
+    margin-left: 43%;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2188f3;
+}
+
+h6.formButton-label_jy.exceptconOption_jy.mcuEditskil_jy {
+    margin-right: 82px;
+}
+
+button.btMachupEdit_jy {
+    border: 1px solid #9e9e9e8c;
+    color: white;
+    background: #9e9e9e8c;
+    width: 184px;
+    height: 52px;
+    border-radius: 3px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    float: right;
+}
+
+
+.machupMemEdit-btOk_jy {
+    border: 1px solid #9e9e9e8c;
+    color: white;
+    background: #9e9e9e8c;
+    width: 184px;
+    height: 52px;
+    border-radius: 3px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 auto;
+    /* text-align: right; */
+    margin-right: 4px;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy1 {
+    width: 640px;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy {
+    width: 640px;
+}
+
+i.icon-arrow_right.arrowIcon_jy {
+    right: 49px;
+}
+
+
+.jikmubtInnerdiv_jy {
+    /* overflow: hidden; */
+    display: inline-block;
+}
+
+.jobarea_jy.mcuEditjabarea_jy {
+    display: inline-block;
+    /* overflow: hidden; */
+    /* width: 100%; */
+}
+
+button.navbar-toggler.mcuEdit-togglebt_jy {
+    /* position: relative; */
+}
+
+.jikmubtInnerdiv_jy {
+}
+
+.EnterInterestArea-fieldset_jy {
+    overflow: hidden;
+}
+
+.jikmubtInnerdiv_jy {
+    width: 580px;
+}
+
+label.btn.mcuEdit-jikgunbt_jy {
+    display: inline-block;
+}
+
+.btn-group.btn-group-toggle.mcuEdit-btgruop_jy {
+    display: inline-block;
+}
+
+.btn-group.btn-group-toggle.mcuEdit-btgruop_jy {}
+
+label.btn.mcuEdit-jikgunbt_jy {
+    border: 1px solid #8080802e;
+}
+
+label.btn.mcuEdit-jikgunbt_jy {
+    color: #8080805c;
+    background-color: #ececec0d;
+    font-size: 15px;
+    letter-spacing: 1px;
+    font-weight: normal;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    padding: 10px 20px;
+}
+
+select#exampleFormControlSelect1>option {
+    background-color: white;
+}
+
+select#exampleFormControlSelect2>option {
+    background-color: white;
+}
+
+
+label.btn.mcuEdit-jikgunbt_jy {
+    margin: 5px;
+    padding: 8px 15px;
+    color: #3b3d40;
+    font-weight: 400;
+    border: 1px solid #d1d1d1;
+    border-radius: 0;
+    background-color: #f8f8f8;
+    opacity: 0.3;
+}
+
+
+
+label.btn.mcuEdit-jikgunbt_jy.active {
+    opacity: 1;
+    display: inline-block;
+}
+
+
+
+
+/* 태그 선택하면 이렇게 변하게하기 
+label.btn.mcuEdit-jikgunbt_jy {
+    color: black;
+    background: #80808026;
+    border: none;
+} */
+
+
+
+
+
