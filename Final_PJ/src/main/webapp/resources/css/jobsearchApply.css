@@ -1,0 +1,537 @@
+@charset "UTF-8";
+
+aside.col-lg-4.asideApply_jy {
+}
+
+.outerdiv-apply_jy {
+    border-radius: 3px;
+    border: solid 1px #e1e2e3;
+}
+
+header.header-apply_jy {
+    background: #fff;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e1e2e3;
+    position: relative;
+}
+
+h2.h2-apply_jy {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    line-height: 22px;
+}
+
+button.btback-apply_jy {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 16px;
+    font-weight: 600;
+    color: #999;
+}
+
+div#modaldiv_jy {
+    min-height: 390px;
+    max-height: 620px;
+    padding: 20px 0 0 0;
+    overflow-y: scroll;
+}
+
+.applyinfo_jy {}
+
+.applyinfo_jy {
+    padding: 0 20px;
+}
+
+h3.h3-apply_jy {
+    border-left: 2px solid #258BF7;
+    padding-left: 20px;
+    margin: 0 -20px 0px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+}
+
+label.lb-apply_jy {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #e1e2e3;
+    margin-bottom: 5px;
+}
+
+h4.lbName-apply_jy {
+    width: 80px;
+    line-height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    float: left;
+}
+
+h4.lbName-apply_jy~input[type=text] {
+    width: calc(100% - 80px);
+    height: 50px;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid #e1e2e3;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 50px;
+}
+
+.lb-apply_jy {
+    overflow: hidden;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #e1e2e3;
+    margin-bottom: 5px;
+}
+
+h4.lbName-apply_jy {
+    float: left;
+    width: 80px;
+    line-height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+button.hasmobile_jy {}
+
+button.hasmobile_jy {
+    float: left;
+    width: calc(100% - 80px);
+    height: 50px;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid #e1e2e3;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 50px;
+    color: #333;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+button.hasmobile_jy>i {
+    float: right;
+    position: relative;
+    top: 17px;
+    color: #999;
+}
+
+.lb-apply_jy>button {
+    /* width: 100%; */
+    /* height: 50px; */
+    /* border-bottom: 1px solid #e1e2e3; */
+    /* margin-bottom: 5px; */
+}
+
+.lb-apply_jy>i {
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    /* right: 1px; */
+}
+
+.lb-apply_jy>button {float: left;width: calc(100% - 80px);height: 50px;padding: 0;border: none;border-bottom: 1px solid #e1e2e3;font-size: 16px;font-weight: 600;line-height: 50px;color: #999;text-align: left;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+
+
+h3.lbName-apply_jy {
+    border-left: 2px solid #258BF7;
+    padding-left: 20px;
+    margin: 35px -20px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+}
+
+ul.ul-apply_jy {
+    list-style: none;
+}
+
+.filediv-apply_jy {
+    display: block;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    border-radius: 25px;
+    border: solid 1px #e1e2e3;
+    line-height: 50px;
+    margin: 24px 0 10px;
+}
+
+
+button.fileup-apply_jy {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.44;
+    color: #666;
+    position: relative;
+}
+
+button.resumeRegister-apply_jy {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    border-radius: 25px;
+    border: solid 1px #e1e2e3;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 50px;
+    letter-spacing: normal;
+    color: #666;
+}
+
+---------------------몬가이상
+
+span.ap-mcuFlagsp_jy {
+    display: inline-block;
+    vertical-align: top;
+    color: #3366ff;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 21px;
+    padding: 1px 5px;
+    margin-left: 6px;
+    border-radius: 2px;
+    background: rgba(51, 102, 255, 0.1);
+    
+}
+
+li.li-apply_jy {}
+
+.editing_jy {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #ececec;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background: #f2f4f7;
+    border: 1px solid #f4f5f7;
+}
+
+.editing_jy>label {
+    display: inline-block;
+    vertical-align: middle;
+    width: 56px;
+    height: 60px;
+    margin: 0;
+}
+
+.editing_jy input#resum_No_jy {display: none;}
+
+.editing_jy i.icon-icon_match_list_save.iconSave_jy {
+    width: 20px;
+    height: 20px;
+    margin: 20px 18px;
+    background: #ccc;
+    border: 1px solid #ccc;
+    color: #ccc;
+    display: block;
+    border-radius: 3px;
+    font-size: 8px;
+    line-height: 18px;
+    text-align: center;
+}
+
+.ap-resumInfo_jy.matched_jy {}
+
+.ap-resumInfo_jy.matched_jy {
+    display: inline-block;
+    vertical-align: middle;
+    /* width: calc(100% - 95px); */
+    color: #333;
+    height: 100%;
+}
+
+h4.ap-resumInfoTitleh4_jy {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #767676;
+}
+
+.editing_jy p.ap-resumName_jy {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+span.ap-mcuFlagsp_jy {
+    display: inline-block;
+    vertical-align: top;
+    color: #3366ff;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 21px;
+    padding: 1px 5px;
+    margin-left: 6px;
+    border-radius: 2px;
+    background: rgba(51, 102, 255, 0.1);
+}
+
+.ap-resumeRegisterInfo_jy {
+    /* display: inline-block; */
+    /* vertical-align: middle; */
+    /* color: #333; */
+    line-height: 1;
+}
+
+.editing_jy span.ap-resumelang_jy {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #767676;
+}
+
+.editing_jy span.ap-resumedate_jy {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #767676;
+}
+
+.editing_jy span.ap-tempFlag_jy {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #767676;
+}
+
+a.ap-resumEdit_jy {
+    display: inline-block;
+    vertical-align: middle;
+    width: 38px;
+    margin: 0;
+    text-align: center;
+}
+
+.editing_jy {
+    padding: 2px;
+}
+
+i.icon-icon_match_btn_next.iconNextMcubt_jy {
+    font-size: 8px;
+    color: #999;
+}
+
+.ap-resumInfo_jy.matched_jy {
+    width: calc(98% - 97px);
+}
+
+.ap-done_jy {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #ececec;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.ap-done_jy>label {
+    display: inline-block;
+    vertical-align: middle;
+    width: 56px;
+    height: 60px;
+    margin: 0;
+}
+
+.ap-resumInfo_jy {}
+
+.ap-done_jy input#resum_No_jy {
+    margin: 4px 0 0;
+    margin-top: 1px \9;
+    line-height: normal;
+    display: none;
+}
+
+i.icon-icon_match_list_save.iconSave_jy {
+    width: 20px;
+    height: 20px;
+    margin: 20px 18px;
+    background: #fff;
+    border: 1px solid #e1e2e3;
+    color: #fff;
+    display: block;
+    border-radius: 3px;
+    font-size: 8px;
+    line-height: 18px;
+    text-align: center;
+}
+
+.ap-done_jy .ap-resumInfo_jy {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 104px);
+    color: #333;
+}
+
+p.ap-resumName_jy {
+    width: initial;
+    max-width: calc(100% - 50px);
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+    /* width: 100%; */
+}
+
+
+
+.ap-done_jy span.ap-resumelang_jy {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #333;
+}
+
+.ap-done_jy span.ap-resumedate_jy {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #333;
+}
+
+.ap-done_jy span.ap-tempFlag_jy {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #333;
+}
+
+.upfileresume_jy {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #ececec;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+label {}
+
+.upfileresume_jy>label {
+    display: inline-block;
+    vertical-align: middle;
+    width: 56px;
+    height: 60px;
+    margin: 0;
+}
+
+.upfileresume_jy input#resum_No_jy {
+    margin: 4px 0 0;
+    margin-top: 1px \9;
+    line-height: norma;
+    display: none;
+}
+
+.upfileresume_jy .ap-resumInfo_jy {
+    width: calc(100% - 95px);
+    color: #333;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.upfileresume_jy p.ap-resumName_jy {
+    /* font-size: 11px; */
+    /* font-weight: 500; */
+    /* line-height: 20px; */
+    /* letter-spacing: normal; */
+    /* text-align: left; */
+    /* color: #333; */
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+    width: 100%;
+}
+
+span.ap-resumedate_jy {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #333;
+}
+
+span.ap-fileFlag_jy {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #333;
+}
+
+.upfileresume_jy a.none_jy {
+    width: 38px;
+    margin: 0;
+    text-align: center;
+    display: none;
+}
+
+p.ap-wantedResumeP_jy {
+    text-align: left;
+    color: #666;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.62;
+    letter-spacing: normal;
+}
+
+.ap-wantedResumediv2_jy {
+    /* padding-top: 30px; */
+    /* padding-bottom: 30px; */
+}
+
+.ap-wantedResumediv1_jy {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+footer.applyfooter_jy {
+    padding: 24px 20px;
+    border-top: 1px solid #ececec;
+    background: #fff;
+}
+
+button.btapply_jy {
+    width: 100%;
+    height: 50px;
+    background: #36f;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 25px;
+}

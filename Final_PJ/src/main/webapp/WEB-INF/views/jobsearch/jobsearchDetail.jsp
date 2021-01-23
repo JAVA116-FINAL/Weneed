@@ -158,6 +158,9 @@
 				</div>
             </div>
 <!-- 여기부터 aside -->
+<!-- 자연임포트  ajax 이벤트 걸어야함!!!!-->
+			<c:import url="/jobsearch/apply.do"></c:import>
+<!-- 
 			 <aside class="col-lg-4 asideApply_jy" style="margin-left:-30px;"> 
 				   <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" style="width:350px;">
 						<div class="sidebar-widget schedule-widget mb-3">
@@ -194,10 +197,10 @@
 							<div>
 								<button>
 									<i class="icon-ic_favorite_black_24px :before"></i>
-	<!-- 좋아요 갯수 -->		 		<span>32</span>
+	좋아요 갯수		 		<span>32</span>
 								</button>
 								<button>
-	<!-- 좋아요 누른 사람들 -->      <ul>
+	좋아요 누른 사람들      <ul>
 										<li style='background-image: url("https://static.wanted.co.kr/images/avatars/1345710/c968c352.jpg"), url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png")'></li>
 										<li style='background-image: url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png"), url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png")'></li>
 										
@@ -211,6 +214,7 @@
 					
 					</div>
 	           </aside> 
+ -->
  <!-- 어사이드끝 -->     
  
        

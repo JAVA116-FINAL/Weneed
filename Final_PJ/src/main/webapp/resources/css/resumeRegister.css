@@ -1,0 +1,253 @@
+@charset "UTF-8";
+
+select.realselect_jy {
+	border: none;
+	outline:none;
+}
+
+.langselectBox_jy {
+    display: inline-block;
+    width: 14%;
+    border: 1px solid gray;
+    border-radius: 0;
+    padding: 5px;
+}
+
+input.title-input_jy {
+	border: none;font-size: xx-large;color: #383333;
+	outline:none;
+	}
+
+button.btResume-down_jy {
+    display: inline-block;
+    float: right;
+}
+
+.resume-select-lang_jy {display: inline-block;width: 80%;}
+
+section.resumeWriteSection_jy {
+    margin-top: 40px;
+}
+
+input.startYear_jy {/* color: white; */border: none;width: 40px;text-decoration: gray;}
+
+input.startMonth_jy {
+    border: none;
+    width: 30px;
+    text-decoration: gray;
+}
+
+input.endYear_jy {
+    border: none;
+    width: 40px;
+    text-decoration: gray;
+}
+
+input.endMonth_jy {
+    border: none;
+    width: 30px;
+    text-decoration: gray;
+}
+
+input.name_jy {
+    border: none;
+    outline:none;
+}
+
+input.dep_jy {
+    border: none;
+    outline:none;
+}
+button.btResume-down_jy {
+    border: 1px solid gray;
+    border-radius: 3px;
+    width: 37px;
+    font-size: 20px;
+    color: gray;
+    padding-top: 3px;
+}
+
+.resume-basic-info_jy {
+    margin-bottom: 76px;
+}
+
+.reumeTitle_jy {
+    margin-bottom: 65px;
+}
+
+input.content-input_jy {
+    border:0;
+    outline:none;
+}
+
+.reumeBasicInfo_jy {
+}
+
+input.content-input_jy {
+    height: 26px;
+}
+
+.resumeSubTitle_jy {
+    margin-top: 50px;
+    color: black;
+    font-size: 15px;
+    border-bottom: 1px solid #8080809e;
+    padding-bottom: 4px;
+}
+
+.divbtAdd_jy {margin-top: 26px;border-bottom: 1px solid #80808026;padding-bottom: 28px;}
+
+button.btAdd_jy {
+    color: #2196F3;
+}
+
+.btGroup_jy {
+    /* margin-top: 50px; */
+    /* margin-bottom: 50px; */
+    /* position: fixed; */
+    position: fixed;
+    left: 00px;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    text-align: right;
+    height: 81px;
+    vertical-align: -webkit-baseline-middle;
+}
+
+input.buttons_jy {
+    min-width: 158px;
+    border-color: #258bf7;
+    color: #258bf7;
+    background: white;
+    border-radius: 3px;
+    height: 48px;
+    font-size: 15px;
+    margin-top: 15px;
+    outline:none;
+}
+
+button.buttons_jy {
+    min-width: 158px;
+    border-color: #258bf7;
+    color: white;
+    background: #258bf7;
+    border-radius: 3px;
+    height: 48px;
+    font-size: 15px;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 46px;
+    outline:none;
+}
+
+.RWcomponent_jy {
+    margin-bottom: 74px;
+}
+
+
+textarea.content-textArea_jy {
+    border: none;
+    margin-top: 20px;
+    font-size: 15px;
+    width: 100%;
+}
+
+
+
+section.resumeWriteSection_jy {
+    margin-bottom: 155px;
+}
+
+input.title-input_jy {
+    border-color: white;
+}
+
+input.title-input_jy:focus {
+    border: none;
+}
+
+.reumeBasicInfo_jy {}
+
+input.content-input_jy:focus {
+    border: none;
+}
+
+input.content-input_jy:focus {
+    border: none;
+}
+
+textarea.content-textArea_jy:focus {
+    border: none;
+}
+
+input.startYear_jy:focus {
+    border: none;
+}
+
+input.startYear_jy:focus {
+    border: none;
+}
+
+
+input.startMonth_jy:focus {
+    border: none;
+}
+
+input.endYear_jy:focus {
+    border: none;
+}
+
+input.endMonth_jy:focus {
+    border: none;
+}
+
+input.name_jy:focus {
+    border: none;
+}
+
+input.dep_jy:focus {
+    border: none;
+}
+
+textarea.content-textArea_jy:focus {
+    border: 0 none white;
+}
+textarea.content-textArea_jy:focus {
+    border-color: rgb(255 255 255);
+    box-shadow: 0 1px 1px rgb(255 255 255) inset, 0 0 8px rgb(255 255 255);
+    outline: 0 none;
+}
+
+button#btcareer_jy {
+    outline: none;
+}
+
+button.btAdd_jy {
+    outline: none;
+}
+
+/* 210121 */
+.langselectBox_jy {
+    position: absolute;
+    /* overflow: hidden; */
+}
+
+.resume-select-lang_jy {
+    overflow: hidden;
+}
+
+.langselectBox_jy {
+    width: 126px;
+    border-radius: 2px;
+}
+
+select.realselect_jy {
+    width: 80%;
+}
+
+button.btResume-down_jy {
+    margin-top: 17px;
+}

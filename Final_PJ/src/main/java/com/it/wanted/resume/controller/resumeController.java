@@ -18,12 +18,12 @@ public class resumeController {
 		return "resume/resumeList";
 	}
 	
-	@RequestMapping(value = "/resumeWrite.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/resumeRegister.do", method = RequestMethod.GET)
 	public String resumeWrite_get() {
 		logger.info("이력서 글쓰기 화면 보여주기");
 		//이 때인서트를 하고 보여줘야할듯
 		
-		return "resume/resumeWrite";
+		return "resume/resumeRegister";
 	}
 	
 	@RequestMapping("/resumeIntro.do")
