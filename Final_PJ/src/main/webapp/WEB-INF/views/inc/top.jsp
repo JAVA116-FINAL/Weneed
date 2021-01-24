@@ -60,8 +60,27 @@
   
   <script type="text/javascript">
   	$(function(){
-  		$('#login-email').focus();
-  		$('#join-email').focus();
+  		var url = location.href;
+		var getAr0 = url.indexOf("navigation");
+	    var getAr1 = url.indexOf("career");
+	    var getAr2 = url.indexOf("jobSalary");
+	    var getAr3 = url.indexOf("resume");
+	    var getAr4 = url.indexOf("matchupMem");
+	    if(getAr0 != -1) {
+	        $("#navigation").addClass("active");
+	    }
+	    if(getAr1 != -1) {
+	        $("#career").addClass("active-border");
+	    }
+	    if(getAr2 != -1) {
+	        $("#jobSalary").addClass("active-border");
+	    }
+	    if(getAr3 != -1) {
+	        $("#resume").addClass("active-border");
+	    }
+	    if(getAr4 != -1) {
+	        $("#matchupMem").addClass("active-border");
+	    }
   		
   		//회원가입처리
   		$('#joinPwdOk-error').hide();
@@ -321,8 +340,13 @@
   		})
   		
   	});
+  	
+  	
   </script>
 <style type="text/css">
+.active-border{
+	border-bottom:2px solid #3366ff;
+}
 .error{
 	font-size:12px;
 	font-weight:600;
@@ -353,7 +377,7 @@
 			  	</button>
 		  
 				<ul class="navbar-nav">
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" id="navigation">
 						<a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색 </a>
 						<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; border-top:0; margin-top:0; line-height:17px; border-radius:0;">
 							<li><a class="dropdown-item" href="department.html" style="border-bottom:none;">개발<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
@@ -368,15 +392,15 @@
 							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px 15px 20px;font-size:13px;border-bottom:none;">더보기<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
 						</ul>	
 				  	</li>
-				  	<li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Mainpage/careerMain.do'/>">커리어 성장</a></li>
-				  	<li class="nav-item"><a class="nav-link" href="<c:url value='/jobSalary/jobSalary.do'/>">직군별 연봉</a></li>
+				  	<li class="nav-item" id="career"><a class="nav-link" href="<c:url value='/career/Mainpage/careerMain.do'/>">커리어 성장</a></li>
+				  	<li class="nav-item" id="jobSalary"><a class="nav-link" href="<c:url value='/jobSalary/jobSalary.do'/>">직군별 연봉</a></li>
 				  	<c:if test="${empty sessionScope.email }">
-				  		<li class="nav-item"><a class="nav-link" href="<c:url value='/resume/resumeIntro.do'/>">이력서</a></li>
-				  		<li class="nav-item"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemIntro.do'/>">매치업</a></li>
+				  		<li class="nav-item" id="resume"><a class="nav-link" href="<c:url value='/resume/resumeIntro.do'/>">이력서</a></li>
+				  		<li class="nav-item" id="matchupMem"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemIntro.do'/>">매치업</a></li>
 				  	</c:if>
 				  	<c:if test="${!empty sessionScope.email }">
-				  		<li class="nav-item"><a class="nav-link" href="<c:url value='/resume/resumeList.do'/>">이력서</a></li>
-				  		<li class="nav-item"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemList.do'/>">매치업</a></li>
+				  		<li class="nav-item" id="resume"><a class="nav-link" href="<c:url value='/resume/resumeList.do'/>">이력서</a></li>
+				  		<li class="nav-item" id="matchupMem"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemList.do'/>">매치업</a></li>
 				  	</c:if>
 				   	<li class="nav-item"><a class="nav-link" href="contact.html">프리랜서</a></li>
 				</ul>
@@ -411,7 +435,7 @@
 							</ul>	
 						</li>
 						</c:if>				
-								
+						
 						 <!-- modal#1 로그인 시작-->
 						 <div class="modal fade docs-example-modal-sm" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 						  <div class="modal-dialog" style="padding-left:45px; top:2%;">

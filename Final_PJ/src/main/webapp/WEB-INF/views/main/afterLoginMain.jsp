@@ -2,28 +2,75 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="afterLogin-wrapper">
+<style type="text/css">
+.carousel-item img {
+  position:relative;
+  max-height: 300px;
+  background-position:center center;
+  background-size:cover;
+}
+</style>
 
 	<!-- top 슬라이더 -->
-	<div class="mainTopSlider">
-		<div class="mainTopSlider-con-wrapper">
-			<a href="#">
-				<div class="mainTopSlider-con" style="background:url('${pageContext.request.contextPath}/resources/images/main/main_slider_001.jpg') center/cover no-repeat;">
-					<div class="container">
+	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img class="d-block w-100" src="<c:url value='/resources/images/main/main_slider_001.jpg'/>" alt="First slide">
+				<div class="container">
 					<div class="mainTopSlider-con-box">
-						<div>
-							<h2>짐싸(ZIMSSA)</h2>
-							<h3>개발, 디자인 등 전 직군 채용 중</h3>
-						</div>
-						<hr style="border-top:1px solid #eee; margin:0 -30px 14px;">
-						<button type="button" style="display:flex;">
-							<span style="font-size:15px; font-weight:600; text-align:center;color:#258bf7;">바로가기</span>
-							<i class="icon-arrow_right" style="color:#258bf7; font-size:20px; margin-left:4px; margin-top:1px;"></i>
-						</button>
-					</div>
+							<div>
+								<h2>짐싸(ZIMSSA)</h2>
+								<h3>개발, 디자인 등 전 직군 채용 중</h3>
+							</div>
+							<hr style="border-top:1px solid #eee; margin:0 -30px 14px;">
+							<button type="button" style="display:flex;">
+								<span style="font-size:15px; font-weight:600; text-align:center;color:#258bf7;">바로가기</span>
+								<i class="icon-arrow_right" style="color:#258bf7; font-size:20px; margin-left:4px; margin-top:1px;"></i>
+							</button>
 					</div>
 				</div>
-			</a>
+			</div>
+			<div class="carousel-item">
+				<img class="d-block w-100" src="<c:url value='/resources/images/main/main_slider_002.jpg'/>" alt="Second slide">
+				<div class="container">
+					<div class="mainTopSlider-con-box">
+							<div>
+								<h2>라이프 스타일 커머스</h2>
+								<h3>윙잇 반려소반 커먼톤 전 직군 채용</h3>
+							</div>
+							<hr style="border-top:1px solid #eee; margin:0 -30px 14px;">
+							<button type="button" style="display:flex;">
+								<span style="font-size:15px; font-weight:600; text-align:center;color:#258bf7;">바로가기</span>
+								<i class="icon-arrow_right" style="color:#258bf7; font-size:20px; margin-left:4px; margin-top:1px;"></i>
+							</button>
+					</div>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<img class="d-block w-100" src="<c:url value='/resources/images/main/main_slider_003.jpg'/>" alt="Third slide">
+				<div class="container">
+					<div class="mainTopSlider-con-box">
+							<div>
+								<h2>글로벌 InsurTech 기업</h2>
+								<h3>밀리만코리아 - 소프트웨어 엔지니어 채용</h3>
+							</div>
+							<hr style="border-top:1px solid #eee; margin:0 -30px 14px;">
+							<button type="button" style="display:flex;">
+								<span style="font-size:15px; font-weight:600; text-align:center;color:#258bf7;">바로가기</span>
+								<i class="icon-arrow_right" style="color:#258bf7; font-size:20px; margin-left:4px; margin-top:1px;"></i>
+							</button>
+					</div>
+				</div>
+			</div>
 		</div>
+		<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
 	</div>
 	
 	<div class="container">
