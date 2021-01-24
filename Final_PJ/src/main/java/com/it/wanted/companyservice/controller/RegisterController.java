@@ -1,5 +1,7 @@
 package com.it.wanted.companyservice.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.wanted.cominfo.model.ComInfoService;
+import com.it.wanted.cominfo.model.ComInfoVO;
+import com.it.wanted.cominfo.model.ComSizeInfoVO;
+import com.it.wanted.cominfo.model.IndustryVO;
+import com.it.wanted.cominfo.model.NationVO;
+import com.it.wanted.cominfo.model.RegionVO;
 import com.it.wanted.commeminfo.model.ComMemInfoService;
 import com.it.wanted.commeminfo.model.ComMemInfoVO;
 
@@ -19,6 +28,7 @@ public class RegisterController {
 	
 	private static final Logger logger=LoggerFactory.getLogger(RegisterController.class);
 	@Autowired ComMemInfoService comMemInfoService;
+	@Autowired ComInfoService comInfoService;
 	
 	@RequestMapping(value = "/member/join.do", method= RequestMethod.POST)
 	public String join_modal_post(@ModelAttribute ComMemInfoVO vo, Model model) {
@@ -42,8 +52,43 @@ public class RegisterController {
 		return "common/message";
 	}
 	
-	@RequestMapping("/register.do")
-	public void register_get() {
+	@RequestMapping(value="/register.do", method = RequestMethod.GET)
+	public void register_get(Model model) {
+		logger.info("회사정보등록 페이지 조회");
+		
+		//산업군 목록 
+		List<IndustryVO> industryList=comInfoService.selectIndustryList();
+		logger.info("산업군목록 조회결과 industry.size={}", industryList.size());
+		//국가목록
+		List<NationVO> nationList=comInfoService.selectNationList();
+		logger.info("국가목록 조회결과 nationList.size={}", nationList.size());
+		//회사규모
+		List<ComSizeInfoVO> comSizeList=comInfoService.selectComSizeList();
+		logger.info("규모목록 조회결과 comSizeList.size={}", comSizeList.size());
+		//최초 지역목록
+		List<RegionVO> regionList=comInfoService.selectRegionList("KR");
+		logger.info("지역목록 조회결과 regionList.size={}", regionList.size());
+		
+		model.addAttribute("industryList", industryList);
+		model.addAttribute("nationList", nationList);
+		model.addAttribute("comSizeList", comSizeList);
+		model.addAttribute("regionList", regionList);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/selectRegionbyNation.do")
+	public List<RegionVO> selectRegionList(@RequestParam String nationCode) {
+		logger.info("국가코드로 지역목록 선택, 파라미터 국가코드 nationCode={}", nationCode);
+		
+		List<RegionVO> regionList=comInfoService.selectRegionList(nationCode);
+		logger.info("국가코드로 지역목록 조회 결과, regionList.size={}", regionList.size());
+		
+		return regionList;
+	}
+	
+	@RequestMapping(value="/register.do", method = RequestMethod.POST)
+	public void register_post(@ModelAttribute ComInfoVO comInfoVo) {
 		logger.info("회사정보등록 페이지 조회");
 		
 	}
