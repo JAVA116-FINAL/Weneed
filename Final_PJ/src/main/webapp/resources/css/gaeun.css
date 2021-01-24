@@ -45,6 +45,19 @@ button{
 	padding: 10px 0;
 }
 
+.nav-link:hover{
+	color:#333;
+}
+.nav-link:visited{
+	color:#333;
+}
+.nav-link:active{
+	color:#333;
+}
+.nav-link:link{
+	color:#333;
+}
+
 .nav-item{
 	height:inherit;
 	padding: 7px 6px;
@@ -98,20 +111,10 @@ button{
 	vertical-align:middle;
 }
 
-.navbar-nav >li a:hover{
-	color:#333;
+.nav-item:hover{
+	 border-bottom: solid 2px #d1d2d3;
 }
 
-.navbar-nav >li:after {
-   display:block;/*a요소를 블록 요소라고 선언*/
-   content: '';
-   border-bottom: solid 2px #d1d2d3;
-   transform: scaleX(0);/*크기를 0으로 줌으로써 평상시엔 밑줄 없음*/
-   transition: transform 250ms ease-in-out; /*변형 방식*/
-}
-.navbar-nav >li:hover:after {
-	transform: scaleX(1);/*a 속성에 hover시 기존 크기로*/
-}
 
 .icon-arrow_right:before {
   content: "\e94f";
