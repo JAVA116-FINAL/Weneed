@@ -12,7 +12,6 @@ $(function(){
 		//선택한 (바뀔) 탭메뉴의 인덱스를 가져온다
 		$('.lb-appliPassedFilter').removeClass("lb-appliPassedFilter-selected");
 		//전체 리스트에 대해 셀렉티드 클래스 제거
-		
 		$('.lb-appliPassedFilter:eq('+num+')').addClass("lb-appliPassedFilter-selected");
 		//선택한 탭메뉴 인덱스에 클래스 추가
 	});
@@ -77,21 +76,37 @@ $(function(){
 						<button class="appli-searchIcon"><i class="fas fa-search"></i></button>
 					</div>
 				</div>
+							<script>
+								$(function(){
+									$('#appli-checkAll').change(function(){
+										if($('#appli-checkAllBox').is(":checked")){
+											$('#appli-checkAll').removeClass("appli-checked");
+										}else{
+											$('#appli-checkAll').addClass("appli-checked");
+										}
+									});
+								});
+							</script>
 				<div class="appli-statusChangeDiv"> <!-- 체크올, 상태변경, 지원자에게 결과를 알림 on/off, 별표지원자 모아보기 상태변경팝업도 띄워야겠네ㅋㅋ  -->
 					<div class="appli-statusChangeDiv"> <!-- 체크, 상태변경, 지원자에게 결과알림 -->
 						<div class="appli-statusChangeDiv"> <!-- 체크박스, 상태변경버튼  -->
-							<div class="appli-checkAll">
-								<input type="checkbox" id="appli-checkAll" name="appli-checkAll">
-							</div>
+							<label class="appli-checkAll" for="appli-checkAllBox">
+								<input type="checkbox" id="appli-checkAllBox" name="appli-checkAll">
+							</label>
 							<button class="appli-btn-statusChange">상태변경</button>
+							<!-- 상태변경 모달 include -->
 						</div>
-						<div> <!-- 지원자에게 결과를 알림 토글버튼 -->
-							<input type="checkbox" checked data-toggle="toggle"><label>지원자에게 결과를 알림</label>
+						<div class="appli-resultInfo-toggleWrapper"> <!-- 지원자에게 결과를 알림 토글버튼 -->
+							<span>지원자에게 결과를 알림</span>&nbsp;
+							<label class="appli-lb-resultInfo-toggle">
+								<input type="checkbox" checked style="display:none">
+								<span class="appli-slider appli-slider-round"></span>
+							</label>
 						</div>
 					</div>
 					<div> <!-- 별표 지원자 모아보기 -->
 						<input type="checkbox" id="chkBox-staredApplis">
-						<label for="chkBox-staredApplis" class="chkBox-staredApplis"><i class="fas fa-star appli-object-ele appli-object-ele_gold"></i>별표 지원자 모아보기</label>
+						<label for="chkBox-staredApplis" class="chkBox-staredApplis"></i>별표 지원자 모아보기</label>
 					</div>
 				</div>
 				<div> <!-- 리스트 뿌리기.. 디비에서 읽어온걸로, 틀만 잡아주어봅시다 -->
