@@ -1,0 +1,903 @@
+@charset "UTF-8";
+
+h1 {
+   font-size: 40px;
+   font-weight: 800;
+   line-height: 1.35;
+   color: #333;
+   margin-bottom: 15px;
+}
+
+.grayButton {
+   font-size: 14px;
+   color: black;
+   background-color: rgba(234, 234, 238, 0.5);
+   border-radius: 15px;
+   padding: 7px 10px;
+   margin: 5px 0 5px 12px;
+   padding: 10px 22px 10px 22px;
+   font-weight: 700;
+   border-radius: 3em;
+}
+
+.blueButton {
+   font-size: 14px;
+   color: white;
+   background-color: #3366ff;
+   border-radius: 15px;
+   padding: 7px 10px;
+   margin: 5px 0 5px 12px;
+   padding: 10px 22px 10px 22px;
+   font-weight: 700;
+   border-radius: 3em
+}
+
+/* 프리랜서 블럭 */
+.free_banner {
+   position: relative;
+   overflow: hidden;
+   background: #fff;
+   background: url("../images/bg/slider-bg-1.jpg") no-repeat;
+   background-size: cover;
+   min-height: 550px;
+}
+
+.free_banner .free_block {
+   padding: 80px 0px 160px;
+}
+
+/* .free_banner .free_block h1 {
+   font-size: 40px;
+   font-weight: 600;
+   line-height: 1.35;
+   color: #333;
+   margin-bottom: 15px;
+} */
+.free_banner .free_block p {
+   font-size: 18px;
+   font-stretch: normal;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 1.56;
+   letter-spacing: normal;
+   color: #6d7278;
+   margin-bottom: 36px;
+   word-break: keep-all;
+}
+
+/* 전문가 등록 혜택 칸 */
+.free_benefit {
+   padding-top: 50px;
+}
+
+.benefit-title {
+   font-size: 30px;
+   font-weight: 700;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: normal;
+   letter-spacing: normal;
+   text-align: center;
+   color: black;
+   margin-bottom: 12px;
+}
+
+.free_benefit p {
+   font-size: 18px;
+   font-stretch: normal;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 1.56;
+   letter-spacing: normal;
+   color: #6d7278;
+   margin-bottom: 36px;
+   word-break: keep-all;
+}
+
+.row {
+   display: flex;
+   align-items: stretch;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   margin-top: 1rem;
+}
+
+.card_expert {
+   flex-basis: 23.5%;
+   margin: 12px 0px;
+}
+
+.card {
+   padding: 20px;
+   border-radius: 5px;
+   box-shadow: 15px 15px 30px 0 rgba(0, 0, 0, .05);
+   background-color: #fff;
+   border: 0px;
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   min-width: 0;
+   background-clip: border-box;
+}
+
+.card img {
+   margin: auto auto 14px;
+}
+
+.card h4 {
+   height: 33px;
+   font-size: 22px;
+   font-weight: bold;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: normal;
+   letter-spacing: -0.37px;
+   text-align: center;
+   color: #333;
+}
+
+.card p {
+   font-size: 16px;
+   font-weight: 600;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: 1.5;
+   letter-spacing: normal;
+   text-align: center;
+   color: #6d7278;
+   word-break: keep-all;
+   min-height: 97px;
+}
+
+.benefit {
+   font-size: 13px;
+   font-weight: 600;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: normal;
+   letter-spacing: normal;
+   color: #979da4;
+   text-align: left;
+   margin-top: 10px;
+}
+
+/*  */
+.index-bg-blue {
+   background: #36f;
+   text-align: center;
+   padding: 60px 0px;
+   margin-top: 50px;
+}
+
+.free_title {
+   font-size: 30px;
+   font-weight: 700;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: normal;
+   letter-spacing: normal;
+   text-align: center;
+   color: #fff;
+}
+
+.d-sm-none {
+   display: none !important;
+}
+
+.container {
+   max-width: 1060px;
+}
+
+.index-bg-blue .rect-container {
+   margin-top: 25px;
+   list-style-type: none;
+   display: flex;
+   flex-wrap: wrap;
+   position: relative;
+}
+
+.index-bg-blue .rect-container .rect:first-child {
+   margin-right: 10px;
+}
+
+.index-bg-blue .rect-container .rect {
+   width: calc(50% - 10px);
+   border-radius: 5px;
+   border: solid 1px rgba(255, 255, 255, .46);
+   box-sizing: border-box;
+}
+
+.index-bg-blue .rect-container .rect .text {
+   margin-top: 10px;
+   font-size: 16px;
+   font-weight: 700;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: normal;
+   letter-spacing: normal;
+   text-align: center;
+   color: #fbfbfb;
+}
+
+.index-bg-blue .rect-container .rect .number {
+   font-size: 40px;
+   font-weight: 900;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: normal;
+   letter-spacing: normal;
+   text-align: center;
+   color: #fbfbfb;
+   margin-bottom: 10px;
+}
+
+.index-bg-blue .rect-container .circle-1 {
+   width: 62px;
+   height: 62px;
+   background-color: #44d7b6;
+   position: absolute;
+   top: -160px;
+   right: 30px;
+   border-radius: 62px;
+}
+
+.index-bg-blue .rect-container .circle-2 {
+   width: 62px;
+   height: 62px;
+   background-color: #32c5ff;
+   position: absolute;
+   top: -30px;
+   left: -20px;
+   border-radius: 62px;
+}
+
+.index-bg-blue .rect-container .circle-3 {
+   width: 62px;
+   height: 62px;
+   background-color: #0091ff;
+   position: absolute;
+   top: 30px;
+   left: -120px;
+   border-radius: 62px;
+}
+
+.index-bg-blue .rect-container .circle-4 {
+   width: 62px;
+   z height: 62px;
+   background-color: #32c5ff;
+   position: absolute;
+   top: 10px;
+   right: -190px;
+   border-radius: 62px;
+}
+
+.index-bg-blue .rect-container .circle-5 {
+   width: 62px;
+   height: 62px;
+   background-color: #44d7b6;
+   position: absolute;
+   top: -50px;
+   left: -320px;
+   border-radius: 62px;
+}
+
+/* 프로젝트 등록 및 전문가 등록/수정 기본 설정 */
+/* 왜 색상이 안먹지 */
+.contact-form-wrap section {
+   background-color: #f2f4f7;
+}
+
+.free-section-title {
+   margin-bottom: 70px;
+}
+
+.free-section-title h2 {
+   font-size: 30px;
+   font-weight: bold;
+   margin-bottom: 15px;
+}
+
+.free-section-title h4 {
+   font-size: 18px;
+   font-weight: 400;
+   font-stretch: normal;
+   font-style: normal;
+   letter-spacing: normal;
+   color: #6d7278;
+   word-break: keep-all;
+   line-height: 1.5;
+   text-align: center;
+   margin-bottom: 40px;
+}
+
+.registration-tips {
+   margin-top: 50px;
+   border-radius: 6px;
+   border: solid 1px #36f;
+   background-color: rgba(255, 255, 255, .5);
+   padding: 20px 40px;
+   font-size: 17px;
+   font-weight: bold;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: 1.33;
+   letter-spacing: normal;
+   color: #6d7278;
+   text-align: left;
+}
+/* 
+.project_1 {
+   margin-top: 50px;
+   border-radius: 6px;
+   background-color: white;
+   padding: 15px 15px;
+   font-size: 17px;
+   font-weight: bold;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: 1.33;
+   letter-spacing: normal;
+   color: #6d7278;
+   text-align: left;
+    height: 400px;
+   
+}
+
+.project_form_1 {
+   border-radius: 6px;
+   background-color: white;
+   padding: 15px 15px;
+   font-size: 17px;
+   font-weight: bold;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: 1.33;
+   letter-spacing: normal;
+   color: #6d7278;
+   text-align: left;
+   
+   
+    height: 380px;
+   
+}
+ */
+.form-content-title {
+   margin: 10px 10px 10px 10px;
+   font-size: 20px;
+   text-align: left;
+   font-weight: bold;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: 1.2;
+   letter-spacing: normal;
+   color: #333;
+}
+
+.form-content-form {
+   padding: 10px;
+   text-align: left;
+   margin-top: 50px;
+}
+
+.form-row {
+   padding-left: 40px;
+   padding-right: 40px
+}
+
+.form-row1 {
+   display: block;
+   flex: 0 0 50%;
+   max-width: 50%;
+}
+
+.form-row1-col {
+   padding: 0 0 8px;
+   line-height: 1.5715;
+   white-space: initial;
+   text-align: left;
+}
+
+.form_1_company_name {
+   font-size: 16px;
+   font-weight: 500;
+   color: #333;
+   width: 100%;
+}
+
+.form-row1-row {
+   position: relative;
+   max-width: 100%;
+   min-height: 1px;
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+   align-items: center;
+   flex: auto;
+   text-overflow: ellipsis;
+}
+
+.ant-advanced-search-form {
+   margin-top: 30px;
+}
+
+.text-left {
+   text-align: left !important;
+}
+
+.ant-form {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   color: rgba(0, 0, 0, 0.65);
+   font-size: 14px;
+   font-variant: tabular-nums;
+   line-height: 1.5715;
+   list-style: none;
+   font-feature-settings: 'tnum';
+}
+
+.steps-content {
+   border-radius: 6px;
+   border: solid 1px #ececec;
+   background-color: #fff;
+   margin-top: 20px;
+   padding: 30px;
+}
+
+.steps-content {
+   margin-top: 16px;
+   border: 1px dashed #e9e9e9;
+   border-radius: 2px;
+   background-color: #fafafa;
+   /* min-height: 50px; */
+   text-align: center;
+   padding: 10px;
+}
+
+.steps-content-title {
+   margin: 10px 10px 50px 0px;
+   font-size: 20px;
+   text-align: left;
+   font-weight: bold;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: 1.2;
+   letter-spacing: normal;
+   color: #333;
+}
+
+.steps-content-form {
+   padding: 10px;
+   text-align: left;
+   margin-top: 50px;
+}
+
+.ant-input {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   font-variant: tabular-nums;
+   list-style: none;
+   font-feature-settings: 'tnum';
+   position: relative;
+   display: inline-block;
+   width: 100%;
+   min-width: 0;
+   padding: 4px 11px;
+   color: rgba(0, 0, 0, 0.65);
+   font-size: 14px;
+   line-height: 1.5715;
+   background-color: #fff;
+   background-image: none;
+   border: 1px solid #d9d9d9;
+   border-radius: 4px;
+   transition: all 0.3s;
+   touch-action: manipulation;
+}
+
+.ant-row {
+   display: flex;
+   flex-flow: row wrap;
+}
+
+.ant-form-item {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   color: rgba(0, 0, 0, 0.65);
+   font-size: 14px;
+   font-variant: tabular-nums;
+   line-height: 1.5715;
+   list-style: none;
+   font-feature-settings: 'tnum';
+   margin-bottom: 50px;
+   vertical-align: top;
+}
+
+.ant-advanced-search-form .ant-form-item-label>label {
+   font-size: 16px;
+   font-weight: 500;
+   color: #333;
+   width: 100%;
+}
+
+.ant-col {
+   position: relative;
+   max-width: 100%;
+   min-height: 1px;
+}
+
+.ant-form-item-control {
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+}
+
+.ant-form-item-control-input {
+   position: relative;
+   display: flex;
+   align-items: center;
+   min-height: 32px;
+}
+
+.ant-form-item-control-input-content {
+   flex: auto;
+   max-width: 100%;
+}
+
+.ant-input:placeholder-shown {
+   text-overflow: ellipsis;
+}
+
+@media ( min-width : 992px) .ant-col-lg-12 {
+   display
+   
+   
+   
+   
+   
+   
+   :
+   
+   
+   
+    
+   
+   
+   
+   block
+   
+   
+   
+   
+   
+   
+   ;
+   flex
+   
+   
+   
+   
+   
+   
+   :
+   
+   
+   
+    
+   
+   
+   
+   0
+   
+   
+   
+    
+   
+   
+   
+   0
+   
+   
+   
+    
+   
+   
+   
+   50
+   
+   
+   
+   
+   
+   
+   %;
+   max-width
+   
+   
+   
+   
+   
+   
+   :
+   
+   
+   
+    
+   
+   
+   
+   50
+   
+   
+   
+   
+   
+   
+   %;
+}
+
+.ant-form-vertical .ant-form-item {
+   flex-direction: column;
+}
+
+.ant-form-item {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   color: rgba(0, 0, 0, 0.65);
+   font-size: 14px;
+   font-variant: tabular-nums;
+   line-height: 1.5715;
+   list-style: none;
+   font-feature-settings: 'tnum';
+   margin-bottom: 50px;
+   vertical-align: top;
+}
+
+.ant-form-vertical .ant-form-item-label, .ant-col-24.ant-form-item-label,
+   .ant-col-xl-24.ant-form-item-label {
+   padding: 0 0 8px;
+   line-height: 1.5715;
+   white-space: initial;
+   text-align: left;
+}
+
+.ant-col {
+   position: relative;
+   max-width: 100%;
+   min-height: 1px;
+}
+
+.ant-form-item-label {
+   display: inline-block;
+   flex-grow: 0;
+   overflow: hidden;
+   vertical-align: middle;
+}
+
+.ant-form-item-label>label {
+   position: relative;
+   display: inline-flex;
+   align-items: center;
+}
+
+.ant-form-item-control {
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+}
+
+.ant-col {
+   position: relative;
+   max-width: 100%;
+   min-height: 1px;
+}
+
+.ant-form-item-control-input {
+   position: relative;
+   display: flex;
+   align-items: center;
+   min-height: 32px;
+}
+
+.ant-form-item-control-input-content {
+   flex: auto;
+   max-width: 100%;
+}
+
+.ant-input-lg {
+   padding: 8.5px 11px;
+}
+
+.ant-input-lg {
+   font-size: 16px;
+}
+
+.ant-input {
+   box-sizing: border-box;
+   margin: 0;
+   font-variant: tabular-nums;
+   list-style: none;
+   font-feature-settings: 'tnum';
+   position: relative;
+   display: inline-block;
+   width: 100%;
+   min-width: 0;
+   color: rgba(0, 0, 0, 0.65);
+   line-height: 1.5715;
+   background-color: #fff;
+   background-image: none;
+   border: 1px solid #d9d9d9;
+   border-radius: 4px;
+   transition: all 0.3s;
+}
+
+.ant-col-24 {
+   display: block;
+   flex: 0 0 100%;
+   max-width: 100%;
+}
+
+.ant-col {
+   position: relative;
+   min-height: 1px;
+}
+
+.ant-btn-xlg {
+   font-size: 20px;
+   font-weight: 500;
+   height: 58px;
+   padding-left: 30px;
+   padding-right: 30px;
+}
+
+.ant-btn-primary {
+   color: #fff;
+   background: #3366ff;
+   border-color: #3366ff;
+   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+
+.ant-btn-lg {
+   padding: 8px 15px;
+   border-radius: 29px;
+}
+
+.ant-btn {
+   line-height: 1.5715;
+   position: relative;
+   display: inline-block;
+   font-weight: 600;
+   white-space: nowrap;
+   text-align: center;
+   background-image: none;
+   border: 1px none transparent;
+   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+   cursor: pointer;
+   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+   user-select: none;
+   touch-action: manipulation;
+   height: 32px;
+   padding: 4px 15px;
+   font-size: 14px;
+   border-radius: 29px;
+   color: #333333;
+   background: #f2f4f7;
+   border-color: #d9d9d9;
+}
+
+.ant-btn>span {
+   display: inline-block;
+}
+
+/*프로젝트 등록 2페이지 */
+.form-style {
+   background-color: white;
+   padding: 50px;
+   border: 1px solid #d9d9d9;
+   border-radius: 5px;
+}
+
+.row {
+   display: flex;
+   flex-wrap: wrap;
+   margin-right: -15px;
+   margin-left: -15px;
+   margin-bottom: 50px;
+}
+
+.proj-register-2 {
+   margin-top: 40px;
+}
+
+.register-star {
+   color: red;
+}
+
+.projTitle {
+   color: black;
+}
+
+.projRegisterForm {
+   margin: 10px 0px;
+}
+
+.projStartDate {
+   color: black;
+}
+
+.projDetailText {
+   color: #979da4;
+}
+
+.form-group textarea {
+   height: 82.6667px;
+   min-height: 82.6667px;
+   max-height: 250.667px;
+   color: #979da4;
+   overflow-y: hidden;
+   margin-top: 0px;
+   margin-bottom: 0px;
+   font-size: 1rem;
+   border-radius: 5px;
+}
+
+/* .text-left {
+   text-align: left !important;
+}
+ */
+.form-buttonArea {
+   text-align: right;
+   margin: 30px 0px;
+}
+
+.form-whiteButton {
+   margin: 0px 0px 0px 20px;
+   border: none;
+   background-color: white;
+   font-size: 20px;
+   font-weight: 500;
+   height: 58px;
+   padding-left: 30px;
+   padding-right: 30px;
+   border-radius: 29px;
+}
+
+.form-blueButton {
+   margin: 0px 0px 0px 20px;
+   border: none;
+   background-color: #3366ff;
+   font-size: 20px;
+   font-weight: 500;
+   height: 58px;
+   padding-left: 30px;
+   padding-right: 30px;
+   border-radius: 29px;
+   color: white;
+}
+
+.form-finish-title {
+   font-size: 26px;
+   font-weight: bold;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: .92;
+   letter-spacing: normal;
+   color: #333;
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+.form-finish-sub {
+   font-size: 18px;
+   font-weight: 500;
+   font-stretch: normal;
+   font-style: normal;
+   line-height: normal;
+   letter-spacing: normal;
+   color: #6d7278;
+   text-align: center;
+   margin-bottom: 20px;
+}
