@@ -8,6 +8,23 @@
 		where com_code=(select com_code 
                			from comMemList where com_mem_no=#{comMemNo})
 	</select>
+	
+	<select id="selectIndustryList" resultType="industryVo">
+		select * from industry
+	</select>
+	
+	<select id="selectNationList" resultType="nationVo">
+		select * from nationList
+	</select>
+	
+	<select id="selectRegionList" parameterType="string" resultType="regionVo">
+		select * from regionList where nation_Code=#{nationCode}
+	</select>
+	
+	<select id="selectComSizeList" resultType="comSizeInfoVo">
+		select * from comSizeInfo
+	</select>
+	
 </mapper>
 
 
