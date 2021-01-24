@@ -1,5 +1,4 @@
-@charset "UTF-8";
-span, label, div{
+span, label, div, h4{
 	color: #454547;
 }
 .tabSection{
@@ -28,7 +27,8 @@ span, label, div{
 	color: black;
 }
 
-#tabImg, #tabInfo{
+#tabImg, #tabInfo,
+#posTab-showAll, #posTab-developer{
 	display: none;
 }
 
@@ -43,7 +43,9 @@ span, label, div{
 	color: 
 }
 
+
 /* 이미지 등록 박스 */
+.posBoxWrapper,
 .imgBoxWrapper{
 	display: flex;
 	margin-bottom: 30px;
@@ -51,12 +53,17 @@ span, label, div{
 }
 
 .imgBox{
-	width: 225px;
-	height: 170px;
 	border: 1px solid #e1e2e3;
+	width: 225px;
 	margin: 0 20px 20px 0;
 }
 
+.imgBox{
+	height: 170px;
+	padding: 5px;
+}
+
+.posBox:hover,
 .imgBox:hover{
 	cursor: pointer;
 }
@@ -96,4 +103,43 @@ span, label, div{
 	position: absolute;
 	right: 0;
 	margin-bottom: 30px;
+}
+
+/* 채용포지션 목록 */
+
+.posBoxWrapper{
+	display: flex;
+	margin-bottom: 30px;
+	flex-flow: wrap;
+}
+
+.posBoxWrapper2{
+	border: 1px solid #e1e2e3;
+	width: 225px;
+}
+
+.posBox{
+	padding: 5px;
+}
+
+.posJikMu{
+	font-weight: bold;
+}
+
+.posDueDate{
+	font-size: 0.8em;
+	font-weight: 
+}
+.posDueDateDiv{
+	border-top:1px solid #e1e2e3;
+	padding: 5px;
+	width: 100%;
+}
+
+.posDueDateLink{
+	font-size: 0.8em;
+}
+
+.posSectionTemp{
+	color: #808080;
 }

@@ -1,0 +1,42 @@
+label, span, input, select, option{
+	color: #444444;
+}
+label {
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+.comServModal-btn{
+	padding: 10px 20px;
+	background-color: #3366ff;
+	color: white;
+}
+
+/* 제안하기 팝업*/
+
+.propo-boundDiv{
+	margin-bottom: 20px;	
+}
+.propo-boundDivFlex{
+	width: 400px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.propo-block{
+	display: block;
+}
+
+.propo-posGuide{
+	font-size: 0.7em;
+	color: #3366ff
+}
+
+.propo-shortInput{
+	width: 115px;
+}
+
+.propo-longInput{
+	width: 400px;
+	height: 45px;
+}
