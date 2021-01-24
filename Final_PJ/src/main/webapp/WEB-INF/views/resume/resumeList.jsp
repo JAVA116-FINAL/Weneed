@@ -21,7 +21,7 @@
 		<div class="row RWRow_jy">
 			<div class="col-lg-3 col-sm-6 col-md-6">
 				 <div class="contact-block mb-4 mb-lg-0 block_jy">
-					 <a href="<c:url value='/resume/resumeWrite.do'/>" class="RWLink_jy">
+					 <a href="<c:url value='/resume/resumeRegister.do'/>" class="RWLink_jy">
 				 		<span class="blueBox_jy">
 				 			<i class="icon-new_resume :before NewResumeIcon_jy"></i>
 						</span>

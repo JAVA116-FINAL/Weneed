@@ -64,7 +64,8 @@
   		$('#join-email').focus();
   		
   		//회원가입처리
-  		$('#joinPwdOk-error').hide();  		$("#registerBtn").click(function(){
+  		$('#joinPwdOk-error').hide();
+  		$("#registerBtn").click(function(){
 	  	  		$.ajax({
 	  				url:"<c:url value='/memberJoin.do'/>",
 	  				type:"POST",
@@ -343,8 +344,8 @@
 	<div class="header-div">
 		<nav class="navbar navbar-expand-lg navigation navbar-border" id="navbar">
 			<div class="container container-top">
-			 	 <a class="navbar-logo" href="index.html">
-				  	<img src="${pageContext.request.contextPath}/resources/images/wantedLogo.png" alt="" class="img-fluid top-logo">
+			 	 <a class="navbar-logo" href="<c:url value='/index.do'/>">
+				  	<img src="<c:url value='/resources/images/wantedLogo.png'/>" alt="" class="img-fluid top-logo">
 				  </a>
 	
 			  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
@@ -367,10 +368,16 @@
 							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px 15px 20px;font-size:13px;border-bottom:none;">더보기<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
 						</ul>	
 				  	</li>
-				  	<li class="nav-item active"><a class="nav-link" href="index.html">커리어 성장</a></li>
-				  	<li class="nav-item"><a class="nav-link" href="about.html">직군별 연봉</a></li>
-				  	<li class="nav-item"><a class="nav-link" href="service.html">이력서</a></li>
-				   	<li class="nav-item"><a class="nav-link" href="contact.html">매치업</a></li>
+				  	<li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Mainpage/careerMain.do'/>">커리어 성장</a></li>
+				  	<li class="nav-item"><a class="nav-link" href="<c:url value='/jobSalary/jobSalary.do'/>">직군별 연봉</a></li>
+				  	<c:if test="${empty sessionScope.email }">
+				  		<li class="nav-item"><a class="nav-link" href="<c:url value='/resume/resumeIntro.do'/>">이력서</a></li>
+				  		<li class="nav-item"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemIntro.do'/>">매치업</a></li>
+				  	</c:if>
+				  	<c:if test="${!empty sessionScope.email }">
+				  		<li class="nav-item"><a class="nav-link" href="<c:url value='/resume/resumeList.do'/>">이력서</a></li>
+				  		<li class="nav-item"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemList.do'/>">매치업</a></li>
+				  	</c:if>
 				   	<li class="nav-item"><a class="nav-link" href="contact.html">프리랜서</a></li>
 				</ul>
 			  
@@ -388,11 +395,11 @@
 								<i class="icon-bell" style="font-size:14px;color:#333;font-weight:400;"></i>
 							</button></li>
 							<li><button type="button" class="profileButton nav-link dropdown-toggl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="outline:none;">
-								<img src="${pageContext.request.contextPath}/resources/images/main/profile_default.png" alt="" class="profileImg"
+								<img src="<c:url value='/resources/images/main/profile_default.png'/>" alt="" class="profileImg"
 									style="width:32px;height:32px; border-radius:9999px;">
 							</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; left:-115%; margin-top:0; line-height:17px; border-radius:0; padding:0;">
-								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:20px 0 10px 0;">MY 원티드</a></li>
+							<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:97%; left:-115%; margin-top:0; line-height:17px; border-radius:0; padding:0;">
+								<li><a class="dropdown-item" id="profile-li" href="<c:url value='/mypage/main.do'/>" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:20px 0 10px 0;">MY 원티드</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">프로필</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;margin-top:10px; border-top:1px solid #e1e2e3;padding:21px 0 11px 0;">지원현황</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">제안받기 현황</a></li>
@@ -564,7 +571,7 @@
 						</div>
 						<!-- modal#3 비밀번호찾기 끝 -->
 						
-						<li><a href="#" class="dashboardButton" >기업 서비스</a></li>
+						<li><a href="<c:url value='/company/welcome.do'/>" class="dashboardButton" >기업 서비스</a></li>
 					</ul>
 				</aside>
 			</div>
