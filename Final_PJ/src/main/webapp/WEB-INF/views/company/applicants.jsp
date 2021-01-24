@@ -93,8 +93,10 @@ $(function(){
 							<label class="appli-checkAll" for="appli-checkAllBox">
 								<input type="checkbox" id="appli-checkAllBox" name="appli-checkAll">
 							</label>
-							<button class="appli-btn-statusChange">상태변경</button>
+							<button class="appli-btn-statusChange"
+								data-toggle="modal" data-target=".comServAppliStatusChangeMD" style="outline:none;">상태변경</button>
 							<!-- 상태변경 모달 include -->
+							<%@ include file="../company/modal/statusChange.jsp" %>
 						</div>
 						<div class="appli-resultInfo-toggleWrapper"> <!-- 지원자에게 결과를 알림 토글버튼 -->
 							<span>지원자에게 결과를 알림</span>&nbsp;

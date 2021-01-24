@@ -388,3 +388,8 @@ input:checked + .appli-slider:before {
 	margin-left: 20px;
 	
 }
+
+
+
+/* 상태변경 모달 팝업 statusChange */
+
