@@ -17,4 +17,8 @@ public class MatchUpController {
 		return "company/matchupMain";
 	}
 	
+	@RequestMapping("/modal/modalButtonsTest.do")
+	public String modalTest() {
+		return "company/modal/modalButtonsTest";
+	}
 }

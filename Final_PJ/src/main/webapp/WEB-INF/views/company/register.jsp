@@ -6,6 +6,37 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/register.css">
 <title>Wanted - 회사 정보 등록</title>
 <script type="text/javascript">
+$(function(){
+//ajax 사용해서 국가선택에 따라 지역목록 받아야 함
+//국가코드를 보내서 지역목록을 리스트로 받아온다.
+//받아온 리스트를 select에 option으로 append해준다. option value와 option의 html로 구분해서 더해줘야 한다.
+	
+	$('#nation').change(function(){
+		$('#region option').remove();
+		var nationCode=$('#nation option:selected').val();		
+		$.ajax({
+			url:"<c:url value='/company/selectRegionbyNation.do'/>",
+			dataType:"json",
+			data:"nationCode="+nationCode,
+			type:'get',
+			success:function(result){
+				//각자에 대해 option에 append 해주면 돼.
+				for(item of result){
+	//				alert(item.regionCode);
+		//			alert(item.regionNameKr);
+					var option="<option value="+item.regionCode+">"+item.regionNameKr+"</option>";		
+					$('#region').append(option)
+				}
+			},
+			error:function(xhr, status, error){
+				alert('error! '+error);
+			}
+		});
+	});
+	
+//설립년도 네자리 숫자만 입력해야 한다. 숫자 범위도 설정가능할지? 1950~현재년도여야 함.
+});	
+
 </script>
 </head>
 <body>
@@ -26,10 +57,12 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                 		<span class="comServFormTitle">국가</span><span class="comServRequired">*</span>
-                   	<select style="background-color: #ffffff;outline-color: #dbdbdb;" 
-                   	class="form-control comServFormInput" id="nation">
-                       	<option>한국</option>
-                         	<!-- 테이블에서 목록 불러오기 -->
+                   		<select style="background-color: #ffffff;outline-color: #dbdbdb;" 
+                   		class="form-control comServFormInput" id="nation">
+                       	<!-- 테이블에서 목록 불러오기 -->
+                       	<c:forEach var="nationVo" items="${nationList}">
+                       		<option value="${nationVo.nationCode }">${nationVo.nationNameKr}</option>
+                       	</c:forEach>
                        </select>
                    </div>
                 </div>
@@ -38,8 +71,10 @@
                 		<span class="comServFormTitle">지역</span><span class="comServRequired">*</span>
                    	<select style="background-color: #ffffff;outline-color: #dbdbdb;"
                    	class="form-control comServFormInput" id="region">
-                       	<option>서울</option>
-                         	<!-- 테이블에서 목록 불러오기 -->
+                         	<!-- 테이블에서 목록 불러오기. nation select문에서 세팅된 값에 따라 달라져야 함. 어떻게?  -->
+                         	<c:forEach var="regionVo" items="${regionList}">
+                         		<option value="regionVo.regionCode">${regionVo.regionNameKr}</option>
+                         	</c:forEach>
                        </select>
                    </div>
                 </div>
@@ -69,19 +104,21 @@
                 	<span class="comServFormTitle">산업군</span><span class="comServRequired">*</span>
                        <select style="background-color: #ffffff;outline-color: #dbdbdb;"
                        class="form-control comServFormInput" id="industry">
-                          <option>산업군</option>
-      	    	              <!-- 테이블에서 목록 불러오기 -->
+                         <c:forEach var="industryVo" items="${industryList}">
+                       		<option value="${industryVo.industryNo }">${industryVo.industryName}</option>
+                       	</c:forEach>
           	            </select>
                    </div>
                </div>
                <div class="col-lg-6">
                    <div class="form-group">
               		<span class="comServFormTitle">직원수</span><span class="comServInfoSentence">(승인기준: 팀원 10명 이상)</span><span class="comServRequired">*</span>
-                   	 <select style="background-color: #ffffff;outline-color: #dbdbdb;"
-                   	  id="comSize" class="form-control comServFormInput">
-                          <option>회사규모</option>
-      	    	              <!-- 테이블에서 목록 불러오기 -->
-          	            </select>
+                   	 	<select style="background-color: #ffffff;outline-color: #dbdbdb;"
+                   	  		id="comSize" class="form-control comServFormInput">
+                        	<c:forEach var="comSizeVo" items="${comSizeList}">
+                       			<option value="${comSizeVo.comSizeCode }">${comSizeVo.comSize}</option>
+                       		</c:forEach>
+          	        	</select>
                 	</div>
                 </div>
             </div>

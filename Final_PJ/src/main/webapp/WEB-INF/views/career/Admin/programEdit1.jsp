@@ -39,11 +39,11 @@ $( document ).ready( function() {
 $(function(){
 	$('#proName').focus();
 	
-	$('form[name=proWrite1]').find('input[type=button]').click(function(){
-		location.href='<c:url value="/career/Admin/careerAdminMain.do"/>';
+	$('form[name=proEdit1]').find('input[type=button]').click(function(){
+		location.href='<c:url value="/career/Admin/programComplete1.do?proNo=${proVo.proNo}"/>';
 	});
 	
-	$('form[name=proWrite1]').submit(function(){
+	$('form[name=proEdit1]').submit(function(){
 		if($('#proName').val().length<1){
 			alert('프로그램 이름을 입력하세요');
 			$('#proName').focus();
@@ -79,7 +79,7 @@ $(function(){
 </script>
 
 	
-<title>프로그램 기본정보 등록 페이지</title>
+<title>프로그램 기본정보 수정 페이지</title>
 <script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
 </head>
 <body>
@@ -113,14 +113,19 @@ $(function(){
 <section class="section blog-wrap" style="margin-top:-30px;">
 
 <div style = "width:980px; max-width: 100%; margin:auto;">
-	<form name="proWrite1" action="programComplete1.do?proNo=" method="post">
+	<form name="proEdit1" action="<c:url value='programComplete1.do?proNo=${pro.proNo }'/>" method="post">
+		
+		<!--  수정시 필요한 proNo를 hidden 필드에 넣는다-->
+	    <input type="hidden" name="proNo" value="${param.proNo}"/>
+		
 		<fieldset>
-		<legend style="color:#258bf7;"><b>프로그램 등록, 첫번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
+		<legend style="color:#258bf7;"><b>프로그램 기본정보, 수정 페이지   &nbsp;</b><i class="fas fa-eraser"></i></legend>
 		<br>
+    
 			<!-- 프로그램 이름 -->
 		        <div class="proInfoDiv">
 					<label class="proWriteLabel"> 프로그램 이름: </label>
-					<input type="text" class="programTitleTextField" id="proName" name="proName" placeholder="프로그램 이름을 적어주세요">
+					<input type="text" class="programTitleTextField" id="proName" name="proName" value="${proVo.proName}">
 		        </div>
 			<!-- 프로그램 카테고리 -->
 		        <div class="proInfoDiv" id="cateName">
@@ -150,9 +155,8 @@ $(function(){
 		        <div class="proInfoDiv">
 					<label class="proWriteLabel"> 프로그램 타입: </label>
 					<select name="proType" id="proType" title="프로그램 타입" class="programTitleTextField">
+						<option value="${proVo.proType}" selected></option>
 						<option value="0">프로그램 타입을 선택해주세요</option>
-						
-						
 						<option name="proType" value="1">이벤트</option>
 						<option name="proType" value="2">북클럽</option>
 						<option name="proType" value="3">교육 강의</option>
@@ -175,31 +179,31 @@ $(function(){
 			<!-- 주최자 -->
 		        <div class="proInfoDiv">
 					<label class="proWriteLabel"> 주최자: </label>
-					<input type="text" class="programTitleTextField" id="proSponsor" name="proSponsor" placeholder="주최자를 적어주세요">
+					<input type="text" class="programTitleTextField" id="proSponsor" name="proSponsor" value="${proVo.proSponsor}">
 		        </div>
 		
 			<!-- 프로그램 시작일 -->
 		        <div class="proInfoDiv">
 					<label class="proWriteLabel"> 프로그램 시작일: </label>
-					<input type="text" class="programTitleTextField" id="proStartDate" name="proStartDate" placeholder="프로그램 시작일을 선택해주세요">
+					<input type="text" class="programTitleTextField" id="proStartDate" name="proStartDate" value="${proVo.proStartDate}">
 		        </div>
 		
 			<!-- 프로그램 가격 -->
 		        <div class="proInfoDiv">
 					<label class="proWriteLabel"> 프로그램 가격: </label>
-					<input type="text" class="programTitleTextField" id="proPrice" name="proPrice" placeholder="프로그램 가격을 적어주세요">
+					<input type="text" class="programTitleTextField" id="proPrice" name="proPrice" value="${proVo.proPrice}">
 		        </div>
 		
 			<!-- 프로그램 신청 마감일 -->
 		        <div class="proInfoDiv">
 					<label class="proWriteLabel"> 프로그램 신청 마감일: </label>
-					<input type="text" class="programTitleTextField" id="regiEndDate" name="regiEndDate" placeholder="프로그램 신청 마감일을 선택해주세요">
+					<input type="text" class="programTitleTextField" id="regiEndDate" name="regiEndDate" value="${proVo.regiEndDate}">
 		        </div>
 		
 			<!-- 프로그램 썸네일 이미지 url -->  
 		        <div class="proInfoDiv">
 					<label for="imgUrl" class="proWriteLabel"> 프로그램 썸네일 이미지 url: </label><br>
-					<input type="file" class="" id="imgUrl" name="imgUrl" placeholder="프로그램 썸네일 이미지 url을 넣어주세요">
+					<input type="file" class="" id="imgUrl" name="imgUrl" value="${proVo.imgUrl}">
 		        </div>
 		
 		     	
