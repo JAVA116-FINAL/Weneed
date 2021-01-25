@@ -3,69 +3,84 @@ package com.it.wanted.notice.model;
 import java.sql.Timestamp;
 
 public class NoticeVO {
-	private int NOTICE_NO; /* 안내번호 */
-	private int ADMIN_NO; /* ★관리자 번호 FK */
-	private String NOTICE_TITLE; /* 글 제목 */
-	private String NOTICE_CONTENT; /* 글 내용 */
-	private String NOTICE_IMAGE; /* 이미지 */
-	private int NOTICE_DEPT1; /* 대분류 */
-	private int NOTICE_DEPT2; /* 소분류 */
-	private Timestamp NOTICE_REGDATE; /* 등록일 */
-	
-	public int getNOTICE_NO() {
-		return NOTICE_NO;
+	private int notice_no; /* 안내번호 */
+	private int admin_no; /* ★관리자 번호 FK */
+	private String notice_title; /* 글 제목 */
+	private String notice_content; /* 글 내용 */
+	private String notice_image; /* 이미지 */
+	private int notice_dept1; /* 대분류 */
+	private int notice_dept2; /* 소분류 */
+	private String notice_dept1_info; /* 대분류 상세 */
+	private String notice_dept2_info; /* 소분류 상세 */
+	private Timestamp notice_regdate; /* 등록일 */
+	public int getNotice_no() {
+		return notice_no;
 	}
-	public void setNOTICE_NO(int nOTICE_NO) {
-		NOTICE_NO = nOTICE_NO;
+	public void setNotice_no(int notice_no) {
+		this.notice_no = notice_no;
 	}
-	public int getADMIN_NO() {
-		return ADMIN_NO;
+	public int getAdmin_no() {
+		return admin_no;
 	}
-	public void setADMIN_NO(int aDMIN_NO) {
-		ADMIN_NO = aDMIN_NO;
+	public void setAdmin_no(int admin_no) {
+		this.admin_no = admin_no;
 	}
-	public String getNOTICE_TITLE() {
-		return NOTICE_TITLE;
+	public String getNotice_title() {
+		return notice_title;
 	}
-	public void setNOTICE_TITLE(String nOTICE_TITLE) {
-		NOTICE_TITLE = nOTICE_TITLE;
+	public void setNotice_title(String notice_title) {
+		this.notice_title = notice_title;
 	}
-	public String getNOTICE_CONTENT() {
-		return NOTICE_CONTENT;
+	public String getNotice_content() {
+		return notice_content;
 	}
-	public void setNOTICE_CONTENT(String nOTICE_CONTENT) {
-		NOTICE_CONTENT = nOTICE_CONTENT;
+	public void setNotice_content(String notice_content) {
+		this.notice_content = notice_content;
 	}
-	public String getNOTICE_IMAGE() {
-		return NOTICE_IMAGE;
+	public String getNotice_image() {
+		return notice_image;
 	}
-	public void setNOTICE_IMAGE(String nOTICE_IMAGE) {
-		NOTICE_IMAGE = nOTICE_IMAGE;
+	public void setNotice_image(String notice_image) {
+		this.notice_image = notice_image;
 	}
-	public int getNOTICE_DEPT1() {
-		return NOTICE_DEPT1;
+	public int getNotice_dept1() {
+		return notice_dept1;
 	}
-	public void setNOTICE_DEPT1(int nOTICE_DEPT1) {
-		NOTICE_DEPT1 = nOTICE_DEPT1;
+	public void setNotice_dept1(int notice_dept1) {
+		this.notice_dept1 = notice_dept1;
 	}
-	public int getNOTICE_DEPT2() {
-		return NOTICE_DEPT2;
+	public int getNotice_dept2() {
+		return notice_dept2;
 	}
-	public void setNOTICE_DEPT2(int nOTICE_DEPT2) {
-		NOTICE_DEPT2 = nOTICE_DEPT2;
+	public void setNotice_dept2(int notice_dept2) {
+		this.notice_dept2 = notice_dept2;
 	}
-	public Timestamp getNOTICE_REGDATE() {
-		return NOTICE_REGDATE;
+	public String getNotice_dept1_info() {
+		return notice_dept1_info;
 	}
-	public void setNOTICE_REGDATE(Timestamp nOTICE_REGDATE) {
-		NOTICE_REGDATE = nOTICE_REGDATE;
+	public void setNotice_dept1_info(String notice_dept1_info) {
+		this.notice_dept1_info = notice_dept1_info;
+	}
+	public String getNotice_dept2_info() {
+		return notice_dept2_info;
+	}
+	public void setNotice_dept2_info(String notice_dept2_info) {
+		this.notice_dept2_info = notice_dept2_info;
+	}
+	public Timestamp getNotice_regdate() {
+		return notice_regdate;
+	}
+	public void setNotice_regdate(Timestamp notice_regdate) {
+		this.notice_regdate = notice_regdate;
 	}
 	
 	@Override
 	public String toString() {
-		return "NoticeVO [NOTICE_NO=" + NOTICE_NO + ", ADMIN_NO=" + ADMIN_NO + ", NOTICE_TITLE=" + NOTICE_TITLE
-				+ ", NOTICE_CONTENT=" + NOTICE_CONTENT + ", NOTICE_IMAGE=" + NOTICE_IMAGE + ", NOTICE_DEPT1="
-				+ NOTICE_DEPT1 + ", NOTICE_DEPT2=" + NOTICE_DEPT2 + ", NOTICE_REGDATE=" + NOTICE_REGDATE + "]";
+		return "NoticeVO [notice_no=" + notice_no + ", admin_no=" + admin_no + ", notice_title=" + notice_title
+				+ ", notice_content=" + notice_content + ", notice_image=" + notice_image + ", notice_dept1="
+				+ notice_dept1 + ", notice_dept2=" + notice_dept2 + ", notice_dept1_info=" + notice_dept1_info
+				+ ", notice_dept2_info=" + notice_dept2_info + ", notice_regdate=" + notice_regdate + "]";
 	}
+	
 	
 }

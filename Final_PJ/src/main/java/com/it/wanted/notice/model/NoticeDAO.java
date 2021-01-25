@@ -1,5 +1,15 @@
 package com.it.wanted.notice.model;
 
-public interface NoticeDAO {
+import java.util.List;
+import java.util.Map;
 
+public interface NoticeDAO {
+	//main
+	public List<Map<String, Object>> selectMain1(); //개인회원 자주 묻는 질문
+	public List<Map<String, Object>> selectMain2(); //기업회원 자주 묻는 질문
+	public List<Map<String, Object>> selectMain3(); //원티드 소식 상위 N건 출력
+	
+	public List<NoticeVO> select_dept1(int notice_dept1);
+	public List<NoticeVO> select_dept2(int notice_dept2);
+	public Map<String, Object> selectDetail(int notice_no);
 }
