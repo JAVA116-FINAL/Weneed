@@ -1,6 +1,8 @@
-p, span, h5, h1, h2, a, button, i{
+p, span, h5, h1, h2, a, button, i, li, label{
 	color: #444444;
 }
+
+/******* 매치업 메인 *******/
 
 /* 첫번째 섹션*/
 .matchupMain-1stSec{
@@ -186,4 +188,222 @@ h1{
 
 .matupChooseBtn:visited{
 	color: #ffffff;
+}
+
+
+
+
+
+
+/******* 매치업 검색 *******/
+
+.matchupSearch-1stSec{
+	margin: 30px 0px 0px 0px;
+}
+
+.matchupSearch-1stSec > h1{
+	font-size: 1.6em;
+	font-weight: bold;
+	color: black;
+}
+
+.matchupSearch-select{
+	height: 45px;
+	padding: 10px 10px;
+	font-size: 0.8em;
+	font-weight: bold;
+	margin-right: 20px;
+}
+
+.matchupSearch-selectShort{
+	width: 25%;
+}
+.matchupSearch-selectLong{
+	width: 50%;
+	margin-bottom: 20px;
+}
+
+.matchupSearch-searchInput{
+	height: 30px;
+	border-radius: 30px;
+	border: 1px solid #e1e2e3;
+	font-weight: bold;
+	font-size: 0.8em;
+	padding: 10px 30px;
+	width: 100%;
+	background-color: #f3f5f8;
+}
+
+.matchupSearch-searchFilter{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 1px solid #e1e2e3;
+	padding: 20px 0px 20px 0px;
+}
+
+.matchupSearch-select-sub{
+	border: none;
+	margin-right: 10px;
+}
+
+.matchupSearch-searchDiv{
+	position: relative;
+	width: 50%;
+}
+
+.matchupSearch-searchBtn{
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+}
+
+.matchupSearch-rangeSlider{
+	display: flex;
+	position: relative;
+}
+
+.matchupSearch-rangeSliderLabel{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.matchupSearch-label{
+	font-size: 0.8em;
+	font-weight: bold;
+	margin: 0 auto;
+	margin-right: 10px;
+}
+
+#slider-range{
+	width: 50%;
+	position: absolute;
+	bottom: 13px;
+	right: 0;
+}
+
+#amount{
+	color: #258bf7;
+}
+.matchupSearch-tabBound{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.matchupSearch-resultList{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+}
+.matchupSearch-li{
+	font-size: 0.8em;
+	font-weight: bold;
+	color: #9d9d9d;
+	cursor: pointer;
+	width: 16.7%;
+	padding: 20px 0px;
+	border-left: 1px solid #e1e2e3;
+	border-top: 1px solid #e1e2e3;
+	border-bottom: 1px solid #e1e2e3;
+}
+
+.matchupSearch-li:last-child{
+	border-right: 1px solid #e1e2e3;
+}
+
+.matchupSearch-selectedLi{
+	color: #444444;
+	border-top: 2px solid #444444;
+}
+
+.matchupSearch-resultOrderFilters{
+	text-align: right;
+	padding: 10px 0px;
+	border-bottom: 1px solid #e1e2e3;
+	align-items: center;
+}
+
+.matchupSearch-orderFilterLb{
+	font-size: 0.8em;
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.matchupSearch-resumeBound{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 10px 0px 10px;
+	border-bottom: 1px solid #e1e2e3;
+}
+
+.matchupSearch-resume-1st > span,
+.matchupSearch-resume-2nd > span,
+.matchupSearch-resume-3rd > button{
+	display: block;
+}
+.matchupSearch-resume-1st {
+	align-items: center;
+	font-size: 0.8em;
+	width: 70px;
+	text-align: center;
+	margin-right: 10px;
+}
+.matchupSearch-resume-2nd{
+	font-weight: bold;
+	margin-bottom: 10px;
+	width: 80%;
+}
+.matchupSearch-resume-2nd > span{
+	margin-bottom: 10px;
+}
+.matchupSearch-resume-3rd{
+
+}
+.matchupSearch-resume-3rd > button{
+	height: 40px;
+	width: 130px;
+	padding: 10px 10px;	
+	border-radius: 40px;
+	border: 1px solid #e1e2e3;
+	font-size: 0.8em;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.goldStar{
+	color: gold;
+}
+
+.matchupSearch-resume-paging{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.matchupSearch-pagingDiv{
+	border: 1px solid #e1e2e3;
+	border-radius: 3px;
+	color: #444444;
+	padding: 5px 10px;
+	margin: 10px 5px;
+	font-size: 0.8em;
+}
+
+.matchupSearch-pagingDiv_prev,
+.matchupSearch-pagingDiv_next,
+.matchupSearch-pagingDiv-page{
+	cursor: pointer;
+}
+
+.matchupSearch-pagingDiv-page{
+	text-align: center;
+}
+
+.matchupSearch-pagingDiv-curPage{
+	font-weight: bold;
+	border: 1px solid #444444;
+	
 }

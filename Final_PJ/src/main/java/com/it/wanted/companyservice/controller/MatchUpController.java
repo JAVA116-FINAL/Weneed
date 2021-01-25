@@ -17,6 +17,13 @@ public class MatchUpController {
 		return "company/matchupMain";
 	}
 	
+	@RequestMapping("/matchupSearch.do")
+	public String matchupSearch() {
+		logger.info("기업서비스 매치업 메인화면");
+		
+		return "company/matchupSearch";
+	}
+	
 	@RequestMapping("/modal/modalButtonsTest.do")
 	public String modalTest() {
 		return "company/modal/modalButtonsTest";
