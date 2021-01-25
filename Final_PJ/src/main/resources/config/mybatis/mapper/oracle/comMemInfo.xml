@@ -24,7 +24,7 @@
 	</insert>
 	
 	<select id="selectComMem" parameterType="string" resultType="comMemInfoVo">
-		select * from comMemInfo where com_mem_id=#{comMemLoginId}
+		select * from comMemInfo where com_mem_id=#{comMemId}
 	</select>
 </mapper>
 

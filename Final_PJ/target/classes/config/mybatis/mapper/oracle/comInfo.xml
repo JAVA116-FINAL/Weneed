@@ -18,12 +18,22 @@
 	</select>
 	
 	<select id="selectRegionList" parameterType="string" resultType="regionVo">
-		select * from regionList where nation_Code=#{nationCode}
+		select * from regionList where nation_code=#{nationCode}
 	</select>
 	
 	<select id="selectComSizeList" resultType="comSizeInfoVo">
 		select * from comSizeInfo
 	</select>
+	
+	<insert id="insertComInfo" parameterType="comInfoVo">
+		<selectKey keyProperty="comCode" resultType="String" order="BEFORE">
+			select to_char(sysdate, 'yymmdd') || 'C' || to_char(cominfo_seq.nextval, 'FM000') from dual
+		</selectKey>
+		insert into cominfo(com_Code, nation, region, com_Name, com_Address, com_Reg_No, profit, industry, 
+			com_Size, com_Intro, com_Year, com_Emails, com_Phone, com_Website, com_Keywords, com_Recom)
+		values(#{comCode}, #{nation}, #{region}, #{comName}, #{comAddress}, #{comRegNo}, #{profit}, #{industry}, 
+			#{comSize}, #{comIntro}, #{comYear}, #{comEmails}, #{comPhone}, #{comWebsite}, #{comKeywords}, #{comRecom})
+	</insert>
 	
 </mapper>
 

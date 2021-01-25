@@ -43,12 +43,17 @@ public class LoginController {
 		logger.info("로그인 확인 결과 res={}", res);
 		
 		String loc="";
+		ComInfoVO comInfoVo=new ComInfoVO();
+		ComMemInfoVO comMemInfoVo=new ComMemInfoVO();
 		if(res==ComMemInfoService.LOGIN_SUCCESS) { //일단 로그인 성공
 			//일단 세션처리부터, 쿠키는 아이디저장기능 별도로 없어서 저장하지 않음
 			HttpSession session=request.getSession();
 			session.setAttribute("comMemId", comMemLoginId);
 			
-			ComMemInfoVO comMemVo=comMemService.selectComMem(comMemLoginId);
+			comMemInfoVo=comMemService.selectComMem(comMemLoginId);
+			logger.info("기업회원정보 조회 결과 comMemInfoVo={}", comMemInfoVo);
+			logger.info("기업회원이름 comMemName={}", comMemInfoVo.getComMemName());
+			session.setAttribute("comMemName", comMemInfoVo.getComMemName());
 			//멤버정보를 통째로 가져와서 사용할 수 있는 것들 
 			// 1 멤버번호, 2 멤버이름, 3 멤버번호를 사용해서 기업정보 불러오기 
 			
@@ -57,14 +62,12 @@ public class LoginController {
 			logger.info("기업정보 등록 여부 확인 결과 regedCheck={}", regedCheck);
 			
 			//등록여부에 따라 기업명 세팅
-			ComInfoVO comInfoVo=new ComInfoVO();
+			
 			if(regedCheck==ComMemListService.REGED_COMPANY || regedCheck==ComMemListService.IMG_NOT_REGED) {
-				comInfoVo=comInfoService.selectCompany(comMemVo.getComMemNo());
+				comInfoVo=comInfoService.selectCompany(comMemInfoVo.getComMemNo());
 				model.addAttribute("comInfoVo", comInfoVo);
 				//번호를 넣어서 회사정보를 가져옴
 			}
-			logger.info("파라미터로 세팅할 comMemVo={}", comMemVo);
-			model.addAttribute("comMemVo", comMemVo);
 			
 			//ajax 버림
 			if(regedCheck==ComMemListService.REGED_COMPANY) { //기업정보와 이미지 모두 등록승인된 경우
@@ -78,6 +81,7 @@ public class LoginController {
 			loc="redirect:/company/welcome.do";
 		}
 		
+		logger.info("파라미터로 세팅한 comMemInfoVo={}", comMemInfoVo);
 		return loc;
 	}
 	

@@ -5,5 +5,5 @@ public interface ComMemInfoDAO {
 	String selectPwd(String comMemId);
 	int selectMemNo(String comMemId);
 	int joinComMem(ComMemInfoVO vo);
-	ComMemInfoVO selectComMem(String comMemLoginId);
+	ComMemInfoVO selectComMem(String comMemId);
 }

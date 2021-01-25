@@ -33,5 +33,11 @@ public class ComInfoServiceImpl implements ComInfoService {
 	public List<ComSizeInfoVO> selectComSizeList() {
 		return comInfoDao.selectComSizeList();
 	}
+
+	@Override
+	public int insertComInfo(ComInfoVO comInfoVo) {
+		//comCode 처리를 서비스에서 해줍시다..가 아니고 mapper에서 해줘보자
+		return comInfoDao.insertComInfo(comInfoVo);
+	}
 	
 }

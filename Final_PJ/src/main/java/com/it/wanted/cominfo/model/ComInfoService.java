@@ -9,5 +9,6 @@ public interface ComInfoService {
 	List<NationVO> selectNationList();
 	List<RegionVO> selectRegionList(String nationCode);
 	List<ComSizeInfoVO> selectComSizeList();
+	int insertComInfo(ComInfoVO comInfoVo);
 
 }

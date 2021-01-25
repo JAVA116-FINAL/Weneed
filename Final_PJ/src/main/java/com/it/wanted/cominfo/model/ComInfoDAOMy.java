@@ -35,6 +35,11 @@ public class ComInfoDAOMy implements ComInfoDAO{
 	public List<ComSizeInfoVO> selectComSizeList() {
 		return sqlSession.selectList(namespace+"selectComSizeList");
 	}
+
+	@Override
+	public int insertComInfo(ComInfoVO comInfoVo) {
+		return sqlSession.insert(namespace+"insertComInfo", comInfoVo);
+	}
 	
 	
 }
