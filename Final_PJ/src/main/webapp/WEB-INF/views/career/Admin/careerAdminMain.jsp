@@ -28,6 +28,8 @@
   <!-- 커리어성장 필터 팝업창 css -->
   <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jiwonPopup.css'/>">
   <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
+
+  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/mouseOverJiwon.css'/>">
   
      <!-- 
     Essential Scripts
@@ -66,6 +68,16 @@ $( document ).ready( function() {
 	    }
 	  });
 	});
+	
+	
+/* 마우스오버시 이미지 변경 */
+  $(".hover").mouseleave(
+    function () {
+      $(this).removeClass("hover");
+    }
+  );
+
+	
 </script>
 
 	
@@ -91,7 +103,6 @@ $( document ).ready( function() {
 			   <li class="nav-item"><a class="nav-link" href="#title1">프로그램 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
-			    <a name="title"></a>   
 			  </ul>	
 			</div>
 			</div>
@@ -106,11 +117,15 @@ $( document ).ready( function() {
 
 <div class="subscribeBody">
 <div class="img_admin_career2">
-	<img alt="등록된 프로그램 조회 페이지로 이동" src="https://scontent-ssn1-1.xx.fbcdn.net/v/t1.0-9/118121468_1722859387865670_6932201002241137751_o.jpg?_nc_cat=105&ccb=2&_nc_sid=dd9801&_nc_ohc=EkvV99Ynvb0AX9KlL8X&_nc_ht=scontent-ssn1-1.xx&oh=15778fa29a00b4a694b1a9b123fca561&oe=602EFE6A" class="campus-recruit-img"  style="width:100%;">
+	<img alt="" src="https://scontent-ssn1-1.xx.fbcdn.net/v/t1.0-9/118121468_1722859387865670_6932201002241137751_o.jpg?_nc_cat=105&ccb=2&_nc_sid=dd9801&_nc_ohc=EkvV99Ynvb0AX9KlL8X&_nc_ht=scontent-ssn1-1.xx&oh=15778fa29a00b4a694b1a9b123fca561&oe=602EFE6A" class="campus-recruit-img"  style="width:100%;">
 </div>
 
+<a name="title"></a>   
 <div class="img_admin_career">
-	<a href="programWrite.do"><img alt="프로그램 등록" src="<c:url value='/resources/images/career/wantedwanted.png'/>" class="campus-recruit-img" style="width:100%;"></a>
+	<a href="programWrite.do"><img alt="클릭시 프로그램 등록페이지로 이동" src="<c:url value='/resources/images/career/wantedwanted.png'/>" class="campus-recruit-img" style="width:100%;"></a>
+	<div class="text">
+		<p><font size=17>프로그램 등록</font></p>
+	</div>
 </div>
 
 

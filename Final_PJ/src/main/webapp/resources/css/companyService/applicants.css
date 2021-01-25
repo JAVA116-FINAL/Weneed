@@ -182,19 +182,108 @@ aside{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
+}
+
+.appli-checked{
+	background-color: #2c5bf1;
+}
+#appli-checkAllBox{
+	display: none;
 }
 
 .appli-btn-statusChange{
 	border: 1px solid #c1c1c1;
 	font-size: 0.8em;
 	font-weight: bold;
-	padding: 5px 10px;
+	padding: 0px 10px;
 	margin-right: 10px;
 }
 
+.appli-lb-resultInfo-toggle,
 .chkBox-staredApplis{
 	font-size: 0.8em;
 }
+
+
+
+
+
+.appli-resultInfo-toggleWrapper{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.appli-resultInfo-toggleWrapper > span{
+	font-size: 0.8em;	
+}
+
+.appli-lb-resultInfo-toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin: 0 auto;
+}
+
+.appli-resultInfo-toggle input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.appli-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.appli-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .appli-slider {
+  background-color: #2196F3;
+}
+
+input:focus + .appli-slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .appli-slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.appli-slider-round {
+  border-radius: 34px;
+}
+
+.appli-slider-round:before {
+  border-radius: 50%;
+}
+
+
+
+
+
 
 
 
@@ -211,7 +300,6 @@ aside{
 
 .appli-list-object,
 .appli-list-object-none{
-	border: 1px solid #e1e2e3;
 	padding: 5px 10px;	
 	background-color: #ffffff;
 	align-items: center;
@@ -223,7 +311,7 @@ aside{
 	height: 72px;
 	justify-content: center;
 	align-items: center;
-	
+	border-bottom: 1px solid #e1e2e3;
 }
 
 .appli-list-object-none > p{
@@ -300,3 +388,8 @@ aside{
 	margin-left: 20px;
 	
 }
+
+
+
+/* 상태변경 모달 팝업 statusChange */
+

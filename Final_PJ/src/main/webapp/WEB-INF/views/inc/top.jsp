@@ -60,11 +60,31 @@
   
   <script type="text/javascript">
   	$(function(){
-  		$('#login-email').focus();
-  		$('#join-email').focus();
+  		var url = location.href;
+		var getAr0 = url.indexOf("navigation");
+	    var getAr1 = url.indexOf("career");
+	    var getAr2 = url.indexOf("jobSalary");
+	    var getAr3 = url.indexOf("resume");
+	    var getAr4 = url.indexOf("matchupMem");
+	    if(getAr0 != -1) {
+	        $("#navigation").addClass("active");
+	    }
+	    if(getAr1 != -1) {
+	        $("#career").addClass("active-border");
+	    }
+	    if(getAr2 != -1) {
+	        $("#jobSalary").addClass("active-border");
+	    }
+	    if(getAr3 != -1) {
+	        $("#resume").addClass("active-border");
+	    }
+	    if(getAr4 != -1) {
+	        $("#matchupMem").addClass("active-border");
+	    }
   		
   		//회원가입처리
-  		$('#joinPwdOk-error').hide();  		$("#registerBtn").click(function(){
+  		$('#joinPwdOk-error').hide();
+  		$("#registerBtn").click(function(){
 	  	  		$.ajax({
 	  				url:"<c:url value='/memberJoin.do'/>",
 	  				type:"POST",
@@ -320,8 +340,13 @@
   		})
   		
   	});
+  	
+  	
   </script>
 <style type="text/css">
+.active-border{
+	border-bottom:2px solid #3366ff;
+}
 .error{
 	font-size:12px;
 	font-weight:600;
@@ -343,8 +368,8 @@
 	<div class="header-div">
 		<nav class="navbar navbar-expand-lg navigation navbar-border" id="navbar">
 			<div class="container container-top">
-			 	 <a class="navbar-logo" href="index.html">
-				  	<img src="${pageContext.request.contextPath}/resources/images/wantedLogo.png" alt="" class="img-fluid top-logo">
+			 	 <a class="navbar-logo" href="<c:url value='/index.do'/>">
+				  	<img src="<c:url value='/resources/images/wantedLogo.png'/>" alt="" class="img-fluid top-logo">
 				  </a>
 	
 			  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
@@ -352,7 +377,7 @@
 			  	</button>
 		  
 				<ul class="navbar-nav">
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" id="navigation">
 						<a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색 </a>
 						<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; border-top:0; margin-top:0; line-height:17px; border-radius:0;">
 							<li><a class="dropdown-item" href="department.html" style="border-bottom:none;">개발<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
@@ -367,10 +392,16 @@
 							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px 15px 20px;font-size:13px;border-bottom:none;">더보기<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
 						</ul>	
 				  	</li>
-				  	<li class="nav-item active"><a class="nav-link" href="index.html">커리어 성장</a></li>
-				  	<li class="nav-item"><a class="nav-link" href="about.html">직군별 연봉</a></li>
-				  	<li class="nav-item"><a class="nav-link" href="service.html">이력서</a></li>
-				   	<li class="nav-item"><a class="nav-link" href="contact.html">매치업</a></li>
+				  	<li class="nav-item" id="career"><a class="nav-link" href="<c:url value='/career/Mainpage/careerMain.do'/>">커리어 성장</a></li>
+				  	<li class="nav-item" id="jobSalary"><a class="nav-link" href="<c:url value='/jobSalary/jobSalary.do'/>">직군별 연봉</a></li>
+				  	<c:if test="${empty sessionScope.email }">
+				  		<li class="nav-item" id="resume"><a class="nav-link" href="<c:url value='/resume/resumeIntro.do'/>">이력서</a></li>
+				  		<li class="nav-item" id="matchupMem"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemIntro.do'/>">매치업</a></li>
+				  	</c:if>
+				  	<c:if test="${!empty sessionScope.email }">
+				  		<li class="nav-item" id="resume"><a class="nav-link" href="<c:url value='/resume/resumeList.do'/>">이력서</a></li>
+				  		<li class="nav-item" id="matchupMem"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemList.do'/>">매치업</a></li>
+				  	</c:if>
 				   	<li class="nav-item"><a class="nav-link" href="contact.html">프리랜서</a></li>
 				</ul>
 			  
@@ -388,11 +419,11 @@
 								<i class="icon-bell" style="font-size:14px;color:#333;font-weight:400;"></i>
 							</button></li>
 							<li><button type="button" class="profileButton nav-link dropdown-toggl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="outline:none;">
-								<img src="${pageContext.request.contextPath}/resources/images/main/profile_default.png" alt="" class="profileImg"
+								<img src="<c:url value='/resources/images/main/profile_default.png'/>" alt="" class="profileImg"
 									style="width:32px;height:32px; border-radius:9999px;">
 							</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; left:-115%; margin-top:0; line-height:17px; border-radius:0; padding:0;">
-								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:20px 0 10px 0;">MY 원티드</a></li>
+							<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:97%; left:-115%; margin-top:0; line-height:17px; border-radius:0; padding:0;">
+								<li><a class="dropdown-item" id="profile-li" href="<c:url value='/mypage/main.do'/>" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:20px 0 10px 0;">MY 원티드</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">프로필</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;margin-top:10px; border-top:1px solid #e1e2e3;padding:21px 0 11px 0;">지원현황</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">제안받기 현황</a></li>
@@ -404,7 +435,7 @@
 							</ul>	
 						</li>
 						</c:if>				
-								
+						
 						 <!-- modal#1 로그인 시작-->
 						 <div class="modal fade docs-example-modal-sm" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 						  <div class="modal-dialog" style="padding-left:45px; top:2%;">
@@ -564,7 +595,7 @@
 						</div>
 						<!-- modal#3 비밀번호찾기 끝 -->
 						
-						<li><a href="#" class="dashboardButton" >기업 서비스</a></li>
+						<li><a href="<c:url value='/company/welcome.do'/>" class="dashboardButton" >기업 서비스</a></li>
 					</ul>
 				</aside>
 			</div>

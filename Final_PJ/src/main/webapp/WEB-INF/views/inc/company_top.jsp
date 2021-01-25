@@ -44,11 +44,11 @@
 							<!-- 기업서비스 로그인 -->
 							<button class="comServBtn comServLoginBtn"
 								data-toggle="modal" data-target=".comServLoginMD" style="outline:none;">채용담당자 로그인</button>
-							<%@include file="../company/member/login.jsp" %>
+							<%@include file="../company/modal/login.jsp" %>
 							<!-- 기업서비스 관리자 회원가입 -->
 							<button class="comServBtn comServJoinBtn"
 								data-toggle="modal" data-target=".comServJoinMD" style="outline:none;">관리자 가입</button>
-							<%@include file="../company/member/join.jsp" %>
+							<%@include file="../company/modal/join.jsp" %>
 						</c:if>
 						<c:if test="${!empty comMemId}">
 						<!-- 기업서비스 로그인 후 담당자명+님 띄워줄 곳  -->
