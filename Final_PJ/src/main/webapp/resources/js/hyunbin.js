@@ -10,7 +10,7 @@
 		alertId.text(msg);
 		alertId.show();
 		inputId.focus();
-		event.preventDefault();
+		return false;
 	}else{ //입력을 뭐라도 했을 때
 		alertId.hide();
 	}

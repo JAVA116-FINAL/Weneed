@@ -2,6 +2,8 @@ package com.it.wanted.companyservice.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +55,7 @@ public class RegisterController {
 	}
 	
 	@RequestMapping(value="/register.do", method = RequestMethod.GET)
-	public void register_get(Model model) {
+	public void register_get(Model model, HttpSession session) {
 		logger.info("회사정보등록 페이지 조회");
 		
 		//산업군 목록 
@@ -69,6 +71,11 @@ public class RegisterController {
 		List<RegionVO> regionList=comInfoService.selectRegionList("KR");
 		logger.info("지역목록 조회결과 regionList.size={}", regionList.size());
 		
+		String comMemId=(String) session.getAttribute("comMemId");
+		
+		ComMemInfoVO comMemInfoVo=comMemInfoService.selectComMem(comMemId);
+		
+		model.addAttribute("comMemInfoVo", comMemInfoVo);
 		model.addAttribute("industryList", industryList);
 		model.addAttribute("nationList", nationList);
 		model.addAttribute("comSizeList", comSizeList);
@@ -79,18 +86,38 @@ public class RegisterController {
 	@ResponseBody
 	@RequestMapping("/selectRegionbyNation.do")
 	public List<RegionVO> selectRegionList(@RequestParam String nationCode) {
-		logger.info("국가코드로 지역목록 선택, 파라미터 국가코드 nationCode={}", nationCode);
+		logger.info("국가명으로 지역목록 선택, 파라미터 국가코드 nationCode={}", nationCode);
 		
 		List<RegionVO> regionList=comInfoService.selectRegionList(nationCode);
-		logger.info("국가코드로 지역목록 조회 결과, regionList.size={}", regionList.size());
+		logger.info("국가명으로 지역목록 조회 결과, regionList.size={}", regionList.size());
 		
 		return regionList;
 	}
 	
 	@RequestMapping(value="/register.do", method = RequestMethod.POST)
-	public void register_post(@ModelAttribute ComInfoVO comInfoVo) {
-		logger.info("회사정보등록 페이지 조회");
+	public String register_post(@ModelAttribute ComInfoVO comInfoVo, Model model) {
+		logger.info("회사정보등록 처리, 파라미터 comInfoVo={}", comInfoVo);
 		
+		//입력된 정보로 insert, 승인여부는 'Yet'으로 자동세팅됨
+		int cnt=comInfoService.insertComInfo(comInfoVo);
+		logger.info("회사정보등록 처리 결과, cnt={}", cnt);
+		
+		String msg="", url="", returnUrl="";
+		if(cnt>0) { //입력 성공
+			msg="기업 정보 제출이 완료되었습니다. 1영업일 후 승인처리됩니다.";
+			url="/company/welcome.do";
+			returnUrl="common/message2";
+		}else {
+			msg="기업 정보 제출이 실패했습니다.";
+			url="/company/register.do";
+			returnUrl="common/message";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		//안내화면 하나 만들어줘야겠네
+		return "common/message";
 	}
 	
 	@RequestMapping("/imgUpload.do")

@@ -9,5 +9,5 @@ public interface ComMemInfoService {
 	
 	int loginCheck(String comMemId, String comMemPwd);
 	int joinComMem(ComMemInfoVO vo);
-	ComMemInfoVO selectComMem(String comMemLoginId);
+	ComMemInfoVO selectComMem(String comMemId);
 }

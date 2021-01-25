@@ -10,7 +10,7 @@
 <meta name="description" content="Orbitor,business,company,agency,modern,bootstrap4,tech,software">
 <meta name="author" content="themefisher.com">
 
-<title>WANTED</title>
+<title>weneed</title>
 <%@ include file="cssJsImports.jsp" %>
 </head>
 <body>
@@ -53,7 +53,7 @@
 						<c:if test="${!empty comMemId}">
 						<!-- 기업서비스 로그인 후 담당자명+님 띄워줄 곳  -->
 							<div class="comServDropdown">
-								<button class="comServBtn comServBtn-name">${comMemVo.comMemName} 님 <i class="fas fa-chevron-down"></i></button>
+								<button class="comServBtn comServBtn-name">${comMemName} 님 <i class="fas fa-chevron-down"></i></button>
 								<div class="comServOptionMenu"> <!-- 내 프로필 / 로그아웃 링크 있는 곳 -->
 									<a href="#">내 프로필</a>
 									<a href="<c:url value='/company/logout.do'/>">로그아웃</a>
