@@ -33,6 +33,16 @@
 		)
 	</select>
 	
+	<select id="selectByDept2" parameterType="int" resultType="map">
+		select * from
+		(
+		    select*from noticeView
+		    where notice_dept2=#{notice_dept2}
+		    <![CDATA[and rownum<=6]]>
+		    order by notice_regdate desc
+		)
+	</select>
+	
 	<select id="select_dept2" parameterType="int" resultType="map">
 		select*from noticeView
 		where notice_dept2=#{notice_dept2}
@@ -56,5 +66,16 @@
 		select*from noticeView
 		where notice_no=#{notice_no}
 	</select>
+	
+	<select id="selectOther" parameterType="int" resultType="map">
+		select * from
+		(
+		    select*from noticeView
+		    where notice_dept2=#{notice_dept2} 
+		    <![CDATA[and rownum<6]]>
+		    order by notice_regdate desc
+		)
+	</select>
+
 	
 </mapper>

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.wanted.notice.cate.model.NoticeCateService;
-import com.it.wanted.notice.cate.model.NoticeCateVO;
 import com.it.wanted.notice.model.NoticeService;
 import com.it.wanted.notice.model.NoticeVO;
 
@@ -59,7 +58,6 @@ public class NoticeController {
 		List<Map<String, Object>>listDept2Count=noticeCateService.selectDept2Count(notice_dept1); //카테고리 개수 받아옴
 		
 		model.addAttribute("notice_dept1", notice_dept1);
-		
 		model.addAttribute("listDept2Count", listDept2Count);
 		model.addAttribute("notice_dept1_info", notice_dept1_info); //대분류명 보내기
 		
@@ -103,6 +101,28 @@ public class NoticeController {
 	@RequestMapping("/notice_result.do")
 	public void notice_result() {
 		logger.info("notice_result 출력");
+	}
+	
+	@RequestMapping("/notice_inc/notice_showByDept2.do")
+	public String notice_selectByDept2(@RequestParam(defaultValue = "0") int notice_dept2,
+			Model model) {
+		
+		List<Map<String, Object>>listByDept2=noticeService.selectByDept2(notice_dept2);
+		model.addAttribute("listByDept2", listByDept2);
+		model.addAttribute("listByDept2Count", listByDept2.size());
+		
+		return "notice/notice_inc/notice_showByDept2";
+	}
+	
+	@RequestMapping("/notice_inc/notice_other.do")
+	public String noticeOther(@RequestParam(defaultValue = "0")int notice_dept2, 
+			Model model) {
+		logger.info("이 섹션의 문서, notice_dept2={}", notice_dept2);
+		
+		List<Map<String, Object>> listOther=noticeService.selectOther(notice_dept2);
+		model.addAttribute("listOther", listOther);
+		
+		return "notice/notice_inc/notice_other";
 	}
 	
 }

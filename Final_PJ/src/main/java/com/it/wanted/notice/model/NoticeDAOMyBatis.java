@@ -17,14 +17,13 @@ public class NoticeDAOMyBatis implements NoticeDAO{
 	
 	@Override
 	public List<NoticeVO> select_dept1(int notice_dept1) {
-		List<NoticeVO>list=sqlSession.selectList(namespace+"select_dept1", notice_dept1);
-		return list;
+		return sqlSession.selectList(namespace+"select_dept1", notice_dept1);
 	}
 
 	@Override
 	public List<NoticeVO> select_dept2(int notice_dept2) {
-		List<NoticeVO>list=sqlSession.selectList(namespace+"select_dept2", notice_dept2);
-		return list;
+		return sqlSession.selectList(namespace+"select_dept2", notice_dept2);
+		
 	}
 
 	@Override
@@ -45,6 +44,16 @@ public class NoticeDAOMyBatis implements NoticeDAO{
 	@Override
 	public Map<String, Object> selectDetail(int notice_no) {
 		return sqlSession.selectOne(namespace+"selectDetail", notice_no);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectOther(int notice_dept2) {
+		return sqlSession.selectList(namespace+"selectOther", notice_dept2);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectByDept2(int notice_dept2) {
+		return sqlSession.selectList(namespace+"selectByDept2", notice_dept2);
 	}
 
 

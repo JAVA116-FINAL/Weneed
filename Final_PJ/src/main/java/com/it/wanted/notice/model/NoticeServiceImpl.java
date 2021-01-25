@@ -41,9 +41,14 @@ public class NoticeServiceImpl implements NoticeService{
 		return noticeDao.selectDetail(notice_no);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectOther(int notice_dept2) {
+		return noticeDao.selectOther(notice_dept2);
+	}
 
-
-
-
+	@Override
+	public List<Map<String, Object>> selectByDept2(int notice_dept2) {
+		return noticeDao.selectByDept2(notice_dept2);
+	}
 
 }

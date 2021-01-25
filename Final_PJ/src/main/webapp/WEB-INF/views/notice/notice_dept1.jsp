@@ -130,18 +130,11 @@ ol.breadcrumbs {
 										<input type="hidden" value="${map['NOTICE_DEPT2'] }">
 									</h3>
 	
-									<ul class="article-list">
-										<!-- 해당 소분류 글목록 반복 -->
-										<c:forEach var="map" items="${listDept1 }">
-											<li class="article">
-												<a href="<c:url value='/notice/notice_detail.do?notice_no=${map["NOTICE_NO"] }'/>">
-													${map['NOTICE_TITLE'] }
-												</a>
-											</li>
-										</c:forEach>
-									</ul>
-	
-	
+									<!-- 소분류별 상위 5건 출력 페이지 임포트해서 구현? -->
+									<c:import url="/notice/notice_inc/notice_showByDept2.do">
+										<c:param name="notice_dept2" value="${map['NOTICE_DEPT2'] }"/>
+									</c:import>
+									
 								</div>
 							</section>
 						</c:forEach>
@@ -151,12 +144,6 @@ ol.breadcrumbs {
 				</div>
 			</div>
 		</div>
-	</div>
-	<div>
-		<iframe url="about:blank" data-testid="abe-iframe"
-			id="automaticAnswers" class="zEWidget-automaticAnswers"
-			title="문서 추천을 위한 피드백" tabindex="-1" aria-hidden="true"
-			style="border: none; background: transparent; transform: translateZ(0px); position: fixed; opacity: 0; bottom: 0px; margin: 0px 6px 6px 0px; z-index: 2147483647; right: 0px; height: 188px; width: 410px; transition-property: none; transition-timing-function: unset; top: -9999px;"></iframe>
 	</div>
 </main>
 

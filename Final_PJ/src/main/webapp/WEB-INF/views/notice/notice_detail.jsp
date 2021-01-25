@@ -54,7 +54,9 @@
 			
 			<!-- 이 섹션의 문서  include -->
 			<div id="pc_related_articles_DIV">
-				<%@include file="notice_inc/notice_other.jsp" %>
+				<c:import url="/notice/notice_inc/notice_other.do">
+					<c:param name="notice_dept2" value="${listDetail['notice_dept2'] }"/>
+				</c:import>
 			</div> 
 		</div>
 		
