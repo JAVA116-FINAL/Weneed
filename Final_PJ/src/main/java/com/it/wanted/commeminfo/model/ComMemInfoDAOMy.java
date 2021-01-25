@@ -31,8 +31,8 @@ public class ComMemInfoDAOMy implements ComMemInfoDAO{
 	}
 
 	@Override
-	public ComMemInfoVO selectComMem(String comMemLoginId) {
-		return sqlSession.selectOne(namespace+"selectComMem", comMemLoginId);
+	public ComMemInfoVO selectComMem(String comMemId) {
+		return sqlSession.selectOne(namespace+"selectComMem", comMemId);
 	}
 	
 	

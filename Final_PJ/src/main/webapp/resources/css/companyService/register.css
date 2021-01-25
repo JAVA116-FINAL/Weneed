@@ -64,10 +64,10 @@
 	border-top: 1px solid #dddddd;
 }
 
-
 .comServRegiBottomCon{
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .comServRegiCheckDiv{

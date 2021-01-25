@@ -35,16 +35,16 @@ $(function(){
 	$('#comMemName').keyup(function(){ //아이디 인풋박스에 키업이벤트
 		keyupCheck($('#comMemName'), '담당자 성함을', $('#alertSpanName'));
 	});
-	$('#comMemTeam').keyup(function(){ //아이디 인풋박스에 키업이벤트
+	$('#comMemTeam').keyup(function(){ 
 		keyupCheck($('#comMemTeam'), '팀/직책을', $('#alertSpanTeam'));
 	});
-	$('#comMemMobile').keyup(function(){ //아이디 인풋박스에 키업이벤트
+	$('#comMemMobile').keyup(function(){ 
 		keyupCheck($('#comMemMobile'), '연락처를', $('#alertSpanMobile'));
 	});
-	$('#comMemJoinId').keyup(function(){ //아이디 인풋박스에 키업이벤트
+	$('#comMemJoinId').keyup(function(){ 
 		keyupCheck($('#comMemJoinId'), '아이디를', $('#alertSpanJoinId'));
 	});
-	$('#comMemJoinPwd').keyup(function(){ //아이디 인풋박스에 키업이벤트
+	$('#comMemJoinPwd').keyup(function(){
 		pwdKeyupCheck($('#comMemJoinPwd'), '비밀번호를', $('#alertSpanJoinPwd'));
 	});
 	

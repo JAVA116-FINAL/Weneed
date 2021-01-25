@@ -9,13 +9,14 @@ public class ComInfoVO {
 	private String comName;
 	private String comAddress;
 	private String comRegNo;
+	private String industry;
 	private String profit;
 	private String comSize;
 	private String comIntro;
 	private String comYear;
 	private String comEmails;
 	private String comPhone;
-	private String comWebSite;
+	private String comWebsite;
 	private String comKeywords;
 	private String comRecom;
 	private String comMemAgree;
@@ -57,6 +58,12 @@ public class ComInfoVO {
 	public void setComRegNo(String comRegNo) {
 		this.comRegNo = comRegNo;
 	}
+	public String getIndustry() {
+		return industry;
+	}
+	public void setIndustry(String industry) {
+		this.industry = industry;
+	}
 	public String getProfit() {
 		return profit;
 	}
@@ -93,11 +100,11 @@ public class ComInfoVO {
 	public void setComPhone(String comPhone) {
 		this.comPhone = comPhone;
 	}
-	public String getComWebSite() {
-		return comWebSite;
+	public String getComWebsite() {
+		return comWebsite;
 	}
-	public void setComWebSite(String comWebSite) {
-		this.comWebSite = comWebSite;
+	public void setComWebsite(String comWebsite) {
+		this.comWebsite = comWebsite;
 	}
 	public String getComKeywords() {
 		return comKeywords;
@@ -132,9 +139,9 @@ public class ComInfoVO {
 	@Override
 	public String toString() {
 		return "ComInfoVO [comCode=" + comCode + ", nation=" + nation + ", region=" + region + ", comName=" + comName
-				+ ", comAddress=" + comAddress + ", comRegNo=" + comRegNo + ", profit=" + profit + ", comSize="
-				+ comSize + ", comIntro=" + comIntro + ", comYear=" + comYear + ", comEmails=" + comEmails
-				+ ", comPhone=" + comPhone + ", comWebSite=" + comWebSite + ", comKeywords=" + comKeywords
+				+ ", comAddress=" + comAddress + ", comRegNo=" + comRegNo + ", industry=" + industry + ", profit="
+				+ profit + ", comSize=" + comSize + ", comIntro=" + comIntro + ", comYear=" + comYear + ", comEmails="
+				+ comEmails + ", comPhone=" + comPhone + ", comWebsite=" + comWebsite + ", comKeywords=" + comKeywords
 				+ ", comRecom=" + comRecom + ", comMemAgree=" + comMemAgree + ", comRegdate=" + comRegdate
 				+ ", comInfoPassed=" + comInfoPassed + "]";
 	}
