@@ -68,19 +68,18 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/notice_dept2.do")
-	public String notice_dept2(@RequestParam(defaultValue = "0") int notice_dept2,
-			int notice_dept1, Model model) {
-		logger.info("notice_dept2 출력, notice_dept1={}, notice_dept2={}", notice_dept1, notice_dept2);
+	public String notice_dept2(@RequestParam(defaultValue = "0") int notice_dept2, 
+			Model model) {
+		logger.info("notice_dept2 출력, notice_dept2={}", notice_dept2);
 		
-		String notice_dept2_info=noticeCateService.selectCate2(notice_dept2); //소분류명 받아옴
+		Map<String, Object>selectDept2Info=noticeCateService.selectDept2Info(notice_dept2); //소분류 레코드 받아옴
 		List<NoticeVO> listDept2=noticeService.select_dept2(notice_dept2);
 		
-		model.addAttribute("notice_dept1", notice_dept1);
-		model.addAttribute("notice_dept2", notice_dept2);
 		model.addAttribute("listDept2", listDept2);
-		model.addAttribute("notice_dept2_info", notice_dept2_info);
+		model.addAttribute("selectDept2Info", selectDept2Info);
 		
 		logger.info("listDept2={}", listDept2);
+		logger.info("selectDept2Info={}", selectDept2Info);
 		
 		return "notice/notice_dept2";
 	}

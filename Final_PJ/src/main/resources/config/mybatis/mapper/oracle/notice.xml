@@ -27,7 +27,7 @@
 		select * from
 		(
 		    select*from noticeView
-		    where notice_dept1=2
+		    where notice_dept1=3
 		    <![CDATA[and rownum<=6]]>
 		    order by notice_regdate desc
 		)

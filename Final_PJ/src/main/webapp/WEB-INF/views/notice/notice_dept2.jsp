@@ -71,14 +71,16 @@ ol.breadcrumbs {
 
 				<li title="원티드 고객센터"><a href="<c:url value='/notice/notice.do'/>">원티드 고객센터</a></li>
 
-				<li title="개인회원"><a
-					href="<c:url value='/notice/notice_dept1.do'/>">개인회원</a>
+				<li title="${selectDept2Info['NOTICE_DEPT1_INFO'] }">
+					<a href="<c:url value='/notice/notice_dept1.do?notice_dept1=${selectDept2Info["NOTICE_DEPT1"] }'/>">
+						${selectDept2Info['NOTICE_DEPT1_INFO'] }
+					</a>
 
 				</li>
 
-				<li title="${notice_dept2_info }">
-					<a href="<c:url value='/notice/notice_dept2.do?notice_dept2=${notice_dept2 }'/>">
-						${notice_dept2_info }
+				<li title="${selectDept2Info['NOTICE_DEPT2_INFO'] }">
+					<a href="<c:url value='/notice/notice_dept2.do?notice_dept1=${selectDept2Info["NOTICE_DEPT1"] }&notice_dept2=${selectDept2Info["NOTICE_DEPT2"] }'/>">
+						${selectDept2Info['NOTICE_DEPT2_INFO'] }
 					</a>
 				</li>
 
@@ -99,7 +101,7 @@ ol.breadcrumbs {
 	<div class="container" style="margin-bottom: 50px;">
 		<div class="row" style="padding-bottom: 50px;">
 			<div class="section-template col-xs-12">
-				<h2 class="hc_title">${notice_dept2_info }</h2>
+				<h2 class="hc_title">${selectDept2Info['NOTICE_DEPT2_INFO'] }</h2>
 
 				<div class="article-lists section-with-article-block">
 					<ul class="article-list">

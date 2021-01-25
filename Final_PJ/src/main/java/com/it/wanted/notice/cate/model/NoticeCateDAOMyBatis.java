@@ -27,6 +27,11 @@ public class NoticeCateDAOMyBatis implements NoticeCateDAO{
 		return sqlSession.selectList(namespace+"selectDept2Count", notice_dept1);
 	}
 
+	@Override
+	public Map<String, Object> selectDept2Info(int notice_dept2) {
+		return sqlSession.selectOne(namespace+"selectDept2Info", notice_dept2);
+	}
+
 
 
 	
