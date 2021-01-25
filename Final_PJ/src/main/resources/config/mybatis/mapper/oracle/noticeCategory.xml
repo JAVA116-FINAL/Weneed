@@ -20,4 +20,9 @@
 		where notice_dept1=#{notice_dept1}
 		order by notice_dept2
 	</select>
+	
+	<select id="selectDept2Info" parameterType="int" resultType="map">
+		select*from noticeCate
+		where notice_dept2=#{notice_dept2}
+	</select>
 </mapper>

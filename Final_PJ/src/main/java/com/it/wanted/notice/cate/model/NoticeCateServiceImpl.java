@@ -25,5 +25,10 @@ public class NoticeCateServiceImpl implements NoticeCateService{
 		return noticeCateDao.selectDept2Count(notice_dept1);
 	}
 
+	@Override
+	public Map<String, Object> selectDept2Info(int notice_dept2) {
+		return noticeCateDao.selectDept2Info(notice_dept2);
+	}
+
 
 }
