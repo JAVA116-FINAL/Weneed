@@ -23,15 +23,15 @@ $(function(){
 		$('#tabInfoLabel').addClass('selectedTab');
 		$('#tabImgLabel').removeClass('selectedTab');
 	});
-});
 
 
 //이미지 업로드 기능 구현
-	const imgFileInput= document.querySelector('#imgFileInput');
 	
 	$('#comServImgAddBtn').click(function(){
-		imgFileInput.click();
+		$('#imgFileInput').click();
 	});
+	
+});
 </script>
 <body>
 	<div class="container">
@@ -43,6 +43,8 @@ $(function(){
 			<label for="tabInfo" id="tabInfoLabel" class="comInfoRegiTab">정보</label>
 		</section>
 		<!-- 이미지등록 탭 -->
+		<!-- 이미지는 한 번에 한 개만 선택해서 등록할 수 있다 -->
+		<!-- 승인중 / 승인됨 / 거절됨 딱지가 붙을 자리를.. top left 0으로 맞춰서 노출시켜야 함.  -->
 		<section class="imgSection">
 			<h2 class="comServTitle">대표 이미지</h2>
 			<p class="comServTitle-imageCountGuide">*대표 이미지는 최대 8개까지 등록 가능합니다.</p>
@@ -74,14 +76,15 @@ $(function(){
 	                   	<div class="form-group">
 	                    	<span class="comServFormTitle">회사이름</span><span class="comServRequired">*</span>
 	                       	<input style="background-color: #ffffff;outline-color: #dbdbdb;"
-	                       	name="comName" id="comName" type="text" class="form-control comServFormInput" placeholder="회사 이름">
+	                       	name="comName" id="comName" type="text" class="form-control comServFormInput" placeholder="회사 이름"
+	                       	value="${comInfoVo.comName}">
 	                       </div>
 	                    </div>
 	                    <div class="col-lg-6">
 	                        <div class="form-group">
 	                    		<span class="comServFormTitle">국가</span><span class="comServRequired">*</span>
 	                       	<select style="background-color: #ffffff;outline-color: #dbdbdb;" 
-	                       	class="form-control comServFormInput" id="nation">
+	                       	class="form-control comServFormInput" id="nation" value="${comInfoVo.nation}">
 	                           	<option>한국</option>
 	                             	<!-- 테이블에서 목록 불러오기 -->
 	                           </select>
@@ -91,7 +94,7 @@ $(function(){
 	                       <div class="form-group">
 	                    		<span class="comServFormTitle">지역</span><span class="comServRequired">*</span>
 	                       	<select style="background-color: #ffffff;outline-color: #dbdbdb;"
-	                       	class="form-control comServFormInput" id="region">
+	                       	class="form-control comServFormInput" id="region" value="${comInfoVo.region}">
 	                           	<option>서울</option>
 	                             	<!-- 테이블에서 목록 불러오기 -->
 	                           </select>
@@ -101,21 +104,24 @@ $(function(){
 	                       <div class="form-group">
 	                     <span class="comServFormTitle">대표 주소</span><span class="comServRequired">*</span>
 	                           <input style="background-color: #ffffff;outline-color: #dbdbdb;"
-	                           name="comAddress" id="comAddress" type="text" class="form-control comServFormInput" placeholder="대표 주소 입력">
+	                           name="comAddress" id="comAddress" type="text" class="form-control comServFormInput" placeholder="대표 주소 입력"
+	                           value="${comInfoVo.comAddress}">
 	                       </div>
 						</div>
 	                    <div class="col-lg-6">
 	                       <div class="form-group">
 	                    	<span class="comServFormTitle">사업자 등록 번호</span><span class="comServRequired">*</span>
 	                           <input style="background-color: #ffffff;outline-color: #dbdbdb;"
-	                            name="comRegNo" id="comRegNo" type="text" class="form-control comServFormInput" placeholder="'-' 제외 10자리">
+	                            name="comRegNo" id="comRegNo" type="text" class="form-control comServFormInput" placeholder="'-' 제외 10자리"
+	                            value="${comInfoVo.comRegNo}">
 	                       </div>
 	                    </div>
 	                    <div class="col-lg-6 comServ_oneLineDiv">
 	                       <div class="form-group">
 	                       	   <span class="comServFormTitle">매출액/투자금액</span><span class="comServInfoSentence">(승인기준: 매출액/투자 유치 5억원 이상)</span><span class="comServRequired">*</span>
 	                           <input style="background-color: #ffffff;outline-color: #dbdbdb;"
-	                            name="profit" id="profit" type="text" class="form-control comServFormInput" placeholder="매출액/투자금액 입력 (단위: 억원)">
+	                            name="profit" id="profit" type="text" class="form-control comServFormInput" placeholder="매출액/투자금액 입력 (단위: 억원)"
+	                            value="${comInfoVo.profit}">
 	                       </div>
 	                    </div>
 	                    <div class="col-lg-6">
@@ -144,7 +150,8 @@ $(function(){
 	                  <div class="form-group">
 	                  	<span class="comServFormTitle">회사/서비스 소개</span><span class="comServInfoSentence">(3,000자 제한)</span><span class="comServRequired">*</span>
 	                      <textarea style="background-color: #ffffff;outline-color: #dbdbdb;display:block;width:207%"
-	                      name="comIntro" id="comIntro" class="form-control comServFormInput" rows="6" placeholder="회사 정보 입력"></textarea>
+	                      name="comIntro" id="comIntro" class="form-control comServFormInput" rows="6" placeholder="회사 정보 입력"
+	                      value="${comInfoVo.comIntro}"></textarea>
 	                  </div>
 	                 </div>
 	                </div>
@@ -153,28 +160,32 @@ $(function(){
 	                   		<div class="form-group">
 	                		<span class="comServFormTitle">설립연도</span><span class="comServRequired">*</span>
 	                        	<input style="background-color: #ffffff;outline-color: #dbdbdb;"
-	                        	name="comYear" id="comYear" type="text" class="form-control comServFormInput" placeholder="ex) 2012년">
+	                        	name="comYear" id="comYear" type="text" class="form-control comServFormInput" placeholder="ex) 2012년"
+	                        	value="${comInfoVo.comYear}">
 	                    	</div>
 	                	</div>
 	               		<div class="col-lg-6">
 	               		<span class="comServFormTitle">정보 수신 이메일</span><span class="comServRequired">*</span>
 	                   	<div class="form-group">
 	                       	<input style="background-color: #ffffff;outline-color: #dbdbdb;"
-	                       	name="comEmails" id="comEmails" type="text" class="form-control comServFormInput" placeholder="">
+	                       	name="comEmails" id="comEmails" type="text" class="form-control comServFormInput" placeholder=""
+	                       	value="${comInfoVo.comEmails}">
 	              			</div>
 	               		</div>
 	               		<div class="col-lg-6">
 	                		<span class="comServFormTitle">담당자 연락처</span><span class="comServRequired">*</span>
 	                   	<div class="form-group">
 	                       	<input style="background-color: #ffffff;outline-color: #dbdbdb;"
-	                       	 name="comPhone" id="comPhone" type="text" class="form-control comServFormInput" placeholder="">
+	                       	 name="comPhone" id="comPhone" type="text" class="form-control comServFormInput" placeholder=""
+	                       	 value="${comInfoVo.comPhone}">
 	                   	</div>
 	                	</div>
 	                	<div class="col-lg-6">
 	                 		<span class="comServFormTitle">웹사이트 주소</span>
 	                  		<div class="form-group">
 	                       		<input style="background-color: #ffffff;outline-color: #dbdbdb;width:100%"
-	                      	 	name="comWebsite" id="comWebsite" type="text" class="form-control comServFormInput" placeholder="URL 입력 (여러개 등록 시 ','로 구분)">
+	                      	 	name="comWebsite" id="comWebsite" type="text" class="form-control comServFormInput" 
+	                      	 	placeholder="URL 입력 (여러개 등록 시 ','로 구분)" value="${comInfoVo.comWebsite}">
 	                   		</div>
 	                	</div>
 	               	</div>
@@ -184,8 +195,8 @@ $(function(){
 	                       <div class="form-group">
 	                           <div style="display:flex;width:207%">
 	                             <input style="background-color: #ffffff;outline-color: #dbdbdb;width:180%"
-	                             name="comKeywords" id="comKeywords" type="text" class="form-control comServFormInput" placeholder="서비스명 또는 브랜드명 입력">
-	                        		<input type="submit" class="form-control comServFormInput" value="추가" style="width:20%">
+	                             name="comKeywords" id="comKeywords" type="text" class="form-control comServFormInput" placeholder="서비스명 또는 브랜드명 입력"
+	                             value="${comInfoVo.comKeywords}">
 	                           </div>
 	                       </div>
 	                   </div>
@@ -195,19 +206,8 @@ $(function(){
 	                   	<span class="comServFormTitle">가입 경로</span><span class="comServInfoSentence">(원티드를 추천한 기업과 추천인을 입력해 주세요.)</span>
 	                       <div class="form-group">
 	                           <input style="background-color: #ffffff;outline-color: #dbdbdb;width:207%"
-	                            name="comRecom" id="comRecom" type="text" class="form-control comServFormInput" placeholder="ex) 원티드랩/김OO담당자">
-	                       </div>
-	                   </div>
-	                </div>
-	                <div class="row">
-	                   <div class="col-lg-6">
-	                   	<span class="comServFormTitle">기업회원 이용약관</span>
-	                       <div class="form-group">
-	                           <%-- <textarea style="background-color: #ffffff;outline-color: #dbdbdb;display:block;width:207%" rows="6"
-	                           name="comMemAgree" id="comMemAgree" type="text" class="form-control comServFormInput" >
-	                           <iframe src="<c:url value='/inc2/comServProvision.html'/>"></iframe>
-	                           </textarea> --%>
-	                           <iframe src="<c:url value='/inc2/comServProvision.html'/>" width="207%" class="comServIFrame comServIFrameModi"></iframe>
+	                            name="comRecom" id="comRecom" type="text" class="form-control comServFormInput" placeholder="ex) 원티드랩/김OO담당자"
+	                            value="${comInfoVo.comRecom}">
 	                       </div>
 	                   </div>
 	                </div>

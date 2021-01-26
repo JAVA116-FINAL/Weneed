@@ -2,7 +2,8 @@ package com.it.wanted.commemlist.model;
 
 public interface ComMemListDAO {
 
-	int checkComReged(String comMemId);
+	int checkComReged(int memNo);
 	String selectComCode(int memNo);
+	int insertComMemList(ComMemListVO comMemListVo);
 
 }

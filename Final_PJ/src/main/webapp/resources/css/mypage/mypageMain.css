@@ -25,9 +25,16 @@ h2{
 .leftDiv,
 .rightDiv{
 	background: #ffffff;
-	border: 0.5px solid #e1e2e3;
+	border: 1px solid #e1e2e3;
 }
 
+.leftDiv{
+	border-bottom: none;
+}
+
+.leftDiv:last-child{
+	border-bottom: 1px solid #e1e2e3;
+}
 /* 프로필 영역 */
 .leftDiv:first-child {
 	height: 329px;
@@ -125,12 +132,19 @@ dd:last-child{
 
 
 /*오른쪽 시작*/
+
 .subTitleinRightDivs{
 	padding: 0 32px 26px;
 }
 .rightDiv{
 	width: 790px;
 	margin-left: 20px;
+	display: block;
+	padding: 26px 30px 30px;
+}
+
+.rightDiv{
+	margin-bottom: 20px;
 }
 .onlyStatus{
 	display: flex;
@@ -141,11 +155,6 @@ dd:last-child{
 	width: 197px;
 	height: 70px;
 	text-align: center;
-}
-.rightDiv:first-child {
-	height: 180px;
-	margin-bottom: 20px;
-	padding:26px 0 24px 0;
 }
 
 strong{
@@ -166,17 +175,6 @@ strong{
 .subTitleinRightDivsSecond{
 	padding: 0 0 0 0;
 }
-.rightDiv:nth-child(2) {
-	height: 213px;
-	padding: 26px 30px 30px;
-}
-
-.rightDiv:nth-child(3) {
-	height: 211px;
-	padding: 26px 30px 30px;
-}
-
-
 
 
 /* 북마크, 좋아요 */
@@ -187,6 +185,11 @@ strong{
 .seeMore{
 	color: #3366ff;
 	font-size: 0.9em;
+}
+
+.booklikeBody{
+	display: block;
+	flex-flow:wrap;
 }
 .bookLikeAllBody{
 	display: flex;
@@ -225,9 +228,10 @@ strong{
     margin:0;
     padding:0;
     margin-top:30px;
+    overflow: auto;
 }
 .booklikeLi{
-	  margin: 0 0 0 0;
+	margin: 0 0 20px 0;
     padding: 0 0 0 0;
     border : 0;
     float: left;
@@ -261,4 +265,17 @@ p{
 .booklikeContent span{
 	color: #999999;
 	font-size: 0.8em;
+}
+
+.nonebookLikeBody{
+	padding: 20px 20px;
+	align-items: center;
+	width: 728px;
+}
+.nonebookLike{
+	color: #e1e2e3;
+}
+
+.nonebookLikeA{
+	color: #258bf7;
 }
