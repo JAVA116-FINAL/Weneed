@@ -73,7 +73,7 @@ public class LoginController {
 			if(regedCheck==ComMemListService.REGED_COMPANY) { //기업정보와 이미지 모두 등록승인된 경우
 				loc="redirect:/company/applicants.do";
 			}else if(regedCheck==ComMemListService.IMG_NOT_REGED){ //정보만 등록승인되고 이미지 미등록시
-				loc="redirect:/company/imgUpload.do";
+				loc="redirect:/company/comInfoModify.do";
 			}else if(regedCheck==ComMemListService.INFO_NOT_REGED){ //정보도 미등록됨
 				loc="redirect:/company/register.do";
 			}//기업정보 확인 if

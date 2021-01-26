@@ -2,7 +2,7 @@
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/mypageMain.css">
 <div class="container">
-	<h2 class="mypageTitle">MY 원티드</h2>
+	<h2 class="mypageTitle">MY 위니드</h2>
 	<div class="divWrapper">
 		<div class="leftSideDivGroup">
 			<div class="leftDiv">
@@ -42,10 +42,9 @@
 					<span>계정 설정</span>
 			</div>
 		</div>
-		
 		<div class="rightSideDivGroup">
 			<div class="rightDiv rightApplyStatus">
-			<h2 class="subTitleinRightDivs">지원 현황</h2>
+				<h2 class="subTitleinRightDivs">지원 현황</h2>
 				<div class="onlyStatus">
 					<a class="applyStatusNum" href="">
 						<strong>0</strong><span>지원 완료</span></a>
@@ -78,6 +77,30 @@
 								</div>
 							</a>
 						</li>
+						<li class="booklikeLi">
+							<a class="bookLikeAllBody" href="#">
+								<div class="booklikeLogo">
+									<!-- 기업로고이미지 -->
+								</div>
+								<div class="booklikeContent">
+									<h2>포지션 종류</h2>
+									<p>기업명</p>
+									<span>지역·국가</span>
+								</div>
+							</a>
+						</li>
+						<li class="booklikeLi">
+							<a class="bookLikeAllBody" href="#">
+								<div class="booklikeLogo">
+									<!-- 기업로고이미지 -->
+								</div>
+								<div class="booklikeContent">
+									<h2>포지션 종류</h2>
+									<p>기업명</p>
+									<span>지역·국가</span>
+								</div>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -90,7 +113,8 @@
 				</div>
 				<!-- 등록한 기업이 없을 때 -->
 				<div class="nonebookLikeBody">
-					<span class="nonebookLike">아직 등록한 기업이 없습니다.</span>
+					<span class="nonebookLike">아직 등록한 기업이 없습니다.</span><br>
+					<a href="#" class="nonebookLikeA">채용공고 보러 가기</a>
 				</div>
 				
 					<!-- 등록한 기업이 있을 때 -->

@@ -10,5 +10,7 @@ public interface ComInfoService {
 	List<RegionVO> selectRegionList(String nationCode);
 	List<ComSizeInfoVO> selectComSizeList();
 	int insertComInfo(ComInfoVO comInfoVo);
+	List<ComInfoVO> selectAllCompany();
+	List<ComInfoVO> changeStatustoPass(List<String> comCodeArr, List<String> comMemNoArr);
 
 }
