@@ -14,4 +14,9 @@ public class PositionController {
 	public void positionList() {
 		logger.info("포지션목록 조회");
 	}
+	
+	@RequestMapping("/positionAdd.do")
+	public void positionAdd() {
+		logger.info("포지션등록 페이지 조회");
+	}
 }
