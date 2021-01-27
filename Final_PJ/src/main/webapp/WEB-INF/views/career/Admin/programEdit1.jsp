@@ -16,6 +16,9 @@
 	<link rel="stylesheet" href="/resources/demos/style.css">  
     <!-- ck에디터 -->
 	<script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+	
+	<!-- 메뉴 -->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
 
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
@@ -97,8 +100,8 @@ $(function(){
 		 	 <div class="navbar-brand">
 				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
-			  <li class="nav-item active"><a class="nav-link" href="#title">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="#title1">프로그램 조회</a></li>
+			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
+			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programList.do'/>">프로그램 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
 			    <a name="title"></a>   
@@ -119,7 +122,7 @@ $(function(){
 	    <input type="hidden" name="proNo" value="${param.proNo}"/>
 		
 		<fieldset>
-		<legend style="color:#258bf7;"><b>프로그램 기본정보, 수정 페이지   &nbsp;</b><i class="fas fa-eraser"></i></legend>
+		<legend style="color:#258bf7;"><b>프로그램 기본정보, 수정 페이지   &nbsp;</b><i class="fas fa-eraser fa-1x"></i></legend>
 		<br>
     
 			<!-- 프로그램 이름 -->

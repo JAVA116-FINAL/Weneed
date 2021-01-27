@@ -16,5 +16,9 @@ public class ProgramDAOMybatis implements ProgramDAO{
 		return cnt;
 	}
 	
+	public ProgramVO selectByProgramNo(int programNo) {
+		ProgramVO proVo = sqlSession.selectOne(namespace + "selectByProgramNo", programNo);
+		return proVo;
+	}
 	
 }

@@ -1,0 +1,101 @@
+@CHARSET "utf-8";
+/* body{margin:0} */
+
+body, td, th, span, p{
+	font-family: 'nanum gothic', 맑은 고딕, 한컴돋움, 돋움;
+	font-size: 0.9em;
+	color:#555555;
+}
+	
+td, th{
+	padding:4px;
+}
+
+a:link{color:#555555;text-decoration:none}
+a:visited{color:#555555;text-decoration:none}
+a:hover{color:#047CC1;text-decoration:underline;}
+a:active{color:#047CC1;text-decoration:underline;}
+
+input,Textarea, select {
+    font-family:'nanum gothic', 맑은 고딕, 한컴돋움, 돋움;
+	font-size: 0.9em;
+	color:#555555;
+}
+
+table{
+	margin-left:30%;
+	padding: 0;
+	border-collapse: collapse;
+}
+
+table.box, table.box2{
+	margin: 0;
+	padding: 0;
+	border: solid silver 1px;
+	border-collapse: collapse;
+}
+
+table.box2 th{
+	background-color: #eeeeee;
+	border: solid silver 1px;
+}
+
+table.box2 td{
+	border: solid silver 1px;	
+}
+
+td.line
+{
+	border-bottom:solid 1px silver;
+}
+
+
+
+table.box3{
+	margin: 0;
+	padding: 0;
+	border-top: solid silver 1px;
+	border-bottom: solid silver 1px;	
+	border-collapse: collapse;
+}
+
+table.box3 td{
+	border-top: solid silver 1px;
+	border-bottom: solid silver 1px;	
+}
+
+.box4
+{
+	background-color: #eeeeee;
+}
+
+.divPdList{
+	width:800px;
+	padding:10px 5px 10px 0;
+	margin:10px 0 35px 3px;
+	border:solid silver 1px;
+}	
+
+.errorMessage{
+	color:red;
+	font-size:0.8em;
+}
+
+
+.align_left{
+	text-align: left;
+}
+.align_right{
+	text-align: right;
+}
+.align_center{
+	text-align: center;
+}
+
+
+.width_80{
+	width:80px;
+}
+.width_350{
+	width:350px;
+}

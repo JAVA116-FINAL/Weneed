@@ -11,4 +11,9 @@ public class ProgramServiceImpl implements ProgramService{
 	public int insertProgram(ProgramVO proVo) {
 		return programDao.insertProgram(proVo);
 	}
+
+	@Override
+	public ProgramVO selectByProgramNo(int programNo) {
+		return programDao.selectByProgramNo(programNo);
+	}
 }

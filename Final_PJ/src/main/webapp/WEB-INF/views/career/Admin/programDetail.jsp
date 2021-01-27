@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../../inc/top.jsp" %>
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
+
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programJiwon.css'/>">
 
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
@@ -17,24 +19,42 @@ $( document ).ready( function() {
 	    }
 	  });
 	});
-	
-</script>	
 
-<div class="jbMenu" style="width:100%; opacity:1;">
+
+</script>
+<!-- 
+<style="type="text/css">
+ body{
+	margin:0px;
+	padding:0px;
+}
+.jbFixed {
+     position: fixed;
+     top: 0px;
+}
+.jbContent {
+        height: 2000px;
+      } 
+      
+.parag{
+	margin-top: 50px;
+	margin-bottom: 50px;      
+}
+
+</style> -->
+<div class="jbMenu">
     	<nav class="navbar navbar-expand-lg navigation" id="navbar" style="background-color:#f8f8fa;">
 		<div class="container" >
 		 	 <div class="navbar-brand">
-				<div class="myNav" style="width:100%;">
-				  <ul class="navbar-nav ml-auto">
-				  <li class="nav-item active"><a class="nav-link" href="#title">북클럽 소개</a></li>
-				    <li class="nav-item"><a class="nav-link" href="#title1">이번 북클럽 소개</a></li>
-				    <li class="nav-item"><a class="nav-link" href="#title2">프로그램 상세</a></li>
-				    <li class="nav-item"><a class="nav-link" href="#title3">클럽장 소개</a></li>
-				    <li class="nav-item"><a class="nav-link" href="#title4">참가비용</a></li>
-				    <li class="nav-item"><a class="nav-link" href="#title5">후기</a></li>
-				    <li class="nav-item"><a class="nav-link" href="#title6">안내/설문</a></li>
-				 </ul>	
-				</div>
+			  <ul class="navbar-nav ml-auto">
+			  <li class="nav-item active"><a class="nav-link" href="#title">북클럽 소개</a></li>
+			   <li class="nav-item"><a class="nav-link" href="#title1">이번 북클럽 소개</a></li>
+			    <li class="nav-item"><a class="nav-link" href="#title2">프로그램 상세</a></li>
+			    <li class="nav-item"><a class="nav-link" href="#title3">클럽장 소개</a></li>
+			    <li class="nav-item"><a class="nav-link" href="#title4">참가비용</a></li>
+			    <li class="nav-item"><a class="nav-link" href="#title5">후기</a></li>
+			    <li class="nav-item"><a class="nav-link" href="#title6">안내/설문</a></li>
+				</ul>	
 			 </div>
 		</div>
 		</nav>
@@ -224,16 +244,16 @@ $( document ).ready( function() {
 
 
 						<div class="sidebar-widget schedule-widget mb-3" style="background-color:#fff; margin-left:-60px; margin-top:-20px; width:380px">
-							<h5 class="mb-4"><b>북클럽: ${proName }</b></h5>
+							<h5 class="mb-4"><b>북클럽: 작가는 아니지만 글은 쓰고싶어</b></h5>
 
 							<ul class="list-unstyled">
 							
 									<div style="font:12px;"><span>일자</span></div>
-									<div style="color:black; font:12px;"><span>${proStartDate}</span></div><br>
+									<div style="color:black; font:12px;"><span>2021 Jan 16</span></div><br>
 									<div style="font:12px;"><span>장소</span></div>
 									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br>
 									<div style="font:12px;"><span>주최자</span></div>
-									<div style="color:black; font:12px;"><span>${proSponsor}</span></div>
+									<div style="color:black; font:12px;"><span></span></div>
 							
 							</ul>
 							<br><br><br>
@@ -266,71 +286,19 @@ $( document ).ready( function() {
 
 <hr>
 
-<!-- 프로젝트 리스트 섹션!!!!!!! -->
-<div class="row shuffle-wrapper portfolio-gallery">
-      	<div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat1&quot;,&quot;cat2&quot;]">
-	      	<div class="position-relative doctor-inner-box">
-		        <div class="doctor-profile">
-	               <div class="doctor-img">
-	               		<img src="<c:url value='https://static.wanted.co.kr/images/tags/ebfb705e.jpg'/>" alt="" class="img-fluid w-100">
-	               </div>
-	            </div>
-                <div class="content mt-3">
-                	<h4 class="mb-0"><a href="doctor-single.html">Just Do it</a></h4>
-                	<p>나이스</p>
-                </div> 
-	      	</div>
-      	</div>
 
-      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat2&quot;]">
-        	<div class="position-relative doctor-inner-box">
-		        <div class="doctor-profile">
-		        	<div class="doctor-img">
-		               <img src="<c:url value='https://static.wanted.co.kr/images/tags/ebfb705e.jpg'/>" alt="" class="img-fluid w-100">
-		            </div>
-	            </div>
-                <div class="content mt-3">
-                	<h4 class="mb-0"><a href="doctor-single.html">야 너두? 야 나두!</a></h4>
-                	<p>조정석</p>
-                </div> 
-	      	</div>
-      </div>
-
-      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat3&quot;]">
-        	<div class="position-relative doctor-inner-box">
-		        <div class="doctor-profile">
-		        	<div class="doctor-img">
-		               <img src="<c:url value='https://static.wanted.co.kr/images/tags/ebfb705e.jpg'/>" alt="" class="img-fluid w-100">
-		            </div>
-	            </div>
-                <div class="content mt-3">
-                	<h4 class="mb-0"><a href="doctor-single.html">Impossible is nothing</a></h4>
-                	<p>아디도다스</p>
-                </div> 
-	      	</div>
-      </div>
-
-      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat3&quot;,&quot;cat4&quot;]">
-        	<div class="position-relative doctor-inner-box">
-		        <div class="doctor-profile">
-		        	<div class="doctor-img">
-		               <img src="<c:url value='https://static.wanted.co.kr/images/tags/ebfb705e.jpg'/>" alt="" class="img-fluid w-100">
-		            </div>
-	            </div>
-                <div class="content mt-3">
-                	<h4 class="mb-0"><a href="doctor-single.html">야 너두? 야 나두!</a></h4>
-                	<p>조정석</p>
-                </div> 
-	      	</div>
-      </div>
- </div>     
- <!-- 프로젝트 리스트 섹션 끝 -->
  <br>
-<div style="width: 20%; margin:auto;">
-<a href="<c:url value='/career/mainpage/careerMain.do'/>" target="_blank" class="btn btn-main btn-icon btn-round-full" style="background-color:#fff; outline:none; border:0.3px solid gray; border-radius:2em; color: black;">이벤트 모두 보기<i class="icofont-simple-right ml-2  "></i></a>
-</div>
+			<div style="margin:auto; text-align:center;">
+				
+							<div style="text-align:center";>
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programEditTotal.do?proNo=${proVo.proNo}'" style="outline:none;">수정</button>					      									
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programList.do'" style="outline:none;">프로그램 목록</button>					      									
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/careerAdminMain.do'" style="outline:none; width:160px;">커리어성장 메인으로</button>					      									
+							</div>
+			</div>
 	</div>
 	</section>
+
 
 
 </body>
