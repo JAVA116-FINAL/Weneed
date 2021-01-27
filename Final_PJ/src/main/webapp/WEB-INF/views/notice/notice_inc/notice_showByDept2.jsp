@@ -16,6 +16,7 @@
 	</li>
 </ul>
 </c:forEach>
+<!-- 출력된 리스트 사이즈가 6일 경우에만 모두보기 출력(list에 최대 6건의 결과만 담기도록 설정했음) -->
 <c:if test="${6 eq listByDept2Count }">
 	<a href="<c:url value='/notice/notice_dept2.do?notice_dept1=${notice_dept1}&notice_dept2=${notice_dept2}'/>" 
 		class="see-all-articles btn" style="font-size: 1.1em;">
