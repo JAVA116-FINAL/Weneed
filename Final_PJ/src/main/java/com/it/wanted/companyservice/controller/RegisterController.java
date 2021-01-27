@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.wanted.comimginfo.model.ComImgInfoService;
+import com.it.wanted.comimginfo.model.ComImgInfoVO;
 import com.it.wanted.cominfo.model.ComInfoService;
 import com.it.wanted.cominfo.model.ComInfoVO;
 import com.it.wanted.cominfo.model.ComSizeInfoVO;
@@ -31,6 +33,7 @@ public class RegisterController {
 	private static final Logger logger=LoggerFactory.getLogger(RegisterController.class);
 	@Autowired ComMemInfoService comMemInfoService;
 	@Autowired ComInfoService comInfoService;
+	@Autowired ComImgInfoService comImgInfoService;
 	
 	@RequestMapping(value = "/member/join.do", method= RequestMethod.POST)
 	public String join_modal_post(@ModelAttribute ComMemInfoVO vo, Model model) {
@@ -120,10 +123,40 @@ public class RegisterController {
 		return "common/message";
 	}
 	
-	@RequestMapping("/imgUpload.do")
-	public void imgUpload_get() {
+	@RequestMapping("/comInfoModify.do")
+	public void imgUpload_get(HttpSession session, Model model) {
 		logger.info("회사이미지등록 페이지 조회");
 		
+		String comMemId=(String) session.getAttribute("comMemId");
+		
+		//[1] 세션에 저장된 아이디로 cominfo에 있는 정보를 불러와서 정보 탭에 세팅한다 
+		ComMemInfoVO comMemInfoVo=comMemInfoService.selectComMem(comMemId);
+		logger.info("comMemNo를 가져오기 위한 comMemInfoVo 조회: {}", comMemInfoVo);
+		
+		int comMemNo=comMemInfoVo.getComMemNo();
+		ComInfoVO comInfoVo=comInfoService.selectCompany(comMemNo);
+		logger.info("comMemNo로 comInfo 조회 결과, comInfoVo={}", comInfoVo);
+		
+		//국가정보로 지역목록을 불러온다. 해당 국가와 지역으로 세팅해야 함
+		//이 코드를 value로 하는 값을 처음에 세팅해줘야 하고, jsp에서 ajax로 값 변경시 다시 받아오는걸 해야 함
+		String comNation=comInfoVo.getNation();
+		logger.info("기업의 국가코드 comNation={}", comNation); //나중에 지우자
+		String comRegion=comInfoVo.getRegion();
+		logger.info("기업의 지역코드 comNation={}", comRegion); //나중에 지우자
+		
+		List<NationVO> nationList=comInfoService.selectNationList();
+		List<RegionVO> regionList=comInfoService.selectRegionList(comNation);
+		
+		//[2] cominfo의 comcode에 해당하는 이미지들이 있으면 불러와서 세팅한다.
+		List<ComImgInfoVO> imgList=comImgInfoService.selectAllImg(comInfoVo.getComCode());
+		logger.info("회사코드로 이미지 조회 결과, imgList.size={}", imgList.size());
+		
+		//회사정보, 회사이미지 세팅해주기 위해 모델에 add
+		
+		model.addAttribute("nationList", nationList);
+		model.addAttribute("regionList", regionList);
+		model.addAttribute("comInfoVo", comInfoVo);
+		model.addAttribute("imgList", imgList);
 	}
 	
 }

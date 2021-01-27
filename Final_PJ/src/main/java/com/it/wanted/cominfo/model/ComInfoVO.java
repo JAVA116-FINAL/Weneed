@@ -22,6 +22,8 @@ public class ComInfoVO {
 	private String comMemAgree;
 	private Timestamp comRegdate;
 	private String comInfoPassed;
+	private int comMemNo;
+	
 	public String getComCode() {
 		return comCode;
 	}
@@ -136,6 +138,13 @@ public class ComInfoVO {
 	public void setComInfoPassed(String comInfoPassed) {
 		this.comInfoPassed = comInfoPassed;
 	}
+	public int getComMemNo() {
+		return comMemNo;
+	}
+	public void setComMemNo(int comMemNo) {
+		this.comMemNo = comMemNo;
+	}
+	
 	@Override
 	public String toString() {
 		return "ComInfoVO [comCode=" + comCode + ", nation=" + nation + ", region=" + region + ", comName=" + comName
@@ -143,7 +152,7 @@ public class ComInfoVO {
 				+ profit + ", comSize=" + comSize + ", comIntro=" + comIntro + ", comYear=" + comYear + ", comEmails="
 				+ comEmails + ", comPhone=" + comPhone + ", comWebsite=" + comWebsite + ", comKeywords=" + comKeywords
 				+ ", comRecom=" + comRecom + ", comMemAgree=" + comMemAgree + ", comRegdate=" + comRegdate
-				+ ", comInfoPassed=" + comInfoPassed + "]";
+				+ ", comInfoPassed=" + comInfoPassed + ", comMemNo=" + comMemNo + "]";
 	}
 	
 }

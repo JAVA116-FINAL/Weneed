@@ -10,5 +10,7 @@ public interface ComInfoDAO {
 	List<RegionVO> selectRegionList(String nationCode);
 	List<ComSizeInfoVO> selectComSizeList();
 	int insertComInfo(ComInfoVO comInfoVo);
+	List<ComInfoVO> selectAllCompany();
+	int changeStatusYettoPass(String comCode);
 
 }
