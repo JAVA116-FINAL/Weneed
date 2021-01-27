@@ -945,20 +945,20 @@ ul.promoted-noticeList > li > a {
 /*상단 문서 Path 및 검색 영역 [E]*/
   
 @media (min-width: 992px)
-  {
+{
 #article-content-div {
     padding-right:80px;
+	}
 }
-  }
 .breadcrumbs{
-      padding-left: 0px;
-  }
+	padding-left: 0px;
+}
   
   
-  #new_request_container{
-		padding-top: 120px;
+#new_request_container{
+	padding-top: 120px;
   	padding-bottom: 150px;
-  }
+}
   
 @media (max-width: 769px) {
     #new_request_container{
@@ -968,19 +968,19 @@ ul.promoted-noticeList > li > a {
 }
 
   /*2020-01-07 추가 요청사항 Start */
-	.search-results-heading {
+.search-results-heading {
     color: #333333;
     font-size: 1.5em;
     margin-top: 10px;
     padding-bottom: 15px;
-  }
-  @media (min-width: 770px) {
+}
+@media (min-width: 770px) {
     .search-results-heading {
-    	font-size: 1.6em !important;
-  		font-weight: 600;
-      padding-bottom: 30px !important;
+	    font-size: 1.6em !important;
+	  	font-weight: 600;
+	    padding-bottom: 30px !important;
     }
-  }
+}
 
 .header {
     background-color: rgba(204, 96, 47, 0);
@@ -993,4 +993,13 @@ section.breadcrumb {
 }
 .v2{
   	margin-bottom:80px;
+}
+.noticeTitle{
+	color: #444444;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.search-result-meta>a{
+	color: #337ab7;
 }
