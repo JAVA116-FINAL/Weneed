@@ -1,4 +1,4 @@
-h1, span, label, li, a, i, button {
+h1, span, label, li, a, i, button, div {
 	color: #444444;
 }
 
@@ -14,9 +14,12 @@ label{
 input, select{
 	height: 45px;
 	padding: 5px 10px;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 
+span {
+	margin-right: 10px;
+}
 input[type=checkbox] {
 	margin-right: 10px;
 }
@@ -27,8 +30,9 @@ select{
 
 textarea{
 	width: 100%;
-	height: 100px;
-	padding: 10px 20px;
+	height: 150px;
+	padding: 10px 10px;
+	resize: none;
 }
 
 label{
@@ -40,7 +44,6 @@ label{
 
 .positionAdd-1stSec{
 	margin-bottom: 20px;
-	border-bottom: 1px solid #e1e2e3;	
 }
 
 .positionAdd-2ndSec{
@@ -54,12 +57,33 @@ label{
 .positionAdd-TitleSpan{
 	font-weight: bold;
 	display: block;
+	margin-bottom: 5px;
 }
 
 .positionAdd-select{
 	width: 40%;	
 }
 
+.positionAdd-selectedJikMuBoundDivs{
+	display: flex;
+}
+.positionAdd-selectedJikMuBound{
+	position: relative;
+}
+
+.positionAdd-selectedJikMuBound > button{
+	position: absolute;
+	right: 20px;
+	top: 17px;
+}
+
+.positionAdd-selectedJikmu{
+	background-color: #f4f4f4;
+	padding: 10px 25px 10px 10px;
+	font-size: 0.8em;
+	margin: 10px 10px;
+	border-radius: 30px;
+}
 .positionAdd-guideSpan{
 	color: #b9b9b9;
 	font-weight: bold;
@@ -85,15 +109,29 @@ label{
 
 .positionAdd-contentsWrapper{
 	border: 1px solid #e1e2e3;
-	padding: 10px 20px;
-	margin-top: 20px;
+	padding: 10px 20px 0px 20px;
+	margin: 20px 0px;
 }
 
 .positionAdd-DueDate{
 	display: flex;
 	align-items: center;
 }
+.positionAdd-DueDatePicker{
+	margin-right: 20px;
+}
 
+.positionAdd-abroadBound{
+	display: flex;
+	align-items: center;
+}
+.positionAdd-abroadBound > select{
+	width: 50%;
+}
+
+.positionAdd-contentsWrapper input{
+	width: 100%;	
+}
 
 
 
@@ -113,18 +151,63 @@ label{
 	margin: 10px 0px;
 	height: 45px;
 	align-items: center;
-	padding: 10px 5px;
+	padding: 5px 10px;
 	position: relative;
 }
 .positionAdd-managerEmail{
 	background-color: #ffffff;
 }
-.positionAdd-managerEmailAddBtn{
+.positionAdd-managerEmailDelBtn{
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
 }
 
+.positionAdd-mngEmailAddBtn{
+	border: 1px solid #e1e2e3;
+	font-size: 0.8em;
+	background-color: #ffffff;
+	padding: 5px 10px;
+	position: absolute;
+	right: 5px;
+	bottom: 7px;
+}
+
 .positionAdd-mngEmailInput{
 	width: 100%;
+}
+
+.positionAdd-mngEmailAddBound{
+	position: relative;
+}
+
+
+
+
+/********* 버튼 영역*********/
+
+.positionAdd-btnSec{
+	text-align: right;
+	border-top: 1px solid #e1e2e3;
+	padding-top: 20px;
+}
+
+.positionAdd-btn{
+	padding: 10px 20px;
+	width: 150px;
+	margin: 0px 10px 20px 0px;
+	border-radius: 3px;
+}
+
+.positionAdd-btn-temp{
+	border: 1px solid #258af9;
+	color: #258af9;
+	font-weight: bold;
+}
+
+.positionAdd-btn-request{
+	color: white;
+	background-color: #258af9;
+	font-weight: bold;
+	border: 1px solid #258af9;
 }

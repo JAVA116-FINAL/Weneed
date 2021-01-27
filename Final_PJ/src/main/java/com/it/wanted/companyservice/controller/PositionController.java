@@ -1,5 +1,6 @@
 package com.it.wanted.companyservice.controller;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,5 +19,9 @@ public class PositionController {
 	@RequestMapping("/positionAdd.do")
 	public void positionAdd() {
 		logger.info("포지션등록 페이지 조회");
+		
+		//직군 테이블 끌어오기
+		
+		//직무 테이블 끌어오기
 	}
 }
