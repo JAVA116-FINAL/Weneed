@@ -18,5 +18,9 @@ public interface NoticeService {
 	public List<NoticeVO> select_dept1(int notice_dept1);
 	public List<NoticeVO> select_dept2(int notice_dept2);
 	public Map<String, Object> selectDetail(int notice_no);
+	
+	//검색관련 쿼리
+	public List<Map<String, Object>> noticeSearch(String keyword);
+	public Map<String, Object> noticeSearchCnt(String keyword);
 
 }

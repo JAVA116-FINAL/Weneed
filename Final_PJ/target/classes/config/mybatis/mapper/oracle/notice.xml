@@ -29,7 +29,7 @@
 		    select*from noticeView
 		    where notice_dept1=3
 		    <![CDATA[and rownum<=6]]>
-		    order by notice_regdate desc
+		    order by notice_no desc
 		)
 	</select>
 	
@@ -39,7 +39,7 @@
 		    select*from noticeView
 		    where notice_dept2=#{notice_dept2}
 		    <![CDATA[and rownum<=6]]>
-		    order by notice_regdate desc
+		    order by notice_no desc
 		)
 	</select>
 	
@@ -67,12 +67,26 @@
 		where notice_no=#{notice_no}
 	</select>
 	
+	<select id="noticeSearch" parameterType="String" resultMap="detailMap">
+		select*from noticeView
+		where notice_title like '%'||#{keyword}||'%' 
+		or to_char(notice_content) like '%'||#{keyword}||'%'
+		order by notice_regdate desc
+	</select>
+	
+	<select id="noticeSearchCnt" parameterType="String" resultMap="detailMap">
+		select count(*) as cnt from noticeView
+		where notice_title like '%'||#{keyword}||'%' 
+		or to_char(notice_content) like '%'||#{keyword}||'%'
+		order by notice_regdate desc
+	</select>
+	
 	<select id="selectOther" parameterType="int" resultType="map">
 		select * from
 		(
 		    select*from noticeView
 		    where notice_dept2=#{notice_dept2} 
-		    <![CDATA[and rownum<6]]>
+		    <![CDATA[and rownum<6]]> <![CDATA[]]>
 		    order by notice_regdate desc
 		)
 	</select>

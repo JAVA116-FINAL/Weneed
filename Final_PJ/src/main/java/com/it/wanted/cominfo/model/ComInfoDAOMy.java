@@ -40,6 +40,16 @@ public class ComInfoDAOMy implements ComInfoDAO{
 	public int insertComInfo(ComInfoVO comInfoVo) {
 		return sqlSession.insert(namespace+"insertComInfo", comInfoVo);
 	}
+
+	@Override
+	public List<ComInfoVO> selectAllCompany() {
+		return sqlSession.selectList(namespace+"selectAllCompany");
+	}
+
+	@Override
+	public int changeStatusYettoPass(String comCode) {
+		return sqlSession.update(namespace+"changeStatusYettoPass", comCode);
+	}
 	
 	
 }

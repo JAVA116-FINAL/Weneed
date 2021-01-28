@@ -56,5 +56,15 @@ public class NoticeDAOMyBatis implements NoticeDAO{
 		return sqlSession.selectList(namespace+"selectByDept2", notice_dept2);
 	}
 
+	@Override
+	public List<Map<String, Object>> noticeSearch(String keyword) {
+		return sqlSession.selectList(namespace+"noticeSearch", keyword);
+	}
+
+	@Override
+	public Map<String, Object> noticeSearchCnt(String keyword) {
+		return sqlSession.selectOne(namespace+"noticeSearchCnt", keyword);
+	}
+
 
 }
