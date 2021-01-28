@@ -3,8 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.matchupMem">
-
-	
+	<select id="selectOpen" resultType="matchupMemVo">
+		select * from matchupMem where resumeopen_flag='Y'
+	</select>
 	
 	
 </mapper>

@@ -1,5 +1,7 @@
 package com.it.wanted.companyservice.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.it.wanted.career.model.CareerService;
@@ -15,13 +18,15 @@ import com.it.wanted.jikgun.model.JikgunService;
 import com.it.wanted.jikgun.model.JikgunVO;
 import com.it.wanted.jikmu.model.JikmuService;
 import com.it.wanted.jikmu.model.JikmuVO;
+import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.matchup.model.MatchupMemVO;
 
 @Controller
 @RequestMapping("/company")
-public class MatchUpController {
-	private static final Logger logger=LoggerFactory.getLogger(MatchUpController.class);
+public class CompanyMatchUpController {
+	private static final Logger logger=LoggerFactory.getLogger(CompanyMatchUpController.class);
 	@Autowired CareerService careerService;
+	@Autowired MatchupMemService matchupMemService;
 	@Autowired JikgunService jgService;
 	@Autowired JikmuService jmService;
 	
@@ -33,7 +38,7 @@ public class MatchUpController {
 	}
 	
 	@RequestMapping("/matchupSearch.do")
-	public String matchupSearch() {
+	public String matchupSearch(Model model) {
 		logger.info("기업서비스 매치업 검색/조회화면");
 		
 		//[1-1] 직군리스트 불러오기
@@ -50,8 +55,10 @@ public class MatchUpController {
 		
 		// [2] 전체 매치업이력서 불러오기, 이력서 공개여부 Y에 해당하는 
 		List<MatchupMemVO> matchupMemList=matchupMemService.selectOpen();
+		logger.info("이력서 공개된 매치업이력서 목록 조회 결과, matchupMemList.size={}", matchupMemList.size());
 		
-		List<Map<String, Integer>> careerList=null;
+		List<Map<Integer, Integer>> careerList=new ArrayList<Map<Integer,Integer>>();
+		List<Map<Integer, Integer>> eduList=new ArrayList<Map<Integer,Integer>>();
 		
 		for(MatchupMemVO vo : matchupMemList) {
 			int resumeNo=vo.getResumeNo();
@@ -77,12 +84,31 @@ public class MatchUpController {
 				}
 			}
 			
-		}
-		// 커리어VO 리스트 가져오기
+			Map<Integer, Integer> carMap=new HashMap<Integer, Integer>();
+			carMap.put(resumeNo, careerPeriod);
+			careerList.add(carMap);
+			
+			// [4] 이력서 번호에 해당하는 학력 (education) 불러와서 학교명, 전공및 학위 출력해주기
+			String eduResult="";
+			List<EducationVO> eduList=selectEducation(resumeNo);
+			
+			for(EducationVO vo : eduList) {
+				eduResult=vo.getEduName()+" "+vo.getEduMajor();
+
+				Map<Integer, String> eduMap=new HashMap<Integer, String>();
+				eduMap.put(resumeNo,eduResult);
+				eduList.add(eduMap);
+			}
+			
+		}//for
 		
 		
-		// [4] 이력서 번호에 해당하는 학력 (education) 불러와서 학교명, 전공및 학위 출력해주기
-		
+		model.addAttribute("jikgunList", jikgunList);
+		model.addAttribute("basicCode", basicCode);
+		model.addAttribute("jikmuList", jikmuList);
+		model.addAttribute("matchupMemList", matchupMemList);
+		model.addAttribute("careerList", careerList);
+		model.addAttribute("eduList", eduList);
 		
 		return "company/matchupSearch";
 	}
