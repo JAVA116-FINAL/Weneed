@@ -14,8 +14,8 @@ public class CareerCategoryDAOMybatis implements CareerCategoryDAO{
 	
 	private String namespace="com.mybatis.mapper.careerCategory.";
 	
-	public List<CareerCategoryVO> selectCategoryAll(){
-		List<CareerCategoryVO> list=sqlSession.selectList(namespace+"selectCategoryAll");
+	public List<CareerCategoryVO> selectCareerCategoryAll(){
+		List<CareerCategoryVO> list=sqlSession.selectList(namespace+"selectCareerCategoryAll");
 		
 		return list;
 	} 
