@@ -38,7 +38,7 @@ public class ProgramWriteController {
 	
 	//프로그램 글쓰기(등록) 화면 보여주기
 
-	@RequestMapping(value="/programWrite.do")
+	@RequestMapping(value="/programWrite.do", method=RequestMethod.GET)
 	public void insertGet(Model model){
 		//1. 
 		logger.debug("상품 등록 화면 보여주기");
@@ -117,7 +117,7 @@ public class ProgramWriteController {
 	}
 
 	
-	@RequestMapping("/programList.do")
+	@RequestMapping("/programAdminList.do")
 	public String list(@ModelAttribute SearchVO searchVo, Model model) {
 		//1
 		logger.info("글 목록 페이지, 파라미터 searchVo={}", searchVo);
