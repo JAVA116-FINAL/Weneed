@@ -2,11 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jobSalary.css">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#subCategory").change(function(){
+	  		$.ajax({
+				url:"<c:url value='/salaryChartData.do'/>",
+				type:"GET",
+				dataType:"json",
+				data:{
+					"jikgun_code": "JG001",
+					"jikmu_code":this.value
+				},
+				success:function(res){
+					alert(res.length);
+				},
+				error:function(xhr, status, error){
+					alert('error! : ' + error);
+				}
+			});
+	});
+	
+});
+
+</script>
 
 <div class="salary-chart-box">
 	<div class="container">
 		<section class="salary-chart">
-		
+			<canvas id="salaryChart"></canvas>
 		</section>
 		<div class="salary-chart-desc">
 			<button type="button" class="salary-chart-desc-btn">개발</button>
@@ -25,17 +52,17 @@
 						<div class="salary-select-eachGroup">
 							<select name="category" style="border:none;width:100%; outline:none;">
 								<option disable>직군</option>
-								<option value="">개발</option>
+								<option value="JG001">개발</option>
 							</select>
 						</div>
 					</div>
 					<div class="salary-select-each-job">
 						<div class="salary-select-eachGroup">
-							<select name="subCategory" style="border:none;width:100%; outline:none;">
+							<select id="subCategory" name="subCategory" style="border:none;width:100%; outline:none;">
 								<option disable>직무</option>
-								<option value="">서버 개발자</option>
-								<option value="">웹 개발자</option>
-								<option value="">프론트엔드 개발자</option>
+								<option value="JM001">서버 개발자</option>
+								<option value="2">웹 개발자</option>
+								<option value="3">프론트엔드 개발자</option>
 								<option value="">안드로이드 개발자</option>
 								<option value="">iOS 개발자</option>
 								<option value="">데이터 엔지니어</option>
