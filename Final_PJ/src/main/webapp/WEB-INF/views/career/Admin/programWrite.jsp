@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
     
 	<!-- 지원 css -->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programJiwon.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/js/jquery-ui.min.css'/>"> 
 	<!-- 캘린더 -->	
@@ -16,6 +17,7 @@
 	<link rel="stylesheet" href="/resources/demos/style.css">  
     <!-- ck에디터 -->
 	<script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+
 
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
@@ -33,7 +35,6 @@ $( document ).ready( function() {
 	  });
 	});
 	
-
 	
 /* 유효성 검사 */	
 $(function(){
@@ -42,6 +43,17 @@ $(function(){
 	$('form[name=proWrite1]').find('input[type=button]').click(function(){
 		location.href='<c:url value="/career/Admin/careerAdminMain.do"/>';
 	});
+	
+	
+/* 	$('#saveFirstpart').on("click", function(){
+		var param = "";
+		$(".proCateNo : checked").each(function(){
+			if (param == "")
+				param = "name=" + $(this).parent().children("#name".val();
+		
+		})
+	}) */
+	
 	
 	$('form[name=proWrite1]').submit(function(){
 		if($('#proName').val().length<1){
@@ -76,6 +88,95 @@ $(function(){
 	});
 	
 });
+
+/* 카테고리 번호 넘기기  ajax로*/
+/* $('#btnChk').click(function() {
+	var gproCateNo = "";
+
+	$("input[name=proCateNo]:checked").each(function() {
+		if(gproCateNo == ""){
+			gproCateNo = $(this).val();
+		} else {
+			gproCateNo = gproCateNo + "," + $(this).val();
+		}
+	});
+	$('#gproCateNo').val(gproCateNo);
+});
+
+
+$(document).ready(function(){
+	$('#saveFirstpart').click(function(){
+		$.ajax({
+			url:'/career/Admin/cateChecked.do',
+			type:'post',
+			dataType:'json',
+			data: $('#proWrite1 : input').serializeArray(),
+			success: function(res){
+				alert(res);
+			},
+			error: function(xhr,status, error){
+				alert("error발생:" + error);
+			}			
+		})
+	})
+}) */
+
+
+/* 
+
+$(document).ready(function(){
+	$('#saveFirstpart').click(function(){
+		
+		var gproCateNo = "";
+
+		$("input[name=proCateNo]:checked").each(function() {
+			if(gproCateNo == ""){
+				gproCateNo = $(this).val();
+			} else {
+				gproCateNo = gproCateNo + "," + $(this).val();
+			}
+		});
+		$('#gproCateNo').val(gproCateNo);
+		 
+		
+		$.ajax({
+			url:'/career/Admin/cateChecked.do',
+			type:'post',
+			dataType:'json',
+			data: $("#proWrite1").serialize(),
+			success: function(res){
+				alert(res);
+			},
+			error: function(xhr,status, error){
+				alert("error발생:" + error);
+			}			
+		})
+	})
+})
+*/
+/* function checkboxArr(){
+	var checkArr=[];
+	$("input[name='proWrite1']:checked").each(function(i)){
+		checkArr.push($(this).val());  //체크된 것만 값을 뽑아서 배열에 푸쉬
+	}
+	
+	$.ajax({
+		url:'/career/Admin/cateChecked.do',
+		type:'post',
+		dataType:'json',
+		data:{
+			"checkedValues": checkArr
+		},
+		success: function(res){
+			alert(res);
+		},
+		error: function(xhr.status, error){
+			alert("error발생:" + error);
+		}
+		
+	}); 
+}
+*/
 </script>
 
 	
@@ -97,8 +198,8 @@ $(function(){
 		 	 <div class="navbar-brand">
 				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
-			  <li class="nav-item active"><a class="nav-link" href="#title">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="#title1">프로그램 조회</a></li>
+			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
+			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programList.do'/>">프로그램 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
 			    <a name="title"></a>   
@@ -112,38 +213,41 @@ $(function(){
 
 <section class="section blog-wrap" style="margin-top:-30px;">
 
+
 <div style = "width:980px; max-width: 100%; margin:auto;">
-	<form name="proWrite1" action="programComplete1.do?proNo=" method="post">
+	<form name="proWrite1" method="post" action='<c:url value="/career/Admin/programWrite.do"/>' enctype="multipart/form-data">
 		<fieldset>
 		<legend style="color:#258bf7;"><b>프로그램 등록, 첫번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
 		<br>
 			<!-- 프로그램 이름 -->
 		        <div class="proInfoDiv">
 					<label class="proWriteLabel"> 프로그램 이름: </label>
-					<input type="text" class="programTitleTextField" id="proName" name="proName" placeholder="프로그램 이름을 적어주세요">
+					<input type="text" class="programTitleTextField" id="programName" name="programName" placeholder="프로그램 이름을 적어주세요">
 		        </div>
 			<!-- 프로그램 카테고리 -->
-		        <div class="proInfoDiv" id="cateName">
-					<label id="cateName" class="proWriteLabel"> 프로그램 카테고리: </label><br><br>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="인사">인사</a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="Wanted Plus"> Wanted Plus </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="커리어"> 커리어 </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="경영·비즈니스"> 경영·비즈니스 </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="기술/IT"> 기술/IT </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="마케팅·광고"> 마케팅·광고 </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="크리에이티브"> 크리에이티브 </a></label><br>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="디자인"> 디자인 </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="리더십"> 리더십 </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="교육"> 교육 </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="UX"> UX </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="데이터"> 데이터 </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="브랜딩"> 브랜딩 </a></label>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="개발"> 개발 </a></label> 
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="핀테크"> 핀테크 </a></label> 
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="건강"> 건강 </a></label><br>
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="금융"> 금융 </a></label> 
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="영어"> 영어 </a></label> 
-					<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="고객서비스·리테일"> 고객서비스·리테일 </label> 
+		        <div class="proInfoDiv" id="">
+					<label class="proWriteLabel"> 프로그램 카테고리: </label><br><br>
+					<div class="proCateNo">
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="81">인사</a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="82"> Wanted Plus </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="83"> 커리어 </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="84"> 경영·비즈니스 </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="85"> 기술/IT </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="86"> 마케팅·광고 </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="87"> 크리에이티브 </a></label><br>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="88"> 디자인 </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="89"> 리더십 </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="90"> 교육 </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="91"> UX </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="92"> 데이터 </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="93"> 브랜딩 </a></label>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="94"> 개발 </a></label> 
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="95"> 핀테크 </a></label> 
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="96"> 건강 </a></label><br>
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="97"> 금융 </a></label> 
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="98"> 영어 </a></label> 
+						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="99"> 고객서비스·리테일 </label> 
+		       		</div>
 		        </div>
 		        
 			<!-- 프로그램 타입 (이벤트, 북클럽, 교육강연) -->
@@ -206,12 +310,12 @@ $(function(){
 		    <!-- 관리자 번호는 세션에서 넘겨주기? -->        
 		        <div class="proInfoDiv">
 					<!-- 관리자 번호 -->
-					<input type="hidden" class="" id="adminNo" name="adminNo">
+					<input type="text" class="" id="adminNo" name="adminNo">
 		        </div>
 		        
 		 	<!-- 프로그램 내용등록 페이지로 이동 버튼 -->       
 		        <div class="btnCenter" style="margin-top:120px;">
-		            <input type = "submit" class="programBtn" value="저장"/>
+		            <input type = "submit" class="programBtn" id="saveFirstpart" value="저장"/>
 		            <input type = "Button" class="programBtn" value="취소" />         
 		        </div>
 		</fieldset>
@@ -228,8 +332,11 @@ $(function(){
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
 <script type="text/javascript">
-/* 캘린더 */
 
+/* 프로그래스 바 */
+
+
+/* 캘린더 */
 $(function() {
        //input을 datepicker로 선언
 	$.datepicker.setDefaults({

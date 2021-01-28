@@ -1,11 +1,12 @@
 package com.it.wanted.career.admin.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ProgramVO {
 	private int programNo; 		/* 프로그램 번호 */
 	private int adminNo; 		/* ★관리자 번호 FK */
-	private int proCateNo; 		/* 카테고리 번호 */
+	private List<String> proCateNo; 		/* 카테고리 번호 */
 	private String proName; 	/* 프로그램 이름 */
 	private String proSponsor; 	/* 주최자 */
 	private int proPrice; 		/* 가격 */
@@ -32,12 +33,12 @@ public class ProgramVO {
 		this.adminNo = adminNo;
 	}
 	
-	public int getProCateNo() {
+	public List<String> getProCateNo() {
 		return proCateNo;
 	}
 	
-	public void setProCateNo(int proCateNo) {
-		this.proCateNo = proCateNo;
+	public void setProCateNo(List<String> valueArr) {
+		this.proCateNo = valueArr;
 	}
 	
 	public String getProName() {
@@ -103,15 +104,15 @@ public class ProgramVO {
 	public void setRegiEndDate(Timestamp regiEndDate) {
 		this.regiEndDate = regiEndDate;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ProgramWriteVO [programNo=" + programNo + ", adminNo=" + adminNo + ", proCateNo=" + proCateNo
-				+ ", proName=" + proName + ", proSponsor=" + proSponsor + ", proPrice=" + proPrice + ", proStartDate="
-				+ proStartDate + ", regdate=" + regdate + ", proType=" + proType + ", imageUrl=" + imageUrl
-				+ ", regiEndDate=" + regiEndDate + "]";
+		return "ProgramVO [programNo=" + programNo + ", adminNo=" + adminNo + ", proCateNo=" + proCateNo + ", proName="
+				+ proName + ", proSponsor=" + proSponsor + ", proPrice=" + proPrice + ", proStartDate=" + proStartDate
+				+ ", regdate=" + regdate + ", proType=" + proType + ", imageUrl=" + imageUrl + ", regiEndDate="
+				+ regiEndDate + "]";
 	}
-	
-	
+
+
 	
 }

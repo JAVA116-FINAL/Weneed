@@ -90,11 +90,9 @@ ol.breadcrumbs {
 		<div class="col-md-3 col-sm-3 col-xs-12 breadcrumb-container-search"
 			style="float: right;">
 			<form role="search" class="search" data-search=""
-				action="/hc/ko/search" accept-charset="UTF-8" method="get">
-				<input name="utf8" type="hidden" value="✓"><input
-					type="search" name="query" id="query" placeholder="검색"
-					aria-label="검색"> <input type="submit" name="commit"
-					value="검색">
+				action="<c:url value='notice_search.do'/>" accept-charset="UTF-8" method="post">
+				<input type="search" name="keyword" id="id="notice_search" placeholder="검색" aria-label="검색">
+				<input type="submit" name="commit"value="검색">
 			</form>
 		</div>
 	</div>

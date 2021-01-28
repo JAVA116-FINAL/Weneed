@@ -1,5 +1,7 @@
 package com.it.wanted.freelancer.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,4 +18,16 @@ public class FreelancerMainController {
       
       return "freelancer/freelancerMain";
    }
+   
+	/*
+	 * @RequestMapping("/logout.do") public String logout(HttpSession session) {
+	 * String email = (String) session.getAttribute("email");
+	 * 
+	 * logger.info("로그아웃 처리, 파라미터 email={}", email);
+	 * 
+	 * session.removeAttribute("email"); session.removeAttribute("name");
+	 * session.removeAttribute("mem_no"); session.removeAttribute("fileName");
+	 * 
+	 * return "redirect:/freelancerMain.do"; }
+	 */
 }
