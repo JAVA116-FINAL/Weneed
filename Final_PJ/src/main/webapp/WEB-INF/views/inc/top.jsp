@@ -335,6 +335,29 @@
   			});
 		});
   		
+  		/////////////////////////////////
+  		//비밀번호 찾기
+  		$("#findPwdBtn").click(function(){
+  	  		$.ajax({
+  				url:"<c:url value='/findPwd.do'/>",
+  				type:"POST",
+  				data:{
+  					'email':$("#email").val()
+  				},
+  				async:false,
+  				success:function(res){
+  					var msg ="이메일로 임시 비밀번호를 발송하였습니다.";
+  	  				alert(msg);
+  				},
+  				error:function(xhr, status, error){
+  					alert('error! : ' + error);
+  				}  				
+  			});
+		});
+  		
+  		
+  		
+  		
   		$('.profileButton').click(function(){
   			$('.profileImg').toggleClass('profile-border');
   		})
@@ -585,7 +608,7 @@
 							        			<input type="email" placeholder="이메일을 입력해주세요." id="email" class="ge-inputEmail" value="">
 							        		</div>
 							        	</div>
-							        	<input type ="button" class="sendBtn" id="pwdSearchBtn" value="전송" style="outline:none;">
+							        	<input type ="button" class="sendBtn" id="findPwdBtn" value="전송" style="outline:none;">
 							        </form>
 							        <p>* 가입하신 이메일 계정으로 임시 비밀번호를 전송해 드립니다.</p>
 						        </div>

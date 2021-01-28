@@ -1,5 +1,7 @@
 package com.it.wanted.member.model;
 
+import javax.servlet.http.HttpServletResponse;
+
 public interface MemberService {
 	//이메일 중복확인시 사용
 	public static final int EXIST_EMAIL=1; //이메일이 이미 존재하는 경우
@@ -20,4 +22,10 @@ public interface MemberService {
 	public int loginCheck(String email, String pwd);
 	public MemberVO selectMember(String email);
 	public int checkLoginEmail(String email);
+	
+	//이메일 발송
+	public void sendEmail(MemberVO vo, String div);
+	
+	//비밀번호 찾기
+	public void findPwd(HttpServletResponse response, MemberVO vo);
 }
