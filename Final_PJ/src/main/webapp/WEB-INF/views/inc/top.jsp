@@ -26,9 +26,9 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/slick-carousel/slick/slick-theme.css">
 
   <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/gaeun.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/clear.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/gaeun.css">
   
   <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
   <!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->
@@ -382,6 +382,10 @@
 .profile-border{
 	border:1px solid #3366ff;
 }
+.modal-open .modal{
+	overflow-y:none;
+}
+
 </style>  
 </head>
 
@@ -392,7 +396,7 @@
 		<nav class="navbar navbar-expand-lg navigation navbar-border" id="navbar">
 			<div class="container container-top">
 			 	 <a class="navbar-logo" href="<c:url value='/index.do'/>">
-				  	<img src="<c:url value='/resources/images/wantedLogo.png'/>" alt="" class="img-fluid top-logo">
+				  	<img src="<c:url value='/resources/images/weneedLogo.png'/>" alt="" class="img-fluid top-logo" style="padding-top:4px;">
 				  </a>
 	
 			  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
@@ -400,7 +404,7 @@
 			  	</button>
 		  
 				<ul class="navbar-nav">
-					<li class="nav-item dropdown" id="navigation">
+					<li class="nav-item dropdown" id="navigation" style="padding: 6px 6px;">
 						<a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색 </a>
 						<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; border-top:0; margin-top:0; line-height:17px; border-radius:0;">
 							<li><a class="dropdown-item" href="department.html" style="border-bottom:none;">개발<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
@@ -415,17 +419,17 @@
 							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px 15px 20px;font-size:13px;border-bottom:none;">더보기<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
 						</ul>	
 				  	</li>
-				  	<li class="nav-item" id="career"><a class="nav-link" href="<c:url value='/career/Mainpage/careerMain.do'/>">커리어 성장</a></li>
-				  	<li class="nav-item" id="jobSalary"><a class="nav-link" href="<c:url value='/jobSalary/jobSalary.do'/>">직군별 연봉</a></li>
+				  	<li class="nav-item" id="career" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/career/Mainpage/careerMain.do'/>">커리어 성장</a></li>
+				  	<li class="nav-item" id="jobSalary" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/jobSalary/jobSalary.do'/>">직군별 연봉</a></li>
 				  	<c:if test="${empty sessionScope.email }">
-				  		<li class="nav-item" id="resume"><a class="nav-link" href="<c:url value='/resume/resumeIntro.do'/>">이력서</a></li>
-				  		<li class="nav-item" id="matchupMem"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemIntro.do'/>">매치업</a></li>
+				  		<li class="nav-item" id="resume" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/resume/resumeIntro.do'/>">이력서</a></li>
+				  		<li class="nav-item" id="matchupMem" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemIntro.do'/>">매치업</a></li>
 				  	</c:if>
 				  	<c:if test="${!empty sessionScope.email }">
-				  		<li class="nav-item" id="resume"><a class="nav-link" href="<c:url value='/resume/resumeList.do'/>">이력서</a></li>
-				  		<li class="nav-item" id="matchupMem"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemList.do'/>">매치업</a></li>
+				  		<li class="nav-item" id="resume" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/resume/resumeList.do'/>">이력서</a></li>
+				  		<li class="nav-item" id="matchupMem" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemList.do'/>">매치업</a></li>
 				  	</c:if>
-				   	<li class="nav-item"><a class="nav-link" href="<c:url value='/freelancer/freelancerMain.do'/>">프리랜서</a></li>
+				   	<li class="nav-item" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/freelancer/freelancerMain.do'/>">프리랜서</a></li>
 				</ul>
 			  
 				<aside class="beforeLoginAside">
@@ -464,8 +468,8 @@
 						  <div class="modal-dialog" style="padding-left:45px; top:2%;">
 						    <div class="modal-content" style="width:400px; overflow-y:auto;">
 						      <div class="modal-header gaeun-modal-header">
-						        <h5 class="modal-title h6 modal-wanted-title" id="mySmallModalLabel"><img src="${pageContext.request.contextPath}/resources/images/wantedLogo.png" alt="" class="img-fluid modalLogin-logo"></h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none;">
+						        <h5 class="modal-title h6 modal-wanted-title" id="mySmallModalLabel"><img src="${pageContext.request.contextPath}/resources/images/weneedLogo.png" alt="" class="img-fluid modalLogin-logo"></h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none; padding-top:22px;">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
