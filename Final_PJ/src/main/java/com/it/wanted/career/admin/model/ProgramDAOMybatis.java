@@ -14,7 +14,7 @@ public class ProgramDAOMybatis implements ProgramDAO{
 
 	@Autowired 
 	private SqlSessionTemplate sqlSession; 
-	private String namespace="com.mybatis.mapper.program.";
+	private String namespace="com.mybatis.mapper.oracle.program.";
 	
 	public int insertProgram(ProgramVO proVo) {
 		int cnt = sqlSession.insert(namespace+"insertProgram", proVo);
