@@ -98,7 +98,7 @@ body{
 		
 		
 		<div class="img_admin_career">
-			<a href="programList.do"><img alt="등록된 프로그램 조회 페이지로 이동" src="<c:url value='/resources/images/career/programList.JPG'/>" class="campus-recruit-img" style="width:100%;"></a>
+			<a href="programAdminList.do"><img alt="등록된 프로그램 조회 페이지로 이동" src="<c:url value='/resources/images/career/programList.JPG'/>" class="campus-recruit-img" style="width:100%;"></a>
 		</div>
 		
 		<!-- 프로그램 등록 페이지로 이동 -->

@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.it.wanted.common.FileUploadUtil;
 import com.it.wanted.career.admin.model.ProgramService;
 import com.it.wanted.career.admin.model.ProgramVO;
+import com.it.wanted.career.cate.model.CareerCategoryService;
+import com.it.wanted.career.cate.model.CareerCategoryVO;
+import com.it.wanted.common.FileUploadUtil;
+import com.it.wanted.common.PaginationInfo;
+import com.it.wanted.common.SearchVO;
+import com.it.wanted.common.Utility;
 
 @Controller
 @RequestMapping("/career/Admin")
@@ -27,37 +31,29 @@ public class ProgramWriteController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ProgramWriteController.class);
 	
+	@Autowired private CareerCategoryService careerCategoryService;
 	@Autowired private ProgramService programService;
 	@Autowired private FileUploadUtil fileUtil;
 	
 	
 	//프로그램 글쓰기(등록) 화면 보여주기
-	@RequestMapping(value="/programWrite.do", method=RequestMethod.GET)
-	public String programWrite_get() {
-		logger.info("programWrite 프로그램 등록 글쓰기 페이지 보여주기");		
-		
-		return "career/Admin/programWrite";
-	}
 
-	/*
-	 * //ajax이용해서
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/cateChecked.do", method=RequestMethod.POST) public
-	 * ProgramVO cateCheckbox(@ModelAttribute ProgramVO proVo) {
-	 * logger.info("cateChecked ajax proVo={}", proVo);
-	 * 
-	 * ProgramVO proVoResult = new ProgramVO();
-	 * proVoResult.setProName(proVo.getProName());
-	 * proVoResult.setP(proVo.getProName());
-	 * proVoResult.setProName(proVo.getProName());
-	 * proVoResult.setProName(proVo.getProName());
-	 * proVoResult.setProName(proVo.getProName());
-	 * 
-	 * 
-	 * return proVoResult; }
-	 */
+	@RequestMapping(value="/programWrite.do", method=RequestMethod.GET)
+	public void insertGet(Model model){
+		//1. 
+		logger.debug("상품 등록 화면 보여주기");
+
+		List<CareerCategoryVO> ccgList=careerCategoryService.selectCareerCategoryAll();
+		
+		logger.debug("카테고리 조회 결과 ccgList.size{}=", ccgList.size());
+		
+		model.addAttribute("ccgList", ccgList);
+		//4
+}
+	
+
+
+
 	
 	//프로그램 등록하기 (등록 처리)
 	@RequestMapping(value="/programWrite.do", method=RequestMethod.POST)
@@ -99,12 +95,6 @@ public class ProgramWriteController {
 	}
 		
 	
-	/*
-	 * @RequestMapping("/programComplete1.do") public void programComplete1() {
-	 * 
-	 * logger.info("programComplete1 프로그램 기본정보 등록완료 디테일 페이지 보여주기"); }
-	 */
-
 
 	@RequestMapping("/programComplete1.do")
 	public String programDetail_get(@RequestParam(defaultValue = "0") int programNo,
@@ -126,4 +116,77 @@ public class ProgramWriteController {
 		return "career/Admin/programComplete1";
 	}
 
+	
+	@RequestMapping("/programAdminList.do")
+	public String list(@ModelAttribute SearchVO searchVo, Model model) {
+		//1
+		logger.info("글 목록 페이지, 파라미터 searchVo={}", searchVo);
+		
+		//2
+		//페이징 처리 관련 셋팅
+		//[1] PaginationInfo 생성
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//[2] SearchVo 셋팅
+		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+				
+		List<ProgramVO> plist=programService.selectAll(searchVo);
+		logger.info("글목록 결과, plist.size={}", plist.size());
+		
+		int totalRecord=programService.selectTotalRecord(searchVo);
+		logger.info("글 개수, totalRecord={}", totalRecord);		
+		pagingInfo.setTotalRecord(totalRecord);
+
+		//3. 모델에 결과 저장
+		model.addAttribute("plist", plist);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		//4. 뷰페이지 리턴
+		return "career/Admin/programList";
+	}	
+	
+	
+	
+	
+	
+
+	@RequestMapping("/programWrite2.do")
+	public void programWrite2() {
+		logger.info("programWrite2 관리자 프로그램 내용 등록 페이지 보여주기");
+	}
+
+	@RequestMapping("/programEdit1.do")
+	public void programEdit1() {
+		logger.info("programEdit1 프로그램 내용1 수정페이지 보여주기");
+	}
+
+	@RequestMapping("/programDelete.do")
+	public void programDelete() {
+		logger.info("programDelete 프로그램 내용1 삭제페이지 보여주기");
+	}
+
+
+	@RequestMapping("/programCompleteAll.do")
+	public void programCompleteAll() {
+		logger.info("programCompleteAll 프로그램 등록완료 페이지 보여주기");
+	}
+
+	@RequestMapping("/programDetail.do")
+	public void programDetail() {
+		logger.info("programDetail 프로그램 등록 미리보기 페이지 보여주기");
+	}
+
+	@RequestMapping("/programEditTotal.do")
+	public void programEditTotal() {
+		logger.info("programEditTotal 프로그램 전체 수정페이지 보여주기");
+	}
+
+
+
+	
 }
+

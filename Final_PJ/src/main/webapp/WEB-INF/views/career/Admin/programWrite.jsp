@@ -60,9 +60,9 @@ $(function(){
 			alert('프로그램 이름을 입력하세요');
 			$('#proName').focus();
 			event.preventDefault();
-		}else if($("input[name=cateName]:checkbox").is(':checked')==false){
-			alert('카테고리를 선택하세요');
-			location.href="#cateName";
+		}else if($('#proCateNo').val()=='0'){
+			alert('프로그램 카테고리를 선택하세요');
+			$('#proCateNo').focus();
 			event.preventDefault();
 		}else if($('#proType').val()=='0'){
 			alert('프로그램 타입을 선택하세요');
@@ -199,7 +199,7 @@ $(document).ready(function(){
 				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
 			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programList.do'/>">프로그램 조회</a></li>
+			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
 			    <a name="title"></a>   
@@ -225,34 +225,26 @@ $(document).ready(function(){
 					<input type="text" class="programTitleTextField" id="programName" name="programName" placeholder="프로그램 이름을 적어주세요">
 		        </div>
 			<!-- 프로그램 카테고리 -->
-		        <div class="proInfoDiv" id="">
-					<label class="proWriteLabel"> 프로그램 카테고리: </label><br><br>
-					<div class="proCateNo">
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="81">인사</a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="82"> Wanted Plus </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="83"> 커리어 </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="84"> 경영·비즈니스 </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="85"> 기술/IT </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="86"> 마케팅·광고 </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="87"> 크리에이티브 </a></label><br>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="88"> 디자인 </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="89"> 리더십 </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="90"> 교육 </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="91"> UX </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="92"> 데이터 </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="93"> 브랜딩 </a></label>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="94"> 개발 </a></label> 
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="95"> 핀테크 </a></label> 
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="96"> 건강 </a></label><br>
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="97"> 금융 </a></label> 
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="98"> 영어 </a></label> 
-						<label><a><input type="checkbox" class="cateCheckBox" name="proCateNo" value="99"> 고객서비스·리테일 </label> 
-		       		</div>
+			<div class="proInfoDiv" id="">
+			
+			<label for="proCateNo">프로그램 카테고리</label>
+            <select name="proCateNo" id="proCateNo" title="카테고리" class="programTitleTextField">
+            	<option value="0">선택하세요</option>
+            	<!-- 반복문 시작 -->	
+            	<c:forEach var="ccgVo" items="${ccgList }">
+					<option value="${ccgVo.proCateNo}">
+						${ccgVo.proCateName }</option>
+				</c:forEach>  	
+ 				<!-- 반복문 끝 -->	         
+            </select>            
+			
+			
+
 		        </div>
 		        
 			<!-- 프로그램 타입 (이벤트, 북클럽, 교육강연) -->
 		        <div class="proInfoDiv">
-					<label class="proWriteLabel"> 프로그램 타입: </label>
+					<label for="proType" class="proWriteLabel"> 프로그램 타입: </label>
 					<select name="proType" id="proType" title="프로그램 타입" class="programTitleTextField">
 						<option value="0">프로그램 타입을 선택해주세요</option>
 						
@@ -278,25 +270,25 @@ $(document).ready(function(){
 		
 			<!-- 주최자 -->
 		        <div class="proInfoDiv">
-					<label class="proWriteLabel"> 주최자: </label>
+					<label for="proSponsor" class="proWriteLabel"> 주최자: </label>
 					<input type="text" class="programTitleTextField" id="proSponsor" name="proSponsor" placeholder="주최자를 적어주세요">
 		        </div>
 		
 			<!-- 프로그램 시작일 -->
 		        <div class="proInfoDiv">
-					<label class="proWriteLabel"> 프로그램 시작일: </label>
+					<label for="proStartDate" class="proWriteLabel"> 프로그램 시작일: </label>
 					<input type="text" class="programTitleTextField" id="proStartDate" name="proStartDate" placeholder="프로그램 시작일을 선택해주세요">
 		        </div>
 		
 			<!-- 프로그램 가격 -->
 		        <div class="proInfoDiv">
-					<label class="proWriteLabel"> 프로그램 가격: </label>
+					<label for="proPrice" class="proWriteLabel"> 프로그램 가격: </label>
 					<input type="text" class="programTitleTextField" id="proPrice" name="proPrice" placeholder="프로그램 가격을 적어주세요">
 		        </div>
 		
 			<!-- 프로그램 신청 마감일 -->
 		        <div class="proInfoDiv">
-					<label class="proWriteLabel"> 프로그램 신청 마감일: </label>
+					<label for="regiEndDate" class="proWriteLabel"> 프로그램 신청 마감일: </label>
 					<input type="text" class="programTitleTextField" id="regiEndDate" name="regiEndDate" placeholder="프로그램 신청 마감일을 선택해주세요">
 		        </div>
 		
@@ -333,14 +325,13 @@ $(document).ready(function(){
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
 <script type="text/javascript">
 
-/* 프로그래스 바 */
 
 
 /* 캘린더 */
 $(function() {
        //input을 datepicker로 선언
 	$.datepicker.setDefaults({
-			dateFormat: 'yy-mm-dd' //Input Display Format 변경
+			dateFormat: 'yy/mm/dd' //Input Display Format 변경
            ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
            ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
            ,changeYear: true //콤보박스에서 년 선택 가능
@@ -352,12 +343,19 @@ $(function() {
            ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
            ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
            ,minDate: "+1D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-           ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
+           ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)     
+	
+       		// timepicker 설정
+               ,timeFormat:'HH:mm:ss'
+               ,controlType:'select'
+               ,oneLine:true
+               ,ampm:true
        });                    	
        
 		$("#proStartDate").datepicker();
 		$("#regiEndDate").datepicker();
 
+		
        //초기값을 오늘 날짜로 설정
             $('#proStartDate').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)   });
 
@@ -367,6 +365,3 @@ $(function() {
 </script>
 </body>
 </html>
-
-
-

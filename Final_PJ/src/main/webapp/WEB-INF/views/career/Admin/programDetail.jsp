@@ -292,7 +292,7 @@ $( document ).ready( function() {
 				
 							<div style="text-align:center";>
 								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programEditTotal.do?proNo=${proVo.proNo}'" style="outline:none;">수정</button>					      									
-								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programList.do'" style="outline:none;">프로그램 목록</button>					      									
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programAdminList.do'" style="outline:none;">프로그램 목록</button>					      									
 								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/careerAdminMain.do'" style="outline:none; width:160px;">커리어성장 메인으로</button>					      									
 							</div>
 			</div>
