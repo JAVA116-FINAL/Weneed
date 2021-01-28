@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -218,10 +217,15 @@ public class RegisterController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/imgUpload.do", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
-	public List<Map<String, Object>> imgMultiUpload_post( MultipartHttpServletRequest mRequest) throws Exception {
+	public List<Map<String, Object>> imgMultiUpload_post(MultipartHttpServletRequest mRequest) throws Exception {
 		logger.info("이미지 업로드 처리 시작, 파라미터 mRequest={}", mRequest);
-		
 		String upFilePath="C:\\Users\\jazzo\\git\\Wanted_jayeon\\Final_PJ\\src\\main\\webapp\\companyImgUpload";
+		
+		List<MultipartFile> fileList=mRequest.getFiles("test1");
+		
+		for(MultipartFile mf : fileList) {
+			mf.
+		}
 		
 		List<Map<String, Object>> fileList=fileUpload.fileUplaod_comImg(mRequest);
 		

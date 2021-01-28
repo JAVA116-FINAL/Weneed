@@ -42,6 +42,7 @@ $(function(){
 			url:'<c:url value="/company/imgUpload.do"/>',
 			type:'POST',
 			data:data,
+			enctype:"multipart/form-data",
 			contentType:false, // false -> multipart/form-data
 							   // true -> application/x-www-form-urlencoded 
 			processData:false, // true: get방식 / false: post방식

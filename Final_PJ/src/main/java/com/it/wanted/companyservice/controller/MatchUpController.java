@@ -9,11 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.it.wanted.career.model.CareerService;
+import com.it.wanted.career.model.CareerVO;
+import com.it.wanted.matchup.model.MatchupMemVO;
+
 @Controller
 @RequestMapping("/company")
 public class MatchUpController {
 	private static final Logger logger=LoggerFactory.getLogger(MatchUpController.class);
-//	@Autowired matchupmemService matchupMemService;
+	//@Autowired matchup matchupMemService;
+	@Autowired CareerService careerService;
 	
 	@RequestMapping("/matchupMain.do")
 	public String matchupMain() {
@@ -21,7 +26,7 @@ public class MatchUpController {
 		
 		return "company/matchupMain";
 	}
-	
+	/*
 	@RequestMapping("/matchupSearch.do")
 	public String matchupSearch() {
 		logger.info("기업서비스 매치업 검색/조회화면");
@@ -35,10 +40,15 @@ public class MatchUpController {
 		
 		for(matchupmemvo vo : matchupMemList) {
 			int resumeNo=vo.getresumeno();
+			// [3] 이력서 번호에 해당하는 경력 (career) 불러와서 기간 계산하기
+			CareerVO careerVo=careerService.selectCareer(resumeNo);
+			int careerPeriod=0;
+			int startY=Integer.parseInt(careerVo.getStartYear());
+			int startM=Integer.parseInt(careerVo.getStartMonth());
+			int endY=Integer.parseInt(careerVo.getEndYear());
+			int endM=Integer.parseInt(careerVo.getEndMonth());
 			
-			careerVo
 		}
-		// [3] 이력서 번호에 해당하는 경력 (career) 불러와서 기간 계산하기
 		// 커리어VO 리스트 가져오기
 		
 		
@@ -54,13 +64,13 @@ public class MatchUpController {
 		 		 마감월 - 시작월 이 <6이면 년도만 셀렉
 		 		 			 >=6이면 년도+1 셀렉
 		 }
-		 */
 		
 		// [4] 이력서 번호에 해당하는 학력 (education) 불러와서 학교명, 전공및 학위 출력해주기
 		
 		
 		return "company/matchupSearch";
 	}
+	*/
 	
 	@RequestMapping("/modal/modalButtonsTest.do")
 	public String modalTest() {
