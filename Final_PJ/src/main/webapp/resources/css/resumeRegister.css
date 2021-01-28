@@ -336,3 +336,20 @@ textarea.content-textArea_jy.innerTA_jy {
     width: 55%;
     vertical-align: -webkit-baseline-middle;
 }
+
+input.dep_jy.eduDetail_jy {
+    display: inline-block;
+    text-align: left;
+    width: 41%;
+    margin-left: 569px;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.eduDetail_jy+button#btEduDel_jy {
+    /* position: absolute; */
+    /* right: 22%; */
+    top: -33px;
+}
+
+::before {}
