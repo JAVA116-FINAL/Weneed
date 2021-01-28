@@ -8,10 +8,14 @@
 
 
 <script type="text/javascript">
+
+
 $(function(){	
+	
 	var careerNo=0;//자식 li append 할때 위치 잡기위해 필요
 	var c=0;//경력카운트
 	var a=0;//성과 카운트
+	var e=0;//edu 카운트
 	 $('.soltableli_jy').sortable();
 	 $('.soltableli_jy').disableSelection();
 	 	 	 
@@ -32,11 +36,13 @@ $(function(){
 	//경력추가버튼누르면
 	// $('#btcareer_jy').click(function(){
 	 $('.btAdd_jy').click(function(){
+		var resumeNo= ${resumeVo.resumeNo}
+	 
 		 if($(this).attr("id")=="btcareer_jy"){
 			 $.ajax({
 				url:"<c:url value='/career/careerRegister.do'/>",
 				type:"get",
-				data: "resumeNo="+${resumeVo.resumeNo},
+				data: "resumeNo="+resumeNo,
 				dataType:"json",
 				success:function(res){
 					//alert(res);
@@ -45,13 +51,30 @@ $(function(){
 					}				
 				},
 				error:function(xhr,status,error){
-					alert(error);
+					alert("error:"+error);
 				}
 			});
-		 }//if
+		 }else if($(this).attr("id")=="btEdu_jy"){
+			 $.ajax({
+					url:"<c:url value='/education/educationRegister.do'/>",
+					type:"get",
+					data: "resumeNo="+ resumeNo,
+					dataType:"json",
+					success:function(resEdu){
+						//alert(resEdu);
+						if(resEdu!=null){
+							$.makeForm3(resEdu);		
+						}				
+					},
+					error:function(xhr,status,error){
+						alert("error!!:"+error);
+					}
+				});
+			 
+			 
+		}//if
 		 
-		 
-	 });		
+	 });//클릭이벤트		
 	
 	//성과추가버튼누르면
 	 $(document).on("click","#btach_jy", function(){
@@ -76,8 +99,8 @@ $(function(){
 	 $.makeForm1=function(res){
 			 var crrStr="";
 			 
-			 careerNo=res.careerNo;
-			 crrStr+="<li class='crrLi_jy' id='crr"+careerNo+"'>";
+			 
+			 crrStr+="<li class='crrLi_jy' id='crr"+res.careerNo+"'>";
 			 //crrStr+="<form method='post' name='frmCrr' id='frmCrr'>";			 
 			 crrStr+="<input type='hidden' value='"+res.careerNo+"' id='careerNo' name='crrList["+c+"].careerNo'>";
 			 crrStr+="<input type='hidden' value='"+res.resumeNo+"' id='resumeNo' name='crrList["+c+"].resumeNo'>";	 
@@ -117,8 +140,35 @@ $(function(){
 			 a++;
 			 //achStr+="</form>"
 			 achStr+="</li>"
-			$('#ul2_jy'+careerNo).append(achStr);//순서대로 붙는데.. this로 받아서 그 근처 ul2_jy에 붙게 처리하고싶다.매우.. 
+			$('#ul2_jy'+resAch.careerNo).append(achStr);//순서대로 붙는데.. this로 받아서 그 근처 ul2_jy에 붙게 처리하고싶다.매우.. 
 	   } 
+	    
+	    $.makeForm3=function(resEdu){
+			 var eduStr="";
+			 
+			 eduStr+="<li class='crrLi_jy' id='edu"+resEdu.careerNo+"'>";
+			 //eduStr+="<form method='post' name='frmEdu' id='frmEdu'>";			 
+			 eduStr+="<input type='hidden' value='"+resEdu.eduNo+"' id='EduNo' name='eduList["+e+"].eduNo'>";
+			 eduStr+="<input type='hidden' value='"+resEdu.resumeNo+"' id='resumeNo' name='eduList["+e+"].resumeNo'>";	 
+			 eduStr+="<input type='hidden' value='N' id='curEnrolled"+e+"' class='realcurEnrolled' name='eduList["+e+"].curEnrolled'>";	 
+			 eduStr+="<input class='startYear_jy' type='text' value='' placeholder='YYYY' name='eduList["+e+"].startYear'>.";
+			 eduStr+="<input class='startMonth_jy' type='text' value='' placeholder='MM' name='eduList["+e+"].startMonth'>-";		 
+			 eduStr+="<input class='endYear_jy' type='text' value='' placeholder='YYYY' name='eduList["+e+"].endYear'>.";		 
+			 eduStr+="<input class='endMonth_jy' type='text' value='' placeholder='MM' name='eduList["+e+"].endMonth'>";		 
+			 eduStr+="<input class='ckCur_jy' type='checkbox' value='' id='ckcurEnrolled"+e+"' name='eduList["+e+"].ckcm' onclick='$.getCur("+e+")'>현재재학중";			 
+			 eduStr+="<input class='name_jy' type='text' value='' placeholder='학교명' name='eduList["+e+"].eduName'>";
+			 eduStr+="<input class='dep_jy' type='text' value='' placeholder='전공 및 학원(ex: 경영학과 학사)' name='eduList["+e+"].eduMajor'>";
+			 eduStr+="<input class='dep_jy eduDetail_jy' type='text' value='' placeholder='이수과목 또는 연구내용' name='eduList["+e+"].eduDetails'>";
+			 eduStr+="<button type='button' class='btDel_jy' id='btEduDel_jy' onclick='$.del(\"" + resEdu.careerNo+ "\",\"" + 'edu' + "\")'> <i class='icon-close btDel-i_jy'></i></button>";
+			 c++;
+	    	 //eduStr+="</form>";
+			 eduStr+="</li>";
+			 $('#ul3_jy').append(eduStr); 
+		 }
+	    
+	    
+	    
+	    
 	    
 	    //체크박스 선택여부에 따라 밸류지정
 	    $.getCur=function(c){
@@ -127,6 +177,14 @@ $(function(){
 		   	}else{
 		   		$('#curEmployed'+c).val("N");
 		   	}
+	    	
+	    	if($('#ckcurEnrolled'+c).is(":checked")){
+		   		 $('#curEnrolled'+c).val("Y");
+		   	}else{
+		   		$('#curEnrolled'+c).val("N");
+		   	}
+	    	
+	    	
 	    }	  
 	    
 	    //버튼 누르면 삭제하기
@@ -163,6 +221,26 @@ $(function(){
 		 					alert(error+":에러");
 		 				}
 		 		   });//ajax
+				
+			}else if(type=="edu"){
+				$.ajax({
+	 				url:"<c:url value='/education/educationDelete.do'/>",
+	 				type:"get",
+	 				data:"eduNo="+delNo,
+	 				dataType:"json",
+	 				success:function(deledu){
+	 				 	alert(deledu);
+	 				 	/*	  if(deledu>0){
+	 						$('#edu'+delNo).remove();
+	 					 }  */
+	 				},
+	 				error:function(xhr,status,error){
+	 					alert(error+":에러");
+	 				}
+	 		   });//ajax
+				
+				
+				
 				
 			}//if 
 	    }//del함수끝
@@ -230,6 +308,10 @@ $(function(){
 				<div class="resumeSubTitle_jy">학력</div>
 				<div class="divbtAdd_jy">
 					<button type="button" id="btEdu_jy"  class="btAdd_jy">+ 추가</button>
+					<!-- 값이 있다면 여기에 ul li로  list추가! -->
+				 	<ul id="ul3_jy" class='soltableli_jy'>
+				 		
+				 	</ul>
 				</div>
 			</div>
 			<div class="RWcomponent_jy">	
