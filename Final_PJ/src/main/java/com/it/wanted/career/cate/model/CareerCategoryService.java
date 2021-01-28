@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface CareerCategoryService {
 
-	List<CareerCategoryVO> selectCategoryAll();
+	List<CareerCategoryVO> selectCareerCategoryAll();
 
 }

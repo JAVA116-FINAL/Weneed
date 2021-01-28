@@ -24,7 +24,7 @@ public class CareerCategoryController {
 	public String listCareerCategory(Model model) {
 		logger.info("카테고리 전체조회하기");
 		
-		List<CareerCategoryVO> ccgList=careerCategoryService.selectCategoryAll();
+		List<CareerCategoryVO> ccgList=careerCategoryService.selectCareerCategoryAll();
 		
 		logger.debug("카테고리 조회 결과 ccgList.size{}=", ccgList.size());
 		
@@ -32,4 +32,19 @@ public class CareerCategoryController {
 		
 		return "/categoryList.do";
 	}
+	
+	@RequestMapping("/categoryList.do")
+	public String listCategory(Model model){
+		logger.debug("카테고리 전체 조회하기");
+		
+		List<CareerCategoryVO> ccgList
+			= careerCategoryService.selectCareerCategoryAll();
+		logger.debug("카테고리 조회 결과, ccgList.size={}", ccgList.size());
+		
+		model.addAttribute("ccgList", ccgList);
+		
+		return "career/category/categoryList";
+	}
+	
+	
 }
