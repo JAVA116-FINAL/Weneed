@@ -51,4 +51,14 @@ public class NoticeServiceImpl implements NoticeService{
 		return noticeDao.selectByDept2(notice_dept2);
 	}
 
+	@Override
+	public List<Map<String, Object>> noticeSearch(String keyword) {
+		return noticeDao.noticeSearch(keyword);
+	}
+
+	@Override
+	public Map<String, Object> noticeSearchCnt(String keyword) {
+		return noticeDao.noticeSearchCnt(keyword);
+	}
+
 }

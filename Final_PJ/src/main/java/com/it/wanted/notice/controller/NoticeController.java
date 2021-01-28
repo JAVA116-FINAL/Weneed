@@ -3,12 +3,15 @@ package com.it.wanted.notice.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.wanted.notice.cate.model.NoticeCateService;
@@ -22,8 +25,8 @@ public class NoticeController {
 		=LoggerFactory.getLogger(NoticeController.class);
 	
 	@Autowired NoticeService noticeService;
-	
 	@Autowired NoticeCateService noticeCateService;
+	
 	
 	@RequestMapping("/notice.do")
 	public String notice(Model model) {
@@ -122,6 +125,41 @@ public class NoticeController {
 		model.addAttribute("listOther", listOther);
 		
 		return "notice/notice_inc/notice_other";
+	}
+	
+	@RequestMapping(value = "/notice_search.do", method = RequestMethod.POST)
+	public String noticeSearch(HttpServletRequest request, Model model) {
+		String keyword=request.getParameter("keyword");
+		logger.info("notice_search 출력, keyword={}", keyword);
+		
+		List<Map<String, Object>>listSelect=noticeService.noticeSearch(keyword);
+		Map<String, Object>listSelectCnt=noticeService.noticeSearchCnt(keyword);
+		
+		model.addAttribute("listSelect", listSelect);
+		model.addAttribute("listSelectCnt", listSelectCnt);
+		model.addAttribute("keyword", keyword);
+		
+		logger.info("listSelect.size={}", listSelect.size());
+		logger.info("listSelectCnt={}", listSelectCnt);
+		
+		return "notice/notice_search";
+	}
+	
+	@RequestMapping("/notice_inc/notice_split.do")
+	public String noticeSplit(@RequestParam (defaultValue = "0") String notice_content,
+			String notice_keyword, Model model) {
+		logger.info("notice_content={}", notice_content);
+		logger.info("notice_keyword={}", notice_keyword);
+		
+		NoticeUtility util=new NoticeUtility();
+		
+		String content=util.splitContent(notice_content, notice_keyword);
+		
+		model.addAttribute("content", content);
+		
+		logger.info("notice_split 파라미터 content={}", content);
+		
+		return "notice/notice_inc/notice_split";
 	}
 	
 }

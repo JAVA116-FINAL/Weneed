@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
     
   <!-- 지원 css -->
+  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
 
   <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programJiwon.css'/>">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
@@ -29,12 +30,22 @@ $(function(){
 	
 $('form[name=proComplete1]').find('input[type=button]').click(function(){
 	location.href='<c:url value="/career/Admin/programEdit1.do?proNo=${proVo.proNo}"/>';
+	});
 });
-});
-	
-	
-</script>
 
+</script>
+<style "type="text/css">
+body{
+	margin:0px;
+	padding:0px;
+}
+.fixed {
+     position: fixed;
+     top: 0px;
+}
+.subscribeBody {
+ } 
+</style>
 	
 <title>프로그램 내용 등록 페이지</title>
 <script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
@@ -54,8 +65,8 @@ $('form[name=proComplete1]').find('input[type=button]').click(function(){
 		 	 <div class="navbar-brand">
 				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
-			  <li class="nav-item active"><a class="nav-link" href="#title">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="#title1">프로그램 조회</a></li>
+			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
+			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programList.do'/>">프로그램 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
 			    <a name="title"></a>   
@@ -69,37 +80,39 @@ $('form[name=proComplete1]').find('input[type=button]').click(function(){
   
 <section class="section blog-wrap" style="margin-top: -30px;">
 
+
 <div style = "width:980px; max-width: 100%; margin:auto;">
 	<form name="proComplete1" action="programWrite2.do?proNo="${proVo.proNo} method="get">
 		<fieldset>
-		<legend style="color:#258bf7;"><b>프로그램 등록, 첫번째 단계 완료! &nbsp;&nbsp;</b><i class="fas fa-check"></i></legend>
+		<legend style="color:#258bf7;"><b>프로그램 등록, 첫번째 단계 완료! &nbsp;&nbsp;</b><i class="fas fa-check fa-1x"></i></legend>
 		<p><b>계속해서 두번째 단계를 완료해주세요.</b></p>
 		<br>
 			<!-- 프로그램 번호 보내주기 -->
+			
 		        <div class="proInfoDiv">
 					<label class="line"><span class="sp1">프로그램 번호:</span>
-						<input type="text" id="proNo" name="proNo" value="${proVo.proNo }" style="height:20px;">
+						<input type="text" id="programNo" name="programNo" value="${proVo.programNo }" style="height:20px;">
 					</label>		        
 		        </div>
 
 			<!-- 프로그램 이름 -->
 		        <div class="proInfoDiv">
 					<p class="line"><span class="sp1">프로그램 이름:</span>
-						<span>${proVo.proName }</span>
+						<span>${param.proName }</span>
 					</p>		        
 		        </div>
 		        
 			<!-- 프로그램 카테고리 -->
 		        <div class="proInfoDiv">
 					<p class="line"><span class="sp1">프로그램 카테고리:</span>
-						<span>${proVo.cateName }</span>
+						<span>${param.proCateNo }</span>
 					</p>			        
 		        </div>
 		        
 			<!-- 프로그램 타입 (이벤트, 북클럽, 교육강연) -->
 		        <div class="proInfoDiv">
 					<p class="line"><span class="sp1">프로그램 타입:</span>
-						<span>${proVo.proType }</span>
+						<span>${param.proType }</span>
 					</p>	
 		        </div>		        
 		
@@ -148,7 +161,7 @@ $('form[name=proComplete1]').find('input[type=button]').click(function(){
 			<!-- 관리자 번호 -->
 		        <div class="proInfoDiv">
 					<p class="line"><span class="sp1">관리자 번호:</span>
-						<span>${proVo.adminNo }</span>
+						<span>${param.adminNo }</span>
 					</p>
 		        </div>
 		        <br><br>

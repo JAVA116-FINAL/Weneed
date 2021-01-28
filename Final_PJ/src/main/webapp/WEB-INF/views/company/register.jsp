@@ -126,6 +126,7 @@ $(function(){
        	<p class="mb-4 comServRegiSmallTitle">
        		위니드는 추천인/후보자들에게 좋은 일자리를 제공하기 위해, 다음 정보를 리뷰하여 회사등록을 승인하고 있습니다.</p>
       	<form id="comServInfoRegiForm" class="appoinment-form" method="post" action="#">
+      		<input type="hidden" name="comMemNo" value="${comMemInfoVo.comMemNo}">
        	<div class="row">
            	<div class="col-lg-6">
                	<div class="form-group boundDivSpan">

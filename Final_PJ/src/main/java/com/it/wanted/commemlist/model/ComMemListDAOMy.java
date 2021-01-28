@@ -18,13 +18,18 @@ public class ComMemListDAOMy implements ComMemListDAO{
 	 */
 
 	@Override
-	public int checkComReged(String comMemId) {
-		return sqlSession.selectOne(namespace+"checkComReged", comMemId);
+	public int checkComReged(int comMemNo) {
+		return sqlSession.selectOne(namespace+"checkComReged", comMemNo);
 	}
 
 	@Override
 	public String selectComCode(int comMemNo) {
 		return sqlSession.selectOne(namespace+"selectComCode", comMemNo);
+	}
+
+	@Override
+	public int insertComMemList(ComMemListVO comMemListVo) {
+		return sqlSession.insert(namespace+"insertComMemList", comMemListVo);
 	}
 	
 }

@@ -9,16 +9,17 @@
 			<h1 class="help-center-name" id="help_center_title2">궁금한 점을 검색해주세요.</h1>
 			<p class="help-center-details"></p>
 			<div class="hc_search">
+				<!-- 검색 폼 -->
 				<form role="search" class="search" data-search=""
-					data-instant="true" autocomplete="off" action="<c:url value='notice_result.do'/>"
+					data-instant="true" autocomplete="off" action="<c:url value='notice_search.do'/>"
 					accept-charset="UTF-8" method="post">
-					<input name="utf8" type="hidden" value="✓">
 					<input
-						type="search" name="notice_search" id="notice_search"
+						type="search" name="keyword" id="notice_search"
 						placeholder="예) 서비스 이용방법, 비밀번호 찾기 등" autocomplete="off"
 						aria-label="예) 서비스 이용방법, 비밀번호 찾기 등"> 
 					<input type="submit" name="commit" value="검색">
 				</form>
+				
 			</div>
 		</div>
 	</section>

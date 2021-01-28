@@ -2,19 +2,39 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../../inc/top.jsp" %>
-<div class="jbMenu">
+  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
+
+<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
+<script type="text/javascript">
+$( document ).ready( function() {
+	  var Offset = $( '.jbMenu' ).offset();
+	  $( window ).scroll( function() {
+	   if ( $( document ).scrollTop() > Offset.top ) {
+	      $( '.jbMenu' ).addClass( 'fixed' );
+	    }
+	    else {
+	      $( '.jbMenu' ).removeClass( 'fixed' );
+	    }
+	  });
+	});
+	
+</script>	
+
+<div class="jbMenu" style="width:100%; opacity:1;">
     	<nav class="navbar navbar-expand-lg navigation" id="navbar" style="background-color:#f8f8fa;">
 		<div class="container" >
 		 	 <div class="navbar-brand">
-			  <ul class="navbar-nav ml-auto">
-			  <li class="nav-item active"><a class="nav-link" href="#title">북클럽 소개</a></li>
-			   <li class="nav-item"><a class="nav-link" href="#title1">이번 북클럽 소개</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title2">프로그램 상세</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title3">클럽장 소개</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title4">참가비용</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title5">후기</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title6">안내/설문</a></li>
-				</ul>	
+				<div class="myNav" style="width:100%;">
+				  <ul class="navbar-nav ml-auto">
+				  <li class="nav-item active"><a class="nav-link" href="#title">북클럽 소개</a></li>
+				    <li class="nav-item"><a class="nav-link" href="#title1">이번 북클럽 소개</a></li>
+				    <li class="nav-item"><a class="nav-link" href="#title2">프로그램 상세</a></li>
+				    <li class="nav-item"><a class="nav-link" href="#title3">클럽장 소개</a></li>
+				    <li class="nav-item"><a class="nav-link" href="#title4">참가비용</a></li>
+				    <li class="nav-item"><a class="nav-link" href="#title5">후기</a></li>
+				    <li class="nav-item"><a class="nav-link" href="#title6">안내/설문</a></li>
+				 </ul>	
+				</div>
 			 </div>
 		</div>
 		</nav>
@@ -204,22 +224,38 @@
 
 
 						<div class="sidebar-widget schedule-widget mb-3" style="background-color:#fff; margin-left:-60px; margin-top:-20px; width:380px">
-							<h5 class="mb-4"><b>북클럽: 작가는 아니지만 글은 쓰고싶어</b></h5>
+							<h5 class="mb-4"><b>북클럽: ${proName }</b></h5>
 
 							<ul class="list-unstyled">
 							
 									<div style="font:12px;"><span>일자</span></div>
-									<div style="color:black; font:12px;"><span>2021 Jan 16</span></div><br>
+									<div style="color:black; font:12px;"><span>${proStartDate}</span></div><br>
 									<div style="font:12px;"><span>장소</span></div>
 									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br>
 									<div style="font:12px;"><span>주최자</span></div>
-									<div style="color:black; font:12px;"><span></span></div>
+									<div style="color:black; font:12px;"><span>${proSponsor}</span></div>
 							
 							</ul>
 							<br><br><br>
 							<div class="sidebar-contatct-info mt-4" style="padding-top:10px;">
+						<!-- 이벤트일때 -->							
+							<c:if test="${proVo.proType }=='1'">
+								<button onclick="location.href='buyProgram.do'" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:150px; height:50px;padding:10px, 7px; background-color:#3366ff; font-size:12px; color:white">참가신청</button>
+								<button onclick="location.href='subsRegister.do'" class="btnFilter" style="border:0.3px solid gray; border-radius:3em; outline:none; width:150px; height:50px; margin-left: 20px; padding:10px, 7px; background-color:#fff; font-size:12px; color:black">채팅문의</button>
+							</c:if>
+
+						<!-- 북클럽일때 -->							
+							<c:if test="${proVo.proType }=='2'">
 								<button onclick="location.href='buyProgram.do'" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:150px; height:50px;padding:10px, 7px; background-color:#3366ff; font-size:12px; color:white">참가신청</button>
 								<button onclick="location.href='subsRegister.do'" class="btnFilter" style="border:0.3px solid gray; border-radius:3em; outline:none; width:150px; height:50px; margin-left: 20px; padding:10px, 7px; background-color:#fff; font-size:12px; color:black">구독하고 할인받기</button>
+							</c:if>
+
+						<!-- 교육 강의일때 -->							
+							<c:if test="${proVo.proType }=='3'">
+								<button onclick="location.href='buyProgram.do'" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:150px; height:50px;padding:10px, 7px; background-color:#3366ff; font-size:12px; color:white">참가신청</button>
+								<button onclick="location.href='subsRegister.do'" class="btnFilter" style="border:0.3px solid gray; border-radius:3em; outline:none; width:150px; height:50px; margin-left: 20px; padding:10px, 7px; background-color:#fff; font-size:12px; color:black">채팅문의</button>
+							</c:if>
+							
 							</div>
 						</div>
 
@@ -296,54 +332,6 @@
 	</div>
 	</section>
 
-
-<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
-<script type="text/javascript">
-/* $( document ).ready( function() {
-    var jbOffset = $( '.navbar-nav' ).offset();
-    $( window ).scroll( function() {
-      if ( $( document ).scrollTop() > jbOffset.top ) {
-        $( '.navbar-nav' ).addClass( 'jbFixed' );
-      }
-      else {
-        $( '.navbar-nav' ).removeClass( 'jbFixed' );
-      }
-    });
-  } );
-$( document ).ready( function() {
-    var jbOffsetBtn = $( '.sidebar-contatct-info' ).offset();
-    $( window ).scroll( function() {
-      if ( $( document ).scrollTop() > jbOffsetBtn.top ) {
-        $( '.sidebar-contatct-info' ).addClass( 'jbFixed' );
-      }
-      else {
-        $( '.sidebar-contatct-info' ).removeClass( 'jbFixed' );
-      }
-    });
-  } );
-   */
-
-</script>
-<!-- 
-<style="type="text/css">
- body{
-	margin:0px;
-	padding:0px;
-}
-.jbFixed {
-     position: fixed;
-     top: 0px;
-}
-.jbContent {
-        height: 2000px;
-      } 
-      
-.parag{
-	margin-top: 50px;
-	margin-bottom: 50px;      
-}
-
-</style> -->
 
 </body>
 </html>
