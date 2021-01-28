@@ -1,5 +1,7 @@
 package com.it.wanted.education.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,9 @@ public class EducationDAOMybatis implements EducationDAO{
 		return sqlSession.selectOne(namespace+"selectEdu",resumeNo);
 	}
 
-	
-	
+	@Override
+	public List<EducationVO> selectEduByResumeNo(int resumeNo) {
+		return sqlSession.selectList(namespace+"selectEduByResumeNo", resumeNo);
+	}
+
 }
