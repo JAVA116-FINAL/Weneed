@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public class ResumeDAOMybatis implements ResumeDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	private final static String namespace ="com.mybatis.mapper.resume.";
+	private final static String namespace ="com.mybatis.mapper.oracle.resume.";
 	
 	@Override
 	public int insertResume(ResumeVO vo) {

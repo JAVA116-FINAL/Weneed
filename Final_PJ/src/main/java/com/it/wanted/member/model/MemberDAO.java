@@ -7,4 +7,5 @@ public interface MemberDAO {
 	public String selectPwd(String email);
 	public MemberVO selectMember(String email);
 	public int checkLoginEmail(String email);
+	public int updatePw(MemberVO vo);
 }

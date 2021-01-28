@@ -37,4 +37,9 @@
 		]]>
 	</select>
 	
+	<update id="updatePwd">
+		update memberinfo 
+		set pwd=#{pwd} where email=#{email}
+	</update>
+	
 </mapper>
