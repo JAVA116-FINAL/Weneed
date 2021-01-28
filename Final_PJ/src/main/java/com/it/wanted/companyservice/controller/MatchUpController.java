@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.it.wanted.career.model.CareerService;
 import com.it.wanted.career.model.CareerVO;
+import com.it.wanted.jikgun.model.JikgunService;
+import com.it.wanted.jikgun.model.JikgunVO;
+import com.it.wanted.jikmu.model.JikmuService;
+import com.it.wanted.jikmu.model.JikmuVO;
 import com.it.wanted.matchup.model.MatchupMemVO;
 
 @Controller
@@ -19,6 +23,8 @@ public class MatchUpController {
 	private static final Logger logger=LoggerFactory.getLogger(MatchUpController.class);
 	@Autowired MatchupMemService matchupMemService;
 	@Autowired CareerService careerService;
+	@Autowired JikgunService jgService;
+	@Autowired JikmuService jmService;
 	
 	@RequestMapping("/matchupMain.do")
 	public String matchupMain() {
@@ -31,8 +37,17 @@ public class MatchUpController {
 	public String matchupSearch() {
 		logger.info("기업서비스 매치업 검색/조회화면");
 		
-		// [1] 직군리스트 세팅
+		//[1-1] 직군리스트 불러오기
+		List<JikgunVO> jikgunList=jgService.selectAllJikgun();
+		logger.info("직군리스트 불러오기 결과 jikgunList={}", jikgunList);
 		
+		//[1-2] 첫번째 직군 코드 불러오기 
+		String basicCode=jgService.selectBasicJikgunCode();
+		logger.info("첫번째 직군코드 basicCode={}", basicCode);
+		
+		//[1-3] 직무리스트 불러오기 개발에 해당하는
+		List<JikmuVO> jikmuList=jgService.selectJikmuByJikgunCode(basicCode);
+		logger.info("첫번째 직군코드에 해당하는 직무리스트 jikmuList={}", jikmuList);
 		
 		// [2] 전체 매치업이력서 불러오기, 이력서 공개여부 Y에 해당하는 
 		List<MatchupMemVO> matchupMemList=matchupMemService.selectOpen();

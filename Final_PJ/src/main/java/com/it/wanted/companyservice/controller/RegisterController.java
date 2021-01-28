@@ -173,8 +173,6 @@ public class RegisterController {
 		model.addAttribute("imgList", imgList);
 	}
 	
-	@Autowired MappingJackson2JsonView jsonView;
-	
 	/*
 	@ResponseBody
 	@RequestMapping(value="/imgUpload.do", method=RequestMethod.POST, produces="text/plain")
