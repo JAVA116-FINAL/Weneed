@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ApplicantsController {
 	
 	private static final Logger logger=LoggerFactory.getLogger(ApplicantsController.class);
-	@Autowired 
 	
 	@RequestMapping("/applicants.do")
 	public String applicantsMain() {
