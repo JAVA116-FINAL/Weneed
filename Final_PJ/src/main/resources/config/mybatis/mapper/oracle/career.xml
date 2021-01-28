@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.career">
+
+	
+	 <insert id="insertCareer" parameterType="careerVo">
+		<selectKey keyProperty="careerNo" resultType="int" order="BEFORE">
+			select career_seq.nextval from dual  
+		</selectKey>
+		insert into career(career_No,resume_No) 
+		values(#{careerNo},#{resumeNo})
+	</insert>
+	
+	<select id="selectCareer" resultType="careerVo" parameterType="int">
+		select * from 
+		(select * from career where resume_No=#{resumeNo} order by career_no desc)
+		where rowNum=1
+	</select>
+ 	<update id="updateCareer" parameterType="careerVo">
+ 		update career
+		set start_Year=#{startYear},start_Month=#{startMonth},end_Year=#{endYear},end_Month=#{endMonth}, cur_Employed=#{curEmployed}, career_Name=#{careerName}, career_Dep=#{careerDep}
+		where career_No=#{careerNo}
+ 	</update>
+	<delete id="deleteCareer" parameterType="int">
+		delete from career where career_No=#{careerNo}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

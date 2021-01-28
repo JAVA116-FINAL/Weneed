@@ -251,3 +251,88 @@ select.realselect_jy {
 button.btResume-down_jy {
     margin-top: 17px;
 }
+
+/* 2021_01_24 */
+textarea.content-textArea_jy {
+    resize: none;
+}
+
+/* 2021_01_25 */
+input.endMonth_jy {
+    margin-right: 50px;
+}
+
+input.name_jy {
+    margin-: 50px;
+}
+
+input.name_jy {
+    margin-left: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input#achName {
+    border: none;
+    outline: none;
+    font-weight: bold;
+}
+button.btDel_jy {
+    border: 0;
+    background-color: transparen;
+    position: absolute;
+    color: #d1d1d1;
+    font-size: 10px;
+    padding: 15px;
+    top: 21px;
+    right: 15px;
+}
+
+i.btDel-i_jy {
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+button.btDel_jy {
+    display: inline-block;
+    position: absolute;
+    margin-left: 22px;
+    top: 62%;
+}
+
+i.icon-close.btDel-i_jy {
+    display: inline-block;
+    font-size: 9px;
+    color: #9e9e9e8f;
+    width: 50px;
+}
+
+
+input.dep_jy {
+    width: 350px;
+}
+
+i.icon-close.btDel-i_jy {position: relative;}
+
+button.btDel_jy {
+    position: relative;
+    right: 0px;
+    padding: 0;
+    margin-bottom: 10px;
+    content-visibility: auto;
+}
+
+input#achName {
+    margin-left: 10px;
+}
+
+textarea.content-textArea_jy.innerTA_jy {
+    width: 55%;
+    vertical-align: -webkit-baseline-middle;
+}
