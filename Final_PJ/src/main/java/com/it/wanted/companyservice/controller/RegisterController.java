@@ -221,11 +221,13 @@ public class RegisterController {
 		logger.info("이미지 업로드 처리 시작, 파라미터 mRequest={}", mRequest);
 		String upFilePath="C:\\Users\\jazzo\\git\\Wanted_jayeon\\Final_PJ\\src\\main\\webapp\\companyImgUpload";
 		
-		List<MultipartFile> fileList=mRequest.getFiles("test1");
-		
-		for(MultipartFile mf : fileList) {
-			mf.
+		File nf=new File(upFilePath+"/test.txt");
+		try {
+			nf.createNewFile();
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
+		logger.info("파일 생성 완료! nf={}", nf);
 		
 		List<Map<String, Object>> fileList=fileUpload.fileUplaod_comImg(mRequest);
 		
