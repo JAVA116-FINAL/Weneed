@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class matchupMemDAOMybatis implements matchupMemDAO{
+public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private static final String namespace="config.mybatis.mapper.oracle.matchupMem.";
