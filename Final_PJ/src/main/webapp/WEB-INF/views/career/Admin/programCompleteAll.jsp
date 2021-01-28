@@ -31,7 +31,7 @@ $( document ).ready( function() {
 $(function(){
 	
 	$('form[name=proCompleteAll]').find('input[type=button]').click(function(){
-		location.href='<c:url value="/career/Admin/programList.do"/>';
+		location.href='<c:url value="/career/Admin/programAdminList.do"/>';
 		});
 	});
 </script>	
@@ -56,7 +56,7 @@ $(function(){
 				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
 			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programList.do'/>">프로그램 조회</a></li>
+			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
 			    <a name="title"></a>   
@@ -93,7 +93,7 @@ $(function(){
 					        		<i class="far fa-eye fa-5x" style="color:#258bf7;"></i><br><br>
 					       			<input type="submit" class="programComBtn" value="미리보기"/>
 								</button>
-								<button type="button" onclick="location.href='/career/Admin/programList.do'" style="outline:none;">
+								<button type="button" onclick="location.href='/career/Admin/programAdminList.do'" style="outline:none;">
 									<i class="fas fa-list fa-5x" style="color:#258bf7;"></i><br><br>
 					      			<input type="button" class="programComBtn" value="프로그램 목록" style="width:130px;"/>
 								</button>					      									
