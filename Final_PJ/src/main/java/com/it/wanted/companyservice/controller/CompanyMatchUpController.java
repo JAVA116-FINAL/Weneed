@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.it.wanted.career.model.CareerService;
 import com.it.wanted.career.model.CareerVO;
+import com.it.wanted.education.model.EducationService;
+import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.jikgun.model.JikgunService;
 import com.it.wanted.jikgun.model.JikgunVO;
 import com.it.wanted.jikmu.model.JikmuService;
@@ -29,6 +31,7 @@ public class CompanyMatchUpController {
 	@Autowired MatchupMemService matchupMemService;
 	@Autowired JikgunService jgService;
 	@Autowired JikmuService jmService;
+	@Autowired EducationService eduService;
 	
 	@RequestMapping("/matchupMain.do")
 	public String matchupMain() {
@@ -58,7 +61,7 @@ public class CompanyMatchUpController {
 		logger.info("이력서 공개된 매치업이력서 목록 조회 결과, matchupMemList.size={}", matchupMemList.size());
 		
 		List<Map<Integer, Integer>> careerList=new ArrayList<Map<Integer,Integer>>();
-		List<Map<Integer, Integer>> eduList=new ArrayList<Map<Integer,Integer>>();
+		List<Map<Integer, String>> eduList=new ArrayList<Map<Integer,String>>();
 		
 		for(MatchupMemVO vo : matchupMemList) {
 			int resumeNo=vo.getResumeNo();
@@ -90,10 +93,10 @@ public class CompanyMatchUpController {
 			
 			// [4] 이력서 번호에 해당하는 학력 (education) 불러와서 학교명, 전공및 학위 출력해주기
 			String eduResult="";
-			List<EducationVO> eduList=selectEducation(resumeNo);
+			List<EducationVO> educationList=eduService.selectEduByResumeNo(resumeNo);
 			
-			for(EducationVO vo : eduList) {
-				eduResult=vo.getEduName()+" "+vo.getEduMajor();
+			for(EducationVO vo2 : educationList) {
+				eduResult=vo2.getEduName()+" "+vo2.getEduMajor();
 
 				Map<Integer, String> eduMap=new HashMap<Integer, String>();
 				eduMap.put(resumeNo,eduResult);
@@ -112,8 +115,7 @@ public class CompanyMatchUpController {
 		
 		return "company/matchupSearch";
 	}
-	
-	
+
 	@RequestMapping("/modal/modalButtonsTest.do")
 	public String modalTest() {
 		return "company/modal/modalButtonsTest";
