@@ -13,6 +13,7 @@ public class CareerCategoryServiceImpl implements CareerCategoryService{
 
 	@Override
 	public List<CareerCategoryVO> selectCareerCategoryAll() {
-		return null;
+		return careerCategoryDao.selectCareerCategoryAll();
 	}
 }
+

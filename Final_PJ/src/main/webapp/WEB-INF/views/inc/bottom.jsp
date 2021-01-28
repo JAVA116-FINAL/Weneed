@@ -23,7 +23,7 @@
 		<div class="footer-top">
 			<div class="footer-top-left">
 				<div class="wantedLogo_white">
-					<img src="${pageContext.request.contextPath}/resources/images/wantedLogo_white.png" alt="">
+					<img src="${pageContext.request.contextPath}/resources/images/weneedLogo_white.png" alt="">
 				</div>
 				<div>
 					<div class="wanted-info">

@@ -21,6 +21,7 @@ button{
 
 .top-logo{
 	width:120px;
+	padding-top:4px;
 }
 
 .navbar-logo{
@@ -60,7 +61,7 @@ button{
 
 .nav-item{
 	height:inherit;
-	padding: 7px 6px;
+	padding: 6px 6px;
 }
 
 .searchBtn{
