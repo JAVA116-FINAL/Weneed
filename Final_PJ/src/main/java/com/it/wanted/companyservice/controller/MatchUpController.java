@@ -27,7 +27,7 @@ public class MatchUpController {
 		logger.info("기업서비스 매치업 검색/조회화면");
 		
 		// [1] 직군리스트 세팅
-		/*
+		
 		// [2] 전체 매치업이력서 불러오기, 이력서 공개여부 Y에 해당하는 
 		List<MatchupMemVO> matchupMemList=matchupMemService.selectOpen();
 		
