@@ -1,6 +1,5 @@
 package com.it.wanted.member.controller;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -112,6 +111,15 @@ public class MemberController {
 		
 		//4.
 		return name;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/findPwd.do")
+	public void findPwd(@ModelAttribute MemberVO vo, HttpServletResponse response) {
+		logger.info("ajax 이용 - 비밀번호찾기, vo={}", vo);
+		
+		memberService.findPwd(response, vo);
 	}
 	
 	@RequestMapping("/logout.do")
