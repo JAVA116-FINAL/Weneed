@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AchievementDAOMybatis implements AchievementDAO{
-	private static final String namespace="com.mybatis.mapper.achievement.";
+	private static final String namespace="com.mybatis.mapper.oracle.achievement.";
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Override

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mybatis.mapper.resume">
+<mapper namespace="com.mybatis.mapper.oracle.resume">
 
 	<!-- 안되면 oracle useGenerate true로 바꾸고, update처리 cart=>orderDetails -->
 	<update id="insertResume" parameterType="resumeVo">
