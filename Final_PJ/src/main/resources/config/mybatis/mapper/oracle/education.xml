@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.education">
+	<insert id="insertEdu" parameterType="educationVo">
+		<selectKey keyProperty="eduNo" resultType="int" order="BEFORE">
+			select education_seq.nextval from dual 
+		</selectKey>
+		insert into education(edu_No,resume_No)
+		values(#{eduNo} ,#{resumeNo})
+	</insert>
+
+	<select id="selectEdu" parameterType="int" resultType="educationVo">
+		select * from 
+		(select * from education where resume_No=#{resumeNo} order by edu_no desc)
+		where rownum=1		
+	</select>	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
