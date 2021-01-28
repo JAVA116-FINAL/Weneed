@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it.wanted.jikmu.model.JikmuVO;
+
 @Service
 public class JikgunServiceImpl implements JikgunService{
 
@@ -18,5 +20,10 @@ public class JikgunServiceImpl implements JikgunService{
 	@Override
 	public String selectBasicJikgunCode() {
 		return jikgunDao.selectBasicJikgunCode();
+	}
+
+	@Override
+	public List<JikmuVO> selectJikmuByJikgunCode(String basicCode) {
+		return jikgunDao.selectJikmuByJikgunCode(basicCode);
 	}
 }

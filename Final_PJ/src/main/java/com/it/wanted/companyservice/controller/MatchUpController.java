@@ -21,7 +21,6 @@ import com.it.wanted.matchup.model.MatchupMemVO;
 @RequestMapping("/company")
 public class MatchUpController {
 	private static final Logger logger=LoggerFactory.getLogger(MatchUpController.class);
-	@Autowired MatchupMemService matchupMemService;
 	@Autowired CareerService careerService;
 	@Autowired JikgunService jgService;
 	@Autowired JikmuService jmService;

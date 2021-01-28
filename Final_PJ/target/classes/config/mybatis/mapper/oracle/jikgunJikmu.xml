@@ -7,8 +7,12 @@
 		select * from jikgun
 	</select>
 	
-	<select id="selectBasicJikgunCode">
-		select * from jikmu where rownum=1 order by jikmu_code, jikgun_code
+	<select id="selectBasicJikgunCode" resultType="String">
+		select jikgun_code from jikmu where rownum=1 order by jikmu_code, jikgun_code
+	</select>
+	
+	<select id="selectJikmuByJikgunCode" parameterType="string" resultType="jikmuVo">
+		select * from jikmu where jikgun_code=#{basicCode}
 	</select>
 </mapper>
 
