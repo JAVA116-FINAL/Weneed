@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public class CareerDAOMybatis implements CareerDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	private static final String namespace="com.mybatis.mapper.career.";
+	private static final String namespace="com.mybatis.oracle.mapper.career.";
 	
 	@Override
 	public int insertCareer(CareerVO careerVo) {
