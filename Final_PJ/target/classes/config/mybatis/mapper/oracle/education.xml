@@ -17,6 +17,16 @@
 		where rownum=1		
 	</select>	
 	
+	<delete id="deleteEdu" parameterType="int">
+		delete from education where edu_no=#{eduNo}
+	</delete>
+	
+	<update id="updateEdu" parameterType="educationVo">
+	 	update education 
+		set start_Year=#{startYear},start_Month=#{startMonth},end_Year=#{endYear},end_Month=#{endMonth},
+		cur_Enrolled=#{curEnrolled}, edu_Name=#{eduName}, edu_Major=#{eduMajor},edu_Details=#{eduDetails}
+		where edu_No=#{eduNo}
+	 </update>
 	
 </mapper>
 

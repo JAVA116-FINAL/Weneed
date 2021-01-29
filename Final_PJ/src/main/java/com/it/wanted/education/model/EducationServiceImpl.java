@@ -17,6 +17,11 @@ public class EducationServiceImpl implements EducationService{
 	public EducationVO selectEdu(int resumeNo) {
 		return educationDao.selectEdu(resumeNo);
 	}
+
+	@Override
+	public int deleteEdu(int eduNo) {
+		return educationDao.deleteEdu(eduNo);
+	}
 	
 	
 }
