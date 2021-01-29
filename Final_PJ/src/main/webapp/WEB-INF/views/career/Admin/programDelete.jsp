@@ -111,7 +111,7 @@ $( document ).ready( function() {
 			 	<!-- 프로그램 내용등록 페이지로 이동 버튼 -->       
 			        <div class="btnDelCenter">
 			       		<input type="submit" class="programBtn" value="삭제"/>
-			      		<input type="button" class="programBtn" value="글목록" OnClick="location.href='<c:url value="/career/Admin/programList.do"/>'" />
+			      		<input type="button" class="programBtn" value="글목록" OnClick="location.href='<c:url value="/career/Admin/programAdminList.do"/>'" />
 			        </div>
 		        
 		  </div>

@@ -12,8 +12,10 @@ import com.it.wanted.common.SearchVO;
 @Repository
 public class ProgramDAOMybatis implements ProgramDAO{
 
-	@Autowired private SqlSessionTemplate sqlSession; 
-	private String namespace="com.mybatis.mapper.program.";
+	@Autowired 
+	private SqlSessionTemplate sqlSession; 
+	private String namespace="com.mybatis.mapper.oracle.program.";
+
 	
 	public int insertProgram(ProgramVO proVo) {
 		return sqlSession.insert(namespace+"insertProgram", proVo);
