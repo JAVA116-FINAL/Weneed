@@ -46,4 +46,5 @@ public class IndexController {
 	public void jobSalary() {
 		logger.info("직군별 연봉 화면 보여주기");
 	}
+	
 }

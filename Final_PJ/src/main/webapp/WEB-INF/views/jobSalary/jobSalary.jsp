@@ -14,11 +14,11 @@ $(function(){
 				type:"GET",
 				dataType:"json",
 				data:{
-					"jikgun_code": "JG001",
+					"jikgun_code": this.value,
 					"jikmu_code":this.value
 				},
 				success:function(res){
-					alert(res.length);
+					alert(res);
 				},
 				error:function(xhr, status, error){
 					alert('error! : ' + error);
