@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.languages">
+	<insert id="insertLang" parameterType="languagesVo">
+		<selectKey keyProperty="langNo" resultType="int" order="BEFORE">
+			select languages_SEQ.nextval from dual
+		</selectKey>
+		insert into languages(lang_No, resume_No)
+		values(#{langNo},#{resumeNo})
+	</insert>
+	
+	<select id="selectLang" parameterType="int" resultType="languagesVo">
+		select * from 
+		(select * from languages where resume_No=#{resumeNo} order by lang_no desc)
+		where rownum=1
+	</select>
+	
+	<delete id="deleteLang" parameterType="int">
+		delete from languages where lang_No=#{langNo}
+	</delete>
+	
+	<update id="updateLang" parameterType="languagesVo">
+		update languages
+		set lang_Name=#{langName}, lang_level=#{langLevel}
+		where lang_No=#{langNo}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
