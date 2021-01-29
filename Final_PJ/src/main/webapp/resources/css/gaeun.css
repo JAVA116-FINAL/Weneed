@@ -1193,7 +1193,55 @@ h5.modal-wanted-title{
 	color:#333;
 }
 
+.icon-arrow_left_line:before {
+  content: "\e9a0";
+}
 
+.icon-arrow_right:before {
+  content: "\e94f";
+}
+
+.main-left-btn{
+	opacity:0.7;
+	border:solid 1px #ddd;
+	width:38px;
+	height:38px;
+	border-radius:50%;
+}
+
+.main-left-right-btn{
+	display:flex;
+	position:absolute;
+	padding:0;
+	margin:0;
+	right:0;
+	top:0px;
+}
+.icon-arrow_left_line{
+	font-size:25px;
+	line-height:37px;
+	color:darkslategray;
+}
+.main-right-btn{
+	margin-left:10px;
+	opacity:0.7;
+	border:solid 1px #ddd;
+	width:38px;
+	height:38px;
+	border-radius:50%;
+}
+.icon-arrow_right{
+	font-size:25px;
+	line-height:37px;
+	color:darkslategray;
+}
+
+.event-more-btn{
+	margin:8px 0 0;
+	font-size:14px;
+	font-weight:500;
+	color:#333;
+}
 
 /*회원가입 후 onboarding 화면*/
 #onboardingBody{
@@ -1224,7 +1272,7 @@ h5.modal-wanted-title{
 	padding:51px 20px 25px;
 	border:1px solid #ececec;
 	border-radius:5px;
-	margin-top:39px;
+	margin-top:25px;
 	background-color:#fff;
 }
 

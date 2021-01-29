@@ -1,5 +1,7 @@
 package com.it.wanted.education.model;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,11 @@ public class EducationServiceImpl implements EducationService{
 	@Override
 	public int deleteEdu(int eduNo) {
 		return educationDao.deleteEdu(eduNo);
+
+  @Override
+	public List<EducationVO> selectEduByResumeNo(int resumeNo) {
+		return educationDao.selectEduByResumeNo(resumeNo);
+
 	}
 	
 	

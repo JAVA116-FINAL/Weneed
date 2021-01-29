@@ -37,10 +37,10 @@
 <body id="onboardingBody">
 	<div class="ob-wrapper">
 		<div class="ob-content">
-			<div class="ob-con-logo"><img src="${pageContext.request.contextPath}/resources/images/wantedLogo.png"></div>
+			<div class="ob-con-logo"><img src="${pageContext.request.contextPath}/resources/images/weneedLogo.png"></div>
 			<div class="ob-con-box">
 				<div class="ob-con-box-top">
-					<h1>Welcome 원티드</h1>
+					<h1>Welcome 위니드</h1>
 					<p>아래 정보를 입력하면,<br>홍길동님에게 찰떡궁합 회사를 매칭해드려요!</p>
 				</div>
 				<!-- 직군 -->

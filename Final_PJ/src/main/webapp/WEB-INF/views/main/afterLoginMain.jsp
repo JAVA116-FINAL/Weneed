@@ -162,7 +162,11 @@
 			<div class="carrer-chance-title-wrap">
 				<div class="carrer-box-title-div">
 					<h2 class="carrer-box-title">커리어 성장의 기회</h2>
-					<div><a href="#">다양한 이벤트 더보기></a></div>
+					<a href="#"><h6 class="event-more-btn">다양한 이벤트 더보기></h6></a>
+					<div class="main-left-right-btn">
+						<button class="main-left-btn" type="button" style="outline:none;"><i class="icon-arrow_left_line"></i></button>
+						<button class="main-right-btn" type="button" style="outline:none;"><i class="icon-arrow_right"></i></button>
+					</div>
 				</div>
 				<div class="carrer-box-title-btn">
 				
@@ -232,9 +236,10 @@
 			<div class="theme-title-wrap">
 				<div class="theme-box-title-div">
 					<h2 class="theme-box-title">테마별 채용</h2>
-				</div>
-				<div class="carrer-box-title-btn">
-				
+					<div class="main-left-right-btn" style="top:-8px;">
+						<button class="main-left-btn" type="button" style="outline:none;"><i class="icon-arrow_left_line"></i></button>
+						<button class="main-right-btn" type="button" style="outline:none;"><i class="icon-arrow_right"></i></button>
+					</div>
 				</div>
 			</div>
 			<div class="row">
