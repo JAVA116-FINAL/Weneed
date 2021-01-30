@@ -40,6 +40,7 @@
     =====================================-->
 
     <!-- Main jQuery -->
+    <script src="<%=request.getContextPath() %>resources/plugins/jquery/jquery.js"></script>
     <!-- Bootstrap 4.3.2 -->
     <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/popper.js"></script>
     <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
