@@ -871,7 +871,7 @@ h5.modal-wanted-title{
 	position:relative;
 	padding-right:30px;
 	padding-left:30px;
-	background:#258bf7;
+	background:#3366ff;
 	border-radius:3px;
 }
 
@@ -920,7 +920,7 @@ h5.modal-wanted-title{
 
 .profile-matching-area >button{
 	right:30px;
-	color:#258bf7;
+	color:#3366ff;
 	font-size:15px;
 	font-weight:600;
 	padding:10px 40px;
@@ -984,7 +984,7 @@ h5.modal-wanted-title{
 	top:0;
 	bottom:0;
 	border-radius:3px;
-	border-left:solid 5px #258bf7;
+	border-left:solid 5px #3366ff;
 }
 
 .network-icon-box{
@@ -1012,12 +1012,12 @@ h5.modal-wanted-title{
 }
 
 .connect-network{
-	color:#258bf7;
+	color:#3366ff;
 	position:absolute;
 	right:30px;
 	display:inline-block;
 	border-radius:3px;
-	border:solid 1px #39f;
+	border:solid 1px #3366ff;
 	padding:12px 40px;
 	font-size:15px;
 	font-weight:600;
@@ -1232,7 +1232,7 @@ h5.modal-wanted-title{
 }
 .icon-arrow_right{
 	font-size:25px;
-	line-height:37px;
+	line-height:21px;
 	color:darkslategray;
 }
 
