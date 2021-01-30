@@ -23,6 +23,16 @@ public class EducationDAOMybatis implements EducationDAO{
 	}
 
 	@Override
+	public int deleteEdu(int eduNo) {
+		return sqlSession.delete(namespace+"deleteEdu",eduNo);
+	}
+
+	@Override
+	public int updateEdu(EducationVO educationVo) {
+		return sqlSession.update(namespace+"updateEdu",educationVo);
+	}
+
+  @Override
 	public List<EducationVO> selectEduByResumeNo(int resumeNo) {
 		return sqlSession.selectList(namespace+"selectEduByResumeNo", resumeNo);
 	}
