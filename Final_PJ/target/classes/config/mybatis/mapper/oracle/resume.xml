@@ -14,23 +14,43 @@
 		from memberInfo 
 		where mem_no=#{memNo}		
 	</update>
-	
+	<!-- 등록누르자마자 인서트된 가장 최신 이력서 셀렉트 -->
 	<select id="selectResume" parameterType="int" resultType="resumeVo">
 		select * from 
 		(select * from resume where mem_No=#{memNo} order by resume_no desc)
 		where rownum=1
 	</select>
-	
+	<!-- 등록버튼 누르면 insert-select했던 이력서 업뎃 -->
 	<update id="updateResume" parameterType="resumeVo">
 		update resume 
 		set resume_Title= #{resumeTitle  ,jdbcType=VARCHAR} ,resume_Name=#{resumeName} ,resume_Email=#{resumeEmail},
 		 	resume_Hp=#{resumeHp}, resume_Introduce=#{resumeIntroduce},temp_Flag=#{tempFlag},resume_Regdate=sysdate,lang_flag=#{langFlag}
 		where resume_No=#{resumeNo}
 	</update>
+	<!-- 이력서 관리 조횜 -->
+	<select id="selectResumeAll" parameterType="int" resultType="resumeVo">
+		select * from resume where mem_No=#{memNo} order by resume_No desc
+	</select>
 	
+	<!-- 이력서 번호로 조회 회원번호도 넣을까?-->
+	<select id="selectResumeOne" parameterType="resumeVo" resultType="resumeVo">
+		select * from resume where resume_No=#{resumeNo} and mem_No=${memNo}
+	</select>
 	
+	<!-- 파일업로드 업뎃 -->
+	<update id="insertResumeFile" parameterType="resumeVo">
+		<selectKey keyProperty="resumeNo" resultType="int" order="BEFORE">
+			select resume_seq.nextval from dual
+		</selectKey>
+		insert into resume(resume_No, mem_no, resume_Title,resume_Name, resume_Email,resume_Hp, temp_flag, resume_File, resume_Upfileflag)
+		select #{resumeNo},mem_No,#{resumeFile},name,email, hp,'N',#{resumeFile},'Y' 
+		from memberInfo 
+		where mem_no=#{memNo}		
+	</update>
 	
-	
+	<delete id="deleteResume" parameterType="resumeVo" >
+		delete from resume where mem_No=#{memNo} and resume_No=#{resumeNo}
+	</delete>
 	
 </mapper>
 
