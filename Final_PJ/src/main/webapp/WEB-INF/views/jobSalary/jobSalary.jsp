@@ -1,32 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jobSalary.css">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="<c:url value='/resources/css/jobSalary.css'/>">
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#subCategory").change(function(){
-	  		$.ajax({
-				url:"<c:url value='/salaryChartData.do'/>",
-				type:"GET",
-				dataType:"json",
-				data:{
-					"jikgun_code": "JG001",
-					"jikmu_code":this.value
-				},
-				success:function(res){
-					alert(res.length);
-				},
-				error:function(xhr, status, error){
-					alert('error! : ' + error);
-				}
-			});
+	$('#subCategory').change(function(){
+		//alert('#subCategory');
+		 $.ajax({
+			url:"<c:url value='/salary/salaryChartData.do'/>",
+			type:"POST",
+			data: {
+				"jikgun_code": "JG001",
+				"jikmu_code":this.value
+			},
+			dataType:"json",
+			success:function(res){
+				alert(res.length);
+			},
+			error:function(){
+				alert("ajax통신 실패");
+			}
+				
+		}); 
 	});
-	
 });
+
 
 </script>
 
@@ -50,7 +53,7 @@ $(function(){
 				<div class="salary-select-each">
 					<div class="salary-select-each-jobGroup">
 						<div class="salary-select-eachGroup">
-							<select name="category" style="border:none;width:100%; outline:none;">
+							<select id="jikgunCategory" name="category" style="border:none;width:100%; outline:none;">
 								<option disable>직군</option>
 								<option value="JG001">개발</option>
 							</select>
@@ -61,37 +64,37 @@ $(function(){
 							<select id="subCategory" name="subCategory" style="border:none;width:100%; outline:none;">
 								<option disable>직무</option>
 								<option value="JM001">서버 개발자</option>
-								<option value="2">웹 개발자</option>
-								<option value="3">프론트엔드 개발자</option>
-								<option value="">안드로이드 개발자</option>
-								<option value="">iOS 개발자</option>
-								<option value="">데이터 엔지니어</option>
-								<option value="">파이썬 개발자</option>
-								<option value="">소프트웨어 엔지니어</option>
-								<option value="">DevOps / 시스템 관리자 </option>
-								<option value="">Node.js 개발자</option>
-								<option value="">개발 매니저</option>
-								<option value="">데이터 사이언티스트</option>
-								<option value="">머신러닝 엔지니어</option>
-								<option value="">시스템, 네트워크 관리자</option>
-								<option value="">C, C++개발자</option>
-								<option value="">빅데이터 엔지니어</option>
-								<option value="">QA, 테스트 엔지니어</option>
-								<option value="">PHP 개발자</option>
-								<option value="">프로덕트 매니저</option>
-								<option value="">웹퍼블리셔</option>
-								<option value="">보안엔지니어</option>
-								<option value="">.NET 개발자</option>
-								<option value="">루비온레일즈 개발자</option>
-								<option value="">임베디드 개발자</option>
-								<option value="">CTO, Chief Technology Officer</option>
-								<option value="">블록체인 플랫폼 엔지니어</option>
-								<option value="">영상, 음성 엔지니어</option>
-								<option value="">크로스플랫폼 앱 개발자</option>
-								<option value="">BI 엔지니어</option>
-								<option value="">그래픽스 엔지니어</option>
-								<option value="">VR 엔지니어</option>
-								<option value="">CIO, Chief Information Officer</option>
+								<option value="JM002">웹 개발자</option>
+								<option value="JM003">프론트엔드 개발자</option>
+								<option value="JM004">안드로이드 개발자</option>
+								<option value="JM005">iOS 개발자</option>
+								<option value="JM006">데이터 엔지니어</option>
+								<option value="JM007">파이썬 개발자</option>
+								<option value="JM008">소프트웨어 엔지니어</option>
+								<option value="JM009">DevOps / 시스템 관리자 </option>
+								<option value="JM010">Node.js 개발자</option>
+								<option value="JM011">개발 매니저</option>
+								<option value="JM012">데이터 사이언티스트</option>
+								<option value="JM013">머신러닝 엔지니어</option>
+								<option value="JM014">시스템, 네트워크 관리자</option>
+								<option value="JM015">C, C++개발자</option>
+								<option value="JM016">빅데이터 엔지니어</option>
+								<option value="JM017">QA, 테스트 엔지니어</option>
+								<option value="JM018">PHP 개발자</option>
+								<option value="JM019">프로덕트 매니저</option>
+								<option value="JM020">웹퍼블리셔</option>
+								<option value="JM021">보안엔지니어</option>
+								<option value="JM022">.NET 개발자</option>
+								<option value="JM023">루비온레일즈 개발자</option>
+								<option value="JM024">임베디드 개발자</option>
+								<option value="JM025">CTO, Chief Technology Officer</option>
+								<option value="JM026">블록체인 플랫폼 엔지니어</option>
+								<option value="JM027">영상, 음성 엔지니어</option>
+								<option value="JM028">크로스플랫폼 앱 개발자</option>
+								<option value="JM029">BI 엔지니어</option>
+								<option value="JM030">그래픽스 엔지니어</option>
+								<option value="JM031">VR 엔지니어</option>
+								<option value="JM032">CIO, Chief Information Officer</option>
 							</select>
 						</div>
 					</div>

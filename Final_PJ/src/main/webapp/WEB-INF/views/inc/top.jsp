@@ -40,6 +40,7 @@
     =====================================-->
 
     <!-- Main jQuery -->
+    <script src="<%=request.getContextPath() %>resources/plugins/jquery/jquery.js"></script>
     <!-- Bootstrap 4.3.2 -->
     <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/popper.js"></script>
     <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -450,7 +451,7 @@
 									style="width:32px;height:32px; border-radius:9999px;">
 							</button>
 							<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:97%; left:-115%; margin-top:0; line-height:17px; border-radius:0; padding:0;">
-								<li><a class="dropdown-item" id="profile-li" href="<c:url value='/mypage/main.do'/>" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:20px 0 10px 0;">MY 원티드</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="<c:url value='/mypage/main.do'/>" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:20px 0 10px 0;">MY 위니드</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">프로필</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;margin-top:10px; border-top:1px solid #e1e2e3;padding:21px 0 11px 0;">지원현황</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">제안받기 현황</a></li>

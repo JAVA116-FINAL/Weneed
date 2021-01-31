@@ -37,5 +37,16 @@ public class EducationController {
 		return eduVo;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/educationDelete.do")
+	public int educationDelete(@RequestParam(defaultValue = "0") int eduNo) {
+		//1
+		logger.info("학력사항 삭제하기 파라미터 eduNo={}",eduNo);
+		//2
+		int cnt=eduService.deleteEdu(eduNo);
+		//3
+		//4
+		return cnt;
+	}
 
 }

@@ -871,7 +871,7 @@ h5.modal-wanted-title{
 	position:relative;
 	padding-right:30px;
 	padding-left:30px;
-	background:#258bf7;
+	background:#3366ff;
 	border-radius:3px;
 }
 
@@ -920,7 +920,7 @@ h5.modal-wanted-title{
 
 .profile-matching-area >button{
 	right:30px;
-	color:#258bf7;
+	color:#3366ff;
 	font-size:15px;
 	font-weight:600;
 	padding:10px 40px;
@@ -984,7 +984,7 @@ h5.modal-wanted-title{
 	top:0;
 	bottom:0;
 	border-radius:3px;
-	border-left:solid 5px #258bf7;
+	border-left:solid 5px #3366ff;
 }
 
 .network-icon-box{
@@ -1012,12 +1012,12 @@ h5.modal-wanted-title{
 }
 
 .connect-network{
-	color:#258bf7;
+	color:#3366ff;
 	position:absolute;
 	right:30px;
 	display:inline-block;
 	border-radius:3px;
-	border:solid 1px #39f;
+	border:solid 1px #3366ff;
 	padding:12px 40px;
 	font-size:15px;
 	font-weight:600;
@@ -1193,7 +1193,55 @@ h5.modal-wanted-title{
 	color:#333;
 }
 
+.icon-arrow_left_line:before {
+  content: "\e9a0";
+}
 
+.icon-arrow_right:before {
+  content: "\e94f";
+}
+
+.main-left-btn{
+	opacity:0.7;
+	border:solid 1px #ddd;
+	width:38px;
+	height:38px;
+	border-radius:50%;
+}
+
+.main-left-right-btn{
+	display:flex;
+	position:absolute;
+	padding:0;
+	margin:0;
+	right:0;
+	top:0px;
+}
+.icon-arrow_left_line{
+	font-size:25px;
+	line-height:37px;
+	color:darkslategray;
+}
+.main-right-btn{
+	margin-left:10px;
+	opacity:0.7;
+	border:solid 1px #ddd;
+	width:38px;
+	height:38px;
+	border-radius:50%;
+}
+.icon-arrow_right{
+	font-size:25px;
+	line-height:21px;
+	color:darkslategray;
+}
+
+.event-more-btn{
+	margin:8px 0 0;
+	font-size:14px;
+	font-weight:500;
+	color:#333;
+}
 
 /*회원가입 후 onboarding 화면*/
 #onboardingBody{
@@ -1224,7 +1272,7 @@ h5.modal-wanted-title{
 	padding:51px 20px 25px;
 	border:1px solid #ececec;
 	border-radius:5px;
-	margin-top:39px;
+	margin-top:25px;
 	background-color:#fff;
 }
 
