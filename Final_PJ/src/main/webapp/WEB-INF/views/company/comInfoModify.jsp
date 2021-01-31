@@ -38,6 +38,7 @@ $(function(){
 	    data.append("file", form);
 		console.log('data='+data);
 		
+		
 		$.ajax({
 			url:'<c:url value="/company/imgUpload.do"/>',
 			type:'POST',
@@ -78,8 +79,8 @@ $(function(){
 				<div class="imgBox imgPreviewBox">
 					등록된 이미지
 				</div>
-				<form id="imgForm" method="post" enctype="multipart/form-data">
-					<input type="file" id="imgFileInput" data-input="false" multiple="multiple" class="image_inputType_file" 
+				<form id="imgForm" name="imgForm" method="post" enctype="multipart/form-data" action='<c:url value="/company/imgUpload.do"/>'>
+					<input type="file" id="imgFileInput" name="imgFileInput" data-input="false" multiple="multiple" class="image_inputType_file" 
 						accept="image/*" style="display:none"/>
 				</form>
 				<button class="imgBox imgPlusBox" id="comServImgAddBtn"> <!-- 사진 업로드 버튼, 8장 등록되면 숨김처리되도록  -->

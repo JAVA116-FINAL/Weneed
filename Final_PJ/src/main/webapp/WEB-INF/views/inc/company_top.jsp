@@ -22,7 +22,7 @@
 					<div class="header-logo" id="comServHeaderLogo">
 						<!-- 로그인 후 기업로고 + 기업명으로 변경? -->
 						<c:if test="${empty comMemId}">
-							<a class="comServNavbar-logo-link" href="#">Wanted for Employer</a>
+							<a class="comServNavbar-logo-link" href="#">Weneed for Employer</a>
 						</c:if>
 						<c:if test="${!empty comMemId}">
 							<c:if test="${empty comInfoVo.comName }">
