@@ -5,5 +5,7 @@ import java.util.List;
 public interface MatchupMemService {
 
 	List<MatchupMemVO> selectOpen();
+	/* 자연 */
+	public int selectmcuResumeNo(int memNo);
 
 }

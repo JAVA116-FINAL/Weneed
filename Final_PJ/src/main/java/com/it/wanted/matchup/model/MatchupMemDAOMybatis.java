@@ -9,13 +9,27 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	
-	@Autowired SqlSessionTemplate sqlSession;
-	private String namespace="config.mybatis.mapper.oracle.matchupMem.";
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	private static final String namespace="config.mybatis.mapper.oracle.matchupMem.";
+	
 	
 	@Override
 	public List<MatchupMemVO> selectOpen() {
 		return sqlSession.selectList(namespace+"selectOpen");
 	}
+
+	/* 자연 */
+	@Override
+	public int selectmcuResumeNo(int memNo) {
+		int cnt=sqlSession.selectOne(namespace+"selectmcuResumeNo",memNo);
+		return cnt;
+	}
+	
+	
+
+	
+
 	
 	
 }

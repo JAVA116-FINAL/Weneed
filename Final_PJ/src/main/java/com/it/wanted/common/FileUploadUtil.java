@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -25,8 +26,10 @@ public class FileUploadUtil {
 	//자료실에서 사용하는지, 상품 등록에서 사용하는지 구분하는 상수
 	public static final int PDS_TYPE=1;  //자료실에서 사용
 	public static final int IMAGE_TYPE=2; //상품등록에서 사용
+	public static final int RESUME_UP_TYPE=3; //이력서등록에서 사용
 	
-	@Autowired private Properties fileUploadProps;
+	@Resource(name="fileUploadProperties")
+	private Properties fileUploadProps;
 	
 	private static final Logger logger
 		=LoggerFactory.getLogger(FileUploadUtil.class);
@@ -107,6 +110,13 @@ public class FileUploadUtil {
 			}else {
 				upPath=fileUploadProps.getProperty("imageFile.upload.path");
 			}
+		}else if(type==RESUME_UP_TYPE) {//이력서 등록일 때 
+			if(testGb.equals("test")) {
+				upPath=fileUploadProps.getProperty("resumeFile.upload.path.test");
+			}else {
+				upPath=fileUploadProps.getProperty("resumeFile.upload.path");
+			}
+			
 		}
 		
 		if(!testGb.equals("test")) {
