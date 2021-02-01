@@ -19,6 +19,7 @@ $( document ).ready( function() {
 	    }
 	  });
 	});
+	
 
 
 </script>
@@ -42,20 +43,19 @@ $( document ).ready( function() {
 }
 
 </style> -->
-<div class="jbMenu">
+<div class="jbMenu" style="width:100%;">
     	<nav class="navbar navbar-expand-lg navigation" id="navbar" style="background-color:#f8f8fa;">
 		<div class="container" >
 		 	 <div class="navbar-brand">
+				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
-			  <li class="nav-item active"><a class="nav-link" href="#title">북클럽 소개</a></li>
-			   <li class="nav-item"><a class="nav-link" href="#title1">이번 북클럽 소개</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title2">프로그램 상세</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title3">클럽장 소개</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title4">참가비용</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title5">후기</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title6">안내/설문</a></li>
-				</ul>	
-			 </div>
+			    <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/careerAdminMain.do'/>">커리어성장 메인</a></li>							  
+			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
+			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
+			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>			
+			  </ul>	
+			</div>
+			</div>
 		</div>
 		</nav>
 </div>
@@ -70,9 +70,9 @@ $( document ).ready( function() {
 						<div class="col-lg-12 mb-5">
 							<div class="single-blog-item">
 								<img
-									src="<c:url value='/resources/images/career/bookclub.PNG'/>"
+									src="<c:url value='/resources/images/career/${proVo.imageURL }'/>"
 									alt="" class="img-fluid">
-
+				  	
 								<!-- 태그넣기 -->
 								<div class="sidebar-widget tags mb-3" style="margin-top:20px;margin-bottom: -60px;">
 									<a href="#">#WantedPlus</a> 
@@ -90,22 +90,17 @@ $( document ).ready( function() {
 
 									<div style="color: black;">
 
+				  	<c:forEach var="proVo2" items="${proVoList2 }">				  	
 										<!-- 제목, 내용 1 -->
 
 										<div class="parag" id="parag1">
 											<a name="title"><h3>
-													<b>북클럽 소개</b>
+													<b>${proVo2.proTitle }</b>
 												</h3></a> <br>
-											<div>유튜브, 넷플릭스 등 재미난 할 거리들은 점점 늘어나고, 책 읽는 시간은 점점 줄어들게
-												됩니다. 읽어야지, 읽어야지 하면서도 못 읽는 게 우리 모두의 현실이죠. Wanted Book Club에서는
-												좋은 책을 꾸준히 읽어가면서 좋은 사람들과 교류할 수 있도록 도와드립니다. 클럽장이 추천한 좋은 책과
-												멤버들과 함께 정한 책, 총 3권을 함께 읽어보세요. 혼자 읽는 것이 아니라 누군가와 함께 한다는 사실이
-												꾸준히, 그리고 끝까지 읽을 수 있도록 도와줍니다. 책을 읽고 클럽장을 포함한 멤버들과 자연스럽게 이야기
-												나누어보세요. 같은 책을 읽는다는 것은 같은 관심사와 고민을 가지고 있다는 의미입니다. 같은 관심사를 가진
-												친구를 얻어 가세요.</div>
+											<div>${proVo2.proContents }</div>
 
 										</div>
-
+					</c:forEach>
 
 										<!-- 
 									<blockquote class="quote">A brand for a company is
@@ -115,30 +110,11 @@ $( document ).ready( function() {
 										<!-- 제목, 내용2 -->
 										<div class="parag" id="parag2" style="margin-top: 50px;">
 											<a name="title2"><h3>
-													<b>이번 북클럽 소개</b>
+													<b>${proVo2.proTitle }</b>
 												</h3></a> <br>
 											<div>
 												<p>
-													Wanted Book Club : 작가는 아니지만 글은 쓰고 싶어 꼭 작가여만 글을 쓰는 걸까요? 사실
-													우리는 아주 어릴 때부터 글을 써왔어요. 방학 숙제에 꼭 들어있던 일기였죠. 사실 우리 모두 작가였던
-													거죠. 하지만 점차 어른이 되면서 글은 전문가들의 영역이라고 생각하게 됐고, 사회생활하면서부턴 글은
-													보고서나 기획서에만 적는 걸로 여겼죠. 바로 그 생각에 변화를 만드는 모임이 되길 기대하고 있답니다.
-
-													우리는 책 첫인상 & 책 내용, 왜 글을 써야 하는지를 함께 공유하고 이야기를 나누어요. 우리는 글을 쓰기
-													위해 재료를 모으고, 재료를 통해 요리도 만드는 간단한 액션도 해볼 거예요. 우리는 글을 쓴다는 게 결국
-													나를 관찰하고 나를 알아가는 시간이란 걸 알게 될 거예요. 우리는 발전을 위해 서로 글을 공유하고 피드백을
-													주고받아볼 거예요. 우리는 공유하고, 응원하며 연결되어 '작가가 아니어도 글을 쓸 수 있음'을 경험할
-													거예요. 우리는 모두 원래 작가였으니까요. 책 #1 : 회사말고 내 콘텐츠 일상에 패턴을 만드는 글쓰기 한
-													줄의 글을 쓰고, 또 다음 줄을 쓰고 계속해서 콘텐츠를 만들었다. -p.21- 일상에 패턴이 생겼다.
-													-p26- 꾸준히 글을 쓰는 힘, 글을 쓰며 일상에 패턴이 생길 때 새로운 나를 발견하게 됩니다. 지금
-													환경과 여건 속에서 정의된 '내'가 아닌 새로움 속에 발견하고 정의할 수 있는 '내'가 있습니다. 회사에서
-													정의된 '내'가 아닌 내가 만든 콘텐츠로 새롭게 정의할 수 있는 '내'가 있습니다. 같이 새로운 우리를
-													발견하고자 합니다. 책 #2 : 기록의 쓸모 인사이트의 원천 기록 관찰력과 순간을 놓치지 않고 쥐는 힘이
-													중요하지 -p32- 기록은 관찰과 순간을 놓치지 않는 힘. 기록을 통해서 언제든 다시 꺼내볼 수 있습니다.
-													언제든 다시 꺼낼 수 있는 문자는 사람의 마음을 얻어내는 힘이 되죠. 세밀한 관찰력, 만사에 호기심을 갖는
-													힘 기록의 쓸모, 기록의 습관을 같이 길러보고자 합니다. 책 #3 : 멤버들과 함께 정한 책 첫 모임 이후
-													멤버들의 의견을 반영하여
-													<작가는 아니지만 글은 쓰고 싶어>의 주제에 맞는 책을 선정해서 모임을 진행합니다. 
+													${proVo2.proContents } 
 												</p>
 											</div>
 										</div>
@@ -244,16 +220,16 @@ $( document ).ready( function() {
 
 
 						<div class="sidebar-widget schedule-widget mb-3" style="background-color:#fff; margin-left:-60px; margin-top:-20px; width:380px">
-							<h5 class="mb-4"><b>북클럽: 작가는 아니지만 글은 쓰고싶어</b></h5>
+							<h5 class="mb-4"><b>${proVo.proName}</b></h5>
 
 							<ul class="list-unstyled">
 							
 									<div style="font:12px;"><span>일자</span></div>
-									<div style="color:black; font:12px;"><span>2021 Jan 16</span></div><br>
+									<div style="color:black; font:12px;"><span><fmt:formatDate value="${proVo.proStartDate}" pattern="yyyy-MM-dd"/></span></div><br>
 									<div style="font:12px;"><span>장소</span></div>
 									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br>
 									<div style="font:12px;"><span>주최자</span></div>
-									<div style="color:black; font:12px;"><span></span></div>
+									<div style="color:black; font:12px;"><span>${proVo.proSponsor }</span></div>
 							
 							</ul>
 							<br><br><br>
@@ -291,8 +267,8 @@ $( document ).ready( function() {
 			<div style="margin:auto; text-align:center;">
 				
 							<div style="text-align:center";>
-								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programEditTotal.do?proNo=${proVo.proNo}'" style="outline:none;">수정</button>					      									
-								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programAdminList.do'" style="outline:none;">프로그램 목록</button>					      									
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programEditTotal.do?programNo=${proVo.programNo}'" style="outline:none;">수정</button>					      									
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programList.do'" style="outline:none;">프로그램 목록</button>					      									
 								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/careerAdminMain.do'" style="outline:none; width:160px;">커리어성장 메인으로</button>					      									
 							</div>
 			</div>
