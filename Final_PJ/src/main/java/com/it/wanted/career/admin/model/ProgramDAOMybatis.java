@@ -27,14 +27,29 @@ public class ProgramDAOMybatis implements ProgramDAO{
 		return proVo;
 	}
 
-	@Override
-	public List<ProgramVO> selectAll(SearchVO searchVo) {
-		return sqlSession.selectList(namespace+"selectAll", searchVo);
+	public List<ProgramVO> selectAllprogram(SearchVO searchVo) { 
+		return sqlSession.selectList(namespace+"selectAllprogram", searchVo); 
+	}
+
+	public int selectListTotalRecord(SearchVO searchVo) { 
+		return sqlSession.selectOne(namespace+"selectListTotalRecord", searchVo); 
 	}
 
 	@Override
-	public int selectTotalRecord(SearchVO searchVo) {
-		return sqlSession.selectOne(namespace+"getTotalRecord", searchVo);
+	public int deleteProgram(int programNo) {
+		return sqlSession.delete(namespace+"deleteProgram", programNo);
 	}
+
+	@Override
+	public List<ProgramVO2> insertProgram2(ProgramVO2 proVo2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * @Override public List<ProgramVO2> insertProgram2(ProgramVO2 proVo2) { return
+	 * sqlSession.insert(namespace+"insertProgram2", proVo2); }
+	 */
+	 
 	
 }

@@ -1,13 +1,10 @@
+<%@ include file="../../inc/top.jsp" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<%@ include file="../../inc/top.jsp" %>  
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
     
   <!-- 지원 css -->
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programJiwon.css'/>">
@@ -28,17 +25,11 @@ $( document ).ready( function() {
 	});
 
 
-$(function(){
-	
-	$('form[name=proCompleteAll]').find('input[type=button]').click(function(){
-		location.href='<c:url value="/career/Admin/programAdminList.do"/>';
-		});
-	});
+
 </script>	
-	
-<title>프로그램 내용 등록 페이지</title>
+
 <script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
-</head>
+
 
 <body>
 	<%
@@ -93,11 +84,11 @@ $(function(){
 					        		<i class="far fa-eye fa-5x" style="color:#258bf7;"></i><br><br>
 					       			<input type="submit" class="programComBtn" value="미리보기"/>
 								</button>
-								<button type="button" onclick="location.href='/career/Admin/programAdminList.do'" style="outline:none;">
+								<button type="button" onclick="location.href='<c:url value="/career/Admin/programAdminList.do"/>'" style="outline:none;">
 									<i class="fas fa-list fa-5x" style="color:#258bf7;"></i><br><br>
 					      			<input type="button" class="programComBtn" value="프로그램 목록" style="width:130px;"/>
 								</button>					      									
-								<button type="button" onclick="location.href='/career/Admin/careerAdminMain.do'" style="outline:none;">
+								<button type="button" onclick="location.href='<c:url value="/career/Admin/careerAdminMain.do"/>'" style="outline:none;">
 									<i class="fas fa-home fa-5x" style="color:#258bf7;"></i><br><br>
 					      			<input type="button" class="programComBtn" value="커리어성장 메인으로" style="width:150px;"/>
 								</button>					      									

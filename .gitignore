@@ -1,6 +1,11 @@
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java
 
+context-common.xml
+context-database.xml
+mybatis-config.xml
+fileUpload.properties
+servlet-context.xml
 pom.xml
 log4j.xml
 pom.properties

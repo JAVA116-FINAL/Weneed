@@ -1,21 +1,20 @@
 package com.it.wanted.career.admin.model;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 public class ProgramVO {
 	private int programNo; 		/* 프로그램 번호 */
 	private int adminNo; 		/* ★관리자 번호 FK */
-	private List<String> proCateNo; 		/* 카테고리 번호 */
+	private int proCateNo; 		/* 카테고리 번호 */
 	private String proName; 	/* 프로그램 이름 */
 	private String proSponsor; 	/* 주최자 */
 	private int proPrice; 		/* 가격 */
 	private Timestamp proStartDate; /* 프로그램 시작일 */
 	private Timestamp regdate; 	/* 등록일 */
 	private int proType; 	/* 프로그램 타입 */
-	private String imageUrl; 	/* 썸네일 이미지 url */
+	private String imageURL; 	/* 이미지 url */
 	private Timestamp regiEndDate; /* 신청마감일 */
-	
+
 	
 	public int getProgramNo() {
 		return programNo;
@@ -33,12 +32,12 @@ public class ProgramVO {
 		this.adminNo = adminNo;
 	}
 	
-	public List<String> getProCateNo() {
+	public int getProCateNo() {
 		return proCateNo;
 	}
 	
-	public void setProCateNo(List<String> valueArr) {
-		this.proCateNo = valueArr;
+	public void setProCateNo(int proCateNo) {
+		this.proCateNo = proCateNo;
 	}
 	
 	public String getProName() {
@@ -89,12 +88,12 @@ public class ProgramVO {
 		this.proType = proType;
 	}
 	
-	public String getImageUrl() {
-		return imageUrl;
+	public String getImageURL() {
+		return imageURL;
 	}
 	
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 	
 	public Timestamp getRegiEndDate() {
@@ -109,10 +108,12 @@ public class ProgramVO {
 	public String toString() {
 		return "ProgramVO [programNo=" + programNo + ", adminNo=" + adminNo + ", proCateNo=" + proCateNo + ", proName="
 				+ proName + ", proSponsor=" + proSponsor + ", proPrice=" + proPrice + ", proStartDate=" + proStartDate
-				+ ", regdate=" + regdate + ", proType=" + proType + ", imageUrl=" + imageUrl + ", regiEndDate="
+				+ ", regdate=" + regdate + ", proType=" + proType + ", imageURL=" + imageURL + ", regiEndDate="
 				+ regiEndDate + "]";
 	}
-
-
+	
+	
+	
+	
 	
 }

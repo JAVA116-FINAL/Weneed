@@ -1,14 +1,10 @@
+<%@ include file="../../inc/top.jsp" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<%@ include file="../../inc/top.jsp" %>  
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-    
+
   <!-- 지원 css -->
   <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
 
@@ -47,9 +43,7 @@ body{
  } 
 </style>
 	
-<title>프로그램 내용 등록 페이지</title>
 <script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
-</head>
 <body>
 	<%
 		String userID = null;
@@ -180,8 +174,3 @@ body{
 
 <%@ include file="../../inc/bottom.jsp" %>  
   
-  
-
-
-</body>
-</html>  
