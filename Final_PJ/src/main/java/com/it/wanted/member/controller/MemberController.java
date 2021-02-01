@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +24,7 @@ public class MemberController {
 		= LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired private MemberService memberService;
+	@Autowired BCryptPasswordEncoder pwdEncoder;
 	
 	@ResponseBody
 	@RequestMapping(value="/memberJoin.do")
@@ -32,6 +34,9 @@ public class MemberController {
 		
 		//2.
 		boolean bool = false;
+		String inputPass = vo.getPwd();
+		String pwd = pwdEncoder.encode(inputPass);
+		vo.setPwd(pwd);
 		int cnt = memberService.insertMember(vo);
 		logger.info("회원가입 결과, cnt={}", cnt);
 		if(cnt>0) { //회원가입 성공
@@ -88,6 +93,7 @@ public class MemberController {
 		logger.info("로그인 처리 결과, result={}", result);
 		
 		MemberVO memVo = null;
+		
 		String name = "";
 		if(result==MemberService.LOGIN_OK) {
 			memVo =memberService.selectMember(vo.getEmail());

@@ -613,7 +613,7 @@
 							        			<input type="email" placeholder="이메일을 입력해주세요." id="email" class="ge-inputEmail" value="">
 							        		</div>
 							        	</div>
-							        	<input type ="button" class="sendBtn" id="findPwdBtn" value="전송" style="outline:none;">
+							        	<input type ="submit" class="sendBtn" id="findPwdBtn" value="전송" style="outline:none;">
 							        </form>
 							        <p>* 가입하신 이메일 계정으로 임시 비밀번호를 전송해 드립니다.</p>
 						        </div>
