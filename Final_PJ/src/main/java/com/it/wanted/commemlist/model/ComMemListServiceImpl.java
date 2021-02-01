@@ -32,5 +32,11 @@ public class ComMemListServiceImpl implements ComMemListService{
 		}
 		return result;
 	}
+
+	@Override
+	public String selectComCode(String comMemId) {
+		int memNo=comMemInfoDao.selectMemNo(comMemId);
+		return comMemListDao.selectComCode(memNo);
+	}
 	
 }

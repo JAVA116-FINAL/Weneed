@@ -2,9 +2,6 @@ package com.it.wanted.admin.companyService.controller;
 
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

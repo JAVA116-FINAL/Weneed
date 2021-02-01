@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="afterLogin-wrapper">
+
 <style type="text/css">
 .carousel-item img {
   position:relative;
@@ -9,8 +9,15 @@
   background-position:center center;
   background-size:cover;
 }
+.slick-list{
+	height:350px!important;
+}
+.slick-dots li button:before{
+	content: '•'!important;
+}
 </style>
 
+<div class="afterLogin-wrapper">
 	<!-- top 슬라이더 -->
 	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
@@ -25,7 +32,7 @@
 							<hr style="border-top:1px solid #eee; margin:0 -30px 14px;">
 							<button type="button" style="display:flex;">
 								<span style="font-size:15px; font-weight:600; text-align:center;color:#258bf7;">바로가기</span>
-								<i class="icon-arrow_right" style="color:#258bf7; font-size:20px; margin-left:4px; margin-top:1px;"></i>
+								<i class="icon-arrow_right" style="color:#258bf7; font-size:20px; margin-left:4px; margin-top:1px;line-height:21px;"></i>
 							</button>
 					</div>
 				</div>
@@ -40,8 +47,8 @@
 							</div>
 							<hr style="border-top:1px solid #eee; margin:0 -30px 14px;">
 							<button type="button" style="display:flex;">
-								<span style="font-size:15px; font-weight:600; text-align:center;color:#258bf7;">바로가기</span>
-								<i class="icon-arrow_right" style="color:#258bf7; font-size:20px; margin-left:4px; margin-top:1px;"></i>
+								<span style="font-size:15px; font-weight:600; text-align:center;color:#3366ff;">바로가기</span>
+								<i class="icon-arrow_right" style="color:#3366ff; font-size:20px; margin-left:4px; margin-top:1px;line-height:21px;"></i>
 							</button>
 					</div>
 				</div>
@@ -57,7 +64,7 @@
 							<hr style="border-top:1px solid #eee; margin:0 -30px 14px;">
 							<button type="button" style="display:flex;">
 								<span style="font-size:15px; font-weight:600; text-align:center;color:#258bf7;">바로가기</span>
-								<i class="icon-arrow_right" style="color:#258bf7; font-size:20px; margin-left:4px; margin-top:1px;"></i>
+								<i class="icon-arrow_right" style="color:#258bf7; font-size:20px; margin-left:4px; margin-top:1px;line-height:21px;"></i>
 							</button>
 					</div>
 				</div>
@@ -75,13 +82,10 @@
 	
 	<div class="container">
 		<!-- 이력서 강화하기 -->
-		<a href="#" class="profile-matching-area">
+		<a href="#" class="profile-matching-area" style="background:#3366ff;">
 			<h3>
-				<div class="matching-percent-box">
-					<div class="matching-percent">60%</div>
-				</div>
 				<p class="matching-area-desc">
-					프로필에 이력서 추가하고, 인사담당자에게 직접 면접 제안 받으세요
+					프로필에 이력서 추가하고, 인사담당자에게 직접 면접 제안 받으세요!
 				</p>
 			</h3>
 			<button type="button">이력서 강화하기</button>
@@ -158,33 +162,42 @@
 		</div>
 		
 		<!-- 커리어 성장의 기회 -->
-		<div class="career-chance-box">
+		<section class="section testimonial-2" style="padding:20px 0 0 0;">
 			<div class="carrer-chance-title-wrap">
 				<div class="carrer-box-title-div">
 					<h2 class="carrer-box-title">커리어 성장의 기회</h2>
-					<div><a href="#">다양한 이벤트 더보기></a></div>
-				</div>
-				<div class="carrer-box-title-btn">
-				
+					<a href="#"><h6 class="event-more-btn">다양한 이벤트 더보기></h6></a>
 				</div>
 			</div>
-			<div class="row">
-			<div class="col-md-6">
-				<div class="about-block-item">
-					<a href="#">
-					<img src="${pageContext.request.contextPath}/resources/images/main/main_career_001.jpg" alt="" class="img-fluid w-100" style="height:300px;">
-					</a>
-					<h3 class="mt-3 passPredic-pic-title">Wanted Plus : 무제한으로 즐기는</h3>
+			<div class="row align-items-center">
+				<div class="col-lg-12 testimonial-wrap-2">
+					<div class="testimonial-block style-2"
+						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_001.jpg') center/cover no-repeat; height:270px;padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">Wanted Plus : 무제한으로 즐기는</h3></div>
+					</div>
+	
+					<div class="testimonial-block style-2"
+						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_002.jpg') center/cover no-repeat; height:270px;padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">우리회사 제품 라이브커머스로 팔기</h3></div>
+					</div>
+	
+					<div class="testimonial-block style-2"
+						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_003.jpg') center/cover no-repeat; height:270px;padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">Wanted Career Talk #8. DATA 누구에게나 처음은 있었다.</h3></div>
+					</div>
+	
+					<div class="testimonial-block style-2"
+						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_004.jpg') center/cover no-repeat; height:270px;padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">스터디살롱 : Where I am</h3></div>
+					</div>
+	
+					<div class="testimonial-block style-2"
+					style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_005.jpg') center/cover no-repeat; height:270px;padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">실전 프로젝트로 배우는 딥러닝 컴퓨터비전</h3></div>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="about-block-item">
-					<img src="${pageContext.request.contextPath}/resources/images/main/main_career_002.jpg" alt="" class="img-fluid w-100" style="height:300px;">
-					<h3 class="mt-3 passPredic-pic-title">우리회사 제품 라이브커머스로 팔기</h3>
-				</div>
-			</div>
-			</div>
-		</div>
+		</section>
 		
 		<!-- 신규 채용 회사 -->
 		<div class="newJob-box">
@@ -228,34 +241,46 @@
 		</div>
 		
 		<!-- 테마별 채용 -->
-		<div class="theme-box">
-			<div class="theme-title-wrap">
-				<div class="theme-box-title-div">
-					<h2 class="theme-box-title">테마별 채용</h2>
-				</div>
-				<div class="carrer-box-title-btn">
-				
+		<section class="section testimonial-2" style="padding:0;">
+			<div class="carrer-chance-title-wrap">
+				<div class="carrer-box-title-div">
+					<h2 class="carrer-box-title">테마별 채용</h2>
 				</div>
 			</div>
-			<div class="row">
-			<div class="col-md-6">
-				<div class="about-block-item">
-					<a href="#">
-					<img src="${pageContext.request.contextPath}/resources/images/main/main_theme_001.png" alt="" class="img-fluid w-100" style="height:300px;">
-					</a>
-					<h3 class="mt-3 passPredic-pic-title">성과는 상여금으로 보답하는 기업</h3>
-					<div class="ge-job-card-company-location">회사가 성장하는 만큼 상여금, 성과급으로 보상하는 기업을 소개합니다.</div>
+			<div class="row align-items-center">
+				<div class="col-lg-12 testimonial-wrap-2">
+					<div class="testimonial-block style-2"
+						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_theme_001.png') center/cover no-repeat; height:270px; padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">성과는 상여금으로 보답하는 기업</h3></div>
+						<div class="ge-job-card-company-location" style="position:relative; top:270px;">회사가 성장하는 만큼 상여금, 성과급으로 보상하는 기업을 소개합니다.</div>
+					</div>
+	
+					<div class="testimonial-block style-2"
+						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_theme_002.png') center/cover no-repeat; height:270px;padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">연봉 Flex! 연봉 상위 10% 기업</h3></div>
+						<div class="ge-job-card-company-location" style="position:relative; top:270px;">업계별 상위 연봉을 제시하는 기업을 소개합니다.</div>
+					</div>
+	
+					<div class="testimonial-block style-2"
+						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_theme_003.png') center/cover no-repeat; height:270px;padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">패션, 뷰티 업계가 주목하는 기업</h3></div>
+						<div class="ge-job-card-company-location" style="position:relative; top:270px;">패션, 뷰티 업계가 주목하는 핫한 기업을 소개합니다.</div>
+					</div>
+	
+					<div class="testimonial-block style-2"
+						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_theme_004.jpg') center/cover no-repeat; height:270px;padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">글로벌 이커머스 플랫폼 'DHOLIC'</h3></div>
+						<div class="ge-job-card-company-location" style="position:relative; top:270px;">일본 K-패션 1위 이커머스 플랫폼, 디홀릭커머스 채용 중</div>
+					</div>
+	
+					<div class="testimonial-block style-2"
+					style="background:url('${pageContext.request.contextPath}/resources/images/main/main_theme_005.jpg') center/cover no-repeat; height:270px;padding:0;">
+						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">대한민국 핀테크 선도 주자</h3></div>
+						<div class="ge-job-card-company-location" style="position:relative; top:270px;">두나무 (업비트/증권플러스)</div>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="about-block-item">
-					<img src="${pageContext.request.contextPath}/resources/images/main/main_theme_002.png" alt="" class="img-fluid w-100" style="height:300px;">
-					<h3 class="mt-3 passPredic-pic-title">연봉 Flex! 연봉 상위 10% 기업</h3>
-					<div class="ge-job-card-company-location">업계별 상위 연봉을 제시하는 기업을 소개합니다.</div>
-				</div>
-			</div>
-			</div>
-		</div>
+		</section>
 		
 		<!-- 금주의 추천 -->
 		<div class="weekRefer-box">
@@ -313,5 +338,18 @@
 						</div>
 				</section>
 		</div>
+	</div>
 </div>
-</div>
+
+<!-- Bootstrap 4.3.2 -->
+<script src="<c:url value='/resources/plugins/counterup/jquery.easing.js'/>"></script>
+<!-- Slick Slider -->
+<script src="<c:url value='/resources/plugins/slick-carousel/slick/slick.min.js'/>"></script>
+<!-- Counterup -->
+<script src="<c:url value='/resources/plugins/counterup/jquery.waypoints.min.js'/>"></script>
+<script src="<c:url value='/resources/plugins/shuffle/shuffle.min.js'/>"></script>
+<script src="<c:url value='/resources/plugins/counterup/jquery.counterup.min.js'/>"></script>
+<!-- Google Map -->
+<script src="<c:url value='/resources/plugins/google-map/map.js'/>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
+<script src="<c:url value='/resources/js/script.js'/>"></script>

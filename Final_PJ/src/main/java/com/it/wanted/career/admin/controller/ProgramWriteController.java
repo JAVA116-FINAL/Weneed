@@ -34,12 +34,14 @@ public class ProgramWriteController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ProgramWriteController.class);
 
+
 	@Autowired
 	private CareerCategoryService careerCategoryService;
 	@Autowired
 	private ProgramService programService;
 	@Autowired
 	private FileUploadUtil fileUtil;
+
 
 	// 프로그램 글쓰기(등록) 화면 보여주기
 
@@ -159,10 +161,11 @@ public class ProgramWriteController {
 
 
 	/* 프로그램 목록 */
+	
 	@RequestMapping("/programAdminList.do")
-	public String programAdminList(@ModelAttribute SearchVO searchVo, Model model) {
+	public String programAdminListShow(@ModelAttribute SearchVO searchVo, Model model) {
+		//1
 
-		// 1
 		logger.info("글 목록 페이지, 파라미터 searchVo={}", searchVo);
 
 		// 2

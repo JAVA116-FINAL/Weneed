@@ -37,7 +37,7 @@
 <body id="onboardingBody">
 	<div class="ob-wrapper">
 		<div class="ob-content">
-			<div class="ob-con-logo"><img src="${pageContext.request.contextPath}/resources/images/wantedLogo.png"></div>
+			<div class="ob-con-logo"><img src="${pageContext.request.contextPath}/resources/images/weneedLogo.png"></div>
 			<div class="ob-con-box">
 				<div class="ob-con-box-top">
 					<p>인사담당자에게 제안받고 싶다면,<br>아래 정보를 추가해주세요!</p>
@@ -62,7 +62,7 @@
 				</div>
 				<!-- 원티드 시작하기 버튼 -->
 				<div class="ob-button-wrapper">
-					<button type="button" class="ob-next-btn" style="outline:none;">원티드 시작하기</button>
+					<button type="button" class="ob-next-btn" style="outline:none;">위니드 시작하기</button>
 				</div>
 			</div>
 			<div class="ob-after-input-wrapper">

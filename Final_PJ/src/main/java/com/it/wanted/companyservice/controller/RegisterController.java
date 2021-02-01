@@ -1,19 +1,31 @@
 package com.it.wanted.companyservice.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.it.wanted.comimginfo.model.ComImgInfoService;
 import com.it.wanted.comimginfo.model.ComImgInfoVO;
@@ -25,6 +37,7 @@ import com.it.wanted.cominfo.model.NationVO;
 import com.it.wanted.cominfo.model.RegionVO;
 import com.it.wanted.commeminfo.model.ComMemInfoService;
 import com.it.wanted.commeminfo.model.ComMemInfoVO;
+import com.it.wanted.common.FileUploadUtil;
 
 @Controller
 @RequestMapping("/company")
@@ -34,6 +47,7 @@ public class RegisterController {
 	@Autowired ComMemInfoService comMemInfoService;
 	@Autowired ComInfoService comInfoService;
 	@Autowired ComImgInfoService comImgInfoService;
+	@Autowired FileUploadUtil fileUpload;
 	
 	@RequestMapping(value = "/member/join.do", method= RequestMethod.POST)
 	public String join_modal_post(@ModelAttribute ComMemInfoVO vo, Model model) {
@@ -159,4 +173,57 @@ public class RegisterController {
 		model.addAttribute("imgList", imgList);
 	}
 	
+	/*
+	@ResponseBody
+	@RequestMapping(value="/imgUpload.do", method=RequestMethod.POST, produces="text/plain")
+    public String upload(MultipartHttpServletRequest request) throws Exception {
+		String upFilePath="C:\\Users\\jazzo\\git\\Wanted_jayeon\\Final_PJ\\src\\main\\webapp\\companyImgUpload";	
+		// 응답용 객체를 생성하고, jsonView 를 사용하도록 합니다.
+		ModelAndView model = new ModelAndView();
+		model.setView(jsonView);
+		
+		Iterator itr =  request.getFileNames();
+		
+        if(itr.hasNext()) {
+            List mpf = request.getFiles((String) itr.next());
+            // 임시 파일을 복사한다.
+            for(int i = 0; i < mpf.size(); i++) {
+
+                File file = new File(upFilePath + ((MultipartFile) mpf.get(i)).getOriginalFilename());
+                logger.info(file.getAbsolutePath());
+                ((MultipartFile) mpf.get(i)).transferTo(file);
+                
+            }
+            
+            // 업로드된 파일이 있을경우 응답입니다.
+            JSONObject json = new JSONObject();
+            json.put("code", "true");
+            model.addObject("result", json);
+            return model;
+            
+        } else {
+        	
+            // 파일이 없을 경우 응답 입니다.
+            JSONObject json = new JSONObject();
+            json.put("code", "false");
+            model.addObject("result", json);
+            return model;
+            
+        }
+    }
+    */
+	
+	@ResponseBody
+	@RequestMapping(value = "/imgUpload.do", method = RequestMethod.POST)
+	public String imgMultiUpload_post(MultipartFile imgForm) {
+		logger.info("이미지 업로드 처리 시작, 파라미터 imgFileInput={}", imgForm);
+		String upFilePath="C:\\Users\\jazzo\\git\\Wanted_jayeon\\Final_PJ\\src\\main\\webapp\\companyImgUpload";
+		
+		String fileName=imgForm.getName();
+		logger.info("fileName={}", fileName);
+		
+	//	List<Map<String, Object>> fileList=fileUpload.fileUplaod_comImg(data);
+		
+		return "성공";
+	} 
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.jikgunJikmu">
+	<select id="selectAllJikgun" resultType="jikgunVo">
+		select * from jikgun
+	</select>
+	
+	<select id="selectBasicJikgunCode" resultType="String">
+		select jikgun_code from jikmu where rownum=1 order by jikmu_code, jikgun_code
+	</select>
+	
+	<select id="selectJikmuByJikgunCode" parameterType="string" resultType="jikmuVo">
+		select * from jikmu where jikgun_code=#{basicCode}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

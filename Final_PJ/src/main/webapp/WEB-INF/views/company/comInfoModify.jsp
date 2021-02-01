@@ -13,8 +13,6 @@ $(function(){
 		
 		$('#tabImgLabel').addClass('selectedTab');
 		$('#tabInfoLabel').removeClass('selectedTab');
-		
-		
 	});
 	$('#tabInfo').click(function(){
 		$('.imgSection').addClass('hide');
@@ -24,11 +22,40 @@ $(function(){
 		$('#tabImgLabel').removeClass('selectedTab');
 	});
 
-
-//이미지 업로드 기능 구현
-	
+	//이미지 업로드 기능 구현
+	//버튼 클릭하여 fileDialog open
 	$('#comServImgAddBtn').click(function(){
 		$('#imgFileInput').click();
+	});
+	
+	$('#imgFileInput').change(function(){
+		
+		//선택한 이미지파일들을 ajax로 Controller에 전달
+		
+		var form = $('#imgForm')[0];
+		console.log('form='+form);
+	    var data = new FormData();
+	    data.append("file", form);
+		console.log('data='+data);
+		
+		
+		$.ajax({
+			url:'<c:url value="/company/imgUpload.do"/>',
+			type:'POST',
+			data:data,
+			enctype:"multipart/form-data",
+			contentType:false, // false -> multipart/form-data
+							   // true -> application/x-www-form-urlencoded 
+			processData:false, // true: get방식 / false: post방식
+			cache:false,
+			success:function(result){
+				alert('success');
+				console.log(result);
+			},
+			error:function(xhr, status, error){
+				alert('error! : '+error);
+			}
+		});
 	});
 	
 });
@@ -52,7 +79,10 @@ $(function(){
 				<div class="imgBox imgPreviewBox">
 					등록된 이미지
 				</div>
-				<input type="file" id="imgFileInput" class="image_inputType_file" accept="image/*" style="display:none"/>
+				<form id="imgForm" name="imgForm" method="post" enctype="multipart/form-data" action='<c:url value="/company/imgUpload.do"/>'>
+					<input type="file" id="imgFileInput" name="imgFileInput" data-input="false" multiple="multiple" class="image_inputType_file" 
+						accept="image/*" style="display:none"/>
+				</form>
 				<button class="imgBox imgPlusBox" id="comServImgAddBtn"> <!-- 사진 업로드 버튼, 8장 등록되면 숨김처리되도록  -->
 					<div class="imgPlusBtn">
 						<i class="fas fa-plus fa-3x"></i>

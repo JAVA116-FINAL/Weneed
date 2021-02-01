@@ -6,5 +6,6 @@ public interface ComMemListService {
 	public final static int IMG_NOT_REGED=3;
 	
 	int checkComReged(String comMemId);
+	String selectComCode(String comMemId);
 
 }

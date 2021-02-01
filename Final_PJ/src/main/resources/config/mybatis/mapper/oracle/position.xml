@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.position">
+	
+	<insert id="insertPosition" parameterType="positionVo" >
+		<selectKey keyProperty="posNo" resultType="int" order="BEFORE">
+			select position_seq.nextval from dual
+		</selectKey>
+		insert into position(pos_No, com_Code, jikgun_Code, com_Emails, pos_Min_Sal, pos_Max_Sal, 
+							 end_Date, pos_Name, pos_Context, pos_Career, qualification, 
+                    		 preferential_Treatment, welfare_Benefits, overseas, pos_Status, 
+                    		 region, nation_Name_Kr, min_Year, max_Year)
+		values(#{posNo}, #{comCode}, #{jikgunCode}, #{comEmails}, #{posMinSal}, #{posMaxSal}, 
+							 #{endDate}, #{posName}, #{posContext}, #{posCareer}, #{qualification}, 
+                    		 #{preferentialTreatment}, #{welfareBenefits}, #{overseas}, #{posStatus}, 
+                    		 #{region}, #{nationNameKr}, #{minYear}, #{maxYear})
+	</insert>
+	
+	<select id="selectPosNo" parameterType="positionVo" resultType="int">
+		select pos_No from position where pos_name=#{posName} and com_code=#{comCode}
+	</select>
+	
+	<insert id="insertPosJikmu" parameterType="posJikmuVo">
+		insert into posJikmu(pos_no, jikmu_code)
+		values(#{posNo}, #{jikmuCode})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+

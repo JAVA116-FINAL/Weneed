@@ -3,10 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.salary">
-	<select id="getSalary" parameterType="String" resultType="salaryVO">
-		<![CDATA[
+	<resultMap id="salaryResultMap" type="HashMap">
+	  <result property="salary_no" column="salary_no" />
+	  <result property="carrer" column="carrer"/>
+	  <result property="salary" column="salary"/>
+	  <result property="jikgun_code" column="jikgun_code"/>
+	  <result property="jikmu_code" column="jikmu_code"/>
+	</resultMap>
+
+	<select id="selectSalary" resultMap="salaryResultMap">
 		select career, salary from salary
-		where jikgun_code=#{jikgunCode} and jikmu_code=#{jikmuCode}
-		]]>
+		where jikgun_code=#{jikgun_code} and jikmu_code=#{jikmu_code}
 	</select>
 </mapper>
