@@ -128,8 +128,7 @@ public class FileUploadUtil {
 	}
 	
 	public List<Map<String, Object>> fileUplaod_comImg(HttpServletRequest request) throws IllegalStateException, IOException {
-		MultipartHttpServletRequest multiRequest 
-			= (MultipartHttpServletRequest) request;
+		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 		
 		//결과를 저장할 리스트
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
@@ -177,6 +176,10 @@ public class FileUploadUtil {
 			upPath=fileUploadProps.getProperty("comImgFile.upload.path");
 			//회사이미지 업로드
 		}
+		
+		if(!testGb.equals("test")) {
+			upPath=request.getSession().getServletContext().getRealPath(upPath);
+		} //테스트가 아닐때는 물리적 경로를 구해야 한다. 배포시에도? 
 		
 		logger.info("파일 업로드 경로: {}", upPath);
 		

@@ -1,6 +1,7 @@
 package com.it.wanted.companyservice.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -37,6 +38,7 @@ import com.it.wanted.cominfo.model.NationVO;
 import com.it.wanted.cominfo.model.RegionVO;
 import com.it.wanted.commeminfo.model.ComMemInfoService;
 import com.it.wanted.commeminfo.model.ComMemInfoVO;
+import com.it.wanted.commemlist.model.ComMemListService;
 import com.it.wanted.common.FileUploadUtil;
 
 @Controller
@@ -47,6 +49,7 @@ public class RegisterController {
 	@Autowired ComMemInfoService comMemInfoService;
 	@Autowired ComInfoService comInfoService;
 	@Autowired ComImgInfoService comImgInfoService;
+	@Autowired ComMemListService comMemListService;
 	@Autowired FileUploadUtil fileUpload;
 	
 	@RequestMapping(value = "/member/join.do", method= RequestMethod.POST)
@@ -100,7 +103,7 @@ public class RegisterController {
 		
 	}
 	
-	@ResponseBody
+	@ResponseBody //국가별 지역목록 조회 ajax 핸들러
 	@RequestMapping("/selectRegionbyNation.do")
 	public List<RegionVO> selectRegionList(@RequestParam String nationCode) {
 		logger.info("국가명으로 지역목록 선택, 파라미터 국가코드 nationCode={}", nationCode);
@@ -137,6 +140,7 @@ public class RegisterController {
 		return "common/message";
 	}
 	
+	//회사 이미지 등록 페이지 조회
 	@RequestMapping("/comInfoModify.do")
 	public void imgUpload_get(HttpSession session, Model model) {
 		logger.info("회사이미지등록 페이지 조회");
@@ -173,57 +177,64 @@ public class RegisterController {
 		model.addAttribute("imgList", imgList);
 	}
 	
-	/*
-	@ResponseBody
-	@RequestMapping(value="/imgUpload.do", method=RequestMethod.POST, produces="text/plain")
-    public String upload(MultipartHttpServletRequest request) throws Exception {
-		String upFilePath="C:\\Users\\jazzo\\git\\Wanted_jayeon\\Final_PJ\\src\\main\\webapp\\companyImgUpload";	
-		// 응답용 객체를 생성하고, jsonView 를 사용하도록 합니다.
-		ModelAndView model = new ModelAndView();
-		model.setView(jsonView);
-		
-		Iterator itr =  request.getFileNames();
-		
-        if(itr.hasNext()) {
-            List mpf = request.getFiles((String) itr.next());
-            // 임시 파일을 복사한다.
-            for(int i = 0; i < mpf.size(); i++) {
-
-                File file = new File(upFilePath + ((MultipartFile) mpf.get(i)).getOriginalFilename());
-                logger.info(file.getAbsolutePath());
-                ((MultipartFile) mpf.get(i)).transferTo(file);
-                
-            }
-            
-            // 업로드된 파일이 있을경우 응답입니다.
-            JSONObject json = new JSONObject();
-            json.put("code", "true");
-            model.addObject("result", json);
-            return model;
-            
-        } else {
-        	
-            // 파일이 없을 경우 응답 입니다.
-            JSONObject json = new JSONObject();
-            json.put("code", "false");
-            model.addObject("result", json);
-            return model;
-            
-        }
-    }
-    */
 	
 	@ResponseBody
 	@RequestMapping(value = "/imgUpload.do", method = RequestMethod.POST)
-	public String imgMultiUpload_post(MultipartFile imgForm) {
-		logger.info("이미지 업로드 처리 시작, 파라미터 imgFileInput={}", imgForm);
-		String upFilePath="C:\\Users\\jazzo\\git\\Wanted_jayeon\\Final_PJ\\src\\main\\webapp\\companyImgUpload";
+	public List<ComImgInfoVO> imgMultiUpload_post(HttpServletRequest request, HttpSession session) {
+		String comMemId=(String) session.getAttribute("comMemId");
+		String comCode=comMemListService.selectComCode(comMemId);
 		
-		String fileName=imgForm.getName();
-		logger.info("fileName={}", fileName);
+		logger.info("이미지 업로드 처리 시작, 파라미터 comCode={}, imgFileRequest={}", comCode, request);
 		
-	//	List<Map<String, Object>> fileList=fileUpload.fileUplaod_comImg(data);
+		List<Map<String, Object>> fileList=null;
+		try { //파일네임, 오리진네임, 파일사이즈가 있는 mapList를 리턴받음
+			fileList=fileUpload.fileUplaod_comImg(request);
+			logger.info("이미지 업로드 결과, fileList.size={}", fileList.size());
+		} catch (IllegalStateException | IOException e) {
+			logger.info("이미지 업로드 실패!");
+			e.printStackTrace();
+		}
+		ComImgInfoVO imgVo=new ComImgInfoVO();
+		for(Map<String, Object> fileMap : fileList) {
+			logger.info("fileName={}", fileMap.get("fileName"));
+			logger.info("fileSize={}", fileMap.get("fileSize"));
+			logger.info("originalFileName={}", fileMap.get("originalFileName"));
+			imgVo.setComCode(comCode);
+			imgVo.setComImgUrl((String)fileMap.get("fileName"));
+			imgVo.setComImgPassed("N");
+			int cnt=comImgInfoService.insertImg(imgVo);
+			logger.info("이미지 입력 결과, imgVo={}, cnt={}", imgVo, cnt);
+		} //출력까지 해보자 그러고 성공하면, comCode와 함께 이미지를 묶어서 db에 insert
 		
-		return "성공";
+		//return 값은 이미지 파일 리스트여야 함. 앞단에서 미리보기 해줘야 하니까
+		List<ComImgInfoVO> imgList=comImgInfoService.selectAllImg(comCode);
+		
+		return imgList;
 	} 
+	
+	@ResponseBody
+	@RequestMapping(value = "/imgDelete.do", method = RequestMethod.GET)
+	public String comImgDelete(@RequestParam String imgFileName, 
+			HttpServletRequest request, HttpSession session){
+		String res="삭제 실패!";
+
+		String upPath = fileUpload.getUploadPath_comImg(request);
+		boolean bool=false;
+		
+		//실물파일 삭제해줘
+		File imgFile = new File(upPath, imgFileName);
+		if(imgFile.exists()) {
+			bool=imgFile.delete();
+			logger.info("파일 삭제 여부 :{}", bool);
+		}//if
+		
+		//파일네임 찾아서 db에서도 삭제해줘
+		int cnt=comImgInfoService.deleteImg(imgFileName);
+		logger.info("파일 삭제 결과 cnt={}", cnt);
+		if(bool && cnt>0) {
+			res="삭제 성공!";
+		}
+		
+		return res;
+	}
 }

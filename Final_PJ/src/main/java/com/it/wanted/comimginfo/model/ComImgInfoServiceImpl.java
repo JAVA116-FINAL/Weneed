@@ -13,5 +13,20 @@ public class ComImgInfoServiceImpl implements ComImgInfoService{
 	public List<ComImgInfoVO> selectAllImg(String comCode) {
 		return comImgInfoDao.selectAllImg(comCode);
 	}
+
+	@Override
+	public int insertImg(ComImgInfoVO imgVo) {
+		return comImgInfoDao.insertImg(imgVo);
+	}
+
+	@Override
+	public int deleteImg(String imgFileName) {
+		return comImgInfoDao.deleteImg(imgFileName);
+	}
+
+	@Override
+	public List<ComImgInfoVO> selectAllImage() {
+		return comImgInfoDao.selectAllImage();
+	}
 	
 }

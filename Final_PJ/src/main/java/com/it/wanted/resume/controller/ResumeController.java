@@ -107,7 +107,7 @@ public class ResumeController {
 		//2 회원번호로 이력서 테이블 불러오기, 매치업이력서 번호 확인 
 		List<ResumeVO> resumeList = resumeService.selectResumeAll(memNo);
 		logger.info("이력서 조회결과 resumeList.size()={}", resumeList.size());
-		/* 보류
+		/*
 		int mcuResumeNo=mcumemService.selectmcuResumeNo(memNo);
 		logger.info("매치업 이력서번호 mcuResumeNo={}", mcuResumeNo);
 		

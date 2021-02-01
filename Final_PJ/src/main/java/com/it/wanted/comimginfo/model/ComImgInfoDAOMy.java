@@ -20,5 +20,20 @@ public class ComImgInfoDAOMy implements ComImgInfoDAO{
 	public List<ComImgInfoVO> selectAllImg(String comCode) {
 		return sqlSession.selectList(namespace+"selectAllImg", comCode);
 	}
+
+	@Override
+	public int insertImg(ComImgInfoVO imgVo) {
+		return sqlSession.insert(namespace+"insertImg", imgVo);
+	}
+
+	@Override
+	public int deleteImg(String imgFileName) {
+		return sqlSession.delete(namespace+"deleteImg", imgFileName);
+	}
+
+	@Override
+	public List<ComImgInfoVO> selectAllImage() {
+		return sqlSession.selectList(namespace+"selectAllImage");
+	}
 	
 }
