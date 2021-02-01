@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/matchup.css'/>">
 <script type="text/javascript">
 $(function(){
+	//경력 슬라이더
 	$("#slider-range").slider({
 		range: true,
 		min: 0,
@@ -20,7 +21,6 @@ $(function(){
 	});
 	$("#amount").val($("#slider-range").slider("values",0)
 			+" - "+$("#slider-range").slider("values",1)+"년");
-
 	
 	//리스트 선택 시 표시해주기
 	$('.matchupSearch-li').click(function(){
@@ -37,17 +37,23 @@ $(function(){
 			$(this).children('i').addClass('goldStar');
 		}
 	});
+	
+	
 });
 </script>
 	<div class="container"> <!-- 가장 바깥 래퍼 --> 
 		<section class="matchupSearch-1stSec"> <!-- 이름, 검색필터, 검색창, 필터 -->
 			<h1>찾고 있는 인재의 직군/직무를 설정하세요</h1>
-			<select class="matchupSearch-select matchupSearch-selectShort">
-				<option>전체 직군</option>				
+			<select id="matchupSearch-jikgunSelect" class="matchupSearch-select matchupSearch-selectShort">
+				<c:forEach var="jikgunVo" items="${jikgunList}">
+					<option value="${jikgunVo.jikgunCode}">${jikgunVo.jikgunName}</option>			
+				</c:forEach>
 			</select>
-			<!-- 여기도 아작스구나 -->
-			<select class="matchupSearch-select matchupSearch-selectLong"> 
-				<option>전체 직무</option>
+			<!-- 여기도 아작스 써야 하는데 일단 그냥 함 -->
+			<select id="matchupSearch-jikmuSelect" class="matchupSearch-select matchupSearch-selectLong"> 
+				<c:forEach var="jikmuVo" items="${jikmuList}">
+					<option value="${jikmuVo.jikmuCode}">${jikmuVo.jikmuName}</option>			
+				</c:forEach>
 			</select>
 			<div class="matchupSearch-searchFilter">
 				<div class="matchupSearch-searchDiv">
@@ -103,19 +109,25 @@ $(function(){
 		</section>
 		<section class="matchupSearch-resumeList">
 			<div class="matchupSearch-resumeBound">
-				<div class="matchupSearch-resume-1st">
-					<img src="#">
-					<span>No.12345</span>
-				</div>
-				<div class="matchupSearch-resume-2nd"> <!-- 이력서 목록 -->
-					<span>직군직종명</span>
-					<span>6년 경력</span>
-					<span>학력대학교 무슨학과</span>
-				</div>
-				<div class="matchupSearch-resume-3rd">
-					<button id="matchupSearch-ZzimBtn"><i class="fas fa-star"></i> 찜</button>
-					<button>이력서 미리보기</button>
-				</div>
+				<c:forEach var="matchupMemVo" items="${matchupMemList }">
+					<div class="matchupSearch-resume-1st">
+						<img src="#">
+						<span>${matchupMemVo.resumeNo}</span>
+					</div>
+					<div class="matchupSearch-resume-2nd"> <!-- 이력서 목록 -->
+						
+						<span>직군직종명</span>
+						
+						<span>6년 경력</span>
+						
+						<span>학력대학교 무슨학과</span>
+					
+					</div>
+					<div class="matchupSearch-resume-3rd">
+						<button id="matchupSearch-ZzimBtn"><i class="fas fa-star"></i> 찜</button>
+						<button>이력서 미리보기</button>
+					</div>
+				</c:forEach>
 			</div>
 			<div class="matchupSearch-resume-paging">
 				<div class="matchupSearch-pagingDiv matchupSearch-pagingDiv_prev">이전</div>

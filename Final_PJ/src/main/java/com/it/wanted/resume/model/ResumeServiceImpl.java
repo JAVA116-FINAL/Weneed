@@ -135,6 +135,28 @@ public class ResumeServiceImpl implements ResumeService{
 		return cnt;
 	}
 
+	@Override
+	public List<ResumeVO> selectResumeAll(int memNo) {
+		return resumeDao.selectResumeAll(memNo);
+	}
+
+	@Override
+	public int insertResumeFile(ResumeVO rVo) {
+		return resumeDao.insertResumeFile(rVo);
+	}
+
+	@Transactional
+	@Override
+	public int deleteResume(ResumeVO rVo) {
+		/* rVo.getResumeNo(); */
+		return resumeDao.deleteResume(rVo);
+	}
+
+	@Override
+	public ResumeVO selectResumeOne(ResumeVO rVo) {
+		return resumeDao.selectResumeOne(rVo);
+	}
+
 	
 	
 }

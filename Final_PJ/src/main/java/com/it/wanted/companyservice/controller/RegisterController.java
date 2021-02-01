@@ -214,21 +214,16 @@ public class RegisterController {
     */
 	
 	@ResponseBody
-	@RequestMapping(value = "/imgUpload.do", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
-	public List<Map<String, Object>> imgMultiUpload_post(MultipartHttpServletRequest mRequest) throws Exception {
-		logger.info("이미지 업로드 처리 시작, 파라미터 mRequest={}", mRequest);
+	@RequestMapping(value = "/imgUpload.do", method = RequestMethod.POST)
+	public String imgMultiUpload_post(MultipartFile imgForm) {
+		logger.info("이미지 업로드 처리 시작, 파라미터 imgFileInput={}", imgForm);
 		String upFilePath="C:\\Users\\jazzo\\git\\Wanted_jayeon\\Final_PJ\\src\\main\\webapp\\companyImgUpload";
 		
-		File nf=new File(upFilePath+"/test.txt");
-		try {
-			nf.createNewFile();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		logger.info("파일 생성 완료! nf={}", nf);
+		String fileName=imgForm.getName();
+		logger.info("fileName={}", fileName);
 		
-		List<Map<String, Object>> fileList=fileUpload.fileUplaod_comImg(mRequest);
+	//	List<Map<String, Object>> fileList=fileUpload.fileUplaod_comImg(data);
 		
-		return fileList;
+		return "성공";
 	} 
 }

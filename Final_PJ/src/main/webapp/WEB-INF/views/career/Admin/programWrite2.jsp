@@ -1,14 +1,10 @@
+<%@ include file="../../inc/top.jsp" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<%@ include file="../../inc/top.jsp" %>  
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-    
+
   <!-- 지원 css -->
 
   <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programJiwon.css'/>">
@@ -21,6 +17,8 @@
 
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
+
+/* 메뉴bar 상단 고정 */
 $( document ).ready( function() {
 	  var Offset = $( '.jbMenu' ).offset();
 	  $( window ).scroll( function() {
@@ -32,13 +30,13 @@ $( document ).ready( function() {
 	    }
 	  });
 	});
+	
 
 </script>
 
 	
-<title>프로그램 내용 등록 페이지</title>
 <script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
-</head>
+
 <body>
 	<%
 		String userID = null;
@@ -48,16 +46,16 @@ $( document ).ready( function() {
 	%>
 	
 <!-- 메뉴 부분!!!!! -->
-<div class="jbMenu" style="width:100%; opacity:1;">
+<div class="jbMenu" style="width:100%;">
     	<nav class="navbar navbar-expand-lg navigation" id="navbar" style="background-color:#f8f8fa;">
 		<div class="container" >
 		 	 <div class="navbar-brand">
 				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
+			    <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/careerAdminMain.do'/>">커리어성장 메인</a></li>							  
 			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
 			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
 			    <a name="title"></a>   
 			  </ul>	
 			</div>
@@ -71,25 +69,33 @@ $( document ).ready( function() {
 
 
 <div style = "width:980px; max-width: 100%; margin:auto;">
-	<form name="proWrite2" action="<c:url value='/career/Admin/programCompleteAll.do?proNo=${proVo.proNo}'/>" method="post">
+	<form name="proWrite2" action="<c:url value='/career/Admin/programCompleteAll.do'/>" method="post">
 		<fieldset>
 		<legend style="color:#258bf7;"><b>프로그램 등록, 두번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
 		<p><b>총 7가지의 구분이 가능합니다! </b></p>		
 		<br>
 		        
+		<!-- 반복문으로 제목 내용 입력받는 칸 만들기 -->
+		<c:forEach var="proVo2" items="${proVo2List}">
+		<p>${proVo2.proTitle}</p>
+		<textarea>${proVo2.proContents}</textarea>
+		</c:forEach>
+		
+
+		
 		
 			<!-- 제목1 내용1 -->
 				<div class="programBodyContents2" style="margin-top:-3px;">
-					<label proWriteLabel> 첫번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle1" name="proTitle1" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description1" name = "description1" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
+					<label for="proConNo"> 첫번째: </label>
+					<input type="text" class="programTitleTextField" id="proTitle" name="proTitle" placeholder="첫번째 목차의 제목을 적어주세요">
+					<textarea id = "proContents1" name = "proContents1" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
 				</div>
 			
 			<!-- 제목2 내용2 -->
 				<div class="programBodyContents2">
-					<label proWriteLabel> 두번째: </label>
+					<label for="proConNo"> 두번째: </label>
 					<input type="text" class="programTitleTextField" id="proTitle2" name="proTitle2" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description2" name = "description2" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
+					<textarea id = "proContents2" name = "proContents2" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
 				</div>
 			
 			<!-- 제목3 내용3 -->
@@ -139,8 +145,8 @@ $( document ).ready( function() {
 
 
 <script type="text/javascript">
-CKEDITOR.replace("description1");
-CKEDITOR.replace("description2");
+CKEDITOR.replace("proContents1");
+CKEDITOR.replace("proContents2");
 CKEDITOR.replace("description3");
 CKEDITOR.replace("description4");
 CKEDITOR.replace("description5");

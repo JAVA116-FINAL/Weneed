@@ -1,5 +1,7 @@
 package com.it.wanted.resume.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,26 @@ public class ResumeDAOMybatis implements ResumeDAO{
 	@Override
 	public int updateResume(ResumeVO vo) {
 		return sqlSession.update(namespace+"updateResume",vo);
+	}
+
+	@Override
+	public List<ResumeVO> selectResumeAll(int memNo) {
+		return sqlSession.selectList(namespace+"selectResumeAll",memNo);
+	}
+
+	@Override
+	public int insertResumeFile(ResumeVO rVo) {
+		return sqlSession.update(namespace+"insertResumeFile",rVo);
+	}
+
+	@Override
+	public int deleteResume(ResumeVO rVo) {
+		return sqlSession.delete(namespace+"deleteResume", rVo);
+	}
+
+	@Override
+	public ResumeVO selectResumeOne(ResumeVO rVo) {
+		return sqlSession.selectOne(namespace+"selectResumeOne", rVo);
 	}
 	
 	

@@ -4,22 +4,81 @@
 
 <mapper namespace="com.mybatis.mapper.oracle.program">
 	
-	<!-- 프로그램 등록하기 -->
+	<sql id="searchWhereList">
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+				${searchCondition} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>	
+	</sql>	
+	
+	<!-- 프로그램 등록하기 1단계-->
 		<insert id="insertProgram" parameterType="programVo">
 		<selectKey keyProperty="programNo" resultType="int" order="BEFORE">
 			select program_seq.nextval from dual
 		</selectKey>
 		
-		insert into program(programNo, adminNo, proCateNo, proName, proSponsor, proPrice, proStartDate, proType, imageUrl, regiEndDate)
-		values(#{PROGRAM_NO}, #{ADMIN_NO}, #{PRO_CATE_NO}, #{PRO_NAME}, #{PRO_SPONSOR}, #{PRO_PRICE}, #{PRO_START_DATE}, #{PRO_TYPE}, #{IMAGE_URL}, #{REGI_END_DATE})
+		insert into program(program_No, admin_No, pro_Cate_No, pro_Name, pro_Sponsor, pro_Price, pro_Start_Date, pro_Type, image_URL, regi_End_Date)
+		values(#{programNo}, #{adminNo}, #{proCateNo}, #{proName}, #{proSponsor}, #{proPrice}, #{proStartDate}, #{proType}, #{imageURL}, #{regiEndDate})
 		</insert>
+
+	<!-- 프로그램 등록하기 2단계-->
+		<insert id="insertProgram2" parameterType="programVo">
+		<selectKey keyProperty="programNo" resultType="int" order="BEFORE">
+			select programcontents_seq.nextval from dual
+		</selectKey>
 		
+		insert into programcontents(program_No, pro_Con_No, pro_Title, pro_Contents)
+		values(#{programNo}, #{pro_Con_No}, #{pro_Title}, #{pro_Contents})
+		</insert>
+
 		
-		<!-- 프로그램 디테일 일반회원 커리어 디테일페이지에 뿌려주기 (select) -->
+	<!-- 프로그램 디테일 일반회원 커리어 디테일페이지에 뿌려주기 (select) -->
 		<select id="selectByProgramNo" parameterType="int" resultType="programVo">
 			select * from program 
-			where PROGRAM_NO = #{PROGRAM_NO}
+			where program_No = #{programNo}
 		</select>
+		
+		
+	<!-- 프로그램 조회에 프로그램들 리스트 뿌려주기-->
+					<!--	<select id="selectAllprogram" resultType="programVo">
+								select program_No, pro_Name, pro_Type, pro_Start_Date, regi_End_Date, regdate 
+								from program         
+								order by program_No DESC	   
+							</select>	 -->	
+		
+	
+		<select id="selectAllprogram" parameterType="searchVo" resultType="programVo">
+			select *
+			from
+			(
+			    select A.*, rownum as RNUM
+			    from
+			    (
+			        select program_No, pro_Name, pro_Type, pro_Start_Date, regi_End_Date, regdate 
+			        from program 
+					<include refid="searchWhereList" />	        
+			        order by program_No DESC
+			    )A
+			)
+			<![CDATA[
+			where RNUM > #{firstRecordIndex} 
+			and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+			]]>
+		
+		</select>
+		
+ 		<select id="selectListTotalRecord" parameterType="searchVo" resultType="int">
+			select count(*) from program
+			<include refid="searchWhereList"></include>
+		</select> 
+				
+	<!-- 프로그램 삭제 -->
+		<delete id="deleteProgram" parameterType="int">
+			delete from program
+			where program_No=#{programNo}
+		</delete>	
+		
 	
 </mapper>
 
