@@ -36,7 +36,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)
 	public String login(@RequestParam String comMemLoginId, @RequestParam String comMemLoginPwd,
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, HttpSession session, Model model) {
 		logger.info("로그인, 파라미터 comMemId={}, comMemPwd={}", comMemLoginId, comMemLoginPwd);
 		
 		int res=comMemService.loginCheck(comMemLoginId, comMemLoginPwd);
@@ -47,7 +47,7 @@ public class LoginController {
 		ComMemInfoVO comMemInfoVo=new ComMemInfoVO();
 		if(res==ComMemInfoService.LOGIN_SUCCESS) { //일단 로그인 성공
 			//일단 세션처리부터, 쿠키는 아이디저장기능 별도로 없어서 저장하지 않음
-			HttpSession session=request.getSession();
+			session=request.getSession();
 			session.setAttribute("comMemId", comMemLoginId);
 			
 			comMemInfoVo=comMemService.selectComMem(comMemLoginId);
@@ -81,6 +81,8 @@ public class LoginController {
 			loc="redirect:/company/welcome.do";
 		}
 		
+		session.setAttribute("comInfoVo", comInfoVo);
+		
 		logger.info("파라미터로 세팅한 comMemInfoVo={}", comMemInfoVo);
 		return loc;
 	}
@@ -91,6 +93,7 @@ public class LoginController {
 		logger.info("로그아웃 처리, 파라미터 comMemId={}", comMemId);
 		
 		session.removeAttribute("comMemId");
+		session.removeAttribute("comInfoVo");
 		
 		return "redirect:/company/welcome.do";
 	}

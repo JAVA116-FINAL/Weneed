@@ -19,9 +19,8 @@ public class MainController {
 		logger.info("기업서비스 첫화면 조회");
 		
 		String comMemId=(String) session.getAttribute("comMemId");
-		if(comMemId==null || comMemId.isEmpty()) {
-			
-		}
+		logger.info("세션에서 읽어온 comMemId={}", comMemId);
+		model.addAttribute("comMemId", comMemId);
 		
 		return "company/welcome";
 	}

@@ -3,7 +3,7 @@
 <%@ include file="../inc/company_top.jsp" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/position.css'/>">
 <script type="text/javascript">
-
+//메일주소 합쳐주기
 function emailBounding(){
 	var emailBounds="";
 	var emailCount=$('.positionAdd-managerEmail').length;
@@ -21,7 +21,7 @@ function emailBounding(){
 }
 
 $(function(){
-	//신입 선택시 인풋입력 readonly, 경력 선택시 해제
+	//신입 선택시 경력인풋 disabled, 경력 선택시 해제
 	$('#positionAdd-oldieChk').click(function(){
 		$('.positionAdd-year').prop('disabled', false);
 	});

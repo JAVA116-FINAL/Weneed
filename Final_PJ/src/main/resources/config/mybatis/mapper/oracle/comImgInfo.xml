@@ -8,7 +8,24 @@
 	</select>
 	
 	<select id="selectAllImg" parameterType="String" resultType="comImgInfoVo">
-		select * from comImgInfo where com_Code=#{comCode}
+		select * from comImgInfo where com_Code=#{comCode} order by com_img_no
+	</select>
+	
+	<insert id="insertImg" parameterType="comImgInfoVo" >
+		<selectKey keyProperty="comImgNo" resultType="int" order="BEFORE">
+			select comImgInfo_seq.nextval from dual
+		</selectKey>
+		insert into comImgInfo(com_Img_No, com_Code, com_Img_Url, com_Img_Passed)
+		values(#{comImgNo}, #{comCode}, #{comImgUrl}, #{comImgPassed})
+	</insert>
+	
+	<delete id="deleteImg" parameterType="string">
+		delete from comimginfo
+		where com_img_url=#{imgFileName}
+	</delete>
+	
+	<select id="selectAllImage" resultType="comImgInfoVo">
+		select * from comimginfo order by com_code, com_img_no
 	</select>
 </mapper>
 

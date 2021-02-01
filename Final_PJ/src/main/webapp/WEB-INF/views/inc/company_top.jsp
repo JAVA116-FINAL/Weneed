@@ -26,13 +26,13 @@
 						</c:if>
 						<c:if test="${!empty comMemId}">
 							<c:if test="${empty comInfoVo.comName }">
-								<img src="#">
+								<span><i class="fas fa-building" style="color:white"></i></span>
 								<span class="comServNavbar-logo-link">
-									소속기업명		
+									-		
 								</span>
 							</c:if>
 							<c:if test="${!empty comInfoVo.comName }">
-								<img src="#">
+								<span><i class="fas fa-building" style="color:white"></i></span>
 								<span class="comServNavbar-logo-link">
 									${comInfoVo.comName}	
 								</span>
@@ -64,23 +64,23 @@
 					</div>
 				</div>
 				<c:if test="${!empty comMemId}">
-				<!-- 로그인 후, 기업서비스 상단-2번 바 추가 노출 -->
-				<div class="header-wrapper22" id="comServHeader2nd">
-					<nav class="comServNavbar">
-						<ul class="comServNavs ml-auto">
-							<li class="comServNav-item">
-								<a class="comServNav-item-link" href="#">지원자</a></li>
-							<li class="comServNav-item">
-								<a class="comServNav-item-link" href="#">포지션</a></li>
-							<li class="comServNav-item">
-								<a class="comServNav-item-link" href="#">매치업</a></li>
-							<li class="comServNav-item">
-								<a class="comServNav-item-link" href="#">기업정보</a></li>
-							<li class="comServNav-item">
-								<a class="comServNav-item-link" href="#">계정관리</a></li>
-						</ul>
-					</nav>
-				</div>
+					<!-- 로그인 후, 기업서비스 상단-2번 바 추가 노출 -->
+					<div class="header-wrapper22" id="comServHeader2nd">
+						<nav class="comServNavbar">
+							<ul class="comServNavs ml-auto">
+								<li class="comServNav-item">
+									<a class="comServNav-item-link" href="<c:url value='/company/applicants.do'/>">지원자</a></li>
+								<li class="comServNav-item">
+									<a class="comServNav-item-link" href="<c:url value='/company/positionList.do'/>">포지션</a></li>
+								<li class="comServNav-item">
+									<a class="comServNav-item-link" href="<c:url value='/company/matchupMain.do'/>">매치업</a></li>
+								<li class="comServNav-item">
+									<a class="comServNav-item-link" href="<c:url value='/company/comInfoModify.do'/>">기업정보</a></li>
+								<li class="comServNav-item">
+									<a class="comServNav-item-link" href="#">계정관리</a></li>
+							</ul>
+						</nav>
+					</div>
 				</c:if>
 			</div>
 		</div>
