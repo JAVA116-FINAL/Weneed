@@ -1,6 +1,6 @@
 package com.it.wanted.career.admin.model;
 
-public class Program2VO {
+public class ProgramVO2 {
 	private int proConNo;  		/* 프로그램내용번호 */
 	private int programNo;  	/* 프로그램 번호 */
 	private String proTitle; 	/* 제목 */
