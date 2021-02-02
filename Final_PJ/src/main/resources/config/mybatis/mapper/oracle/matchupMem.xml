@@ -4,15 +4,40 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.matchupMem">
 
-	 
+	<!-- 자연 -->
+	<select id="selectmcuResumeNo" parameterType="int" resultType="int">
+		select resume_No from matchupMem where mem_No=#{memNo}
+	</select>
+
+	
+	<!-- 현빈 -->
 	<select id="selectOpen" resultType="matchupMemVo">
 		select * from matchupMem where resumeopen_flag='Y'
 	</select> 
 	
 	
-	<!-- 자연 -->
-	<select id="selectmcuResumeNo" parameterType="int" resultType="int">
-		select resume_No from matchupMem where mem_No=#{memNo}
+	
+	
+	<!-- 
+	create or replace view matchupMemSearchView
+	as
+	select rownum as RNUM, A.*
+	from
+	(
+	select m.resume_no as resumeNo, m.mem_no as memNo, m.expertise_no as expertiseNo, 
+	       m.jobsearch_flag as jobSearchFlag, m.resumeopen_flag as resumepenFlag,
+	       r.resume_title, r.resume_name, r.resume_introduce, r.lang_flag from matchupMem m join resume r 
+	on m.resume_No = r.resume_no 
+	where m.resumeopen_flag='Y'
+	order by m.mcumem_no
+	)A;
+	 -->
+	<select id="selectTenMem" parameterType="int" resultType="map">
+		select * from matchupMemSearchView
+		<![CDATA[
+		    where RNUM > #{firstRecord}
+		    and RNUM <= #{firstRecord}+5
+		]]>
 	</select>
 </mapper>
 

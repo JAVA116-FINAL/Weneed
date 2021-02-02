@@ -47,7 +47,6 @@ public class LoginController {
 		ComMemInfoVO comMemInfoVo=new ComMemInfoVO();
 		if(res==ComMemInfoService.LOGIN_SUCCESS) { //일단 로그인 성공
 			//일단 세션처리부터, 쿠키는 아이디저장기능 별도로 없어서 저장하지 않음
-			session=request.getSession();
 			session.setAttribute("comMemId", comMemLoginId);
 			
 			comMemInfoVo=comMemService.selectComMem(comMemLoginId);

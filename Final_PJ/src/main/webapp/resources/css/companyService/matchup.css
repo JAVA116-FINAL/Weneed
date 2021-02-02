@@ -303,7 +303,7 @@ h1{
 	font-weight: bold;
 	color: #9d9d9d;
 	cursor: pointer;
-	width: 16.7%;
+	width: 20%;
 	padding: 20px 0px;
 	border-left: 1px solid #e1e2e3;
 	border-top: 1px solid #e1e2e3;
@@ -383,13 +383,16 @@ h1{
 	align-items: center;
 	justify-content: center;
 }
+
 .matchupSearch-pagingDiv{
-	border: 1px solid #e1e2e3;
 	border-radius: 3px;
-	color: #444444;
-	padding: 5px 10px;
-	margin: 10px 5px;
+	background-color: #5c85ff;
+	color: white;
+	padding: 10px 80px;
+	margin: 20px;
 	font-size: 0.8em;
+	cursor: pointer;
+	font-weight: bold;
 }
 
 .matchupSearch-pagingDiv_prev,

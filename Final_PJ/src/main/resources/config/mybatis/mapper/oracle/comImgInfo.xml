@@ -20,13 +20,19 @@
 	</insert>
 	
 	<delete id="deleteImg" parameterType="string">
-		delete from comimginfo
+		delete from comImgInfo
 		where com_img_url=#{imgFileName}
 	</delete>
 	
 	<select id="selectAllImage" resultType="comImgInfoVo">
-		select * from comimginfo order by com_code, com_img_no
+		select * from comImgInfo order by com_code, com_img_no
 	</select>
+	
+	<update id="changeStatustoPass" parameterType="int">
+		update comImgInfo
+		set com_img_passed = 'Y'
+		where com_img_no=#{comImgNo}
+	</update>
 </mapper>
 
 
