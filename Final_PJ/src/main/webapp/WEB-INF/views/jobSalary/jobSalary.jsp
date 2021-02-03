@@ -3,116 +3,211 @@
 <%@ include file="../inc/top.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/jobSalary.css'/>">
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script type="text/javascript" src = "<c:url value='/resources/js/member.js'/>"></script>
 <script type="text/javascript">
 $(function(){
-	$('#subCategory').change(function(){
-		//alert('#subCategory');
-		 $.ajax({
-			url:"<c:url value='/salary/salaryChartData.do'/>",
+	
+	makeChart();
+	getSalary();
+	$('#salaryChart-jikmu').text($("#jikmuCode option:selected").text());
+	$('#sub-salaryChart-jikmu').text($("#jikmuCode option:selected").text());
+	$('#salary-chart-job').text($("#carrer-year option:selected").val());
+	
+	$('#jikmuCode').change(function(){
+		//alert($('#jikgunCode').val());
+		makeChart();
+		$('#salaryChart-jikmu').text($("#jikmuCode option:selected").text());
+		$('#sub-salaryChart-jikmu').text($("#jikmuCode option:selected").text());
+	});
+	
+	
+	$('#carrer-year').change(function(){
+		$('#salary-chart-job').text($("#carrer-year option:selected").val());
+		getSalary();
+	});
+	
+	
+	
+
+});
+
+function makeChart(){
+	 $.ajax({
+			url:"<c:url value='/jobsalary/salaryChartData.do'/>",
 			type:"POST",
 			data: {
-				"jikgun_code": "JG001",
-				"jikmu_code":this.value
+				"jikgunCode": $('#jikgunCode').val(),
+				"jikmuCode":$('#jikmuCode').val()
 			},
-			dataType:"json",
-			success:function(res){
-				alert(res.length);
+			//dataType:"json",
+			success:function(data){
+				//alert(res);
+				console.log(JSON.stringify(data));
+				console.log(data);
+				var chart = AmCharts.makeChart( "chartdiv", {
+					  "type": "serial",
+					  "theme": "none",
+					  "dataProvider": data,
+				      //[{"CAREER":"신입","SALARY":"3490"},{"CAREER":"1년","SALARY":"3672"},{"CAREER":"2년","SALARY":"3841"},{"CAREER":"3년","SALARY":"4371"},{"CAREER":"4년","SALARY":"4628"},{"CAREER":"5년","SALARY":"5044"},{"CAREER":"6년","SALARY":"5498"},{"CAREER":"7년","SALARY":"5952"},{"CAREER":"8년","SALARY":"6228"},{"CAREER":"9년","SALARY":"6504"},{"CAREER":"10년","SALARY":"7842"}],
+					  "valueAxes": [ {
+					    "gridColor": "#333333",
+					    "gridAlpha": 0.1,
+					    "dashLength": 0
+					  } ],
+					  "addClassNames": true,
+					  "gridAboveGraphs": true,
+					  "startDuration": 1,
+					  "graphs": [ {
+					    "balloonText": "[[category]]: <b>[[value]]</b>",
+					    "fillAlphas": 0.2,
+					    "lineAlpha": 0,
+					    "type": "column",
+					    "valueField": "SALARY",
+					    "fillColors": "#33333",
+					    "fixedColumnWidth": 20
+					  }],
+					  "chartCursor": {
+					    "categoryBalloonEnabled": false,
+					    "cursorAlpha": 0,
+					    "zoomable": false
+					  },
+					  "categoryField": "CAREER",
+					  "categoryAxis": {
+					    "gridPosition": "start",
+					    "gridAlpha": 0,
+					    "tickPosition": "start",
+					    "tickLength": 20
+					  },
+					  "export": {
+					    "enabled": false
+					  }
+
+					} );
 			},
 			error:function(){
 				alert("ajax통신 실패");
 			}
 				
 		}); 
-	});
-});
+}
 
+
+
+function getSalary(){
+	 $.ajax({
+			url:"<c:url value='/jobsalary/getSalary.do'/>",
+			type:"POST",
+			data: {
+				"jikmuCode":$('#jikmuCode').val(),
+				"career":$('#carrer-year option:selected').text()
+			},
+			success:function(res){
+				//console.log(res);
+				//alert(res);
+				$('#carrer-salary').html(res);
+			},
+			error:function(){
+				alert("ajax통신 실패");
+			}
+				
+		}); 
+}
 
 </script>
+<style>
+#chartdiv {
+  width: 100%;
+  height: 380px;
+  font-size	: 11px;
+}
+</style>
 
 <div class="salary-chart-box">
 	<div class="container">
 		<section class="salary-chart">
-			<canvas id="salaryChart"></canvas>
+			<div id="chartdiv" name="chartdiv"></div>
 		</section>
 		<div class="salary-chart-desc">
-			<button type="button" class="salary-chart-desc-btn">개발</button>
-			<button type="button" class="salary-chart-desc-btn">CTO,Chief Technology Officer</button>
+			<button type="button" class="salary-chart-desc-btn" style="margin-top:10px;">개발</button>
+			<button type="button" id="salaryChart-jikmu" class="salary-chart-desc-btn"></button>
 		</div>
-		<aside>
-			<h4 class="salary-chart-job">신입CTO,Chief Technology Officer 예상 연봉</h4>
-			<h2 class="salary-chart-salary">
-				3,230<sub>만원</sub>
-			</h2>
+		<aside style="color:#fff;">
+			<span id ="salary-chart-job" class="salary-chart-job"></span>
+			<span id="sub-salaryChart-jikmu"></span> 예상 연봉<br>
+			<span id="carrer-salary" class="salary-chart-salary"></span><span> 만원</span>
 		</aside>
+		<div class="container">
 		<div class="salary-select-box">
 			<div class="salary-select-box-wrap">
 				<div class="salary-select-each">
 					<div class="salary-select-each-jobGroup">
 						<div class="salary-select-eachGroup">
-							<select id="jikgunCategory" name="category" style="border:none;width:100%; outline:none;">
+							<select id="jikgunCode" name="jikgunCode" style="border:none;width:100%; outline:none;">
 								<option disable>직군</option>
-								<option value="JG001">개발</option>
+								<option value="JG001" selected>개발</option>
 							</select>
 						</div>
 					</div>
 					<div class="salary-select-each-job">
 						<div class="salary-select-eachGroup">
-							<select id="subCategory" name="subCategory" style="border:none;width:100%; outline:none;">
+							<select id="jikmuCode" name="jikmuCode" style="border:none;width:100%; outline:none;">
 								<option disable>직무</option>
-								<option value="JM001">서버 개발자</option>
-								<option value="JM002">웹 개발자</option>
-								<option value="JM003">프론트엔드 개발자</option>
-								<option value="JM004">안드로이드 개발자</option>
-								<option value="JM005">iOS 개발자</option>
-								<option value="JM006">데이터 엔지니어</option>
-								<option value="JM007">파이썬 개발자</option>
-								<option value="JM008">소프트웨어 엔지니어</option>
-								<option value="JM009">DevOps / 시스템 관리자 </option>
-								<option value="JM010">Node.js 개발자</option>
-								<option value="JM011">개발 매니저</option>
-								<option value="JM012">데이터 사이언티스트</option>
-								<option value="JM013">머신러닝 엔지니어</option>
-								<option value="JM014">시스템, 네트워크 관리자</option>
-								<option value="JM015">C, C++개발자</option>
-								<option value="JM016">빅데이터 엔지니어</option>
-								<option value="JM017">QA, 테스트 엔지니어</option>
-								<option value="JM018">PHP 개발자</option>
-								<option value="JM019">프로덕트 매니저</option>
-								<option value="JM020">웹퍼블리셔</option>
-								<option value="JM021">보안엔지니어</option>
-								<option value="JM022">.NET 개발자</option>
-								<option value="JM023">루비온레일즈 개발자</option>
-								<option value="JM024">임베디드 개발자</option>
-								<option value="JM025">CTO, Chief Technology Officer</option>
-								<option value="JM026">블록체인 플랫폼 엔지니어</option>
-								<option value="JM027">영상, 음성 엔지니어</option>
-								<option value="JM028">크로스플랫폼 앱 개발자</option>
-								<option value="JM029">BI 엔지니어</option>
-								<option value="JM030">그래픽스 엔지니어</option>
-								<option value="JM031">VR 엔지니어</option>
-								<option value="JM032">CIO, Chief Information Officer</option>
+								<option value="JM001" selected >서버 개발자</option>
+								<option value="JM002" >웹 개발자</option>
+								<option value="JM003" >프론트엔드 개발자</option>
+								<option value="JM004" >안드로이드 개발자</option>
+								<option value="JM005" >iOS 개발자</option>
+								<option value="JM006" >데이터 엔지니어</option>
+								<option value="JM007" >파이썬 개발자</option>
+								<option value="JM008" >소프트웨어 엔지니어</option>
+								<option value="JM009" >DevOps / 시스템 관리자 </option>
+								<option value="JM010" >Node.js 개발자</option>
+								<option value="JM011" >개발 매니저</option>
+								<option value="JM012" >데이터 사이언티스트</option>
+								<option value="JM013" >머신러닝 엔지니어</option>
+								<option value="JM014" >시스템, 네트워크 관리자</option>
+								<option value="JM015" >C, C++개발자</option>
+								<option value="JM016" >빅데이터 엔지니어</option>
+								<option value="JM017" >QA, 테스트 엔지니어</option>
+								<option value="JM018" >PHP 개발자</option>
+								<option value="JM019" >프로덕트 매니저</option>
+								<option value="JM020" >웹퍼블리셔</option>
+								<option value="JM021" >보안엔지니어</option>
+								<option value="JM022" >.NET 개발자</option>
+								<option value="JM023" >루비온레일즈 개발자</option>
+								<option value="JM024" >임베디드 개발자</option>
+								<option value="JM025" >CTO, Chief Technology Officer</option>
+								<option value="JM026" >블록체인 플랫폼 엔지니어</option>
+								<option value="JM027" >영상, 음성 엔지니어</option>
+								<option value="JM028" >크로스플랫폼 앱 개발자</option>
+								<option value="JM029" >BI 엔지니어</option>
+								<option value="JM030" >그래픽스 엔지니어</option>
+								<option value="JM031" >VR 엔지니어</option>
+								<option value="JM032" >CIO, Chief Information Officer</option>
 							</select>
 						</div>
 					</div>
 					<div class="salary-select-each-career">
 						<div class="salary-select-eachGroup">
-							<select name="category" style="border:none;width:100%; outline:none;">
+							<select id="carrer-year" name="carrer-year" style="border:none;width:100%; outline:none;">
 								<option disable>경력</option>
-								<option value="">신입</option>
-								<option value="">1년</option>
-								<option value="">2년</option>
-								<option value="">3년</option>
-								<option value="">4년</option>
-								<option value="">5년</option>
-								<option value="">6년</option>
-								<option value="">7년</option>
-								<option value="">8년</option>
-								<option value="">9년</option>
-								<option value="">10년</option>
+								<option value="신입" selected>신입</option>
+								<option value="1년 경력">1년 </option>
+								<option value="2년 경력">2년</option>
+								<option value="3년 경력">3년</option>
+								<option value="4년 경력">4년</option>
+								<option value="5년 경력">5년</option>
+								<option value="6년 경력">6년</option>
+								<option value="7년 경력">7년</option>
+								<option value="8년 경력">8년</option>
+								<option value="9년 경력">9년</option>
+								<option value="10년 경력">10년</option>
 							</select>
 						</div>
 					</div>
@@ -121,6 +216,7 @@ $(function(){
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 </div>
