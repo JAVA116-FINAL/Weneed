@@ -1,5 +1,6 @@
 package com.it.wanted.resume.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import com.it.wanted.languagestest.model.LanguagestestDAO;
 import com.it.wanted.languagestest.model.LanguagestestVO;
 import com.it.wanted.link.model.LinkDAO;
 import com.it.wanted.link.model.LinkVO;
+import com.itextpdf.tool.xml.html.head.Link;
 
 @Service
 public class ResumeServiceImpl implements ResumeService{
@@ -59,6 +61,8 @@ public class ResumeServiceImpl implements ResumeService{
 	@Override
 	@Transactional
 	public int updateResume(ResumeAllVO resumeAllVo) {
+		
+		logger.info("이력서 등록resumeALlVo={}",resumeAllVo);
 		ResumeVO rVo= resumeAllVo.getResumeVo();
 		List<CareerVO>crrList=resumeAllVo.getCrrList();
 		List<AchievementVO>achList=resumeAllVo.getAchList();
@@ -73,19 +77,19 @@ public class ResumeServiceImpl implements ResumeService{
 		try {
 			//이력서 등록
 			cnt=resumeDao.updateResume(rVo);
-			logger.info("이력서 등록={}",rVo);
+			logger.info("이력서 등록rVo={}, cnt={}",rVo,cnt);
 			
 			//경력 List등록
 			if(crrList!=null&& !crrList.isEmpty()) {
 				for(CareerVO crrVo:crrList) {
 					cnt=careerDao.updateCareer(crrVo);
-					logger.info("커리어 등록crrVo={}",crrVo);
+					logger.info("커리어 등록crrVo={}, cnt={}",crrVo,cnt);
 				}
 				//성과List등록
 				if(achList!=null&&!achList.isEmpty()) {
 					for(AchievementVO achVo:achList) {
 						cnt=achievmentDao.updateAch(achVo);
-						logger.info("성과 등록achVo={}",achVo);
+						logger.info("성과 등록achVo={}, cnt={}",achVo,cnt);
 					}//for
 				}//if
 			 }//바깥 if
@@ -94,7 +98,7 @@ public class ResumeServiceImpl implements ResumeService{
 			if(eduList!=null&& !eduList.isEmpty()) {
 				for(EducationVO eduVo:eduList) {
 					cnt=educationDao.updateEdu(eduVo);
-					logger.info("교육사항등록eduVo={}",eduVo);
+					logger.info("교육사항등록eduVo={}, cnt={}",eduVo,cnt);
 				}
 			}
 			
@@ -102,7 +106,7 @@ public class ResumeServiceImpl implements ResumeService{
 			if(addList!=null&& !addList.isEmpty()) {
 				for(AddinformatiodVO addVo:addList) {
 					cnt=addinformatiodDao.updateAdd(addVo);
-					logger.info("기타활동사항 등록 addVo={}",addVo);
+					logger.info("기타활동사항 등록 addVo={}, cnt={}",addVo,cnt);
 				}
 			}
 			
@@ -110,20 +114,23 @@ public class ResumeServiceImpl implements ResumeService{
 			if(langList!=null&& !langList.isEmpty()) {
 				for(LanguagesVO langVo:langList) {
 					cnt=languagesDao.updateLang(langVo);
-					logger.info("외국어사항 등록langVo={}",langVo);
+					logger.info("외국어사항 등록langVo={}, cnt={}",langVo,cnt);
 				}
 				//어학
-				for(LanguagestestVO testVo:testList) {
-					cnt=languagestestDao.updateLangtest(testVo);
-					logger.info("어학시험 등록 testVo={}",testVo);
+				if(testList!=null&& !testList.isEmpty()) {
+					for(LanguagestestVO testVo:testList) {
+						cnt=languagestestDao.updateLangtest(testVo);
+						logger.info("어학시험 등록 testVo={}",testVo,cnt);
+					}
 				}
+				
 			}
 			
 			//링크
 			if(linkList!=null&& !linkList.isEmpty()) {
 				for(LinkVO linkVo:linkList) {
 					cnt=linkDao.updateLink(linkVo);
-					logger.info("기타활동사항 등록 linkVo={}",linkVo);
+					logger.info("기타활동사항 등록 linkVo={}, cnt={}",linkVo,cnt);
 				}
 			}
 				
@@ -155,6 +162,106 @@ public class ResumeServiceImpl implements ResumeService{
 	@Override
 	public ResumeVO selectResumeOne(ResumeVO rVo) {
 		return resumeDao.selectResumeOne(rVo);
+	}
+	
+	//이력서 상세조회!!
+	@Override
+	public ResumeAllVO selectResumeDetail(ResumeVO rVo) {
+		
+		int resumeNo=rVo.getResumeNo();
+		ResumeAllVO resumeAllVo= new ResumeAllVO();
+		
+		//이력서 조회
+		ResumeVO resumeVo=resumeDao.selectResumeOne(rVo);
+		if(resumeVo !=null ) {
+			resumeAllVo.setResumeVo(resumeVo);
+			
+			//경력조회	
+			List<AchievementVO> achList=new ArrayList<AchievementVO>();
+			List<CareerVO>crrList=careerDao.selectCareerbyResumeNo(resumeNo);
+			if(crrList!=null) {
+				resumeAllVo.setCrrList(crrList);
+				
+				//경력리스트에서 경력번호 꺼내서 포문돌려서 성과 리스트 받기 achList
+				for(int i=0; i<crrList.size();i++) {
+					int careerNo=crrList.get(i).getCareerNo();
+					if(careerNo!=0) {
+						List<AchievementVO> aList = achievmentDao.selectAchbyCareerNo(careerNo);
+						for(int j=0;j<aList.size();j++) {
+							AchievementVO achVo = aList.get(j);
+							achList.add(achVo);
+						}
+					}
+					
+				}
+				if(achList!=null) {
+					resumeAllVo.setAchList(achList);
+					logger.info("achList={}",achList);
+				}
+					
+				
+				
+				/*
+				for(CareerVO cVo:crrList) {
+					int careerNo=cVo.getCareerNo();
+					List<AchievementVO> achList = achievmentDao.selectAchbyCareerNo(careerNo);
+					if(achList!=null) {
+						resumeAllVo.setAchList(achList);
+					}//if
+				}//for */
+				
+			}//if
+			
+			
+			//언어  
+			List<LanguagestestVO> testList =new ArrayList<LanguagestestVO>();
+			
+			List<LanguagesVO> langList = languagesDao.selectLangbyResumeNo(resumeNo);
+			if(langList!=null) {
+				resumeAllVo.setLangList(langList);
+				logger.info("langList={}",langList);
+				//어학점수
+
+				for(int i=0; i<langList.size();i++) {
+					int langNo=langList.get(i).getLangNo();
+					if(langNo!=0) {
+						List<LanguagestestVO> tList = languagestestDao.selectLangtestbyLangNo(langNo);
+						for(int j=0;j<tList.size();j++) {
+							LanguagestestVO testVo = tList.get(j);
+							testList.add(testVo);
+							
+						}
+					}
+					
+				}
+				if(testList!=null) {
+					resumeAllVo.setTestList(testList);
+					logger.info("testList={}",testList);
+				}
+					
+			}//if
+			
+			//학력사항
+			List<EducationVO> eduList = educationDao.selectEdubyResumeNo(resumeNo);
+			if(eduList!=null) {
+				resumeAllVo.setEduList(eduList);
+			}
+			
+			//기타활동사항
+			List<AddinformatiodVO> addList = addinformatiodDao.selectAddByResumeNo(resumeNo);
+			if(addList!=null) {
+				resumeAllVo.setAddList(addList);
+			}
+			
+			//링크
+			List<LinkVO>linkList=linkDao.selectLinkbyResumeNo(resumeNo);
+			if(langList!=null) {
+				resumeAllVo.setLinkList(linkList);
+			}
+			
+		}//바깥 이프
+		logger.info("resumeAllVo={}",resumeAllVo);
+		return resumeAllVo;
 	}
 
 	

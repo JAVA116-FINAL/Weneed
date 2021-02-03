@@ -6,6 +6,7 @@ import java.util.Map;
 public interface MatchupMemDAO {
 
 	/* 자연 */
+	public int isMechupMem(int memNo);
 	public int selectmcuResumeNo(int memNo);
 	
 	/* 현빈 */

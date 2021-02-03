@@ -7,5 +7,6 @@ public interface EducationDAO {
 	public EducationVO selectEdu(int resumeNo);
 	public int deleteEdu(int eduNo);
 	public int updateEdu(EducationVO educationVo);
-	public List<EducationVO> selectEduByResumeNo(int resumeNo);
+	public List<EducationVO> selectEdubyResumeNo(int resumeNo);
+	
 }

@@ -1,5 +1,7 @@
 package com.it.wanted.languages.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,12 @@ public class LanguagesDAOMybatis implements LanguagesDAO{
 	public int updateLang(LanguagesVO lVo) {
 		return sqlSession.update(namespace+"updateLang",lVo);
 	}
+	@Override
+	public List<LanguagesVO> selectLangbyResumeNo(int resumeNo) {
+		return sqlSession.selectList(namespace+"selectLangbyResumeNo",resumeNo);
+	}
+
+	
 
 	
 	

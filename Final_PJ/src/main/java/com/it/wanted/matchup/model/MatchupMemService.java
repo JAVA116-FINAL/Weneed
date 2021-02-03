@@ -6,6 +6,7 @@ import java.util.Map;
 public interface MatchupMemService {
 
 	/* 자연 */
+	public int isMechupMem(int memNo);
 	public int selectmcuResumeNo(int memNo);
 	
 	

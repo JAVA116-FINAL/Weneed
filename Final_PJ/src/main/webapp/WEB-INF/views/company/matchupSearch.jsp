@@ -40,7 +40,7 @@ $(function(){
 			$.ajax({
 				url:"<c:url value='/company/delZzim.do'/>",
 				type:"get",
-				dataType:"json",
+				dataType:"text",
 				data:{"resumeNo":resumeNo},
 				success:function(result){
 					console.log(result);
@@ -62,7 +62,7 @@ $(function(){
 			$.ajax({
 				url:"<c:url value='/company/addZzim.do'/>",
 				type:"get",
-				dataType:"json",
+				dataType:"text",
 				data:{"resumeNo":resumeNo},
 				success:function(result){
 					//alert('성공');
@@ -75,7 +75,7 @@ $(function(){
 			
 		}
 	});
-	$('.matchupSearch-ZzimBtn').click(function(){
+	/* $('.matchupSearch-ZzimBtn').click(function(){
 		if($(this).children('i').hasClass('goldStar')){
 			$(this).children('i').removeClass('goldStar');
 			//찜에서 빼기도 해야하는구만
@@ -118,8 +118,8 @@ $(function(){
 				}
 			});
 			
-		}
-	});
+		} 
+	});*/
 	
 	//더보기 기능 구현
 	$('#matchupSearch-viewMoreBtn').click(function(){
