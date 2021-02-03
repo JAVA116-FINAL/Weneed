@@ -1,17 +1,16 @@
 package com.it.wanted.salary.model;
 
 public class SalaryVO {
-	private int salary_no;
+	private int salaryNo;
 	private String career;
 	private String salary;
-	private String jikgun_code;
-	private String jikmu_code;
-	
-	public int getSalary_no() {
-		return salary_no;
+	private String jikgunCode;
+	private String jikmuCode;
+	public int getSalaryNo() {
+		return salaryNo;
 	}
-	public void setSalary_no(int salary_no) {
-		this.salary_no = salary_no;
+	public void setSalaryNo(int salaryNo) {
+		this.salaryNo = salaryNo;
 	}
 	public String getCareer() {
 		return career;
@@ -25,23 +24,22 @@ public class SalaryVO {
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
-	public String getJikgun_code() {
-		return jikgun_code;
+	public String getJikgunCode() {
+		return jikgunCode;
 	}
-	public void setJikgun_code(String jikgun_code) {
-		this.jikgun_code = jikgun_code;
+	public void setJikgunCode(String jikgunCode) {
+		this.jikgunCode = jikgunCode;
 	}
-	public String getJikmu_code() {
-		return jikmu_code;
+	public String getJikmuCode() {
+		return jikmuCode;
 	}
-	public void setJikmu_code(String jikmu_code) {
-		this.jikmu_code = jikmu_code;
+	public void setJikmuCode(String jikmuCode) {
+		this.jikmuCode = jikmuCode;
 	}
-	
 	@Override
 	public String toString() {
-		return "SalaryVO [salary_no=" + salary_no + ", career=" + career + ", salary=" + salary + ", jikgun_code="
-				+ jikgun_code + ", jikmu_code=" + jikmu_code + "]";
+		return "SalaryVO [salaryNo=" + salaryNo + ", career=" + career + ", salary=" + salary + ", jikgunCode="
+				+ jikgunCode + ", jikmuCode=" + jikmuCode + "]";
 	}
 	
 	
