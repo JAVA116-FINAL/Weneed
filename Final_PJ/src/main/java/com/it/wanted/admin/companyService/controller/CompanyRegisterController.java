@@ -75,21 +75,22 @@ public class CompanyRegisterController {
 		
 		model.addAttribute("comImgList", comImgList);
 		
-		return "admin/companyService/comInfoPermission";
+		return "admin/companyService/comImgPermission";
 	}
 	
 	@ResponseBody
 	@RequestMapping("/comImgStatustoPass.do")
 	public List<ComImgInfoVO> adminComImgStatustoPass(@RequestParam(value="comImgNoArr[]") List<Integer> comImgNoArr) {
 		
-		logger.info("기업정보등록 승인 처리, 파라미터 기업이미지 배열 comImgNoArr={}", comImgNoArr);
+		logger.info("기업정보등록 승인 처리, 파라미터 기업이미지 배열 comImgNoArr.size={}", comImgNoArr.size());
+		int cnt=0;
 		for(int imgNo:comImgNoArr) {
-			System.out.println(imgNo);
+			cnt+=comImgInfoService.changeStatustoPass(imgNo);
 		}
+		logger.info("이미지 승인 처리 결과 cnt={}", cnt);
 		//통째로 넘겨서 승인처리 해줍니다
-	//	List<ComImgInfoVO> changedComImgList=comImgInfoService.changeStatustoPass(comImgNoArr);
-	//	logger.info("기업이미지등록 승인 처리 결과, changedComList.size={}", changedComList.size());
-		List<ComImgInfoVO> changedComImgList=null;
+		List<ComImgInfoVO> changedComImgList=comImgInfoService.selectAllImage();
+	//	List<ComImgInfoVO> changedComImgList=null;
 		//결과값은 다시 컴인포 목록입니다.
 		return changedComImgList;
 	}

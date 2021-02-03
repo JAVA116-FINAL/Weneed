@@ -35,5 +35,10 @@ public class ComImgInfoDAOMy implements ComImgInfoDAO{
 	public List<ComImgInfoVO> selectAllImage() {
 		return sqlSession.selectList(namespace+"selectAllImage");
 	}
+
+	@Override
+	public int changeStatustoPass(int comImgNo) {
+		return sqlSession.update(namespace+"changeStatustoPass", comImgNo);
+	}
 	
 }

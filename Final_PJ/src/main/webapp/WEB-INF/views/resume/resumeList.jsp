@@ -102,9 +102,9 @@ $(function(){
 			dataType:"json",
 			success:function(resDel){
 				//alert(resDel);
-				 if(resDel>0){
+				if(resDel>0){
 					$('#divNo'+resumeNo).remove();
-				} 
+				}
 			},
 			error:function(xhr,status,error){
 				alert("error:"+error);
@@ -156,7 +156,7 @@ $(function(){
 			 	<div class="col-lg-3 col-sm-4 col-md-4">
 					 <div class="contact-block mb-4 mb-lg-0 block_jy">
 						<span class="resumT_jy">
-							<span class="noResume_jy">작성 이력서 없음</span>
+							<h3>작성 이력서 없음<h3>
 						</span>
 					 </div>	
 				</div>	
@@ -179,11 +179,12 @@ $(function(){
 												</h3>
 											</span>
 											<span class="RWRegdate"><p><fmt:formatDate value="${rVo.resumeRegdate}" pattern="yyyy.MM.dd"/></p></span>
-						<!-- 매치업  넣기 -->				
+						<!-- 매치업 널포인터해결하면 넣기 -->				
+											<%-- 
 											<c:if test="${rVo.resumeNo eq mcuResumeNo}">
 												<span class="RWMachupFlag"><p> 매치업이력서</p></span>
 											</c:if>  
-											
+											--%>
 										   </a>
 									   </form>
 								    </c:if>
@@ -219,10 +220,10 @@ $(function(){
 					<!-- 떙땡이 클릭하면 수정삭제여부나온다. -->
 								    <div class="nav-item dropdown RWdropdown_jy">
 										<div class="nav-link dropdown-toggle dropdowntoggle_jy"  data-toggle="dropdown">
-											<i class="icon-more_vert :before icon_jy"></i>
-											<ul class="dropdown-menu dropdownMenu_jy">
+											<i class="icon-more_vert :before icon_jy">
+										</i>
+											<ul class="dropdown-menu dropdownMenu_jy" >
 												<li><button type="button" class="dropdown-item" id="TitleEdit_jy"  onClick="$.editTitle(${rVo.resumeNo})">이름변경</button></li>
-												<!-- 만약 파일이면 파일다운로드 -->
 												<li><button type="button" class="dropdown-item" id="downResume_jy" onClick="$.downResume(${rVo.resumeNo})">다운로드</button></li>
 												<li><button type="button" class="dropdown-item" id="resumeDel_jy" onClick="$.delResume(${rVo.resumeNo})">삭제</button></li>
 											</ul>

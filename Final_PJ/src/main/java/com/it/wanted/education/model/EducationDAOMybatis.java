@@ -32,10 +32,9 @@ public class EducationDAOMybatis implements EducationDAO{
 		return sqlSession.update(namespace+"updateEdu",educationVo);
 	}
 
-
-	@Override
-	public List<EducationVO> selectEdubyResumeNo(int resumeNo) {
-	return sqlSession.selectList(namespace+"selectEdubyResumeNo",resumeNo);
+  @Override
+	public List<EducationVO> selectEduByResumeNo(int resumeNo) {
+		return sqlSession.selectList(namespace+"selectEduByResumeNo", resumeNo);
 	}
 
 }

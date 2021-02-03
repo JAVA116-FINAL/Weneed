@@ -27,10 +27,6 @@
 		where add_No=#{addNo}
 	</update>
 	
-	<select id="selectAddByResumeNo" parameterType="int" resultType="addinformatiodVo">
-		select * from addinformatiod where resume_No=#{resumeNo}
-	</select>
-	
 </mapper>
 
 

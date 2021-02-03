@@ -4,18 +4,48 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.matchupMem">
 
-	 
-	<select id="selectOpen" resultType="matchupMemVo">
-		select * from matchupMem where resumeopen_flag='Y'
-	</select> 
-	
 	<!-- 자연 -->
+	<select id="selectmcuResumeNo" parameterType="int" resultType="int">
+		select resume_No from matchupMem where mem_No=#{memNo}
+	</select>
+
 	<select id="isMechupMem" parameterType="int" resultType="int">
 		select count(*) from matchupMem where mem_no=#{memNo}
 	</select>
 	
-	<select id="selectmcuResumeNo" parameterType="int" resultType="int">
-		select resume_No from matchupMem where mem_No=#{memNo}
+	
+	<!-- 현빈 -->
+	<select id="selectOpen" resultType="matchupMemVo">
+		select * from matchupMem where resumeopen_flag='Y'
+	</select> 
+	
+	<select id="selectMcumemNo" parameterType="int" resultType="int">
+		select mcumem_no from matchupmem where resume_no=#{resumeNo}
+	</select>
+	
+	<!-- 
+	create or replace view matchupMemSearchView
+	as
+	select rownum as RNUM, A.*
+	from
+	(
+	select m.resume_no as resumeNo, m.mem_no as memNo, m.expertise_no as expertiseNo, 
+	       m.jobsearch_flag as jobSearchFlag, m.resumeopen_flag as resumepenFlag,
+	       r.resume_title as resumeTitle, r.resume_name as resumeName, r.resume_introduce as resumeIntroduce, 
+	       r.lang_flag as langFlag,
+	       (select count(*) from matchuplike where mcumem_no=m.mcumem_no) as cnt
+	from matchupMem m join resume r 
+	on m.resume_No = r.resume_no 
+	where m.resumeopen_flag='Y'
+	order by m.mcumem_no
+	)A;
+	 -->
+	<select id="selectTenMem" parameterType="int" resultType="map">
+		select * from matchupMemSearchView
+		<![CDATA[
+		    where RNUM > #{firstRecord}
+		    and RNUM <= #{firstRecord}+5
+		]]>
 	</select>
 </mapper>
 

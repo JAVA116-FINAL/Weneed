@@ -18,9 +18,8 @@ button{
 
 .salary-chart-box{
 	position:relative;
-	height:460px;
-	min-height:350px;
-	padding-top:26px;
+	height:350px;
+	padding-top:40px;
 	padding-botton:40px;
 	margin-bottom:40px;
 	background-color:#22bd79;
@@ -33,6 +32,7 @@ button{
 }
 
 .salary-chart-desc{
+	display:flex;
 	justify-flex:flex-start;
 	align-items:flex-start;
 }
@@ -44,7 +44,6 @@ button{
 	margin-bottom:10px;
 	padding:8px 10px;
 	color:#22bd79;
-	font-weight:600;
 	background-color:#fff;
 	border-radius:3px;
 	white-space:pre;
@@ -62,6 +61,7 @@ button{
 	font-size:40px;
 	font-weight:700;
 	color:#fff;
+	line-height:1.4;
 	white-space:pre-wrap;
 }
 
@@ -72,9 +72,7 @@ button{
 }
 
 .salary-select-box{
-	position:absolute;
-	margin:0 auto;
-	width:90%;
+	position:relative;
 	left:0;
 	right:0;
 	bottom:-24px;
@@ -182,8 +180,6 @@ button{
 	font-size:13px;
 	font-weight:400;
 	color:#b5b5b5;
-	flex-direction:column;
-	display:flex;
 }
 
 .matchUp-start-box{

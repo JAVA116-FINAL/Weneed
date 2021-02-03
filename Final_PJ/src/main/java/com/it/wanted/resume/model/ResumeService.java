@@ -11,6 +11,4 @@ public interface ResumeService {
 	public int insertResumeFile(ResumeVO rVo);
 	public int deleteResume(ResumeVO rVo);
 	public ResumeVO selectResumeOne(ResumeVO rVo);
-	public ResumeAllVO selectResumeDetail(ResumeVO rVo);
-	
 }

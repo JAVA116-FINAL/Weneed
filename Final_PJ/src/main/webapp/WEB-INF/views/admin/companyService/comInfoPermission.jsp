@@ -45,8 +45,8 @@ $(function(){
 			type:"post",
 			dataType:"json",
 			data:data,
-			success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해서 새로고침해주면 될거같아
-				alert('성공!');
+			success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
+				//alert('성공!');
 				location.reload();
 			},
 			error:function(xhr, status, error){
@@ -83,8 +83,8 @@ $(function(){
 			<button class="weneed-adminBtn" id="weneed-adminBtn-pass">승인</button>
 		</div>
 		<table class="weneed-adminTable">
-			<tr class="weneed-adminTable">
-				<thead>
+			<thead>
+				<tr class="weneed-adminTable">
 					<th><input type="checkbox" id="weneed-admin-CheckAll"></th>
 					<th>회사코드</th>
 					<th>회사명</th>
@@ -93,25 +93,25 @@ $(function(){
 					<th>매출액/투자규모</th>
 					<th>등록회원번호</th>
 					<th>승인상태</th>
-				</thead>
-			</tr>
+				</tr>
+			</thead>
 			<!-- foreach문으로 전부 불러오기  -->
 			<!-- 근데 그중에 passed인거 아닌 애들만 -->
 			<tbody>
 				<c:forEach var="comInfoVo" items="${comList}">
 					<c:if test="${comInfoVo.comInfoPassed != 'PASSED'}">
-							<tr class="weneed-adminTable">
-								<td>
-									<input type="checkbox" name="weneed-adminStatusChkbox">
-								</td>
-								<td>${comInfoVo.comCode}</td>
-								<td>${comInfoVo.comName}</td>
-								<td>${comInfoVo.comRegNo}</td>
-								<td>${comInfoVo.comSize}</td>
-								<td>${comInfoVo.profit}</td>
-								<td>${comInfoVo.comMemNo}</td>
-								<td>${comInfoVo.comInfoPassed}</td>
-							</tr>
+						<tr class="weneed-adminTable">
+							<td>
+								<input type="checkbox" name="weneed-adminStatusChkbox">
+							</td>
+							<td>${comInfoVo.comCode}</td>
+							<td>${comInfoVo.comName}</td>
+							<td>${comInfoVo.comRegNo}</td>
+							<td>${comInfoVo.comSize}</td>
+							<td>${comInfoVo.profit}</td>
+							<td>${comInfoVo.comMemNo}</td>
+							<td>${comInfoVo.comInfoPassed}</td>
+						</tr>
 					</c:if>
 				</c:forEach>
 			</tbody>
@@ -120,8 +120,8 @@ $(function(){
 	<div>
 		<h2>기업정보 승인 완료 건</h2>
 		<table class="weneed-adminTable">
-			<tr class="weneed-adminTable">
-				<thead>
+			<thead>
+				<tr class="weneed-adminTable">
 					<th><input type="checkbox" id="weneed-admin-CheckAll-ed"></th>
 					<th>회사코드</th>
 					<th>회사명</th>
@@ -130,25 +130,25 @@ $(function(){
 					<th>매출액/투자규모</th>
 					<th>등록회원번호</th>
 					<th>승인상태</th>
-				</thead>
-			</tr>
+				</tr>
+			</thead>
 			<!-- foreach문으로 전부 불러오기  -->
 			<!-- 근데 그중에 passed인거 아닌 애들만 -->
 			<tbody>
 				<c:forEach var="comInfoVo" items="${comList}">
 					<c:if test="${comInfoVo.comInfoPassed == 'PASSED'}">
-							<tr class="weneed-adminTable">
-								<td>
-									<input type="checkbox" name="weneed-adminStatusChkbox">
-								</td>
-								<td>${comInfoVo.comCode}</td>
-								<td>${comInfoVo.comName}</td>
-								<td>${comInfoVo.comRegNo}</td>
-								<td>${comInfoVo.comSize}</td>
-								<td>${comInfoVo.profit}</td>
-								<td>${comInfoVo.comMemNo}</td>
-								<td>${comInfoVo.comInfoPassed}</td>
-							</tr>
+						<tr class="weneed-adminTable">
+							<td>
+								<input type="checkbox" name="weneed-adminStatusChkbox">
+							</td>
+							<td>${comInfoVo.comCode}</td>
+							<td>${comInfoVo.comName}</td>
+							<td>${comInfoVo.comRegNo}</td>
+							<td>${comInfoVo.comSize}</td>
+							<td>${comInfoVo.profit}</td>
+							<td>${comInfoVo.comMemNo}</td>
+							<td>${comInfoVo.comInfoPassed}</td>
+						</tr>
 					</c:if>
 				</c:forEach>
 			</tbody>

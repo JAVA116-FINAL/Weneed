@@ -31,9 +31,7 @@
 	 	delete from achievement where career_No=#{careerNo}
 	 </delete>
 	 
-	 <select id="selectAchbyCareerNo" parameterType="int" resultType="achievementVo">
-	 	select * from achievement where career_No=#{careerNo}
-	 </select>
+	 
 	
 </mapper>
 

@@ -483,25 +483,7 @@ i.icon-joblist_bottombar_cv.\:before.icon_jy {
     margin-left: 5px;
 }
 
-
-/* 0201  */
-input#resumeTitleEdit_jy:focus {
-    border: none;
-    outline: none;
+i.icon-more_vert.\:before.icon_jy {
+    pointer-events: none;
 }
 
-i.icon-more_vert.icon_jy {
-    position: absolute;
-    float: left;
-    top: -23px;
-    right: 3px;
-    /* pointer-events: none; */
-}
-
-span.noResume_jy {
-    font-size: 19px;
-    font-weight: 600;
-    margin-top: 82px;
-    display: inline-block;
-    color: gray;
-}

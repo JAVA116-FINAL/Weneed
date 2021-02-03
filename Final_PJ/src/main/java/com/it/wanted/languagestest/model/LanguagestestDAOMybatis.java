@@ -1,7 +1,5 @@
 package com.it.wanted.languagestest.model;
 
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,10 +28,6 @@ public class LanguagestestDAOMybatis implements LanguagestestDAO{
 	@Override
 	public int updateLangtest(LanguagestestVO langtestVo) {
 		return sqlSession.update(namespace+"updateLangtest",langtestVo);
-	}
-	@Override
-	public List<LanguagestestVO> selectLangtestbyLangNo(int langNo) {
-		return sqlSession.selectList(namespace+"selectLangtestbyLangNo",langNo);
 	}
 
 }

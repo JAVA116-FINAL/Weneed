@@ -28,5 +28,10 @@ public class ComImgInfoServiceImpl implements ComImgInfoService{
 	public List<ComImgInfoVO> selectAllImage() {
 		return comImgInfoDao.selectAllImage();
 	}
+
+	@Override
+	public int changeStatustoPass(int imgNo) {
+		return comImgInfoDao.changeStatustoPass(imgNo);
+	}
 	
 }

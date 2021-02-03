@@ -27,7 +27,7 @@
 		 	resume_Hp=#{resumeHp}, resume_Introduce=#{resumeIntroduce},temp_Flag=#{tempFlag},resume_Regdate=sysdate,lang_flag=#{langFlag}
 		where resume_No=#{resumeNo}
 	</update>
-	<!-- 이력서 관리 조회 -->
+	<!-- 이력서 관리 조횜 -->
 	<select id="selectResumeAll" parameterType="int" resultType="resumeVo">
 		select * from resume where mem_No=#{memNo} order by resume_No desc
 	</select>

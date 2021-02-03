@@ -26,13 +26,6 @@
 		set lang_Name=#{langName}, lang_level=#{langLevel}
 		where lang_No=#{langNo}
 	</update>
-	
-	<select id="selectLangbyResumeNo" parameterType="int" resultType="languagesVo">
-		select * from languages where resume_No=#{resumeNo}
-	</select>
-	
-	
-	
 </mapper>
 
 

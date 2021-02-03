@@ -9,5 +9,6 @@ public interface ComImgInfoDAO {
 	int insertImg(ComImgInfoVO imgVo);
 	int deleteImg(String imgFileName);
 	List<ComImgInfoVO> selectAllImage();
+	int changeStatustoPass(int imgNo);
 
 }

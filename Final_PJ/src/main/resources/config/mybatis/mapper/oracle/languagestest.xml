@@ -30,10 +30,6 @@
 		set langtest_Name=#{langtestName}, langtest_Score=#{langtestScore},get_Year=#{getYear}, get_Month=#{getMonth}
 		where langtest_No=#{langtestNo}
 	</update>
-	
-	<select id="selectLangtestbyLangNo" parameterType="int" resultType="languagestestVo">
-		select* from languagestest where lang_No=#{langNo}
-	</select>
 </mapper>
 
 

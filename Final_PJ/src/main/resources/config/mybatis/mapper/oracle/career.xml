@@ -28,9 +28,6 @@
 		delete from career where career_No=#{careerNo}
 	</delete>
 	
-	<select id="selectCareerbyResumeNo" parameterType="int" resultType="careerVo">
-		select * from career where resume_No=#{resumeNo}
-	</select>
 	
 </mapper>
 

@@ -30,6 +30,8 @@ import com.it.wanted.resume.model.ResumeService;
 import com.it.wanted.resume.model.ResumeVO;
 import com.itextpdf.text.DocumentException;
 
+
+
 @Controller
 @RequestMapping("/resume")
 public class ResumeController {
@@ -96,7 +98,6 @@ public class ResumeController {
 		
 	}
 	
-	//이력서 관리화면 
 	@RequestMapping("/resumeList.do")
 	public String resumeList(HttpSession session, Model model) {
 		//1
@@ -106,67 +107,19 @@ public class ResumeController {
 		//2 회원번호로 이력서 테이블 불러오기, 매치업이력서 번호 확인 
 		List<ResumeVO> resumeList = resumeService.selectResumeAll(memNo);
 		logger.info("이력서 조회결과 resumeList.size()={}", resumeList.size());
+		/*
+		int mcuResumeNo=mcumemService.selectmcuResumeNo(memNo);
+		logger.info("매치업 이력서번호 mcuResumeNo={}", mcuResumeNo);
 		
-		int cnt=mcumemService.isMechupMem(memNo);
-		logger.info("매치업 조회결과 cnt={}", cnt);
-		if(cnt>0) {
-			int mcuResumeNo=mcumemService.selectmcuResumeNo(memNo);
-			logger.info("매치업 이력서번호 mcuResumeNo={}", mcuResumeNo);
-		
-			if(mcuResumeNo>0) { 
-				model.addAttribute("mcuResumeNo", mcuResumeNo); 
-			}
-		}
-
-		
-
+		if(mcuResumeNo>0) { 
+			model.addAttribute("mcuResumeNo", mcuResumeNo); 
+		 }
+		*/
 		//3
 		model.addAttribute("resumeList", resumeList);
 		//4
 		return "resume/resumeList";
 	}
-	
-	//이력서 상세보기/수정
-	@RequestMapping("/resumeDetail.do")
-	public String resumeDetail(@RequestParam (defaultValue = "0")int resumeNo, HttpSession session, Model model) {
-		//1
-		int memNo=(Integer) session.getAttribute("mem_no");
-		logger.info("이력서 상세보기 화면보여주기 파라미터 resumeNo={}, memNo={}",resumeNo, memNo);
-		ResumeVO rVo= new ResumeVO();
-		rVo.setMemNo(memNo);
-		rVo.setResumeNo(resumeNo);
-		//2
-		ResumeAllVO rAllVo = resumeService.selectResumeDetail(rVo);
-		logger.info("이력서 상세보기 결과rAllVo={}",rAllVo);
-		//3
-		model.addAttribute("rAllVo", rAllVo);
-		//4
-		return "resume/resumeDetail";
-		
-	}
-	
-	@RequestMapping(value = "/resumeEdit.do", method = RequestMethod.POST)
-	public String resumeEdit(@ModelAttribute ResumeAllVO rAllVo, Model model) {
-		//1 날짜 받아와서 셋팅해야함. 임시저장플래그처리
-		logger.info("이력서 등록하기 파라미터 rAllVo={}",rAllVo);		
-		
-		//2
-		int cnt=resumeService.updateResume(rAllVo);
-		logger.info("update결과,cnt={}",cnt);
-		
-		if(cnt<1) {
-			ResumeVO rVo = rAllVo.getResumeVo();
-			model.addAttribute("msg","이력서 등록실패");
-			model.addAttribute("url","/resume/resumeDetail.do?resumeNo="+rVo.getResumeNo());
-			return "common/message";
-		}
-		//3
-		//4
-		return "redirect:/resume/resumeList.do";
-		
-	}
-	
-	
 	
 	//파일업로드!
 	@ResponseBody
@@ -206,20 +159,20 @@ public class ResumeController {
 		return rVo;
 	}
 	
-	//pdf파일 생성 다운
+	//
 	@ResponseBody
 	@RequestMapping("/resumeDown.do")
 	public int resumeDownload(@RequestParam (defaultValue = "0")int resumeNo, HttpSession session) {
 		//1
 		int memNo=(Integer) session.getAttribute("mem_no");
-		logger.info("pdf파일 다운로드화면 보여주기,파라미터resumeNo={}",resumeNo);
+		logger.info("파일 다운로드화면 보여주기,파라미터resumeNo={}",resumeNo);
 		
 		//2
 		ResumeVO rVo=new ResumeVO();
 		rVo.setMemNo(memNo);
 		rVo.setResumeNo(resumeNo);
 		rVo=resumeService.selectResumeOne(rVo);
-		logger.info("pdf파일 다운로드파라미터 rVo={}",rVo);
+		logger.info("파일 다운로드파라미터 rVo={}",rVo);
 		int result=0;
 		try {
 			pdfFileUtil.createPdf(rVo);
@@ -252,7 +205,7 @@ public class ResumeController {
 		rVo.setResumeNo(resumeNo);
 		//2
 		int cnt=resumeService.deleteResume(rVo);
-		logger.info("삭제 결과 cnt={}, rVo={}", cnt,rVo);
+		
 		//3
 		//4
 		return cnt;
