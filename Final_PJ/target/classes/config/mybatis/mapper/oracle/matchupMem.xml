@@ -9,8 +9,11 @@
 		select * from matchupMem where resumeopen_flag='Y'
 	</select> 
 	
-	
 	<!-- 자연 -->
+	<select id="isMechupMem" parameterType="int" resultType="int">
+		select count(*) from matchupMem where mem_no=#{memNo}
+	</select>
+	
 	<select id="selectmcuResumeNo" parameterType="int" resultType="int">
 		select resume_No from matchupMem where mem_No=#{memNo}
 	</select>

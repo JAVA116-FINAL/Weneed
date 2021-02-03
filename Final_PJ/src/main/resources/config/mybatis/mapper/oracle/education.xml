@@ -28,6 +28,10 @@
 		where edu_No=#{eduNo}
 	 </update>
 	
+	<select id="selectEdubyResumeNo" parameterType="int" resultType="educationVo">
+		select * from education where resume_No=#{resumeNo}
+	</select>
+	
 </mapper>
 
 
