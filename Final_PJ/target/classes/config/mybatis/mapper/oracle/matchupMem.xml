@@ -9,6 +9,10 @@
 		select resume_No from matchupMem where mem_No=#{memNo}
 	</select>
 
+	<select id="isMechupMem" parameterType="int" resultType="int">
+		select count(*) from matchupMem where mem_no=#{memNo}
+	</select>
+	
 	
 	<!-- 현빈 -->
 	<select id="selectOpen" resultType="matchupMemVo">
@@ -18,8 +22,6 @@
 	<select id="selectMcumemNo" parameterType="int" resultType="int">
 		select mcumem_no from matchupmem where resume_no=#{resumeNo}
 	</select>
-	
-	
 	
 	<!-- 
 	create or replace view matchupMemSearchView
