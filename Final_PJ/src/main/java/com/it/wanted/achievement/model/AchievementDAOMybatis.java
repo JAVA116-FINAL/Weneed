@@ -1,5 +1,7 @@
 package com.it.wanted.achievement.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,6 +30,10 @@ public class AchievementDAOMybatis implements AchievementDAO{
 	@Override
 	public int deleteAchbyCareerNo(int careerNo) {
 		return sqlSession.delete(namespace+"deleteAchbyCareerNo", careerNo);
+	}
+	@Override
+	public List<AchievementVO> selectAchbyCareerNo(int CareerNo) {
+		return sqlSession.selectList(namespace+"selectAchbyCareerNo",CareerNo);
 	}
 	
 	

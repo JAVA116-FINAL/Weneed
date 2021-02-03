@@ -1,5 +1,7 @@
 package com.it.wanted.addinformatiod.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,10 @@ public class AddinformatiodDAOMybatis implements AddinformatiodDAO{
 	@Override
 	public int updateAdd(AddinformatiodVO aVo) {
 		return sqlSession.update(namespace+"updateAdd",aVo);
+	}
+	@Override
+	public List<AddinformatiodVO> selectAddByResumeNo(int resumeNo) {
+		return sqlSession.selectList(namespace+"selectAddByResumeNo", resumeNo);
 	}
 	
 	

@@ -1,9 +1,10 @@
 package com.it.wanted.career.model;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
 
 import com.it.wanted.achievement.model.AchievementDAO;
 
@@ -35,6 +36,7 @@ public class CareerServiceImpl implements CareerService{
 			cnt=careerDao.deleteCareer(careerNo);
 		return cnt;
 	}
-	
+
+
 
 }

@@ -45,8 +45,6 @@ public class PdfFileUtil {
 		document.add(new Paragraph("Contact: "+rVo.getResumeHp(),font));
 		document.add(new Paragraph(rVo.getResumeIntroduce(),font));
 		
-		
-		
 		document.close();
 		
 	}

@@ -281,7 +281,7 @@ $(function(){
 				 testStr+="<input type='hidden' value='"+resTest.langNo+"' name='testList["+t+"].langNo' >";
 				 testStr+="<input type='hidden' value='"+t+"'>";
 				 testStr+="·<input type='text' value='' class='testN_jy' placeholder='시험명' id='langtestName' name='testList["+t+"].langtestName'>";
-				 testStr+="<input class='dep_jy' type='text' value='' class='testL_jy' placeholder='점수/급' name='testList["+e+"].langtestScore'>";
+				 testStr+="<input class='dep_jy' type='text' value='' class='testL_jy' placeholder='점수/급' name='testList["+t+"].langtestScore'>";
 				 testStr+="<input class='startYear_jy getYear_jy' type='text' value='' placeholder='YYYY' name='testList["+t+"].getYear'>.";
 				 testStr+="<input class='startMonth_jy getMonth_jy' type='text' value='' placeholder='MM' name='testList["+t+"].getMonth'>.";		 
 				 testStr+="<button type='button' class='btDel_jy' id='btTestDel_jy' onclick='$.del(\"" + resTest.langtestNo+ "\",\"" + 'test' + "\")'><i class='icon-close btDel-i_jy'></i></button>";
