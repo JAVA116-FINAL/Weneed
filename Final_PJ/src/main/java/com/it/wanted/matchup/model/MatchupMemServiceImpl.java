@@ -31,5 +31,9 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return matchupMemDao.selectTenMem(firstRecord);
 	}
 
+	@Override
+	public int selectMcumemNo(int resumeNo) {
+		return matchupMemDao.selectMcumemNo(resumeNo);
+	}
 	
 }

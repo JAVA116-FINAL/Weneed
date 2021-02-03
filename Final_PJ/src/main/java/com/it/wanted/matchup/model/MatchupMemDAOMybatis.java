@@ -31,6 +31,11 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	public List<Map<String, Object>> selectTenMem(int firstRecord) {
 		return sqlSession.selectList(namespace+"selectTenMem", firstRecord);
 	}
+
+	@Override
+	public int selectMcumemNo(int resumeNo) {
+		return sqlSession.selectOne(namespace+"selectMcumemNo", resumeNo);
+	}
 	
 	
 

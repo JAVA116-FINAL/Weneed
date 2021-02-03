@@ -11,5 +11,6 @@ public interface MatchupMemDAO {
 	/* 현빈 */
 	List<MatchupMemVO> selectOpen();
 	List<Map<String, Object>> selectTenMem(int firstRecord);
+	public int selectMcumemNo(int resumeNo);
 
 }

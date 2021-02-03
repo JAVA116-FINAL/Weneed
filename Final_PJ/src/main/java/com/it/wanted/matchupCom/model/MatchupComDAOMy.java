@@ -10,4 +10,19 @@ public class MatchupComDAOMy implements MatchupComDAO{
 	@Autowired SqlSessionTemplate sqlSession;
 	private String namespace="com.mybatis.mapper.matchupCom.";
 	
+	@Override
+	public int addZzim(MatchupZzimVO zzimVo) {
+		return sqlSession.insert(namespace+"addZzim", zzimVo);
+	}
+
+	@Override
+	public int isZzimed(MatchupZzimVO zzimVo) {
+		return sqlSession.selectOne(namespace+"isZzimed", zzimVo);
+	}
+
+	@Override
+	public int delZzim(MatchupZzimVO zzimVo) {
+		return sqlSession.delete(namespace+"delZzim", zzimVo);
+	}
+	
 }

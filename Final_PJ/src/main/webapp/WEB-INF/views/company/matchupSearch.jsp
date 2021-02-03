@@ -30,24 +30,100 @@ $(function(){
 	});
 	
 	//찜 버튼 금색 토글
-	$('.matchupSearch-ZzimBtn').click(function(){
+	$(document).on('click', '.matchupSearch-ZzimBtn', function(){
 		if($(this).children('i').hasClass('goldStar')){
 			$(this).children('i').removeClass('goldStar');
 			//찜에서 빼기도 해야하는구만
-			
-			
+			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
+			//console.log(resumeStr.substr(3));
+			var resumeNo=parseInt(resumeStr.substr(3), 10);
+			$.ajax({
+				url:"<c:url value='/company/delZzim.do'/>",
+				type:"get",
+				dataType:"json",
+				data:{"resumeNo":resumeNo},
+				success:function(result){
+					console.log(result);
+				},
+				error:function(xhr, status, error){
+					console.log("에러!:"+error);
+				}
+			});
 		}else{
 			$(this).children('i').addClass('goldStar');
 			//찜하기를 해볼거예요
 			//이력서번호 넘기고 세션에서 컴코드 받아와서 넘기고
-			//컨트롤러에서 이력서 번호로 매치업일반넘버 찾아 그리고 컴멤넘버 넣어야 할거같은데...
+			//컨트롤러에서 이력서 번호로 매치업일반넘버 찾아
+			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
+			//console.log(resumeStr.substr(3));
+			var resumeNo=parseInt(resumeStr.substr(3), 10);
+			//console.log(resumeNo);
+			
+			$.ajax({
+				url:"<c:url value='/company/addZzim.do'/>",
+				type:"get",
+				dataType:"json",
+				data:{"resumeNo":resumeNo},
+				success:function(result){
+					//alert('성공');
+					console.log(result);
+				},
+				error:function(xhr, status, error){
+					alert('error: '+error);
+				}
+			});
+			
+		}
+	});
+	$('.matchupSearch-ZzimBtn').click(function(){
+		if($(this).children('i').hasClass('goldStar')){
+			$(this).children('i').removeClass('goldStar');
+			//찜에서 빼기도 해야하는구만
+			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
+			//console.log(resumeStr.substr(3));
+			var resumeNo=parseInt(resumeStr.substr(3), 10);
+			$.ajax({
+				url:"<c:url value='/company/delZzim.do'/>",
+				type:"get",
+				dataType:"json",
+				data:{"resumeNo":resumeNo},
+				success:function(result){
+					console.log(result);
+				},
+				error:function(xhr, status, error){
+					console.log("에러!:"+error);
+				}
+			});
+		}else{
+			$(this).children('i').addClass('goldStar');
+			//찜하기를 해볼거예요
+			//이력서번호 넘기고 세션에서 컴코드 받아와서 넘기고
+			//컨트롤러에서 이력서 번호로 매치업일반넘버 찾아
+			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
+			//console.log(resumeStr.substr(3));
+			var resumeNo=parseInt(resumeStr.substr(3), 10);
+			//console.log(resumeNo);
+			
+			$.ajax({
+				url:"<c:url value='/company/addZzim.do'/>",
+				type:"get",
+				dataType:"json",
+				data:{"resumeNo":resumeNo},
+				success:function(result){
+					//alert('성공');
+					console.log(result);
+				},
+				error:function(xhr, status, error){
+					alert('error: '+error);
+				}
+			});
 			
 		}
 	});
 	
 	//더보기 기능 구현
 	$('#matchupSearch-viewMoreBtn').click(function(){
-		console.log('눌렀당');
+		//console.log('눌렀당');
 		
 		var recordCnt=parseInt($('#matchupSearch-record').val(), 10);
 		recordCnt+=5;
@@ -60,7 +136,7 @@ $(function(){
 				recordCnt:recordCnt
 			},
 			success:function(memList){
-				alert('성공!');
+				//alert('성공!');
 				console.log(memList);
 				for(mcumem of memList){
 					makeMemList(mcumem);
@@ -185,10 +261,12 @@ function pageFunc(curPage){
 						<div class="matchupSearch-resume-2nd"> <!-- 이력서 목록 -->
 							<span>직군직종명</span>
 							<span>6년 경력</span>
-							<span>학력대학교 무슨학과</span>
+							<span>학력대학교 무슨학과${mcumemMap.CNT}</span>
 						</div>
 						<div class="matchupSearch-resume-3rd">
-							<button class="matchupSearch-ZzimBtn"><i class="fas fa-star"></i> 찜</button>
+							<button class="matchupSearch-ZzimBtn">
+								<i class="fas fa-star <c:if test="${mcumemMap.CNT eq 1}">goldStar</c:if>
+								"></i> 찜</button>
 							<button>이력서 미리보기</button>
 						</div>
 					</div>

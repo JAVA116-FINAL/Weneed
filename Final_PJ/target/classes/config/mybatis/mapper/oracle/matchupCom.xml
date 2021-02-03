@@ -4,6 +4,20 @@
 
 <mapper namespace="com.mybatis.mapper.matchupCom">
 	
+	<insert id="addZzim" parameterType="matchupZzimVo">
+		insert into matchupLike(com_code, mcumem_no)
+		values(#{comCode}, #{mcumemNo})
+	</insert>
+	
+	<select id="isZzimed" parameterType="matchupZzimVo" resultType="int">
+		select count(*) as cnt from matchupLike
+		where com_Code=#{comCode} and mcumem_No=#{mcumemNo}
+	</select>
+	
+	<delete id="delZzim" parameterType="matchupZzimVo">
+		delete from matchuplike
+		where mcumem_no=#{mcumemNo} and com_code=#{comCode}
+	</delete>
 </mapper>
 
 
