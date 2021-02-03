@@ -1,5 +1,7 @@
 package com.it.wanted.link.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,10 @@ public class LinkDAOMybatis implements LinkDAO{
 	@Override
 	public int updateLink(LinkVO linkVo) {
 		return sqlSession.update(namespace+"updateLink",linkVo);
+	}
+	@Override
+	public List<LinkVO> selectLinkbyResumeNo(int resumeNo) {
+		return sqlSession.selectList(namespace+"selectLinkbyResumeNo",resumeNo);
 	}
 	
 }
