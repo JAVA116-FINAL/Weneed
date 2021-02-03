@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.expertise">
+	<!-- 현빈 -->
+	<select id="selectMcumemNo" parameterType="string" resultType="int">
+		select m.mcumem_no 
+		from resume r join matchupmem m 
+		on r.resume_no=m.resume_no 
+		join expertise e 
+		on m.expertise_no=e.expertise_no
+		where e.skill like '%' || #{keyword} || '%'
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

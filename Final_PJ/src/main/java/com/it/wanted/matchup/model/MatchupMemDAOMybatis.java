@@ -41,11 +41,10 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	public int selectMcumemNo(int resumeNo) {
 		return sqlSession.selectOne(namespace+"selectMcumemNo", resumeNo);
 	}
-	
-	
 
-	
-
-	
+	@Override
+	public List<Map<String, Object>> selectMcumemSearchList(MatchupMemSearchVO mcuMemSearchVo) {
+		return sqlSession.selectList(namespace+"selectMcumemSearchList", mcuMemSearchVo);
+	}
 	
 }

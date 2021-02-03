@@ -10,10 +10,9 @@ public interface MatchupMemService {
 	public int selectmcuResumeNo(int memNo);
 	
 	
-	
 	/* 현빈 */
 	List<MatchupMemVO> selectOpen();
 	List<Map<String, Object>> selectTenMem(int firstRecord);
-	public int selectMcumemNo(int resumeNo);
-	
+	int selectMcumemNo(int resumeNo);
+	List<Map<String, Object>> selectSearchedMemList(MatchupMemSearchVO mcuMemSearchVo);
 }
