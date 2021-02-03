@@ -75,51 +75,6 @@ $(function(){
 			
 		}
 	});
-	/* $('.matchupSearch-ZzimBtn').click(function(){
-		if($(this).children('i').hasClass('goldStar')){
-			$(this).children('i').removeClass('goldStar');
-			//찜에서 빼기도 해야하는구만
-			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
-			//console.log(resumeStr.substr(3));
-			var resumeNo=parseInt(resumeStr.substr(3), 10);
-			$.ajax({
-				url:"<c:url value='/company/delZzim.do'/>",
-				type:"get",
-				dataType:"json",
-				data:{"resumeNo":resumeNo},
-				success:function(result){
-					console.log(result);
-				},
-				error:function(xhr, status, error){
-					console.log("에러!:"+error);
-				}
-			});
-		}else{
-			$(this).children('i').addClass('goldStar');
-			//찜하기를 해볼거예요
-			//이력서번호 넘기고 세션에서 컴코드 받아와서 넘기고
-			//컨트롤러에서 이력서 번호로 매치업일반넘버 찾아
-			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
-			//console.log(resumeStr.substr(3));
-			var resumeNo=parseInt(resumeStr.substr(3), 10);
-			//console.log(resumeNo);
-			
-			$.ajax({
-				url:"<c:url value='/company/addZzim.do'/>",
-				type:"get",
-				dataType:"json",
-				data:{"resumeNo":resumeNo},
-				success:function(result){
-					//alert('성공');
-					console.log(result);
-				},
-				error:function(xhr, status, error){
-					alert('error: '+error);
-				}
-			});
-			
-		} 
-	});*/
 	
 	//더보기 기능 구현
 	$('#matchupSearch-viewMoreBtn').click(function(){
@@ -149,6 +104,7 @@ $(function(){
 		});
 	});
 	
+	//검색버튼 클릭하면 새로고침해서 이 페이지로 돌아오기
 	
 });
 
@@ -178,6 +134,13 @@ function pageFunc(curPage){
 }
 </script>
 	<input type="hidden" id="matchupSearch-record" value="0">
+	<form name="matchupSearchForm" method="post" action="#">
+		<input type="text" value="" name="searchJikmu">
+		<input type="text" value="" name="searchNation">
+		<input type="text" value="" name="searchKeyword">
+		<input type="text" value="" name="searchMinCareer">
+		<input type="text" value="" name="searchMaxCareer">
+	</form>
 	<div class="container"> <!-- 가장 바깥 래퍼 --> 
 		<section class="matchupSearch-1stSec"> <!-- 이름, 검색필터, 검색창, 필터 -->
 			<h1>찾고 있는 인재의 직군/직무를 설정하세요</h1>
@@ -193,11 +156,7 @@ function pageFunc(curPage){
 				</c:forEach>
 			</select>
 			<div class="matchupSearch-searchFilter">
-				<div class="matchupSearch-searchDiv">
-					<input class="matchupSearch-searchInput" type="text" placeholder="회사명, 학교, 스킬 검색">
-					<button class="matchupSearch-searchBtn"><i class="fas fa-search"></i></button>
-				</div>
-				<div class="matchupSearch-filter"> 
+				<!-- <div class="matchupSearch-filter"> 
 					<select class="matchupSearch-select matchupSearch-select-sub">
 						<option>국가 선택</option>
 						<option>한국</option>
@@ -206,7 +165,8 @@ function pageFunc(curPage){
 						<option>홍콩</option>
 						<option>싱가폴</option>
 					</select>
-				</div> <!-- 드롭다운 -->
+				</div>  -->
+				<!-- 드롭다운 -->
 				<!-- 분량이 안될거같으면 삭제 <div class="matchupSearch-filter">
 					<select class="matchupSearch-select matchupSearch-select-sub">
 						<option>언어 선택</option>
@@ -216,14 +176,52 @@ function pageFunc(curPage){
 						<option>영어</option>
 					</select>
 				 드롭다운 -->
-				<div class="matchupSearch-rangeSlider">
+				 <div class="matchupSearch-filter"> 
+				 	<span style="font-weight: bold; font-size: 0.8em;">최소 경력</span>
+					<select class="matchupSearch-select matchupSearch-select-sub">
+						<option>전체</option>
+						<option>신입</option>
+						<option>1년</option>
+						<option>2년</option>
+						<option>3년</option>
+						<option>4년</option>
+						<option>5년</option>
+						<option>6년</option>
+						<option>7년</option>
+						<option>8년</option>
+						<option>9년</option>
+						<option>10년 이상</option>
+					</select>
+				</div> 
+				<div class="matchupSearch-filter"> 
+					<span style="font-weight: bold; font-size: 0.8em;">최대 경력</span>
+					<select class="matchupSearch-select matchupSearch-select-sub">
+						<option>전체</option>
+						<option>신입</option>
+						<option>1년</option>
+						<option>2년</option>
+						<option>3년</option>
+						<option>4년</option>
+						<option>5년</option>
+						<option>6년</option>
+						<option>7년</option>
+						<option>8년</option>
+						<option>9년</option>
+						<option>10년 이상</option>
+					</select>
+				</div> 
+				<div class="matchupSearch-searchDiv">
+					<input class="matchupSearch-searchInput" type="text" placeholder="회사명, 학교, 스킬 검색">
+					<button class="matchupSearch-searchBtn"><i class="fas fa-search"></i></button>
+				</div>
+				<!-- <div class="matchupSearch-rangeSlider">
 					<div class="matchupSearch-rangeSliderLabel">
 						<label class="matchupSearch-label" for="amount">경력</label>
 						<input type="text" id="amount" readonly style="border:0; font-weight:bold;">
 					</div>
-					<!-- Range Slider -->
+					Range Slider
 					<div id="slider-range"></div>
-				</div> 
+				</div>  -->
 			</div>
 		</section>
 		<section class="matchupSearch-2ndSec"> <!-- 목록  -->
@@ -261,7 +259,7 @@ function pageFunc(curPage){
 						<div class="matchupSearch-resume-2nd"> <!-- 이력서 목록 -->
 							<span>직군직종명</span>
 							<span>6년 경력</span>
-							<span>학력대학교 무슨학과${mcumemMap.CNT}</span>
+							<span>학력대학교 무슨학과</span>
 						</div>
 						<div class="matchupSearch-resume-3rd">
 							<button class="matchupSearch-ZzimBtn">

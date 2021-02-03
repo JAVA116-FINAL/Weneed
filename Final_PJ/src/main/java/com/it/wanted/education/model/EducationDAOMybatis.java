@@ -38,4 +38,11 @@ public class EducationDAOMybatis implements EducationDAO{
 	return sqlSession.selectList(namespace+"selectEdubyResumeNo",resumeNo);
 	}
 
+	
+	/* 현빈 */
+	@Override
+	public List<Integer> selectMcumemNo(String keyword) {
+		return sqlSession.selectList(namespace+"selectMcumemNo", keyword);
+	}
+
 }

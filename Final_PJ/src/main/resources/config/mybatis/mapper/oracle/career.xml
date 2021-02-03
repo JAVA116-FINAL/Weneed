@@ -32,6 +32,13 @@
 		select * from career where resume_No=#{resumeNo}
 	</select>
 	
+	<!-- 현빈 -->
+	<select id="selectMcumemNo" parameterType="string" resultType="int">
+		select m.mcumem_no
+		from matchupmem m join career c
+		on m.resume_no=c.resume_no
+		where career_name like '%' || #{keyword} || '%'
+	</select>
 </mapper>
 
 
