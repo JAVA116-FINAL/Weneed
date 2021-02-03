@@ -1,5 +1,7 @@
 package com.it.wanted.career.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,6 +34,13 @@ public class CareerDAOMybatis implements CareerDAO{
 	public int deleteCareer(int careerNo) {
 		return sqlSession.delete(namespace+"deleteCareer", careerNo);
 	}
+
+	@Override
+	public List<CareerVO> selectCareerbyResumeNo(int resumeNo) {
+		return sqlSession.selectList(namespace+"selectCareerbyResumeNo",resumeNo);
+	}
+
+
 	
 	
 

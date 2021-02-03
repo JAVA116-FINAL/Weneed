@@ -22,8 +22,13 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	/* 자연 */
 	@Override
 	public int selectmcuResumeNo(int memNo) {
-		int cnt=sqlSession.selectOne(namespace+"selectmcuResumeNo",memNo);
+		int cnt=sqlSession.selectOne(namespace+"selectmcuResumeNo", memNo);
 		return cnt;
+	}
+
+	@Override
+	public int isMechupMem(int memNo) {
+		return sqlSession.selectOne(namespace+"isMechupMem", memNo);
 	}
 	
 	

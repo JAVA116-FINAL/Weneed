@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.wanted.career.model.CareerService;
 import com.it.wanted.career.model.CareerVO;
+import com.it.wanted.cominfo.model.ComInfoService;
+import com.it.wanted.cominfo.model.ComInfoVO;
+import com.it.wanted.commeminfo.model.ComMemInfoService;
+import com.it.wanted.commeminfo.model.ComMemInfoVO;
+import com.it.wanted.commemlist.model.ComMemListService;
 import com.it.wanted.education.model.EducationService;
 import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.jikgun.model.JikgunService;
@@ -34,9 +41,11 @@ public class CompanyMatchUpController {
 	@Autowired JikgunService jgService;
 	@Autowired JikmuService jmService;
 	@Autowired EducationService eduService;
+	@Autowired ComMemInfoService comMemInfoService;
+	@Autowired ComInfoService comInfoService;
 	
 	@RequestMapping("/matchupMain.do")
-	public String matchupMain() {
+	public String matchupMain(HttpSession session, Model model) {
 		logger.info("기업서비스 매치업 메인화면");
 		
 		return "company/matchupMain";

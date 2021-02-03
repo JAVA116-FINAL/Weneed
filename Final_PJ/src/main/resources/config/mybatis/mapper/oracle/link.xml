@@ -27,6 +27,10 @@
 		where link_No=#{linkNo}
 	</update>
 	
+	<select id="selectLinkbyResumeNo" parameterType="int" resultType="linkVo">
+		select * from link where resume_No=#{resumeNo}
+	</select>
+	
 </mapper>
 
 

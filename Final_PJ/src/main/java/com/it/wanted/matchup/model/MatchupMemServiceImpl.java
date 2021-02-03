@@ -22,5 +22,10 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return matchupMemDao.selectmcuResumeNo(memNo);
 	}
 
+	@Override
+	public int isMechupMem(int memNo) {
+		return matchupMemDao.isMechupMem(memNo);
+	}
+
 	
 }

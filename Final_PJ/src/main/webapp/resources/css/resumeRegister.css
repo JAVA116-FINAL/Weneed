@@ -503,3 +503,18 @@ input[name=ul6_jy] li {
 }
 .eduDetail_jy+button#btEduDel_jy {
     top: 0;
+   
+} 
+/* 210201 */
+input:-internal-autofill-selected {
+    background-color: white !important;
+    /* color: white; */
+}
+
+.crrLi_jy {
+    width: 100%;
+}
+
+input.dep_jy {
+    width: 300px;
+}
