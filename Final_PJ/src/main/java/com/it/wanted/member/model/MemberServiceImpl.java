@@ -1,18 +1,17 @@
 package com.it.wanted.member.model;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberDAO memberDao;
-
+	
 	public int insertMember(MemberVO vo) {
 		int cnt = memberDao.insertMember(vo);
 		return cnt;
@@ -46,12 +45,13 @@ public class MemberServiceImpl implements MemberService{
 
 	public int loginCheck(String email, String pwd) {
 		String dbPwd = memberDao.selectPwd(email);
-		
+        String encodedPassword = new BCryptPasswordEncoder().encode(pwd);
+        
 		int result = 0;
 		if(dbPwd==null || dbPwd.isEmpty()) {
 			result=EMAIL_NONE;
 		}else {
-			if(dbPwd.equals(pwd)) {
+			if(!encodedPassword.matches(pwd)) {
 				result=LOGIN_OK;
 			}else {
 				result=PWD_DISAGREE;
@@ -147,6 +147,9 @@ public class MemberServiceImpl implements MemberService{
 			System.out.close();
 		}
 	}
+
+	
+
 	
 }
 

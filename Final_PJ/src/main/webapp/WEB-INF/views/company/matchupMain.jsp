@@ -11,7 +11,7 @@
 		<h1>MatchUp</h1>
 		<h1>어디에서도 볼 수 없는 국내 최고의 인재풀</h1>
 		<h2 class="matchupMainH2-white"><br>가장 이직이 활발한 3~7년차, IT직군 인재를 만나보세요</h2>
-		<a href="" class="matchupMain-btn-gotoSearchPage">검증된 인재 만나기</a>
+		<a href="<c:url value='/company/matchupSearch.do'/>" class="matchupMain-btn-gotoSearchPage">검증된 인재 만나기</a>
 	</section>
 	<section class="matchupMain-2ndSec">
 		<h2 class="matchupMainH2-dark">합리적인 가격으로, 우수한 인재풀을 빠르고 쉽게!</h2>

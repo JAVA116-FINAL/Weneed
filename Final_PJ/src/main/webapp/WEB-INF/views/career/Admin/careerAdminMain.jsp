@@ -51,9 +51,9 @@ body{
  } 
 </style>
 	
-<title>관리자 커리어성장 메인페이지</title>
+
 <script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
-</head>
+
 <body>
 	<%
 		String userID = null;
@@ -69,10 +69,10 @@ body{
 		 	 <div class="navbar-brand">
 				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
+			    <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/careerAdminMain.do'/>">커리어성장 메인</a></li>							  			  
 			  <li class="nav-item active"><a class="nav-link" href="#title">프로그램 등록</a></li>
 			   <li class="nav-item"><a class="nav-link" href="#title1">프로그램 조회</a></li>
 			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
 			  </ul>	
 			</div>
 			</div>
@@ -126,6 +126,3 @@ body{
 
 <!-- 푸터부분!!!!! -->
 	<%@ include file="../../inc/bottom.jsp" %>
-
-	</body>
-	</html>

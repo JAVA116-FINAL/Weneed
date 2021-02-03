@@ -117,6 +117,9 @@ public class ResumeController {
 				model.addAttribute("mcuResumeNo", mcuResumeNo); 
 			}
 		}
+
+		
+
 		//3
 		model.addAttribute("resumeList", resumeList);
 		//4

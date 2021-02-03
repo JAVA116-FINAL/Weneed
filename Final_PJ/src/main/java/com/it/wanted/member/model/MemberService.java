@@ -28,4 +28,5 @@ public interface MemberService {
 	
 	//비밀번호 찾기
 	public void findPwd(HttpServletResponse response, MemberVO vo);
+	
 }

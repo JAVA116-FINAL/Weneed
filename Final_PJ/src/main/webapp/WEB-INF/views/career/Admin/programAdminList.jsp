@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ include file="../../inc/top.jsp" %>  
+<jsp:useBean id="today" class="java.util.Date"/>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/mainstyle.css'/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/clear.css'/>" />
@@ -34,8 +36,8 @@ $( document ).ready( function() {
 	
 	
 $(function(){
-	$('.divList table.box2 tbody tr').hover(function(){
-		$(this).css('background','lightblue');
+	$('.divproList table.proBox2 tbody tr').hover(function(){
+		$(this).css('background','#fffbda');
 	}, function(){
 		$(this).css('background','');		
 	});
@@ -45,11 +47,32 @@ function pageFunc(curPage){
 	$('input[name=currentPage]').val(curPage);
 	$('form[name=frmPage]').submit();
 }
-</script>
+
+$(function(){
+	$('#btDel').click(function(){
+		var len
+			=$('.divproList .proBox2 tbody')
+				.find('input[type=checkbox]:checked').length;
+		if(len==0){
+			alert('삭제할 프로그램을 선택해주세요!');
+			return false;	
+		}
+		
+		$('form[name=frmList]').prop('action',
+				'<c:url value="/career/Admin/deleteMulti.do"/>');
+		$('form[name=frmList]').submit();
+	});	
+	
+	$('input[name=chkAll]').click(function(){
+		$('.divproList .proBox2 tbody').find('input[type=checkbox]')
+			.prop('checked', this.checked);	
+	});	
+});
+
 
 	
 </script>
-<style "type="text/css">
+<style type="text/css">
 body{
 	margin:0px;
 	padding:0px;
@@ -80,10 +103,10 @@ body{
 		 	 <div class="navbar-brand">
 				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
+			    <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/careerAdminMain.do'/>">커리어성장 메인</a></li>							  
 			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
 			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
+			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>			
 			  </ul>	
 			</div>
 			</div>
@@ -105,10 +128,11 @@ body{
 
 <!-- 프로그램 리스트 부분!!!!!!! -->
 <div style="text-align:center; margin:auto;">
-		<!-- 
-		career/Admin/programList.do?currentPage=7&searchCondition=name&searchKeyword=길
-		 -->
-		<form action="<c:url value='/career/Admin/programList.do'/>" 
+	
+	<!-- 키워드 검색 파라미터 넘겨져서 받는곳 -->
+	 
+		
+		<form action="<c:url value='/career/Admin/programAdminList.do'/>" 
 			name="frmPage" method="post">
 			<input type="text" name="currentPage">
 			<input type="text" name="searchCondition" 
@@ -116,85 +140,175 @@ body{
 			<input type="text" name="searchKeyword"
 				value="${param.searchKeyword }">	
 		</form>
-		
-		
+
+	
+	<form name="frmList" method="post" 
+	action="<c:url value='/career/Admin/programAdminList.do'/>">	
 		<h2>프로그램 리스트</h2>
 		<c:if test="${!empty param.searchKeyword }">
 			<p>검색어 : ${param.searchKeyword}, ${pagingInfo.totalRecord }  
 				건 검색되었습니다.</p>
 		</c:if>
 		
+		<!-- 이벤트별 조회 -->
+		<div style="text-align:right; margin-right:235px;margin-bottom: 10px;">	
+		         	프로그램 조회
+		        <select name="searchEvent">
+		            <option value="pro_Type" 
+		            	<c:if test="${param.searchKeyword == 1}">
+		            		selected="selected"
+		            	</c:if>
+		            >이벤트</option>
+		            <option value="pro_Type" 
+		            	<c:if test="${param.searchKeyword == 2}">
+		            		selected="selected"
+		            	</c:if>
+		            >북클럽</option>
+		            <option value="pro_Type" 
+		            	<c:if test="${param.searchKeyword == 3}">
+		            		selected="selected"
+		            	</c:if>
+		            >교육/강의</option>
+		        </select>   
+<%-- 
+			프로그램 조회
+			
+			<select name="proType">
+				<option value=""></option>
+				<option value="EVENT" 
+					<c:if test="${param.proType=='1' }">
+						selected
+					</c:if>
+				>이벤트</option>
+				<option value="BOOKCLUB"
+					<c:if test="${param.proType=='2' }">
+						selected
+					</c:if>
+				>북클럽</option>
+				<option value="LECTURE"
+					<c:if test="${param.proType=='3' }">
+						selected
+					</c:if>
+				>교육/강의</option>				
+				<option value="FIN"
+					<c:if test="${proVo.regiEndDate < today}">
+						selected
+					</c:if>
+				>신청 마감 완료</option>				
+			</select>
+ --%>			<button><i class="fas fa-search"></i></button>		
+		</div>
+		<!-- 이벤트별 조회 끝 -->
+		
+		
+		<%-- 
+			       		<c:if test="${param.searchCondition == 'pro_Name'}">
+		        	<c:choose>
+		        		<c:when test="${param.searchKeyword == '이벤트'}">
+							1
+		        		</c:when>
+		        		<c:when test="${param.searchKeyword == '북클럽'}">
+		        			2
+		        		</c:when>
+		        		<c:when test="${param.searchKeyword == '교육/강의'}">
+		        			3
+		        		</c:when>
+		        		
+		        		<c:otherwise></c:otherwise>
+		        	</c:choose>
+		         </c:if> --%>
+		
+		
+		
 		<div class="divproList">
 		<table class="proBox2" style="width: 70%;margin:auto;"
 			 	summary="프로그램 번호, 프로그램 이름, 프로그램 신청 마감일, 작성자, 작성일에 대한 정보를 제공합니다.">
 			<caption>프로그램 리스트</caption>
 			<colgroup>
-				<col style="width:10%;" />
-				<col style="width:50%;" />
-				<col style="width:15%;" />
-				<col style="width:15%;" />
-				<col style="width:10%;" />		
+				<col style="width:5%;" />
+				<col style="width:8%;" />
+				<col style="width:38%;" />
+				<col style="width:12%;" />
+				<col style="width:12%;" />
+				<col style="width:13%;" />
+				<col style="width:12%;" />		
 			</colgroup>
 			<thead>
 			  <tr>
+				<th><input type="checkbox" name="chkAll" ></th>	  
 			    <th scope="col">번호</th>
-			    <th scope="col">제목</th>
-			    <th scope="col">작성자</th>
+			    <th scope="col">프로그램 이름</th>
+			    <th scope="col">프로그램 구분</th>
+			    <th scope="col">시작일</th>
+			    <th scope="col">신청 마감일</th>
 			    <th scope="col">작성일</th>
-			    <th scope="col">조회수</th>
 			  </tr>
 			</thead> 
 			<tbody>
-				<c:if test="${empty list }">
+				<c:if test="${empty plist }">
 					<tr>
-						<td colspan="5" class="align_center">데이터가 존재하지 않습니다.</td>
+						<td colspan="7" class="align_center">데이터가 존재하지 않습니다.</td>
 					</tr>
 				</c:if> 
-				<c:if test="${!empty list }">
-				  	<!--리스트 내용 반복문 시작  -->
-				  	<c:forEach var="vo" items="${list }">				  	
+				<c:if test="${!empty plist }">
+		<!--리스트 내용 반복문 시작  -->
+					<c:set var="k" value="0"/>
+				  	<c:forEach var="proVo" items="${plist }">				  	
 						<tr  style="text-align:center">
-							<td>${vo.no}</td>
+							<td>
+								<input type="checkbox" name="proItems[${k}].programNo" value="${proVo.programNo}">
+							</td>						
+							
+							<td>${proVo.programNo}</td>
 							<td style="text-align:left">
-							<a href
-					="<c:url value='/board/countUpdate.do?no=${vo.no}'/>">
+		 					<a href
+					="<c:url value='/career/Admin/programDetail.do?programNo=${proVo.programNo}'/>"> 
 								<!-- 제목이 긴 경우 일부만 보여주기 -->
-								<c:if test="${fn:length(vo.title)>=30}">
-									${fn:substring(vo.title, 0,30) } ...
+								<c:if test="${fn:length(proVo.proName)>=50}">
+									${fn:substring(proVo.proName, 0,50) } ...
 								</c:if>
-								<c:if test="${fn:length(vo.title)<30}">						
-									${vo.title}
+								<c:if test="${fn:length(proVo.proName)<50}">						
+									${proVo.proName}
 								</c:if>
 							</a>
-							<!-- 24시간 이내의 글인 경우 new 이미지 보여주기 -->					
-							<c:if test="${vo.newImgTerm<24 }">
-								<img src="<c:url value='/resources/images/new.gif'/>" 
-									alt="new 이미지">
-							</c:if>
 							</td>
-							<td>${vo.name}</td>
 							
-							<!-- 신청 마감된 글인 경우 체크 이미지 보여주기 -->					
-							<c:if test="${proVo.regiEndDate} Lt <fmt:formatDate value="${toDay }" pattern="yyyy-MM-dd"/>">
-								<i class="fas fa-check"></i>
-								<td>${proVo.regiEndDate}</td>
-							</c:if>							
-
-							<c:if test="${proVo.regiEndDate} Gt <fmt:formatDate value="${toDay }" pattern="yyyy-MM-dd"/>">
-								<td>${proVo.regiEndDate}</td>
-							</c:if>							
+							<td>
+								<c:if test="${proVo.proType  == 1}">
+								이벤트
+								</c:if>
+								<c:if test="${proVo.proType == 2}">
+								북클럽
+								</c:if>
+								<c:if test="${proVo.proType == 3}">
+								교육/강의
+								</c:if>
+							</td>
+	
+							<td><fmt:formatDate value="${proVo.proStartDate}" pattern="yyyy-MM-dd"/></td>
 							
-							
-							<td><fmt:formatDate value="${vo.regdate}"
-								pattern="yyyy-MM-dd"/> </td>
-							<td>${vo.readcount}</td>		
-						</tr>				
+							<!-- 신청 마감된 글인 경우 체크 이미지 보여주기 -->	
+							<td>
+								<c:if test="${proVo.regiEndDate < today}">
+									<fmt:formatDate value="${proVo.regiEndDate}" pattern="yyyy-MM-dd"/>&nbsp;<i class="fas fa-check"></i>
+								</c:if>
+								<c:if test="${proVo.regiEndDate >= today}">
+								<fmt:formatDate value="${proVo.regiEndDate}" pattern="yyyy-MM-dd"/>
+								</c:if>
+							</td>			
+							<td><fmt:formatDate value="${proVo.regdate}" pattern="yyyy-MM-dd"/> </td>
+						</tr>	
+						<c:set var="k" value="${k+1 }"/>				
 					</c:forEach>
 				  </c:if>
 			  <!--반복처리 끝  -->
 			  </tbody>
 		</table>	   
 		</div>
+
+
+<!-- 페이징부분!!!!!! -->
+
 		<div class="divPage">
 			<!-- 페이지 번호 추가 -->		
 			<!-- 이전 블럭으로 이동 -->
@@ -224,36 +338,43 @@ body{
 			</c:if>
 			<!--  페이지 번호 끝 -->
 		</div>
+		
+			<div style="text-align:right; margin-right:235px;">
+				<input type="button" value="선택한 상품 삭제" id="btDel">
+			</div>		
+	</form>	
+		
+		
+		
+		
+		
 		<div class="divSearch">
 		   	<form name="frmSearch" method="post" 
-		   		action='<c:url value="/board/list.do"/>'>
+		   		action='<c:url value="/career/Admin/programAdminList.do"/>'>
 		        <select name="searchCondition">
-		            <option value="title" 
-		            	<c:if test="${param.searchCondition == 'title'}">
+		            <option value="pro_Name" 
+		            	<c:if test="${param.searchCondition == 'pro_Name'}">
 		            		selected="selected"
 		            	</c:if>
-		            >제목</option>
-		            <option value="content"
-		            	<c:if test="${param.searchCondition == 'content'}">
-		            		selected="selected"
-		            	</c:if>
-		            >내용</option>
-		            <option value="name" 
-		            	<c:if test="${param.searchCondition == 'name'}">
-		            		selected="selected"
-		            	</c:if>
-		            >작성자</option>
+		            >프로그램 이름</option>
 		        </select>   
+       	 		       	 
 		        <input type="text" name="searchKeyword" title="검색어 입력"
-		        	value="${param.searchKeyword}" style="height:20px;">   
+		        	value="${param.searchKeyword}" style="height:20px;"> 	   
 				<input type="submit" value="검색">
+				<input type="button" onclick=location.href="<c:url value=''/>" value="초기화">
 		    </form>
 		</div>
+
+<!-- 페이징부분 + 검색부분 끝!!!! -->
+
+
 		
 		<div class="divBtn">
-		    <a href='<c:url value="/career/Admin/programWrite.do"/>' >글쓰기</a>
+		    <a href='<c:url value="/career/Admin/programWrite.do"/>' >프로그램 추가</a>
 		</div>
 </div>
+
 <!-- 프로그램 리스트부분 끝!!!! -->
 
 

@@ -6,11 +6,11 @@ import com.it.wanted.common.SearchVO;
 
 public interface ProgramDAO {
 	public int insertProgram(ProgramVO proVo);
-
 	public ProgramVO selectByProgramNo(int programNo);
-
-	public List<ProgramVO> selectAll(SearchVO searchVo);
-
-	public int selectTotalRecord(SearchVO searchVo);
+	public List<ProgramVO> selectAllprogram(SearchVO searchVo);
+	public int selectListTotalRecord(SearchVO searchVo);
+	public int deleteProgram(int programNo);
+	public List<ProgramVO2> insertProgram2(ProgramVO2 proVo2);
+	 
 
 }
