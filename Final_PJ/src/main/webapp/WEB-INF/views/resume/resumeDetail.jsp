@@ -21,6 +21,7 @@ $(function(){
 	var l=${fn:length(rAllVo.langList)};//외국어 카운트
 	var t=${fn:length(rAllVo.testList)};//어학점수 카운트
 	var lk=${fn:length(rAllVo.linkList)};//링크 카운트
+	
 	 $('.soltableli_jy').sortable();
 	 $('.soltableli_jy').disableSelection();
 	 	 	 
@@ -177,6 +178,7 @@ $(function(){
 			 //crrStr+="<form method='post' name='frmCrr' id='frmCrr'>";			 
 			 crrStr+="<input type='hidden' value='"+res.careerNo+"' id='careerNo' name='crrList["+c+"].careerNo'>";
 			 crrStr+="<input type='hidden' value='"+res.resumeNo+"' id='resumeNo' name='crrList["+c+"].resumeNo'>";	 
+			 crrStr+="<input type='hidden' value='"+c+"' name='c'>";	 
 			 crrStr+="<input type='hidden' value='N' id='curEmployed"+c+"' class='realcurEmployed' name='crrList["+c+"].curEmployed'>";	 
 			 crrStr+="<input class='startYear_jy' type='text' value='' placeholder='YYYY' name='crrList["+c+"].startYear'>.";
 			 crrStr+="<input class='startMonth_jy' type='text' value='' placeholder='MM' name='crrList["+c+"].startMonth'>-";		 
@@ -201,7 +203,7 @@ $(function(){
 			// achStr+="<form method='post' name='frmAch' id='frmAch'>";
 			 achStr+="<input type='hidden' value='"+resAch.achNo+"' id='achNo' name='achList["+a+"].achNo'>";
 			 achStr+="<input type='hidden' value='"+resAch.careerNo+"' name='achList["+a+"].careerNo' >";
-			 //achStr+="<input type='text' value='"+a+"'>";
+			 achStr+="<input type='hidden' value='"+a+"' name='a'>";
 			 achStr+="<input type='text' value='' placeholder='·주요 성과' id='achName' name='achList["+a+"].achName'>";
 			 achStr+="<input class='startYear_jy' type='text' value='' placeholder='YYYY' name='achList["+a+"].startYear'>.";
 			 achStr+="<input class='startMonth_jy' type='text' value='' placeholder='MM' name='achList["+a+"].startMonth'>-";		 
@@ -324,7 +326,7 @@ $(function(){
 	    	
 	    }	  
 	    
-	    //버튼 누르면 삭제하기
+	    //버튼 누르면 삭제하기, 삭제하면 배열 값을 --해야할것 같다.
 	     $.del=function(delNo, type){   	
 	    	 if(type=="career"){ //경력삭제
 	    		 $.ajax({
@@ -514,6 +516,7 @@ $(function(){
 				 	<ul id="ul1_jy" class='soltableli_jy'>
 				 		<c:if test="${!empty rAllVo.crrList}"> <!-- 경력추가 -->
 				 			<c:set var="c" value="0"></c:set>
+				 			<c:set var="a" value="0"></c:set>
 				 			<c:forEach var="crrVo" items="${rAllVo.crrList}">
 					 			 <li class='crrLi_jy' id='crr${crrVo.careerNo}'>
 									 <input type='hidden' value="${crrVo.careerNo}" id='careerNo' name='crrList[${c}].careerNo'>
@@ -531,8 +534,9 @@ $(function(){
 									 <c:set var="c" value="${c+1}"></c:set>
 										
 									 <ul id='ul2_jy${crrVo.careerNo}' name='ul2_jy' class='soltableli_jy'>
+										 
 										 <c:if test="${!empty rAllVo.achList}">	<!-- 성과추가 -->
-										 	<c:set var="a" value="0"></c:set>
+										 	
 										 	<c:forEach var="achVo" items="${rAllVo.achList}">
 											 	<c:if test="${crrVo.careerNo eq achVo.careerNo}">
 													<li class='achLi_jy' id='ach${achVo.achNo}'>
@@ -620,6 +624,7 @@ $(function(){
 					<ul id="ul5_jy" class='soltableli_jy'>
 				 		<c:if test="${!empty rAllVo.langList}">	<!-- 학력사항추가 -->
 						 	<c:set var="l" value="0"></c:set>
+						 	<c:set var="t" value="0"></c:set>
 						 	<c:forEach var="langVo" items="${rAllVo.langList}">
 								 <li class='langLi_jy' id='lang${langVo.langNo}'>
 								 
@@ -634,7 +639,7 @@ $(function(){
 									 <ul id='ul6_jy${langVo.langNo}' name='ul6_jy' class='soltableli_jy'>
 									 	
 									 	<c:if test="${!empty rAllVo.testList}">	<!-- 학력사항추가 -->
-							 				<c:set var="t" value="0"></c:set>
+							 				
 							 				<c:forEach var="testVo" items="${rAllVo.testList}">
 							 					 <c:if test="${langVo.langNo eq testVo.langNo}"> 
 								 					<li class='testLi_jy' id='test${testVo.langtestNo}'>
