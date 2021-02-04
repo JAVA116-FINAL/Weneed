@@ -5,6 +5,11 @@ div, h1, h2, h3, h4, h5, h6
 	font-family: 'Open Sans', sans-serif;
 }
 
+body{
+	background-color: #f8f8fa; !important 
+	background: #f8f8fa;
+}
+
 a{
 	text-decoration: none;
 	color: #444444;
@@ -31,8 +36,12 @@ aside{
 	justify-content: space-between;
 	align-items: center;
 	text-align: center;
-	border-bottom: 1px solid #e1e2e3;
 	padding: 20px 15px;
+}
+
+.topWrapper{
+	border-bottom: 1px solid #e1e2e3;
+	background: #fff;
 }
 
 .adminSecondSection{
@@ -61,15 +70,22 @@ aside{
 
 /* index 페이지*/
 
-.adminMainTable tr{
-	border: 1px solid #444444;
-	border-collapse: collapse;
-}
-
 .adminMainBtn {
 	padding: 20px 15px;
 	border: 1px solid #444444;
 	border-radius: 5px;
 	cursor: pointer;
 	
+}
+
+
+
+/* footer */
+
+#adminfooter{
+	border-top: 1px solid #e1e2e3;
+	text-align: center;	
+	padding: 50px;
+	font-size: 0.8em;
+	background: #fff;
 }
