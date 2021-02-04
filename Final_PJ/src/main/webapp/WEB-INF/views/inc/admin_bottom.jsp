@@ -2,11 +2,13 @@
     pageEncoding="UTF-8"%>
 	</section>
 	<!-- footer -->
-	<footer id="footer">
+	<footer id="adminfooter" style="background: #fff;">
 		<!-- bottom page -->
 		<p class="copyright">
 			Copyright&copy; Weneed. All rights Reserved.
-		</p>			
+			BYEJWM
+		</p>	
+	</footer>
 </div>
 </body>
 </html>
