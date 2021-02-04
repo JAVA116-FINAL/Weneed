@@ -16,6 +16,7 @@ h2{
 	border: 1px solid #e1e2e3;
 	border-collapse: collapse;
 	padding: 5px 10px;
+	background: #fff;
 }
 
 .weneed-adminTable > th,
@@ -31,6 +32,6 @@ h2{
 	padding: 5px 10px;
 	font-size: 0.8em;
 	border: 1px solid #e1e2e3;
-	background-color: #f8f9fa;
+	background-color: #fff;
 	border-radius: 5px;
 }

@@ -3,11 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../../inc/cssJsImports.jsp" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회사정보 승인요청 확인 및 승인 페이지</title>
 <script type="text/javascript">
 	//승인 버튼 클릭하면
 	//체크박스 자식들 중 체크된 애들의 회사코드를 읽어서 리스트로 저장해 
@@ -155,6 +150,3 @@ $(function(){
 		</table>
 	</div>
 </div>
-
-</body>
-</html>

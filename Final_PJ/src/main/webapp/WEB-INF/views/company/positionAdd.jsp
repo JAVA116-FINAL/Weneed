@@ -258,7 +258,7 @@ $(function(){
 					<input type="hidden" id="posJikmu1" name="posJikmus">
 					<input type="hidden" id="posJikmu2" name="posJikmus">
 					<input type="hidden" id="posJikmu3" name="posJikmus">
-					<input type="text" id="posEmails" name="comEmails" value="${sessionScope.comMemId}">
+					<input type="hidden" id="posEmails" name="comEmails" value="${sessionScope.comMemId}">
 				
 					<div class="positionAdd-spanDivBound">
 						<div class="positionAdd-jikgunjikmu">

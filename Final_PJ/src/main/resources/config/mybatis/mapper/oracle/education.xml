@@ -34,11 +34,11 @@
 	
 	
 	<!-- 현빈 -->
-	<select id="selectMcumemNo">
+	<select id="selectMcumemNo" parameterType="String" resultType="int">
 		select m.mcumem_no 
 		from matchupmem m join education e
 		on m.resume_no=e.resume_no
-		where edu_name like '%' || #{keyword} || '%'
+		where e.edu_name like '%' || #{searchKeyword} || '%'
 	</select>
 </mapper>
 

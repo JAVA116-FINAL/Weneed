@@ -86,7 +86,7 @@
 	<div class="container fifSecCon">
 		<div class="fifSecTitleH2">이제 위니드를 통해<br>최적의 후보자를<br>만나세요</div>
 		<div style="display:table-cell;vertical-align:middle;">
-			<a href="#" class="btn btn-outline-primary comServIntroDoc">서비스 문의</a>
+			<a href="<c:url value='/notice/notice_qna.do'/>" class="btn btn-outline-primary comServIntroDoc">서비스 문의</a>
 			<button class="btn btn-primary comServJoin"	data-toggle="modal" 
 				data-target=".comServJoinMD" style="outline:none;">시작하기</button>
 		</div>

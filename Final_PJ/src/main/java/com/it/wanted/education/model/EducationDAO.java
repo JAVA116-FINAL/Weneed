@@ -10,5 +10,5 @@ public interface EducationDAO {
 	public List<EducationVO> selectEdubyResumeNo(int resumeNo);
 	
 	/* 현빈 */
-	public List<Integer> selectMcumemNo(String keyword);
+	public List<Integer> selectMcumemNo(String searchKeyword);
 }

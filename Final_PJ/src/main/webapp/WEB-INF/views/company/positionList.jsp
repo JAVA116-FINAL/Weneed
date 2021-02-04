@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/company_top.jsp" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/imgUpload.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/companyService/position.css'/>">
 <script type="text/javascript">
 $(function(){
 	$('#tabImg').attr("checked", 'checked');
@@ -54,7 +55,7 @@ $(function(){
 <body>
 	<div class="container">
 		<!-- 탭 섹션 -->
-		<section class="tabSection">
+		<section class="positionTabSection">
 			<div>
 				<input type="radio" id="posTab-showAll" name="posTab" />
 				<label for="posTab-showAll" id="tabImgLabel" class="comInfoRegiTab selectedTab">전체</label>
@@ -62,7 +63,8 @@ $(function(){
 				<label for="posTab-developer" id="tabInfoLabel" class="comInfoRegiTab">개발</label>
 			</div>
 			<div>
-				<a href="#">포지션 추가</a>
+				<a id="positionAddBtn" class="btn btn-main btn-round-full" 
+					href="<c:url value='/company/positionAdd.do'/>">포지션 추가</a>
 			</div>
 		</section>
 		<!-- 채용중 -->
