@@ -46,6 +46,10 @@ $(function(){
 		
 	});//change이벤트
 	
+	$.makeform=function(resUp){
+		alert('파일 정상업로드 되었습니다.');
+		window.location.reload();
+	}
 	
 
 	 
@@ -53,26 +57,33 @@ $(function(){
 	/*
 	$.editTitle=function(resumeNo){
 		$('#alocation_jy'+resumeNo).click(function(){
+			$('#resumeTitleEdit_jy'+resumeNo).attr("readonly",false);		
+			$('#resumeTitleEdit_jy'+resumeNo).focus();	
 			ignore.preventDefault();
-		});
-		$('#resumeTitleEdit_jy'+resumeNo).attr("readonly",false);		
-		$('#resumeTitleEdit_jy'+resumeNo).focus();
+			return false;
 		
-		 $.ajax({
-			url:"<c:url value='/resume/resumeTitleEdit.do'/>",
-			type:"post",
-			data:"resumeTitle=",
-			dataType:"",
-			success:function(res){
-				alert(res);
-			},
-			error:function(xhr,status,error){
-				alert("error:"+error);
-			}
-		});//ajax 
+		});
+				
+		$('#resumeTitleEdit_jy'+resumeNo).keyup(function(){
+			$.ajax({
+				url:"<c:url value='/resume/resumeTitleEdit.do'/>",
+				type:"post",
+				data:{"resumeTitle":$('#resumeTitleEdit_jy'+resumeNo).val(),
+					  "resumeNo":resumeNo
+				},
+				dataType:"json",
+				success:function(res){
+					alert(res);
+				},
+				error:function(xhr,status,error){
+					alert("error:"+error);
+				}
+			});//ajax 
+		});
 	
-	}
-	*/		
+	}//타이틀 에딧함수
+			
+	*/
 	
 	//pdf로 파일객체 생성해서 저장
 	$.downResume=function(resumeNo){
@@ -93,23 +104,53 @@ $(function(){
 		});//ajax
 	}//downResume
 	
-	//파일 삭제하기	
+	//이력서 삭제하기	
 	$.delResume=function(resumeNo){
-		$.ajax({
-			url:"<c:url value='/resume/deleteResume.do'/>" ,
-			type:"get",
-			data:"resumeNo="+resumeNo,
-			dataType:"json",
-			success:function(resDel){
-				//alert(resDel);
-				 if(resDel>0){
-					$('#divNo'+resumeNo).remove();
-				} 
-			},
-			error:function(xhr,status,error){
-				alert("error:"+error);
-			}
-		});//ajax
+		
+		if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		
+			$.ajax({
+				url:"<c:url value='/resume/deleteResume.do'/>" ,
+				type:"get",
+				data:"resumeNo="+resumeNo,
+				dataType:"json",
+				success:function(resDel){
+					//alert(resDel);
+					 if(resDel>0){
+						$('#divNo'+resumeNo).remove();
+					} 
+				},
+				error:function(xhr,status,error){
+					alert("error:"+error);
+				}
+			});//ajax
+		}//confirm if
+	}//delResume
+
+	//이력서파일 삭제하기	=>아직안됨
+	$.delResumeFile=function(resumeNo,resumeFile){
+		if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+
+			$.ajax({
+				url:"<c:url value='/resume/deleteResumeFile.do'/>" ,
+				type:"get",
+				data:{
+					  "resumeNo": resumeNo,
+					  "resumeFile": resumeFile
+				},
+				dataType:"json",
+				success:function(resDelFile){
+					//alert(resDelFile);
+					 if(resDelFile>0){
+						alert('파일 정상 삭제 되었습니다.');
+						window.location.reload();
+					} 
+				},
+				error:function(xhr,status,error){
+					alert("error:"+error);
+				}
+			});//ajax
+		}//confirm if	
 	}//delResume
 	
 	
@@ -190,7 +231,17 @@ $(function(){
 						<!-- 첨부파일이면, 파일이름 두줄로 보여주고, 날짜보여주고, 클릭시 파일 다운로드 -->
 									<c:if test="${rVo.resumeUpfileflag eq 'Y' }">
 										<span class="rFileName_jy">
-											<a href="<c:url value='/resume/resumeDown/do?resumeNo=${rVo.resumeNo}&resumeTitle=${rVo.resumeTitle}'/>">${rVo.resumeTitle}</a>
+											<a href="<c:url value='/resume/resumeFileDown.do?resumeNo=${rVo.resumeNo}&resumeFile=${rVo.resumeFile}'/>">
+											${rVo.resumeTitle}
+												<%-- 
+												<span class="RWName">
+													<h3>
+														<input type="text" name="resumeTitle" id="resumeTitleEdit_jy"+${rVo.resumeNo} readonly="readonly" value="${rVo.resumeTitle}" class="nameEdit_jy"></input>
+														<input type="hidden" name="resumeNo" id="resumeNo_jy" value="${rVo.resumeNo}"></input>
+													</h3>
+												</span> 
+												--%>
+											</a>
 										</span>
 										<span class="RWRegdate"><p><fmt:formatDate value="${rVo.resumeRegdate}" pattern="yyyy.MM.dd"/></p></span>
 									</c:if>	
@@ -221,10 +272,19 @@ $(function(){
 										<div class="nav-link dropdown-toggle dropdowntoggle_jy"  data-toggle="dropdown">
 											<i class="icon-more_vert :before icon_jy"></i>
 											<ul class="dropdown-menu dropdownMenu_jy">
-												<li><button type="button" class="dropdown-item" id="TitleEdit_jy"  onClick="$.editTitle(${rVo.resumeNo})">이름변경</button></li>
+												
 												<!-- 만약 파일이면 파일다운로드 -->
-												<li><button type="button" class="dropdown-item" id="downResume_jy" onClick="$.downResume(${rVo.resumeNo})">다운로드</button></li>
-												<li><button type="button" class="dropdown-item" id="resumeDel_jy" onClick="$.delResume(${rVo.resumeNo})">삭제</button></li>
+												<c:if test="${rVo.resumeUpfileflag eq 'Y' }">
+													<li><button type="button" class="dropdown-item" id="downResume_jy" onClick='location.href="<c:url value='/resume/resumeFileDown.do?resumeNo=${rVo.resumeNo}&resumeFile=${rVo.resumeFile}'/>"'>다운로드</button></li>
+													<li><button type="button" class="dropdown-item" id="resumeDel_jy" onClick="$.delResumeFile('${rVo.resumeNo}','${rVo.resumeFile}')">삭제</button></li>
+												</c:if>
+												<c:if test="${rVo.resumeUpfileflag eq 'N' }">
+												<%-- <li><button type="button" class="dropdown-item" id="TitleEdit_jy"  onClick="$.editTitle(${rVo.resumeNo})">이름변경</button></li> --%>
+													<li><button type="button" class="dropdown-item" id="TitleEdit_jy"  onClick="location.href='<c:url value="/resume/resumeDetail.do?resumeNo=${rVo.resumeNo}"/>'">수정하기</button></li>
+													<li><button type="button" class="dropdown-item" id="downResume_jy" onClick="$.downResume(${rVo.resumeNo})">다운로드</button></li>
+													<li><button type="button" class="dropdown-item" id="resumeDel_jy" onClick="$.delResume(${rVo.resumeNo})">삭제</button></li>
+												</c:if>
+													
 											</ul>
 										</div>	
 								  	 </div>
