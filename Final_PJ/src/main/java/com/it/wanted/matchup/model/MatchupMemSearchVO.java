@@ -5,12 +5,14 @@ import java.util.List;
 public class MatchupMemSearchVO {
 	private List<Integer> mcumemNoList;
 	private int viewMoreSize;
-	private String keyword;
-	
-	public List<Integer> getMcumemList() {
+	private String searchKeyword;
+	private String searchMinCareer;
+	private String searchMaxCareer;
+	private String searchJikmu;
+	public List<Integer> getMcumemNoList() {
 		return mcumemNoList;
 	}
-	public void setMcumemList(List<Integer> mcumemNoList) {
+	public void setMcumemNoList(List<Integer> mcumemNoList) {
 		this.mcumemNoList = mcumemNoList;
 	}
 	public int getViewMoreSize() {
@@ -19,17 +21,35 @@ public class MatchupMemSearchVO {
 	public void setViewMoreSize(int viewMoreSize) {
 		this.viewMoreSize = viewMoreSize;
 	}
-	public String getKeyword() {
-		return keyword;
+	public String getSearchKeyword() {
+		return searchKeyword;
 	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
 	}
-	
+	public String getSearchMinCareer() {
+		return searchMinCareer;
+	}
+	public void setSearchMinCareer(String searchMinCareer) {
+		this.searchMinCareer = searchMinCareer;
+	}
+	public String getSearchMaxCareer() {
+		return searchMaxCareer;
+	}
+	public void setSearchMaxCareer(String searchMaxCareer) {
+		this.searchMaxCareer = searchMaxCareer;
+	}
+	public String getSearchJikmu() {
+		return searchJikmu;
+	}
+	public void setSearchJikmu(String searchJikmu) {
+		this.searchJikmu = searchJikmu;
+	}
 	@Override
 	public String toString() {
-		return "MatchupMemSearchVO [mcumemNoList=" + mcumemNoList + ", viewMoreSize=" + viewMoreSize + ", keyword="
-				+ keyword + "]";
+		return "MatchupMemSearchVO [mcumemNoList=" + mcumemNoList + ", viewMoreSize=" + viewMoreSize
+				+ ", searchKeyword=" + searchKeyword + ", searchMinCareer=" + searchMinCareer + ", searchMaxCareer="
+				+ searchMaxCareer + ", searchJikmu=" + searchJikmu + "]";
 	}
 	
 }

@@ -113,7 +113,10 @@ $(function(){
 			</div>
 			<div class="modal-footer comServJoinModalFooter">
 				<div class="container comServModalFooterCon">
-				    <span>계정이 없으신가요? </span><a class="comServ-joinProvsLink" href="#">관리자 계정 만들기</a>
+				    <span>계정이 없으신가요? </span>
+				    <a data-toggle="modal" href=".comServJoinMD" style="outline:none;"
+				    	data-dismiss="modal" aria-label="close" class="comServ-joinProvsLink" href="#">관리자 계정 만들기</a>
+					<%-- <%@include file="join.jsp" %> --%>
 					<button class="btn btn-primary comServFBBtn">페이스북으로 시작하기</button>
 				</div>
 			</div>

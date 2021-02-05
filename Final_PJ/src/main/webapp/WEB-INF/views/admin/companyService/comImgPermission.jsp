@@ -2,12 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../../inc/cssJsImports.jsp" %>
+<%@ include file="../../inc/admin_top.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회사이미지 승인 페이지</title>
 <script type="text/javascript">
 	//승인 버튼 클릭하면
 	//체크박스 자식들 중 체크된 애들의 회사코드를 읽어서 리스트로 저장해 
@@ -136,5 +132,4 @@ $(function(){
 		</table>
 	</div>
 </div>
-</body>
-</html>
+<%@ include file="../../inc/admin_bottom.jsp"%>

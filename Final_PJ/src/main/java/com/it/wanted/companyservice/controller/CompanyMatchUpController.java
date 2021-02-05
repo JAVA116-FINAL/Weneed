@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,17 +60,37 @@ public class CompanyMatchUpController {
 		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
 		String comCode=comVo.getComCode();
 		
-		return "company/matchupMain";
+		model.addAttribute("comCode", comCode);
+		
+		//분기처리 해야함 매치업 구입기업, 비구입기업
+		String url="";
+		boolean check=matchupComService.hasMatchup(comCode);
+		if(check) { //매치업 구입기업이고 기한내에 있으면
+			url="redirect:/company/matchupSearch.do";
+		}else { //매치업 비구입기업이거나 기한이 끝났으면 
+			url="redirect:/company/matchupMain.do";
+		}
+		
+		return url;
 	}
 	
 	@RequestMapping("/matchupSearch.do")
-	public String matchupSearch(Model model, @RequestParam(required = false) String keyword,
-			@RequestParam(required = false, defaultValue = "0") int viewMorePage) {
-		if(keyword.isEmpty() || keyword==null) {
-			keyword="";
-		}
+	public String matchupSearch(Model model, 
+			@ModelAttribute MatchupMemSearchVO searchVo) {
 		
-		logger.info("기업서비스 매치업 검색/조회화면, 파라미터 keyword={}", keyword);
+		if(searchVo.getSearchJikmu()==null || searchVo.getSearchJikmu().isEmpty()) {
+			searchVo.setSearchJikmu("");
+		}
+		if(searchVo.getSearchKeyword()==null || searchVo.getSearchKeyword().isEmpty()) {
+			searchVo.setSearchKeyword("");
+		}
+		if(searchVo.getSearchMaxCareer()==null || searchVo.getSearchMaxCareer().isEmpty()) {
+			searchVo.setSearchMaxCareer("");
+		}
+		if(searchVo.getSearchMinCareer()==null || searchVo.getSearchMinCareer().isEmpty()) {
+			searchVo.setSearchMinCareer("");
+		}
+		logger.info("기업서비스 매치업 검색/조회화면, 파라미터 searchVo={}", searchVo);
 		
 		//[1-1] 직군리스트 불러오기
 		List<JikgunVO> jikgunList=jgService.selectAllJikgun();
@@ -83,31 +104,27 @@ public class CompanyMatchUpController {
 		List<JikmuVO> jikmuList=jgService.selectJikmuByJikgunCode(basicCode);
 		logger.info("첫번째 직군코드에 해당하는 직무리스트 jikmuList={}", jikmuList);
 		
-		// [2] 매치업이력서 불러오기, 이력서 공개여부 Y에 해당하는 
-	//	List<MatchupMemVO> matchupMemList=matchupMemService.selectOpen();
-	//	logger.info("이력서 공개된 매치업이력서 목록 조회 결과, matchupMemList.size={}", matchupMemList.size());
-		
 		List<Map<Integer, Integer>> careerList=new ArrayList<Map<Integer,Integer>>();
 		List<Map<Integer, String>> eduList=new ArrayList<Map<Integer,String>>();
-		
-		MatchupMemSearchVO mcuMemSearchVo=new MatchupMemSearchVO();
-		mcuMemSearchVo.setKeyword(keyword);
-		mcuMemSearchVo.setViewMoreSize(viewMorePage);
-		
-	//	List<Map<String, Object>> memList=matchupMemService.selectTenMem(firstRecord);
 
-		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(mcuMemSearchVo);
+		searchVo.setViewMoreSize(0);
+		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
 		logger.info("5번째 리스트까지 불러오기 결과, memList.size={}", memList.size());
 		
+		Map<String, Object> emptyMapCheck=new HashMap<String, Object>();
+		String emptyCheck="";
+		if(memList.size()==1) {
+			emptyMapCheck=memList.get(0);
+			if(emptyMapCheck.get("MCUMEMNO")==null) {
+				emptyCheck="검색결과 없음";
+			}
+		}
+		model.addAttribute("searchVo", searchVo);
 		model.addAttribute("jikgunList", jikgunList);
 		model.addAttribute("basicCode", basicCode);
 		model.addAttribute("jikmuList", jikmuList);
-		//model.addAttribute("matchupMemList", matchupMemList);
 		model.addAttribute("memList", memList);
-		
-	//	model.addAttribute("careerList", careerList);
-	//	model.addAttribute("eduList", eduList);
-		
+		model.addAttribute("emptyCheck", emptyCheck);
 		return "company/matchupSearch";
 	}
 
@@ -130,10 +147,22 @@ public class CompanyMatchUpController {
 	
 	@ResponseBody
 	@RequestMapping("/viewMoreMatchupMem.do")
-	public List<Map<String, Object>> getMoreMem(@RequestParam(value="recordCnt") int recordCnt){
-		logger.info("리스트까지 불러오기 결과, data={}", recordCnt);
+	public List<Map<String, Object>> getMoreMem(@ModelAttribute MatchupMemSearchVO searchVo){
+		if(searchVo.getSearchJikmu()==null || searchVo.getSearchJikmu().isEmpty()) {
+			searchVo.setSearchJikmu("");
+		}
+		if(searchVo.getSearchKeyword()==null || searchVo.getSearchKeyword().isEmpty()) {
+			searchVo.setSearchKeyword("");
+		}
+		if(searchVo.getSearchMaxCareer()==null || searchVo.getSearchMaxCareer().isEmpty()) {
+			searchVo.setSearchMaxCareer("");
+		}
+		if(searchVo.getSearchMinCareer()==null || searchVo.getSearchMinCareer().isEmpty()) {
+			searchVo.setSearchMinCareer("");
+		}
+		logger.info("리스트까지 불러오기 결과, searchVo={}", searchVo);
 
-		List<Map<String, Object>> memList=matchupMemService.selectTenMem(recordCnt);
+		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
 		logger.info("리스트까지 불러오기 결과, memList.size={}", memList.size());
 		
 		return memList;

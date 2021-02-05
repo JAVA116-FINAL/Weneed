@@ -80,15 +80,23 @@ $(function(){
 	$('#matchupSearch-viewMoreBtn').click(function(){
 		//console.log('눌렀당');
 		
-		var recordCnt=parseInt($('#matchupSearch-record').val(), 10);
-		recordCnt+=5;
-		console.log(recordCnt);
+		var viewMoreSize=parseInt($('#matchupSearch-record').val(), 10);
+		var keyword=$('#matchupSearchkeyword').val();
+		var minCareer=$('#minCareerSelect').val();
+		var maxCareer=$('#maxCareerSelect').val();
+		var jikmu=$('#matchupSearch-jikmuSelect').val();
+		viewMoreSize+=5;
+		console.log(viewMoreSize);
 		$.ajax({
 			url:"<c:url value='/company/viewMoreMatchupMem.do'/>",
 			dataType:"json",
 			type:"get",
 			data:{
-				recordCnt:recordCnt
+				"viewMoreSize":viewMoreSize,
+				"searchKeyword":keyword,
+				"searchmaxCareer":maxCareer,
+				"searchminCareer":minCareer,
+				"searchjikmu":jikmu
 			},
 			success:function(memList){
 				//alert('성공!');
@@ -96,7 +104,12 @@ $(function(){
 				for(mcumem of memList){
 					makeMemList(mcumem);
 				}
-				$('#matchupSearch-record').val(recordCnt);
+				$('#matchupSearch-record').val(viewMoreSize);
+				$('input[name=searchKeyword]').val(keyword);
+				$('input[name=searchMinCareer]').val(minCareer);
+				$('input[name=searchMaxCareer]').val(maxCareer);
+				$('input[name=searchJikmu]').val(jikmu);
+				$('#matchupSearchkeyword').val(keyword);
 			},
 			error:function(error){
 				alert('error!:'+error)
@@ -105,6 +118,18 @@ $(function(){
 	});
 	
 	//검색버튼 클릭하면 새로고침해서 이 페이지로 돌아오기
+	$('.matchupSearch-searchBtn').click(function(){
+		var keyword=$('#matchupSearchkeyword').val();
+		var minCareer=$('#minCareerSelect').val();
+		var maxCareer=$('#maxCareerSelect').val();
+		var jikmu=$('#matchupSearch-jikmuSelect').val();
+		$('input[name=searchKeyword]').val(keyword);
+		$('input[name=searchMinCareer]').val(minCareer);
+		$('input[name=searchMaxCareer]').val(maxCareer);
+		$('input[name=searchJikmu]').val(jikmu);
+		
+		$('form[name=matchupSearchForm]').submit();
+	});
 	
 });
 
@@ -117,8 +142,12 @@ function makeMemList(mcumem){
 	str+='</div>';
 	str+='<div class="matchupSearch-resume-2nd">';
 	str+='<span>직군직종명</span>';
-	str+='<span>6년 경력</span>';
-	str+='<span>학력대학교 무슨학과</span>';
+	str+='<span>'
+	str+='<c:if test="${mcumemMap.CAREER eq \'신입\' }">';
+	str+=mcumem.CAREER+'</span></c:if>';
+	str+='<c:if test="${mcumemMap.CAREER ne \'신입\' }">';
+	str+=mcumem.CAREER+'년 경력</span></c:if>';	
+	str+='<span>'+mcumem.EDUNAME+' '+mcumem.EDUMAJOR+'</span>';
 	str+='</div>';
 	str+='<div class="matchupSearch-resume-3rd">';
 	str+='<button class="matchupSearch-ZzimBtn"><i class="fas fa-star"></i> 찜</button>';
@@ -126,20 +155,16 @@ function makeMemList(mcumem){
 	str+='</div></div>';
 
 	$('#matchupSearch-resumeListDiv').append(str);
+	
 }
 
-function pageFunc(curPage){
-	$('input[name=curPage]').val(curPage);
-	$('form[name=frmPage]').submit();
-}
 </script>
-	<input type="hidden" id="matchupSearch-record" value="0">
 	<form name="matchupSearchForm" method="post" action="#">
-		<input type="text" value="" name="searchJikmu">
-		<input type="text" value="" name="searchNation">
-		<input type="text" value="" name="searchKeyword">
-		<input type="text" value="" name="searchMinCareer">
-		<input type="text" value="" name="searchMaxCareer">
+		<input type="hidden" id="matchupSearch-record" value="0">
+		<input type="hidden" value="${searchVo.searchJikmu }" name="searchJikmu">
+		<input type="hidden" value="${searchVo.searchKeyword }" name="searchKeyword">
+		<input type="hidden" value="${searchVo.searchMinCareer }" name="searchMinCareer">
+		<input type="hidden" value="${searchVo.searchMaxCareer }" name="searchMaxCareer">
 	</form>
 	<div class="container"> <!-- 가장 바깥 래퍼 --> 
 		<section class="matchupSearch-1stSec"> <!-- 이름, 검색필터, 검색창, 필터 -->
@@ -178,40 +203,41 @@ function pageFunc(curPage){
 				 드롭다운 -->
 				 <div class="matchupSearch-filter"> 
 				 	<span style="font-weight: bold; font-size: 0.8em;">최소 경력</span>
-					<select class="matchupSearch-select matchupSearch-select-sub">
-						<option>전체</option>
-						<option>신입</option>
-						<option>1년</option>
-						<option>2년</option>
-						<option>3년</option>
-						<option>4년</option>
-						<option>5년</option>
-						<option>6년</option>
-						<option>7년</option>
-						<option>8년</option>
-						<option>9년</option>
-						<option>10년 이상</option>
+					<select id="minCareerSelect" class="matchupSearch-select matchupSearch-select-sub">
+						<option value="all">전체</option>
+						<option value="new">신입</option>
+						<option value="1">1년</option>
+						<option value="2">2년</option>
+						<option value="3">3년</option>
+						<option value="4">4년</option>
+						<option value="5">5년</option>
+						<option value="6">6년</option>
+						<option value="7">7년</option>
+						<option value="8">8년</option>
+						<option value="9">9년</option>
+						<option value="10">10년 이상</option>
 					</select>
 				</div> 
 				<div class="matchupSearch-filter"> 
 					<span style="font-weight: bold; font-size: 0.8em;">최대 경력</span>
-					<select class="matchupSearch-select matchupSearch-select-sub">
-						<option>전체</option>
-						<option>신입</option>
-						<option>1년</option>
-						<option>2년</option>
-						<option>3년</option>
-						<option>4년</option>
-						<option>5년</option>
-						<option>6년</option>
-						<option>7년</option>
-						<option>8년</option>
-						<option>9년</option>
-						<option>10년 이상</option>
+					<select id="maxCareerSelect" class="matchupSearch-select matchupSearch-select-sub">
+						<option value="all">전체</option>
+						<option value="new">신입</option>
+						<option value="1">1년</option>
+						<option value="2">2년</option>
+						<option value="3">3년</option>
+						<option value="4">4년</option>
+						<option value="5">5년</option>
+						<option value="6">6년</option>
+						<option value="7">7년</option>
+						<option value="8">8년</option>
+						<option value="9">9년</option>
+						<option value="10">10년 이상</option>
 					</select>
 				</div> 
 				<div class="matchupSearch-searchDiv">
-					<input class="matchupSearch-searchInput" type="text" placeholder="회사명, 학교, 스킬 검색">
+					<input class="matchupSearch-searchInput" id="matchupSearchkeyword" type="text" 
+						value="${searchVo.searchKeyword }" placeholder="회사명, 학교, 스킬 검색">
 					<button class="matchupSearch-searchBtn"><i class="fas fa-search"></i></button>
 				</div>
 				<!-- <div class="matchupSearch-rangeSlider">
@@ -250,29 +276,45 @@ function pageFunc(curPage){
 				  r.lang_flag as langFlag from matchupMem m join resume r 
 				  on m.resume_No = r.resume_no 
 			 -->
-				<c:forEach var="mcumemMap" items="${memList }">
-					<div class="matchupSearch-resumeBound">
-						<div class="matchupSearch-resume-1st">
-							<i class="fas fa-user-tie"></i>
-							<span>No.${mcumemMap.RESUMENO}</span>
+			 	<c:if test="${!empty emptyCheck }">
+			 		<div style="text-align: center; padding: 50px 100px;">
+				 		<span>검색결과가 없습니다. 다시 검색해 주세요.</span>
+			 		</div>
+			 	</c:if>
+			 	<c:if test="${empty emptyCheck }">
+					<c:forEach var="mcumemMap" items="${memList }">
+						<div class="matchupSearch-resumeBound">
+							<div class="matchupSearch-resume-1st">
+								<i class="fas fa-user-tie"></i>
+								<span>No.${mcumemMap.RESUMENO}</span>
+							</div>
+							<div class="matchupSearch-resume-2nd"> <!-- 이력서 목록 -->
+								<span>직군직종</span>
+								<span>
+									<c:if test="${mcumemMap.CAREER eq '신입' }">
+										${mcumemMap.CAREER}
+									</c:if>
+									<c:if test="${mcumemMap.CAREER ne '신입' }">
+										${mcumemMap.CAREER}년 경력
+									</c:if>
+								</span>
+								<span>${mcumemMap.EDUNAME} ${mcumemMap.EDUMAJOR}</span>
+							</div>
+							<div class="matchupSearch-resume-3rd">
+								<button class="matchupSearch-ZzimBtn">
+									<i class="fas fa-star <c:if test="${mcumemMap.CNT eq 1}">goldStar</c:if>
+									"></i> 찜</button>
+								<button>이력서 미리보기</button>
+							</div>
 						</div>
-						<div class="matchupSearch-resume-2nd"> <!-- 이력서 목록 -->
-							<span>직군직종명</span>
-							<span>6년 경력</span>
-							<span>학력대학교 무슨학과</span>
-						</div>
-						<div class="matchupSearch-resume-3rd">
-							<button class="matchupSearch-ZzimBtn">
-								<i class="fas fa-star <c:if test="${mcumemMap.CNT eq 1}">goldStar</c:if>
-								"></i> 찜</button>
-							<button>이력서 미리보기</button>
-						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</c:if>
 			</div>
-			<div class="matchupSearch-resume-paging">
-				<div id="matchupSearch-viewMoreBtn" class="matchupSearch-pagingDiv matchupSearch-pagingDiv_next" >더보기</div>
-			</div>
+			<c:if test="${fn:length(memList)==5}">
+				<div class="matchupSearch-resume-paging">
+					<div id="matchupSearch-viewMoreBtn" class="matchupSearch-pagingDiv matchupSearch-pagingDiv_next" >더보기</div>
+				</div>
+		 	</c:if>
 		</section>			
 	</div>
 </body>

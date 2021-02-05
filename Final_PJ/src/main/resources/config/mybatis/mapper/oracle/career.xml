@@ -37,7 +37,7 @@
 		select m.mcumem_no
 		from matchupmem m join career c
 		on m.resume_no=c.resume_no
-		where career_name like '%' || #{keyword} || '%'
+		where career_name like '%' || #{searchKeyword} || '%'
 	</select>
 </mapper>
 

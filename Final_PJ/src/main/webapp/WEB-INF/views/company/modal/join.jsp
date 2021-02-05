@@ -118,7 +118,10 @@ function pwdKeyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아
 				    <span class="comServ-joinAgree">회원가입시 <a class="comServ-joinProvsLink" href="#">개인정보 처리방침</a>을 읽었으며,
 				    	<br><a class="comServ-joinProvsLink" href="#">이용약관</a>에 동의하신 것으로 간주합니다.</span>
 				    <hr>
-				    <span>이미 가입되어 있으신가요? </span><a class="comServ-joinProvsLink" href="#">로그인하기</a>
+				    <span>이미 가입되어 있으신가요? </span>
+				    <a data-toggle="modal" data-target=".comServLoginMD" style="outline:none;"
+				   		data-dismiss="modal" aria-label="Close" class="comServ-joinProvsLink" href="#">로그인하기</a>
+				    	<%@include file="login.jsp" %>
 				</div>
 			</div>
 		</div>

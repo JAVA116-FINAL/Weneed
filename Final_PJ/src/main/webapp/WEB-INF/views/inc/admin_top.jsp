@@ -19,8 +19,8 @@
 			<ul class="adminTopMenubar">
 				<li class="adminMenuLi">기업정보승인
 					<ul>
-						<li class="adminSubMenu"><a href="#">정보 승인</a></li>
-						<li class="adminSubMenu"><a href="#">이미지 승인</a></li>
+						<li class="adminSubMenu"><a href="<c:url value='/admin/index.do'/>">정보 승인</a></li>
+						<li class="adminSubMenu"><a href="<c:url value='/admin/companyService/comImgPermission.do'/>">이미지 승인</a></li>
 					</ul>
 				</li>
 				<li class="adminMenuLi">매치업

@@ -11,5 +11,5 @@ public interface CareerDAO {
 	public List<CareerVO> selectCareerbyResumeNo(int resumeNo);
 	
 	/* 현빈 */
-	public List<Integer> selectMcumemNo(String keyword);
+	public List<Integer> selectMcumemNo(String searchKeyword);
 }

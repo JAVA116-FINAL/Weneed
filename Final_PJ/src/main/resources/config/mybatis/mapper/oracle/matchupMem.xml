@@ -29,13 +29,15 @@
 	select rownum as RNUM, A.*
 	from
 	(
-	select m.mcumem_no as mcumemNo, m.resume_no as resumeNo, m.mem_no as memNo, m.expertise_no as expertiseNo, 
-	       m.jobsearch_flag as jobSearchFlag, m.resumeopen_flag as resumepenFlag,
-	       r.resume_title as resumeTitle, r.resume_name as resumeName, r.resume_introduce as resumeIntroduce, 
-	       r.lang_flag as langFlag,
+	select m.mcumem_no, m.resume_no, m.mem_no, m.expertise_no, m.jobsearch_flag, m.resumeopen_flag,
+	       r.resume_title, r.resume_name, r.resume_introduce, r.lang_flag, c.career_name, e.edu_name, e.edu_major,
+	       x.jikGun_code, x.career, x.skill,
 	       (select count(*) from matchuplike where mcumem_no=m.mcumem_no) as cnt
 	from matchupMem m join resume r 
 	on m.resume_No = r.resume_no 
+	join career c on c.resume_no=m.resume_no
+	join education e on e.resume_no=m.resume_no
+	join expertise x on x.expertise_no=m.expertise_no
 	where m.resumeopen_flag='Y'
 	order by m.mcumem_no
 	)A;
@@ -50,17 +52,33 @@
 	
 	<!-- 여기.. 이렇게 하는게 맞을까.. 데이터가 더 필요하다.. 검색결과를 보려면 데이터가 필요한데.. 학력이랑 커리어랑.. 어떻게 넣지.. 하..ㅠㅠㅠ -->
 	<select id="selectMcumemSearchList" parameterType="matchupMemSearchVo" resultType="map">
-		select * from matchupMemSearchView as mView
-		where mView.mcumemNo in
+		select A.* 
+	    from
+	    (
+	        select rownum as RN, m.* from matchupMemSearchView m
+	        where mcumemNo in
+	        <foreach collection="mcumemNoList" item="mcumemNo" open="(" close=")" separator=",">
+				#{mcumemNo}
+			</foreach>
+		)A
+		<![CDATA[
+		where RN > #{viewMoreSize}
+		and RN <= #{viewMoreSize}+5
+		]]>
+	</select>
+</mapper>
+
+<!-- 
+select * from matchupMemSearchView
+		where mcumemNo in
 		<foreach collection="mcumemNoList" item="mcumemNo" open="(" close=")" separator=",">
 			#{mcumemNo}
 		</foreach>
 		<![CDATA[
-		    where RNUM > #{viewMoreSize}
+		    and RNUM > #{viewMoreSize}
 		    and RNUM <= #{viewMoreSize}+5
 		]]>
-	</select>
-</mapper>
+ -->
 
 
 
