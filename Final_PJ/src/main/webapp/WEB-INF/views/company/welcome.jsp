@@ -5,7 +5,8 @@
 		<strong>사람</strong>과 <strong>일자리</strong>를 가장 <br>
 		인간적이고 효율적으로<br> 
 		<strong>연결</strong>합니다</h1>
-	<a href="#" class="btn btn-outline-primary comServIntroDoc">서비스 소개서</a>
+	<a href="<c:url value='/company/matchupServiceFileDownload.do'/>" 
+			class="btn btn-outline-primary comServIntroDoc">서비스 소개서</a>
 	<button class="btn btn-primary comServJoin"	data-toggle="modal" 
 		data-target=".comServJoinMD" style="outline:none;">시작하기</button>
 </section>

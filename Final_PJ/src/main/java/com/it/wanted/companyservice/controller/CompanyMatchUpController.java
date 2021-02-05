@@ -63,8 +63,15 @@ public class CompanyMatchUpController {
 		model.addAttribute("comCode", comCode);
 		
 		//분기처리 해야함 매치업 구입기업, 비구입기업
+		String url="";
+		boolean check=matchupComService.hasMatchup(comCode);
+		if(check) { //매치업 구입기업이고 기한내에 있으면
+			url="redirect:/company/matchupSearch.do";
+		}else { //매치업 비구입기업이거나 기한이 끝났으면 
+			url="redirect:/company/matchupMain.do";
+		}
 		
-		return "company/matchupMain";
+		return url;
 	}
 	
 	@RequestMapping("/matchupSearch.do")

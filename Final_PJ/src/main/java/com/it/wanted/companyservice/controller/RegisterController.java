@@ -190,7 +190,10 @@ public class RegisterController {
 		try { //파일네임, 오리진네임, 파일사이즈가 있는 mapList를 리턴받음
 			fileList=fileUpload.fileUplaod_comImg(request);
 			logger.info("이미지 업로드 결과, fileList.size={}", fileList.size());
-		} catch (IllegalStateException | IOException e) {
+		} catch (IllegalStateException e){
+			logger.info("이미지 업로드 실패!");
+			e.printStackTrace();
+		} catch (IOException e) {
 			logger.info("이미지 업로드 실패!");
 			e.printStackTrace();
 		}
