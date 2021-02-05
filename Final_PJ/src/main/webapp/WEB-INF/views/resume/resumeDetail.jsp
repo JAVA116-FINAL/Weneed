@@ -30,8 +30,21 @@ $(function(){
 	 //작성완료 버튼을 누르면 글자수 체크, 임시 플래그N,
 	 //유효성검사, 날짜? 
 	  $('.buttons_jy').click(function(){
+		  //글자수체크하고 저장 하기(인풋값만, 셀렉트,)
+		  var count=0;
+		  var list = new Array();
+			$("input[type=text]").each(function(index, item){
+			//list.push($(item).val());
+			count+=$(item).val().length
+			});
+			//alert(count);
+	  
 		  if($(this).attr("id")=="btRealSave"){
-				 $('#tempFlag').val("N");
+				if(count<400){
+					alert("작성한 글자수: "+count+", 400자 이상 작성해야 작성을 완료할 수 있습니다.");
+					return false;
+				}
+			  	$('#tempFlag').val("N");
 			}else{
 				$('#tempFlag').val("Y");
 			} 
@@ -180,10 +193,10 @@ $(function(){
 			 crrStr+="<input type='hidden' value='"+res.resumeNo+"' id='resumeNo' name='crrList["+c+"].resumeNo'>";	 
 			 crrStr+="<input type='hidden' value='"+c+"' name='c'>";	 
 			 crrStr+="<input type='hidden' value='N' id='curEmployed"+c+"' class='realcurEmployed' name='crrList["+c+"].curEmployed'>";	 
-			 crrStr+="<input class='startYear_jy' type='text' value='' placeholder='YYYY' name='crrList["+c+"].startYear'>.";
-			 crrStr+="<input class='startMonth_jy' type='text' value='' placeholder='MM' name='crrList["+c+"].startMonth'>-";		 
-			 crrStr+="<input class='endYear_jy' type='text' value='' placeholder='YYYY' name='crrList["+c+"].endYear'>.";		 
-			 crrStr+="<input class='endMonth_jy' type='text' value='' placeholder='MM' name='crrList["+c+"].endMonth'>";		 
+			 crrStr+="<input class='startYear_jy' maxlength='4' type='text' value='' placeholder='YYYY' name='crrList["+c+"].startYear'>.";
+			 crrStr+="<input class='startMonth_jy' maxlength='2' type='text' value='' placeholder='MM' name='crrList["+c+"].startMonth'>-";		 
+			 crrStr+="<input class='endYear_jy' maxlength='4' type='text' value='' placeholder='YYYY' name='crrList["+c+"].endYear'>.";		 
+			 crrStr+="<input class='endMonth_jy' maxlength='2' type='text' value='' placeholder='MM' name='crrList["+c+"].endMonth'>";		 
 			 crrStr+="<input class='ckCur_jy' type='checkbox' value='' id='ckcurEmployed"+c+"' name='crrList["+c+"].ckcm' onclick='$.getCur("+c+")'>현재재직중";			 
 			 crrStr+="<input class='name_jy' type='text' value='' placeholder='회사명' name='crrList["+c+"].careerName'>";
 			 crrStr+="<input class='dep_jy' type='text' value='' placeholder='부서명/직책' name='crrList["+c+"].careerDep'>";
@@ -205,10 +218,10 @@ $(function(){
 			 achStr+="<input type='hidden' value='"+resAch.careerNo+"' name='achList["+a+"].careerNo' >";
 			 achStr+="<input type='hidden' value='"+a+"' name='a'>";
 			 achStr+="<input type='text' value='' placeholder='·주요 성과' id='achName' name='achList["+a+"].achName'>";
-			 achStr+="<input class='startYear_jy' type='text' value='' placeholder='YYYY' name='achList["+a+"].startYear'>.";
-			 achStr+="<input class='startMonth_jy' type='text' value='' placeholder='MM' name='achList["+a+"].startMonth'>-";		 
-			 achStr+="<input class='endYear_jy' type='text' value='' placeholder='YYYY' name='achList["+a+"].endYear'>.";		 
-			 achStr+="<input class='endMonth_jy' type='text' value='' placeholder='MM' name='achList["+a+"].endMonth'>";		 
+			 achStr+="<input class='startYear_jy' maxlength='4' type='text' value='' placeholder='YYYY' name='achList["+a+"].startYear'>.";
+			 achStr+="<input class='startMonth_jy' maxlength='2' type='text' value='' placeholder='MM' name='achList["+a+"].startMonth'>-";		 
+			 achStr+="<input class='endYear_jy' maxlength='4' type='text' value='' placeholder='YYYY' name='achList["+a+"].endYear'>.";		 
+			 achStr+="<input class='endMonth_jy' maxlength='2' type='text' value='' placeholder='MM' name='achList["+a+"].endMonth'>";		 
 			 achStr+="<textarea class='content-textArea_jy innerTA_jy' name='achList["+a+"].achDetails' value=''   placeholder='상세 업무 내용과 성과를 기입해주세요' rows='2' cols='20' ></textarea>";
 			 achStr+="<button type='button' class='btDel_jy' id='btAchDel_jy' onclick='$.del(\"" + resAch.achNo+ "\",\"" + 'ach' + "\")'><i class='icon-close btDel-i_jy'></i></button>";
 			 a++;
@@ -225,10 +238,10 @@ $(function(){
 			 eduStr+="<input type='hidden' value='"+resEdu.eduNo+"' id='eduNo' name='eduList["+e+"].eduNo'>";
 			 eduStr+="<input type='hidden' value='"+resEdu.resumeNo+"' id='resumeNo' name='eduList["+e+"].resumeNo'>";	 
 			 eduStr+="<input type='hidden' value='N' id='curEnrolled"+e+"' class='realcurEnrolled' name='eduList["+e+"].curEnrolled'>";	 
-			 eduStr+="<input class='startYear_jy' type='text' value='' placeholder='YYYY' name='eduList["+e+"].startYear'>.";
-			 eduStr+="<input class='startMonth_jy' type='text' value='' placeholder='MM' name='eduList["+e+"].startMonth'>-";		 
-			 eduStr+="<input class='endYear_jy' type='text' value='' placeholder='YYYY' name='eduList["+e+"].endYear'>.";		 
-			 eduStr+="<input class='endMonth_jy' type='text' value='' placeholder='MM' name='eduList["+e+"].endMonth'>";		 
+			 eduStr+="<input class='startYear_jy' maxlength='4' type='text' value='' placeholder='YYYY' name='eduList["+e+"].startYear'>.";
+			 eduStr+="<input class='startMonth_jy' maxlength='2' type='text' value='' placeholder='MM' name='eduList["+e+"].startMonth'>-";		 
+			 eduStr+="<input class='endYear_jy' maxlength='4' type='text' value='' placeholder='YYYY' name='eduList["+e+"].endYear'>.";		 
+			 eduStr+="<input class='endMonth_jy' maxlength='2' type='text' value='' placeholder='MM' name='eduList["+e+"].endMonth'>";		 
 			 eduStr+="<input class='ckCur_jy' type='checkbox' value='' id='ckcurEnrolled"+e+"' name='eduList["+e+"].ckcm' onclick='$.getCur("+e+")'>현재재학중";			 
 			 eduStr+="<input class='name_jy' type='text' value='' placeholder='학교명' name='eduList["+e+"].eduName'>";
 			 eduStr+="<input class='dep_jy' type='text' value='' placeholder='전공 및 학원(ex: 경영학과 학사)' name='eduList["+e+"].eduMajor'>";
@@ -246,8 +259,8 @@ $(function(){
 			 //addStr+="<form method='post' name='frmAdd' id='frmAdd'>";			 
 			 addStr+="<input type='hidden' value='"+resAdd.addNo+"' id='addNo' name='addList["+ai+"].addNo'>";
 			 addStr+="<input type='hidden' value='"+resAdd.resumeNo+"' id='resumeNo' name='addList["+ai+"].resumeNo'>";	 
-			 addStr+="<input class='startYear_jy getYear_jy' type='text' value='' placeholder='YYYY' name='addList["+ai+"].getYear'>.";
-			 addStr+="<input class='startMonth_jy getMonth_jy' type='text' value='' placeholder='MM' name='addList["+ai+"].getMonth'>";
+			 addStr+="<input class='startYear_jy getYear_jy' maxlength='4' type='text' value='' placeholder='YYYY' name='addList["+ai+"].getYear'>.";
+			 addStr+="<input class='startMonth_jy getMonth_jy' maxlength='2' type='text' value='' placeholder='MM' name='addList["+ai+"].getMonth'>";
 			 addStr+="<input class='name_jy' type='text' value='' placeholder='활동명' name='addList["+ai+"].addName'>";
 			 addStr+="<input class='dep_jy eduDetail_jy addDetail_jy' type='text' value='' placeholder='세부사항' name='addList["+ai+"].addDetails'>";
 			 addStr+="<button type='button' class='btDel_jy' id='btEduDel_jy' onclick='$.del(\"" + resAdd.addNo+ "\",\"" + 'add' + "\")'> <i class='icon-close btDel-i_jy'></i></button>";
@@ -285,8 +298,8 @@ $(function(){
 				 testStr+="<input type='hidden' value='"+t+"'>";
 				 testStr+="<input type='text' value='' class='testN_jy' placeholder='·시험명' id='langtestName' name='testList["+t+"].langtestName'>";
 				 testStr+="<input class='dep_jy' type='text' value='' class='testL_jy' placeholder='점수/급' name='testList["+t+"].langtestScore'>";
-				 testStr+="<input class='startYear_jy getYear_jy' type='text' value='' placeholder='YYYY' name='testList["+t+"].getYear'>.";
-				 testStr+="<input class='startMonth_jy getMonth_jy' type='text' value='' placeholder='MM' name='testList["+t+"].getMonth'>.";		 
+				 testStr+="<input class='startYear_jy getYear_jy' maxlength='4' type='text' value='' placeholder='YYYY' name='testList["+t+"].getYear'>.";
+				 testStr+="<input class='startMonth_jy getMonth_jy' maxlength='2' type='text' value='' placeholder='MM' name='testList["+t+"].getMonth'>.";		 
 				 testStr+="<button type='button' class='btDel_jy' id='btTestDel_jy' onclick='$.del(\"" + resTest.langtestNo+ "\",\"" + 'test' + "\")'><i class='icon-close btDel-i_jy'></i></button>";
 				 t++;
 				 //testStr+="</form>"
@@ -522,10 +535,10 @@ $(function(){
 									 <input type='hidden' value="${crrVo.careerNo}" id='careerNo' name='crrList[${c}].careerNo'>
 									 <input type='hidden' value='${crrVo.resumeNo}' id='resumeNo' name='crrList[${c}].resumeNo'>
 									 <input type='hidden' value='${crrVo.curEmployed}' id='curEmployed${c}' class='realcurEmployed' name='crrList[${c}].curEmployed'>	 
-									 <input class='startYear_jy' type='text' value='${crrVo.startYear}' placeholder='YYYY' name='crrList[${c}].startYear'>.
-									 <input class='startMonth_jy' type='text' value='${crrVo.startMonth}' placeholder='MM' name='crrList[${c}].startMonth'>-		 
-									 <input class='endYear_jy' type='text' value='${crrVo.endYear}' placeholder='YYYY' name='crrList[${c}].endYear'>.		 
-									 <input class='endMonth_jy' type='text' value='${crrVo.endMonth}' placeholder='MM' name='crrList[${c}].endMonth'>
+									 <input class='startYear_jy' maxlength='4' type='text' value='${crrVo.startYear}' placeholder='YYYY' name='crrList[${c}].startYear'>.
+									 <input class='startMonth_jy' maxlength='2' type='text' value='${crrVo.startMonth}' placeholder='MM' name='crrList[${c}].startMonth'>-		 
+									 <input class='endYear_jy' maxlength='4' type='text' value='${crrVo.endYear}' placeholder='YYYY' name='crrList[${c}].endYear'>.		 
+									 <input class='endMonth_jy' maxlength='2' type='text' value='${crrVo.endMonth}' placeholder='MM' name='crrList[${c}].endMonth'>
 									 <input class='ckCur_jy' type='checkbox' <c:if test="${crrVo.curEmployed eq 'Y'}">checked="checked"</c:if>' id='ckcurEmployed${c}' name='crrList[${c}].ckcm' onclick='$.getCur(${c})'>현재재직중			 
 									 <input class='name_jy' type='text' value='${crrVo.careerName}' placeholder='회사명' name='crrList[${c}].careerName'>
 									 <input class='dep_jy' type='text' value='${crrVo.careerDep}' placeholder='부서명/직책' name='crrList[${c}].careerDep'>
@@ -545,10 +558,10 @@ $(function(){
 														<input type='hidden' value='${a}' name='a' >
 														
 														<input type='text' value='${achVo.achName}' placeholder='·주요 성과' id='achName' name='achList[${a}].achName'>
-														<input class='startYear_jy' type='text' value='${achVo.startYear}' placeholder='YYYY' name='achList[${a}].startYear'>.
-														<input class='startMonth_jy' type='text' value='${achVo.startMonth}' placeholder='MM' name='achList[${a}].startMonth'>-		 
-														<input class='endYear_jy' type='text' value='${achVo.endYear}' placeholder='YYYY' name='achList[${a}].endYear'>.		 
-														<input class='endMonth_jy' type='text' value='${achVo.endMonth}' placeholder='MM' name='achList[${a}].endMonth'>
+														<input class='startYear_jy' maxlength='4' type='text' value='${achVo.startYear}' placeholder='YYYY' name='achList[${a}].startYear'>.
+														<input class='startMonth_jy' maxlength='2' type='text' value='${achVo.startMonth}' placeholder='MM' name='achList[${a}].startMonth'>-		 
+														<input class='endYear_jy' maxlength='4' type='text' value='${achVo.endYear}' placeholder='YYYY' name='achList[${a}].endYear'>.		 
+														<input class='endMonth_jy' maxlength='2' type='text' value='${achVo.endMonth}' placeholder='MM' name='achList[${a}].endMonth'>
 														<textarea class='content-textArea_jy innerTA_jy' name='achList[${a}].achDetails'  placeholder='상세 업무 내용과 성과를 기입해주세요' rows='2' cols='20' >${achVo.achDetails}</textarea>
 														<button type='button' class='btDel_jy' id='btAchDel_jy' onclick="$.del(${achVo.achNo},'ach')"><i class='icon-close btDel-i_jy'></i></button>
 												 		<c:set var="a" value="${a+1}"></c:set>
@@ -576,10 +589,10 @@ $(function(){
 									<input type='hidden' value='${eduVo.eduNo}' id='eduNo' name='eduList[${e}].eduNo'>
 									<input type='hidden' value='${eduVo.resumeNo}' id='resumeNo' name='eduList[${e}].resumeNo'>
 									<input type='hidden' value='${eduVo.curEnrolled}' id='curEnrolled${e}' class='realcurEnrolled' name='eduList[${e}].curEnrolled'>	 
-									<input class='startYear_jy' type='text' value='${eduVo.startYear}' placeholder='YYYY' name='eduList[${e}].startYear'>.
-									<input class='startMonth_jy' type='text' value='${eduVo.startMonth}' placeholder='MM' name='eduList[${e}].startMonth'>-		 
-									<input class='endYear_jy' type='text' value='${eduVo.endYear}' placeholder='YYYY' name='eduList[${e}].endYear'>.		 
-									<input class='endMonth_jy' type='text' value='${eduVo.endMonth}' placeholder='MM' name='eduList[${e}].endMonth'>
+									<input class='startYear_jy' maxlength='4' type='text' value='${eduVo.startYear}' placeholder='YYYY' name='eduList[${e}].startYear'>.
+									<input class='startMonth_jy' maxlength='2' type='text' value='${eduVo.startMonth}' placeholder='MM' name='eduList[${e}].startMonth'>-		 
+									<input class='endYear_jy' maxlength='4' type='text' value='${eduVo.endYear}' placeholder='YYYY' name='eduList[${e}].endYear'>.		 
+									<input class='endMonth_jy' maxlength='2' type='text' value='${eduVo.endMonth}' placeholder='MM' name='eduList[${e}].endMonth'>
 									<input class='ckCur_jy' type='checkbox' value='${eduVo.curEnrolled}' <c:if test="${eduVo.curEnrolled eq 'Y'}">checked='checked'</c:if> id='ckcurEnrolled${e}' name='eduList[${e}].ckcm' onclick='$.getCur(${e})'>현재재학중			 
 									<input class='name_jy' type='text' value='${eduVo.eduName}' placeholder='학교명' name='eduList[${e}].eduName'>
 									<input class='dep_jy' type='text' value='${eduVo.eduMajor}' placeholder='전공 및 학원(ex: 경영학과 학사)' name='eduList[${e}].eduMajor'>
@@ -604,8 +617,8 @@ $(function(){
 						 		<li class='addLi_jy' id='add${addVo.addNo}'>
 									<input type='hidden' value='${addVo.addNo}' id='addNo' name='addList[${ai}].addNo'>
 									<input type='hidden' value='${addVo.resumeNo}' id='resumeNo' name='addList[${ai}].resumeNo'>
-									<input class='startYear_jy getYear_jy' type='text' value='${addVo.getYear}' placeholder='YYYY' name='addList[${ai}].getYear'>.
-									<input class='startMonth_jy getMonth_jy' type='text' value='${addVo.getMonth}' placeholder='MM' name='addList[${ai}].getMonth'>
+									<input class='startYear_jy getYear_jy' maxlength='4' type='text' value='${addVo.getYear}' placeholder='YYYY' name='addList[${ai}].getYear'>.
+									<input class='startMonth_jy getMonth_jy' maxlength='2' type='text' value='${addVo.getMonth}' placeholder='MM' name='addList[${ai}].getMonth'>
 									<input class='name_jy' type='text' value='${addVo.addName}' placeholder='활동명' name='addList[${ai}].addName'>
 									<input class='dep_jy eduDetail_jy addDetail_jy' type='text' value='${addVo.addDetails}' placeholder='세부사항' name='addList[${ai}].addDetails'>
 									<button type='button' class='btDel_jy' id='btEduDel_jy' onclick="$.del(${addVo.addNo},'add')"> <i class='icon-close btDel-i_jy'></i></button>
@@ -648,8 +661,8 @@ $(function(){
 														<input type='hidden' value='${t}'>
 														<input type='text' value='${testVo.langtestName}' class='testN_jy' placeholder='·시험명' id='langtestName' name='testList[${t}].langtestName'>
 														<input class='dep_jy' type='text' value='${testVo.langtestScore}' class='testL_jy' placeholder='점수/급' name='testList[${t}].langtestScore'>
-														<input class='startYear_jy getYear_jy' type='text' value='${testVo.getYear}' placeholder='YYYY' name='testList[${t}].getYear'>.
-														<input class='startMonth_jy getMonth_jy' type='text' value='${testVo.getMonth}' placeholder='MM' name='testList[${t}].getMonth'>.		 
+														<input class='startYear_jy getYear_jy' maxlength='4' type='text' value='${testVo.getYear}' placeholder='YYYY' name='testList[${t}].getYear'>.
+														<input class='startMonth_jy getMonth_jy' maxlength='2' type='text' value='${testVo.getMonth}' placeholder='MM' name='testList[${t}].getMonth'>.		 
 														<button type='button' class='btDel_jy' id='btTestDel_jy' onClick="$.del(${testVo.langtestNo},'test')"><i class='icon-close btDel-i_jy'></i></button>
 								 					</li>
 								 					<c:set var="t" value="${t+1}"></c:set>
