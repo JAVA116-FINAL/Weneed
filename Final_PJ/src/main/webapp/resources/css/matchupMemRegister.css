@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-.jobarea_jy.mcuEditjabarea_jy {
-    /* display: inline-flex; */
-}
-
-.jobarea_jy.mcuEditjabarea_jy {}
-
-.form-group.mcuEditformgroup_jy {
-    /* display: inline; */
-    /* width: 51px; */
-}
 
 .form-group.mcuEditformgroup_jy {
     display: inline-block;
@@ -198,24 +188,51 @@ label.btn.mcuEdit-jikgunbt_jy {
     opacity: 0.3;
 }
 
-
-
 label.btn.mcuEdit-jikgunbt_jy.active {
     opacity: 1;
     display: inline-block;
 }
+/* 02/05 */
+button#btToggle {
+    outline: none;
+}
 
+i.icon-arrow_right.arrowIcon_jy {
+    right: 49px;
+}
 
+button.navbar-toggler.mcuEdit-togglebt_jy.collapsed {
+    outline: none;
+}
 
+span.mcuEditplusbt_jy {
+    outline: none;
+}
 
-/* 태그 선택하면 이렇게 변하게하기 
+button#btToggle {
+    outline: none;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy1 {
+    outline: none;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy {
+    outline: none;
+}
+
+button.btMachupEdit_jy {
+    outline: none;
+}
+
+/* 
 label.btn.mcuEdit-jikgunbt_jy {
     color: black;
     background: #80808026;
     border: none;
-} */
+} 
 
-
+ */
 
 
 
