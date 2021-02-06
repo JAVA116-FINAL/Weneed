@@ -46,9 +46,15 @@ public class IndexController {
 	public void jobSalary() {
 		logger.info("직군별 연봉 화면 보여주기");
 	}
+	
 	@RequestMapping("/main/afterLoginMain.do")
 	public void loginMain() {
 		logger.info("afterLoginMain 보여주기");
+	}
+	
+	@RequestMapping("/mainSearch/search.do")
+	public void mainSearch() {
+		logger.info("mainSearch 보여주기");
 	}
 	
 }

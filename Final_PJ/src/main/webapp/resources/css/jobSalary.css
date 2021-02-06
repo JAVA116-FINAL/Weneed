@@ -18,9 +18,9 @@ button{
 
 .salary-chart-box{
 	position:relative;
-	height:460px;
+	height:450px;
 	min-height:350px;
-	padding-top:26px;
+	padding-top:20px;
 	padding-botton:40px;
 	margin-bottom:40px;
 	background-color:#22bd79;
@@ -74,7 +74,6 @@ button{
 .salary-select-box{
 	position:absolute;
 	margin:0 auto;
-	width:90%;
 	left:0;
 	right:0;
 	bottom:-24px;
