@@ -9,10 +9,22 @@
 		select resume_No from matchupMem where mem_No=#{memNo}
 	</select>
 
-	<select id="isMechupMem" parameterType="int" resultType="int">
+	<select id="isMatchupMem" parameterType="int" resultType="int">
 		select count(*) from matchupMem where mem_no=#{memNo}
 	</select>
 	
+	<insert id="insertMcuMem" parameterType="matchupMemVo">
+		<selectKey keyProperty="mcumemNo" resultType="int" order="BEFORE">
+			select matchupMem_seq.nextVal from dual
+		</selectKey>
+		insert into matchupMem(mcumem_No, mem_No)
+		values(#{mcumemNo}, #{memNo});
+	</insert>
+
+	<select id="selectMcuMem" parameterType="int">
+		select * from matchupMem where mem_No=#{memNo}
+	</select>
+
 	
 	<!-- 현빈 -->
 	<select id="selectOpen" resultType="matchupMemVo">

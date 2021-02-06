@@ -27,8 +27,18 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	}
 
 	@Override
-	public int isMechupMem(int memNo) {
-		return matchupMemDao.isMechupMem(memNo);
+	public int isMatchupMem(int memNo) {
+		return matchupMemDao.isMatchupMem(memNo);
+	}
+
+	@Override
+	public int insertMcuMem(MatchupMemVO mVo) {
+		return matchupMemDao.insertMcuMem(mVo);
+	}
+	
+	@Override
+	public MatchupMemVO selectMcuMem(int memNo) {
+		return matchupMemDao.selectMcuMem(memNo);
 	}
 
 	
@@ -95,5 +105,7 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	
 		return mcumemSearchResultList;
 	}
+
+	
 	
 }

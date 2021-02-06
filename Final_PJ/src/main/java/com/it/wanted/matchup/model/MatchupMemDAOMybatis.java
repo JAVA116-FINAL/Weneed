@@ -22,9 +22,20 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	}
 
 	@Override
-	public int isMechupMem(int memNo) {
-		return sqlSession.selectOne(namespace+"isMechupMem", memNo);
+	public int isMatchupMem(int memNo) {
+		return sqlSession.selectOne(namespace+"isMatchupMem", memNo);
 	}
+	
+	@Override
+	public int insertMcuMem(MatchupMemVO mVo) {
+		return sqlSession.selectOne(namespace+"insertMcuMem", mVo);
+	}
+	
+	@Override
+	public MatchupMemVO selectMcuMem(int memNo) {
+		return sqlSession.selectOne(namespace+"selectMcuMem", memNo);
+	}
+	
 	
 	/* 현빈 */
 	@Override
@@ -46,5 +57,9 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	public List<Map<String, Object>> selectMcumemSearchList(MatchupMemSearchVO mcuMemSearchVo) {
 		return sqlSession.selectList(namespace+"selectMcumemSearchList", mcuMemSearchVo);
 	}
+
+	
+
+	
 	
 }
