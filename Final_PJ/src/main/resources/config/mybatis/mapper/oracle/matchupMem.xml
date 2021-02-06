@@ -17,11 +17,11 @@
 		<selectKey keyProperty="mcumemNo" resultType="int" order="BEFORE">
 			select matchupMem_seq.nextVal from dual
 		</selectKey>
-		insert into matchupMem(mcumem_No, mem_No)
-		values(#{mcumemNo}, #{memNo});
+		insert into matchupmem(mcumem_No, mem_No,expertise_No, resume_No)
+		values(#{mcumemNo}, #{memNo},#{expertiseNo},#{resumeNo})
 	</insert>
 
-	<select id="selectMcuMem" parameterType="int">
+	<select id="selectMcuMem" parameterType="int" resultType="matchupMemVo">
 		select * from matchupMem where mem_No=#{memNo}
 	</select>
 
