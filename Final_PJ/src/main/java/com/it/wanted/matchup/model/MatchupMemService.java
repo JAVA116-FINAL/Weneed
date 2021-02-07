@@ -10,8 +10,11 @@ public interface MatchupMemService {
 	/* 자연 */
 	public int isMatchupMem(int memNo);
 	public int selectmcuResumeNo(int memNo);
-	public int insertMcuMem(ResumeVO rVo);
+	public int hasMcuResumeNo(int memNo);
+	public int insertMcuMem(MatchupAllVO mmAllVo);
+
 	public MatchupMemVO selectMcuMem(int memNo);
+	
 	
 	/* 현빈 */
 	List<MatchupMemVO> selectOpen();

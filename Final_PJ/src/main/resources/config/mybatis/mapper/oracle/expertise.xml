@@ -18,9 +18,20 @@
 		<selectKey keyProperty="expertiseNo" resultType="int" order="BEFORE">
 			select expertise_seq.nextval from dual
 		</selectKey>
-		insert into expertise(expertise_No,salary)
-		values (#{expertiseNo},#{salary})
+		insert into expertise(expertise_No,jikgun_Code,career,salary,skill)
+		values(#{expertiseNo}, #{jikgunCode}, #{career}, #{salary}, #{skill})
 	</insert>
+	
+	<select id="selectUptodateExpertNo" resultType="int">
+		select * from 
+		(
+		<![CDATA[
+			select expertise_No from expertise where expertise_No<3000 order by expertise_No desc
+		]]>
+		)
+		where rownum=1
+		
+	</select>
 
 </mapper>
 
