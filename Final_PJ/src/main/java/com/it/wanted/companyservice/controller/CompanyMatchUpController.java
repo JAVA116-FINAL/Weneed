@@ -28,6 +28,7 @@ import com.it.wanted.commeminfo.model.ComMemInfoVO;
 import com.it.wanted.commemlist.model.ComMemListService;
 import com.it.wanted.common.MatchupPagination;
 import com.it.wanted.common.MatchupSearchVO;
+import com.it.wanted.common.SearchVO;
 import com.it.wanted.education.model.EducationService;
 import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.jikgun.model.JikgunService;
@@ -84,37 +85,11 @@ public class CompanyMatchUpController {
 	}
 	
 	
+	
 	@RequestMapping("/matchupSearch.do")
 	public String matchupSearch(Model model, @ModelAttribute MatchupMemSearchVO searchVo) {
-		
-		if(searchVo.getSearchJikmu()==null || searchVo.getSearchJikmu().isEmpty()) {
-			searchVo.setSearchJikmu("");
-		}
-		if(searchVo.getSearchJikgun()==null || searchVo.getSearchJikgun().isEmpty()) {
-			searchVo.setSearchJikgun("");
-		}
-		if(searchVo.getSearchKeyword()==null || searchVo.getSearchKeyword().isEmpty()) {
-			searchVo.setSearchKeyword("");
-		}
-		if(searchVo.getSearchMaxCareer()==null || searchVo.getSearchMaxCareer().isEmpty()) {
-			searchVo.setSearchMaxCareer("100");
-		}
-		if(searchVo.getSearchMinCareer()==null || searchVo.getSearchMinCareer().isEmpty()) {
-			searchVo.setSearchMinCareer("0");
-		}
-		
-		//최소가 신입이거나 전체일 땐 미니멈 0으로 세팅해주기 
-		if(searchVo.getSearchMinCareer().equals("신입") || searchVo.getSearchMinCareer().equals("전체")) {
-			searchVo.setSearchMinCareer("0");
-		}
-		//최대가 신입이면 맥시멈도 0으로 세팅
-		if(searchVo.getSearchMaxCareer().equals("신입")) {
-			searchVo.setSearchMaxCareer("0");
-		}
-		//최대가 전체거나 10년이상일 때 맥시멈 100으로 세팅 
-		if(searchVo.getSearchMaxCareer().equals("전체") || searchVo.getSearchMaxCareer().equals("10")) {
-			searchVo.setSearchMaxCareer("100");
-		}
+		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setBeforeMethod(searchVo);
 		
 		logger.info("기업서비스 매치업 검색/조회화면, 파라미터 searchVo={}", searchVo);
 		
@@ -143,19 +118,7 @@ public class CompanyMatchUpController {
 			}
 		}
 		
-		//다시 돌려줘야 화면에 세팅값이 제대로 들어가겠죠
-		//최소가 0이면 전체로 세팅 - 최소가 전체거나 신입이었음
-		if(searchVo.getSearchMinCareer().equals("0")) {
-			searchVo.setSearchMinCareer("전체");
-		}
-		//최대가 0이면 맥스 new로 (신입)으로 설정
-		if(searchVo.getSearchMaxCareer().equals("0")) {
-			searchVo.setSearchMaxCareer("신입");
-		}
-		//최대가 100이면 전체로 세팅
-		if(searchVo.getSearchMaxCareer().equals("100")){
-			searchVo.setSearchMaxCareer("전체");
-		}
+		searchVo=setAfterMethod(searchVo);
 		
 		logger.info("세팅 끝난 searchVo={}", searchVo);
 		model.addAttribute("searchVo", searchVo);
@@ -184,55 +147,21 @@ public class CompanyMatchUpController {
 	}
 	*/
 	
+	
+	
 	@ResponseBody
 	@RequestMapping("/viewMoreMatchupMem.do")
 	public List<Map<String, Object>> getMoreMem(@ModelAttribute MatchupMemSearchVO searchVo){
-		if(searchVo.getSearchJikmu()==null || searchVo.getSearchJikmu().isEmpty()) {
-			searchVo.setSearchJikmu("");
-		}
-		if(searchVo.getSearchJikgun()==null || searchVo.getSearchJikgun().isEmpty()) {
-			searchVo.setSearchJikgun("");
-		}
-		if(searchVo.getSearchKeyword()==null || searchVo.getSearchKeyword().isEmpty()) {
-			searchVo.setSearchKeyword("");
-		}
-		if(searchVo.getSearchMaxCareer()==null || searchVo.getSearchMaxCareer().isEmpty()) {
-			searchVo.setSearchMaxCareer("100");
-		}
-		if(searchVo.getSearchMinCareer()==null || searchVo.getSearchMinCareer().isEmpty()) {
-			searchVo.setSearchMinCareer("0");
-		}
+		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setBeforeMethod(searchVo);
 		
-		//최소가 신입이거나 전체일 땐 미니멈 0으로 세팅해주기 
-		if(searchVo.getSearchMinCareer().equals("신입") || searchVo.getSearchMinCareer().equals("전체")) {
-			searchVo.setSearchMinCareer("0");
-		}
-		//최대가 신입이면 맥시멈도 0으로 세팅
-		if(searchVo.getSearchMaxCareer().equals("신입")) {
-			searchVo.setSearchMaxCareer("0");
-		}
-		//최대가 전체거나 10년이상일 때 맥시멈 100으로 세팅 
-		if(searchVo.getSearchMaxCareer().equals("전체") || searchVo.getSearchMaxCareer().equals("10")) {
-			searchVo.setSearchMaxCareer("100");
-		}
 		logger.info("리스트까지 불러오기 결과, searchVo={}", searchVo);
 
 		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
 		logger.info("리스트까지 불러오기 결과, memList.size={}", memList.size());
 		
-		//다시 돌려줘야 화면에 세팅값이 제대로 들어가겠죠
-		//최소가 0이면 전체로 세팅 - 최소가 전체거나 신입이었음
-		if(searchVo.getSearchMinCareer().equals("0")) {
-			searchVo.setSearchMinCareer("전체");
-		}
-		//최대가 0이면 맥스 new로 (신입)으로 설정
-		if(searchVo.getSearchMaxCareer().equals("0")) {
-			searchVo.setSearchMaxCareer("신입");
-		}
-		//최대가 100이면 전체로 세팅
-		if(searchVo.getSearchMaxCareer().equals("100")){
-			searchVo.setSearchMaxCareer("전체");
-		}
+		//이걸 왜 하지
+		searchVo=setAfterMethod(searchVo);
 		
 		return memList;
 	}
@@ -289,4 +218,57 @@ public class CompanyMatchUpController {
 	 
 	 }
 	 */
+	
+	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo) {
+		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty()) {
+			vo.setSearchJikmu("");
+		}
+		if(vo.getSearchJikgun()==null || vo.getSearchJikgun().isEmpty()) {
+			vo.setSearchJikgun("");
+		}
+		if(vo.getSearchKeyword()==null || vo.getSearchKeyword().isEmpty()) {
+			vo.setSearchKeyword("");
+		}
+		if(vo.getSearchMaxCareer()==null || vo.getSearchMaxCareer().isEmpty()) {
+			vo.setSearchMaxCareer("100");
+		}
+		if(vo.getSearchMinCareer()==null || vo.getSearchMinCareer().isEmpty()) {
+			vo.setSearchMinCareer("0");
+		}
+		return vo;
+	}
+	
+	public MatchupMemSearchVO setBeforeMethod(MatchupMemSearchVO searchVo){
+		//최소가 신입이거나 전체일 땐 미니멈 0으로 세팅해주기 
+		if(searchVo.getSearchMinCareer().equals("신입") || searchVo.getSearchMinCareer().equals("전체")) {
+			searchVo.setSearchMinCareer("0");
+		}
+		//최대가 신입이면 맥시멈도 0으로 세팅
+		if(searchVo.getSearchMaxCareer().equals("신입")) {
+			searchVo.setSearchMaxCareer("0");
+		}
+		//최대가 전체거나 10년이상일 때 맥시멈 100으로 세팅 
+		if(searchVo.getSearchMaxCareer().equals("전체") || searchVo.getSearchMaxCareer().equals("10")) {
+			searchVo.setSearchMaxCareer("100");
+		}
+		
+		return searchVo;
+	}
+	
+	public MatchupMemSearchVO setAfterMethod(MatchupMemSearchVO searchVo){
+		//다시 돌려줘야 화면에 세팅값이 제대로 들어가겠죠
+		//최소가 0이면 전체로 세팅 - 최소가 전체거나 신입이었음
+		if(searchVo.getSearchMinCareer().equals("0")) {
+			searchVo.setSearchMinCareer("전체");
+		}
+		//최대가 0이면 맥스 new로 (신입)으로 설정
+		if(searchVo.getSearchMaxCareer().equals("0")) {
+			searchVo.setSearchMaxCareer("신입");
+		}
+		//최대가 100이면 전체로 세팅
+		if(searchVo.getSearchMaxCareer().equals("100")){
+			searchVo.setSearchMaxCareer("전체");
+		}
+		return searchVo;
+	}
 }
