@@ -10,13 +10,13 @@
 <meta name="description" content="Orbitor,business,company,agency,modern,bootstrap4,tech,software">
 <meta name="author" content="themefisher.com">
 
-<title>weneed</title>
+<title>Weneed for employer</title>
 <%@ include file="cssJsImports.jsp" %>
 <script type="text/javascript" src="<c:url value='/resources/js/hyunbin.js'/>"></script>
 <script type="text/javascript">
 $(function(){
+	//여기는 회원가입 유효성 확인 부분
 	$('#comServjoinSubmitBtn').click(function(){
-		//여기는 유효성 확인 부분
 		if($('#comMemName').val().length<1){ //이름
 			$('#alertSpanName').html("이름을 입력하세요.");
 			$('#comMemName').focus();
@@ -40,8 +40,7 @@ $(function(){
 		}else{
 			$('form[name=comServJoinForm]').submit();
 		}
-		
-	});
+	});//유효성 확인
 	
 	$('#comMemName').keyup(function(){ //아이디 인풋박스에 키업이벤트
 		keyupCheck($('#comMemName'), '담당자 성함을', $('#alertSpanName'));
@@ -59,9 +58,9 @@ $(function(){
 		pwdKeyupCheck($('#comMemJoinPwd'), '비밀번호를', $('#alertSpanJoinPwd'));
 	});
 	
-
-	$('#comServLoginSubmit').click(function(){
-		//여기는 유효성 확인 부분
+	//여기는 유효성 확인 부분 로그인
+	$('form[name=comServLoginForm]').submit(function(){
+//	$('#comServLoginSubmit').submit(function(){
 		var msg="";
 		
 		if($('#comMemLoginId').val().length<1){ //아이디 빈칸일 때
@@ -78,36 +77,51 @@ $(function(){
 			return false;
 		}
 		
-		/* //아이디 비밀번호 다 입력했으면 db에서 체크해보기 ajax 사용
-		var id=$('#comMemId').val();
-		var pwd=$('#comMemPwd').val();
 		$.ajax({
-			url:"<c:url value='/company/member/login.do'/>",
-			dataType:"json",
-			type:"post",
+			url:"<c:url value='/company/ajaxPwdCheck.do'/>",
 			data:{
-				comMemId:id,
-				comMemPw:pwd
+				comMemId:$('#comMemLoginId').val(),
+				comMemPwd:$('#comMemLoginPwd').val()
+			},
+			type:"post",
+			success:function(result){
+				alert(result);
+			},
+			error:function(xhr, status, error){
+				alert('error! '+error);
+			}
+		});
+		
+		
+		/* //아이디 비밀번호 다 입력했으면 db에서 체크해보기 ajax 사용
+		var id=$('#comMemLoginId').val();
+		var pwd=$('#comMemLoginPwd').val();
+		console.log(id);
+		console.log(pwd);
+		
+		$.ajax({
+			url:"<c:url value='/company/ajaxLoginCheck.do'/>",
+			type:"post",
+			dataType:"text",
+			async:false,
+			data:{
+				'comMemId':$('#comMemLoginId').val(),
+				'comMemPwd':$('#comMemLoginPwd').val()
 			},
 			success:function(result){
-				if(result=='success_reged'){ //기업정보, 이미지 모두 등록된 계정이 로그인함
+				console.log(result);
+				if(result=='/company/welcome.do'){ // 로그인 실패시
+					alert('비밀번호나 아이디가 일치하지 않습니다.');
+					return false;
+				}else{ //이미지 미등록 계정이 로그인함
 					alert('로그인 성공!');
-					location.href="/company/applicants.jsp"; //지원자 화면으로 이동
-				}else if(result=='success_img_not_reged'){ //이미지 미등록 계정이 로그인함
-					alert('로그인 성공!');
-					location.href="/company/imgUpload.jsp"; //이미지 등록 화면으로 이동
-				}else if(result=='success_info_not_reged'){ //기업정보 미등록된 계정이 로그인함
-					alert('로그인 성공!');
-					location.href="/company/register.jsp"; //기업정보 등록 화면으로 이동
-				}else if(result=='fail'){
-					alert('비밀번호나 아이디를 다시 확인해주세요.'); //로그인 팝업 유지?
 				}
+					location.href=result; 
 			},
 			error:function(xhr, status, error){
 				alert("로그인 실패! error: "+error);
 			}
-				
-		});//ajax 로그인처리 */
+		});//ajax 로그인처리  */
 	}); //click
 	
 	$('#comMemLoginId').keyup(function(){ //아이디 인풋박스에 키업이벤트
@@ -118,19 +132,16 @@ $(function(){
 	$('#comMemLoginPwd').keyup(function(){ //인풋박스에 키업이벤트
 		keyupCheck($('#comMemLoginPwd'), '비밀번호를', $('#alertSpanLoginPwd'));
 	});
+	
+	//메뉴 선택 시 해당 메뉴만 하얗게 바꾸기
+	$('.comServNav-item-link').click(function(){
+		const num=$('.comServNav-item-link').index($(this));
+		$('.comServNav-item-link').removeClass("comServSelectedMenu");		
+		$('.comServNav-item-link:eq('+num+')').addClass("comServSelectedMenu");
+	});
+	
+	
 });
-
-/* function keyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아이디 전체,인풋이름,얼럿표시할곳을 준다
-if(inputId.val().length<1){
-	var msg=inputName+"를 입력하세요.";
-	alertId.text(msg);
-	alertId.show();
-	inputId.focus();
-	event.preventDefault();
-}else{ //입력을 뭐라도 했을 때
-	alertId.hide();
-} 
-} */
 
 function pwdKeyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아이디 전체,인풋이름,얼럿표시할곳을 준다
 	if(inputId.val().length<6){
@@ -154,17 +165,17 @@ function pwdKeyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아
 					<div class="header-logo" id="comServHeaderLogo">
 						<!-- 로그인 후 기업로고 + 기업명으로 변경? -->
 						<c:if test="${empty comMemId}">
-							<a class="comServNavbar-logo-link" href="#">Weneed for Employer</a>
+							<a class="comServNavbar-logo-link" href="<c:url value='/company/welcome.do'/>">Weneed for Employer</a>
 						</c:if>
 						<c:if test="${!empty comMemId}">
 							<c:if test="${empty comInfoVo.comName }">
-								<span><i class="fas fa-building" style="color:white"></i></span>
+								<span id="topBuildingSpan"><i class="fas fa-building" style="color:white"></i></span>
 								<span class="comServNavbar-logo-link">
 									-		
 								</span>
 							</c:if>
 							<c:if test="${!empty comInfoVo.comName }">
-								<span><i class="fas fa-building" style="color:white"></i></span>
+								<span id="topBuildingSpan"><i class="fas fa-building" style="color:white"></i></span>
 								<span class="comServNavbar-logo-link">
 									${comInfoVo.comName}	
 								</span>
@@ -192,7 +203,7 @@ function pwdKeyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아
 											<div class="modal-body">
 											    <div class="table-responsive">
 											        <div class="container">
-										        		<form id="comServLoginForm" name="comServLoginForm" method="post" action="<c:url value='/company/member/login.do'/>">
+										        		<form id="comServLoginForm" name="comServLoginForm" method="post" action="<c:url value='/company/login.do'/>">
 													        <div class="boundDivSpan">
 														        <input class="comServ-input input-long" type="text" placeholder="로그인 아이디(회사 이메일)"
 														        	id="comMemLoginId" name="comMemLoginId"/>
@@ -316,9 +327,9 @@ function pwdKeyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아
 								<li class="comServNav-item">
 									<a class="comServNav-item-link" href="<c:url value='/company/positionList.do'/>">포지션</a></li>
 								<li class="comServNav-item">
-									<a class="comServNav-item-link" href="<c:url value='/company/matchupMain.do'/>">매치업</a></li>
+									<a class="comServNav-item-link" href="<c:url value='/company/matchupService.do'/>">매치업</a></li>
 								<li class="comServNav-item">
-									<a class="comServNav-item-link" href="<c:url value='/company/comInfoModify.do'/>">기업정보</a></li>
+									<a class="comServNav-item-link comServSelectedMenu" href="<c:url value='/company/comInfoModify.do'/>">기업정보</a></li>
 								<li class="comServNav-item">
 									<a class="comServNav-item-link" href="#">계정관리</a></li>
 							</ul>

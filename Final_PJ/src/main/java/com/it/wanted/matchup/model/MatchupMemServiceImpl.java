@@ -50,20 +50,20 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	}
 	
 	//일단 서비스를 만들어보자
-	//커리어, 에듀, 엑스퍼타이즈에서 매치업번호 리스트를 받아오고, 그걸로 다시 뷰를 서치하는 함수 
+	//커리어, 에듀, 엑스퍼타이즈에서 매치업번호 리스트를 받아오고, 그걸로 다시 뷰를 셀렉하는 함수 
 	public List<Map<String, Object>> selectSearchedMemList(MatchupMemSearchVO mcuMemSearchVo){ 
 		//매치업번호 리스트 합칠 것 
 		List<Integer> mcumemNoList=new ArrayList<Integer>();
 		
-		//커리어의 매치업번호 리스트 테스트 전
+		//커리어의 매치업번호 리스트 
 		List<Integer> careerMcumemNoList=careerDao.selectMcumemNo(mcuMemSearchVo.getSearchKeyword());
 		System.out.println("커리어 검색결과 careerMcumemNoList.size="+careerMcumemNoList.size());
 
-		//에듀의 매치업번호 리스트 테스트 전
+		//에듀의 매치업번호 리스트
 		List<Integer> eduMcumemNoList=educationDao.selectMcumemNo(mcuMemSearchVo.getSearchKeyword());
 		System.out.println("에듀 검색결과 eduMcumemNoList.size="+eduMcumemNoList.size());
 		
-		//익스퍼트의 매치업번호 리스트 테스트 전
+		//익스퍼트의 매치업번호 리스트
 		List<Integer> expertMcumemNoList=expertDao.selectMcumemNo(mcuMemSearchVo.getSearchKeyword());
 		System.out.println("익스퍼트 검색결과 expertMcumemNoList.size="+expertMcumemNoList.size());
 		
@@ -89,11 +89,41 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		
 		mcuMemSearchVo.setMcumemNoList(mcumemNoList);
 		//이제 매치업넘버리스트는 완성됐어 이거에 대한 이력서리스트를 가져와야 해
+		
+		//한번만 찍어보자 
+		System.out.println("searchMinCareer"+mcuMemSearchVo.getSearchMinCareer());
+		System.out.println("searchMaxCareer"+mcuMemSearchVo.getSearchMaxCareer());
 		mcumemSearchResultList=matchupMemDao.selectMcumemSearchList(mcuMemSearchVo);
 		
 		System.out.println("매치업넘버리스트에 해당하는 매치업멤버 뷰 조회 결과, mcumemSearchResultList.size="+mcumemSearchResultList.size());
 	
+		/*
+		 //이제 경력 계산을 하는 거예요 근데 케이스를 여기서 바꾼
+		 
+		for(int i=0; i<mcumemSearchResultList.size(); i++) {
+			Map<String,Object> map=mcumemSearchResultList.get(i);
+			
+			//신입부터 뽑는거면 아무것도 제외할 필요가 없네
+			if(mcuMemSearchVo.getSearchMinCareer().equals("신입") || mcuMemSearchVo.getSearchMaxCareer().equals("신입")) {
+				continue;
+			}
+			//신입부터 n년차까지 뽑는거면 n년차 이상은 제외. 미니멈은 신입이고 맥시멈은 신입이 아니고 전체도 아니고 10도 아닐 때
+			if(mcuMemSearchVo.getSearchMinCareer().equals("신입") || !mcuMemSearchVo.getSearchMaxCareer().equals("신입") ||
+					!mcuMemSearchVo.getSearchMaxCareer().equals("전체") || !mcuMemSearchVo.getSearchMaxCareer().equals("10") ) {
+				
+				
+			}
+		}
+		*/
 		return mcumemSearchResultList;
+	}
+	
+	//검색결과중에 찜한 멤버 리스트를 골라보자!
+	public List<Map<String, Object>> MatchupZzimedList(List<Map<String, Object>> mcumemSearchResultList) {
+		List<Map<String, Object>> zzimedList=null;
+		zzimedList=matchupMemDao.selectZzimedList(mcumemSearchResultList);
+		
+		return zzimedList;
 	}
 	
 }

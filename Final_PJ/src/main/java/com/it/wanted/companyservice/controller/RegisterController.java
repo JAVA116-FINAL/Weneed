@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,6 +38,7 @@ import com.it.wanted.cominfo.model.IndustryVO;
 import com.it.wanted.cominfo.model.NationVO;
 import com.it.wanted.cominfo.model.RegionVO;
 import com.it.wanted.commeminfo.model.ComMemInfoService;
+import com.it.wanted.commeminfo.model.ComMemInfoServiceImpl;
 import com.it.wanted.commeminfo.model.ComMemInfoVO;
 import com.it.wanted.commemlist.model.ComMemListService;
 import com.it.wanted.common.FileUploadUtil;
@@ -51,9 +53,11 @@ public class RegisterController {
 	@Autowired ComImgInfoService comImgInfoService;
 	@Autowired ComMemListService comMemListService;
 	@Autowired FileUploadUtil fileUpload;
+	@Autowired BCryptPasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = "/member/join.do", method= RequestMethod.POST)
 	public String join_modal_post(@ModelAttribute ComMemInfoVO vo, Model model) {
+		
 		logger.info("기업회원 회원가입 처리, vo={}", vo);
 		
 		int cnt=comMemInfoService.joinComMem(vo);
@@ -62,7 +66,7 @@ public class RegisterController {
 		String msg="", url="";
 		if(cnt==1) { //회원가입 처리 성공
 			msg="회원가입 되었습니다.";
-			url="/company/register.do";
+			url="/company/welcome.do";
 		}else { //cnt가 2면 이미 존재하는 아이디임
 			msg="이미 가입된 계정입니다.";
 			url="/company/welcome.do";
@@ -142,18 +146,12 @@ public class RegisterController {
 	
 	//회사 이미지 등록 페이지 조회
 	@RequestMapping("/comInfoModify.do")
-	public void imgUpload_get(HttpSession session, Model model) {
+	public void imgUpload_get(HttpSession session, Model model, HttpServletRequest request) {
 		logger.info("회사이미지등록 페이지 조회");
 		
 		String comMemId=(String) session.getAttribute("comMemId");
-		
-		//[1] 세션에 저장된 아이디로 cominfo에 있는 정보를 불러와서 정보 탭에 세팅한다 
-		ComMemInfoVO comMemInfoVo=comMemInfoService.selectComMem(comMemId);
-		logger.info("comMemNo를 가져오기 위한 comMemInfoVo 조회: {}", comMemInfoVo);
-		
-		int comMemNo=comMemInfoVo.getComMemNo();
-		ComInfoVO comInfoVo=comInfoService.selectCompany(comMemNo);
-		logger.info("comMemNo로 comInfo 조회 결과, comInfoVo={}", comInfoVo);
+		ComInfoVO comInfoVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		logger.info("세션의 comMemId, comInfo 조회 결과, comMemId={}, comInfoVo={}", comMemId, comInfoVo);
 		
 		//국가정보로 지역목록을 불러온다. 해당 국가와 지역으로 세팅해야 함
 		//이 코드를 value로 하는 값을 처음에 세팅해줘야 하고, jsp에서 ajax로 값 변경시 다시 받아오는걸 해야 함
@@ -170,10 +168,8 @@ public class RegisterController {
 		logger.info("회사코드로 이미지 조회 결과, imgList.size={}", imgList.size());
 		
 		//회사정보, 회사이미지 세팅해주기 위해 모델에 add
-		
 		model.addAttribute("nationList", nationList);
 		model.addAttribute("regionList", regionList);
-		model.addAttribute("comInfoVo", comInfoVo);
 		model.addAttribute("imgList", imgList);
 	}
 	

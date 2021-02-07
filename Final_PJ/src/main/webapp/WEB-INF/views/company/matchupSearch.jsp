@@ -8,20 +8,54 @@
 
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/matchup.css'/>">
 <script type="text/javascript">
+
 $(function(){
-	//경력 슬라이더
-	$("#slider-range").slider({
-		range: true,
-		min: 0,
-		max: 30,
-		values: [ 0, 30 ],
-		slide: function(event,ui) {
-			$("#amount").val(ui.values[0] +" - "+ ui.values[1]+"년");
-		}
-	});
-	$("#amount").val($("#slider-range").slider("values",0)
-			+" - "+$("#slider-range").slider("values",1)+"년");
+	/* //mincareer maxcareer 세팅해주기
+	var minCareer=$('input[name=searchMinCareer]').val();
+	console.log(minCareer);
+	var maxCareer=$('input[name=searchMaxCareer]').val();
+	console.log(maxCareer);
 	
+	if(minCareer=='전체'){
+		$('#minCareerSelect option:eq(0)').attr("selected","selected");
+	}else if(minCareer='신입'){
+		$('#minCareerSelect option:eq(1)').attr("selected","selected");
+	}else if(minCareer='1'){
+		$('#minCareerSelect option:eq(2)').attr("selected","selected");
+	}else if(minCareer='2'){
+		$('#minCareerSelect option:eq(3)').attr("selected","selected");
+	}else if(minCareer='3'){
+		$('#minCareerSelect option:eq(4)').attr("selected","selected");
+	}else if(minCareer='4'){
+		$('#minCareerSelect option:eq(5)').attr("selected","selected");
+	}else if(minCareer='5'){
+		$('#minCareerSelect option:eq(6)').attr("selected","selected");
+	}else if(minCareer='6'){
+		$('#minCareerSelect option:eq(7)').attr("selected","selected");
+	}else if(minCareer='7'){
+		$('#minCareerSelect option:eq(8)').attr("selected","selected");
+	}
+	 
+	if(maxCareer=='전체'){
+		$('#maxCareerSelect option:eq(0)').attr("selected",true);
+	}else if(maxCareer='신입'){
+		$('#maxCareerSelect option:eq(1)').attr("selected",true);
+	}else if(maxCareer='1'){
+		$('#maxCareerSelect option:eq(2)').attr("selected","selected");
+	}else if(maxCareer='2'){
+		$('#maxCareerSelect option:eq(3)').attr("selected",true);
+	}else if(maxCareer='3'){
+		$('#maxCareerSelect option:eq(4)').attr("selected",true);
+	}else if(maxCareer='4'){
+		$('#maxCareerSelect option:eq(5)').attr("selected",true);
+	}else if(maxCareer='5'){
+		$('#maxCareerSelect option:eq(6)').attr("selected",true);
+	}else if(maxCareer='6'){
+		$('#maxCareerSelect option:eq(7)').attr("selected",true);
+	}else if(maxCareer='7'){
+		$('#maxCareerSelect option:eq(8)').attr("selected",true);
+	}
+	 */
 	//리스트 선택 시 표시해주기
 	$('.matchupSearch-li').click(function(){
 		var num=$(this).index(); //부모 요소를 기준으로 내가 몇번째 자식이냐
@@ -72,19 +106,18 @@ $(function(){
 					alert('error: '+error);
 				}
 			});
-			
 		}
 	});
 	
 	//더보기 기능 구현
 	$('#matchupSearch-viewMoreBtn').click(function(){
 		//console.log('눌렀당');
-		
 		var viewMoreSize=parseInt($('#matchupSearch-record').val(), 10);
 		var keyword=$('#matchupSearchkeyword').val();
 		var minCareer=$('#minCareerSelect').val();
 		var maxCareer=$('#maxCareerSelect').val();
 		var jikmu=$('#matchupSearch-jikmuSelect').val();
+		var jikgun=$('#matchupSearch-jikgunSelect').val();
 		viewMoreSize+=5;
 		console.log(viewMoreSize);
 		$.ajax({
@@ -94,9 +127,10 @@ $(function(){
 			data:{
 				"viewMoreSize":viewMoreSize,
 				"searchKeyword":keyword,
-				"searchmaxCareer":maxCareer,
-				"searchminCareer":minCareer,
-				"searchjikmu":jikmu
+				"searchMaxCareer":maxCareer,
+				"searchMinCareer":minCareer,
+				"searchJikmu":jikmu,
+				"searchJikgun":jikgun
 			},
 			success:function(memList){
 				//alert('성공!');
@@ -109,10 +143,11 @@ $(function(){
 				$('input[name=searchMinCareer]').val(minCareer);
 				$('input[name=searchMaxCareer]').val(maxCareer);
 				$('input[name=searchJikmu]').val(jikmu);
+				$('input[name=searchJikgun]').val(jikgun);
 				$('#matchupSearchkeyword').val(keyword);
 			},
 			error:function(error){
-				alert('error!:'+error)
+				alert('error!:'+error);
 			}
 		});
 	});
@@ -120,15 +155,23 @@ $(function(){
 	//검색버튼 클릭하면 새로고침해서 이 페이지로 돌아오기
 	$('.matchupSearch-searchBtn').click(function(){
 		var keyword=$('#matchupSearchkeyword').val();
-		var minCareer=$('#minCareerSelect').val();
-		var maxCareer=$('#maxCareerSelect').val();
+		var minCareer=$('#minCareerSelect option:selected').val();
+		var maxCareer=$('#maxCareerSelect option:selected').val();
 		var jikmu=$('#matchupSearch-jikmuSelect').val();
+		var jikgun=$('#matchupSearch-jikgunSelect').val();
 		$('input[name=searchKeyword]').val(keyword);
 		$('input[name=searchMinCareer]').val(minCareer);
 		$('input[name=searchMaxCareer]').val(maxCareer);
 		$('input[name=searchJikmu]').val(jikmu);
+		$('input[name=searchJikgun]').val(jikgun);
 		
 		$('form[name=matchupSearchForm]').submit();
+		
+	});
+	
+	//찜한 이력서 보기.. 이 경우엔 검색어랑 경력 다 같이 가야할거같은뎅... 
+	$('#matchupSearch-Zzimed-list').click(function(){
+		
 	});
 	
 });
@@ -142,11 +185,13 @@ function makeMemList(mcumem){
 	str+='</div>';
 	str+='<div class="matchupSearch-resume-2nd">';
 	str+='<span>직군직종명</span>';
-	str+='<span>'
-	str+='<c:if test="${mcumemMap.CAREER eq \'신입\' }">';
-	str+=mcumem.CAREER+'</span></c:if>';
-	str+='<c:if test="${mcumemMap.CAREER ne \'신입\' }">';
-	str+=mcumem.CAREER+'년 경력</span></c:if>';	
+	str+='<span>';
+	
+	if(mcumem.CAREER == '신입'){
+		str+=mcumem.CAREER+'</span>';
+	}else{
+		str+=mcumem.CAREER+'년 경력</span>';
+	}
 	str+='<span>'+mcumem.EDUNAME+' '+mcumem.EDUMAJOR+'</span>';
 	str+='</div>';
 	str+='<div class="matchupSearch-resume-3rd">';
@@ -161,10 +206,11 @@ function makeMemList(mcumem){
 </script>
 	<form name="matchupSearchForm" method="post" action="#">
 		<input type="hidden" id="matchupSearch-record" value="0">
+		<input type="hidden" value="${searchVo.searchJikgun }" name="searchJikgun">
 		<input type="hidden" value="${searchVo.searchJikmu }" name="searchJikmu">
 		<input type="hidden" value="${searchVo.searchKeyword }" name="searchKeyword">
-		<input type="hidden" value="${searchVo.searchMinCareer }" name="searchMinCareer">
-		<input type="hidden" value="${searchVo.searchMaxCareer }" name="searchMaxCareer">
+		<input type="text" value="${searchVo.searchMinCareer }" name="searchMinCareer">
+		<input type="text" value="${searchVo.searchMaxCareer }" name="searchMaxCareer">
 	</form>
 	<div class="container"> <!-- 가장 바깥 래퍼 --> 
 		<section class="matchupSearch-1stSec"> <!-- 이름, 검색필터, 검색창, 필터 -->
@@ -204,35 +250,130 @@ function makeMemList(mcumem){
 				 <div class="matchupSearch-filter"> 
 				 	<span style="font-weight: bold; font-size: 0.8em;">최소 경력</span>
 					<select id="minCareerSelect" class="matchupSearch-select matchupSearch-select-sub">
-						<option value="all">전체</option>
-						<option value="new">신입</option>
-						<option value="1">1년</option>
-						<option value="2">2년</option>
-						<option value="3">3년</option>
-						<option value="4">4년</option>
-						<option value="5">5년</option>
-						<option value="6">6년</option>
-						<option value="7">7년</option>
-						<option value="8">8년</option>
-						<option value="9">9년</option>
-						<option value="10">10년 이상</option>
+						<option value="전체"
+							<c:if test="${searchVo.searchMinCareer eq '전체'}">
+								selected
+							</c:if>
+						>전체</option>
+						<option value="신입"<c:if test="${searchVo.searchMinCareer eq '신입'}">
+								selected
+							</c:if>
+						>신입</option>
+						<option value="1"
+							<c:if test="${searchVo.searchMinCareer eq '1'}">
+								selected
+							</c:if>
+						>1년</option>
+						<option value="2"
+							<c:if test="${searchVo.searchMinCareer eq '2'}">
+								selected
+							</c:if>
+						>2년</option>
+						<option value="3"
+							<c:if test="${searchVo.searchMinCareer eq '3'}">
+								selected
+							</c:if>
+						>3년</option>
+						<option value="4"
+							<c:if test="${searchVo.searchMinCareer eq '4'}">
+								selected
+							</c:if>
+						>4년</option>
+						<option value="5"
+							<c:if test="${searchVo.searchMinCareer eq '5'}">
+								selected
+							</c:if>
+						>5년</option>
+						<option value="6"
+							<c:if test="${searchVo.searchMinCareer eq '6'}">
+								selected
+							</c:if>
+						>6년</option>
+						<option value="7"
+							<c:if test="${searchVo.searchMinCareer eq '7'}">
+								selected
+							</c:if>
+						>7년</option>
+						<option value="8"
+							<c:if test="${searchVo.searchMinCareer eq '8'}">
+								selected
+							</c:if>
+						>8년</option>
+						<option value="9"
+							<c:if test="${searchVo.searchMinCareer eq '9'}">
+								selected
+							</c:if>
+						>9년</option>
+						<option value="10"
+							<c:if test="${searchVo.searchMinCareer eq '10'}">
+								selected
+							</c:if>
+						>10년 이상</option>
 					</select>
 				</div> 
 				<div class="matchupSearch-filter"> 
 					<span style="font-weight: bold; font-size: 0.8em;">최대 경력</span>
 					<select id="maxCareerSelect" class="matchupSearch-select matchupSearch-select-sub">
-						<option value="all">전체</option>
-						<option value="new">신입</option>
-						<option value="1">1년</option>
-						<option value="2">2년</option>
-						<option value="3">3년</option>
-						<option value="4">4년</option>
-						<option value="5">5년</option>
-						<option value="6">6년</option>
-						<option value="7">7년</option>
-						<option value="8">8년</option>
-						<option value="9">9년</option>
-						<option value="10">10년 이상</option>
+						<option value="전체"
+							<c:if test="${searchVo.searchMaxCareer eq '전체'}">
+								selected
+							</c:if>
+						>전체</option>
+						<option value="신입"
+							<c:if test="${searchVo.searchMaxCareer eq '신입'}">
+								selected
+							</c:if>
+						>신입</option>
+						<option value="1"
+							<c:if test="${searchVo.searchMaxCareer eq '1'}">
+								selected
+							</c:if>
+						>1년</option>
+						<option value="2"
+							<c:if test="${searchVo.searchMaxCareer eq '2'}">
+								selected
+							</c:if>
+						>2년</option>
+						<option value="3"
+							<c:if test="${searchVo.searchMaxCareer eq '3'}">
+								selected
+							</c:if>
+						>3년</option>
+						<option value="4"
+							<c:if test="${searchVo.searchMaxCareer eq '4'}">
+								selected
+							</c:if>
+						>4년</option>
+						<option value="5"
+							<c:if test="${searchVo.searchMaxCareer eq '5'}">
+								selected
+							</c:if>
+						>5년</option>
+						<option value="6"
+							<c:if test="${searchVo.searchMaxCareer eq '6'}">
+								selected
+							</c:if>
+						>6년</option>
+						<option value="7"
+							<c:if test="${searchVo.searchMaxCareer eq '7'}">
+								selected
+							</c:if>
+						>7년</option>
+						<option value="8"
+							<c:if test="${searchVo.searchMaxCareer eq '8'}">
+								selected
+							</c:if>
+						>8년</option>
+						<option value="9"
+							<c:if test="${searchVo.searchMaxCareer eq '9'}">
+								selected
+							</c:if>
+						>9년</option>
+						<option value="10"
+							<c:if test="${searchVo.searchMaxCareer eq '10'}">
+								selected
+							</c:if>
+						>10년 이상</option>
 					</select>
 				</div> 
 				<div class="matchupSearch-searchDiv">
@@ -254,7 +395,7 @@ function makeMemList(mcumem){
 			<div class="matchupSearch-tabBound">
 				<ul class="matchupSearch-resultList">
 					<li class="matchupSearch-li matchupSearch-selectedLi">목록 전체</li>
-					<li class="matchupSearch-li">찜한 이력서</li>
+					<li class="matchupSearch-li" id="matchupSearch-Zzimed-list">찜한 이력서</li>
 					<li class="matchupSearch-li">미열람 이력서</li>
 					<li class="matchupSearch-li">열람한 이력서</li>
 					<li class="matchupSearch-li">면접 제안한 이력서</li>

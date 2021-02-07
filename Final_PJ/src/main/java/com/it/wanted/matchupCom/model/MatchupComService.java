@@ -1,10 +1,12 @@
 package com.it.wanted.matchupCom.model;
 
+import java.util.Map;
+
 public interface MatchupComService {
 
 	int addZzim(MatchupZzimVO zzimVo);
 	int isZzimed(MatchupZzimVO zzimVo);
 	int delZzim(MatchupZzimVO zzimVo);
-	boolean hasMatchup(String comCode);
+	Map<String, Float> hasMatchup(String comCode);
 
 }
