@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="description" content="Orbitor,business,company,agency,modern,bootstrap4,tech,software">
 <meta name="author" content="themefisher.com">
-<title>커리어 여정을 행복하게, 원티드</title>
+<title>당신의 커리어를 탄탄하게, 위니드</title>
 </head>
 
   <!-- Favicon -->
@@ -34,13 +34,8 @@
   <!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->
   <script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src = "<c:url value='/resources/js/member.js'/>"></script>
-  
-   <!-- 
-    Essential Scripts
-    =====================================-->
 
     <!-- Main jQuery -->
-    <script src="<%=request.getContextPath() %>resources/plugins/jquery/jquery.js"></script>
     <!-- Bootstrap 4.3.2 -->
     <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/popper.js"></script>
     <script src="<%=request.getContextPath() %>/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -356,12 +351,42 @@
   			});
 		});
   		
-  		
-  		
-  		
   		$('.profileButton').click(function(){
   			$('.profileImg').toggleClass('profile-border');
   		})
+  		
+  		$('#after-search').hide();
+  		$('.searchBtn').click(function(){
+  			if($('#after-search').css("display")=="none"){
+				$('#before-search').hide();
+				$('#after-search').show();
+			}
+  			$('')
+  			$('.search-bottom-box').css('z-index',1);
+  			$('.search-back').css('top','50px').css('width','100%')
+  			.css('height','100%').css('background-color', ' rgba(0, 0, 0, 0.4)')
+  			.css('display','block');
+  			$('.bodyWrapper').css('filter','brightness(0.5)').css('background-color',' rgba(0, 0, 0, 0.4)');
+  		});
+  		
+  		$('.closeBtn').click(function(){
+			$('#after-search').hide();
+			$('#before-search').show();
+			$('.bodyWrapper').css('filter','none').css('background-color','transparent');
+		});
+  		
+  		$('.search-result-wrap').hide();
+  		$('.search-input').keyup(function(){
+  			var input = $(".search-input").val();
+  			if(input.length > 0){
+	  			$('.search-bottom-box').hide();
+	  			$('.search-result-wrap').show();
+	  			$('.search-result-wrap').css('z-index','1');
+  			}else{
+  				$('.search-bottom-box').show();
+	  			$('.search-result-wrap').hide();
+  			}
+  		});
   		
   	});
   	
@@ -387,6 +412,10 @@
 	overflow-y:none;
 }
 
+.container-top:not(.search-back){
+	height:50px;
+}
+
 </style>  
 </head>
 
@@ -395,7 +424,7 @@
 <header>
 	<div class="header-div">
 		<nav class="navbar navbar-expand-lg navigation navbar-border" id="navbar">
-			<div class="container container-top">
+			<div class="container container-top" id="before-search">
 			 	 <a class="navbar-logo" href="<c:url value='/index.do'/>">
 				  	<img src="<c:url value='/resources/images/weneedLogo.png'/>" alt="" class="img-fluid top-logo" style="padding-top:4px;">
 				  </a>
@@ -406,18 +435,18 @@
 		  
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown" id="navigation" style="padding: 6px 6px;">
-						<a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색 </a>
+						<a class="nav-link dropdown-toggle" href="<c:url value='/jobsearch/jobsearchDetail.do'/>" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색 </a>
 						<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; border-top:0; margin-top:0; line-height:17px; border-radius:0;">
-							<li><a class="dropdown-item" href="department.html" style="border-bottom:none;">개발<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
-							<li><a class="dropdown-item" href="department-single.html" style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">서버 개발자</a></li>
-							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">웹 개발자</a></li>
-							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">프론트엔드 개발자</a></li>
-							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">자바 개발자</a></li>
-							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">안드로이드 개발자</a></li>
-							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">iOS 개발자</a></li>
-							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">데이터 엔지니어</a></li>
-							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">파이썬 개발자</a></li>
-							<li><a class="dropdown-item" href="department-single.html"style="color:#999;padding:5px 20px 15px 20px;font-size:13px;border-bottom:none;">더보기<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
+							<li><a class="dropdown-item" href="#" style="border-bottom:none;">개발<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
+							<li><a class="dropdown-item" href="#" style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">서버 개발자</a></li>
+							<li><a class="dropdown-item" href="#"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">웹 개발자</a></li>
+							<li><a class="dropdown-item" href="#"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">프론트엔드 개발자</a></li>
+							<li><a class="dropdown-item" href="#"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">자바 개발자</a></li>
+							<li><a class="dropdown-item" href="#"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">안드로이드 개발자</a></li>
+							<li><a class="dropdown-item" href="#"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">iOS 개발자</a></li>
+							<li><a class="dropdown-item" href="#"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">데이터 엔지니어</a></li>
+							<li><a class="dropdown-item" href="#"style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">파이썬 개발자</a></li>
+							<li><a class="dropdown-item" href="#"style="color:#999;padding:5px 20px 15px 20px;font-size:13px;border-bottom:none;">더보기<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
 						</ul>	
 				  	</li>
 				  	<li class="nav-item" id="career" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/career/Mainpage/careerMain.do'/>">커리어 성장</a></li>
@@ -476,8 +505,8 @@
 						      </div>
 						      <div class="modal-body gaeun-modal-body" style="height: calc(100vh - 130px);overflow-y: auto;border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
 						        <div class="gaeun-modal-body-con1">
-						        	<h1>직장인을 위한<br>커리어 플랫폼, 원티드!</h1>
-						        	<h2>커리어 성장과 행복을 위한 여정<br>지금 원티드에서 시작하세요.</h2>
+						        	<h1>직장인을 위한<br>커리어 플랫폼, 위니드!</h1>
+						        	<h2>커리어 성장과 행복을 위한 여정<br>지금 위니드에서 시작하세요.</h2>
 						        </div>
 						        <div class="gaeun-modal-body-con2">
 						        	<form name="frmLogin" method="post" action="">
@@ -627,6 +656,54 @@
 					</ul>
 				</aside>
 			</div>
+			
+			<!-- 검색 -->
+			<div class="container-top" id="after-search">
+				<form action="#" class="container search-form" style="display:flex;">
+					<input type="text" placeholder="#태그, 회사, 포지션 검색" class="search-input"
+					autocomplete="off" style="border:0; height:36px;">
+					<i class="icon-search" style="width:16px;left:34px;"></i>
+					<button type="button" class="closeBtn">
+						<i class="icon-close" style="right:34px;"></i>
+					</button>
+				</form>
+				<div class="search-bottom-box">
+					<div class="container" id="tag-wrap">
+						<h4 class="tag-title">추천태그로 검색해보세요</h4>
+						<a href="#" class="companytag-home">기업태그 홈</a>
+						<ul class="tag-recom">
+							<li class="tag-list-item">
+								<button class="tag-list-item-btn">#퇴사율5%이하</button>
+							</li>
+							<li class="tag-list-item">
+								<button class="tag-list-item-btn">#사내카페</button>
+							</li>
+							<li class="tag-list-item">
+								<button class="tag-list-item-btn">#주4일근무</button>
+							</li>
+							<li class="tag-list-item">
+								<button class="tag-list-item-btn">#전문연구요원</button>
+							</li>
+							<li class="tag-list-item">
+								<button class="tag-list-item-btn">#연봉상위2~5%</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="search-result-wrap">
+					<div class="container" id="result-wrap">
+						<ul class="result-list">
+							<li>
+								<a href="<c:url value='/mainSearch/search.do'/>" class="">
+									<span><i class="icon-search" id="search-icon"></i></span>
+									<span>Product Manager / UX기획자</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</nav>
 	</div>
 </header>
+<div class="bodyWrapper">

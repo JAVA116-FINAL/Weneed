@@ -107,7 +107,7 @@ public class ResumeController {
 		List<ResumeVO> resumeList = resumeService.selectResumeAll(memNo);
 		logger.info("이력서 조회결과 resumeList.size()={}", resumeList.size());
 		
-		int cnt=mcumemService.isMechupMem(memNo);
+		int cnt=mcumemService.isMatchupMem(memNo);
 		logger.info("매치업 조회결과 cnt={}", cnt);
 		if(cnt>0) {
 			int mcuResumeNo=mcumemService.selectmcuResumeNo(memNo);

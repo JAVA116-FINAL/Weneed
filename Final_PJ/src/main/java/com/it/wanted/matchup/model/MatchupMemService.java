@@ -3,11 +3,17 @@ package com.it.wanted.matchup.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.wanted.resume.model.ResumeVO;
+
 public interface MatchupMemService {
 
 	/* 자연 */
-	public int isMechupMem(int memNo);
+	public int isMatchupMem(int memNo);
 	public int selectmcuResumeNo(int memNo);
+	public int hasMcuResumeNo(int memNo);
+	public int insertMcuMem(MatchupAllVO mmAllVo);
+
+	public MatchupMemVO selectMcuMem(int memNo);
 	
 	
 	/* 현빈 */

@@ -1,0 +1,177 @@
+@charset "UTF-8";
+.bodyWrapper{
+	background-color:#f8f8fa;
+}
+
+.search-keyword-wrap{
+	position:relative;
+	width:100%;
+	height:150px;
+	background:#fff;
+	border-bottom:1px solid #e1e2e3;
+	border-top:1px solid rgb(0 0 0 / 10%);
+	z-index:1;
+}
+.search-keyword{
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%, -50%);
+	max-width:90%;
+	font-size:42px;
+	line-height:2;
+	color:#333;
+	padding:0;
+	margin:0;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.search-wrap{
+	position:relative;
+	margin-top:60px;
+}
+.search-company{
+	padding-bottom:60px;
+}
+.search-company-title{
+	font-size:22px;
+	font-weight:600;
+	line-height:34px;
+	margin-bottom:18px;
+	color:#333;
+}
+.search-company-title >span{
+	margin-left:10px;
+	font-weight:400;
+}
+
+.search-company-conBox{
+	margin:-10px;
+	position:relative;
+}
+
+.search-company-link{
+	background:#fff;
+	border-radius:2px;
+	padding:20px 20px;
+	justify-content:space-between;
+	display:flex;
+	width:100%;
+	margin:10px;
+	float:left;
+	align-items:center;
+}
+
+.search-company-link-detail-left{
+	display:flex;
+	align-tems:center;
+	
+}
+
+.search-company-img >img{
+	width:58px;
+	height:58px;
+	margin-right:20px;
+	
+}
+
+.search-company-name{
+	width:calc(100% -78px);
+	height:58px;
+	display:flex;
+	justify-content:center;
+	flex-direction:column;  
+}
+
+.search-company-name >h5{
+	color:#333;
+	font-size:16px;
+	font-weight:400;
+	line-height:27px;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+.search-company-name >h6{
+	color:#999;
+	font-size:14px;
+	font-weight:400;
+	line-height:20px;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+.follow-btn{
+	width:88px;
+	height:38px;
+	border-radius:20px;
+	border:1px solid #e1e2e3;
+	background:#fff;
+	color:#3366ff;
+	font-size:14px;
+}
+
+
+/*포지션*/
+.search-position-title{
+	font-size:22px;
+	font-weight:600;
+	line-height:34px;
+	margin-bottom:18px;
+	color:#333;
+}
+.search-position-title >span{
+	margin-left:10px;
+	font-weight:400;
+}
+
+.job-opening-wrap{
+	padding:80px 0 90px;
+	position:relative;
+}
+
+.job-opening-title{
+	font-size:14px;
+	border-top:1px solid #e1e2e3;
+	padding:70px 0 40px;
+	font-weight:600;
+	letter-spacing:normal;
+	color:#333;
+}
+.job-opening-con-box{
+	text-align:center;
+}
+.job-opening-con-box >h3{
+	font-size:16px;
+	font-weight:400;
+	line-height:1.5;
+	letter-spacing:normal;
+	text-align:center;
+	color:#333;
+	margin:120px auto 20px;
+}
+.job-opening-con-box >button{
+	width:150px;
+	height:40px;
+	border-radius:34px;
+	background-color:#3366ff;
+	font-size:14px;
+	font-weight:600;
+	color:#fff;
+	margin-bottom:100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
