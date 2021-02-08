@@ -46,6 +46,11 @@ public class ResumeDAOMybatis implements ResumeDAO{
 	public ResumeVO selectResumeOne(ResumeVO rVo) {
 		return sqlSession.selectOne(namespace+"selectResumeOne", rVo);
 	}
+
+	@Override
+	public int insertMcuResume(ResumeVO rVo) {
+		return sqlSession.update(namespace+"insertMcuResume",rVo);
+	}
 	
 	
 	

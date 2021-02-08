@@ -8,6 +8,7 @@ public interface EducationDAO {
 	public int deleteEdu(int eduNo);
 	public int updateEdu(EducationVO educationVo);
 	public List<EducationVO> selectEdubyResumeNo(int resumeNo);
+	public int insertMcuEdu(EducationVO educationVo);
 	
 	/* 현빈 */
 	public List<Integer> selectMcumemNo(String searchKeyword);

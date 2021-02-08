@@ -32,6 +32,15 @@
 		select * from education where resume_No=#{resumeNo}
 	</select>
 	
+	<insert id="insertMcuEdu" parameterType="educationVo">
+	<selectKey keyProperty="eduNo" resultType="int" order="BEFORE">
+		select education_seq.nextval from dual 
+	</selectKey>
+		insert into education(edu_No,resume_No,edu_Name)
+		values(#{eduNo} ,#{resumeNo},#{eduName})
+	</insert>
+	
+	
 	
 	<!-- 현빈 -->
 	<select id="selectMcumemNo" parameterType="String" resultType="int">

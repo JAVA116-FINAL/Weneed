@@ -203,3 +203,20 @@ span.spckbox_jy {
 span.spckbox_jy {
     margin-bottom: 50px;
 }
+
+i.icon-arrow_right.\:before.arrowIcon_jy {
+    position: absolute;
+    bottom: 5px;
+    right: 0px;
+}
+
+.profileTitle-dt_jy {
+    font-size: 17px;
+    color: #505050;
+    font-weight: bolder;
+    margin-bottom: 12px;
+}
+
+aside.col-lg-3.col-md-6.machupAside_jy {
+    padding-top: 2px;
+}

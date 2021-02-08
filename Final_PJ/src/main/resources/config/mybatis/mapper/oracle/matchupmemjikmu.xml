@@ -8,7 +8,7 @@
 			select matchupMemjikmu_seq.nextval from dual
 		</selectKey>
 		insert into matchupMemJikmu(mcumem_Jikmu_No, jikmu_Code, expertise_No)
-		values(#{mcumemJikmuNo},#{jikmuCode},#{expertiseNo})
+		values(#{mcumemJikmuNo},#{jikmuCode, jdbcType=VARCHAR},#{expertiseNo})
 	</insert>
 	
 </mapper>
