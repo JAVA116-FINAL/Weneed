@@ -9,6 +9,14 @@ public class MatchupMemSearchVO {
 	private String searchMinCareer;
 	private String searchMaxCareer;
 	private String searchJikmu;
+	private String searchJikgun;
+	
+	public String getSearchJikgun() {
+		return searchJikgun;
+	}
+	public void setSearchJikgun(String searchJikgun) {
+		this.searchJikgun = searchJikgun;
+	}
 	public List<Integer> getMcumemNoList() {
 		return mcumemNoList;
 	}
@@ -45,11 +53,12 @@ public class MatchupMemSearchVO {
 	public void setSearchJikmu(String searchJikmu) {
 		this.searchJikmu = searchJikmu;
 	}
+	
 	@Override
 	public String toString() {
 		return "MatchupMemSearchVO [mcumemNoList=" + mcumemNoList + ", viewMoreSize=" + viewMoreSize
 				+ ", searchKeyword=" + searchKeyword + ", searchMinCareer=" + searchMinCareer + ", searchMaxCareer="
-				+ searchMaxCareer + ", searchJikmu=" + searchJikmu + "]";
+				+ searchMaxCareer + ", searchJikmu=" + searchJikmu + ", searchJikgun=" + searchJikgun + "]";
 	}
 	
 }

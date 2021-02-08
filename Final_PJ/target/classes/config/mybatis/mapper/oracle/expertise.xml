@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mybatis.mapper.expertise">
+<mapper namespace="com.mybatis.mapper.oracle.expertise">
 	<!-- 현빈 -->
 	<select id="selectMcumemNo" parameterType="string" resultType="int">
 		select m.mcumem_no 
@@ -12,6 +12,27 @@
 		on m.expertise_no=e.expertise_no
 		where e.skill like '%' || #{keyword} || '%'
 	</select>
+	
+	<!-- 자연 -->
+	<insert id="insertExpertise" parameterType="expertiseVo">
+		<selectKey keyProperty="expertiseNo" resultType="int" order="BEFORE">
+			select expertise_seq.nextval from dual
+		</selectKey>
+		insert into expertise(expertise_No,jikgun_Code,career,salary,skill)
+		values(#{expertiseNo}, #{jikgunCode}, #{career}, #{salary}, #{skill})
+	</insert>
+	
+	<select id="selectUptodateExpertNo" resultType="int">
+		select * from 
+		(
+		<![CDATA[
+			select expertise_No from expertise where expertise_No<3000 order by expertise_No desc
+		]]>
+		)
+		where rownum=1
+		
+	</select>
+
 </mapper>
 
 

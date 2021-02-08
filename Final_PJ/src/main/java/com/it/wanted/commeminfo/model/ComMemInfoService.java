@@ -7,7 +7,7 @@ public interface ComMemInfoService {
 	public final static int PWD_MISMATCH=3; //아이디는 있으나 비밀번호 불일치 
 	public final static int LOGIN_SUCCESS=4; //로그인 성공
 	
-	int loginCheck(String comMemId, String comMemPwd);
+	int loginCheck(String comMemId, String comMemLoginPwd);
 	int joinComMem(ComMemInfoVO vo);
 	ComMemInfoVO selectComMem(String comMemId);
 }

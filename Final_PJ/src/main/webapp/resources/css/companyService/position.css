@@ -20,6 +20,11 @@ input, select{
 span {
 	margin-right: 10px;
 }
+
+#topBuildingSpan{
+	margin-right: 0px;
+}
+
 input[type=checkbox] {
 	margin-right: 10px;
 }

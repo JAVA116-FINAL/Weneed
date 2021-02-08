@@ -18,6 +18,19 @@
 		delete from matchuplike
 		where mcumem_no=#{mcumemNo} and com_code=#{comCode}
 	</delete>
+	
+	<select id="checkListedMatchup" parameterType="string" resultType="int">
+		select count(*) from matchupCom where com_code=#{comCode}
+	</select>
+	
+	<select id="isOverMatchup" parameterType="string" resultType="map">
+		select 
+		case when mcupd_exdate is null then 0 
+		else (sysdate-mcupd_exdate) end as leftDate, 
+		case when resume_read_count is null then 0
+		else (max_resume_count - resume_read_count) end as leftCount 
+		from matchupCom where com_code=#{comCode}
+	</select>
 </mapper>
 
 

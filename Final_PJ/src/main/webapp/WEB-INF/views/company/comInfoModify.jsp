@@ -67,7 +67,7 @@ $(function(){
 			}
 		});
 		
-		//location.reload(true);
+		location.reload(true);
 		//이미지 등록 후 새로고침 기능을 어떻게 넣어줘야 할 지...
 	});
 

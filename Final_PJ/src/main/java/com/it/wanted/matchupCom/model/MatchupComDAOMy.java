@@ -1,5 +1,7 @@
 package com.it.wanted.matchupCom.model;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,16 @@ public class MatchupComDAOMy implements MatchupComDAO{
 	@Override
 	public int delZzim(MatchupZzimVO zzimVo) {
 		return sqlSession.delete(namespace+"delZzim", zzimVo);
+	}
+
+	@Override
+	public int checkListedMatchup(String comCode) {
+		return sqlSession.selectOne(namespace+"checkListedMatchup", comCode);
+	}
+
+	@Override
+	public Map<String, Float> isOverMatchup(String comCode) {
+		return sqlSession.selectOne(namespace+"isOverMatchup", comCode);
 	}
 	
 }
