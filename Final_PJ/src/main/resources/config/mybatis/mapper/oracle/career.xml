@@ -32,6 +32,14 @@
 		select * from career where resume_No=#{resumeNo}
 	</select>
 	
+	<insert id="insertMcuCareer" parameterType="careerVo">
+		<selectKey keyProperty="careerNo" resultType="int" order="BEFORE">
+			select career_seq.nextval from dual  
+		</selectKey>
+		insert into career(career_No,resume_No,start_Year, start_Month,end_Year, end_Month,cur_Employed, career_Name) 
+		values(#{careerNo},#{resumeNo},#{startYear}, #{startMonth},#{endYear}, #{endMonth},#{curEmployed}, #{careerName})
+	</insert>
+	
 	<!-- 현빈 -->
 	<select id="selectMcumemNo" parameterType="string" resultType="int">
 		select m.mcumem_no

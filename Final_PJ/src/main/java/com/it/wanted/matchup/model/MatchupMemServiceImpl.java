@@ -13,11 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.it.wanted.career.model.CareerDAO;
+import com.it.wanted.career.model.CareerVO;
 import com.it.wanted.education.model.EducationDAO;
+import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.expertise.model.ExpertiseDAO;
 import com.it.wanted.expertise.model.ExpertiseVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemJikmuVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemjikmuDAO;
+import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeDAO;
 import com.it.wanted.resume.model.ResumeVO;
 
@@ -69,7 +72,10 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 				if(mmjikmuList!=null&& !mmjikmuList.isEmpty()) {
 					for( MatchupMemJikmuVO mmjikmuVo:mmjikmuList) {
 						mmjikmuVo.setExpertiseNo(expertNo);
-						cnt=mmjikmuDao.insertMatchupMemJikmu(mmjikmuVo);
+						if(mmjikmuVo!=null) {
+							cnt=mmjikmuDao.insertMatchupMemJikmu(mmjikmuVo);
+						}
+						
 					}//for
 				}
 				
@@ -86,34 +92,40 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return cnt;
 	}
 	
-	/*
 	@Override
+	public MatchupMemVO selectMcuMem(int memNo) {
+		return matchupMemDao.selectMcuMem(memNo);
+	}
+	//2/8 mcu이력서 등록
 	@Transactional
-	public int insertMcuMem(ResumeVO rVo) {
-		//1. 전문가번호등록하기 curval로 가져와야하나...
+	@Override
+	public int insertMcuMem2(ResumeAllVO rAllVo, MatchupMemVO mcuVo) {
+		ResumeVO resumeVo = rAllVo.getResumeVo();
+		List<CareerVO> crrList = rAllVo.getCrrList();
+		CareerVO crrVo = crrList.get(0);
+		List<EducationVO> eduList = rAllVo.getEduList();
+		EducationVO eduVo=eduList.get(0);
+
 		int cnt=0;
-		int result=0;
-		MatchupMemVO mVo= new MatchupMemVO();
 		try {
-		ExpertiseVO eVo= new ExpertiseVO();
-		//eVo.setCareer("신입");
-		eVo.setSalary("0");
-		result=expertDao.insertExpertise(eVo);
-		logger.info("전문기술 insert결과 result={}",result);
-		
-		//2. 이력서 등록하기
-		cnt=resumeDao.insertResume(rVo);
-		rVo = resumeDao.selectResume(rVo.getMemNo());
-		logger.info("이력서 insert결과 rVo={}", rVo);
-		
-		//3. 매치업 등록하기 
-		
-		mVo.setMemNo(rVo.getMemNo());
-		mVo.setResumeNo(rVo.getResumeNo());
-		mVo.setExpertiseNo(result);
-		cnt=matchupMemDao.insertMcuMem(mVo);
-		logger.info("매치업 insert 파라미터 mVo={}, insert결과cnt={}",mVo, cnt);
-		
+			//1이력서 등록
+			cnt=resumeDao.insertMcuResume(resumeVo);
+			if(cnt>0) {
+				resumeVo=resumeDao.selectResume(resumeVo.getMemNo());
+				logger.info("방금 입력한 이력서 resumeVO={}",resumeVo);
+				//2.학교 등록
+				eduVo.setResumeNo(resumeVo.getResumeNo());
+				cnt=educationDao.insertMcuEdu(eduVo);
+				
+				//3.회사등록
+				crrVo.setResumeNo(resumeVo.getResumeNo());
+				cnt=careerDao.insertMcuCareer(crrVo);
+				
+				//4.매치업업뎃!
+				mcuVo.setResumeNo(resumeVo.getResumeNo());
+				logger.info("매치업 업뎃 매개변수 mcuVo={}", mcuVo);
+				cnt=matchupMemDao.updateMCUResume(mcuVo);
+			}
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			cnt=-1;
@@ -121,13 +133,6 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		}
 		return cnt;
 	}
-	*/
-	@Override
-	public MatchupMemVO selectMcuMem(int memNo) {
-		return matchupMemDao.selectMcuMem(memNo);
-	}
-
-	
 	
 	/* 현빈 */
 	@Override
@@ -223,5 +228,6 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		
 		return zzimedList;
 	}
+
 	
 }
