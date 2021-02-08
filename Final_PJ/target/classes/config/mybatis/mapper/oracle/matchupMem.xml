@@ -13,12 +13,16 @@
 		select count(*) from matchupMem where mem_no=#{memNo}
 	</select>
 	
+	<select id="hasMcuResumeNo" parameterType="int" resultType="int">
+		select count(resume_No) from matchupMem where mem_no=#{memNo}
+	</select>
+	
 	<insert id="insertMcuMem" parameterType="matchupMemVo">
 		<selectKey keyProperty="mcumemNo" resultType="int" order="BEFORE">
 			select matchupMem_seq.nextVal from dual
 		</selectKey>
-		insert into matchupmem(mcumem_No, mem_No,expertise_No, resume_No)
-		values(#{mcumemNo}, #{memNo},#{expertiseNo},#{resumeNo})
+		insert into matchupmem(mcumem_No, mem_No,expertise_No)
+		values(#{mcumemNo}, #{memNo}, #{expertiseNo})
 	</insert>
 
 	<select id="selectMcuMem" parameterType="int" resultType="matchupMemVo">

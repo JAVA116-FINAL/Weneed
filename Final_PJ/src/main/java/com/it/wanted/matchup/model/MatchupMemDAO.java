@@ -7,9 +7,12 @@ public interface MatchupMemDAO {
 
 	/* 자연 */
 	public int isMatchupMem(int memNo);
+	public int hasMcuResumeNo(int memNo);
 	public int selectmcuResumeNo(int memNo);
 	public int insertMcuMem(MatchupMemVO mVo);
 	public MatchupMemVO selectMcuMem(int memNo);
+	
+	
 	
 	/* 현빈 */
 	List<MatchupMemVO> selectOpen();

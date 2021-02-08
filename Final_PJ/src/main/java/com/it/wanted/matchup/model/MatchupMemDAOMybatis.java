@@ -27,6 +27,11 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	}
 	
 	@Override
+	public int hasMcuResumeNo(int memNo) {
+		return sqlSession.selectOne(namespace+"hasMcuResumeNo",memNo);
+	}
+	
+	@Override
 	public int insertMcuMem(MatchupMemVO mVo) {
 		return sqlSession.insert(namespace+"insertMcuMem", mVo);
 	}

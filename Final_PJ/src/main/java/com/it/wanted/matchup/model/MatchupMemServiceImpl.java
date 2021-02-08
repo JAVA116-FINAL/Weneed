@@ -16,6 +16,8 @@ import com.it.wanted.career.model.CareerDAO;
 import com.it.wanted.education.model.EducationDAO;
 import com.it.wanted.expertise.model.ExpertiseDAO;
 import com.it.wanted.expertise.model.ExpertiseVO;
+import com.it.wanted.matchupmemjikmu.model.MatchupMemJikmuVO;
+import com.it.wanted.matchupmemjikmu.model.MatchupMemjikmuDAO;
 import com.it.wanted.resume.model.ResumeDAO;
 import com.it.wanted.resume.model.ResumeVO;
 
@@ -27,6 +29,8 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	@Autowired private CareerDAO careerDao;
 	@Autowired private ExpertiseDAO expertDao;
 	@Autowired private ResumeDAO resumeDao;
+	@Autowired private MatchupMemjikmuDAO mmjikmuDao;
+	
 	private static final Logger logger=LoggerFactory.getLogger(MatchupMemServiceImpl.class);
 	
 	/* 자연 */
@@ -39,8 +43,50 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	public int isMatchupMem(int memNo) {
 		return matchupMemDao.isMatchupMem(memNo);
 	}
-
 	
+	@Override
+	public int hasMcuResumeNo(int memNo) {
+		return matchupMemDao.hasMcuResumeNo(memNo);
+	}
+	@Transactional
+	@Override
+	public int insertMcuMem(MatchupAllVO mcuAllVo) {
+		ExpertiseVO expertVo = mcuAllVo.getExpertVo();
+		List<MatchupMemJikmuVO> mmjikmuList = mcuAllVo.getMcujikmuList();
+		MatchupMemVO mmVo = mcuAllVo.getMcumemVo();
+		
+		int cnt=0;
+		int expertNo=0;
+		
+		try {
+		//전문가 등록
+			logger.info("expertVo={}",expertVo);
+			cnt=expertDao.insertExpertise(expertVo);
+			if(cnt>0) {
+				expertNo=expertDao.selectUptodateExpertNo();
+						logger.info("expertiseNo={}",expertNo);
+				//직무리스트 등록
+				if(mmjikmuList!=null&& !mmjikmuList.isEmpty()) {
+					for( MatchupMemJikmuVO mmjikmuVo:mmjikmuList) {
+						mmjikmuVo.setExpertiseNo(expertNo);
+						cnt=mmjikmuDao.insertMatchupMemJikmu(mmjikmuVo);
+					}//for
+				}
+				
+				//매치업 회원등록
+				mmVo.setExpertiseNo(expertNo);
+				cnt=matchupMemDao.insertMcuMem(mmVo);
+				logger.info("파라미터 mmVo={}, 결과 cnt={}",mmVo,cnt);
+			}//if
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return cnt;
+	}
+	
+	/*
 	@Override
 	@Transactional
 	public int insertMcuMem(ResumeVO rVo) {
@@ -75,7 +121,7 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		}
 		return cnt;
 	}
-	
+	*/
 	@Override
 	public MatchupMemVO selectMcuMem(int memNo) {
 		return matchupMemDao.selectMcuMem(memNo);
@@ -167,6 +213,13 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		*/
 		return mcumemSearchResultList;
 	}
+
+	
+
+
+
+
+	
 
 	
 	

@@ -18,11 +18,15 @@ public class ExpertiseDAOMy implements ExpertiseDAO{
 		return sqlSession.selectList(namespace+"selectMcumemNo", keyword);
 	}
 
+	/* 자연 */
 	@Override
 	public int insertExpertise(ExpertiseVO eVo) {
-		int cnt=sqlSession.insert(namespace+"insertExpertise",eVo);
-		
-		return eVo.getExpertiseNo(); 
+		return sqlSession.insert(namespace+"insertExpertise",eVo); 
+	}
+
+	@Override
+	public int selectUptodateExpertNo() {
+		return sqlSession.selectOne(namespace+"selectUptodateExpertNo");
 	}
 	
 }
