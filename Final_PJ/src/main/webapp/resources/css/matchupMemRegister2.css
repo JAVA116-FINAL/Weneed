@@ -1,0 +1,205 @@
+@charset "UTF-8";
+
+dt.machupTitle-dt_jy {
+    display: inline-block;
+}
+
+dd.infoIcon_dd_jy {
+    display: inline-block;
+    position: relative;
+    float: right;
+}
+
+a.infoIcon_a_jy {
+    font-size: 14px;
+    color: #9e9e9e;
+}
+
+.ectbtgroup_jy {
+    border-top: none;
+}
+
+::before {}
+
+i.icon-info_icon.infoIcon_jy {
+    color: #9e9e9e;
+    margin-left: 8px;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+input#eduName {
+    border: none;
+    outline: none;
+    width: 75%;
+    /* color: #9e9e9e45; */
+    border-bottom: 1px solid #9e9e9e3b;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy1 {
+    position: relative;
+    width: 3%;
+    display: inline-block;
+}
+
+div#divEdu_jy {
+    width: 75%;
+    display: contents;
+}
+
+h6.formButton-label_jy.mcuEditsal_jy {
+    margin-right: 15%;
+}
+
+input#careerName {
+    border: none;
+    outline: none;
+    width: 75%;
+    /* color: #9e9e9e45; */
+    border-bottom: 1px solid #9e9e9e3b;
+}
+
+h6.formButton-label_jy.exceptconOption_jy.mcuEditskil_jy {
+    margin-right: 15%;
+}
+
+span#spSkills_jy {
+    width: 75%;
+    /* display: contents; */
+}
+
+.formButton_jy {
+    width: 75%;
+    display: contents;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy {
+    position: relative;
+    width: 3%;
+}
+
+select#year {
+    width: 11%;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    /* color: #9e9e9e8c; */
+}
+
+select#month {
+    width: 11%;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+
+select#year2 {
+    width: 11%;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+
+select#month2 {
+    width: 11%;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+
+input#ckcurEmployed {
+    display: inline-block;
+}
+
+textarea.taIntroduce_jy {
+    resize: none;
+    border: 1px solid #80808059;
+    border-radius: 4px;
+    width: -webkit-fill-available;
+}
+
+p.tooltipP_jy {
+    font-size: 13px;
+    color: #9e9e9e91;
+    margin-bottom: 5px;
+}
+
+input#eduNameModal_jy {
+    border: none;
+    outline: none;
+}
+
+.modalbodyinnderDiv_jy {
+    padding: 0;
+}
+
+input#careerinput_jy {
+    border: none;
+    outline: none;
+}
+
+span.spckbox_jy {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+input#ckcurEmployed {margin-right: 5px;}
+
+
+h6.formButton-label_jy.exceptconOption_jy.mcuEditskil_jy.simpleIntroTitle_jy {
+    margin-bottom: 5px;
+}
+select#year {
+    -moz-appearance: none; /* Firefox */
+    /* -webkit-appearance:none; */ /* Safari and Chrome */
+    -webkit-appearance: none;
+    /* appearance:none; */
+    background: none;
+    padding: 0px;
+    width: 5%;
+}
+
+select#month {
+    appearance: none;
+    background: none;
+    padding: 0;
+    width: 4%;
+}
+
+select#year2 {
+    webkit-appearance: none;
+    /* appearance: none; */
+    background: none;
+    padding: 0px;
+    width: 5%;
+}
+
+select#month2 {
+    appearance: none;
+    background: none;
+    padding: 0;
+    width: 4%;
+}
+
+span.periodAria_jy {
+    display: inline-block;
+    margin-left: 153px;
+    width: 100%;
+}
+
+h6.formButton-label_jy.exceptconOption_jy.mcuEditskil_jy {
+    margin-bottom: 5px;
+}
+
+span.spckbox_jy {
+    display: inline-block;
+    margin-left: 153px;
+    width: 100%;
+}
+
+span.spckbox_jy {
+    margin-bottom: 50px;
+}
