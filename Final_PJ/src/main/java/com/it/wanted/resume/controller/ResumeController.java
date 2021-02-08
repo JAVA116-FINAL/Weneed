@@ -1,7 +1,9 @@
 package com.it.wanted.resume.controller;
 
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,15 +15,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.it.wanted.common.FileUploadUtil;
 import com.it.wanted.common.PdfFileUtil;
 import com.it.wanted.matchup.model.MatchupMemService;
@@ -43,14 +43,14 @@ public class ResumeController {
 	@Autowired
 	private PdfFileUtil pdfFileUtil; 
 	
-	//인트로화면보여주기
+	//1.인트로화면보여주기
 	@RequestMapping("/resumeIntro.do")
 	public String resumeIntro() {
 		logger.info("이력서소개 화면 보여주기");
 		return "resume/resumeIntro";
 	}
 	
-	//이력서 등록화면
+	//2.이력서 등록화면
 	@RequestMapping(value = "/resumeRegister.do", method = RequestMethod.GET)
 	public String resumeRegister_get(HttpSession session, Model model) {
 		//1
@@ -75,7 +75,7 @@ public class ResumeController {
 		return "resume/resumeRegister";
 	}
 	
-	//진짜 이력서등록, 하지만 업뎃!
+	//3.진짜 이력서등록, 하지만 업뎃!
 	@RequestMapping(value = "resumeRegister.do", method = RequestMethod.POST)
 	public String resumeRegister_post(@ModelAttribute ResumeAllVO rAllVo,Model model) {
 		//1 날짜 받아와서 셋팅해야함. 임시저장플래그처리
@@ -96,7 +96,7 @@ public class ResumeController {
 		
 	}
 	
-	//이력서 관리화면 
+	//4.이력서 관리화면 
 	@RequestMapping("/resumeList.do")
 	public String resumeList(HttpSession session, Model model) {
 		//1
@@ -115,10 +115,9 @@ public class ResumeController {
 		
 			if(mcuResumeNo>0) { 
 				model.addAttribute("mcuResumeNo", mcuResumeNo); 
+				
 			}
 		}
-
-		
 
 		//3
 		model.addAttribute("resumeList", resumeList);
@@ -126,7 +125,7 @@ public class ResumeController {
 		return "resume/resumeList";
 	}
 	
-	//이력서 상세보기/수정
+	//5.이력서 상세보기/수정
 	@RequestMapping("/resumeDetail.do")
 	public String resumeDetail(@RequestParam (defaultValue = "0")int resumeNo, HttpSession session, Model model) {
 		//1
@@ -145,6 +144,7 @@ public class ResumeController {
 		
 	}
 	
+	//6.이력서 수정처리
 	@RequestMapping(value = "/resumeEdit.do", method = RequestMethod.POST)
 	public String resumeEdit(@ModelAttribute ResumeAllVO rAllVo, Model model) {
 		//1 날짜 받아와서 셋팅해야함. 임시저장플래그처리
@@ -166,12 +166,11 @@ public class ResumeController {
 		
 	}
 	
-	
-	
-	//파일업로드!
+	//7. 파일업로드!
 	@ResponseBody
 	@RequestMapping(value = "/resumefileUpload.do", method = RequestMethod.POST)
 	public ResumeVO resumefileUpload( HttpSession session, HttpServletRequest request) {
+	
 		//1
 		int memNo=(Integer) session.getAttribute("mem_no");
 		logger.info("이력서파일 등록하기 화면, memNo={}" , memNo);
@@ -205,11 +204,12 @@ public class ResumeController {
 		//4
 		return rVo;
 	}
+	//파일다운로드!!!
 	
-	//pdf파일 생성 다운
+	//8. pdf파일 생성 다운
 	@ResponseBody
 	@RequestMapping("/resumeDown.do")
-	public int resumeDownload(@RequestParam (defaultValue = "0")int resumeNo, HttpSession session) {
+	public int resumeDownload(@RequestParam (defaultValue = "0") int resumeNo, HttpSession session) {
 		//1
 		int memNo=(Integer) session.getAttribute("mem_no");
 		logger.info("pdf파일 다운로드화면 보여주기,파라미터resumeNo={}",resumeNo);
@@ -218,11 +218,15 @@ public class ResumeController {
 		ResumeVO rVo=new ResumeVO();
 		rVo.setMemNo(memNo);
 		rVo.setResumeNo(resumeNo);
-		rVo=resumeService.selectResumeOne(rVo);
-		logger.info("pdf파일 다운로드파라미터 rVo={}",rVo);
+		//rVo=resumeService.selectResumeOne(rVo);//샘플 이력서테이블만
+		ResumeAllVO rAllVo = resumeService.selectResumeDetail(rVo);
+		
+		//logger.info("pdf파일 다운로드파라미터 rVo={}",rVo);
+		logger.info("pdf파일 다운로드파라미터 rAllVo={}",rAllVo);
+		
 		int result=0;
 		try {
-			pdfFileUtil.createPdf(rVo);
+			pdfFileUtil.createPdf(rAllVo);
 			result=1;
 		} catch (DocumentException e) {
 			e.printStackTrace();
@@ -239,10 +243,27 @@ public class ResumeController {
 		
 	}
 	
-	//이력서 지우기
+	//9.이력서 파일 다운로드
+	@RequestMapping("/resumeFileDown.do")
+	public ModelAndView resumeFileDown(@RequestParam (defaultValue = "0") int resumeNo, @RequestParam String resumeFile, HttpServletRequest request) {
+		//1
+		logger.info("이력서 파일 다운로드 파라미터 resumeNo={},resumeFile={}", resumeNo, resumeFile);
+		//2
+		//3
+		Map<String, Object> map=new HashMap<String, Object>();
+		String upPath=fileUploadUtil.getUploadPath(FileUploadUtil.RESUME_UP_TYPE, request);
+		File file=new File(upPath,resumeFile);
+		map.put("file", file);
+		ModelAndView mav= new ModelAndView("resumeDownloadView",map);
+		//4
+		return mav;
+	}
+	
+	
+	//10.이력서 지우기
 	@ResponseBody
 	@RequestMapping("/deleteResume.do")
-	public int deleteResume(@RequestParam int resumeNo, HttpSession session) {
+	public int deleteResume(@RequestParam (defaultValue = "0") int resumeNo, HttpSession session) {
 		//1
 		int memNo=(Integer) session.getAttribute("mem_no");
 		logger.info("이력서삭제 파라미터 resumeNo={}, memNo={}",resumeNo, memNo);
@@ -250,6 +271,8 @@ public class ResumeController {
 		ResumeVO rVo= new ResumeVO();
 		rVo.setMemNo(memNo);
 		rVo.setResumeNo(resumeNo);
+		
+		logger.info("rVo={}",rVo);
 		//2
 		int cnt=resumeService.deleteResume(rVo);
 		logger.info("삭제 결과 cnt={}, rVo={}", cnt,rVo);
@@ -258,6 +281,38 @@ public class ResumeController {
 		return cnt;
 	}
 	
+	//11.파일이력서 지우기
+	@ResponseBody
+	@RequestMapping("/deleteResumeFile.do")
+	public int deleteResumeFile(@RequestParam (defaultValue = "0") int resumeNo, @RequestParam String resumeFile, HttpServletRequest request, HttpSession session) {
+		//1
+		int memNo=(Integer) session.getAttribute("mem_no");
+		logger.info("이력서 파일 삭제, 파라미터 resumeNo={}, resumeFile={}",resumeNo, resumeFile);
+		logger.info("회뭔번호 memNo={}",memNo);
+		
+		ResumeVO rVo= new ResumeVO();
+		rVo.setMemNo(memNo);
+		rVo.setResumeNo(resumeNo);
+		rVo.setResumeFile(resumeFile);
+		logger.info("회뭔번호 rVo={}",rVo);
+		
+		//2
+		int cnt=resumeService.deleteResume(rVo);
+		logger.info("삭제 결과 cnt={}, rVo={}", cnt,rVo);
+		
+		if(cnt>0) {
+			String upPath=fileUploadUtil.getUploadPath(FileUploadUtil.IMAGE_TYPE, request);
+			File file= new File(upPath, resumeFile);
+			if(file.exists()) {
+				boolean bool=file.delete();
+				logger.info("파일 삭제여부bool={}",bool);
+			}
+		}
+		
+		//3
+		//4
+		return cnt;
+	}
 	
 	
 }
