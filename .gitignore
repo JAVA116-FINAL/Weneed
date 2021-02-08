@@ -7,8 +7,10 @@ mybatis-config.xml
 servlet-context.xml
 pom.xml
 log4j.xml
+web.xml
 
-target/*
+lecture
+target
 *.properties
 .classpath
 MANIFEST.MF
