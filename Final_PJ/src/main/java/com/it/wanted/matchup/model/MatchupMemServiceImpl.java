@@ -5,20 +5,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.it.wanted.career.model.CareerDAO;
 import com.it.wanted.education.model.EducationDAO;
 import com.it.wanted.expertise.model.ExpertiseDAO;
+import com.it.wanted.expertise.model.ExpertiseVO;
+import com.it.wanted.resume.model.ResumeDAO;
+import com.it.wanted.resume.model.ResumeVO;
 
 @Service
 public class MatchupMemServiceImpl implements MatchupMemService{
 	
-	@Autowired 	private MatchupMemDAO matchupMemDao;
-	@Autowired EducationDAO educationDao;
-	@Autowired CareerDAO careerDao;
-	@Autowired ExpertiseDAO expertDao;
+	@Autowired private MatchupMemDAO matchupMemDao;
+	@Autowired private EducationDAO educationDao;
+	@Autowired private CareerDAO careerDao;
+	@Autowired private ExpertiseDAO expertDao;
+	@Autowired private ResumeDAO resumeDao;
+	private static final Logger logger=LoggerFactory.getLogger(MatchupMemServiceImpl.class);
 	
 	/* 자연 */
 	@Override
@@ -27,8 +36,49 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	}
 
 	@Override
-	public int isMechupMem(int memNo) {
-		return matchupMemDao.isMechupMem(memNo);
+	public int isMatchupMem(int memNo) {
+		return matchupMemDao.isMatchupMem(memNo);
+	}
+
+	
+	@Override
+	@Transactional
+	public int insertMcuMem(ResumeVO rVo) {
+		//1. 전문가번호등록하기 curval로 가져와야하나...
+		int cnt=0;
+		int result=0;
+		MatchupMemVO mVo= new MatchupMemVO();
+		try {
+		ExpertiseVO eVo= new ExpertiseVO();
+		//eVo.setCareer("신입");
+		eVo.setSalary("0");
+		result=expertDao.insertExpertise(eVo);
+		logger.info("전문기술 insert결과 result={}",result);
+		
+		//2. 이력서 등록하기
+		cnt=resumeDao.insertResume(rVo);
+		rVo = resumeDao.selectResume(rVo.getMemNo());
+		logger.info("이력서 insert결과 rVo={}", rVo);
+		
+		//3. 매치업 등록하기 
+		
+		mVo.setMemNo(rVo.getMemNo());
+		mVo.setResumeNo(rVo.getResumeNo());
+		mVo.setExpertiseNo(result);
+		cnt=matchupMemDao.insertMcuMem(mVo);
+		logger.info("매치업 insert 파라미터 mVo={}, insert결과cnt={}",mVo, cnt);
+		
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return cnt;
+	}
+	
+	@Override
+	public MatchupMemVO selectMcuMem(int memNo) {
+		return matchupMemDao.selectMcuMem(memNo);
 	}
 
 	
@@ -117,6 +167,8 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		*/
 		return mcumemSearchResultList;
 	}
+
+	
 	
 	//검색결과중에 찜한 멤버 리스트를 골라보자!
 	public List<Map<String, Object>> MatchupZzimedList(List<Map<String, Object>> mcumemSearchResultList) {

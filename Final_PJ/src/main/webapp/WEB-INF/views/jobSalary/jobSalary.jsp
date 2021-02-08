@@ -143,7 +143,7 @@ function getSalary(){
 			<span id="carrer-salary" class="salary-chart-salary"></span><span> 만원</span>
 		</aside>
 		<div class="container">
-		<div class="salary-select-box">
+		<div class="container salary-select-box">
 			<div class="salary-select-box-wrap">
 				<div class="salary-select-each">
 					<div class="salary-select-each-jobGroup">
@@ -228,7 +228,7 @@ function getSalary(){
 		</h5>
 		<div class="matchUp-start-box">
 			<div class="matchUp-start-box-text1">이제 밤새워 채용사이트 보지 마세요.</div>
-			<div class="matchUp-start-box-text2">원티드 매치업에 프로필을 등록하면, 기업의 인사담당자가 직접 면접을 제안합니다.</div>
+			<div class="matchUp-start-box-text2">위니드 매치업에 프로필을 등록하면, 기업의 인사담당자가 직접 면접을 제안합니다.</div>
 			<div class="matchUp-start-box-logoBox">
 				<ul class="logoBox">
 					<li class="logoBox-li" style="background:url('${pageContext.request.contextPath}/resources/images/jobSalary/salary_company_001.jpg') center/cover no-repeat;"></li>

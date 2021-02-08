@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-.jobarea_jy.mcuEditjabarea_jy {
-    /* display: inline-flex; */
-}
-
-.jobarea_jy.mcuEditjabarea_jy {}
-
-.form-group.mcuEditformgroup_jy {
-    /* display: inline; */
-    /* width: 51px; */
-}
 
 .form-group.mcuEditformgroup_jy {
     display: inline-block;
@@ -198,24 +188,268 @@ label.btn.mcuEdit-jikgunbt_jy {
     opacity: 0.3;
 }
 
-
-
 label.btn.mcuEdit-jikgunbt_jy.active {
     opacity: 1;
     display: inline-block;
 }
+/* 02/05 */
+button#btToggle {
+    outline: none;
+}
 
+i.icon-arrow_right.arrowIcon_jy {
+    right: 49px;
+}
 
+button.navbar-toggler.mcuEdit-togglebt_jy.collapsed {
+    outline: none;
+}
 
+span.mcuEditplusbt_jy {
+    outline: none;
+}
 
-/* 태그 선택하면 이렇게 변하게하기 
+button#btToggle {
+    outline: none;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy1 {
+    outline: none;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy {
+    outline: none;
+}
+
+button.btMachupEdit_jy {
+    outline: none;
+}
+
+/* 
 label.btn.mcuEdit-jikgunbt_jy {
     color: black;
     background: #80808026;
     border: none;
-} */
+} 
+
+ */
+/* 0206 */
+
+input#salary {
+    border: none;
+    outline: none;
+}
+
+input#skill {
+    border: none;
+    outline: none;
+}
 
 
+button.navbar-toggler.mcuEdit-togglebt_jy {
+    outline: none;
+}
+
+.modal-header.modalHeader_jy {
+    padding: 9px 13px;
+}
+
+.modal-dialog.modalDialog_jy {
+    margin: 0 auto;
+    margin-top: 350px;
+}
+
+h5#modalLabel_jy {
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    margin-left: 176px;
+}
+
+span.closeIcon_jy {font-weight: lighter;}
 
 
+.modalDivSelect1_jy {
+    border: none;
+}
 
+
+.modalbodyinnderDiv_jy {
+    padding: 18px;
+}
+
+
+select#selectPer {
+    border: none;
+    background: #9e9e9e17;
+    width: 100%;
+    height: 38px;
+    margin-bottom: 15px;
+}
+
+.modal-dialog.modalDialog_jy {
+    width: 430px;
+}
+
+select#selectPer {
+    font-size: 13px;
+    font-weight: 700;
+    padding-left: 13px;
+}
+
+select#selectCurrency {
+    border: none;
+    background: #9e9e9e17;
+    width: 100%;
+    height: 38px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    font-weight: 700;
+    padding-left: 13px;
+}
+
+input#salaryAmount_jy {
+    border: none;
+    outline: none;
+}
+
+.MosaldivInput_jy {border: 1px solid #9e9e9e17;}
+
+input#salaryAmount_jy {
+    display: inline-block;
+    width: 89%;
+    padding-left: 13px;
+    font-size: 13px;
+}
+
+span#spCurecy {
+    font-size: 14px;
+    font-weight: normal;
+    color: black;
+}
+
+button#btFinish_jy {
+    width: 100%;
+    border-radius: 4px;
+}
+
+
+.modalDivSelect1_jy>label {
+    font-size: 13px;
+}
+
+input#skillsinput_jy {
+    display: inline-block;
+    width: 88%;
+    border: none;
+    outline: none;
+}
+
+.skillinputDiv {
+    border: 1px solid #9e9e9e4d;
+    border-radius: 4px;
+}
+
+input#skillsinput_jy {
+    padding-left: 15px;
+    font-size: 13px;
+    /* color: #9e9e9e38; */
+}
+
+i.icon-search {
+    border-left: 1px solid #80808033;
+    padding-left: 9px;
+}
+
+.skillsLi {
+    display: inline-block;
+    margin-right: 10px;
+    border: 1px solid #80808000;
+    border-radius: 18px;
+    background: #9e9e9e26;
+    padding: 3px 20px;
+    margin: 10px 5px;
+    font-size: 13px;
+    font-weight: lighter;
+    color: black;
+}
+
+span.tags_jy {
+    font-variation-settings: normal;
+}
+
+button#delTags {
+    margin-left: 8px;
+    color: #9e9e9eb0;
+    font-size: 15px;
+    background: #80808000;
+}
+
+select#career {
+    background: #80808012;
+    border: none;
+}
+
+div#spSalary_jy {
+    display: inline-block;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy1 {
+    border: 0;
+    width: 5%;
+}
+
+div#spSalary_jy {
+    width: 78%;
+    border-bottom: 1px solid #9e9e9e40;
+}
+
+
+i.icon-arrow_right.\:before.arrowIcon_jy {position: initial;}
+
+input#skill {
+    width: 78%;
+    font-size: 14px;
+    border-bottom: 1px solid #9e9e9e40;
+    padding-bottom: 0;
+}
+
+button.btselect_jy.mcuEditbtSelect_jy {
+    border: 0;
+    width: 5%;
+}
+
+div#spSalary_jy {
+    font-size: 14px;
+    color: black;
+    padding-bottom: 8px;
+}
+
+
+.machupMemEdit-btOk_jy {
+    margin-top: 50px;
+}
+
+.machupMemEdit-btOk_jy.mcuRegisterdiv {
+    position: fixed;
+    border-top: 1px solid #9e9e9e52;
+    width: 100%;
+    display: inline-block;
+    right: 0;
+    bottom: 0px;
+    background: white;
+    height: 73px;
+}
+
+button.btMachupEdit_jy.mcuRegisterbt {
+    background: #2189f3f0;
+    position: relative;
+    display: inline-block;
+    bottom: -11px;
+    left: -59px;
+}
+
+.col-lg-9.col-md-6.machupWrapperdiv_jy {
+    margin-bottom: 50px;
+}

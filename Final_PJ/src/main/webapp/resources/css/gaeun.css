@@ -126,6 +126,155 @@ button{
 	color:#555;
 }
 
+/* 검색 */
+#after-search{
+	background-color:#fff;
+	left: 0;
+  bottom: 0;
+  width: 100%;
+  position:relative;
+}
+
+.icon-search:before {
+  content: "\e923";
+}
+.icon-search{
+    font-size: 16px;
+    left: 20px;
+    top: 28% !important;
+}
+.icon-close:before {
+  	content: "\e92a";
+}
+.icon-close{
+    position: absolute;
+    font-size: 12px;
+    right: 10px;
+    top: 25%;
+    color:#333;
+}
+.search-form{
+    padding: 7px 0;
+    position: relative;
+}
+.search-input{
+	height: 36px;
+    width: 97%;
+    margin: 0 auto;
+    padding: 0 36px 0 46px;
+    border: 0;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #333;
+    background-color: #e8e8e8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    out-line:0;
+}
+
+.search-bottom-box{
+  position: relative;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+}
+
+.serch-bottom-box-wrap{
+	 position: relative;
+    margin: 0 auto;
+    padding: 40px 0 0;
+    max-width: 1060px;
+}
+.serch-bottom-box-wrap:before{
+	content:" ";
+	display:table;
+}
+
+.tag-title{
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 400;
+  color: #999;
+}
+.companytag-home{
+	float:right;
+	font-size:14px;
+	line-height:1;
+	font-weight:600;
+	color:#3366ff;
+}
+
+.search-back{
+  content: '';
+  display: block;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1; 
+}
+
+#tag-wrap{
+	padding-top:40px;
+}
+.tag-recom{
+	padding:20px 0 25px;
+	display:inline-block;
+}
+.tag-list-item{
+	float:left;
+	width:auto;
+	position:relative;
+	display:block;
+	font-size:18px;
+	font-weight:500;
+	line-height:29px;
+	color:#000;
+	margin-bottom:8px;
+}
+.tag-list-item:first-of-type > button{
+	margin-left:0;
+}
+.tag-list-item-btn{
+	display:inline-block;
+	height:50px;
+	line-height:50px;
+	font-size:15px;
+	font-weight:400;
+	color:#333;
+	padding:0 26px;
+	border-radius:25px;
+	background-color:#f3f5f8;
+	margin-left:10px;
+}
+
+.search-result-wrap{
+  position: relative;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+}
+#result-wrap{
+	padding-top:10px;
+	max-height:calc(100vh - 100px);
+	overflow-y:auto;
+}
+.result-list{
+	padding-bottom:40px;
+}
+.result-list li{
+	font-size:20px;
+	line-height:34px;
+	padding:5px 0;
+	color:#333;
+}
+#search-icon{
+	font-size:24px;
+	margin-right:10px;
+}
 /*로그인 후 top*/
 .icon-bell:before{
 	content: "\e925";
