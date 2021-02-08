@@ -1,6 +1,6 @@
+<%@ include file="../inc/top.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!-- 내꺼!! -->  
 <!-- 리스트기반 에딧고쳐서 꼭 같이 있어야 함 -->
@@ -37,9 +37,9 @@ $(function(){
 		
 		if(jList.length>0){
 			$.each(jList, function(idx,item){
-				jikmu+="<label class='btn mcuEdit-jikgunbt_jy' onclick='$.btActivejikmu(\""+item.jikmuCode+"\")' id='lb"+item.jikmuCode+"'>";	
-				jikmu+="<input type='text' name='jikmuItems["+idx+"].jikmuCode' value='"+item.jikmuCode+"'/>";
-				jikmu+="<input type='checkbox' name='jikmuItems["+idx+"].jikmuName' value='"+item.jikmuName+"'/>"+item.jikmuName    
+				jikmu+="<label for='ckjikmu"+item.jikmuCode+"' class='btn mcuEdit-jikgunbt_jy' onclick='$.btActivejikmu("+item.jikmuCode+")' id='lb"+item.jikmuCode+"'>";	
+				/* jikmu+="<input type='text' name='mcujikmuList["+idx+"].jikmuCode' value='"+item.jikmuCode+"'/>"; */
+				jikmu+="<input type='checkbox' name='mcujikmuList["+idx+"].jikmuCode' id='ckjikmu"+item.jikmuCode+"' value='"+item.jikmuCode+"'/>"+item.jikmuName    
 				jikmu+="</label>";    
 		
 			});//each
@@ -51,7 +51,7 @@ $(function(){
 	var bool=true;
 	$('#btToggle').click(function(){
 		
-		if(bool){//토글 구현하는 방법★★
+		if(bool){//
 			$('#moreChoice').html('선택사항 접기 <i class="icon-arrow_up btarrowDoun_jy :before"></i>');
 			//bool=false;
 		}else{
@@ -90,9 +90,24 @@ $(function(){
 		str+=$('#salaryAmount_jy').val();
 		str+=$('#spCurecy').html();
 			
-		$('#spSalary_jy').html(str); /* 모달안에 셋팅 */
 		$('#salary').val(str); /* 모달밖에 셋팅 */
 	}
+
+	
+ 	$('#skillsinput_jy').keydown(function(e){
+ 		if(e.keyCode == 13){
+ 			event.preventDefault(); 
+ 	 		$.setSkills();	
+ 		}
+ 		
+	}); 
+	
+ 	$('#salaryAmount_jy').keydown(function(e){
+ 		if(e.keyCode == 13){
+ 			event.preventDefault(); 
+ 		}
+	});
+	
 	
 	//기술 돋보기 클릭 시 생성(모달)
 	var j=0;
@@ -129,6 +144,8 @@ $(function(){
 			//alert(list);
 			$('#skill').val(list);
 	});	
+	
+	
 
 });//jquery
 
@@ -175,10 +192,9 @@ $(function(){
 			<div class="col-lg-9 col-md-6 machupWrapperdiv_jy">
 				<div class="doctor-details mt-4 mt-lg-0 machupinner_jy">
 					<div class="machupSection_jy">
-						<form id="frmMcuEx" class="appoinment-form" method="post" action="<c:url value='/machupMem/machupMemExRegister.do'/>">
-							<input type="text" name="mcumemNo" value="${mcuVo.mcumemNo}"> 						
-							<input type="text" name="memNo" value="${mcuVo.memNo}">		 		
-							<input type="text" name="resumeNo" value="${mcuVo.resumeNo}">		 		
+						<form id="frmMcuRegister" class="appoinment-form" method="post" action="<c:url value='/matchupMem/matchupMemRegister.do'/>">
+							<!-- <input type="text" name="mcumemVo.mcumemNo" value=""> --> 						
+							<input type="hidden" name="mcumemVo.memNo" value="${memVo.memNo}">		 		
 							<header class="form-header_jy">	
 								<dl class="form-title_jy">
 									<dt class="machupTitle-dt_jy">전문분야 설정</dt>
@@ -192,9 +208,9 @@ $(function(){
 						<!-- 직군선택하기  forEach로 뿌리기-->				
 				                            <div class="form-group mcuEditformgroup_jy">
 				                <!-- 전문가번호 -->  
-				                               <input type="text" name="expertiseNo" value="${mcuVo.expertiseNo}">
+				                               <!-- <input type="text" name="expertiseNo" value=""> -->
 				                <!-- 직군코드 -->
-				                                <select class="form-control mcuEditFormctr_jy" id="exampleFormControlSelect1" name="jikgunCode">
+				                                <select class="form-control mcuEditFormctr_jy" id="exampleFormControlSelect1" name="expertVo.jikgunCode">
 				                                 <option value="0">선택하세요</option>
 				                                  <c:forEach var="jikgunVo" items="${jikgunList}">
 					                                  <option value="${jikgunVo.jikgunCode}">${jikgunVo.jikgunName}</option>
@@ -227,13 +243,18 @@ $(function(){
 											<div class="staticlabel_jy mcuEditstaticlabel_jy">경력</div>                   
 				                            <div class="form-group mcuEditformgroup_jy">
 					            		  <!--경력-->            
-				                                <select class="form-control mcuEditFormctr_jy" id="career">
+				                                <select class="form-control mcuEditFormctr_jy" name="expertVo.career" id="career">
 				                                  <option value="신입">신입</option>
-				                                  <option value="1년">1년</option>
-				                                  <option value="2년">2년</option>
-				                                  <option value="3년">3년</option>
-				                                  <option value="5년이상">5년이상</option>
-				                                  <option value="10년이상">10년이상</option>
+				                                  <option value="1">1년</option>
+				                                  <option value="2">2년</option>
+				                                  <option value="3">3년</option>
+				                                  <option value="4">4년이상</option>
+				                                  <option value="5">5년이상</option>
+				                                  <option value="6">6년이상</option>
+				                                  <option value="7">7년이상</option>
+				                                  <option value="8">8년이상</option>
+				                                  <option value="9">9년이상</option>
+				                                  <option value="10이상">10년이상</option>
 				                                </select>
 					                         </div>
 										</div>
@@ -256,9 +277,9 @@ $(function(){
 												<div class="formButton_jy">
 													<h6 class="formButton-label_jy mcuEditsal_jy">현재연봉</h6>
 										<!-- 연봉 -->
-													<div class="spSalary_jy" id="spSalary_jy">
-														<input type="text" name="salary" id="salary" placeholder="선택하기" value="">
-													</div>
+													<span class="spSalary_jy" id="spSalary_jy">
+														<input type="text" name="expertVo.salary" readonly="readonly" id="salary" placeholder="선택하기">
+													</span>
 													<button type="button" class="btselect_jy mcuEditbtSelect_jy1"  data-toggle="modal" data-target="#salarayModal">
 														<i class="icon-arrow_right :before arrowIcon_jy"></i>
 													</button>
@@ -268,7 +289,7 @@ $(function(){
 													<h6 class="formButton-label_jy exceptconOption_jy mcuEditskil_jy">스킬</h6>
 										<!-- 스킬 -->	
 													<span class="spSkills_jy" id="spSkills_jy">
-														<input type="text" name="skill" id="skill" placeholder="선택하기" value="">
+														<input type="text" name="expertVo.skill" readonly="readonly" id="skill" placeholder="선택하기" value="">
 													</span>
 													<button type="button" class="btselect_jy mcuEditbtSelect_jy" data-toggle="modal" data-target="#skillsModal">	
 														<i class="icon-arrow_right :before arrowIcon_jy"></i>
@@ -329,6 +350,7 @@ $(function(){
 																	<div class="modalDivSelect1_jy">
 																		<label for="skillsinput_jy" >스킬</label>
 																		<div class="skillinputDiv" onClick="$.setSkills()">																	
+																			<input type="hidden" >
 																			<input type="text" name="skillsinput_jy" id="skillsinput_jy" placeholder="보유스킬을 작성해주세요" value="">
 																			<i class="icon-search"></i>
 																		</div>
@@ -349,8 +371,8 @@ $(function(){
 									</div>
 								</div>
 								<div class="machupMemEdit-btOk_jy mcuRegisterdiv">
-									<button type="button" class="btMachupEdit_jy mcuRegisterbt" onClick="location.href='<c:url value="/matchup/mcuResumeRegister.do?resumeNo=${mcuVo.resumeNo}"/>'">
-										<span class="spbtText">다음단계</span>
+									<button type="submit" class="btMachupEdit_jy mcuRegisterbt">
+										<span class="spbtText">다음단계</span> <!-- 이때. 전문가번호, 직무List,매치업번호 insert=>이력서 인서트한다음에 매치업에 업뎃 -->
 									</button>
 								</div> 
 							</form> 	

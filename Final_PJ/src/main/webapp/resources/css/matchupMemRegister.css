@@ -400,7 +400,7 @@ button.btselect_jy.mcuEditbtSelect_jy1 {
     width: 5%;
 }
 
-div#spSalary_jy {
+#spSalary_jy {
     width: 78%;
     border-bottom: 1px solid #9e9e9e40;
 }
@@ -420,7 +420,7 @@ button.btselect_jy.mcuEditbtSelect_jy {
     width: 5%;
 }
 
-div#spSalary_jy {
+#spSalary_jy {
     font-size: 14px;
     color: black;
     padding-bottom: 8px;
@@ -452,4 +452,11 @@ button.btMachupEdit_jy.mcuRegisterbt {
 
 .col-lg-9.col-md-6.machupWrapperdiv_jy {
     margin-bottom: 50px;
+}
+
+input#salary {
+    width: 78%;
+    font-size: 14px;
+    border-bottom: 1px solid #9e9e9e40;
+    padding-bottom: 0;
 }
