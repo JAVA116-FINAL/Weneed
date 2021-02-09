@@ -9,6 +9,6 @@ public interface MainSearchService {
 
 	List<MainSearchVO> searchPosition(String keyword);
 
-	List<Map<String, Object>> getSearchKeyword(String keyword);
+	List<MainSearchVO> getSearchKeyword(String keyword);
 
 }

@@ -25,7 +25,7 @@ public class MainSearchDAOMybatis implements MainSearchDAO {
 	}
 
 	@Override
-	public List<Map<String, Object>> getSearchKeyword(String keyword) {
+	public List<MainSearchVO> getSearchKeyword(String keyword) {
 		return sqlSession.selectList(namespace+"getSearchKeyword", keyword);
 	}
 }

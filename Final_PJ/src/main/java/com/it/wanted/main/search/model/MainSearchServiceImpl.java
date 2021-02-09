@@ -22,7 +22,7 @@ public class MainSearchServiceImpl implements MainSearchService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getSearchKeyword(String keyword) {
+	public List<MainSearchVO> getSearchKeyword(String keyword) {
 		return mainSearchDao.getSearchKeyword(keyword);
 	}
 	

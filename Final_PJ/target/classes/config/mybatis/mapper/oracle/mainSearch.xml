@@ -22,15 +22,24 @@
 		</if>
 	</select>
 	
-	<select id="getSearchKeyword" resultType="map" parameterType="mainSearchVo">
+	<select id="getSearchKeyword" resultType="mainSearchVo" parameterType="mainSearchVo">
+		select distinct com_name
+		from comInfo
+		where com_name like '%'||#{keyword}||'%'
+		union all
+		select distinct pos_name
+		from position
+		where pos_name like '%'||#{keyword}||'%'
+	</select>
+	<!-- <select id="getSearchKeyword" resultType="map" parameterType="mainSearchVo">
 		select distinct b.pos_name
 		from comInfo a, position b
 		where a.COM_CODE = b.COM_CODE
 		and a.com_name like '%'||#{keyword}||'%' or b.pos_name like '%'||#{keyword}||'%'
-	</select>
+	</select> -->
 	
 	<!-- <select id="getSearchKeyword" resultType="mainSearchVo" parameterType="String">
-		select distinct a.com_name, b.pos_name
+		select distinct a.com_name , b.pos_name
 		from comInfo a, position b
 		where a.COM_CODE = b.COM_CODE
 		<if test="value!=null"></if>
