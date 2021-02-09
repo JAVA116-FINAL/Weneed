@@ -52,9 +52,9 @@ public class IndexController {
 		logger.info("afterLoginMain 보여주기");
 	}
 	
-	@RequestMapping("/mainSearch/search.do")
+	/*@RequestMapping("/mainSearch/search.do")
 	public void mainSearch() {
 		logger.info("mainSearch 보여주기");
-	}
+	}*/
 	
 }

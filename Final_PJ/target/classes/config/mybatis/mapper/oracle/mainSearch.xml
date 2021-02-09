@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.mainSearch">
+<!-- 검색조건:회사 -->
+	<select id="searchComInfo" resultType="mainSearchVo" parameterType="String">
+		select a.com_name, a.industry , b.com_img_url
+		from comInfo a, comImgInfo b
+		where a.COM_CODE = b.COM_CODE
+		<if test="value!=null"></if>
+		and com_name like '%'||#{value}||'%' and com_logo='Y'
+	</select>
+
+<!-- 검색조건:포지션 -->
+	<select id="searchPosition" resultType="mainSearchVo" parameterType="String">
+		select a.com_name, a.nation, a.region, b.com_img_url, c.pos_name
+		from comInfo a inner join comImgInfo b on a.COM_CODE = b.COM_CODE
+		inner join position c on a.COM_CODE = c.COM_CODE
+		<if test="value!=null">
+		where c.pos_name like '%'||#{value}||'%' and com_logo='N'
+		</if>
+	</select>
+	
+	<select id="getSearchKeyword" resultType="map" parameterType="mainSearchVo">
+		select distinct b.pos_name
+		from comInfo a, position b
+		where a.COM_CODE = b.COM_CODE
+		and a.com_name like '%'||#{keyword}||'%' or b.pos_name like '%'||#{keyword}||'%'
+	</select>
+	
+	<!-- <select id="getSearchKeyword" resultType="mainSearchVo" parameterType="String">
+		select distinct a.com_name, b.pos_name
+		from comInfo a, position b
+		where a.COM_CODE = b.COM_CODE
+		<if test="value!=null"></if>
+		and com_name like '%'||#{value}||'%' or pos_name like '%'||#{value}||'%'
+	</select> -->
+	
+</mapper>
