@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .bodyWrapper{
-	background-color:#f8f8fa;
+	background-color:#f8f8fa !important;
 }
 
 .search-keyword-wrap{
@@ -69,11 +69,10 @@
 	
 }
 
-.search-company-img >img{
+.search-company-img{
 	width:58px;
 	height:58px;
 	margin-right:20px;
-	
 }
 
 .search-company-name{
