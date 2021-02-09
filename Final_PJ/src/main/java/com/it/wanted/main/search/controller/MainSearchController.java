@@ -47,13 +47,26 @@ public class MainSearchController {
 		return "mainSearch/search";
 	}
 	
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping("/autocomplete.do")
 	public List<Map<String, Object>> AutoTest(@RequestParam(value="keyword") String keyword, Locale locale, HttpServletRequest request, 
 			HttpServletResponse response, MainSearchVO vo){
 		logger.info("keyword={}", keyword);
 		
 		List<Map<String, Object>> list3 = mainSearchService.getSearchKeyword(keyword);
+		logger.info("list3={}", list3);
+		logger.info("keyword가 포함된 결과 list3.size={}", list3.size());
+		
+		return list3;
+	}*/
+	
+	@ResponseBody
+	@RequestMapping("/autocomplete.do")
+	public List<MainSearchVO> AutoTest(@RequestParam(value="keyword") String keyword, Locale locale, HttpServletRequest request, 
+			HttpServletResponse response, MainSearchVO vo){
+		logger.info("keyword={}", keyword);
+		
+		List<MainSearchVO> list3 = mainSearchService.getSearchKeyword(keyword);
 		logger.info("list3={}", list3);
 		logger.info("keyword가 포함된 결과 list3.size={}", list3.size());
 		

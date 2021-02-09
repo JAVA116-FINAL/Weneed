@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+html{
+	height:100%;
+	background-color:#f8f8fa;
+}
+.bodyWrapper{
+	background-color:#f8f8fa;
+}
+.setting-container-wrap{
+	padding-bottom:100px;
+	display:flex;
+}
+.setting-left-nav{
+	position:relative;
+}
+.setting-left-nav-title >p{
+	font-size:18px;
+	font-weight:700;
+	color:#333;
+	padding:50px 0 20px;
+}
+.setting-left-nav-detail{
+	margin:20px 0 auto;
+}
+.nav-detail-btn{
+	float:left;
+	width:20%;
+	margin-bottom:0;
+	padding-right:20px;
+}
+.setting-left-nav-detail >section{
+	float:left;
+	width:80%;
+}
+.nav-detail-btn >ul>li{
+	margin:0;
+	color:#333;
+	font-size:14px;
+	font-weight:400;
+}
+.nav-detail-btn >ul>li+li{
+	margin-top:15px;
+}
+.linkActive{
+	color:#3366ff;
+	font-weight:bold;
+}
+#setNotification{
+	display:grid;
+	margin-bottom:20px;
+	padding:20px;
+	background-color:#fff;
+	border:solid 1px #e1e2e3;
+	border-radius:3px;
+}
+#setNotification h3{
+	margin:0;
+	margin-left:-20px;
+	padding:0 20px;
+	border-left:2px solid #3366ff;
+	color:#757575;
+	font-size:14px;
+	font-weight:600;
+}
+.setNotificationCon >dl{
+	padding-top:18px;
+}
+.setNotificationCon >dl >dt{
+	float:left;
+	width:90%;
+	padding:0;
+	color:#999;
+	font-size:13px;
+	font-weight:400;
+}
+#changePassword{
+	display:grid;
+	margin-bottom:20px;
+	padding:20px;
+	background-color:#fff;
+	border:solid 1px #e1e2e3;
+	border-radius:3px;
+}
+#changePassword h3{
+	margin:0 0 20px -20px;
+	padding:0 20px;
+	border-left:2px solid #3366ff;
+	color:#757575;
+	font-size:14px;
+	font-weight:600;
+}
+#changePassword >input{
+	color:#333;
+	font-size:14px;
+	margin-top:0;
+	padding:13px 15px;
+	border-radius:3px;
+	border:1px solid #dbdbdb;
+	width:100%;
+}
+
+#changePassword >p{
+	color:#757575;
+	font-size:12px;
+}
+#changePassword >button{
+	width:100%;
+	padding:25px 20px;
+	border-radius:3px;
+	margin-top:20px;
+	line-height:0;
+	color:#fff;
+	background-color:#3366ff;
+	font-size:14px;
+	font-weight:600;
+}
+#leave{
+	display:grid;
+	margin-bottom:20px;
+	padding:20px;
+	background-color:#fff;
+	border:solid 1px #e1e2e3;
+	border-radius:3px;
+}
+#leave h3{
+	margin:0 0 20px -20px;
+	padding:0 20px;
+	border-left:2px solid #3366ff;
+	color:#757575;
+	font-size:14px;
+	font-weight:600;
+}
+
+#leave >ul{
+	padding-left:20px;
+	list-style:none;
+}
+
+#leave >ul >li{
+	list-style-type:disc;
+	margin-bottom:18px;
+	color:#999;
+	line-height:1.4;
+	font-size:14px;
+}
+
+#leave >ul >li >a{
+	font-weight:600;
+	text-decoration:underline;
+	color:#999;
+}
+
+.withdraw-agree{
+	min-width:145px;
+	height:50px;
+	padding:0 20px;
+	border-radius:3px;
+	background:#3366ff;
+	border:1px solid #2885fa;
+	display:block;
+	margin:40px auto 20px;
+	color:#fff;
+	font-size:16px;
+	font-weight:600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

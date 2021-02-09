@@ -405,8 +405,8 @@
 	  	  					response(
 	  	  						$.map(data, function(item){
 	  	  							return{
-	  	  								label:item.POS_NAME,
-	  	  								value:item.POS_NAME
+	  	  								label:item.comName,
+	  	  								value:item.comName
 	  	  							}
 	  	  						})  	  								  					
 	  	  					);//response
@@ -742,18 +742,6 @@
 						</ul>
 					</div>
 				</div>
-				<%-- <div class="search-result-wrap">
-					<div class="container" id="result-wrap">
-						<ul class="result-list">
-							<li>
-								<a href="<c:url value='/mainSearch/search.do'/>" class="">
-									<span><i class="icon-search" id="search-icon"></i></span>
-									<span>${param.keyword }</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div> --%>
 			</div>
 		</nav>
 	</div>
