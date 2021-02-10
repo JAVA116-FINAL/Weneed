@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonArray;
-import com.it.wanted.common.SearchVO;
+import com.it.wanted.common.NoticeSearchVO;
 import com.it.wanted.main.search.model.MainSearchService;
 import com.it.wanted.main.search.model.MainSearchVO;
 

@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.it.wanted.common.SearchVO;
+import com.it.wanted.common.NoticeSearchVO;
 
 
 @Repository
@@ -27,11 +27,11 @@ public class ProgramDAOMybatis implements ProgramDAO{
 		return proVo;
 	}
 
-	public List<ProgramVO> selectAllprogram(SearchVO searchVo) { 
+	public List<ProgramVO> selectAllprogram(NoticeSearchVO searchVo) { 
 		return sqlSession.selectList(namespace+"selectAllprogram", searchVo); 
 	}
 
-	public int selectListTotalRecord(SearchVO searchVo) { 
+	public int selectListTotalRecord(NoticeSearchVO searchVo) { 
 		return sqlSession.selectOne(namespace+"selectListTotalRecord", searchVo); 
 	}
 

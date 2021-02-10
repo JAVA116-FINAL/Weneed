@@ -1,9 +1,7 @@
 package com.it.wanted.notice.controller;
 
 import java.io.IOException;
-
 import java.util.List;
-
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -20,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.it.wanted.common.EmailSender;
 import com.it.wanted.common.FileUploadUtil;
 import com.it.wanted.notice.cate.model.NoticeCateService;
 import com.it.wanted.notice.model.NoticeService;
 import com.it.wanted.notice.model.NoticeVO;
 import com.it.wanted.notice.model.QnaVO;
+import com.it.wanted.notice.utility.EmailSender;
 import com.it.wanted.notice.utility.KeywordVO;
 import com.it.wanted.notice.utility.NoticePagination;
 import com.it.wanted.notice.utility.NoticePagingUtility;

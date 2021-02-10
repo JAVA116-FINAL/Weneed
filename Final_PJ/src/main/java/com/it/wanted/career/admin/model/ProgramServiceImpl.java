@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import com.it.wanted.common.SearchVO;
+import com.it.wanted.common.NoticeSearchVO;
 
 @Service
 public class ProgramServiceImpl implements ProgramService{
@@ -24,12 +24,12 @@ public class ProgramServiceImpl implements ProgramService{
 	}
 
 	@Override 
-	public List<ProgramVO> selectAllprogram(SearchVO searchVo) { 
+	public List<ProgramVO> selectAllprogram(NoticeSearchVO searchVo) { 
 		  return programDao.selectAllprogram(searchVo); 
 	}
 	  
 	@Override 
-	public int selectListTotalRecord(SearchVO searchVo) { 
+	public int selectListTotalRecord(NoticeSearchVO searchVo) { 
 		return programDao.selectListTotalRecord(searchVo);
 	}
 
