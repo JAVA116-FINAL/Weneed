@@ -1,61 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../inc/company_top.jsp" %>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/matchup.css'/>">
 <script type="text/javascript">
-
 $(function(){
-	/* //mincareer maxcareer 세팅해주기
-	var minCareer=$('input[name=searchMinCareer]').val();
-	console.log(minCareer);
-	var maxCareer=$('input[name=searchMaxCareer]').val();
-	console.log(maxCareer);
-	
-	if(minCareer=='전체'){
-		$('#minCareerSelect option:eq(0)').attr("selected","selected");
-	}else if(minCareer='신입'){
-		$('#minCareerSelect option:eq(1)').attr("selected","selected");
-	}else if(minCareer='1'){
-		$('#minCareerSelect option:eq(2)').attr("selected","selected");
-	}else if(minCareer='2'){
-		$('#minCareerSelect option:eq(3)').attr("selected","selected");
-	}else if(minCareer='3'){
-		$('#minCareerSelect option:eq(4)').attr("selected","selected");
-	}else if(minCareer='4'){
-		$('#minCareerSelect option:eq(5)').attr("selected","selected");
-	}else if(minCareer='5'){
-		$('#minCareerSelect option:eq(6)').attr("selected","selected");
-	}else if(minCareer='6'){
-		$('#minCareerSelect option:eq(7)').attr("selected","selected");
-	}else if(minCareer='7'){
-		$('#minCareerSelect option:eq(8)').attr("selected","selected");
-	}
-	 
-	if(maxCareer=='전체'){
-		$('#maxCareerSelect option:eq(0)').attr("selected",true);
-	}else if(maxCareer='신입'){
-		$('#maxCareerSelect option:eq(1)').attr("selected",true);
-	}else if(maxCareer='1'){
-		$('#maxCareerSelect option:eq(2)').attr("selected","selected");
-	}else if(maxCareer='2'){
-		$('#maxCareerSelect option:eq(3)').attr("selected",true);
-	}else if(maxCareer='3'){
-		$('#maxCareerSelect option:eq(4)').attr("selected",true);
-	}else if(maxCareer='4'){
-		$('#maxCareerSelect option:eq(5)').attr("selected",true);
-	}else if(maxCareer='5'){
-		$('#maxCareerSelect option:eq(6)').attr("selected",true);
-	}else if(maxCareer='6'){
-		$('#maxCareerSelect option:eq(7)').attr("selected",true);
-	}else if(maxCareer='7'){
-		$('#maxCareerSelect option:eq(8)').attr("selected",true);
-	}
-	 */
 	//리스트 선택 시 표시해주기
 	$('.matchupSearch-li').click(function(){
 		var num=$(this).index(); //부모 요소를 기준으로 내가 몇번째 자식이냐
@@ -109,19 +58,30 @@ $(function(){
 		}
 	});
 	
+	var viewMoreSize=0;
 	//더보기 기능 구현
-	$('#matchupSearch-viewMoreBtn').click(function(){
+	$(document).on('click', '#matchupSearch-viewMoreBtn', function(){
 		//console.log('눌렀당');
-		var viewMoreSize=parseInt($('#matchupSearch-record').val(), 10);
+		viewMoreSize=parseInt($('#matchupSearch-record').val(), 10);
 		var keyword=$('#matchupSearchkeyword').val();
 		var minCareer=$('#minCareerSelect').val();
 		var maxCareer=$('#maxCareerSelect').val();
 		var jikmu=$('#matchupSearch-jikmuSelect').val();
 		var jikgun=$('#matchupSearch-jikgunSelect').val();
+		var comCode=$('input[name=searchComCode]').val();
 		viewMoreSize+=5;
-		console.log(viewMoreSize);
+		
+		var urlstr="";
+		if($('.matchupSearch-li').eq(0).hasClass('matchupSearch-selectedLi')){ //전체보기면
+			console.log('전체 더보기!');
+			urlstr="<c:url value='/company/viewMoreMatchupMem.do'/>";
+		}else if($('.matchupSearch-li').eq(1).hasClass('matchupSearch-selectedLi')){ //찜한목록보기면
+			console.log('찜한목록 더보기!');
+			urlstr="<c:url value='/company/viewMoreZzimedList.do'/>";
+		}
+		
 		$.ajax({
-			url:"<c:url value='/company/viewMoreMatchupMem.do'/>",
+			url:urlstr,
 			dataType:"json",
 			type:"get",
 			data:{
@@ -130,14 +90,21 @@ $(function(){
 				"searchMaxCareer":maxCareer,
 				"searchMinCareer":minCareer,
 				"searchJikmu":jikmu,
-				"searchJikgun":jikgun
+				"searchJikgun":jikgun,
+				"comCode":comCode
 			},
 			success:function(memList){
 				//alert('성공!');
-				console.log(memList);
+				console.log(memList.length);
+				memListSize=memList.length;
+				if(memList.length!=5){
+					$('#matchupSearch-viewMoreBtn').hide();
+				}
+				
 				for(mcumem of memList){
 					makeMemList(mcumem);
 				}
+				
 				$('#matchupSearch-record').val(viewMoreSize);
 				$('input[name=searchKeyword]').val(keyword);
 				$('input[name=searchMinCareer]').val(minCareer);
@@ -166,16 +133,219 @@ $(function(){
 		$('input[name=searchJikgun]').val(jikgun);
 		
 		$('form[name=matchupSearchForm]').submit();
-		
 	});
 	
 	//찜한 이력서 보기.. 이 경우엔 검색어랑 경력 다 같이 가야할거같은뎅... 
 	$('#matchupSearch-Zzimed-list').click(function(){
+		console.log('찜한 이력서 보기');
+		var keyword=$('#matchupSearchkeyword').val();
+		var minCareer=$('#minCareerSelect').val();
+		var maxCareer=$('#maxCareerSelect').val();
+		var jikmu=$('#matchupSearch-jikmuSelect').val();
+		var jikgun=$('#matchupSearch-jikgunSelect').val();
+		var comCode=$('input[name=searchComCode]').val();
+		$.ajax({
+			url:"<c:url value='/company/showZzimedList.do'/>",
+			dataType:"json",
+			type:"get",
+			data:{
+				"viewMoreSize":viewMoreSize,
+				"searchKeyword":keyword,
+				"searchMaxCareer":maxCareer,
+				"searchMinCareer":minCareer,
+				"searchJikmu":jikmu,
+				"searchJikgun":jikgun,
+				"comCode":comCode
+			},
+			success:function(memList){
+				console.log(memList.length);
+				memListSize=memList.length;
+				//리스트를 한번 지워줘야겠다 todo
+				//그리고 그릴 애들은 goldStar클래스를 주야겠어
+				//더보기 기능도 고쳐야겠네...
+				$('#matchupSearch-resumeListDiv').html("");
+				
+				for(mcumem of memList){
+					makeMemList(mcumem);
+				}
+				if(memList.length!=5){
+					$('#matchupSearch-viewMoreBtn').hide();
+				}
+				
+				$('#matchupSearch-record').val(viewMoreSize);
+				$('input[name=searchKeyword]').val(keyword);
+				$('input[name=searchMinCareer]').val(minCareer);
+				$('input[name=searchMaxCareer]').val(maxCareer);
+				$('input[name=searchJikmu]').val(jikmu);
+				$('input[name=searchJikgun]').val(jikgun);
+				$('input[name=searchComCode]').val(comCode);
+				$('#matchupSearchkeyword').val(keyword);
+			},
+			error:function(xhr, status, error){
+				alert('error! '+error);
+			}
+		});
+	});
+	
+	//버튼 선택 시 해당하는 데이터를 모달 팝업에 뿌려주는 기능
+ 	$('.matchupSearchResumeOpenBtn').click(function(){
+		var resumeNo=$(this).data('resumeno');
+		console.log(resumeNo)
+		 
+		$('#wantedResumeSimpleMD').on('show.bs.modal', function(event){
+			//일단 레주메 넘버가 필요함 
+			console.log('뭐가 되긴 하냐');
+			var btn=$(event.relatedTarget);
+			var resumeNo=btn.data('resumeno');
+			//console.log(resumeNo.data('resumeno'));
+			//ajax로 레주메넘버를 보내서 해당 이력서의 디비를 다 받아와야 함
+			$.ajax({
+				url:"<c:url value='/company/getSimpleResumeData.do'/>"
+				,data:{
+					'resumeNo':resumeNo,
+				}
+				,type:"get"
+				,dataType:"json"
+				,success:function(result){
+					console.log(result);
+					setSimpleResumeMD(result);
+					//받아온 db를 모달팝업에 세팅해주기	
+				}
+				,error:function(xhr, status, error){
+					alert('error!'+error);
+				}
+			});
+		});
 		
 	});
 	
+	
 });
 
+//모달을 그려줍니다
+function setSimpleResumeMD(resumeAllVo){
+	//데이터 초기화
+	$('.matchupResumeName').html('');
+	$('.matchupResumeWrapper').html('');
+	
+	var name=resumeAllVo.resumeVo.resumeName;
+	var firstName=name.substr(0,1)+"OO";
+	console.log(firstName);
+	$('.matchupResumeName').html(firstName);
+	
+	//찜버튼 색칠해주기 
+	//가져올때 찜여부 같이 가져와야되자나 아오
+	var resumeNo=resumeAllVo.resumeVo.resumeNo;
+	console.log(resumeNo);
+	
+	$.ajax({
+		url:"<c:url value='/company/isZzimed.do'/>"
+		,data:{
+			'resumeNo':resumeNo
+		}
+		,type:"get"
+		,dataType:"text"
+		,success:function(result){
+			console.log(result);
+			if(result=='Y'){
+				$('#matchupResumeSimpleZzimBtn i').addClass('goldStar');
+			}else{
+				$('#matchupResumeSimpleZzimBtn i').removeClass('goldStar');
+			}
+		}
+		,error:function(xhr, status, error){
+			alert('error!');
+		}
+	});
+	
+	
+	for(crr of resumeAllVo.crrList){
+		var career='';
+		career+='<div class="matchupResumeCont matchupResumeSpace">';
+		career+='<div>';
+		career+='<div class="matchupResumeSubTitle">'+crr.careerName+'</div>';
+		career+='<div>'+crr.careerDep+'</div>';
+		career+='</div>';
+		career+='<div>'+crr.startYear+'.'+crr.startMonth+' ~ '+crr.endYear+'.'+crr.endMonth+'</div>';
+		career+='</div>';
+		
+		$('.matchupResumeWrapper:eq(0)').append(career);
+	}
+	
+	for(edu of resumeAllVo.eduList){
+		var education='';
+		education+='<div class="matchupResumeCont matchupResumeSpace">';
+		education+='<div class="matchupResumeSubTitle">'+edu.eduName+'</div>';
+		education+='<div>'+edu.startYear+'.'+edu.startMonth+' ~ '+edu.endYear+'.'+edu.endMonth+'</div>';
+		education+='</div>';
+		education+='<div>';
+		education+='<div>'+edu.eduMajor+'</div>';
+		education+='</div>';
+		
+		$('.matchupResumeWrapper:eq(1)').append(education);
+	}
+	
+	if(resumeAllVo.addList.length>0){
+		for(add of resumeAllVo.addList){
+			var additional='';
+			additional+='<div class="matchupResumeCont matchupResumeSpace">';
+			additional+='<div class="matchupResumeSubTitle">'+add.addName+'</div>';
+			additional+='<div>'+add.getYear+'.'+add.getMonth+'</div>';
+			additional+='</div>';
+			additional+='<div>';
+			additional+=add.addDetails;
+			additional+='</div>';
+			
+			$('.matchupResumeWrapper:eq(2)').append(additional);
+		}
+	}
+	
+	if(resumeAllVo.langList.length>0){
+		var language='';
+		for(lang of resumeAllVo.langList){
+			language+='<div class="matchupResumeLang">';
+			language+='<div>';
+			language+='<span class="matchupResumeSubTitle">'+lang.langName+'</span><span class="matchupResumeMediumSpan"> '+lang.langLevel+'</span>';
+			language+='</div>';
+			language+='<div class="matchupResumeCont">';
+			
+			if(resumeAllVo.testList.length>0){
+				for(test of resumeAllVo.testList){
+					language+='<span class="matchupResumeMediumSpan matchupResumeBoldSpan">'+test.langtestName+'</span>';
+					language+='<span class="matchupResumeMediumSpan"> '+test.getYear+'.'+test.getMonth+'</span>';
+					language+='<span class="matchupResumeMediumSpan">'+test.langtestScore+'</span>';
+				}
+			}
+			language+='</div>';
+			language+='</div>';
+			
+			$('.matchupResumeWrapper:eq(3)').append(language);
+		}
+		
+	}
+	
+}//drawSimpleResumeMD
+
+//pdf 다운로드 함수 자연님것 가져옴
+$.downResume=function(resumeNo){
+	$.ajax({
+		url:"<c:url value='/resume/resumeDown.do'/>",
+		type:"get",
+		data:"resumeNo="+resumeNo,
+		dataType:"json",
+		success:function(resDown){
+			//alert(resDown);
+			if(resDown>0){
+				alert("pdf 파일생성, 다운로드 되었습니다.");
+			}
+		},
+		error:function(xhr,status,error){
+			alert("error:"+error);
+		}
+	});//ajax
+}//downResume
+
+//리스트 그리는 함수
 function makeMemList(mcumem){
 	var str="";
 	str+='<div class="matchupSearch-resumeBound">';
@@ -195,23 +365,44 @@ function makeMemList(mcumem){
 	str+='<span>'+mcumem.EDUNAME+' '+mcumem.EDUMAJOR+'</span>';
 	str+='</div>';
 	str+='<div class="matchupSearch-resume-3rd">';
-	str+='<button class="matchupSearch-ZzimBtn"><i class="fas fa-star"></i> 찜</button>';
-	str+='<button>이력서 미리보기</button>';
+	str+='<button class="matchupSearch-ZzimBtn"><i class="fas fa-star';
+	if(mcumem.CNT > 0){
+		str+=' goldStar';
+	}
+	str+='"></i> 찜</button>';
+	str+='<button data-toggle="modal" data-target="#wantedResumeSimpleMD" data-resumeno="'+mcumem.RESUMENO+'">이력서 미리보기</button>';
 	str+='</div></div>';
 
 	$('#matchupSearch-resumeListDiv').append(str);
-	
 }
 
 </script>
-	<form name="matchupSearchForm" method="post" action="#">
-		<input type="hidden" id="matchupSearch-record" value="0">
-		<input type="hidden" value="${searchVo.searchJikgun }" name="searchJikgun">
-		<input type="hidden" value="${searchVo.searchJikmu }" name="searchJikmu">
-		<input type="hidden" value="${searchVo.searchKeyword }" name="searchKeyword">
-		<input type="text" value="${searchVo.searchMinCareer }" name="searchMinCareer">
-		<input type="text" value="${searchVo.searchMaxCareer }" name="searchMaxCareer">
-	</form>
+<form name="matchupSearchForm" method="post" action="#">
+	<input type="hidden" id="matchupSearch-record" value="0">
+	<input type="hidden" value="${searchVo.searchJikgun }" name="searchJikgun">
+	<input type="hidden" value="${searchVo.searchJikmu }" name="searchJikmu">
+	<input type="hidden" value="${searchVo.searchKeyword }" name="searchKeyword">
+	<input type="hidden" value="${searchVo.searchMinCareer }" name="searchMinCareer">
+	<input type="hidden" value="${searchVo.searchMaxCareer }" name="searchMaxCareer">
+	<input type="hidden" value="${sessionScope.comInfoVo.comCode}" name="searchComCode">
+</form>
+
+	<div class="matchupNoticeCon">
+		<div class="container matchupNoticeWrapper">
+			<div>
+				<span class="matchupNoticeTitle">Matchup <i class="far fa-handshake fa-sm"></i></span>
+				<span id="matchupUseorNotSpan" class="matchupNoticeText">[이용중]</span>
+				<span id="matchupDuedateSpan" class="matchupNoticeText">2021.02.10까지</span>
+				<span id="matchupViewCountSpan1" class="matchupNoticeText">사용 5회 </span>
+				<span id="matchupViewCountSpan2" class="matchupNoticeText">| 잔여 25회</span>
+			</div>
+			<div class="matchupNoticeBtnWrapper">
+				<!-- 매치업서비스 가입 모달 팝업 -->
+				<button type="button" data-toggle="modal" data-target=".matchupServPlanMD" data-comcode="${comInfoVo.comCode}" class="matchupServiceBuyBtn">매치업 서비스 가입</button>
+				<%@ include file="../company/modal/matchupServiceSelect.jsp"%>
+			</div>
+		</div>
+	</div>
 	<div class="container"> <!-- 가장 바깥 래퍼 --> 
 		<section class="matchupSearch-1stSec"> <!-- 이름, 검색필터, 검색창, 필터 -->
 			<h1>찾고 있는 인재의 직군/직무를 설정하세요</h1>
@@ -394,7 +585,8 @@ function makeMemList(mcumem){
 		<section class="matchupSearch-2ndSec"> <!-- 목록  -->
 			<div class="matchupSearch-tabBound">
 				<ul class="matchupSearch-resultList">
-					<li class="matchupSearch-li matchupSearch-selectedLi">목록 전체</li>
+					<li class="matchupSearch-li matchupSearch-selectedLi">
+						<a href="<c:url value='/company/matchupSearch.do'/>">목록 전체</a></li>
 					<li class="matchupSearch-li" id="matchupSearch-Zzimed-list">찜한 이력서</li>
 					<li class="matchupSearch-li">미열람 이력서</li>
 					<li class="matchupSearch-li">열람한 이력서</li>
@@ -443,20 +635,23 @@ function makeMemList(mcumem){
 							</div>
 							<div class="matchupSearch-resume-3rd">
 								<button class="matchupSearch-ZzimBtn">
-									<i class="fas fa-star <c:if test="${mcumemMap.CNT eq 1}">goldStar</c:if>
+									<i class="fas fa-star <c:if test="${mcumemMap.CNT > 0}">goldStar</c:if>
 									"></i> 찜</button>
-								<button>이력서 미리보기</button>
+								<!-- 이력서 미리보기 모달 팝업 -->								
+								<button class="matchupSearchResumeOpenBtn" type="button" data-toggle="modal" data-target="#wantedResumeSimpleMD" data-resumeno="${mcumemMap.RESUMENO}">
+									이력서 미리보기</button>
+								<%@ include file="../company/modal/resumeSimple.jsp" %>
 							</div>
 						</div>
 					</c:forEach>
 				</c:if>
 			</div>
-			<c:if test="${fn:length(memList)==5}">
-				<div class="matchupSearch-resume-paging">
-					<div id="matchupSearch-viewMoreBtn" class="matchupSearch-pagingDiv matchupSearch-pagingDiv_next" >더보기</div>
-				</div>
-		 	</c:if>
 		</section>			
+		<div class="matchupSearch-resume-paging">
+			<div id="matchupSearch-viewMoreBtn" class="matchupSearch-pagingDiv matchupSearch-pagingDiv_next" >
+				더보기</div>
+		</div>
 	</div>
+
 </body>
 </html>

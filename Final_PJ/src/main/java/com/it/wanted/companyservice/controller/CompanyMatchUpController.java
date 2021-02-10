@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.it.wanted.career.model.CareerService;
 import com.it.wanted.career.model.CareerVO;
 import com.it.wanted.cominfo.model.ComInfoService;
@@ -40,6 +42,8 @@ import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.matchup.model.MatchupMemVO;
 import com.it.wanted.matchupCom.model.MatchupComService;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
+import com.it.wanted.resume.model.ResumeAllVO;
+import com.it.wanted.resume.model.ResumeService;
 
 @Controller
 @RequestMapping("/company")
@@ -53,6 +57,7 @@ public class CompanyMatchUpController {
 	@Autowired EducationService eduService;
 	@Autowired ComMemInfoService comMemInfoService;
 	@Autowired ComInfoService comInfoService;
+	@Autowired ResumeService resumeService;
 	
 	@RequestMapping(value = "/matchupService.do", method = RequestMethod.GET)
 	public String matchupMain(HttpServletRequest request, Model model) {
@@ -83,8 +88,6 @@ public class CompanyMatchUpController {
 		
 		return "company/matchupMain";
 	}
-	
-	
 	
 	@RequestMapping("/matchupSearch.do")
 	public String matchupSearch(Model model, @ModelAttribute MatchupMemSearchVO searchVo) {
@@ -147,23 +150,71 @@ public class CompanyMatchUpController {
 	}
 	*/
 	
-	
-	
 	@ResponseBody
+	@JsonBackReference
 	@RequestMapping("/viewMoreMatchupMem.do")
-	public List<Map<String, Object>> getMoreMem(@ModelAttribute MatchupMemSearchVO searchVo){
+	public List<Map<String, Object>> getMoreMem(@ModelAttribute MatchupMemSearchVO searchVo
+			, Model model){
 		searchVo=setSearchInfoDefault(searchVo);
 		searchVo=setBeforeMethod(searchVo);
 		
-		logger.info("리스트까지 불러오기 결과, searchVo={}", searchVo);
+		logger.info("리스트 더보기  시작, searchVo={}", searchVo);
 
 		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
-		logger.info("리스트까지 불러오기 결과, memList.size={}", memList.size());
+		logger.info("더보기 결과, memList.size={}", memList.size());
 		
 		//이걸 왜 하지
 		searchVo=setAfterMethod(searchVo);
 		
 		return memList;
+	}
+
+	@ResponseBody
+	@JsonManagedReference
+	@RequestMapping("/showZzimedList.do")
+	public List<Map<String, Object>> showZzimedList(@ModelAttribute MatchupMemSearchVO searchVo
+		, Model model) {
+		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setBeforeMethod(searchVo);
+		
+		List<Map<String, Object>> memList=matchupMemService.selectZzimedList(searchVo);
+		logger.info("찜한 목록 조회 결과, memList.size={}", memList.size());
+
+		searchVo=setAfterMethod(searchVo);
+		
+		return memList;
+	}
+	
+	@ResponseBody
+	@JsonBackReference
+	@RequestMapping("/viewMoreZzimedList.do")
+	public List<Map<String, Object>> getMoreZzimedMem(@ModelAttribute MatchupMemSearchVO searchVo
+			, Model model){
+		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setBeforeMethod(searchVo);
+		
+		logger.info("찜한 리스트 더 불러오기 시작, searchVo={}", searchVo);
+
+		List<Map<String, Object>> memList=matchupMemService.selectZzimedList(searchVo);
+		logger.info("찜한 리스트 더 불러오기 결과, memList.size={}", memList.size());
+		
+		//이걸 왜 하지
+		searchVo=setAfterMethod(searchVo);
+		
+		return memList;
+	}
+	
+	//이력서 그려주려고 데이터 받아오는 것
+	@ResponseBody
+	@RequestMapping("/getSimpleResumeData.do")
+	public ResumeAllVO getResumeForMatchupModal(@RequestParam int resumeNo) {
+		ResumeAllVO resumeAllVo=new ResumeAllVO();
+		logger.info("레주메넘버로 레주메 조회 시작, resumeNo={}", resumeNo);
+		
+		resumeAllVo=resumeService.selectResumeByResumeNo(resumeNo);
+		logger.info("레주메넘버로 레주메 조회 결과, resume={}", resumeAllVo);
+		
+		return resumeAllVo;
 	}
 	
 	@ResponseBody
@@ -213,11 +264,23 @@ public class CompanyMatchUpController {
 		return result;
 	}
 	
-	/*
-	 @RequestMapping("") public showZzimedList() {
-	 
-	 }
-	 */
+	@ResponseBody
+	@RequestMapping("/isZzimed.do")
+	public String isZzimed(@RequestParam int resumeNo, HttpSession session) {
+		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		String comCode=comVo.getComCode();
+		
+		logger.info("팝업이력서 찜여부 확인하기, 파라미터 resumeNo={}, comCode={}", resumeNo, comCode);
+		
+		int cnt=matchupMemService.isZzimed(resumeNo, comCode);
+		
+		String result="N";
+		if(cnt>0) {
+			result="Y";
+		}
+		
+		return result;
+	}
 	
 	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo) {
 		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty()) {
