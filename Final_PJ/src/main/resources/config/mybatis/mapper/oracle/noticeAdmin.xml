@@ -10,6 +10,29 @@
 		order by qna_no desc
 	</select>
 	
+	<select id="selectQnaList_search" parameterType="qnaVo" resultType="map">
+		select*from
+		(
+		    select A.*, rownum as RNUM from
+		    (
+		    	select*from qna
+		        where qna_title like '%'||#{searchKeyword}||'%' 
+		        or to_char(qna_content) like '%'||#{searchKeyword}||'%'
+		        order by qna_regdate desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectQnaList_cnt" parameterType="qnaVo" resultType="map">
+		select count(*) as cnt from qna
+		where qna_title like '%'||#{searchKeyword}||'%' 
+		or to_char(qna_content) like '%'||#{searchKeyword}||'%'
+	</select>
+	
 	<!-- detail에서 함게 출력될 답변 -->
 	<select id="selectQnaDetail_admin" parameterType="int" resultType="map">
 		select*from qnareply

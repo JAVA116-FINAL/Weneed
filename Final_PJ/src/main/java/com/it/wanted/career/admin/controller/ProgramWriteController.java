@@ -25,7 +25,7 @@ import com.it.wanted.career.cate.model.CareerCategoryService;
 import com.it.wanted.career.cate.model.CareerCategoryVO;
 import com.it.wanted.common.FileUploadUtil;
 import com.it.wanted.common.PaginationInfo;
-import com.it.wanted.common.NoticeSearchVO;
+import com.it.wanted.common.SearchVO;
 import com.it.wanted.common.Utility;
 
 @Controller
@@ -163,7 +163,7 @@ public class ProgramWriteController {
 	/* 프로그램 목록 */
 	
 	@RequestMapping("/programAdminList.do")
-	public String programAdminListShow(@ModelAttribute NoticeSearchVO searchVo, Model model) {
+	public String programAdminListShow(@ModelAttribute SearchVO searchVo, Model model) {
 		//1
 
 		logger.info("글 목록 페이지, 파라미터 searchVo={}", searchVo);

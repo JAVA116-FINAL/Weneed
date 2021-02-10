@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- 문의내역 리스트 상세보기 -->
-<%@ include file="../../notice/notice_inc/notice_top.jsp"%><!-- 관리자 페이지 include로 바꾸기 -->
+<%@ include file="../../inc/admin_top.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="qnaTable">
 	<div class="userDetail">
 		<c:forEach var="map" items="${userDetail }">
@@ -21,4 +22,4 @@
 	</div>
 </div>
 
-<%@ include file="../../notice/notice_inc/notice_bottom.jsp"%>
+<%@ include file="../../inc/admin_bottom.jsp"%>

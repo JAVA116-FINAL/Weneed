@@ -2,7 +2,6 @@ package com.it.wanted.notice.model;
 
 import java.util.List;
 import java.util.Map;
-
 import com.it.wanted.notice.utility.KeywordVO;
 
 public interface NoticeDAO {

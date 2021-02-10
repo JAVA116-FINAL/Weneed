@@ -41,6 +41,19 @@
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<beans:property name="contentType" value="application/json;charset=UTF-8" />
 	</beans:bean>
+	
+	<!-- 기업서비스 로그인 인터셉터 -->
+	<beans:bean id="ComLoginInterceptor" class="com.it.wanted.companyservice.controller.ComLoginInterceptor"></beans:bean>
+    
+    <interceptors>
+        <interceptor>
+            <mapping path="/company/*.do"/>
+            <exclude-mapping path="/company/welcome.do"/>
+            <exclude-mapping path="/company/login.do"/>
+            <exclude-mapping path="/company/join.do"/>
+            <beans:ref bean="ComLoginInterceptor"/>
+        </interceptor>
+    </interceptors>
 
 	
 </beans:beans>

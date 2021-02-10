@@ -8,6 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.notice.model.QnaVO;
+import com.it.wanted.notice.utility.KeywordVO;
+
 @Repository
 public class NoticeAdminDAOMybatis implements NoticeAdminDAO{
 
@@ -39,6 +42,16 @@ public class NoticeAdminDAOMybatis implements NoticeAdminDAO{
 	public int updateReply(int qna_no) {
 		int cnt=sqlSession.update(namespace+"updateReply", qna_no);
 		return cnt;
+	}
+
+	@Override
+	public List<QnaVO> selectQnaList_search(KeywordVO searchVo) {
+		return sqlSession.selectList(namespace+"selectQnaList_search", searchVo);
+	}
+
+	@Override
+	public Map<String, Object> selectQnaList_cnt(KeywordVO searchVo) {
+		return sqlSession.selectOne(namespace+"selectQnaList_cnt", searchVo);
 	}
 
 

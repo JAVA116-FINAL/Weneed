@@ -1,6 +1,6 @@
 package com.it.wanted.notice.utility;
 
-public class SearchVO {
+public class NoticeSearchVO {
 	/**현재 페이지*/
 	private int currentPage = 1;
 
@@ -19,7 +19,7 @@ public class SearchVO {
 	/** 검색키워드 */
 	private String searchKeyword = "";
 
-    public void setSearchVO(SearchVO bean){
+    public void setSearchVO(NoticeSearchVO bean){
     	this.currentPage = bean.currentPage;
     	this.searchKeyword = bean.getSearchKeyword();
     	this.blockSize = bean.blockSize;

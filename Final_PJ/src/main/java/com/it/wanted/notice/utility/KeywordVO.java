@@ -1,7 +1,7 @@
 package com.it.wanted.notice.utility;
 
 
-public class KeywordVO extends SearchVO{
+public class KeywordVO extends NoticeSearchVO{
 
 	private String searchKeyword;
 

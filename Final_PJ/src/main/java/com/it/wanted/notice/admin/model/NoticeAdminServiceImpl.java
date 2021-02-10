@@ -6,6 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it.wanted.notice.model.QnaVO;
+import com.it.wanted.notice.utility.KeywordVO;
+
 @Service
 public class NoticeAdminServiceImpl implements NoticeAdminService{
 	@Autowired private NoticeAdminDAO noticeAdminDao;
@@ -33,6 +36,16 @@ public class NoticeAdminServiceImpl implements NoticeAdminService{
 	@Override
 	public List<Map<String, Object>> selectQnaDetail_user(int qna_no) {
 		return noticeAdminDao.selectQnaDetail_user(qna_no);
+	}
+
+	@Override
+	public List<QnaVO> selectQnaList_search(KeywordVO searchVo) {
+		return noticeAdminDao.selectQnaList_search(searchVo);
+	}
+
+	@Override
+	public Map<String, Object> selectQnaList_cnt(KeywordVO searchVo) {
+		return noticeAdminDao.selectQnaList_cnt(searchVo);
 	}
 
 

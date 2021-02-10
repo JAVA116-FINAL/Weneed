@@ -28,7 +28,7 @@ import com.it.wanted.commeminfo.model.ComMemInfoVO;
 import com.it.wanted.commemlist.model.ComMemListService;
 import com.it.wanted.common.MatchupPagination;
 import com.it.wanted.common.MatchupSearchVO;
-import com.it.wanted.common.NoticeSearchVO;
+import com.it.wanted.common.SearchVO;
 import com.it.wanted.education.model.EducationService;
 import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.jikgun.model.JikgunService;

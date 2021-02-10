@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+#qnaTable{
+	text-align: center;
+	width: 100%;
+	border-collapse: collapse;
+}
+.align_center{
+	text-align: center;
+}
+
+div#noticeDiv {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+th{
+    border-bottom: 1.5px solid #cecece;
+}
+
+td{
+	border-bottom: 1px solid #e6e3e3;
+	font-size: 15px;
+	height: 50px;
+}
+
+.qnaTr:hover {
+	background-color: #f1f1f1; 
+}
+
+.qnaTableSubject{
+	font-size: 40px;
+}
+
+.qnaTablealert{
+	font-size: 20px;
+    margin-bottom: 50px;
+}
+
+form.search {
+    text-align: right;
+    margin-top: 30px;
+}
+
+#searchKeyword {
+    border-radius: 0px;
+    border: 1px solid #cecece;
+    height: 30px;
+}
+
+#commit {
+    height: 30px;
+    border: 1px solid #cecece;
+}
+
+.pagination{
+	list-style: none;
+}
+
+.pagination li{
+	display: inline;
+}
