@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.noticeAdmin">
+
+	<!-- 사용자가 등록한 qna 리스트 select -->
+	<select id="selectQnaList" resultType="map">
+		select*from qna
+		order by qna_no desc
+	</select>
+	
+	<!-- detail에서 함게 출력될 답변 -->
+	<select id="selectQnaDetail_admin" parameterType="int" resultType="map">
+		select*from qnareply
+		where qna_no=#{qna_no}
+	</select>
+	
+	<select id="selectQnaDetail_user" parameterType="int" resultType="map">
+		select*from qna
+		where qna_no=#{qna_no}
+	</select>
+	
+	<!-- 미답변 1:1문의 갯수 -->
+	<select id="selectReply_cnt" resultType="int">
+		select count(*) from qna
+		where qna_reply = 'N'
+	</select>
+	
+	<!-- 답변여부 업데이트 -->
+	<update id="updateReply" parameterType="int">
+		update qna
+		set qna_reply='Y'
+		where qna_no=#{qna_no}
+	</update>
+	
+</mapper>	

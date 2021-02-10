@@ -1,23 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="notice_inc/notice_top.jsp"%>
+<%@include file="notice_inc/notice_script.jsp" %>
 
 <main role="main">
 	<section class="hero-unit text-center hero-image ">
 		<div class="container">
-			<h1 class="help-center-name" id="help_center_title1">원티드에 대해</h1>
+			<h1 class="help-center-name" id="help_center_title1">위니드에 대해</h1>
 			<h1 class="help-center-name" id="help_center_title2">궁금한 점을 검색해주세요.</h1>
 			<p class="help-center-details"></p>
 			<div class="hc_search">
 				<!-- 검색 폼 -->
 				<form role="search" class="search" data-search=""
 					data-instant="true" autocomplete="off" action="<c:url value='notice_search.do'/>"
-					accept-charset="UTF-8" method="post">
+					accept-charset="UTF-8" method="get">
 					<input
-						type="search" name="keyword" id="notice_search"
+						type="search" name="searchKeyword" id="notice_search"
 						placeholder="예) 서비스 이용방법, 비밀번호 찾기 등" autocomplete="off"
 						aria-label="예) 서비스 이용방법, 비밀번호 찾기 등"> 
-					<input type="submit" name="commit" value="검색">
+					<input type="submit" id="commit" name="commit" value="검색">
 				</form>
 				
 			</div>
@@ -97,7 +98,7 @@
 		<div class="row">
 			<div class="category_view">
 				<div class="col-xs-12">
-					<h2 class="hc_title" style="float: left;">원티드 소식</h2>
+					<h2 class="hc_title" style="float: left;">위니드 소식</h2>
 					<h6 class="hc_title_more" style="float: right; margin-top: 25px;">
 						<a style="font-size: 14px;"
 							href="<c:url value='/notice/notice_dept1.do?notice_dept1=3'/>">

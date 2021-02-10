@@ -15,8 +15,7 @@
 				<!-- 5번 반복(rownum으로) -->
 				<c:forEach var="map" items="${listOther }">
 				<li style="padding-left: 15px; padding-right: 15px;">
-					<a href="<c:url value='/notice/notice_dept2.do?notice_dept1=${map["NOTICE_DEPT1"] }&notice_dept2=${map["NOTICE_DEPT2"] }'/>" 
-						class="sidenav-item">
+					<a href="<c:url value='/notice/notice_detail.do?notice_no=${map["NOTICE_NO"] }'/>" class="sidenav-item">
 						${map['NOTICE_TITLE'] }
 					</a>
 				</li>

@@ -3,6 +3,8 @@ package com.it.wanted.notice.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.wanted.notice.utility.KeywordVO;
+
 public interface NoticeDAO {
 	//main
 	public List<Map<String, Object>> selectMain1(); //개인회원 자주 묻는 질문
@@ -20,6 +22,9 @@ public interface NoticeDAO {
 	public Map<String, Object> selectDetail(int notice_no);
 	
 	//검색관련
-	public List<Map<String, Object>> noticeSearch(String keyword);
-	public Map<String, Object> noticeSearchCnt(String keyword);
+	public List<NoticeVO> noticeSearch(KeywordVO searchVo);
+	public Map<String, Object> noticeSearchCnt(KeywordVO searchVo);
+	
+	//qna등록
+	public int insertQna(QnaVO vo);
 }
