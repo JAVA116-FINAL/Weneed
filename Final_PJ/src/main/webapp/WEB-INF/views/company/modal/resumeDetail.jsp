@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/matchupResumeModal.css'/>">
 <!-- 이력서 상세보기 모달 팝업 시작 -->
 <div class="modal fade bs-example-modal-lg wantedResumeDetailMD" tabindex="-1" 
-	role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+	id="wantedResumeDetailMD" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 			<div class="modal-header modal-comServHeader">
@@ -98,10 +98,10 @@
 			        					</div>
 			        					<div class="matchupResumeCont ">
 			        						<span class="matchupResumeMediumSpan matchupResumeBoldSpan">SIELE </span>
-			        						<span class="matchupResumeMediumSpan"> (2010.05)</span>
+			        						<span class="matchupResumeMediumSpan"> (2010.05)</span><br>
 			        					</div>
 			        					<div>
-			        						<span class="matchupResumeMediumSpan">744점</span>
+			        						<span class="matchupResumeMediumSpan">744점</span><br>
 			        						<span class="matchupResumeMediumSpan">(B2급)</span>
 			        					</div>
 		        					</div>
@@ -114,7 +114,7 @@
 			        						<span class="matchupResumeMediumSpan"> (2010.05)</span>
 			        					</div>
 			        					<div>
-			        						<span class="matchupResumeMediumSpan">AL</span><span></span>
+			        						<span class="matchupResumeMediumSpan">AL</span><br><span></span>
 			        					</div>
 		        					</div>
 		        				</div>

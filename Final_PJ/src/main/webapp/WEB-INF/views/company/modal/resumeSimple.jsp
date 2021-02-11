@@ -86,9 +86,9 @@
 			        					<div>
 			        						<span class="matchupResumeSubTitle">스페인어</span><span class="matchupResumeMediumSpan"> 일상회화수준</span>
 			        					</div>
-			        					<div class="matchupResumeCont">
+			        					<div class="matchupResumeCont matchupResumeLangTestCont">
 			        						<span class="matchupResumeMediumSpan matchupResumeBoldSpan">SIELE </span>
-			        						<span class="matchupResumeMediumSpan"> (2010.05)</span>
+			        						<span class="matchupResumeMediumSpan"> (2010.05)</span><br>
 			        					</div>
 			        					<div>
 			        						<span class="matchupResumeMediumSpan">744점</span>
@@ -104,8 +104,10 @@
 			<div class="modal-footer comServJoinModalFooter">
 				<div class="container comServModalFooterCon matchupResumeSpace">
 					<span>*이력서 상세보기를 하면 열람권 1회가 차감됩니다.</span>
-				    <button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="button"
-				     data-dismiss="modal" data-toggle="modal" data-target=".wantedResumeDetailMD" data-resumeno="${mcumemMap.RESUMENO}">상세이력 보기</button> 
+					<button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="button"
+				      data-resumeno="${mcumemMap.RESUMENO}">상세이력 보기</button> 
+<%-- 				    <button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="button"
+				      data-toggle="modal" data-target=".wantedResumeSimpleMD" data-resumeno="${mcumemMap.RESUMENO}">상세이력 보기</button>  --%>
 				</div>
 			</div>
 		</div>

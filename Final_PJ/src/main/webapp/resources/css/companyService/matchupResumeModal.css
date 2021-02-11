@@ -45,6 +45,10 @@ section, section > div {
 	display: flex;
 }
 
+.matchupResumeLangTestCont{
+	justify-content: space-between;
+}
+
 .matchupResumeAchievement{
 	margin-top: 10px;	
 }

@@ -167,63 +167,25 @@ $(function(){
 		 
 		$('#wantedResumeSimpleMD').on('show.bs.modal', function(event){
 			//일단 레주메 넘버가 필요함 
-			console.log('뭐가 되긴 하냐');
-			var btn=$(event.relatedTarget);
-			var resumeNo=btn.data('resumeno');
 			//console.log(resumeNo.data('resumeno'));
-			//ajax로 레주메넘버를 보내서 해당 이력서의 디비를 다 받아와야 함
-			$.ajax({
-				url:"<c:url value='/company/getSimpleResumeData.do'/>"
-				,data:{
-					'resumeNo':resumeNo,
-				}
-				,type:"get"
-				,dataType:"json"
-				,success:function(result){
-					console.log(result);
-					setSimpleResumeMD(result);
-					//받아온 db를 모달팝업에 세팅해주기	
-				}
-				,error:function(xhr, status, error){
-					alert('error!'+error);
-				}
-			});
+			setResume(setSimpleResumeMD, resumeNo);
 		});
+	});
+	
+	
+	//이력 상세보기 버튼 클릭 시 데이터 받아다 모달 그려주기 (다시 그려야 함, 상세보기니까..) 
+	$('#matchupResumeViewDetailBtn').click(function(){
+		//레주메넘버가 필요함 
+		
+		var index=$('.matchupResumeName').text().indexOf(" ");
+		var resumeNo=parseInt($('.matchupResumeName').text().substr(3, index-3), 10);
+		//console.log(resumeNo);
+		console.log('다시 그리기 버튼 눌렀다');
+		setResume(setDetailResumeMD, resumeNo);
 		
 	});
 	
-	
-	//아임포트
-	var IMP = window.IMP; // 생략가능
-	IMP.init('imp22131582'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-	
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:결제테스트',
-	    amount : 14000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	});
-	
-	
+	//이력 미리보기에서 찜하기
 	$('#matchupResumeSimpleZzimBtn').click(function(){
 		if($(this).children('i').hasClass('goldStar')){
 			$(this).children('i').removeClass('goldStar');
@@ -246,7 +208,70 @@ $(function(){
 	
 });
 
-//모달을 그려줍니다
+//이력서 정보 세팅하는 메소드 
+function setResume(resumeStyle, resumeNo){
+	$.ajax({
+		url:"<c:url value='/company/getResumeData.do'/>"
+		,data:{
+			'resumeNo':resumeNo,
+		}
+		,type:"get"
+		,dataType:"json"
+		,success:function(result){
+			console.log(result);
+			resumeStyle(result);
+			//받아온 db를 모달팝업에 세팅해주기	
+		}
+		,error:function(xhr, status, error){
+			alert('error!'+error);
+		}
+	});
+}
+
+//모달에 그려주는 항목 중 언어, 수상및기타는 따로 뺍시다 
+function drawLang(resumeAllVo){
+	if(resumeAllVo.langList.length>0){
+		var language='';
+		for(lang of resumeAllVo.langList){
+			language+='<div class="matchupResumeLang">';
+			language+='<div>';
+			language+='<span class="matchupResumeSubTitle">'+lang.langName+'</span><span class="matchupResumeMediumSpan"> '+lang.langLevel+'</span>';
+			language+='</div>';
+			language+='<div class="matchupResumeCont matchupResumeLangTestCont">';
+			
+			if(resumeAllVo.testList.length>0){
+				for(test of resumeAllVo.testList){
+					language+='<span class="matchupResumeMediumSpan matchupResumeBoldSpan">'+test.langtestName;
+					language+=' ('+test.getYear+'.'+test.getMonth+')</span>';
+					language+='<span class="matchupResumeMediumSpan">'+test.langtestScore+'</span>';
+				}
+			}
+			language+='</div>';
+			language+='</div>';
+			
+			$('.matchupResumeWrapper:eq(3)').append(language);
+		}
+		
+	}
+}
+
+function drawAdd(resumeAllVo){
+	if(resumeAllVo.addList.length>0){
+		for(add of resumeAllVo.addList){
+			var additional='';
+			additional+='<div class="matchupResumeCont matchupResumeSpace">';
+			additional+='<div class="matchupResumeSubTitle">'+add.addName+'</div>';
+			additional+='<div>'+add.getYear+'.'+add.getMonth+'</div>';
+			additional+='</div>';
+			additional+='<div>';
+			additional+=add.addDetails;
+			additional+='</div>';
+			
+			$('.matchupResumeWrapper:eq(2)').append(additional);
+		}
+	}
+}
+//이력서 미리보기 모달을 그려줍니다
 function setSimpleResumeMD(resumeAllVo){
 	//데이터 초기화
 	$('.matchupResumeName').html('');
@@ -308,47 +333,87 @@ function setSimpleResumeMD(resumeAllVo){
 		$('.matchupResumeWrapper:eq(1)').append(education);
 	}
 	
-	if(resumeAllVo.addList.length>0){
-		for(add of resumeAllVo.addList){
-			var additional='';
-			additional+='<div class="matchupResumeCont matchupResumeSpace">';
-			additional+='<div class="matchupResumeSubTitle">'+add.addName+'</div>';
-			additional+='<div>'+add.getYear+'.'+add.getMonth+'</div>';
-			additional+='</div>';
-			additional+='<div>';
-			additional+=add.addDetails;
-			additional+='</div>';
-			
-			$('.matchupResumeWrapper:eq(2)').append(additional);
-		}
-	}
-	
-	if(resumeAllVo.langList.length>0){
-		var language='';
-		for(lang of resumeAllVo.langList){
-			language+='<div class="matchupResumeLang">';
-			language+='<div>';
-			language+='<span class="matchupResumeSubTitle">'+lang.langName+'</span><span class="matchupResumeMediumSpan"> '+lang.langLevel+'</span>';
-			language+='</div>';
-			language+='<div class="matchupResumeCont">';
-			
-			if(resumeAllVo.testList.length>0){
-				for(test of resumeAllVo.testList){
-					language+='<span class="matchupResumeMediumSpan matchupResumeBoldSpan">'+test.langtestName+'</span>';
-					language+='<span class="matchupResumeMediumSpan"> '+test.getYear+'.'+test.getMonth+'</span>';
-					language+='<span class="matchupResumeMediumSpan">'+test.langtestScore+'</span>';
-				}
-			}
-			language+='</div>';
-			language+='</div>';
-			
-			$('.matchupResumeWrapper:eq(3)').append(language);
-		}
-		
-	}
+	drawLang(resumeAllVo);
+	drawAdd(resumeAllVo);
 	
 }//drawSimpleResumeMD
 
+//이력서 상세보기 모달을 그려줍니다
+function setDetailResumeMD(resumeAllVo){
+	//데이터 초기화
+	$('.matchupResumeName').html('');
+	$('.matchupResumeWrapper').html('');
+	
+	var name=resumeAllVo.resumeVo.resumeName;
+	var resumeNo=resumeAllVo.resumeVo.resumeNo;
+	var firstName=name.substr(0,1)+"OO";
+	console.log(firstName);
+	$('.matchupResumeName').html("No."+resumeNo+" / "+firstName);
+	
+	//찜버튼 색칠해주기 
+	//가져올때 찜여부 같이 가져와야되자나
+	var resumeNo=resumeAllVo.resumeVo.resumeNo;
+	console.log(resumeNo);
+	
+	$.ajax({
+		url:"<c:url value='/company/isZzimed.do'/>"
+		,data:{
+			'resumeNo':resumeNo
+		}
+		,type:"get"
+		,dataType:"text"
+		,success:function(result){
+			if(result=='Y'){
+				$('#matchupResumeDetailZzimBtn i').addClass('goldStar');
+			}else{
+				$('#matchupResumeDetailZzimBtn i').removeClass('goldStar');
+			}
+		}
+		,error:function(xhr, status, error){
+			alert('error!');
+		}
+	});
+	
+	for(crr of resumeAllVo.crrList){
+		var career='';
+		career+='<div class="matchupResumeCont matchupResumeSpace">';
+		career+='<div>';
+		career+='<div class="matchupResumeSubTitle">'+crr.careerName+'</div>';
+		career+='<div>'+crr.careerDep+'</div>';
+		career+='</div>';
+		career+='<div>'+crr.startYear+'.'+crr.startMonth+' ~ '+crr.endYear+'.'+crr.endMonth+'</div>';
+		career+='</div>';
+		
+		if(resumeAllVo.achList.length>0){
+			for(ach of resumeAllVo.achList){
+				career+='<div class="matchupResumeCont matchupResumeSpace matchupResumeAchievement">';
+				career+='<div>'+ach.achName+'</div>';
+				career+='<div class="matchupResumeMediumSpan">'+ach.startYear+'.'+ach.startMonth +' ~ '+ach.endYear+'.'+ach.endMonth+'</div>';
+				career+='</div>';
+				career+='<div>'+ach.achDetails+'</div>';
+				career+='<div class="matchupResumeMDLightLine"></div>';
+			}
+		}
+		$('.matchupResumeWrapper:eq(0)').append(career);
+	}
+	
+	for(edu of resumeAllVo.eduList){
+		var education='';
+		education+='<div class="matchupResumeCont matchupResumeSpace">';
+		education+='<div class="matchupResumeSubTitle">'+edu.eduName+'</div>';
+		education+='<div>'+edu.startYear+'.'+edu.startMonth+' ~ '+edu.endYear+'.'+edu.endMonth+'</div>';
+		education+='</div>';
+		education+='<div>';
+		education+='<div>'+edu.eduMajor+'</div>';
+		education+='</div>';
+		
+		$('.matchupResumeWrapper:eq(1)').append(education);
+	}
+	
+	drawLang(resumeAllVo);
+	drawAdd(resumeAllVo);
+	
+}//drawDetailResumeMD
 
 function delZzim(resumeNo){
 	$.ajax({
@@ -705,7 +770,7 @@ function makeMemList(mcumem){
 								<button class="matchupSearchResumeOpenBtn" type="button" data-toggle="modal" data-target="#wantedResumeSimpleMD" data-resumeno="${mcumemMap.RESUMENO}">
 									이력서 미리보기</button>
 								<%@ include file="../company/modal/resumeSimple.jsp" %>
-								<%@ include file="../company/modal/resumeDetail.jsp" %>
+								<%-- <%@ include file="../company/modal/resumeDetail.jsp" %> --%>
 							</div>
 						</div>
 					</c:forEach>

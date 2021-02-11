@@ -216,7 +216,7 @@ public class CompanyMatchUpController {
 	
 	//이력서 그려주려고 데이터 받아오는 것
 	@ResponseBody
-	@RequestMapping("/getSimpleResumeData.do")
+	@RequestMapping("/getResumeData.do")
 	public ResumeAllVO getResumeForMatchupModal(@RequestParam int resumeNo) {
 		ResumeAllVO resumeAllVo=new ResumeAllVO();
 		logger.info("레주메넘버로 레주메 조회 시작, resumeNo={}", resumeNo);
