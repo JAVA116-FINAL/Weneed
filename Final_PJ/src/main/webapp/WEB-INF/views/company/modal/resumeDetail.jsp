@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/matchupResumeModal.css'/>">
+<!-- 이력서 상세보기 모달 팝업 시작 -->
 <div class="modal fade bs-example-modal-lg wantedResumeDetailMD" tabindex="-1" 
 	role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 			<div class="modal-header modal-comServHeader">
-			    <h5 class="modal-title modal-comServTitle" id="wantedResumeDetailMDLabel" style="align:center">이력서 미리보기</h5>
+			    <h5 class="modal-title modal-comServTitle" id="wantedResumeDetailMDLabel" style="align:center">상세이력 보기</h5>
 			    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
 			        <span aria-hidden="true">×</span>
 			    </button>
@@ -20,7 +21,7 @@
 					        		<span class="matchupResumeName">손 OO</span>
 					        		<div>
 						        		<button class="matchupResumeSMBtns"><i class="far fa-save"></i> 다운로드</button>
-						        		<button class="matchupResumeSMBtns"><i class="fas fa-star"></i> 찜</button>
+						        		<button class="matchupResumeSMBtns" ><i class="fas fa-star"></i> 찜</button>
 					        		</div>
 				        		</div>
 				        		<div>
@@ -124,10 +125,11 @@
 			</div>
 			<div class="modal-footer comServJoinModalFooter">
 				<div class="container comServModalFooterCon matchupResumeSpace">
-					<span>*이력서 상세보기를 하면 열람권 1회가 차감됩니다.</span>
-				    <button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="submit">이력서 상세보기</button>
+					<span class="matchupModalFooterGuide">*유능한 후보자는 여러 기업에서 면접 제안을 받습니다.<br>기회를 놓치지 마세요!</span>
+				    <button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="submit">제안하기</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<!-- 이력서 상세보기 모달 팝업 끝 -->

@@ -18,43 +18,19 @@ $(function(){
 			$(this).children('i').removeClass('goldStar');
 			//찜에서 빼기도 해야하는구만
 			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
-			//console.log(resumeStr.substr(3));
+			console.log(resumeStr.substr(3));
 			var resumeNo=parseInt(resumeStr.substr(3), 10);
-			$.ajax({
-				url:"<c:url value='/company/delZzim.do'/>",
-				type:"get",
-				dataType:"text",
-				data:{"resumeNo":resumeNo},
-				success:function(result){
-					console.log(result);
-				},
-				error:function(xhr, status, error){
-					console.log("에러!:"+error);
-				}
-			});
+			console.log('resumeNo'+resumeNo);
+			delZzim(resumeNo);
 		}else{
 			$(this).children('i').addClass('goldStar');
-			//찜하기를 해볼거예요
-			//이력서번호 넘기고 세션에서 컴코드 받아와서 넘기고
+			//찜하기를 해볼거예요 이력서번호 넘기고 세션에서 컴코드 받아와서 넘기고
 			//컨트롤러에서 이력서 번호로 매치업일반넘버 찾아
 			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
 			//console.log(resumeStr.substr(3));
 			var resumeNo=parseInt(resumeStr.substr(3), 10);
 			//console.log(resumeNo);
-			
-			$.ajax({
-				url:"<c:url value='/company/addZzim.do'/>",
-				type:"get",
-				dataType:"text",
-				data:{"resumeNo":resumeNo},
-				success:function(result){
-					//alert('성공');
-					console.log(result);
-				},
-				error:function(xhr, status, error){
-					alert('error: '+error);
-				}
-			});
+			addZzim(resumeNo);
 		}
 	});
 	
@@ -160,9 +136,6 @@ $(function(){
 			success:function(memList){
 				console.log(memList.length);
 				memListSize=memList.length;
-				//리스트를 한번 지워줘야겠다 todo
-				//그리고 그릴 애들은 goldStar클래스를 주야겠어
-				//더보기 기능도 고쳐야겠네...
 				$('#matchupSearch-resumeListDiv').html("");
 				
 				for(mcumem of memList){
@@ -220,6 +193,57 @@ $(function(){
 	});
 	
 	
+	//아임포트
+	var IMP = window.IMP; // 생략가능
+	IMP.init('imp22131582'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '주문명:결제테스트',
+	    amount : 14000,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	});
+	
+	
+	$('#matchupResumeSimpleZzimBtn').click(function(){
+		if($(this).children('i').hasClass('goldStar')){
+			$(this).children('i').removeClass('goldStar');
+			var resumeStr=$(this).parent().prev();
+			console.log('resumeStr: '+resumeStr);
+//			var resumeNo=parseInt(resumeStr.substr(3), 10);
+			console.log('resumeNo: '+resumeNo);
+			delZzim(resumeNo);
+		}else{
+			$(this).children('i').addClass('goldStar');
+			//찜하기를 해볼거예요 이력서번호 넘기고 세션에서 컴코드 받아와서 넘기고
+			//컨트롤러에서 이력서 번호로 매치업일반넘버 찾아
+			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
+			//console.log(resumeStr.substr(3));
+			var resumeNo=parseInt(resumeStr.substr(3), 10);
+			//console.log(resumeNo);
+			addZzim(resumeNo);
+		}
+	});
+	
 });
 
 //모달을 그려줍니다
@@ -229,12 +253,13 @@ function setSimpleResumeMD(resumeAllVo){
 	$('.matchupResumeWrapper').html('');
 	
 	var name=resumeAllVo.resumeVo.resumeName;
+	var resumeNo=resumeAllVo.resumeVo.resumeNo;
 	var firstName=name.substr(0,1)+"OO";
 	console.log(firstName);
-	$('.matchupResumeName').html(firstName);
+	$('.matchupResumeName').html("No."+resumeNo+" / "+firstName);
 	
 	//찜버튼 색칠해주기 
-	//가져올때 찜여부 같이 가져와야되자나 아오
+	//가져올때 찜여부 같이 가져와야되자나
 	var resumeNo=resumeAllVo.resumeVo.resumeNo;
 	console.log(resumeNo);
 	
@@ -246,7 +271,6 @@ function setSimpleResumeMD(resumeAllVo){
 		,type:"get"
 		,dataType:"text"
 		,success:function(result){
-			console.log(result);
 			if(result=='Y'){
 				$('#matchupResumeSimpleZzimBtn i').addClass('goldStar');
 			}else{
@@ -257,7 +281,6 @@ function setSimpleResumeMD(resumeAllVo){
 			alert('error!');
 		}
 	});
-	
 	
 	for(crr of resumeAllVo.crrList){
 		var career='';
@@ -325,6 +348,39 @@ function setSimpleResumeMD(resumeAllVo){
 	}
 	
 }//drawSimpleResumeMD
+
+
+function delZzim(resumeNo){
+	$.ajax({
+		url:"<c:url value='/company/delZzim.do'/>",
+		type:"get",
+		dataType:"text",
+		data:{"resumeNo":resumeNo},
+		success:function(result){
+			console.log(result);
+		},
+		error:function(xhr, status, error){
+			console.log("에러!:"+error);
+		}
+	});
+}
+
+function addZzim(resumeNo){
+	$.ajax({
+		url:"<c:url value='/company/addZzim.do'/>",
+		type:"get",
+		dataType:"text",
+		data:{"resumeNo":resumeNo},
+		success:function(result){
+			//alert('성공');
+			console.log(result);
+		},
+		error:function(xhr, status, error){
+			alert('error: '+error);
+		}
+	});
+}
+
 
 //pdf 다운로드 함수 자연님것 가져옴
 $.downResume=function(resumeNo){
@@ -641,6 +697,7 @@ function makeMemList(mcumem){
 								<button class="matchupSearchResumeOpenBtn" type="button" data-toggle="modal" data-target="#wantedResumeSimpleMD" data-resumeno="${mcumemMap.RESUMENO}">
 									이력서 미리보기</button>
 								<%@ include file="../company/modal/resumeSimple.jsp" %>
+								<%@ include file="../company/modal/resumeDetail.jsp" %>
 							</div>
 						</div>
 					</c:forEach>

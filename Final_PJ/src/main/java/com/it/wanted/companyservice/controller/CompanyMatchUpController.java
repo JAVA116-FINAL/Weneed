@@ -60,23 +60,24 @@ public class CompanyMatchUpController {
 	@Autowired ResumeService resumeService;
 	
 	@RequestMapping(value = "/matchupService.do", method = RequestMethod.GET)
-	public String matchupMain(HttpServletRequest request, Model model) {
+	public String matchupMain(HttpSession session, HttpServletRequest request, Model model) {
 		logger.info("기업서비스 매치업 메인화면");
 		
 		//여기서 세션에서 comCode 따다가 매치업기업목록에 해당 컴코드가 있으면 session에 매치업기업번호 추가해놓고
 		//redirect company/matchupSearch.do
-		HttpSession session = request.getSession();
+	//	HttpSession session = request.getSession();
 		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
 		logger.info("session에서 읽어온 cominfoVo comVo={}", comVo);
 		String comCode=comVo.getComCode();
 		
 		//분기처리 해야함 매치업 구입기업, 비구입기업
 		String url="";
-		Map<String, Float> checkMap=matchupComService.hasMatchup(comCode);
+		Map<String, Object> checkMap=matchupComService.hasMatchup(comCode);
 		logger.info("받아온 checkMap={}", checkMap);
 		if(checkMap == null) {
 			url="redirect:/company/matchupMain.do";
-		}else if(checkMap.get("leftDate")>0 && checkMap.get("leftCount")>0) { //매치업 구입기업이고 기한내에 있으면
+		}else if(Integer.parseInt(String.valueOf(checkMap.get("LEFTDATE")))>0
+				&& Integer.parseInt(String.valueOf(checkMap.get("LEFTCOUNT")))>0) { //매치업 구입기업이고 기한내에 있으면
 			url="redirect:/company/matchupSearch.do";
 		}
 		return url;
@@ -218,7 +219,7 @@ public class CompanyMatchUpController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/addZzim.do")
+	@RequestMapping(value="/addZzim.do", produces = "application/text; charset=utf8")
 	public String addZzim(@RequestParam int resumeNo, HttpSession session) {
 		ComInfoVO comInfoVo=(ComInfoVO) session.getAttribute("comInfoVo");
 		logger.info("매치업 찜하기, resumeNo={}, comCode={}", resumeNo, comInfoVo.getComCode());
@@ -243,7 +244,7 @@ public class CompanyMatchUpController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/delZzim.do")
+	@RequestMapping(value="/delZzim.do", produces = "application/text; charset=utf8")
 	public String delZzim(@RequestParam int resumeNo, HttpSession session) {
 		ComInfoVO comInfoVo=(ComInfoVO) session.getAttribute("comInfoVo");
 		logger.info("매치업 찜하기, resumeNo={}, comCode={}", resumeNo, comInfoVo.getComCode());

@@ -82,3 +82,7 @@ section, section > div {
 	width: 200px;
 	border-radius: 50px;
 }
+
+.matchupModalFooterGuide{
+	text-align: left;
+}

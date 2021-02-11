@@ -28,7 +28,7 @@
 					        			<span class="matchupResumeSubTitle">E-mail </span><span>연락처는 면접 제안 단계에서 공개됩니다.</span>
 				        			</div>
 				        			<div>
-				        				<span class="matchupResumeSubTitle">Mobile </span><span>연락처는 면접 제안 단계에서 공개됩니다</span>
+				        				<span class="matchupResumeSubTitle">Mobile </span><span>연락처는 면접 제안 단계에서 공개됩니다.</span>
 				        			</div>
 				        		</div>
 			        		</section>
@@ -104,7 +104,8 @@
 			<div class="modal-footer comServJoinModalFooter">
 				<div class="container comServModalFooterCon matchupResumeSpace">
 					<span>*이력서 상세보기를 하면 열람권 1회가 차감됩니다.</span>
-				    <button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="submit">이력서 상세보기</button>
+				    <button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="button"
+				     data-dismiss="modal" data-toggle="modal" data-target=".wantedResumeDetailMD" data-resumeno="${mcumemMap.RESUMENO}">상세이력 보기</button> 
 				</div>
 			</div>
 		</div>

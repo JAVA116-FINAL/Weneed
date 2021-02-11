@@ -7,6 +7,6 @@ public interface MatchupComService {
 	int addZzim(MatchupZzimVO zzimVo);
 	int isZzimed(MatchupZzimVO zzimVo);
 	int delZzim(MatchupZzimVO zzimVo);
-	Map<String, Float> hasMatchup(String comCode);
+	Map<String, Object> hasMatchup(String comCode);
 
 }
