@@ -27,6 +27,7 @@ import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.matchup.model.MatchupMemVO;
 import com.it.wanted.member.model.MemberService;
 import com.it.wanted.member.model.MemberVO;
+import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeVO;
 
 @Controller
@@ -70,18 +71,9 @@ public class MatchupMemController {
 		logger.info("매치업 회원여부 mcuCnt={}, resumeCnt={}",mcuCnt,resumeCnt);
 		if(mcuCnt>0) {//매치업회원,전문가번호가있다.
 			if(resumeCnt>0) {//매치업회원이고, 이력서가등록되어있다.
-				mcuVo=matchupService.selectMcuMem(memNo);
-				logger.info("mcuVo={}",mcuVo);//이것 mcuAllVo로 바꿔야할듯
-				model.addAttribute("mcuVo", mcuVo);
-				model.addAttribute("memVo", memVo);
 				return "redirect:/matchupMem/matchupMemList.do";
 				
 			}else {//아직 이력서 등록이 안됐다!그러면 이력서 등록화면으로 간다.
-				/*
-				mcuVo=matchupService.selectMcuMem(memNo);
-				logger.info("mcuVo={}",mcuVo);//이것 mcuAllVo로 바꿔야할듯
-				model.addAttribute("mcuVo", mcuVo);
-				*/
 				return "redirect:/matchupMem/matchupMemRegister2.do";
 			}
 		}
@@ -114,13 +106,7 @@ public class MatchupMemController {
 			model.addAttribute("url", "/matchupMem/matchupMemRegister.do");
 			return "common/message";
 		}
-		
-		//3. 매치업 정보 담아보내기
-		/*
-			MatchupMemVO mcuVo = matchupService.selectMcuMem(mcuAllVo.getMcumemVo().getMemNo());
-			logger.info("mcuVo={}",mcuVo);//매치업 회원정보를 담아 이력서로 보낸다. 
-			model.addAttribute("mcuVo", mcuVo);
-		*/
+		//3. 
 		//4.
 		return "redirect:/matchupMem/matchupMemRegister2.do";
 	}
@@ -129,12 +115,22 @@ public class MatchupMemController {
 	@RequestMapping(value = "/matchupMemRegister2.do",method = RequestMethod.GET)
 	public String matchupRegister2_get(HttpSession session, Model model) {
 		//1 화면 보여주기
+		logger.info("매치업 이력서 등록 화면보여주기");
 		String email=(String) session.getAttribute("email");
 		MemberVO memVo = memberService.selectMember(email);
 		logger.info("매치업 aside 회원정보 조회 memVo={}",memVo);
 		//2
 		MatchupMemVO mcuVo = matchupService.selectMcuMem(memVo.getMemNo());	
-			
+		
+		int mcuCnt=matchupService.isMatchupMem(memVo.getMemNo());
+		int resumeCnt=matchupService.hasMcuResumeNo(memVo.getMemNo());
+		logger.info("매치업 회원여부 mcuCnt={}, resumeCnt={}",mcuCnt,resumeCnt);
+		if(mcuCnt>0) {//매치업회원,전문가번호가있다.
+			if(resumeCnt>0) {//매치업회원이고, 이력서가등록되어있다.
+				return "redirect:/matchupMem/matchupMemList.do";
+			}
+		}
+		
 		//3
 			model.addAttribute("memVo", memVo);
 			model.addAttribute("mcuVo", mcuVo);
@@ -142,12 +138,27 @@ public class MatchupMemController {
 		return "matchupMem/matchupMemRegister2";
 	}
 	
+	//5.매치업 이력서 등록2/8
+	@RequestMapping(value = "/matchupMemRegister2.do",method = RequestMethod.POST)
+	public String matchupRegister2_post(@ModelAttribute ResumeAllVO rAllVo,@RequestParam int mcumemNo,Model model) {
+		//1
+		logger.info("매치업 이력서 등록 화면 보여주기 파라미터 rAllVo={}, mcumemNo={}",rAllVo, mcumemNo);
+		MatchupMemVO mcuVo=new MatchupMemVO();
+		mcuVo.setMcumemNo(mcumemNo);
+		//2
+		int cnt=matchupService.insertMcuMem2(rAllVo, mcuVo);
+		logger.info("이력서 등록결과 cnt={}",cnt);
+		if(cnt<1) {
+			model.addAttribute("msg", "매치업 이력서 등록 실패!");
+			model.addAttribute("url", "/matchupMem/matchupMemRegister2.do");
+			return "common/message";
+		}
+		//3
+		//4
+		return "redirect:/matchupMem/matchupMemList.do";
+	}
 	
-	
-	
-	
-	
-	//5.매치업 관리
+	//6.매치업 관리
 	@RequestMapping("/matchupMemList.do")
 	public String machupList() {
 		//1 매치업 정보 매치업이력서, 이력서리스트, 전문분야 등 보내기 
@@ -158,7 +169,7 @@ public class MatchupMemController {
 		return "matchupMem/matchupMemList";
 	}
 	
-	//6.ajax 직무 리스트 뿌려주기
+	//7.ajax 직무 리스트 뿌려주기
 	@ResponseBody
 	@RequestMapping("/matchupGetJikmu.do")
 	public List<JikmuVO> matchupGetJikmu(@RequestParam String jikgunCode){
@@ -169,7 +180,6 @@ public class MatchupMemController {
 		List<JikmuVO> jikmuList = jikgunService.selectJikmuByJikgunCode(jikgunCode);
 		logger.info("jikmuList={}",jikmuList);
 		//3
-		
 		//4
 		return jikmuList;
 	}

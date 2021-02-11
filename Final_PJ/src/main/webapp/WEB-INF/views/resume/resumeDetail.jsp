@@ -35,9 +35,12 @@ $(function(){
 		  var list = new Array();
 			$("input[type=text]").each(function(index, item){
 			//list.push($(item).val());
-			count+=$(item).val().length
+			count+=$(item).val().length;
 			});
+			count+=$('#taResumeIntro_jy').val().length;
 			//alert(count);
+			$('#resumeLength').val(count);
+			
 	  
 		  if($(this).attr("id")=="btRealSave"){
 				if(count<400){
@@ -507,6 +510,7 @@ $(function(){
 			<input type="hidden" name="resumeVo.resumeNo" value="${rAllVo.resumeVo.resumeNo}"> 			
 			<input type="hidden" name="resumeVo.memNo" value="${rAllVo.resumeVo.memNo}">
 			<input type="hidden" id="tempFlag" name="resumeVo.tempFlag" value="${rAllVo.resumeVo.tempFlag}">
+			<input type="hidden" id="resumeLength" name="resumeVo.resumeLength" value="${rAllVo.resumeVo.resumeLength}">
 			<!-- 엄청크게 --> 
 			<div class="reumeTitle_jy">
 				<input type="text" class="title-input_jy" name="resumeVo.resumeTitle" value="${rAllVo.resumeVo.resumeTitle}">
@@ -519,7 +523,7 @@ $(function(){
 			<div class="resumeSubTitle_jy"> 
 				<label for="resumeIntroduce">간단소개글</label><br>
 			</div>
-			<textarea name="resumeVo.resumeIntroduce"  class="content-textArea_jy" placeholder="간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요. (3~5줄 권장)" rows="3" cols="50" >${rAllVo.resumeVo.resumeIntroduce}</textarea>
+			<textarea name="resumeVo.resumeIntroduce" id="taResumeIntro_jy" class="content-textArea_jy" placeholder="간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요. (3~5줄 권장)" rows="3" cols="50" >${rAllVo.resumeVo.resumeIntroduce}</textarea>
 			<br>	
 			<div class="RWcomponent_jy">
 				<div class="resumeSubTitle_jy">경력</div>

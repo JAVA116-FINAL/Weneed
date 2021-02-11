@@ -29,6 +29,11 @@
 		select * from matchupMem where mem_No=#{memNo}
 	</select>
 
+	<update id="updateMCUResume" parameterType="matchupMemVo">
+		update matchupmem
+		set resume_No=#{resumeNo}
+		where mcumem_No=#{mcumemNo}
+	</update>
 	
 	<!-- 현빈 -->
 	<select id="selectOpen" resultType="matchupMemVo">

@@ -22,22 +22,20 @@ $(function(){
 	var lk=0;//링크 카운트
 	 $('.soltableli_jy').sortable();
 	 $('.soltableli_jy').disableSelection();
-	 	 	 
 	 
-	 //버튼 누르면 날짜정리하기!=>날짜 컬림 나눠서 수정 210126_22:50
 	 //작성완료 버튼을 누르면 글자수 체크, 임시 플래그N,
 	 //유효성검사, 날짜? 
 	  $('.buttons_jy').click(function(){
-		  	
-	
 		//글자수체크하고 저장 하기(인풋값만, 셀렉트,)
 		  var count=0;
 		  var list = new Array();
 			$("input[type=text]").each(function(index, item){
 			//list.push($(item).val());
-			count+=$(item).val().length
+			count+=$(item).val().length;
 			});
+			count+=$('#taResumeIntro_jy').val().length;
 			//alert(count);
+			$('#resumeLength').val(count);
 		  
 		  if($(this).attr("id")=="btRealSave"){
 				if(count<400){
@@ -329,13 +327,11 @@ $(function(){
 		   	}else{
 		   		$('#curEmployed'+c).val("N");
 		   	}
-	    	
 	    	if($('#ckcurEnrolled'+c).is(":checked")){//현재재학중
 		   		 $('#curEnrolled'+c).val("Y");
 		   	}else{
 		   		$('#curEnrolled'+c).val("N");
 		   	}
-	    	
 	    	
 	    }	  
 	    
@@ -458,22 +454,8 @@ $(function(){
 				}//if
 	    	 }//confirm if	
 	    }//del함수끝
-	    
-	    
-	    
-	    
-	   
+	       
 });
-
-/* function validate_Year(year){
-	var pattern = new RegExp(/^[0-9]*$/g);
-	return pattern.test(year);
-	
-		0 에서 9사이의 숫자로 시작하거나 끝나야 한다는 의미 (^는 시작, $는 끝을 의미)
-		닫기 대괄호(]) 뒤의 * 기호는 0번 이상 반복
-	
-} */
-
 </script>
 <section class="resumeWriteSection_jy">
 	<div class="container container_jy">
@@ -505,6 +487,7 @@ $(function(){
 			<input type="hidden" name="resumeVo.resumeNo" value="${resumeVo.resumeNo}"> 			
 			<input type="hidden" name="resumeVo.memNo" value="${resumeVo.memNo}">
 			<input type="hidden" id="tempFlag" name="resumeVo.tempFlag" value="${resumeVo.tempFlag}">
+			<input type="hidden" id="resumeLength" name="resumeVo.resumeLength" value="${resumeVo.resumeLength}">
 			<!-- 엄청크게 --> 
 			<div class="reumeTitle_jy">
 				<input type="text" class="title-input_jy" name="resumeVo.resumeTitle" value="${resumeVo.resumeTitle}">
@@ -517,7 +500,7 @@ $(function(){
 			<div class="resumeSubTitle_jy"> 
 				<label for="resumeIntroduce">간단소개글</label><br>
 			</div>
-			<textarea name="resumeVo.resumeIntroduce" value="${resumeVo.resumeIntroduce}"  class="content-textArea_jy" placeholder="간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요. (3~5줄 권장)" rows="3" cols="50" ></textarea>
+			<textarea id="taResumeIntro_jy" name="resumeVo.resumeIntroduce" value="${resumeVo.resumeIntroduce}"  class="content-textArea_jy" placeholder="간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요. (3~5줄 권장)" rows="3" cols="50" ></textarea>
 			<br>	
 			<div class="RWcomponent_jy">
 				<div class="resumeSubTitle_jy">경력</div>

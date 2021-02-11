@@ -40,12 +40,18 @@ public class CareerDAOMybatis implements CareerDAO{
 		return sqlSession.selectList(namespace+"selectCareerbyResumeNo",resumeNo);
 	}
 
-	
+	@Override
+	public int insertMcuCareer(CareerVO careerVo) {
+		return sqlSession.insert(namespace+"insertMcuCareer",careerVo);
+	}
+
 	
 	/* 현빈 */
 	@Override
 	public List<Integer> selectMcumemNo(String searchKeyword) {
 		return sqlSession.selectList(namespace+"selectMcumemNo", searchKeyword);
 	}
+
+
 
 }

@@ -173,6 +173,16 @@ button{
     white-space: nowrap;
     out-line:0;
 }
+.search-ok{
+	border:none;
+	background:none;
+	font-weight:600;
+	font-size:13px;
+	position:absolute;
+	line-height:36px;
+	right:52px;
+	color:#333;
+}
 
 .search-bottom-box{
   position: relative;

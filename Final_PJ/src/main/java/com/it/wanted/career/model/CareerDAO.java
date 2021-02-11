@@ -9,6 +9,7 @@ public interface CareerDAO {
 	public int updateCareer(CareerVO careerVo);
 	public int deleteCareer(int careerNo);
 	public List<CareerVO> selectCareerbyResumeNo(int resumeNo);
+	public int insertMcuCareer(CareerVO careerVo);
 	
 	/* 현빈 */
 	public List<Integer> selectMcumemNo(String searchKeyword);

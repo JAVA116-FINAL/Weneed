@@ -34,15 +34,19 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	}
 	
 	@Override
-	public int insertMcuMem(MatchupMemVO mVo) {
-		return sqlSession.insert(namespace+"insertMcuMem", mVo);
+	public int insertMcuMem(MatchupMemVO mcuVo) {
+		return sqlSession.insert(namespace+"insertMcuMem", mcuVo);
 	}
 	
 	@Override
-	public MatchupMemVO selectMcuMem(int memNo) {
-		return sqlSession.selectOne(namespace+"selectMcuMem", memNo);
+	public MatchupMemVO selectMcuMem(int mcuNo) {
+		return sqlSession.selectOne(namespace+"selectMcuMem", mcuNo);
 	}
 	
+	@Override
+	public int updateMCUResume(MatchupMemVO mcuVo) {
+		return sqlSession.update(namespace+"updateMCUResume",mcuVo);
+	}
 	
 	
 	/* 현빈 */
@@ -75,5 +79,7 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	public int isZzimed(MatchupZzimVO zzimVo) {
 		return sqlSession.selectOne(namespace+"isZzimed", zzimVo);
 	}
+	
+
 	
 }
