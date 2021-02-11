@@ -447,14 +447,22 @@ function makeMemList(mcumem){
 		<div class="container matchupNoticeWrapper">
 			<div>
 				<span class="matchupNoticeTitle">Matchup <i class="far fa-handshake fa-sm"></i></span>
-				<span id="matchupUseorNotSpan" class="matchupNoticeText">[이용중]</span>
-				<span id="matchupDuedateSpan" class="matchupNoticeText">2021.02.10까지</span>
-				<span id="matchupViewCountSpan1" class="matchupNoticeText">사용 5회 </span>
-				<span id="matchupViewCountSpan2" class="matchupNoticeText">| 잔여 25회</span>
+				<c:if test="${checkMap.LEFTDATE > 0 && checkMap.LEFTCOUNT > 0}">
+					<span id="matchupUseorNotSpan" class="matchupNoticeText">[이용중]</span>
+					<span id="matchupDuedateSpan" class="matchupNoticeText"><fmt:formatDate value="${matchupComVo.mcupdExdate}" pattern="yyyy.MM.dd"/> 까지</span>
+					<span id="matchupViewCountSpan1" class="matchupNoticeText">사용 ${matchupComVo.resumeReadCount}회 </span>
+					<span id="matchupViewCountSpan2" class="matchupNoticeText">| 잔여 ${checkMap.LEFTCOUNT}회</span>
+				</c:if>
+				<c:if test="${checkMap.LEFTDATE eq 0 || checkMap.LEFTCOUNT eq 0}">
+					<span id="matchupUseorNotSpan" class="matchupNoticeText">[만료]</span>
+					<span id="matchupDuedateSpan" class="matchupNoticeText"><fmt:formatDate value="${matchupComVo.mcupdExdate}" pattern="yyyy.MM.dd"/> 까지</span>
+					<span id="matchupViewCountSpan1" class="matchupNoticeText">사용 ${matchupComVo.resumeReadCount}회 </span>
+					<span id="matchupViewCountSpan2" class="matchupNoticeText">| 잔여 ${checkMap.LEFTCOUNT}회</span>
+				</c:if>
 			</div>
 			<div class="matchupNoticeBtnWrapper">
 				<!-- 매치업서비스 가입 모달 팝업 -->
-				<button type="button" data-toggle="modal" data-target=".matchupServPlanMD" data-comcode="${comInfoVo.comCode}" class="matchupServiceBuyBtn">매치업 서비스 가입</button>
+				<button type="button" data-toggle="modal" data-target=".matchupServPlanMD" data-comcode="${comInfoVo.comCode}" class="matchupServiceBuyBtn">매치업 서비스 구입</button>
 				<%@ include file="../company/modal/matchupServiceSelect.jsp"%>
 			</div>
 		</div>

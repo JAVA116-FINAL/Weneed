@@ -41,6 +41,7 @@ import com.it.wanted.matchup.model.MatchupMemSearchVO;
 import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.matchup.model.MatchupMemVO;
 import com.it.wanted.matchupCom.model.MatchupComService;
+import com.it.wanted.matchupCom.model.MatchupComVO;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
 import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeService;
@@ -91,11 +92,17 @@ public class CompanyMatchUpController {
 	}
 	
 	@RequestMapping("/matchupSearch.do")
-	public String matchupSearch(Model model, @ModelAttribute MatchupMemSearchVO searchVo) {
+	public String matchupSearch(Model model, @ModelAttribute MatchupMemSearchVO searchVo,
+			HttpSession session) {
 		searchVo=setSearchInfoDefault(searchVo);
 		searchVo=setBeforeMethod(searchVo);
+		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		//매치업 구입 기업만 여기 들어올수 있습니다. 
+		//그럼 그냥 구입내역을 찍어서 리턴시키면 되는 거 아니야?
+		MatchupComVO matchupComVo=matchupComService.selectMatchupCom(comVo.getComCode());
+		Map<String, Object> checkMap=matchupComService.hasMatchup(comVo.getComCode());
 		
-		logger.info("기업서비스 매치업 검색/조회화면, 파라미터 searchVo={}", searchVo);
+		logger.info("기업서비스 매치업 검색/조회화면, 파라미터 searchVo={}, matchupComVo={}", searchVo, matchupComVo);
 		
 		//[1-1] 직군리스트 불러오기
 		List<JikgunVO> jikgunList=jgService.selectAllJikgun();
@@ -131,6 +138,8 @@ public class CompanyMatchUpController {
 		model.addAttribute("jikmuList", jikmuList);
 		model.addAttribute("memList", memList);
 		model.addAttribute("emptyCheck", emptyCheck);
+		model.addAttribute("matchupComVo", matchupComVo);
+		model.addAttribute("checkMap", checkMap);
 		return "company/matchupSearch";
 	}
 

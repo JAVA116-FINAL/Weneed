@@ -47,4 +47,9 @@ public class MatchupComServiceImpl implements MatchupComService{
 		}
 		return resultMap;
 	}
+
+	@Override
+	public MatchupComVO selectMatchupCom(String comCode) {
+		return matchupComDao.selectMatchupCom(comCode);
+	}
 }

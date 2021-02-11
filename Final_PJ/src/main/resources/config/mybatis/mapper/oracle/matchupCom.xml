@@ -34,6 +34,10 @@
 			from matchupCom where com_code=#{comCode}
 			)
 	</select>
+	
+	<select id="selectMatchupCom" parameterType="String" resultType="matchupComVo">
+		select * from matchupCom where com_code=#{comCode}
+	</select>
 </mapper>
 
 

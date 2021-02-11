@@ -36,5 +36,10 @@ public class MatchupComDAOMy implements MatchupComDAO{
 	public Map<String, Object> isOverMatchup(String comCode) {
 		return sqlSession.selectOne(namespace+"isOverMatchup", comCode);
 	}
+
+	@Override
+	public MatchupComVO selectMatchupCom(String comCode) {
+		return sqlSession.selectOne(namespace+"selectMatchupCom", comCode);
+	}
 	
 }

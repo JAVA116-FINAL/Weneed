@@ -9,5 +9,6 @@ public interface MatchupComDAO {
 	int delZzim(MatchupZzimVO zzimVo);
 	int checkListedMatchup(String comCode);
 	Map<String, Object> isOverMatchup(String comCode);
+	MatchupComVO selectMatchupCom(String comCode);
 
 }
