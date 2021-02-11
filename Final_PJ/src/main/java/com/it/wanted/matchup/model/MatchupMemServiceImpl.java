@@ -18,6 +18,7 @@ import com.it.wanted.education.model.EducationDAO;
 import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.expertise.model.ExpertiseDAO;
 import com.it.wanted.expertise.model.ExpertiseVO;
+import com.it.wanted.matchupCom.model.MatchupZzimVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemJikmuVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemjikmuDAO;
 import com.it.wanted.resume.model.ResumeAllVO;
@@ -51,6 +52,7 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	public int hasMcuResumeNo(int memNo) {
 		return matchupMemDao.hasMcuResumeNo(memNo);
 	}
+	
 	@Transactional
 	@Override
 	public int insertMcuMem(MatchupAllVO mcuAllVo) {
@@ -155,7 +157,32 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	public List<Map<String, Object>> selectSearchedMemList(MatchupMemSearchVO mcuMemSearchVo){ 
 		//매치업번호 리스트 합칠 것 
 		List<Integer> mcumemNoList=new ArrayList<Integer>();
+		List<Map<String, Object>> mcumemSearchResultList=new ArrayList<Map<String,Object>>();
 		
+		//검색어에 대한 멤버번호목록 확보
+		mcumemNoList=getMcuMemNoList(mcumemNoList, mcuMemSearchVo);
+		
+		if(mcumemNoList.size()<1) { //검색결과가 없으면 빈 맵 더해서 리턴(앞단에서 null이면 안됨)
+			Map<String, Object> emptyMap=new HashMap<String, Object>();
+			mcumemSearchResultList.add(emptyMap);
+			return mcumemSearchResultList;
+		}
+		
+		//이제 매치업넘버리스트는 완성됐어 이거에 대한 이력서리스트를 가져와야 해
+		mcuMemSearchVo.setMcumemNoList(mcumemNoList);
+		
+		//한번만 찍어보자 
+		System.out.println("searchMinCareer: "+mcuMemSearchVo.getSearchMinCareer());
+		System.out.println("searchMaxCareer: "+mcuMemSearchVo.getSearchMaxCareer());
+		
+		mcumemSearchResultList=matchupMemDao.selectMcumemSearchList(mcuMemSearchVo);
+		System.out.println("매치업넘버리스트에 해당하는 매치업멤버 뷰 조회 결과, mcumemSearchResultList.size="+mcumemSearchResultList.size());
+	
+		return mcumemSearchResultList;
+	}
+
+	//검색한 매치업멤버 번호 목록을 확보하는 메소드
+	private List<Integer> getMcuMemNoList(List<Integer> mcumemNoList, MatchupMemSearchVO mcuMemSearchVo) {
 		//커리어의 매치업번호 리스트 
 		List<Integer> careerMcumemNoList=careerDao.selectMcumemNo(mcuMemSearchVo.getSearchKeyword());
 		System.out.println("커리어 검색결과 careerMcumemNoList.size="+careerMcumemNoList.size());
@@ -180,47 +207,11 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		}
 		System.out.println("중복확인이 끝난 매치업멤넘 리스트 길이="+mcumemNoList.size());
 		System.out.println("중복확인이 끝난 매치업멤넘 리스트 길이="+mcumemNoList);
-		List<Map<String, Object>> mcumemSearchResultList=new ArrayList<Map<String,Object>>();
 		
-		if(mcumemNoList.size()<1) { //검색결과가 없으면
-			Map<String, Object> emptyMap=new HashMap<String, Object>();
-			mcumemSearchResultList.add(emptyMap);
-			return mcumemSearchResultList;
-		}
-		
-		mcuMemSearchVo.setMcumemNoList(mcumemNoList);
-		//이제 매치업넘버리스트는 완성됐어 이거에 대한 이력서리스트를 가져와야 해
-		
-		//한번만 찍어보자 
-		System.out.println("searchMinCareer"+mcuMemSearchVo.getSearchMinCareer());
-		System.out.println("searchMaxCareer"+mcuMemSearchVo.getSearchMaxCareer());
-		mcumemSearchResultList=matchupMemDao.selectMcumemSearchList(mcuMemSearchVo);
-		
-		System.out.println("매치업넘버리스트에 해당하는 매치업멤버 뷰 조회 결과, mcumemSearchResultList.size="+mcumemSearchResultList.size());
-	
-		/*
-		 //이제 경력 계산을 하는 거예요 근데 케이스를 여기서 바꾼
-		 
-		for(int i=0; i<mcumemSearchResultList.size(); i++) {
-			Map<String,Object> map=mcumemSearchResultList.get(i);
-			
-			//신입부터 뽑는거면 아무것도 제외할 필요가 없네
-			if(mcuMemSearchVo.getSearchMinCareer().equals("신입") || mcuMemSearchVo.getSearchMaxCareer().equals("신입")) {
-				continue;
-			}
-			//신입부터 n년차까지 뽑는거면 n년차 이상은 제외. 미니멈은 신입이고 맥시멈은 신입이 아니고 전체도 아니고 10도 아닐 때
-			if(mcuMemSearchVo.getSearchMinCareer().equals("신입") || !mcuMemSearchVo.getSearchMaxCareer().equals("신입") ||
-					!mcuMemSearchVo.getSearchMaxCareer().equals("전체") || !mcuMemSearchVo.getSearchMaxCareer().equals("10") ) {
-				
-				
-			}
-		}
-		*/
-		return mcumemSearchResultList;
+		return mcumemNoList;
 	}
 
-	
-	
+	/*
 	//검색결과중에 찜한 멤버 리스트를 골라보자!
 	public List<Map<String, Object>> MatchupZzimedList(List<Map<String, Object>> mcumemSearchResultList) {
 		List<Map<String, Object>> zzimedList=null;
@@ -228,6 +219,35 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		
 		return zzimedList;
 	}
+	 */
+	
+	@Override
+	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo) {
+		List<Integer> mcumemNoList=new ArrayList<Integer>();
+		List<Map<String, Object>> zzimedList=new ArrayList<Map<String,Object>>();
+		
+		//검색어로 검색하고 중복을 제거한 결과
+		mcumemNoList=getMcuMemNoList(mcumemNoList, searchVo);
+		searchVo.setMcumemNoList(mcumemNoList);
 
+		zzimedList=matchupMemDao.selectZzimedList(searchVo);
+		System.out.println("찜한 목록 서칭 결과, zzimedList.size="+zzimedList.size());
+		
+		return zzimedList;
+	}
+
+	@Override
+	public int isZzimed(int resumeNo, String comCode) {
+		int cnt=0;
+		
+		int mcumemNo=matchupMemDao.selectMcumemNo(resumeNo);
+		MatchupZzimVO zzimVo=new MatchupZzimVO();
+		zzimVo.setComCode(comCode);
+		zzimVo.setMcumemNo(mcumemNo);
+		
+		cnt=matchupMemDao.isZzimed(zzimVo);
+		
+		return cnt;
+	}
 	
 }

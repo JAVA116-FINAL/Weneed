@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="<c:url value='/resources/css/companyService/comServModal.css'/>">
 <!-- 매치업 서비스 선택 팝업 -->
 <div class="modal fade bd-example-modal-lg matchupServPlanMD" tabindex="-1" 
 	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
@@ -12,10 +11,8 @@
 			        <span aria-hidden="true">×</span>
 			    </button>
 			</div>
-			<div class="container comServModalCon">
 				<div class="modal-body">
 				    <div class="table-responsive">
-				        <div class="container">
 			        		<div class="matchup-productIntro-3items">
 								<div class="matchup-productIntro-item">
 									<h2 class="matchup-productIntro-item-title1">라이트</h2>
@@ -63,10 +60,8 @@
 									<a href="#" class="matupChooseBtn matupChooseBtn3">선택하기</a>
 								</div>
 							</div>
-			      		</div>
 			        </div>
 			    </div>
-			</div>
 		</div>
 	</div>
 </div>

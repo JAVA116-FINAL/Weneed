@@ -12,4 +12,8 @@ public interface ResumeService {
 	public ResumeVO selectResumeOne(ResumeVO rVo);
 	public ResumeAllVO selectResumeDetail(ResumeVO rVo);
 	
+	
+	/* 현빈 */
+	public ResumeAllVO selectResumeByResumeNo(int resumeNo);
+	
 }

@@ -25,10 +25,17 @@
 
    <!-- Main jQuery -->
    <script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.js"></script>
+   
+   <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   
    <!-- Bootstrap 4.3.2 -->
+   <script src="${pageContext.request.contextPath}/resources/plugins/counterup/jquery.easing.js"></script>
    <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap/js/popper.js"></script>
    <script src="${pageContext.request.contextPath}/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-   <script src="${pageContext.request.contextPath}/resources/plugins/counterup/jquery.easing.js"></script>
+   
    <!-- Slick Slider -->
    <script src="${pageContext.request.contextPath}/resources/plugins/slick-carousel/slick/slick.min.js"></script>
    <!-- Counterup -->
@@ -43,9 +50,9 @@
    
    <script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
- 
-	<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 	
 	<!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->	
 	<script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>
-  
+  	
+  	<!-- 아임포트 -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-x.y.z.js"></script>

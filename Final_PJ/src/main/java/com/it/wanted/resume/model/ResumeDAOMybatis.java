@@ -47,11 +47,17 @@ public class ResumeDAOMybatis implements ResumeDAO{
 		return sqlSession.selectOne(namespace+"selectResumeOne", rVo);
 	}
 
+	
+	/* 현빈 */
+	@Override
+	public ResumeVO selectResumeByResumeNo(int resumeNo) {
+		return sqlSession.selectOne(namespace+"selectResumeByResumeNo", resumeNo);
+	}
+	
 	@Override
 	public int insertMcuResume(ResumeVO rVo) {
 		return sqlSession.update(namespace+"insertMcuResume",rVo);
 	}
-	
 	
 	
 }
