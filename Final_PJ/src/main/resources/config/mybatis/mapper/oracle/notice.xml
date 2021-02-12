@@ -106,10 +106,8 @@
 		<selectKey keyProperty="qna_no" resultType="int" order="BEFORE">
 			select qna_no.nextval from dual
 		</selectKey>		
-		insert into qna(qna_no, qna_email, qna_title, qna_content, qna_phone, 
-			qna_filename, qna_origin_filename, qna_filesize)
-		values(#{qna_no}, #{qna_email}, #{qna_title}, #{qna_content}, #{qna_phone},
-			#{qna_filename}, #{qna_origin_filename}, #{qna_filesize})
+		insert into qna(qna_no, qna_email, qna_title, qna_content, qna_phone)
+		values(#{qna_no}, #{qna_email}, #{qna_title}, #{qna_content}, #{qna_phone})
 	</insert>
 	
 </mapper>

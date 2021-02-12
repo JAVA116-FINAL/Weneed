@@ -75,28 +75,6 @@
 	      		<p id="request_description_hint" style="display: none">상세한 문의 사항을 기입해주세요. 저희 지원 스태프가 영업일 기준 1~2일 이내 가능한 빨리 답변 드릴 수 있도록 노력하겠습니다.</p>
 	    		<div id="errorMessage_content" class="notification notification-error notification-inline" style="display: none"></div>
 	    	</div>
-	
-			<!-- 파일 업로드! -->
-	  		<div class="form-field">
-	  			<label for="request-attachments">첨부 파일 (최대 2M)</label> <!-- 이거 밑에 따로 띄워야됨 -->
-	  				<div id="upload-dropzone" class="upload-dropzone">
-	  					<input type="file" id="qna_file" name="qna_file" multiple="multiple">
-	  					<span><a>파일 추가</a></span>
-					</div>
-	
-				<!-- 업로드 에러시 -->
-				<div id="upload-error" class="notification notification-error notification-inline" style="display: none;">
-					<span data-upload-error-message=""></span>
-				</div>
-				
-				<ul id="request-attachments-pool" class="upload-pool">
-					<!-- 업로드한 파일 정보 출력 -->
-					<li class="upload-item" data-upload-item="" aria-busy="false">
-  						<a class="upload-link" id="upload-link"></a><!-- 파일명 -->
-						<span class="upload-remove"></span> <!-- 파일 지우기 아이콘 -->
-					</li>
-				</ul>
-			</div>
 			
 		<div class="form-field boolean  required  request_custom_fields_360025875971">
 			<p id="request_custom_fields_360025875971_hint"><strong>개인정보 수집 및 이용에 대한 동의 내용</strong><br>주식회사 위니드랩은 정보통신망 이용촉진 및 정보보호 등에 관한 법률을 준수하며 고객님의 개인정보를 수집하고 소중하게 다루고 있습니다. ①개인정보 수집 항목: 이름, 이메일 주소 ②수집목적: 고객식별, 문의응대, 서비스 품질 향상 ③보유 및 이용기간: 수집 목적이 달성되면 지체없이 모든 개인정보를 파기합니다. 단, 관계법령에서 일정 기간 정보의 보관을 규정한 경우에 한해 분리 보관 후 파기합니다.</p><label id="request_custom_fields_360025875971_label" for="request_custom_fields_360025875971">동의합니다.</label>

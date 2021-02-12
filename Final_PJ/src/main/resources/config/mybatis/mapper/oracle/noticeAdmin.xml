@@ -3,21 +3,27 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mybatis.mapper.noticeAdmin">
-
+	<sql id="searchWhere">
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+				qna_title like '%'||#{searchKeyword}||'%' or to_char(qna_content) like '%'||#{searchKeyword}||'%'
+			</if>
+		</where>
+	</sql>
+	
 	<!-- 사용자가 등록한 qna 리스트 select -->
 	<select id="selectQnaList" resultType="map">
 		select*from qna
 		order by qna_no desc
 	</select>
 	
-	<select id="selectQnaList_search" parameterType="qnaVo" resultType="map">
+	<select id="selectQnaList_search" parameterType="searchVo" resultType="map">
 		select*from
 		(
 		    select A.*, rownum as RNUM from
 		    (
 		    	select*from qna
-		        where qna_title like '%'||#{searchKeyword}||'%' 
-		        or to_char(qna_content) like '%'||#{searchKeyword}||'%'
+		    	<include refid="searchWhere" />
 		        order by qna_regdate desc
 		    )A
 		)
@@ -27,7 +33,7 @@
 		]]>
 	</select>
 	
-	<select id="selectQnaList_cnt" parameterType="qnaVo" resultType="map">
+	<select id="selectQnaList_cnt" parameterType="searchVo" resultType="int">
 		select count(*) as cnt from qna
 		where qna_title like '%'||#{searchKeyword}||'%' 
 		or to_char(qna_content) like '%'||#{searchKeyword}||'%'

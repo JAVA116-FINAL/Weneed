@@ -59,4 +59,5 @@ form.search {
 
 .pagination li{
 	display: inline;
+	margin-right: 15px;
 }

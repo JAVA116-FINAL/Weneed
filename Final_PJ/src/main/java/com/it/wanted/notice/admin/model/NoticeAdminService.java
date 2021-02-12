@@ -3,8 +3,7 @@ package com.it.wanted.notice.admin.model;
 import java.util.List;
 import java.util.Map;
 
-import com.it.wanted.notice.model.QnaVO;
-import com.it.wanted.notice.utility.KeywordVO;
+import com.it.wanted.notice.utility.NoticeSearchVO;
 
 
 public interface NoticeAdminService {
@@ -19,6 +18,6 @@ public interface NoticeAdminService {
 	//답변여부 'Y'로 업데이트
 	public int updateReply(int qna_no);
 	
-	public List<QnaVO> selectQnaList_search(KeywordVO searchVo);
-	public Map<String, Object> selectQnaList_cnt(KeywordVO searchVo);
+	public List<Map<String, Object>> selectQnaList_search(NoticeSearchVO searchVo);
+	public int selectQnaList_cnt(NoticeSearchVO searchVo);
 }

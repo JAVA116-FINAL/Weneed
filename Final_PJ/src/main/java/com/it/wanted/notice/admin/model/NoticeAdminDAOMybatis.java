@@ -1,15 +1,13 @@
 package com.it.wanted.notice.admin.model;
 
 import java.util.List;
-
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.it.wanted.notice.model.QnaVO;
-import com.it.wanted.notice.utility.KeywordVO;
+import com.it.wanted.notice.utility.NoticeSearchVO;
 
 @Repository
 public class NoticeAdminDAOMybatis implements NoticeAdminDAO{
@@ -45,12 +43,12 @@ public class NoticeAdminDAOMybatis implements NoticeAdminDAO{
 	}
 
 	@Override
-	public List<QnaVO> selectQnaList_search(KeywordVO searchVo) {
+	public List<Map<String, Object>> selectQnaList_search(NoticeSearchVO searchVo) {
 		return sqlSession.selectList(namespace+"selectQnaList_search", searchVo);
 	}
 
 	@Override
-	public Map<String, Object> selectQnaList_cnt(KeywordVO searchVo) {
+	public int selectQnaList_cnt(NoticeSearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"selectQnaList_cnt", searchVo);
 	}
 

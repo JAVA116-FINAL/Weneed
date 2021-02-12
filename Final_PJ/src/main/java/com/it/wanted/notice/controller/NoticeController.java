@@ -1,6 +1,5 @@
 package com.it.wanted.notice.controller;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.it.wanted.common.FileUploadUtil;
 import com.it.wanted.notice.cate.model.NoticeCateService;
 import com.it.wanted.notice.model.NoticeService;
 import com.it.wanted.notice.model.NoticeVO;
@@ -37,7 +35,6 @@ public class NoticeController {
 	
 	@Autowired NoticeService noticeService;
 	@Autowired NoticeCateService noticeCateService;
-	@Autowired FileUploadUtil fileUtil; //파일업로드처리
 	@Autowired EmailSender emailSender; //메일발송
 	
 	@RequestMapping("/notice.do")
@@ -187,41 +184,17 @@ public class NoticeController {
 	@RequestMapping( value = "/notice_qna.do", method = RequestMethod.POST)
 	public String notice_qna_ok(@ModelAttribute QnaVO qnaVo, 
 			HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		logger.info("문의등록, 파라미터 qnaVo={}", qnaVo);
-		
-		//파일 업로드 처리
-		String qna_origin_filename="", qna_filename="";
-		long qna_filesize=0;
-		try {
-			List<Map<String, Object>> fileList
-				=fileUtil.fileUplaod(request, FileUploadUtil.PDS_TYPE);
-			for(Map<String, Object>fileMap : fileList){
-				qna_origin_filename=(String)fileMap.get("qna_origin_filename");
-				qna_filename=(String)fileMap.get("qna_filename");
-				qna_filesize=(Long)fileMap.get("qna_filesize");
-			}//for
-			
-		}catch (IllegalStateException e) {
-			logger.info("파일 업로드 실패");
-			e.printStackTrace();
-		}catch (IOException e) {
-			logger.info("파일 업로드 실패");
-			e.printStackTrace();
-		}
-		
-		//2
-		qnaVo.setQna_filename(qna_filename);
-		qnaVo.setQna_filesize(qna_filesize);
-		qnaVo.setQna_origin_filename(qna_origin_filename);
+		logger.info("문의등록, 파라미터 qnaVo={}", qnaVo);		
 		
 		int cnt=noticeService.insertQna(qnaVo);
-		logger.info("문의등록 결과, cnt={}", cnt);
 		
+		logger.info("문의등록 결과, cnt={}", cnt);
 		
 		redirectAttributes.addAttribute("receiver", qnaVo.getQna_email());
 		redirectAttributes.addAttribute("subject", qnaVo.getQna_title());
 		redirectAttributes.addAttribute("content", qnaVo.getQna_content());
 		redirectAttributes.addAttribute("no", qnaVo.getQna_no());
+		
 		return "redirect:/notice/notice_email_send.do";
 	}
 	

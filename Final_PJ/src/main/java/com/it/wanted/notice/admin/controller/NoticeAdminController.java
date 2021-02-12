@@ -10,16 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.it.wanted.common.PaginationInfo;
 import com.it.wanted.notice.admin.model.NoticeAdminService;
 import com.it.wanted.notice.controller.NoticeController;
 import com.it.wanted.notice.model.QnaVO;
-import com.it.wanted.notice.utility.KeywordVO;
 import com.it.wanted.notice.utility.NoticePagination;
 import com.it.wanted.notice.utility.NoticePagingUtility;
+import com.it.wanted.notice.utility.NoticeSearchVO;
 
 //이용안내 관리자 컨트롤러
 @Controller
@@ -44,25 +42,22 @@ public class NoticeAdminController {
 	}
 	
 	@RequestMapping("/noticeQna_list.do")
-	public String noticeQna_list(@ModelAttribute KeywordVO keywordVo, Model model){
-		logger.info("1:1문의 리스트 페이지, keywordVo={}", keywordVo);
+	public String noticeQna_list(@ModelAttribute NoticeSearchVO searchVo, Model model){
+		logger.info("1:1문의 리스트 페이지, searchVo={}", searchVo);
 		
 		NoticePagination pagingInfo=new NoticePagination();
 		pagingInfo.setBlockSize(NoticePagingUtility.BLOCK_SIZE);
-		pagingInfo.setCurrentPage(keywordVo.getCurrentPage());
 		pagingInfo.setRecordCountPerPage(NoticePagingUtility.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 		
-		keywordVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		keywordVo.setRecordCountPerPage(NoticePagingUtility.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(NoticePagingUtility.RECORD_COUNT);
 		
-		List<QnaVO> listSearch=noticeAdminService.selectQnaList_search(keywordVo);
-		Map<String, Object> listCnt=noticeAdminService.selectQnaList_cnt(keywordVo);
+		List<Map<String, Object>> listSearch=noticeAdminService.selectQnaList_search(searchVo);
 		
 		int replyCnt=noticeAdminService.selectReply_cnt();
 		
-		int totalRecord=Integer.parseInt(String.valueOf(listCnt.get("CNT")));
-		
-		pagingInfo.setTotalRecord(totalRecord);
+		pagingInfo.setTotalRecord(noticeAdminService.selectQnaList_cnt(searchVo));
 		
 		model.addAttribute("listSearch", listSearch);
 		model.addAttribute("pagingInfo", pagingInfo);

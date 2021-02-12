@@ -21,7 +21,7 @@
 		</c:if>
 	</c:if>
 	
-<form name="frmPage" method="post" action="<c:url value='noticeQna_list.do'/>">
+<form name="frmPage" method="get" action="<c:url value='noticeQna_list.do'/>">
 	<input type="hidden" name="currentPage">
 	<input type="hidden" name="searchKeyword" value="${param.searchKeyword}">
 </form>
@@ -34,12 +34,14 @@
 	<table class="table" id="qnaTable">
 		<colgroup>
 			<col style="width:10%" />
+			<col style="width:10%" />
 			<col style="width:25%" />
-			<col style="width:45%" />
-			<col style="width:20%" />
+			<col style="width:40%" />
+			<col style="width:15%" />
 		<colgroup/>
 		<thead>
 			<tr>
+				<th scope="col">문의번호</th>
 				<th scope="col">답변여부</th>
 				<th scope="col">문의고객</th>
 				<th scope="col">제목</th>
@@ -49,6 +51,9 @@
 		<tbody>
 			<c:forEach var="qnaVo" items="${listSearch }">
 				<tr class="qnaTr">
+				<td>
+					No.${qnaVo.QNA_NO }
+				</td>
 				<c:if test="${qnaVo.QNA_REPLY =='Y'}">
 					<td style="color: #0000bb">답변완료</td>
 				</c:if>
