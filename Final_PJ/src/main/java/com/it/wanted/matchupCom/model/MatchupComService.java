@@ -8,7 +8,10 @@ public interface MatchupComService {
 	int addZzim(MatchupZzimVO zzimVo);
 	int isZzimed(MatchupZzimVO zzimVo);
 	int delZzim(MatchupZzimVO zzimVo);
-	Map<String, Float> hasMatchup(String comCode);
-	/* 0212 자연 */
+	Map<String, Object> hasMatchup(String comCode);
+	MatchupComVO selectMatchupCom(String comCode);
+  
+  	/* 0212 자연 */
 	public List<Map<String, Object>> selectSearchmatchupCombyComName(String comName);
+
 }

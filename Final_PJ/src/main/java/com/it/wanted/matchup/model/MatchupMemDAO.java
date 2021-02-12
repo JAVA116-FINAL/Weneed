@@ -3,6 +3,8 @@ package com.it.wanted.matchup.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.wanted.matchupCom.model.MatchupZzimVO;
+
 public interface MatchupMemDAO {
 
 	/* 자연 */
@@ -26,6 +28,7 @@ public interface MatchupMemDAO {
 	List<Map<String, Object>> selectTenMem(int firstRecord);
 	public int selectMcumemNo(int resumeNo);
 	public List<Map<String, Object>> selectMcumemSearchList(MatchupMemSearchVO mcuMemSearchVo);
-	public List<Map<String, Object>> selectZzimedList(List<Map<String, Object>> mcumemSearchResultList);
+	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo);
+	public int isZzimed(MatchupZzimVO zzimVo);
 
 }

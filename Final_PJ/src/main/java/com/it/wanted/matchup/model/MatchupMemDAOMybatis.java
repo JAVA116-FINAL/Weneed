@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.matchupCom.model.MatchupZzimVO;
+
 @Repository
 public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	
@@ -120,10 +122,14 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectZzimedList(List<Map<String, Object>> mcumemSearchResultList) {
-		return sqlSession.selectList(namespace+"selectZzimedList", mcumemSearchResultList);
+	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectZzimedList", searchVo);
 	}
 
 
-
+	@Override
+	public int isZzimed(MatchupZzimVO zzimVo) {
+		return sqlSession.selectOne(namespace+"isZzimed", zzimVo);
+	}
+  
 }

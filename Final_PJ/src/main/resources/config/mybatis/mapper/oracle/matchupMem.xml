@@ -204,19 +204,40 @@
 	
 	<!-- 찜한 목록 불러오기  -->
 	<select id="selectZzimedList" parameterType="matchupMemSearchVo" resultType="map">
-		select m.* 
-		from 
-		(
-	        select rownum as rnum, v.* from matchupMemSearchView v 
+		select * from (
+	    	select rownum as RNUM, A.* from
+	        (
+		        select m.mcumem_no as MCUMEMNO, m.resume_no AS RESUMENO, m.mem_no AS MEMNO, m.expertise_no AS EXPERTISENO, 
+		               m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITL,
+		               r.resume_name AS RESUMENAME, r.lang_flag AS LANGFLAG, 
+		               c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
+		               x.jikGun_code AS JIKGUNCODE, x.career AS CAREER, x.skill AS SKILL,
+		               (select count(*) from matchuplike l where com_code=#{comCode} and l.mcumem_no=m.mcumem_no) as cnt
+		        from matchupMem m join resume r 
+		        on m.resume_No = r.resume_no 
+		        join career c on c.resume_no=m.resume_no
+		        join education e on e.resume_no=m.resume_no
+		        join expertise x on x.expertise_no=m.expertise_no
+		        where m.resumeopen_flag='Y'
+		        and to_number(translate(career, '신입', '0')) between #{searchMinCareer} and #{searchMaxCareer}
+		        order by m.mcumem_no
+	        )A
 	        <![CDATA[
 	        where cnt>0
 	        ]]>
-		)m
-		<![CDATA[
-		where rnum > #{viewMoreSize}
-		and rnum <= #{viewMoreSize}+5
+	    )
+	    <![CDATA[
+	    where RNUM > #{viewMoreSize}
+		and RNUM <=  #{viewMoreSize}+5
 		]]>
 	</select>
+	
+	<select id="isZzimed" parameterType="matchupZzimVo" resultType="int">
+		select count(*) as CNT
+		from matchuplike
+		where mcumem_no=#{mcumemNo} and com_code=#{comCode}
+	</select>
+	
 </mapper>
 
 <!-- 

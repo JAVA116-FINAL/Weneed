@@ -52,6 +52,14 @@
 	<delete id="deleteResume" parameterType="resumeVo" >
 		delete from resume where mem_No=#{memNo} and resume_No=#{resumeNo}
 	</delete>
+
+
+
+
+	<!-- 현빈 매치업에서 이력서 그려주기용 -->	
+	<select id="selectResumeByResumeNo" parameterType="int" resultType="resumeVo">
+		select * from resume where resume_no=#{resumeNo}
+	</select>
 	
 	<update id="insertMcuResume" parameterType="resumeVo">
 		<selectKey keyProperty="resumeNo" resultType="int" order="BEFORE">
@@ -62,6 +70,7 @@
 		from memberInfo 
 		where mem_no=#{memNo}		
 	</update>
+
 	<!-- 0210 -->
 	
 	<select id="selectResumeOnebyResumeNo" parameterType="int" resultType="resumeVo">
