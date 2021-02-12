@@ -11,6 +11,7 @@ public interface ResumeService {
 	public int deleteResume(ResumeVO rVo);
 	public ResumeVO selectResumeOne(ResumeVO rVo);
 	public ResumeAllVO selectResumeDetail(ResumeVO rVo);
+	public ResumeVO selectResumeOnebyResumeNo(int resumeNo);
 	
 	
 	/* 현빈 */

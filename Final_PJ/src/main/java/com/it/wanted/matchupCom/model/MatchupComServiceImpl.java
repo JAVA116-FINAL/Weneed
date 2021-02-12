@@ -1,6 +1,9 @@
 package com.it.wanted.matchupCom.model;
 
+
+import java.util.List;
 import java.math.BigDecimal;
+
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +54,12 @@ public class MatchupComServiceImpl implements MatchupComService{
 	@Override
 	public MatchupComVO selectMatchupCom(String comCode) {
 		return matchupComDao.selectMatchupCom(comCode);
+
 	}
+  
+  	/* 0212 자연 */
+	@Override
+	public List<Map<String, Object>> selectSearchmatchupCombyComName(String comName) {
+		return matchupComDao.selectSearchmatchupCombyComName(comName);
+  }
 }

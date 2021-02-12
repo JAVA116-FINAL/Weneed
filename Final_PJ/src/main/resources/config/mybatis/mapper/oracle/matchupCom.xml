@@ -38,6 +38,12 @@
 	<select id="selectMatchupCom" parameterType="String" resultType="matchupComVo">
 		select * from matchupCom where com_code=#{comCode}
 	</select>
+	
+	<!-- 자연0212 -->
+	<select id="selectSearchmatchupCombyComName" parameterType="String" resultType="map">
+		select * from mcucomview where com_Name like '%'|| #{comName} ||'%'
+	</select>
+	
 </mapper>
 
 

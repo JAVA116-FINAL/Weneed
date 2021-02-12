@@ -1,5 +1,6 @@
 package com.it.wanted.matchupCom.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,6 +41,12 @@ public class MatchupComDAOMy implements MatchupComDAO{
 	@Override
 	public MatchupComVO selectMatchupCom(String comCode) {
 		return sqlSession.selectOne(namespace+"selectMatchupCom", comCode);
+	}
+	
+	/* 0212 자연 */
+	@Override
+	public List<Map<String, Object>> selectSearchmatchupCombyComName(String comName) {
+		return sqlSession.selectList(namespace+"selectSearchmatchupCombyComName",comName);
 	}
 	
 }
