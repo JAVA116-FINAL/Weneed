@@ -1,5 +1,6 @@
 package com.it.wanted.matchupCom.model;
 
+import java.util.List;
 import java.util.Map;
 
 public interface MatchupComDAO {
@@ -9,5 +10,7 @@ public interface MatchupComDAO {
 	int delZzim(MatchupZzimVO zzimVo);
 	int checkListedMatchup(String comCode);
 	Map<String, Float> isOverMatchup(String comCode);
-
+	
+	/* 0212 자연 */
+	public List<Map<String, Object>> selectSearchmatchupCombyComName(String comName);
 }

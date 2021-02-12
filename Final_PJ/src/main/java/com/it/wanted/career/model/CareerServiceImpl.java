@@ -36,7 +36,10 @@ public class CareerServiceImpl implements CareerService{
 			cnt=careerDao.deleteCareer(careerNo);
 		return cnt;
 	}
-
-
+	//0210
+	@Override
+	public CareerVO selectCareerOne(int careerNo) {
+		return careerDao.selectCareerOne(careerNo);
+	}
 
 }

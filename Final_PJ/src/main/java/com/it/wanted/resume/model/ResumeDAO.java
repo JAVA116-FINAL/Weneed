@@ -12,4 +12,6 @@ public interface ResumeDAO {
 	public int deleteResume(ResumeVO rVo);
 	public ResumeVO selectResumeOne(ResumeVO rVo);
 	public int insertMcuResume(ResumeVO rVo);
+	public ResumeVO selectResumeOnebyResumeNo(int resumeNo);
+	public int updateResumeIntroduce(ResumeVO rVo);
 }

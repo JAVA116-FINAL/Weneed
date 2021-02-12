@@ -31,6 +31,12 @@
 		else (max_resume_count - resume_read_count) end as leftCount 
 		from matchupCom where com_code=#{comCode}
 	</select>
+	
+	<!-- 자연0212 -->
+	<select id="selectSearchmatchupCombyComName" parameterType="String" resultType="map">
+		select * from mcucomview where com_Name like '%'|| #{comName} ||'%'
+	</select>
+	
 </mapper>
 
 

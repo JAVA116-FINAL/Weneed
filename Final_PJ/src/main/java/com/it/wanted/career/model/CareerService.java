@@ -7,6 +7,6 @@ public interface CareerService {
 	public int insertCareer(CareerVO careerVo);
 	public CareerVO selectCareer(int resumeNo);
 	public int deleteCareer(int careerNo);
-
+	public CareerVO selectCareerOne(int careerNo);
 	
 }

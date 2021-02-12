@@ -1,5 +1,6 @@
 package com.it.wanted.matchupCom.model;
 
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,11 @@ public class MatchupComServiceImpl implements MatchupComService{
 			}
 		}
 		return resultMap;
+	}
+
+	/* 0212 자연 */
+	@Override
+	public List<Map<String, Object>> selectSearchmatchupCombyComName(String comName) {
+		return matchupComDao.selectSearchmatchupCombyComName(comName);
 	}
 }

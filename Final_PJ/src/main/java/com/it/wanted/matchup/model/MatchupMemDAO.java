@@ -6,13 +6,20 @@ import java.util.Map;
 public interface MatchupMemDAO {
 
 	/* 자연 */
-	public int isMatchupMem(int mcumemNo);
-	public int hasMcuResumeNo(int mcumemNo);
+	public int isMatchupMem(int memNo);
+	public int hasMcuResumeNo(int memNo);
 	public int selectmcuResumeNo(int mcuNo);
 	public int insertMcuMem(MatchupMemVO mcuVo);
-	public MatchupMemVO selectMcuMem(int mcumemNo);
+	public MatchupMemVO selectMcuMem(int memNo);
 	public int updateMCUResume(MatchupMemVO mcuVo);
-	
+	public List<MatchupDetailAllVO> selectMatchupDetails(int mcumemNo);
+	public List<Map<String, Object>> selectMcuExListView(int mcumemNo);
+	public int updateMatchupResume(MatchupMemVO mcuVo);
+	public MatchupDetailsViewVO selectMatchupDetailsView(int memNo);
+	public int updateMatchupRefName(MatchupMemVO mcumemVo);
+	public MatchupMemVO selectOnebymatchupMemNo(int mcumemNo);
+	public int updateMatchupjobFlag(MatchupMemVO mcuVo);
+	public int deleteMatchupmembyResumeNo(int resumeNo);
 	
 	/* 현빈 */
 	List<MatchupMemVO> selectOpen();
