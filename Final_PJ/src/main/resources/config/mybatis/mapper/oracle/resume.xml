@@ -23,9 +23,9 @@
 	<!-- 등록버튼 누르면 insert-select했던 이력서 업뎃 -->
 	<update id="updateResume" parameterType="resumeVo">
 		update resume 
-		set resume_Title= #{resumeTitle  ,jdbcType=VARCHAR} ,resume_Name=#{resumeName} ,resume_Email=#{resumeEmail},
+		set resume_Title= #{resumeTitle} ,resume_Name=#{resumeName} ,resume_Email=#{resumeEmail},
 		 	resume_Hp=#{resumeHp}, resume_Introduce=#{resumeIntroduce},temp_Flag=#{tempFlag},resume_Regdate=sysdate,
-		 	lang_flag=#{langFlag},resume_Length=#{resumeLength}
+		 	lang_flag=#{langFlag},resume_Length=#{resumeLength}<!-- , resume_regdate=sysdate -->
 		where resume_No=#{resumeNo}
 	</update>
 	<!-- 이력서 관리 조회 -->
@@ -52,6 +52,14 @@
 	<delete id="deleteResume" parameterType="resumeVo" >
 		delete from resume where mem_No=#{memNo} and resume_No=#{resumeNo}
 	</delete>
+
+
+
+
+	<!-- 현빈 매치업에서 이력서 그려주기용 -->	
+	<select id="selectResumeByResumeNo" parameterType="int" resultType="resumeVo">
+		select * from resume where resume_no=#{resumeNo}
+	</select>
 	
 	<update id="insertMcuResume" parameterType="resumeVo">
 		<selectKey keyProperty="resumeNo" resultType="int" order="BEFORE">
@@ -63,7 +71,19 @@
 		where mem_no=#{memNo}		
 	</update>
 
+	<!-- 0210 -->
 	
+	<select id="selectResumeOnebyResumeNo" parameterType="int" resultType="resumeVo">
+		select * from resume where resume_No=#{resumeNo}
+	</select>
+	
+	<update id="updateResumeIntroduce">
+		update resume 
+		set resume_regdate=sysdate, resume_introduce=#{resumeIntroduce}, resume_Length=#{resumeLength}  
+		where resume_No=#{resumeNo}
+	</update>
+	
+
 </mapper>
 
 

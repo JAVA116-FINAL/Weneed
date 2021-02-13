@@ -45,7 +45,7 @@ $(function(){
 		//alert($('#careerinput_jy').val());
 		$('#careerName').val($('#careerinput_jy').val());
 	});	
-	
+	/* 
 	$("#eduNameModal_jy").keydown(function(e){
 		event.preventDefault();
 		if(e.keyCode == 13) $('#eduName').val($('#eduNameModal_jy').val()); 
@@ -55,7 +55,7 @@ $(function(){
 		event.preventDefault();
 		if(e.keyCode == 13) $('#careerName').val($('#careerinput_jy').val()); 
 	}); 
-
+ */
 //전~송! 누르면 날짜체크 year.month year2.month2보다 이전인지 2번이 오늘날짜보다 뒤인지
 	
 	$('#frmMcuRegister2').submit(function(){
@@ -137,7 +137,7 @@ function setDateBox() {
 							<div class="asideMail_jy">${memVo.email}</div>
 							<div class="asideHp_jy">${memVo.hp}</div>
 						</div>
-						<button type="button" class="btEdit_jy" value="기본정보수정">기본정보 수정</button>
+						<button type="button" class="btEdit_jy" value="기본정보수정" onClick="location.href='<c:url value="#"/>'">기본정보 수정</button>
 					</header>
 					<div class="info-block mt-4 infoblock_jy">
 						<a href="#" class="profileInfo-a_jy">
@@ -160,7 +160,7 @@ function setDateBox() {
 				<div class="doctor-details mt-4 mt-lg-0 machupinner_jy">
 				<form id="frmMcuRegister2" class="appoinment-form" method="post" action="<c:url value='/matchupMem/matchupMemRegister2.do'/>">
 					<div class="machupSection_jy">
-							<input type="hidden" name="mcumemNo" value="${mcuVo.mcumemNo}"> 						
+							<input type="hidden" name="mcumemVo.mcumemNo" value="${mcuVo.mcumemNo}"> 						
 							<input type="hidden" name="resumeVo.memNo" value="${mcuVo.memNo}">		 		
 							<input type="hidden" name="resumeVo.resumeNo" value="${mcuVo.resumeNo}">		 		
 							<input type="hidden" id="resumeLength_jy" name="resumeVo.resumeLength" value="">		 		
@@ -177,7 +177,7 @@ function setDateBox() {
 										<h6 class="formButton-label_jy mcuEditsal_jy">학교</h6>
 							<!-- 학교 -->
 										<div class="spSalary_jy divEdu_jy" id="divEdu_jy">
-											<input type="text" name="eduList[0].eduName" id="eduName" placeholder="학교명 입력" readonly="readonly" value="">
+											<input type="text" name="eduVo.eduName" id="eduName" placeholder="학교명 입력" readonly="readonly" value="">
 										</div>
 										<button type="button" class="btselect_jy mcuEditbtSelect_jy1"  data-toggle="modal" data-target="#eduModal">
 											<i class="icon-arrow_right :before arrowIcon_jy"></i>
@@ -188,22 +188,22 @@ function setDateBox() {
 										<h6 class="formButton-label_jy exceptconOption_jy mcuEditskil_jy">직장</h6>
 							<!-- 직장 -->	
 										<span class="spSkills_jy" id="spSkills_jy">
-											<input type="text" name="crrList[0].careerName"  id="careerName" placeholder="직장명입력" readonly="readonly" value="">
+											<input type="text" name="careerVo.careerName"  id="careerName" placeholder="직장명입력" readonly="readonly" value="">
 											<button type="button" class="btselect_jy mcuEditbtSelect_jy" data-toggle="modal" data-target="#careerModal">	
 												<i class="icon-arrow_right :before arrowIcon_jy"></i>
 											</button>
 														
 											<span class="periodAria_jy">
-												<select name="crrList[0].startYear" id="year" title="시작년도" class="custom-select"></select>.
-												<select name="crrList[0].startMonth" id="month" title="시작월" class="custom-select"></select>-
-												<select name="crrList[0].endYear" id="year2" title="종료년도" class="custom-select"></select>.
-												<select name="crrList[0].endMonth" id="month2" title="종료월" class="custom-select"></select>
+												<select name="careerVo.startYear" id="year" title="시작년도" class="custom-select"></select>.
+												<select name="careerVo.startMonth" id="month" title="시작월" class="custom-select"></select>-
+												<select name="careerVo.endYear" id="year2" title="종료년도" class="custom-select"></select>.
+												<select name="careerVo.endMonth" id="month2" title="종료월" class="custom-select"></select>
 											</span>
 											<span class="spckbox_jy">
 												<label for="ckcurEmployed">
 													<input type="checkbox" name="ckcurEmployed" id="ckcurEmployed" onClick="$.getCur()"> 현재 재직중
 												</label>
-												<input type='hidden' value='N' id='curEmployed' class='realcurEmployed' name='crrList[0].curEmployed'>
+												<input type='hidden' value='N' id='curEmployed' class='realcurEmployed' name='careerVo.curEmployed'>
 											</span>
 										</span>
 									</div>

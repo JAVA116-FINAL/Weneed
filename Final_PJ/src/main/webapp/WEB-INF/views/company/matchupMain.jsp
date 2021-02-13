@@ -3,6 +3,21 @@
 <%@ include file="../inc/company_top.jsp" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/matchup.css'/>">
 <title>당신이 찾는 인재, MatchUp에선 훨씬 더 빠르게 찾을 수 있습니다.</title>
+<script type="text/javascript">
+$(function(){
+	$('.matupChooseBtn1').click(function(){
+		$('#matchUpPaymentServSelect').val('light').attr('selected', 'selected');
+	});
+	$('.matupChooseBtn2').click(function(){
+		$('#matchUpPaymentServSelect').val('basic').attr('selected', 'selected');
+	});
+	$('.matupChooseBtn3').click(function(){
+		$('#matchUpPaymentServSelect').val('unlimited').attr('selected', 'selected');
+	});
+});
+
+
+</script>
 </head>
 <body>
 	<!-- 첫번째 섹션 -->
@@ -11,7 +26,8 @@
 		<h1>MatchUp</h1>
 		<h1>어디에서도 볼 수 없는 국내 최고의 인재풀</h1>
 		<h2 class="matchupMainH2-white"><br>가장 이직이 활발한 3~7년차, IT직군 인재를 만나보세요</h2>
-		<a href="<c:url value='/company/matchupSearch.do'/>" class="matchupMain-btn-gotoSearchPage">검증된 인재 만나기</a>
+		<a data-toggle="modal" href=".matchupServPlanMD" class="matchupMain-btn-gotoSearchPage">검증된 인재 만나기</a>
+		<%@ include file="../company/modal/matchupServiceSelect.jsp" %>
 	</section>
 	<section class="matchupMain-2ndSec">
 		<h2 class="matchupMainH2-dark">합리적인 가격으로, 우수한 인재풀을 빠르고 쉽게!</h2>
@@ -48,7 +64,8 @@
 					<span>채용 수수료 무료</span>
 					<span>경력/학력 등 상세 이력 확인</span>
 					<span class="matchup-Strong-text matchup-Strong-text1">30개 상세 이력서 열람</span>
-					<a href="#" class="matupChooseBtn matupChooseBtn1">선택하기</a>
+					<a data-toggle="modal" href=".matchupServPaymentMD" class="matupChooseBtn matupChooseBtn1">선택하기</a>
+					<%@ include file="../company/modal/matchupServicePayment.jsp" %>
 				</div>
 				<div class="matchup-productIntro-item">
 					<h2 class="matchup-productIntro-item-title2">베이직</h2>
@@ -59,7 +76,8 @@
 					<span>채용 수수료 무료</span>
 					<span>경력/학력 등 상세 이력 확인</span>
 					<span class="matchup-Strong-text matchup-Strong-text2">100개 상세 이력서 열람</span>
-					<a href="#" class="matupChooseBtn matupChooseBtn2">선택하기</a>
+					<a data-toggle="modal" href=".matchupServPaymentMD" class="matupChooseBtn matupChooseBtn2">선택하기</a>
+					<%@ include file="../company/modal/matchupServicePayment.jsp" %>
 				</div>
 				<div class="matchup-productIntro-item">
 					<h2 class="matchup-productIntro-item-title3">무제한</h2>
@@ -70,7 +88,8 @@
 					<span>최종합격시 채용수수료 발생</span>
 					<span>경력/학력 등 상세 이력 확인</span>
 					<span class="matchup-Strong-text matchup-Strong-text3">무제한 상세 이력서 열람</span>
-					<a href="#" class="matupChooseBtn matupChooseBtn3">선택하기</a>
+					<a data-toggle="modal" href=".matchupServPaymentMD" class="matupChooseBtn matupChooseBtn3">선택하기</a>
+					<%@ include file="../company/modal/matchupServicePayment.jsp" %>
 				</div>
 			</div>
 		</div>

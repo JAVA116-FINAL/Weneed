@@ -145,6 +145,25 @@ $(function(){
 			$('#skill').val(list);
 	});	
 	
+	$('#frmMcuRegister').submit(function(){
+		//유효성검사 넣기 밸류 없으면 지적해! 2/11추가
+		//직군. 직무, 연봉 스킬
+		if($('#exampleFormControlSelect1').val()==0){
+			alert("직군을 선택하세요");
+			event.preventDefault();
+		}else if($("input[type='checkbox']:checked").length<1){
+			alert("직무를 선택하세요");
+			event.preventDefault();
+		//}else if($('#salary').val()==""){
+		}else if($('#salaryAmount_jy').val()==""){
+			alert("급여정보를 입력하세요");
+			event.preventDefault();
+		}else if($('#skill').val()==""){
+			alert("보유기술을 입력해주세요");
+			event.preventDefault();
+		}
+	});
+	
 	
 
 });//jquery
@@ -158,6 +177,7 @@ $(function(){
 <!-- 프로필구역 -->		
 			<aside class="col-lg-3 col-md-6 machupAside_jy" >
 				<!-- 프로필상자, 사진업로드?-->
+				<div class="profileTitle-dt_jy">프로필</div>
 				<div class="profileblock_jy">
 					<header class="profileHeader_jy">
 						<div class="member-img_jy" style='background-image: url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png"), url("https://static.wanted.co.kr/images/profile_default.png")'>
@@ -189,7 +209,7 @@ $(function(){
 				</div>
 			</aside>		
 
-			<div class="col-lg-9 col-md-6 machupWrapperdiv_jy">
+			<div class="col-lg-9 col-md-6 machupWrapperdiv_jy paddingTop_jy">
 				<div class="doctor-details mt-4 mt-lg-0 machupinner_jy">
 					<div class="machupSection_jy">
 						<form id="frmMcuRegister" class="appoinment-form" method="post" action="<c:url value='/matchupMem/matchupMemRegister.do'/>">

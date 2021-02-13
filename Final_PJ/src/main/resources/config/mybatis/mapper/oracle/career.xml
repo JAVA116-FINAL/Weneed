@@ -40,6 +40,16 @@
 		values(#{careerNo},#{resumeNo},#{startYear}, #{startMonth},#{endYear}, #{endMonth},#{curEmployed}, #{careerName})
 	</insert>
 	
+	<select id="selectCareerOne" parameterType="int" resultType="careerVo">
+		select * from career where career_No=#{careerNo}
+	</select>
+	
+	<update id="updateCareerNameAndDateAndCurVal" parameterType="careerVo">
+		update career
+		set	career_Name=#{careerName}, start_Year=#{startYear}, start_Month=#{startMonth}, end_Year=#{endYear}, end_Month=#{endMonth}, cur_Employed=#{curEmployed}
+		where career_No=#{careerNo}
+	</update>
+	
 	<!-- 현빈 -->
 	<select id="selectMcumemNo" parameterType="string" resultType="int">
 		select m.mcumem_no

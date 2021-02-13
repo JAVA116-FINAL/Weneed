@@ -2,7 +2,6 @@ package com.it.wanted.notice.admin.controller;
 
 import java.util.List;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.wanted.notice.admin.model.NoticeAdminService;
-import com.it.wanted.notice.controller.NoticeController;
-import com.it.wanted.notice.model.QnaVO;
 import com.it.wanted.notice.utility.NoticePagination;
 import com.it.wanted.notice.utility.NoticePagingUtility;
 import com.it.wanted.notice.utility.NoticeSearchVO;
@@ -23,8 +20,8 @@ import com.it.wanted.notice.utility.NoticeSearchVO;
 @Controller
 @RequestMapping("/admin/noticeService")
 public class NoticeAdminController {
-	private final static Logger logger
-		=LoggerFactory.getLogger(NoticeController.class);
+	private static final Logger logger
+		=LoggerFactory.getLogger(NoticeAdminController.class);
 	
 	@Autowired NoticeAdminService noticeAdminService;
 	

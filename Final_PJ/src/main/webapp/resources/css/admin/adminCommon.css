@@ -61,9 +61,16 @@ aside{
 }
 
 .adminSubMenu{
+<<<<<<< HEAD
    font-size: 0.8em;
    font-weight: bold;
    padding-top: 10px;
+=======
+	list-style: none;
+	font-size: 0.8em;
+	font-weight: bold;
+	padding-top: 10px;
+>>>>>>> branch 'main' of https://github.com/JAVA116-FINAL/Wanted_jayeon.git
 }
 
 

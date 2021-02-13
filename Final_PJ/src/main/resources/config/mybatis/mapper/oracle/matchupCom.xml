@@ -24,13 +24,26 @@
 	</select>
 	
 	<select id="isOverMatchup" parameterType="string" resultType="map">
-		select 
-		case when mcupd_exdate is null then 0 
-		else (sysdate-mcupd_exdate) end as leftDate, 
-		case when resume_read_count is null then 0
-		else (max_resume_count - resume_read_count) end as leftCount 
-		from matchupCom where com_code=#{comCode}
+		select cast(leftDate as integer) as leftDate, leftCount
+		from(
+			select
+			case when mcupd_exdate is null then 0 
+			else CEIL(mcupd_exdate-sysdate) end as leftDate, 
+			case when resume_read_count is null then 0
+			else (max_resume_count - resume_read_count) end as leftCount 
+			from matchupCom where com_code=#{comCode}
+			)
 	</select>
+	
+	<select id="selectMatchupCom" parameterType="String" resultType="matchupComVo">
+		select * from matchupCom where com_code=#{comCode}
+	</select>
+	
+	<!-- 자연0212 -->
+	<select id="selectSearchmatchupCombyComName" parameterType="String" resultType="map">
+		select * from mcucomview where com_Name like '%'|| #{comName} ||'%'
+	</select>
+	
 </mapper>
 
 
