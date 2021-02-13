@@ -198,6 +198,10 @@ h1{
 
 /******* 매치업 검색 *******/
 
+.hide{
+	display: none;
+}
+
 .matchupSearch-1stSec{
 	margin: 30px 0px 0px 0px;
 }

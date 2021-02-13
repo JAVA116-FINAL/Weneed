@@ -39,6 +39,16 @@
 		select * from matchupCom where com_code=#{comCode}
 	</select>
 	
+	<update id="updateResumeReadCount" parameterType="int">
+		update matchupCom
+		set resume_read_count=resume_read_count+1
+		where mcucom_no=#{mcucomNo}
+	</update>
+	
+	<select id="checkResumeReadCount" parameterType="int" resultType="int">
+		select (max_resume_count - resume_read_count) as checkedCount from matchupcom where mcucom_no=#{mcucomNo}
+	</select>
+	
 	<!-- 자연0212 -->
 	<select id="selectSearchmatchupCombyComName" parameterType="String" resultType="map">
 		select * from mcucomview where com_Name like '%'|| #{comName} ||'%'

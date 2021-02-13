@@ -83,7 +83,6 @@
 		where resume_No=#{resumeNo}
 	</update>
 	
-
 </mapper>
 
 

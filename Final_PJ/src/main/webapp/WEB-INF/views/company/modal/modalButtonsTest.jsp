@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/comServModal.css">
 <script type="text/javascript">
 $(function(){
-	$('.wantedResumeSimpleMD').on('show.bs.modal', function(event){
+	/* $('.wantedResumeSimpleMD').on('show.bs.modal', function(event){
 		//일단 레주메 넘버가 필요함 
 		var resumeNo=$('').val();
 		
@@ -26,7 +26,7 @@ $(function(){
 				alert('error!'+error);
 			}
 		});
-	});
+	}); */
 	
 });
 </script>
@@ -53,5 +53,10 @@ $(function(){
 	<button class="comServModal-btn"
 		data-toggle="modal" data-target=".wantedResumeSimpleMD" style="outline:none;">이력서 미리보기</button>
 	<%@ include file="resumeSimple.jsp" %>
+	
+	<!-- 이력서 상세보기 팝업  -->
+	<button class="comServModal-btn"
+		data-toggle="modal" data-target=".wantedResumeDetailMD" style="outline:none;">이력서 상세보기</button>
+	<%@ include file="resumeDetail.jsp" %>
 </body>
 </html>

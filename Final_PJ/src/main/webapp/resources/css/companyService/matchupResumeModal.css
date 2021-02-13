@@ -68,6 +68,10 @@ section, section > div {
 	font-weight: bold;
 }
 
+#matchupResumeBtnSpan{
+	text-align: left;	
+}
+
 .matchupResumeSMBtns{
 	border: 1px solid #e1e2e3;
 	background: #fff;

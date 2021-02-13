@@ -59,7 +59,7 @@ public class PdfFileUtil {
 	}
 	
 
-	public void createPdf(ResumeAllVO rAllVo) throws DocumentException, IOException {
+	public void createPdf(ResumeAllVO rAllVo, String downloadPath) throws DocumentException, IOException {
 		
 		//rAllVo에서 모든것을 꺼낸다.
 		ResumeVO rVo = rAllVo.getResumeVo();
@@ -75,7 +75,8 @@ public class PdfFileUtil {
 		Document document = new Document(PageSize.A4,50,50,50,50);
 		
 		//파일저장경로에서 파일이 있는 겨우 이름 변경하기!!
-		PdfWriter writer= PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\user\\Downloads\\"+rVo.getResumeTitle()+".pdf"));
+		PdfWriter writer= PdfWriter.getInstance(document, new FileOutputStream(downloadPath+rVo.getResumeTitle()+".pdf"));
+		//	PdfWriter writer= PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\user\\Downloads\\"+rVo.getResumeTitle()+".pdf"));
 		writer.setInitialLeading(12.5f);
 		document.open();
 		
@@ -218,12 +219,6 @@ public class PdfFileUtil {
 			}//for
 		}//if
 
-		
-		
-		
-		
-		
-		
 		document.close();
 		
 	}

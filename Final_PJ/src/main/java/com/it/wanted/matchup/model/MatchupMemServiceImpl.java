@@ -294,6 +294,7 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return mcumemNoList;
 	}
 
+	/*
 	//검색결과중에 찜한 멤버 리스트를 골라보자!
 	public List<Map<String, Object>> MatchupZzimedList(List<Map<String, Object>> mcumemSearchResultList) {
 		List<Map<String, Object>> zzimedList=null;
@@ -301,7 +302,8 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		
 		return zzimedList;
 	}
-	 */
+	*/
+	 
 	
 	@Override
 	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo) {

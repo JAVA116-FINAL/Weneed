@@ -217,7 +217,9 @@ public class ResumeController {
 		
 		int result=0;
 		try {
-			pdfFileUtil.createPdf(rAllVo);
+			//pdfFileUtil.createPdf(rAllVo);
+			//pdfFileUtil.createPdf(rAllVo, "C:\\Users\\user\\Downloads\\");
+			pdfFileUtil.createPdf(rAllVo, "C:\\Users\\jazzo\\Downloads\\");
 			result=1;
 		} catch (DocumentException e) {
 			e.printStackTrace();
@@ -231,7 +233,6 @@ public class ResumeController {
 		//JsonParser jsonParser = JsonParser.parse(result);
 		
 		return result;
-		
 	}
 	
 	//9.이력서 파일 다운로드
@@ -321,5 +322,37 @@ public class ResumeController {
 			return mav;
 		}
 		
+	
+	/* 현빈 */
+	//pdf파일 생성 다운 - memNo 없는 버전
+	@ResponseBody
+	@RequestMapping("/matchupPopupResumeDown.do")
+	public int resumeDownload(@RequestParam (defaultValue = "0") int resumeNo) {
+		//1
+	//	logger.info("pdf파일 다운로드, 파라미터 resumeNo={}",resumeNo);
+		
+		//2
+		ResumeAllVO rAllVo = resumeService.selectResumeByResumeNo(resumeNo);
+		
+		//logger.info("pdf파일 다운로드파라미터 rVo={}",rVo);
+		logger.info("pdf파일 다운로드 파라미터 rAllVo={} resumeNo={}", rAllVo, resumeNo);
+		String downloadPath="C:\\Users\\jazzo\\Downloads\\";
+		
+		int result=0;
+		try {
+			pdfFileUtil.createPdf(rAllVo, downloadPath);
+			result=1;
+		} catch (DocumentException e) {
+			e.printStackTrace();
+			result=0;
+		} catch (IOException e) {
+			e.printStackTrace();
+			result=0;
+		}
+		//3
+		//4
+		
+		return result;
+	}
 	
 }
