@@ -32,11 +32,6 @@ public class NoticeAdminDAOMybatis implements NoticeAdminDAO{
 	}
 	
 	@Override
-	public int selectReply_cnt() {
-		return sqlSession.selectOne(namespace+"selectReply_cnt");
-	}
-	
-	@Override
 	public int updateReply(int qna_no) {
 		int cnt=sqlSession.update(namespace+"updateReply", qna_no);
 		return cnt;
@@ -50,6 +45,11 @@ public class NoticeAdminDAOMybatis implements NoticeAdminDAO{
 	@Override
 	public int selectQnaList_cnt(NoticeSearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"selectQnaList_cnt", searchVo);
+	}
+
+	@Override
+	public int selectReply_cnt(NoticeSearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"selectReply_cnt", searchVo);
 	}
 
 

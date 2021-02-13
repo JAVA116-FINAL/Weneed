@@ -13,7 +13,7 @@ public interface NoticeAdminDAO {
 	//1:1문의 상세보기 - 관리자
 	public List<Map<String, Object>> selectQnaDetail_admin(int qna_no);
 	//미답변 1:1문의 갯수
-	public int selectReply_cnt();
+	public int selectReply_cnt(NoticeSearchVO searchVo);
 	//답변여부 'Y'로 업데이트
 	public int updateReply(int qna_no);
 	

@@ -21,11 +21,6 @@ public class NoticeAdminServiceImpl implements NoticeAdminService{
 	public List<Map<String, Object>> selectQnaDetail_admin(int qna_no) {
 		return noticeAdminDao.selectQnaDetail_admin(qna_no);
 	}
-
-	@Override
-	public int selectReply_cnt() {
-		return noticeAdminDao.selectReply_cnt();
-	}
 	
 	@Override
 	public int updateReply(int qna_no) {
@@ -45,6 +40,11 @@ public class NoticeAdminServiceImpl implements NoticeAdminService{
 	@Override
 	public int selectQnaList_cnt(NoticeSearchVO searchVo) {
 		return noticeAdminDao.selectQnaList_cnt(searchVo);
+	}
+
+	@Override
+	public int selectReply_cnt(NoticeSearchVO searchVo) {
+		return noticeAdminDao.selectReply_cnt(searchVo);
 	}
 
 

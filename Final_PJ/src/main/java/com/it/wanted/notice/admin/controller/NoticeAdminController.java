@@ -26,7 +26,7 @@ public class NoticeAdminController {
 	@Autowired NoticeAdminService noticeAdminService;
 	
 	@RequestMapping(value = "/noticeQna_detail.do")
-	public String noticeQna_detail_get(@RequestParam int qna_no, Model model) {
+	public String noticeQna_detail(@RequestParam int qna_no, Model model) {
 		logger.info("1:1문의 상세보기 페이지 문의번호 qna_no={}", qna_no);
 		
 		List<Map<String, Object>> userDetail=noticeAdminService.selectQnaDetail_user(qna_no);
@@ -34,6 +34,9 @@ public class NoticeAdminController {
 		
 		model.addAttribute("userDetail", userDetail);
 		model.addAttribute("adminDetail", adminDetail);
+		
+		logger.info("userDetail={}", userDetail);
+		logger.info("adminDetail={}", adminDetail);
 		
 		return "admin/noticeService/noticeQna_detail";
 	}
@@ -52,7 +55,7 @@ public class NoticeAdminController {
 		
 		List<Map<String, Object>> listSearch=noticeAdminService.selectQnaList_search(searchVo);
 		
-		int replyCnt=noticeAdminService.selectReply_cnt();
+		int replyCnt=noticeAdminService.selectReply_cnt(searchVo);
 		
 		pagingInfo.setTotalRecord(noticeAdminService.selectQnaList_cnt(searchVo));
 		
@@ -62,8 +65,15 @@ public class NoticeAdminController {
 		
 		logger.info("listSearch={}", listSearch);
 		logger.info("listSearch.size={}", listSearch.size());
+		logger.info("미답변 문의 cnt={}", replyCnt);
 		
 		return "admin/noticeService/noticeQna_list"; 
 	}
+	
+	/*@RequestMapping("/noticeQna_write.do")
+	public String noticeQna_write() {
+		
+		return
+	}*/
 	
 }

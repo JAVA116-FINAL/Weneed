@@ -16,11 +16,9 @@
 
 <div class="align_center" id="noticeDiv">
 	<h1 class="qnaTableSubject">1:1문의</h1>
-	<c:if test="${param.searchKeyword == ''}">
 		<c:if test="${replyCnt>0 }">
 			<h4 class="qnaTablealert">미답변 문의가 ${replyCnt }건 존재합니다.</h4>
 		</c:if>
-	</c:if>
 	
 <form name="frmPage" method="get" action="<c:url value='noticeQna_list.do'/>">
 	<input type="hidden" name="currentPage">
