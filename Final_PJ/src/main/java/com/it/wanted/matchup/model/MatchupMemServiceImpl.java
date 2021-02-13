@@ -73,8 +73,8 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 				//직무리스트 등록
 				if(mmjikmuList!=null&& !mmjikmuList.isEmpty()) {
 					for( MatchupMemJikmuVO mmjikmuVo:mmjikmuList) {
-						mmjikmuVo.setExpertiseNo(expertNo);
 						if(mmjikmuVo!=null) {
+							mmjikmuVo.setExpertiseNo(expertNo);
 							cnt=mmjikmuDao.insertMatchupMemJikmu(mmjikmuVo);
 						}
 						
@@ -101,12 +101,11 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	//2/8 mcu이력서 등록
 	@Transactional
 	@Override
-	public int insertMcuMem2(ResumeAllVO rAllVo, MatchupMemVO mcuVo) {
-		ResumeVO resumeVo = rAllVo.getResumeVo();
-		List<CareerVO> crrList = rAllVo.getCrrList();
-		CareerVO crrVo = crrList.get(0);
-		List<EducationVO> eduList = rAllVo.getEduList();
-		EducationVO eduVo=eduList.get(0);
+	public int insertMcuMem2(MatchupAllVO mAllVo) {
+		ResumeVO resumeVo = mAllVo.getResumeVo();
+		EducationVO eduVo = mAllVo.getEduVo();
+		CareerVO crrVo = mAllVo.getCareerVo();
+		MatchupMemVO mcuVo = mAllVo.getMcumemVo();
 
 		int cnt=0;
 		try {
@@ -135,6 +134,90 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		}
 		return cnt;
 	}
+	//0209
+	@Override
+	public List<MatchupDetailAllVO> selectMatchupDetails(int mcumemNo) {
+		return matchupMemDao.selectMatchupDetails(mcumemNo);
+	}
+	@Override
+	public List<Map<String, Object>> selectMcuExListView(int mcumemNo) {
+		return matchupMemDao.selectMcuExListView(mcumemNo);
+	}
+	
+	//0210
+	@Override
+	public int updateMatchupResume(MatchupMemVO mcuVo) {
+		return matchupMemDao.updateMatchupResume(mcuVo);
+	}
+	
+	@Override
+	public MatchupDetailsViewVO selectMatchupDetailsView(int memNo) {
+		return matchupMemDao.selectMatchupDetailsView(memNo);
+	}
+	
+	@Transactional
+	@Override
+	public int updateMatcupInfo2(MatchupAllVO mAllVo) {
+		ResumeVO resumeVo = mAllVo.getResumeVo();
+		EducationVO eduVo = mAllVo.getEduVo();
+		CareerVO careerVo = mAllVo.getCareerVo();
+		int cnt=0;
+		try {
+			//1.
+			cnt=resumeDao.updateResumeIntroduce(resumeVo);
+			//2
+			cnt=educationDao.updateEduName(eduVo);
+			//3
+			cnt=careerDao.updateCareerNameAndDateAndCurVal(careerVo);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return cnt;
+	}
+	//0211
+	@Transactional
+	@Override
+	public int updateMatcupInfo1(MatchupAllVO mAllVo) {
+		int cnt=0;
+		try {
+			ExpertiseVO expertiseVo = mAllVo.getExpertVo();
+			List<MatchupMemJikmuVO> mjikmuList = mAllVo.getMcujikmuList();
+			cnt=expertDao.updateMatchupExpertise(expertiseVo);
+			
+			if(mjikmuList!=null&& !mjikmuList.isEmpty()) {
+				cnt=mmjikmuDao.deleteMatchupJikmu(expertiseVo.getExpertiseNo());
+				for( MatchupMemJikmuVO mjikmuVo:mjikmuList) {
+					if(mjikmuVo!=null) {
+						mjikmuVo.setExpertiseNo(expertiseVo.getExpertiseNo());
+						cnt=mmjikmuDao.insertMatchupMemJikmu(mjikmuVo);
+					}
+				}//for
+			}//if
+		}catch (RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return cnt;
+	}
+	@Override
+	public int updateMatchupRefName(MatchupMemVO mcuVo) {
+		return matchupMemDao.updateMatchupRefName(mcuVo);
+	}
+	
+
+	@Override
+	public MatchupMemVO selectOnebymatchupMemNo(int mcumemNo) {
+		return matchupMemDao.selectOnebymatchupMemNo(mcumemNo);
+	}
+	
+	@Override
+	public int updateMatchupjobFlag(MatchupMemVO mcuVo) {
+		return matchupMemDao.updateMatchupjobFlag(mcuVo);
+	}
+	
 	
 	/* 현빈 */
 	@Override
@@ -219,7 +302,8 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		
 		return zzimedList;
 	}
-	 */
+	*/
+	 
 	
 	@Override
 	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo) {
@@ -249,5 +333,7 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		
 		return cnt;
 	}
+	
+
 	
 }

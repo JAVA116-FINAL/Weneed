@@ -48,6 +48,12 @@
 	<select id="checkResumeReadCount" parameterType="int" resultType="int">
 		select (max_resume_count - resume_read_count) as checkedCount from matchupcom where mcucom_no=#{mcucomNo}
 	</select>
+	
+	<!-- 자연0212 -->
+	<select id="selectSearchmatchupCombyComName" parameterType="String" resultType="map">
+		select * from mcucomview where com_Name like '%'|| #{comName} ||'%'
+	</select>
+	
 </mapper>
 
 

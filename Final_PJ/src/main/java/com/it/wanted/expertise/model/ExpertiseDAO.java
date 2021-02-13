@@ -10,4 +10,7 @@ public interface ExpertiseDAO {
 	/* 자연 */
 	public int insertExpertise(ExpertiseVO expertiseVO);
 	public int selectUptodateExpertNo();
+	public ExpertiseVO selectExpertise(int expertiseNo);
+	public int updateMatchupExpertise(ExpertiseVO expertiseVo);
+	public int deleteExpertise(int expertiseNo);
 }

@@ -15,4 +15,6 @@ public interface ResumeDAO {
 	/* 현빈 */
 	public ResumeVO selectResumeByResumeNo(int resumeNo);
 	public int insertMcuResume(ResumeVO rVo);
+	public ResumeVO selectResumeOnebyResumeNo(int resumeNo);
+	public int updateResumeIntroduce(ResumeVO rVo);
 }
