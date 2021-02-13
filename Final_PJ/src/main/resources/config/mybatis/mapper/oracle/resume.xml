@@ -71,6 +71,8 @@
 		where mem_no=#{memNo}		
 	</update>
 	
+	
+	
 </mapper>
 
 

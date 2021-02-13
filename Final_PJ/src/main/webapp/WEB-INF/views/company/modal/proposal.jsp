@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../inc/cssJsImports.jsp" %>
-<link rel="stylesheet" href="">
-<div class="modal fade docs-example-modal-sm wantedProposalMD" tabindex="-1" 
+<div id="wantedProposalMD" class="modal fade docs-example-modal-sm wantedProposalMD" tabindex="-1" 
 	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 	  <div class="modal-dialog">
 	    <div class="modal-content">
