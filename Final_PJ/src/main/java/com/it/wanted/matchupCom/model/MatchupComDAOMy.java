@@ -42,6 +42,16 @@ public class MatchupComDAOMy implements MatchupComDAO{
 	public MatchupComVO selectMatchupCom(String comCode) {
 		return sqlSession.selectOne(namespace+"selectMatchupCom", comCode);
 	}
+
+	@Override
+	public int updateResumeReadCount(int mcucomNo) {
+		return sqlSession.update(namespace+"updateResumeReadCount", mcucomNo);
+	}
+
+	@Override
+	public int checkResumeReadCount(int mcucomNo) {
+		return sqlSession.selectOne(namespace+"checkResumeReadCount", mcucomNo);
+	}
 	
 	/* 0212 자연 */
 	@Override

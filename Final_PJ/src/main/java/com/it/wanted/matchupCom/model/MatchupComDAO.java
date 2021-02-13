@@ -16,5 +16,7 @@ public interface MatchupComDAO {
 
 	Map<String, Object> isOverMatchup(String comCode);
 	MatchupComVO selectMatchupCom(String comCode);
+	int updateResumeReadCount(int mcucomNo);
+	int checkResumeReadCount(int mcucomNo);
 
 }

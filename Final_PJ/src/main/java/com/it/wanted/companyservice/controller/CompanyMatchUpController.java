@@ -1,6 +1,5 @@
 package com.it.wanted.companyservice.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,33 +21,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.it.wanted.career.model.CareerService;
-import com.it.wanted.career.model.CareerVO;
 import com.it.wanted.cominfo.model.ComInfoService;
 import com.it.wanted.cominfo.model.ComInfoVO;
 import com.it.wanted.commeminfo.model.ComMemInfoService;
-import com.it.wanted.commeminfo.model.ComMemInfoVO;
-import com.it.wanted.commemlist.model.ComMemListService;
-import com.it.wanted.common.MatchupPagination;
-import com.it.wanted.common.MatchupSearchVO;
-import com.it.wanted.common.SearchVO;
 import com.it.wanted.education.model.EducationService;
-import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.jikgun.model.JikgunService;
 import com.it.wanted.jikgun.model.JikgunVO;
 import com.it.wanted.jikmu.model.JikmuService;
 import com.it.wanted.jikmu.model.JikmuVO;
 import com.it.wanted.matchup.model.MatchupMemSearchVO;
 import com.it.wanted.matchup.model.MatchupMemService;
-import com.it.wanted.matchup.model.MatchupMemVO;
 import com.it.wanted.matchupCom.model.MatchupComService;
 import com.it.wanted.matchupCom.model.MatchupComVO;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
+import com.it.wanted.matchupStatus.model.MatchupStatusService;
 import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeService;
 
 @Controller
 @RequestMapping("/company")
 public class CompanyMatchUpController {
+	
 	private static final Logger logger=LoggerFactory.getLogger(CompanyMatchUpController.class);
 	@Autowired CareerService careerService;
 	@Autowired MatchupMemService matchupMemService;
@@ -59,6 +52,7 @@ public class CompanyMatchUpController {
 	@Autowired ComMemInfoService comMemInfoService;
 	@Autowired ComInfoService comInfoService;
 	@Autowired ResumeService resumeService;
+	@Autowired MatchupStatusService matchupStatusService; 
 	
 	@RequestMapping(value = "/matchupService.do", method = RequestMethod.GET)
 	public String matchupMain(HttpSession session, HttpServletRequest request, Model model) {
@@ -97,7 +91,7 @@ public class CompanyMatchUpController {
 		searchVo=setSearchInfoDefault(searchVo);
 		searchVo=setBeforeMethod(searchVo);
 		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
-		//매치업 구입 기업만 여기 들어올수 있습니다. 
+		//매치업 구입 기업만 여기 들어올수 있습니다. 구입한 적이 있는 기업만? 
 		//그럼 그냥 구입내역을 찍어서 리턴시키면 되는 거 아니야?
 		MatchupComVO matchupComVo=matchupComService.selectMatchupCom(comVo.getComCode());
 		Map<String, Object> checkMap=matchupComService.hasMatchup(comVo.getComCode());
@@ -292,8 +286,32 @@ public class CompanyMatchUpController {
 		return result;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/updateMatchupStatus.do", produces = "application/text; charset=utf8")
+	public String updateMatchupStatus(@RequestParam int resumeNo, HttpSession session) {
+		logger.info("매치업현황 추가 및 업데이트, 세션 받기 전");
+		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		logger.info("매치업현황 추가 및 업데이트, 파라미터 resumeNo={}, comInfoVo={}", resumeNo, comVo);
+		//여기서 해야 하는 것들 
+		//매칭에 없는 조합이라면 매칭에 추가해주고, 추가되면서 service단에서 이력서 조회 건수 -1 시켜줘야 한다. 
+		
+		int result=matchupStatusService.updateStatus(resumeNo, comVo.getComCode());
+		logger.info("조회 검사 후 result={}", result);
+		
+		String str="";
+		if(result==MatchupStatusService.RESUMECNT_OVER) {
+			str="열람권을 모두 소진했습니다.";
+		}else if(result==MatchupStatusService.RESUMECNT_REDUCED) {
+			str="열람권이 1회 차감되었습니다.";
+		}else if(result==MatchupStatusService.RESUMECNT_READ) {
+			str="이미 조회한 이력서입니다. 열람한 이력서 목록에서 확인하실 수 있습니다.";
+		}
+		return str;
+	}
+	
+	/* 기본 함수들 */
 	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo) {
-		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty()) {
+		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty() || vo.getSearchJikmu().equals("all")) {
 			vo.setSearchJikmu("");
 		}
 		if(vo.getSearchJikgun()==null || vo.getSearchJikgun().isEmpty()) {

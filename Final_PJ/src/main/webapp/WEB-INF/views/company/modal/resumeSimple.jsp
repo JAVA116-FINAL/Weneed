@@ -20,10 +20,11 @@
 				        		<div class="matchupResume1stSec_div"> <!-- 최상단 이름, 다운로드, 찜버튼 -->
 					        		<span class="matchupResumeName"></span>
 					        		<div>
-						        		<button class="matchupSearch-ZzimBtn matchupResumeSMBtns" id="matchupResumeSimpleZzimBtn"><i class="fas fa-star"></i> 찜</button>
+					        		<button class="matchupSearch-downBtn matchupResumeSMBtns hide"><i class="far fa-save"></i> 다운로드</button>
+						        		<button class="matchupResumeSMBtns" id="matchupResumeSimpleZzimBtn"><i class="fas fa-star"></i> 찜</button>
 					        		</div>
 				        		</div>
-				        		<div>
+				        		<div class="matchupResumeIntroSection">
 				        			<div>
 					        			<span class="matchupResumeSubTitle">E-mail </span><span>연락처는 면접 제안 단계에서 공개됩니다.</span>
 				        			</div>
@@ -103,7 +104,7 @@
 			</div>
 			<div class="modal-footer comServJoinModalFooter">
 				<div class="container comServModalFooterCon matchupResumeSpace">
-					<span>*이력서 상세보기를 하면 열람권 1회가 차감됩니다.</span>
+					<span id="matchupResumeBtnSpan">*이력서 상세보기를 하면 열람권 1회가 차감됩니다.</span>
 					<button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="button"
 				      data-resumeno="${mcumemMap.RESUMENO}">상세이력 보기</button> 
 <%-- 				    <button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="button"
