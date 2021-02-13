@@ -50,7 +50,9 @@
             <mapping path="/company/*.do"/>
             <exclude-mapping path="/company/welcome.do"/>
             <exclude-mapping path="/company/login.do"/>
+            <exclude-mapping path="/company/ajaxPwdCheck.do"/>
             <exclude-mapping path="/company/join.do"/>
+            <exclude-mapping path="/company/matchupServiceFileDownload.do"/>
             <beans:ref bean="ComLoginInterceptor"/>
         </interceptor>
     </interceptors>
