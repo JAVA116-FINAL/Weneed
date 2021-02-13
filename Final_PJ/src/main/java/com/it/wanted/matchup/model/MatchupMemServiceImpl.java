@@ -21,7 +21,6 @@ import com.it.wanted.expertise.model.ExpertiseVO;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemJikmuVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemjikmuDAO;
-import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeDAO;
 import com.it.wanted.resume.model.ResumeVO;
 
