@@ -8,3 +8,4 @@ public interface EducationService {
 	public EducationVO selectEduOne(int eduNo);
 
 }
+

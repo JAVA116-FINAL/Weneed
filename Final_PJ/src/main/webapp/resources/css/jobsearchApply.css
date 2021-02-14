@@ -578,3 +578,10 @@ div#displayAside {
 
 
 a.ap-resumEdit_jy {width: fit-content;}
+
+
+div#displayAside {
+    position: absolute;
+    display: inline-block;
+    right: 220px;
+}

@@ -50,6 +50,12 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 		return applicantsDao.selectApplicants2();
 	}
 
+	/* 자연 */
+	@Override
+	public int insertApply(ApplicantsVO applyVo) {
+		return applicantsDao.insertApply(applyVo);
+	}
+
 //	@Override
 //	public int updatePeriod(ApplicantsVO appliVo) {
 //		// TODO Auto-generated method stub

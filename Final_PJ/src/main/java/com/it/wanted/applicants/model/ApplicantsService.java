@@ -20,4 +20,7 @@ public interface ApplicantsService {
 //	public List<Map<String, Object>> selectApplicants(ApplicantsVO appliVo);
 
 //	public int updatePeriod(ApplicantsVO appliVo);
+	
+	/* 자연 */
+	public int insertApply(ApplicantsVO applyVo);
 }

@@ -32,7 +32,30 @@ $(function(){
 			cache: false,
 			success:function(resUp){
 				//alert(resUp);
-				$.addUpfile(resUp);
+				
+				var resumeStr="";
+				
+				resumeStr+="<li class='li-apply_jy'>";
+				resumeStr+="<div class='ap-done_jy'>";
+				resumeStr+="<label for='resume_No_jy'>";
+				resumeStr+="<input type='checkbox' id='resum_No_jy' name='resumeNo' value='"+resUp.resumeNo+"'>";
+				resumeStr+="<i class='icon-icon_match_list_save iconSave_jy :before'></i>";
+				resumeStr+="</label>";
+				resumeStr+="<div class='ap-resumInfo_jy'>";
+				resumeStr+="<h4 class='ap-resumInfoTitleh4_jy'>";
+				resumeStr+="<p class='ap-resumName_jy'>"+resUp.resumeTitle+"</p>";
+				resumeStr+="</h4>";
+				resumeStr+="<div class='ap-resumeRegisterInfo_jy'>";
+				resumeStr+="<span class='ap-resumedate_jy'>"+resUp.resumeRegdate+"</span>";
+				resumeStr+="<span class='ap-fileFlag_jy :after'>첨부파일</span>";
+				resumeStr+="</div>";
+				resumeStr+="</div>";
+				resumeStr+="</div>";	
+				resumeStr+="</li>";
+				
+				$('#ulResumeList').append(resumeStr);
+		
+				
 			},
 			error:function(xhr,status,error){
 				alert("error!:"+error);
@@ -41,46 +64,23 @@ $(function(){
 		
 	});//change이벤트
 	
-	
- 	$.addUpfile=function(resUp){
-		var resumeStr="";
-		
-		resumeStr+="<li class='li-apply_jy'>";
-		resumeStr+="<div class='ap-done_jy'>";
-		resumeStr+="<label for='resume_No_jy'>";
-		resumeStr+="<input type='checkbox' id='resum_No_jy' name='resumeNo' value='"+resUp.resumeNo+"'>";
-		resumeStr+="<i class='icon-icon_match_list_save iconSave_jy :before'></i>";
-		resumeStr+="</label>";
-		resumeStr+="<div class='ap-resumInfo_jy'>";
-		resumeStr+="<h4 class='ap-resumInfoTitleh4_jy'>";
-		resumeStr+="<p class='ap-resumName_jy'>"+resUp.resumeTitle+"</p>";
-		resumeStr+="</h4>";
-		resumeStr+="<div class='ap-resumeRegisterInfo_jy'>";
-		resumeStr+="<span class='ap-resumedate_jy'>"+resUp.resumeRegdate+"</span>";
-		resumeStr+="<span class='ap-fileFlag_jy :after'>첨부파일</span>";
-		resumeStr+="</div>";
-		resumeStr+="</div>";
-		resumeStr+="</div>";	
-		resumeStr+="</li>";
-		
-		$('#ulResumeList').append(resumeStr);
-	} 
- 	/* 
- 	$.backbt=function(){
-	 	 $.ajax({
-	 			url:"<c:url value='/jobsearch/aside.jsp'/>",
- 				success:function(result){
- 					alert(result);
-					$('#asideApply').empty();
-					$('#asideApply').html(result); 
-				}
-	 		});
- 	}
- 	*/
+	$('.ckResumeSave').click(function(){
+		//alert($(this).val());
+		if($(this).prop('checked')){
+			$('.ckResumeSave').prop('checked',false);
+			$(this).prop('checked',true);
+		}
+	}); 
  	
 	$('#byApplySubmit').click(function(){
-		$('#frmApply').submit();
 		//체크박스 없으면 얼럿
+		//alert($('input:checkbox[name=resumeNo]:checked').length);
+		if($('input:checkbox[name=resumeNo]:checked').length<1){
+			alert('제출할 이력서를 선택하세요!');
+			event.PreventDefault();
+		}
+		
+		$('#frmApply').submit();
 	});
 	
 	
@@ -100,7 +100,8 @@ $(function(){
 			<div class="applyinfo_jy">
 				<form action="<c:url value='/jobsearch/apply.do'/>" method="post" name="frmApply" id="frmApply">					
 					<h3 class="h3-apply_jy">지원정보</h3>
-						<input type="hidden" name="posNo" value="${posNo}">
+						<%-- 포지션번호 넣기! <input type="hidden" name="posNo" value="${posNo}"> --%>
+						<input type="hidden" name="posNo" value="27">
 						<input type="hidden" name="memNo" value="${memVo.memNo }">
 					<div class="infotmation_jy">
 						<label for="name" class="lb-apply_jy">
@@ -146,10 +147,10 @@ $(function(){
 											<label for="resume_No_jy">
 											<!-- 만약 작성중이면 디스에이블드 -->
 												<c:if test="${rVo.tempFlag eq 'Y'}">
-													<input type="checkbox" id="ckResumeTemp" name="resumeNo" disabled value="${rVo.resumeNo }">
+													<input type="checkbox" id="ckResumeTemp" name="ckResumeNo" disabled value="${rVo.resumeNo }">
 												</c:if>
 												<c:if test="${rVo.tempFlag eq 'N'}">
-													<input type="checkbox" id="ckResumeSave" name="resumeNo" value="${rVo.resumeNo }">
+													<input type="checkbox" id="ckResumeSave" class="ckResumeSave" name="resumeNo" value="${rVo.resumeNo }">
 												</c:if>
 												<%-- <input type="text" value="${rVo.resumeNo}"> --%>
 											</label>
