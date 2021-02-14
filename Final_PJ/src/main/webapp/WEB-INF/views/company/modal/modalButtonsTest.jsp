@@ -5,31 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Modal Button Test</title>
+<%@ include file="../../inc/cssJsImports.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/comServModal.css">
-<script type="text/javascript">
-$(function(){
-	/* $('.wantedResumeSimpleMD').on('show.bs.modal', function(event){
-		//일단 레주메 넘버가 필요함 
-		var resumeNo=$('').val();
-		
-		//ajax로 레주메넘버를 보내서 해당 이력서의 디비를 다 받아와야 함
-		$.ajax({
-			url:"",
-			data:resumeNo,
-			type:"get",
-			dataType:"json",
-			success:function(result){
-				alert('성공!');
-				//받아온 db를 모달팝업에 세팅해주기	
-			},
-			error:function(xhr, status, error){
-				alert('error!'+error);
-			}
-		});
-	}); */
-	
-});
-</script>
 </head>
 <body>
 	<!-- 제안하기 버튼과 모달팝업 -->

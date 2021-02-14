@@ -485,8 +485,8 @@
 			  	</button>
 		  
 				<ul class="navbar-nav">
-					<li class="nav-item dropdown" id="navigation" style="padding: 6px 6px;">
-						<a class="nav-link dropdown-toggle" href="<c:url value='/jobsearch/jobsearchDetail.do'/>" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색 </a>
+					<li class="nav-item dropdown" id="navigation" style="padding: 6px 6px;" onclick="location.href='<c:url value="/jobsearch/jobsearchList.do"/>'">
+						<a href="#" class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색</a>
 						<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; border-top:0; margin-top:0; line-height:17px; border-radius:0;">
 							<li><a class="dropdown-item" href="#" style="border-bottom:none;">개발<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
 							<li><a class="dropdown-item" href="#" style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">서버 개발자</a></li>

@@ -1,6 +1,9 @@
 package com.it.wanted.position.model;
 
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +26,11 @@ public class PositionDAOMy implements PositionDAO{
 	@Override
 	public int insertPosJikmu(PosJikmuVO vo) {
 		return sqlSession.insert(namespace+"insertPosJikmu", vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectJobsearchList() {
+		return sqlSession.selectList(namespace+"selectJobsearchList");
 	}
 	
 }

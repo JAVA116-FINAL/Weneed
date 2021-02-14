@@ -88,9 +88,9 @@ public class CompanyMatchUpController {
 	@RequestMapping("/matchupSearch.do")
 	public String matchupSearch(Model model, @ModelAttribute MatchupMemSearchVO searchVo,
 			HttpSession session) {
-		searchVo=setSearchInfoDefault(searchVo);
-		searchVo=setBeforeMethod(searchVo);
 		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		searchVo=setSearchInfoDefault(searchVo, comVo.getComCode());
+		searchVo=setBeforeMethod(searchVo);
 		//매치업 구입 기업만 여기 들어올수 있습니다. 구입한 적이 있는 기업만? 
 		//그럼 그냥 구입내역을 찍어서 리턴시키면 되는 거 아니야?
 		MatchupComVO matchupComVo=matchupComService.selectMatchupCom(comVo.getComCode());
@@ -159,7 +159,7 @@ public class CompanyMatchUpController {
 	@RequestMapping("/viewMoreMatchupMem.do")
 	public List<Map<String, Object>> getMoreMem(@ModelAttribute MatchupMemSearchVO searchVo
 			, Model model){
-		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
 		
 		logger.info("리스트 더보기  시작, searchVo={}", searchVo);
@@ -174,11 +174,10 @@ public class CompanyMatchUpController {
 	}
 
 	@ResponseBody
-	@JsonManagedReference
 	@RequestMapping("/showZzimedList.do")
 	public List<Map<String, Object>> showZzimedList(@ModelAttribute MatchupMemSearchVO searchVo
 		, Model model) {
-		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
 		
 		List<Map<String, Object>> memList=matchupMemService.selectZzimedList(searchVo);
@@ -193,8 +192,9 @@ public class CompanyMatchUpController {
 	@JsonBackReference
 	@RequestMapping("/viewMoreZzimedList.do")
 	public List<Map<String, Object>> getMoreZzimedMem(@ModelAttribute MatchupMemSearchVO searchVo
-			, Model model){
-		searchVo=setSearchInfoDefault(searchVo);
+			, Model model, HttpSession session){
+		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		searchVo=setSearchInfoDefault(searchVo, comVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
 		
 		logger.info("찜한 리스트 더 불러오기 시작, searchVo={}", searchVo);
@@ -310,7 +310,7 @@ public class CompanyMatchUpController {
 	}
 	
 	/* 기본 함수들 */
-	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo) {
+	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo, String comCode) {
 		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty() || vo.getSearchJikmu().equals("all")) {
 			vo.setSearchJikmu("");
 		}
@@ -325,6 +325,9 @@ public class CompanyMatchUpController {
 		}
 		if(vo.getSearchMinCareer()==null || vo.getSearchMinCareer().isEmpty()) {
 			vo.setSearchMinCareer("0");
+		}
+		if(vo.getComCode()==null || vo.getComCode().isEmpty()) {
+			vo.setComCode(comCode);
 		}
 		return vo;
 	}

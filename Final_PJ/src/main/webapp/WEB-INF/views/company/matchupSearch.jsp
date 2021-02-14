@@ -11,8 +11,6 @@ $(function(){
 		$('.matchupSearch-li').removeClass('matchupSearch-selectedLi');
 		$('.matchupSearch-li:eq('+num+')').addClass('matchupSearch-selectedLi')
 	});
-	
-	
 
 	//찜 버튼 금색 토글
 	$(document).on('click', '.matchupSearch-ZzimBtn', function(){
@@ -100,6 +98,7 @@ $(function(){
 				$('input[name=searchJikmu]').val(jikmu);
 				$('input[name=searchJikgun]').val(jikgun);
 				$('#matchupSearchkeyword').val(keyword);
+				$('input[name=searchComCode]').val(comCode);
 			},
 			error:function(error){
 				alert('error!:'+error);
@@ -123,7 +122,7 @@ $(function(){
 		$('form[name=matchupSearchForm]').submit();
 	});
 	
-	//찜한 이력서 보기.. 이 경우엔 검색어랑 경력 다 같이 가야할거같은뎅... 
+	//찜한 이력서 보기..
 	$('#matchupSearch-Zzimed-list').click(function(){
 		console.log('찜한 이력서 보기');
 		var keyword=$('#matchupSearchkeyword').val();
@@ -153,6 +152,7 @@ $(function(){
 				for(mcumem of memList){
 					makeMemList(mcumem);
 				}
+				
 				if(memList.length!=5){
 					$('#matchupSearch-viewMoreBtn').hide();
 				}
@@ -167,14 +167,15 @@ $(function(){
 				$('#matchupSearchkeyword').val(keyword);
 			},
 			error:function(xhr, status, error){
-				alert('error! '+error);
+				alert('찜한 목록 보기 실패! '+error);
 			}
 		});
 	});
 	
 	//var resumeNo=0;
 	//버튼 선택 시 해당하는 데이터를 모달 팝업에 뿌려주는 기능
- 	$('.matchupSearchResumeOpenBtn').click(function(){
+// 	$('.matchupSearchResumeOpenBtn').click(function(){
+	$(document).on('click', '.matchupSearchResumeOpenBtn', function(){
  		var resumeNo=$(this).data('resumeno');
 		console.log(resumeNo)
 		$('#wantedResumeSimpleMDLabel').text('이력서 미리보기');
@@ -182,10 +183,10 @@ $(function(){
 		$('#matchupResumeViewDetailBtn').text('상세이력 보기');
 		$('.matchupSearch-downBtn').addClass('hide');
 		
-		$('#wantedResumeSimpleMD').on('show.bs.modal', function(event){
+	//	$('#wantedResumeSimpleMD').on('show.bs.modal', function(event){
 			//일단 레주메 넘버가 필요함 
 			setResume(setSimpleResumeMD, resumeNo);
-		});
+	//	});
 	});
 	
 	
@@ -199,11 +200,11 @@ $(function(){
 		
 		if($(this).text()=='상세이력 보기'){
 			console.log('상세이력 보기 눌렀다');
-			setResume(setDetailResumeMD, resumeNo);
 			$('#wantedResumeSimpleMDLabel').text('상세이력 보기');
 			$('#matchupResumeBtnSpan').html('유능한 인재는 여러 기업에서 면접 제안을 받습니다.<br>기회를 놓치지 마세요!');
 			$('#matchupResumeViewDetailBtn').text('제안하기');
 			$('.matchupSearch-downBtn').removeClass('hide');
+			setResume(setDetailResumeMD, resumeNo);
 			
 			//이력서 조회 -1.. 기조회한 이력서면 떨어지면 안댐. 진행현황 테이블에도 추가하자 같이
 			$.ajax({
@@ -238,6 +239,8 @@ $(function(){
 		}
 		
 	});
+	
+	$('#comServProposalSubmitBtn').click
 	
 });
 
@@ -413,7 +416,9 @@ function setDetailResumeMD(resumeAllVo){
 	var intro='';
 	intro+='<br>';
 	intro+='<span>';
-	intro+=resumeAllVo.resumeVo.resumeIntroduce;
+	if(resumeAllVo.resumeVo.resumeIntroduce != null){
+		intro+=resumeAllVo.resumeVo.resumeIntroduce;
+	}
 	intro+='</span>';
 	$('.matchupResumeIntroSection').append(intro);
 	
@@ -517,8 +522,13 @@ function makeMemList(mcumem){
 	str+='<span>No.'+ mcumem.RESUMENO +'</span>';
 	str+='</div>';
 	str+='<div class="matchupSearch-resume-2nd">';
-	str+='<span>직군직종명</span>';
-	str+='<span>';
+	str+='<span>'+mcumem.JIKGUNNAME;
+	
+	if(mcumem.JIKMUNAME != null){
+		str+=' / '+mcumem.JIKMUNAME;
+	}
+	
+	str+='</span><span>';
 	
 	if(mcumem.CAREER == '신입'){
 		str+=mcumem.CAREER+'</span>';
@@ -530,6 +540,7 @@ function makeMemList(mcumem){
 	str+='<div class="matchupSearch-resume-3rd">';
 	str+='<button class="matchupSearch-ZzimBtn"><i class="fas fa-star';
 	
+	console.log("mcumem.CNT: "+mcumem.CNT)
 	if(mcumem.CNT > 0){
 		str+=' goldStar';
 	}
@@ -543,13 +554,13 @@ function makeMemList(mcumem){
 }
 </script>
 <form name="matchupSearchForm" method="post" action="#">
-	<input type="hidden" id="matchupSearch-record" value="0">
-	<input type="hidden" value="${searchVo.searchJikgun }" name="searchJikgun">
-	<input type="hidden" value="${searchVo.searchJikmu }" name="searchJikmu">
-	<input type="hidden" value="${searchVo.searchKeyword }" name="searchKeyword">
-	<input type="hidden" value="${searchVo.searchMinCareer }" name="searchMinCareer">
-	<input type="hidden" value="${searchVo.searchMaxCareer }" name="searchMaxCareer">
-	<input type="hidden" value="${sessionScope.comInfoVo.comCode}" name="searchComCode">
+	<input type="text" id="matchupSearch-record" value="0">
+	<input type="text" value="${searchVo.searchJikgun }" name="searchJikgun">
+	<input type="text" value="${searchVo.searchJikmu }" name="searchJikmu">
+	<input type="text" value="${searchVo.searchKeyword }" name="searchKeyword">
+	<input type="text" value="${searchVo.searchMinCareer }" name="searchMinCareer">
+	<input type="text" value="${searchVo.searchMaxCareer }" name="searchMaxCareer">
+	<input type="text" value="${sessionScope.comInfoVo.comCode}" name="searchComCode">
 </form>
 
 	<div class="matchupNoticeCon">
@@ -587,7 +598,11 @@ function makeMemList(mcumem){
 			<select id="matchupSearch-jikmuSelect" class="matchupSearch-select matchupSearch-selectLong"> 
 				<option value="all">전체</option>
 				<c:forEach var="jikmuVo" items="${jikmuList}">
-					<option value="${jikmuVo.jikmuCode}">${jikmuVo.jikmuName}</option>			
+					<option value="${jikmuVo.jikmuCode}"
+						<c:if test="${searchVo.searchJikmu eq jikmuVo.jikmuCode}">
+							selected
+						</c:if>
+					>${jikmuVo.jikmuName}</option>			
 				</c:forEach>
 			</select>
 			<div class="matchupSearch-searchFilter">
@@ -758,8 +773,7 @@ function makeMemList(mcumem){
 		<section class="matchupSearch-2ndSec"> <!-- 목록  -->
 			<div class="matchupSearch-tabBound">
 				<ul class="matchupSearch-resultList">
-					<li class="matchupSearch-li matchupSearch-selectedLi">
-						<a style="display:block;" href="<c:url value='/company/matchupSearch.do'/>">목록 전체</a></li>
+					<li class="matchupSearch-li matchupSearch-selectedLi" onclick="location.reload()">목록 전체</li>
 					<li class="matchupSearch-li" id="matchupSearch-Zzimed-list">찜한 이력서</li>
 					<li class="matchupSearch-li">미열람 이력서</li>
 					<li class="matchupSearch-li">열람한 이력서</li>
@@ -795,7 +809,13 @@ function makeMemList(mcumem){
 								<span>No.${mcumemMap.RESUMENO}</span>
 							</div>
 							<div class="matchupSearch-resume-2nd"> <!-- 이력서 목록 -->
-								<span>직군직종</span>
+								<span>${mcumemMap.JIKGUNNAME}
+								<c:if test="${!empty mcumemMap.JIKMUNAME}">
+									<c:if test="${mcumemMap.JIKMUNAME ne 'undefined'}">
+										<c:set value=" / ${mcumemMap.JIKMUNAME}" var="jikmuName"/>
+										 ${jikmuName}
+									</c:if>
+								</c:if></span>
 								<span>
 									<c:if test="${mcumemMap.CAREER eq '신입' }">
 										${mcumemMap.CAREER}
