@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.link">
+	<insert id="insertLink" parameterType="linkVo">
+		<selectKey keyProperty="linkNo" resultType="int" order="BEFORE">
+			select link_seq.nextval from dual 
+		</selectKey>
+		insert into link(link_No,resume_No)
+		values(#{linkNo} ,#{resumeNo})
+	</insert>
+
+	<select id="selectLink" parameterType="int" resultType="linkVo">
+		select * from 
+		(select * from link where resume_No=#{resumeNo} order by link_no desc)
+		where rownum=1		
+	</select>	
+	
+	<delete id="deleteLink" parameterType="int">
+		delete from link where link_no=#{linkNo}
+	</delete>
+	
+	<update id="updateLink" parameterType="linkVo">
+		update link
+		set link_Url=#{linkUrl}
+		where link_No=#{linkNo}
+	</update>
+	
+	<select id="selectLinkbyResumeNo" parameterType="int" resultType="linkVo">
+		select * from link where resume_No=#{resumeNo}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

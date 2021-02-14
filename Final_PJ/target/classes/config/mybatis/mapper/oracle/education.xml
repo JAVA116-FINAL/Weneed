@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.education">
+	<insert id="insertEdu" parameterType="educationVo">
+		<selectKey keyProperty="eduNo" resultType="int" order="BEFORE">
+			select education_seq.nextval from dual 
+		</selectKey>
+		insert into education(edu_No,resume_No)
+		values(#{eduNo} ,#{resumeNo})
+	</insert>
+
+	<select id="selectEdu" parameterType="int" resultType="educationVo">
+		select * from 
+		(select * from education where resume_No=#{resumeNo} order by edu_no desc)
+		where rownum=1		
+	</select>	
+	
+	<delete id="deleteEdu" parameterType="int">
+		delete from education where edu_no=#{eduNo}
+	</delete>
+	
+	<update id="updateEdu" parameterType="educationVo">
+	 	update education 
+		set start_Year=#{startYear},start_Month=#{startMonth},end_Year=#{endYear},end_Month=#{endMonth},
+		cur_Enrolled=#{curEnrolled}, edu_Name=#{eduName}, edu_Major=#{eduMajor},edu_Details=#{eduDetails}
+		where edu_No=#{eduNo}
+	 </update>
+	
+	<select id="selectEdubyResumeNo" parameterType="int" resultType="educationVo">
+		select * from education where resume_No=#{resumeNo}
+	</select>
+	
+	<insert id="insertMcuEdu" parameterType="educationVo">
+	<selectKey keyProperty="eduNo" resultType="int" order="BEFORE">
+		select education_seq.nextval from dual 
+	</selectKey>
+		insert into education(edu_No,resume_No,edu_Name)
+		values(#{eduNo} ,#{resumeNo},#{eduName})
+	</insert>
+	
+	<select id="selectEduOne" parameterType="int" resultType="educationVo">
+		select * from education where edu_No=#{eduNo}	
+	</select>
+	
+	<update id="updateEduName" parameterType="educationVo">
+		update education
+		set edu_Name=#{eduName}
+		where edu_No=#{eduNo}
+	</update>
+	
+	<!-- 현빈 -->
+	<select id="selectMcumemNo" parameterType="String" resultType="int">
+		select m.mcumem_no 
+		from matchupmem m join education e
+		on m.resume_no=e.resume_no
+		where e.edu_name like '%' || #{searchKeyword} || '%'
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

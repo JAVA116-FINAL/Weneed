@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.languagestest">
+	<insert id="insertLangtest" parameterType="languagestestVo">
+      <selectKey keyProperty="langtestNo" resultType="int" order="BEFORE">
+         select languagestest_SEQ.nextval from dual
+      </selectKey>
+      insert into languagestest(langtest_No, lang_No)
+      values(#{langtestNo},#{langNo})
+   </insert>
+   
+   <select id="selectLangtest" parameterType="int" resultType="languagestestVo">
+      select * from 
+      (select * from languagestest where lang_No=#{langNo} order by langtest_no desc)
+      where rownum=1
+   </select>
+   
+   <delete id="deleteLangtest" parameterType="int">
+      delete from languagestest where langtest_No=#{langtestNo}
+   </delete>
+   
+   <delete id="deleteLangtestbylangNo" parameterType="int">
+      delete from languagestest where lang_No=#{langNo}
+   </delete>
+	
+	<update id="updateLangtest" parameterType="languagestestVo">
+		update languagestest
+		set langtest_Name=#{langtestName}, langtest_Score=#{langtestScore},get_Year=#{getYear}, get_Month=#{getMonth}
+		where langtest_No=#{langtestNo}
+	</update>
+	
+	<select id="selectLangtestbyLangNo" parameterType="int" resultType="languagestestVo">
+		select* from languagestest where lang_No=#{langNo}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

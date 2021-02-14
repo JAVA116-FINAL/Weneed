@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.matchupexcom">
+ 	<select id="selecMahuprgisterCheckCount" parameterType="matchupexcomVo" resultType="int">
+		select count(*) from matchupexcom where mcumem_No=#{mcumemNo} and mcucom_No=#{mcucomNo}	
+   	 </select>
+ 
+ 	<!-- <select id="selecMahuprgisterCheckCount" parameterType="matchupexcomVo" resultType="int">
+		select count(*) from matchupexcom where mcumem_No=#{mcumemNo}	
+	</select> -->
+	<insert id="insertMatchupExCom" parameterType="matchupexcomVo">
+		insert into matchupexcom(mcumem_No, mcucom_No) values(#{mcumemNo},#{mcucomNo})
+	</insert>
+	
+	<delete id="deleteMatchuoExcom" parameterType="matchupexcomVo">
+		delete from matchupexcom where mcumem_No=#{mcumemNo} and mcucom_No=#{mcucomNo} 
+	</delete>
+	
+	<select id="selectExcomView" parameterType="matchupexcomVo" resultType="map">
+		select * from excomView where mcumem_No=#{mcumemNo} and mcucom_No=#{mcucomNo}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

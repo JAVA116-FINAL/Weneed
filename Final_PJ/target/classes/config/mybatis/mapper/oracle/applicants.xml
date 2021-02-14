@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.oracle.applicants">
+	<sql id="searchWhere">
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+				${searchCondition} like '%' || #{searchKeyword} || '%'
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectApplicants" parameterType="int"
+		resultType="map">
+		
+		<!-- <if test="sf==0"></if> -->
+		select A.*, B.pos_name
+		from apply A join position B
+		on A.POS_NO =
+		B.POS_NO
+		where A.status_flag=#{sf}
+		order by apply_no desc
+	</select>
+	
+	<select id="selectApplicants2"
+		resultType="map">
+		select A.*, B.pos_name
+		from apply A join position B
+		on A.POS_NO =
+		B.POS_NO
+		order by apply_no desc
+	</select>
+
+	<select id="selectAllPositions" resultType="ApplicantsVO">
+
+		select
+		distinct(B.pos_name)
+		from apply A join position B
+		on A.POS_NO = B.POS_NO
+		order by B.pos_name
+	</select>
+
+	<select id="selectTotalRecord" parameterType="searchVo"
+		resultType="int">
+		select count(*) from apply
+		<include refid="searchWhere"></include>
+	</select>
+
+	<select id="selectByNo" parameterType="int"
+		resultType="ApplicantsVO">
+		select A.*, B.pos_name
+		from apply A join position B
+		on
+		A.POS_NO = B.POS_NO
+		where apply_no = #{applyNo}
+	</select>
+
+	<!-- <update id="updatePeriod" parameterType="appliVo">
+		update apply
+		set apply_period=#{applyPeriod}
+		where apply_no=#{applyNo}
+
+	</update> -->
+	
+	
+	<!-- 자연 -->
+	<insert id="insertApply" parameterType="ApplicantsVO">
+		<selectKey keyProperty="applyNo" resultType="int" order="BEFORE">
+			select apply_seq.nextval from dual
+		</selectKey>
+		insert into apply(apply_No, mem_No, pos_No, resume_No,apply_Name, apply_Hp, ref_Name)
+		values(#{applyNo}, #{memNo}, #{posNo}, #{resumeNo}, #{applyName}, #{applyHp}, #{refName})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+

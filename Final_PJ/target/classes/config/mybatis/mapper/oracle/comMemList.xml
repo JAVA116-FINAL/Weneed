@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.comMemList">
+	<select id="checkComReged" parameterType="int" resultType="int">
+		select count(*) as cnt from comMemList where com_mem_no=#{comMemNo}
+	</select>
+	
+	<select id="selectComCode" parameterType="int" resultType="string">
+		select com_code from comMemList where com_mem_no=#{comMemNo}
+	</select>
+	
+	<insert id="insertComMemList">
+		insert into COMMEMLIST(com_code, com_mem_no)
+		values(#{comCode}, #{comMemNo})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
