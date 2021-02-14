@@ -3,6 +3,8 @@ package com.it.wanted.notice.admin.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.wanted.notice.admin.model.NoticeAdminService;
 import com.it.wanted.notice.model.QnaReplyVO;
+import com.it.wanted.notice.utility.EmailSender;
 import com.it.wanted.notice.utility.NoticePagination;
 import com.it.wanted.notice.utility.NoticePagingUtility;
 import com.it.wanted.notice.utility.NoticeSearchVO;
@@ -28,6 +31,7 @@ public class NoticeAdminController {
 		=LoggerFactory.getLogger(NoticeAdminController.class);
 	
 	@Autowired NoticeAdminService noticeAdminService;
+	@Autowired EmailSender emailSender;
 	
 	@RequestMapping(value = "/noticeQna_detail.do")
 	public String noticeQna_detail(@RequestParam int qna_no, Model model) {
@@ -75,15 +79,32 @@ public class NoticeAdminController {
 	}
 	
 	@RequestMapping("/noticeQna_write.do")
-	public String noticeQna_write(@ModelAttribute QnaReplyVO qnaReplyVo, Model model, HttpSession session) {
+	public String noticeQna_write(@ModelAttribute QnaReplyVO qnaReplyVo, 
+			Model model, HttpServletRequest request) {
 		logger.info("qnaReplyVo={}", qnaReplyVo);
 		
+		//답변 등록, 답변여부 업데이트
 		int cnt=noticeAdminService.insertQnaReply(qnaReplyVo);
 		int updateCnt=noticeAdminService.updateReply(qnaReplyVo.getQna_no());
 		
 		String msg="1:1문의 답변 등록 실패", url="/admin/noticeService/noticeQna_detail.do?qna_no="+qnaReplyVo.getQna_no();
 		if(cnt>0){
 			msg="1:1문의 답변 등록 성공";
+		}
+		
+		//이메일 발송 처리
+		String sender="yuxxxng@gmail.com", receiver=qnaReplyVo.getQna_email();
+		String qna_content=request.getParameter("qna_content");
+		String subject=qnaReplyVo.getQna_r_title();
+		String content="<br>"+qnaReplyVo.getQna_r_content()+"<br><br><hr color='#ececec' size='1px'><br><b>"+receiver+"</b><br><br>"+qna_content+
+				"<br><br><hr color='#ececec' size='1px'>";
+		
+		try {
+			emailSender.sendEmail(subject, content, receiver, sender);
+			logger.info("이메일 발송 성공");
+		}catch (MessagingException e) {
+			logger.info("이메일 발송 실패");
+			e.printStackTrace();
 		}
 		
 		logger.info("1:1문의 답변 등록 결과 cnt={}", cnt);

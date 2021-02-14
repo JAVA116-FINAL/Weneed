@@ -8,19 +8,19 @@
 		(
 		    select*from noticeView
 		    where notice_dept1=1
-			<![CDATA[and rownum<=6]]>
 		    order by notice_regdate desc
 		)
+		<![CDATA[where rownum<=6]]>
 	</select>
 	
 	<select id="selectMain2" resultType="map">
 		select * from
 		(
 		    select*from noticeView
-		    where notice_dept1=2 
-		    <![CDATA[and rownum<=6]]>
+		    where notice_dept1=2
 		    order by notice_regdate desc
-		)                                                                         
+		)
+		<![CDATA[where rownum<=6]]>                                                                    
 	</select>
 	
 	<select id="selectMain3" resultType="map">
@@ -28,9 +28,9 @@
 		(
 		    select*from noticeView
 		    where notice_dept1=3
-		    <![CDATA[and rownum<=6]]>
-		    order by notice_no desc
+		    order by notice_regdate desc
 		)
+		<![CDATA[where rownum<=6]]>
 	</select>
 	
 	<select id="selectByDept2" parameterType="int" resultType="map">
@@ -50,16 +50,8 @@
 	</select>
 	
 	<resultMap type="HashMap" id="detailMap">
-		<result property="notice_no" column="notice_no"/>
-		<result property="admin_no" column="notice_no"/>
-		<result property="notice_title" column="notice_title"/>
 		<result property="notice_content" column="notice_content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="notice_image" column="notice_image" jdbcType="CLOB" javaType="java.lang.String"/>
-		<result property="notice_dept1" column="notice_dept1"/>
-		<result property="notice_regdate" column="notice_regdate"/>
-		<result property="notice_dept2" column="notice_dept2"/>
-		<result property="notice_dept1_info" column="notice_dept1_info"/>
-		<result property="notice_dept2_info" column="notice_dept2_info"/>
 	</resultMap>
 	
 	<select id="selectDetail" parameterType="int" resultMap="detailMap">
@@ -96,7 +88,7 @@
 		(
 		    select*from noticeView
 		    where notice_dept2=#{notice_dept2} 
-		    <![CDATA[and rownum<6]]> <![CDATA[]]>
+		    <![CDATA[and rownum<6]]>
 		    order by notice_no desc
 		)
 	</select>
