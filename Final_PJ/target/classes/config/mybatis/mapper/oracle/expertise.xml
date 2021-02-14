@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.oracle.expertise">
+	<!-- 현빈 -->
+	<select id="selectMcumemNo" parameterType="string" resultType="int">
+		select m.mcumem_no 
+		from resume r join matchupmem m 
+		on r.resume_no=m.resume_no 
+		join expertise e 
+		on m.expertise_no=e.expertise_no
+		where e.skill like '%' || #{keyword} || '%'
+	</select>
+	
+	<!-- 자연 -->
+	<insert id="insertExpertise" parameterType="expertiseVo">
+		<selectKey keyProperty="expertiseNo" resultType="int" order="BEFORE">
+			select expertise_seq.nextval from dual
+		</selectKey>
+		insert into expertise(expertise_No,jikgun_Code,career,salary,skill)
+		values(#{expertiseNo}, #{jikgunCode}, #{career}, #{salary}, #{skill})
+	</insert>
+	
+	<select id="selectUptodateExpertNo" resultType="int">
+		select * from 
+		(
+		<![CDATA[
+			select expertise_No from expertise where expertise_No<3000 order by expertise_No desc
+		]]>
+		)
+		where rownum=1
+	</select>
+	
+	<select id="selectExpertise" parameterType="int" resultType="expertiseVo">
+		select * from expertise where expertise_No=#{expertiserNo}
+	</select>
+	
+	<update id="updateMatchupExpertise" parameterType="expertiseVo">
+		update expertise
+		set jikgun_Code=#{jikgunCode}, career=#{career}, salary=#{salary}, skill=#{skill}
+		where expertise_No=#{expertiseNo}
+	</update>
+	
+	<delete id="deleteExpertise" parameterType="int">
+		delete expertise where expertise_No=#{expertiseNo}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+

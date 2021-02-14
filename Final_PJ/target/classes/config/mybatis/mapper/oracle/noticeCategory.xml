@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.noticeCategory">
+	<select id="selectCate1" parameterType="int" resultType="String">
+		select notice_dept1_info
+		from noticedept1
+		where notice_dept1=#{notice_dept1}
+	</select>
+	
+	<select id="selectCate2" parameterType="int" resultType="String">
+		select notice_dept2_info
+		from noticedept2
+		where notice_dept2=#{notice_dept2}
+	</select>
+	
+	<select id="selectDept2Count" parameterType="int" resultType="map">
+		select*from noticeCate
+		where notice_dept1=#{notice_dept1}
+		order by notice_dept2
+	</select>
+	
+	<select id="selectDept2Info" parameterType="int" resultType="map">
+		select*from noticeCate
+		where notice_dept2=#{notice_dept2}
+	</select>
+</mapper>

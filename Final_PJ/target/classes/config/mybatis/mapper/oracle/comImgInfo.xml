@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.comImgInfo">
+	<select id="selectRegedImgCnt" parameterType="string" resultType="int">
+		select count(*) as cnt from comImgInfo where com_code=#{comCode} and com_img_passed='Y'
+	</select>
+	
+	<select id="selectAllImg" parameterType="String" resultType="comImgInfoVo">
+		select * from comImgInfo where com_Code=#{comCode} order by com_img_no
+	</select>
+	
+	<insert id="insertImg" parameterType="comImgInfoVo" >
+		<selectKey keyProperty="comImgNo" resultType="int" order="BEFORE">
+			select comImgInfo_seq.nextval from dual
+		</selectKey>
+		insert into comImgInfo(com_Img_No, com_Code, com_Img_Url, com_Img_Passed)
+		values(#{comImgNo}, #{comCode}, #{comImgUrl}, #{comImgPassed})
+	</insert>
+	
+	<delete id="deleteImg" parameterType="string">
+		delete from comImgInfo
+		where com_img_url=#{imgFileName}
+	</delete>
+	
+	<select id="selectAllImage" resultType="comImgInfoVo">
+		select * from comImgInfo order by com_code, com_img_no
+	</select>
+	
+	<update id="changeStatustoPass" parameterType="int">
+		update comImgInfo
+		set com_img_passed = 'Y'
+		where com_img_no=#{comImgNo}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+

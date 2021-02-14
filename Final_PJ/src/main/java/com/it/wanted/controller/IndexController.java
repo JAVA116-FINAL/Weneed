@@ -56,5 +56,9 @@ public class IndexController {
 	public void profileSetting() {
 		logger.info("profileSetting 보여주기");
 	}
+	@RequestMapping("/profileSetting/passwordChange.do")
+	public void passwordChange() {
+		logger.info("passwordChange 보여주기");
+	}
 	
 }

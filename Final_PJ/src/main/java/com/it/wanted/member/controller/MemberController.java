@@ -144,6 +144,39 @@ public class MemberController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="/withdraw.do")
+	public boolean withdraw(HttpSession session, HttpServletResponse response, Model model) {
+		//1.
+		String email = (String) session.getAttribute("email");
+		logger.info("탈퇴처리 email ={}", email);
+		
+		//2.
+		boolean bool = false;
+		int cnt = memberService.withdrawMember(email);
+		logger.info("회원탈퇴 결과, cnt={}", cnt);
+		if(cnt>0) { //탈퇴성공
+			session.removeAttribute("email");
+			session.removeAttribute("name");
+			session.removeAttribute("mem_no");
+			session.removeAttribute("fileName");
+			bool = true;
+		}
+		logger.info("bool={}", bool);
+		
+		//4.
+		return bool;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/resetPwd.do")
+	public void resetPwd(@ModelAttribute MemberVO vo, HttpServletResponse response) {
+		logger.info("ajax 이용 - 비밀번호찾기, vo={}", vo);
+		
+		memberService.resetPwd(response, vo);
+	}
+	
+	
 }
 
 

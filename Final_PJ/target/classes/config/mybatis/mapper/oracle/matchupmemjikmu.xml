@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.matchupmemjikmu">
+	<insert id="insertMatchupMemJikmu" parameterType="matchupmemjikmuVo">
+		<selectKey keyProperty="mcumemJikmuNo" resultType="int" order="BEFORE">
+			select matchupMemjikmu_seq.nextval from dual
+		</selectKey>
+		insert into matchupMemJikmu(mcumem_Jikmu_No, jikmu_Code, expertise_No)
+		values(#{mcumemJikmuNo},#{jikmuCode, jdbcType=VARCHAR},#{expertiseNo})
+	</insert>
+	
+	<!-- 직무이름을 어떻게 받아올지 고민 -->
+	<select id="selectMcuMemjikmubyexpertiseNo" parameterType="int" resultType="matchupmemjikmuVo">
+		select * from matchupMemJikmu where expertise_No=#{expertiseNo}
+	</select>
+	
+	<select id="selectMjikmuView" parameterType="int" resultType="map">
+		select * from mjikmuView where expertise_NO=#{expertiserNo}
+	</select>
+	
+	<delete id="deleteMatchupJikmu" parameterType="int">
+		delete from matchupMemJikmu where expertise_No=#{expertiseNo}
+	</delete>
+	
+	<select id="selectMcumemNo" parameterType="string" resultType="int">
+		select m.mcumem_no 
+		from matchupmem m join matchupmemjikmu mu on m.expertise_no=mu.expertise_no
+		where jikmu_code=#{searchJikmu}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.oracle.career">
+	
+	 <insert id="insertCareer" parameterType="careerVo">
+		<selectKey keyProperty="careerNo" resultType="int" order="BEFORE">
+			select career_seq.nextval from dual  
+		</selectKey>
+		insert into career(career_No,resume_No) 
+		values(#{careerNo},#{resumeNo})
+	</insert>
+	
+	<select id="selectCareer" resultType="careerVo" parameterType="int">
+		select * from 
+		(select * from career where resume_No=#{resumeNo} order by career_no desc)
+		where rowNum=1
+	</select>
+	
+ 	<update id="updateCareer" parameterType="careerVo">
+ 		update career
+		set start_Year=#{startYear},start_Month=#{startMonth},end_Year=#{endYear},end_Month=#{endMonth}, cur_Employed=#{curEmployed}, career_Name=#{careerName}, career_Dep=#{careerDep}
+		where career_No=#{careerNo}
+ 	</update>
+ 	
+	<delete id="deleteCareer" parameterType="int">
+		delete from career where career_No=#{careerNo}
+	</delete>
+	
+	<select id="selectCareerbyResumeNo" parameterType="int" resultType="careerVo">
+		select * from career where resume_No=#{resumeNo}
+	</select>
+	
+	<insert id="insertMcuCareer" parameterType="careerVo">
+		<selectKey keyProperty="careerNo" resultType="int" order="BEFORE">
+			select career_seq.nextval from dual  
+		</selectKey>
+		insert into career(career_No,resume_No,start_Year, start_Month,end_Year, end_Month,cur_Employed, career_Name) 
+		values(#{careerNo},#{resumeNo},#{startYear}, #{startMonth},#{endYear}, #{endMonth},#{curEmployed}, #{careerName})
+	</insert>
+	
+	<select id="selectCareerOne" parameterType="int" resultType="careerVo">
+		select * from career where career_No=#{careerNo}
+	</select>
+	
+	<update id="updateCareerNameAndDateAndCurVal" parameterType="careerVo">
+		update career
+		set	career_Name=#{careerName}, start_Year=#{startYear}, start_Month=#{startMonth}, end_Year=#{endYear}, end_Month=#{endMonth}, cur_Employed=#{curEmployed}
+		where career_No=#{careerNo}
+	</update>
+	
+	<!-- 현빈 -->
+	<select id="selectMcumemNo" parameterType="string" resultType="int">
+		select m.mcumem_no
+		from matchupmem m join career c
+		on m.resume_no=c.resume_no
+		where career_name like '%' || #{searchKeyword} || '%'
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

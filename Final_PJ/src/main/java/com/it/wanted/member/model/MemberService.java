@@ -29,4 +29,11 @@ public interface MemberService {
 	//비밀번호 찾기
 	public void findPwd(HttpServletResponse response, MemberVO vo);
 	
+	//회원탈퇴
+	public int withdrawMember(String email);
+	
+	//비밀번호 재설정
+	public void resetPwd(HttpServletResponse response, MemberVO vo);
+	void sendEmail2(MemberVO vo, String div);
+	
 }

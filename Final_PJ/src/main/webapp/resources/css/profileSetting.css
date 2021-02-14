@@ -167,21 +167,96 @@ html{
 
 
 
+/*패스워드재설정 페이지*/
+.back{
+	width:100%;
+	height:100%;
+	position:fixed;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.back:before{
+	content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
 
+.pwdChangeBox{
+	width:400px;
+	border-radius:4px;
+	background-color:#fff;
+	z-index:1;
+}
 
+.pwdChangeTitle{
+	font-size:16px;
+	font-weight:600;
+	text-align:center;
+	padding:17px 0px;
+	border-bottom:1px solid #eee;
+	color:#333;
+}
 
+.pwdChangeCon{
+	padding:20px;
+}
 
+.pwdInput{
+	width:99%;
+	margin-bottom:14px;
+	color:#333;
+	font-size:14px;
+	border-radius:3px;
+	border:1px solid #dbdbdb;
+	border-width:100%;
+}
 
+.pwdOkError{
+	font-size:11px;
+	display:block;
+	margin:0 0 14px;
+	color:red;
+}
 
+.pwdChangeOkBtn{
+	background-color:#3366ff;
+	height:50px;
+	width:100%;
+	border-radius:3px;
+	border:0;
+	outline:0;
+	color:#fff;
+	font-weight:600;
+	font-size:14px;
+}
+.afterPwdChangeBox{
+	z-index:1;
+}
+.afterPwdChangeBox >header{
+	color:#fff;
+	font-size:26px;
+	font-weight:500;
+	text-align:center;
+	padding:17px 0;
+}
 
-
-
-
-
-
-
-
-
+.goMain{
+	background-color:#3366ff;
+	height:50px;
+	border-radius:3px;
+	width:100%;
+	color:#fff;
+	font-size:15px;
+	font-weight:600;
+	border:0;
+	outline:0;
+}
 
 
 

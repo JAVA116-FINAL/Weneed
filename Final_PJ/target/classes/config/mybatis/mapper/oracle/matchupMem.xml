@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.matchupMem">
+
+	<!-- 자연 -->
+	<select id="selectmcuResumeNo" parameterType="int" resultType="int">
+		select resume_No from matchupMem where mem_No=#{memNo}
+	</select>
+
+	<select id="isMatchupMem" parameterType="int" resultType="int">
+		select count(*) from matchupMem where mem_no=#{memNo}
+	</select>
+	
+	<select id="hasMcuResumeNo" parameterType="int" resultType="int">
+		select count(resume_No) from matchupMem where mem_no=#{memNo}
+	</select>
+	
+	<insert id="insertMcuMem" parameterType="matchupMemVo">
+		<selectKey keyProperty="mcumemNo" resultType="int" order="BEFORE">
+			select matchupMem_seq.nextVal from dual
+		</selectKey>
+		insert into matchupmem(mcumem_No, mem_No,expertise_No)
+		values(#{mcumemNo}, #{memNo}, #{expertiseNo})
+	</insert>
+
+	<select id="selectMcuMem" parameterType="int" resultType="matchupMemVo">
+		select * from matchupMem where mem_No=#{memNo}
+	</select>
+
+	<update id="updateMCUResume" parameterType="matchupMemVo">
+		update matchupmem
+		set resume_No=#{resumeNo}
+		where mcumem_No=#{mcumemNo}
+	</update>
+	
+	<!-- 02/09 -->
+	
+	<resultMap type="MatchupDetailAllVO" id="matchupViewResultMap">
+		<association property="MMDetailsVo" column="mcumem_No" javaType="MatchupDetailsViewVO">
+			<id property="mcumemNo" column="mcumem_No" jdbcType="BIGINT"/>
+			<result property="memNo" column="mem_No" jdbcType="BIGINT"/>
+			<result property="jobsearchFlag" column="jobsearch_Flag" jdbcType="VARCHAR"/>
+			<result property="resumeopenFlag" column="resumeopen_Flag" jdbcType="VARCHAR"/>
+			<result property="refName" column="ref_Name" jdbcType="VARCHAR"/>
+			<result property="resumeNo" column="resume_No" jdbcType="BIGINT"/>
+			<result property="resumeLength" column="resume_Length" jdbcType="BIGINT"/>
+			<result property="resumeTitle" column="resume_Title" jdbcType="VARCHAR"/>
+			<result property="langFlag" column="lang_Flag" jdbcType="VARCHAR"/>
+			<result property="resumeIntroduce" column="resume_Introduce" jdbcType="VARCHAR"/>
+			<result property="eduNo" column="edu_No" jdbcType="BIGINT"/>
+			<result property="eduName" column="edu_Name" jdbcType="VARCHAR"/>
+			<result property="eduMajor" column="edu_Major" jdbcType="VARCHAR"/>
+			<result property="careerNo" column="career_No" jdbcType="BIGINT"/>
+			<result property="careerName" column="career_Name" jdbcType="VARCHAR"/>
+			<result property="careerDep" column="career_Dep" jdbcType="VARCHAR"/>
+			<result property="expertiseNo" column="expertise_No" jdbcType="BIGINT"/>
+			<result property="jikgunCode" column="jikgun_Code" jdbcType="VARCHAR"/>
+			<result property="jikgunName" column="jikgun_Name" jdbcType="VARCHAR"/>
+			<result property="career" column="career" jdbcType="VARCHAR"/>
+			<result property="salary" column="salary" jdbcType="VARCHAR"/>
+			<result property="skill" column="skill" jdbcType="VARCHAR"/>
+		</association>
+
+		 <collection property="mcuexList" select="selectMcuExListView"
+     		 column="mcumem_No"  javaType="ArrayList" ofType="map">  	  	 
+ 	     </collection>
+	</resultMap>
+	<!-- 모든 정보가 다 나오는뷰+제외기업리스트 -->
+	<select id="selectMatchupDetails" parameterType="int" resultMap="matchupViewResultMap">
+		select * from
+		(
+			select * from matchupMemDetailsView order by mcumem_no desc, edu_No desc, career desc
+		)
+		where mcumem_no=#{mcumemNo}
+		and rownum=1
+	</select>
+	
+	<select id="selectMcuExListView" parameterType="int" resultType="map">
+		select * from excomView where mcumem_No=#{mcumemNo}
+	</select>
+	
+	<!-- 2/10 -->
+	<update id="updateMatchupResume" parameterType="matchupMemVo">
+		update matchupmem
+		set resume_No=#{resumeNo}
+		where mcumem_No=#{mcumemNo}
+	</update>	
+	
+	<select id="selectMatchupDetailsView" parameterType="int" resultType="matchupDetailsViewVo">
+		select * from
+		(
+			select * from matchupMemDetailsView order by mcumem_no desc, edu_No desc, career desc
+		)
+		where mem_no=#{memNo}
+		and rownum=1
+	</select>
+	
+	<!-- 2/12 -->
+	<update id="updateMatchupRefName" parameterType="matchupMemVo">
+		update matchupmem
+		set ref_Name=#{refName}
+		where mcumem_No=#{mcumemNo}
+	</update>
+	
+	<update id="updateMatchupjobFlag" parameterType="matchupMemVo">
+		update matchupmem
+		set jobsearch_Flag=#{jobsearchFlag},resumeopen_Flag=#{resumeopenFlag}
+		where mcumem_No=#{mcumemNo}
+	</update>
+	
+	<delete id="deleteMatchupmembyResumeNo" parameterType="int">
+		delete matchupmem where resume_No=#{resumeNo}
+	</delete>
+	
+	<select id="selectOnebymatchupMemNo" parameterType="int" resultType="matchupMemVo">
+		select * from matchupmem where mcumem_No=#{mcumemNo}
+	</select>
+	
+	
+	
+	<!-- 현빈 -->
+	<select id="selectOpen" resultType="matchupMemVo">
+		select * from matchupMem where resumeopen_flag='Y'
+	</select> 
+	
+	<select id="selectMcumemNo" parameterType="int" resultType="int">
+		select mcumem_no from matchupmem where resume_no=#{resumeNo}
+	</select>
+	
+	
+	<!-- 검색용 view 0213 업데이트
+	create or replace view matchupMemSearchView
+	as
+	select rownum as RNUM,  A.*
+	from
+	(
+	select m.mcumem_no as MCUMEMNO, m.resume_no AS RESUMENO, m.mem_no AS MEMNO, m.expertise_no AS EXPERTISENO, 
+	       m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITLE,
+	       r.resume_name AS RESUMENAME, r.resume_introduce AS RESUMEINTRODUCE, r.lang_flag AS LANGFLAG, 
+	       c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
+	       x.jikGun_code AS JIKGUNCODE, x.career AS CAREER, x.skill AS SKILL,
+	       (select jikmu_name from jikmu j where j.JIKMU_CODE=
+	            (select jikmu_code from matchupmemjikmu mjm where mjm.expertise_no=m.expertise_no)) as JIKMUNAME, 
+	       (select jikgun_name from jikgun jk where jk.jikgun_code=
+	            (select jikgun_code from expertise e where e.expertise_no=m.expertise_no)) as JIKGUNNAME
+	from matchupMem m join resume r on m.resume_No = r.resume_no 
+	left outer join career c on c.resume_no=m.resume_no
+	left outer join education e on e.resume_no=m.resume_no
+	left outer join expertise x on x.expertise_no=m.expertise_no
+	where m.resumeopen_flag='Y'
+	order by m.mcumem_no
+	)A;
+	 -->
+	 
+	<!-- 검색된 리스트 보기
+	private List<Integer> mcumemNoList;
+	private int viewMoreSize;
+	private String searchKeyword;
+	private String searchMinCareer;
+	private String searchMaxCareer;
+	private String searchJikmu;
+	private String searchJikgun; -->
+	<!-- <select id="selectMcumemSearchList" parameterType="matchupMemSearchVo" resultType="map">
+		select A.* 
+	    from
+	    (
+	        select rownum as RN, m.* from matchupMemSearchView m
+	        where mcumemNo in
+	        <foreach collection="mcumemNoList" item="mcumemNo" open="(" close=")" separator=",">
+				#{mcumemNo}
+			</foreach>
+		)A
+		<![CDATA[
+		where RN > #{viewMoreSize}
+		and RN <= #{viewMoreSize}+5
+		]]>
+	</select> -->
+	
+	<!-- 검색결과 -->
+	<select id="selectMcumemSearchList" parameterType="matchupMemSearchVo" resultType="map">
+		select * from 
+	    (
+	    	select A.* from
+		    (
+		        select rownum as RN, 
+	        	(select count(*) from matchuplike l where com_code=#{comCode} and l.mcumem_no=m.mcumemno) as CNT,
+	        	m.* from matchupMemSearchView m
+	        	left outer join matchupmemjikmu mu on m.EXPERTISENO=mu.expertise_no
+		        where m.mcumemNo in
+		        <foreach collection="mcumemNoList" item="mcumemNo" open="(" close=")" separator=",">
+					#{mcumemNo}
+				</foreach>
+	            and to_number(translate(career, '신입', '0')) between #{searchMinCareer} and #{searchMaxCareer}
+			) A
+			<![CDATA[
+			where RN > #{viewMoreSize}
+			and RN <= #{viewMoreSize}+5
+			]]>
+	    ) 
+	</select>
+	
+	<!-- 찜한 목록 불러오기  -->
+	<select id="selectZzimedList" parameterType="matchupMemSearchVo" resultType="map">
+		select * from
+		(
+		    select A.* 
+		    from (
+			    select rownum as rn, 
+			    	(select count(*) from matchuplike l where com_code=#{comCode} and l.mcumem_no=v.mcumemno) as cnt, v.* 
+			    from matchupMemSearchView v left outer join matchuplike l on l.mcumem_no=v.mcumemNo
+			    where com_code=#{comCode} 
+				) A
+		<![CDATA[
+		where rn > #{viewMoreSize}
+		and rn <= #{viewMoreSize}+5
+		)
+		]]>
+	</select>
+	<!-- 찜한목록 불러오기 이전 sql문 백업 
+	select * from (
+	    	select rownum as RNUM, A.* from
+	        (
+		        select m.mcumem_no as MCUMEMNO, m.resume_no AS RESUMENO, m.mem_no AS MEMNO, m.expertise_no AS EXPERTISENO, 
+		               m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITL,
+		               r.resume_name AS RESUMENAME, r.lang_flag AS LANGFLAG, 
+		               c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
+		               x.jikGun_code AS JIKGUNCODE, x.career AS CAREER, x.skill AS SKILL,
+		               (select count(*) from matchuplike l where com_code=#{comCode} and l.mcumem_no=m.mcumem_no) as cnt
+		        from matchupMem m join resume r 
+		        on m.resume_No = r.resume_no 
+		        join career c on c.resume_no=m.resume_no
+		        join education e on e.resume_no=m.resume_no
+		        join expertise x on x.expertise_no=m.expertise_no
+		        where m.resumeopen_flag='Y'
+		        and m.mcumem_No in
+		        <foreach collection="mcumemNoList" item="mcumemNo" open="(" close=")" separator=",">
+					#{mcumemNo}
+				</foreach>
+		        and to_number(translate(career, '신입', '0')) between #{searchMinCareer} and #{searchMaxCareer}
+		        order by m.mcumem_No
+	        )A
+	        <![CDATA[
+	        where cnt>0
+	        ]]>
+	    )
+	    <![CDATA[
+	    where RNUM > #{viewMoreSize}
+		and RNUM <=  #{viewMoreSize}+5
+		]]>
+	-->
+	
+	<select id="isZzimed" parameterType="matchupZzimVo" resultType="int">
+		select count(*) as CNT
+		from matchuplike
+		where mcumem_no=#{mcumemNo} and com_code=#{comCode}
+	</select>
+	
+</mapper>
