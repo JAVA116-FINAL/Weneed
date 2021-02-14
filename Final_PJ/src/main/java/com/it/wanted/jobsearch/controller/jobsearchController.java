@@ -8,8 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/jobsearch")
 public class jobsearchController {
-
+	
 	private static final Logger logger =LoggerFactory.getLogger(jobsearchController.class);
+	
+	@RequestMapping("/jobsearchList.do")
+	public void jobsearchList() {
+		logger.info("탐색 목록화면 보여주기");
+	}
+	
 	@RequestMapping("/jobsearchDetail.do")
 	public void jobsearchDetail() {
 		logger.info("탐색 상세보기 화면보여주기");
