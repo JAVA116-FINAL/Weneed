@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="wantedProposalMD" class="modal fade docs-example-modal-sm wantedProposalMD" tabindex="-1" 
 	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 	  <div class="modal-dialog">
@@ -21,7 +22,7 @@
 							<div class="propo-boundDiv propo-boundDivFlex">
 								<div style="margin-right:20px;">
 									<label class="propo-block">직급</label>
-									<input name="jopTitle" class="propo-block propo-shortInput" type="text">
+									<input name="jobTitle" class="propo-block propo-shortInput" type="text">
 								</div>
 								<div>
 									<label class="propo-block">연봉<span style="font-weight: normal;"> (단위: 만 원)</span></label>
@@ -37,7 +38,9 @@
 									<span class="propo-posGuide">*포지션 선택 시 지원자가 해당 포지션으로 이동합니다.</span>
 								</div>
 								<select name="posNo" class="propo-block propo-longInput">
-									<option>선택</option>
+									<c:forEach var="posVo" items="${posList}">
+										<option value="${posVo.posNo}">${posVo.posName}</option>
+									</c:forEach>
 								</select>
 							</div>
 							<div class="propo-boundDiv">

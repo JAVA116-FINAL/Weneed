@@ -8,6 +8,9 @@ public interface PositionDAO {
 	int insertPosition(PositionVO posVo);
 	int selectPosNo(PositionVO posVo);
 	int insertPosJikmu(PosJikmuVO vo);
+	
+	/* 현빈 0214 */
 	List<Map<String, Object>> selectJobsearchList();
+	List<PositionVO> selectPositionByComcode(String comCode);
 
 }

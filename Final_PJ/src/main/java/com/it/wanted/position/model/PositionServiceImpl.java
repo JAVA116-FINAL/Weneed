@@ -45,6 +45,11 @@ public class PositionServiceImpl implements PositionService{
 	public List<Map<String, Object>> selectJobsearchList() {
 		return positionDao.selectJobsearchList();
 	}
+
+	@Override
+	public List<PositionVO> selectPositionByComcode(String comCode) {
+		return positionDao.selectPositionByComcode(comCode);
+	}
 	
 	
 }

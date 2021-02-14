@@ -49,6 +49,10 @@
 	<select id="selectJobsearchList" resultType="map">
 		select * from jobsearchView
 	</select>
+	
+	<select id="selectPositionByComcode" parameterType="String" resultType="positionVo">
+		select pos_no, pos_name from position where com_code=#{comCode}
+	</select>
 </mapper>
 
 

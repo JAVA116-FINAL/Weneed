@@ -234,8 +234,6 @@ $(function(){
 			console.log('제안하기 눌렀을 때 ');
 			$('#wantedResumeSimpleMD').modal('hide');
 			$('#wantedProposalMD').modal('show');
-			
-			//제안하기 기능도 맨들어줘야 합니다. ajax? 일반 컨트롤러?
 		}
 		
 	});
@@ -554,13 +552,13 @@ function makeMemList(mcumem){
 }
 </script>
 <form name="matchupSearchForm" method="post" action="#">
-	<input type="text" id="matchupSearch-record" value="0">
-	<input type="text" value="${searchVo.searchJikgun }" name="searchJikgun">
-	<input type="text" value="${searchVo.searchJikmu }" name="searchJikmu">
-	<input type="text" value="${searchVo.searchKeyword }" name="searchKeyword">
-	<input type="text" value="${searchVo.searchMinCareer }" name="searchMinCareer">
-	<input type="text" value="${searchVo.searchMaxCareer }" name="searchMaxCareer">
-	<input type="text" value="${sessionScope.comInfoVo.comCode}" name="searchComCode">
+	<input type="hidden" id="matchupSearch-record" value="0">
+	<input type="hidden" value="${searchVo.searchJikgun }" name="searchJikgun">
+	<input type="hidden" value="${searchVo.searchJikmu }" name="searchJikmu">
+	<input type="hidden" value="${searchVo.searchKeyword }" name="searchKeyword">
+	<input type="hidden" value="${searchVo.searchMinCareer }" name="searchMinCareer">
+	<input type="hidden" value="${searchVo.searchMaxCareer }" name="searchMaxCareer">
+	<input type="hidden" value="${sessionScope.comInfoVo.comCode}" name="searchComCode">
 </form>
 
 	<div class="matchupNoticeCon">

@@ -32,5 +32,10 @@ public class PositionDAOMy implements PositionDAO{
 	public List<Map<String, Object>> selectJobsearchList() {
 		return sqlSession.selectList(namespace+"selectJobsearchList");
 	}
+
+	@Override
+	public List<PositionVO> selectPositionByComcode(String comCode) {
+		return sqlSession.selectList(namespace+"selectPositionByComcode", comCode);
+	}
 	
 }

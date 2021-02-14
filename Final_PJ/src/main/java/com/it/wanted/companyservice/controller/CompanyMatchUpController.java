@@ -35,6 +35,9 @@ import com.it.wanted.matchupCom.model.MatchupComService;
 import com.it.wanted.matchupCom.model.MatchupComVO;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
 import com.it.wanted.matchupStatus.model.MatchupStatusService;
+import com.it.wanted.position.model.PositionService;
+import com.it.wanted.position.model.PositionVO;
+import com.it.wanted.proposal.model.ProposalVO;
 import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeService;
 
@@ -53,6 +56,7 @@ public class CompanyMatchUpController {
 	@Autowired ComInfoService comInfoService;
 	@Autowired ResumeService resumeService;
 	@Autowired MatchupStatusService matchupStatusService; 
+	@Autowired PositionService positionService;
 	
 	@RequestMapping(value = "/matchupService.do", method = RequestMethod.GET)
 	public String matchupMain(HttpSession session, HttpServletRequest request, Model model) {
@@ -110,6 +114,10 @@ public class CompanyMatchUpController {
 		List<JikmuVO> jikmuList=jgService.selectJikmuByJikgunCode(basicCode);
 		logger.info("첫번째 직군코드에 해당하는 직무리스트 jikmuList={}", jikmuList);
 		
+		//포지션 목록도.. 불러와야 해요. 제안하기 팝업이 여기서 열리기 때문. 
+		List<PositionVO> posList=positionService.selectPositionByComcode(comVo.getComCode());
+		logger.info("포지션 목록 조회 결과, posList.size={}", posList.size());
+		
 		searchVo.setViewMoreSize(0);
 		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
 		logger.info("5번째 리스트까지 불러오기 결과, memList.size={}", memList.size());
@@ -137,6 +145,16 @@ public class CompanyMatchUpController {
 		return "company/matchupSearch";
 	}
 
+	@RequestMapping("/sendProposal.do")
+	public String sendProposal(@RequestParam ProposalVO propoVo) {
+		logger.info("제안하기, 파라미터 propoVo={}", propoVo);
+		
+		//제안하기 테이블에 insert 시키는 것이다. 
+		
+		
+		return "/company/matchupSearch.do";
+	}
+	
 	@RequestMapping("/modal/modalButtonsTest.do")
 	public String modalTest() {
 		return "company/modal/modalButtonsTest";
