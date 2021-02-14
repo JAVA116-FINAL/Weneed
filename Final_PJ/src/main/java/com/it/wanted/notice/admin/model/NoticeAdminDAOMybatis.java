@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.notice.model.QnaReplyVO;
 import com.it.wanted.notice.utility.NoticeSearchVO;
 
 @Repository
@@ -50,6 +51,11 @@ public class NoticeAdminDAOMybatis implements NoticeAdminDAO{
 	@Override
 	public int selectReply_cnt(NoticeSearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"selectReply_cnt", searchVo);
+	}
+
+	@Override
+	public int insertQnaReply(QnaReplyVO qnaReplyVo) {
+		return sqlSession.insert(namespace+"insertQnaReply", qnaReplyVo);
 	}
 
 

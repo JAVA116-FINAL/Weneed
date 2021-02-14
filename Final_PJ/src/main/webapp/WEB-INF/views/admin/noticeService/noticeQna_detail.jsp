@@ -4,10 +4,15 @@
 <%@ include file="../../inc/admin_top.jsp"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/admin/noticeService.css'/>">
+<script src="//cdn.ckeditor.com/4.16.0/basic/ckeditor.js"></script>
 <div>
 	<div class="userDiv">
 	<h1>1:1문의 상세보기</h1>
 		<c:forEach var="map" items="${userDetail }">
+		
+			<c:set var="qna_no" value="${map['QNA_NO'] }"/>
+			<c:set var="qna_email" value="${map['QNA_EMAIL'] }"/>
+			
 			<!-- 등록된 문의 출력 -->
 			<table class="detailTable">
 				<colgroup>
@@ -89,15 +94,27 @@
 					</tbody>
 				</table>
 			</c:forEach>
+			<div style="margin-top: 30px;">
+				<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='/wanted/admin/noticeService/noticeQna_list.do'">
+			</div>
 		</c:if>
 		<c:if test="${empty adminDetail }">
-			<!-- 입력 폼 추가 -->
+		<h1>1:1문의 등록</h1>
 			<form name="frmWrite" action="<c:url value='/admin/noticeService/noticeQna_write.do'/>" method="post">
-				<div>
+				<div class="frmDiv">
 					<input type="text" name="qna_r_title" id="qna_r_title" placeholder="제목을 입력하세요">
+					<input type="hidden" name="qna_no" id="qna_no" value="${qna_no }">
+					<input type="hidden" name="qna_email" id="qna_email" value="${qna_email }">
 				</div>
-				<div>
-					<input type="submit" value="등록">
+				<div class="frmDiv">
+					<textarea rows="5" cols="60" name="qna_r_content" id="qna_r_content"></textarea>
+					<script type="text/javascript">
+						CKEDITOR.replace("qna_r_content", {height : 400});
+					</script>  
+				</div>
+				<div class="frmDiv">
+					<input class="frmBtn" id="submit" type="submit" value="등록">
+					<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='/wanted/admin/noticeService/noticeQna_list.do'">
 				</div>
 			</form>
 		</c:if>

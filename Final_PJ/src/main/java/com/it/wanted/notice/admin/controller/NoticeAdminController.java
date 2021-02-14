@@ -2,6 +2,9 @@ package com.it.wanted.notice.admin.controller;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.wanted.notice.admin.model.NoticeAdminService;
+import com.it.wanted.notice.model.QnaReplyVO;
 import com.it.wanted.notice.utility.NoticePagination;
 import com.it.wanted.notice.utility.NoticePagingUtility;
 import com.it.wanted.notice.utility.NoticeSearchVO;
@@ -70,10 +74,25 @@ public class NoticeAdminController {
 		return "admin/noticeService/noticeQna_list"; 
 	}
 	
-	/*@RequestMapping("/noticeQna_write.do")
-	public String noticeQna_write() {
+	@RequestMapping("/noticeQna_write.do")
+	public String noticeQna_write(@ModelAttribute QnaReplyVO qnaReplyVo, Model model, HttpSession session) {
+		logger.info("qnaReplyVo={}", qnaReplyVo);
 		
-		return
-	}*/
+		int cnt=noticeAdminService.insertQnaReply(qnaReplyVo);
+		int updateCnt=noticeAdminService.updateReply(qnaReplyVo.getQna_no());
+		
+		String msg="1:1문의 답변 등록 실패", url="/admin/noticeService/noticeQna_detail.do?qna_no="+qnaReplyVo.getQna_no();
+		if(cnt>0){
+			msg="1:1문의 답변 등록 성공";
+		}
+		
+		logger.info("1:1문의 답변 등록 결과 cnt={}", cnt);
+		logger.info("답변여부 업데이트 결과 updateCnt={}", updateCnt);
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 	
 }

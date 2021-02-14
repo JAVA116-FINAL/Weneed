@@ -3,6 +3,7 @@ package com.it.wanted.notice.admin.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.wanted.notice.model.QnaReplyVO;
 import com.it.wanted.notice.utility.NoticeSearchVO;
 
 
@@ -20,4 +21,6 @@ public interface NoticeAdminService {
 	
 	public List<Map<String, Object>> selectQnaList_search(NoticeSearchVO searchVo);
 	public int selectQnaList_cnt(NoticeSearchVO searchVo);
+	
+	public int insertQnaReply(QnaReplyVO qnaReplyVo);
 }

@@ -58,6 +58,11 @@
 		where qna_no=#{qna_no}
 	</select>
 	
+	<!-- 1:1문의 답변 등록 -->
+	<insert id="insertQnaReply" parameterType="qnaReplyVo">
+		insert into qnareply(qna_no, admin_no, qna_email, qna_r_title, qna_r_content)
+		values(#{qna_no}, 1, #{qna_email}, #{qna_r_title}, #{qna_r_content})
+	</insert>
 	
 	<!-- 미답변 1:1문의 갯수 -->
 	<select id="selectReply_cnt" parameterType="searchVo" resultType="int">
