@@ -3,16 +3,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<link rel="stylesheet" href="<c:url value='/resources/css/resumeIntro.css'/>">
+<%-- <link rel="stylesheet" href="<c:url value='/resources/css/resumeIntro.css'/>"> --%>
+<link rel="stylesheet" href="<c:url value='/resources/css/jobsearchApply.css'/>">
 
 <script type="text/javascript">
 
 	$(function(){
 /* 자연 */
+ 
 		$('#btApply').click(function(){
 			$.ajax({
 				url:"<c:url value='/jobsearch/apply.do'/>",
-				data:"posNo="+27,
+				data:"posNo="+27/* 포지션번호 넣어주기! ${posNo} */,
 				type:"get",
 				success:function(result){
 					$('#asideApply').empty();
