@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.notice.utility.KeywordVO;
+
 @Repository
 public class NoticeDAOMyBatis implements NoticeDAO{
 	
@@ -57,13 +59,19 @@ public class NoticeDAOMyBatis implements NoticeDAO{
 	}
 
 	@Override
-	public List<Map<String, Object>> noticeSearch(String keyword) {
-		return sqlSession.selectList(namespace+"noticeSearch", keyword);
+	public List<NoticeVO> noticeSearch(KeywordVO searchVo) {
+		return sqlSession.selectList(namespace+"noticeSearch", searchVo);
 	}
 
 	@Override
-	public Map<String, Object> noticeSearchCnt(String keyword) {
-		return sqlSession.selectOne(namespace+"noticeSearchCnt", keyword);
+	public Map<String, Object> noticeSearchCnt(KeywordVO searchVo) {
+		return sqlSession.selectOne(namespace+"noticeSearchCnt", searchVo);
+	}
+
+	@Override
+	public int insertQna(QnaVO vo) {
+		int cnt=sqlSession.insert(namespace+"insertQna", vo);
+		return cnt;
 	}
 
 

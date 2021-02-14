@@ -67,17 +67,27 @@
 		where notice_no=#{notice_no}
 	</select>
 	
-	<select id="noticeSearch" parameterType="String" resultMap="detailMap">
-		select*from noticeView
-		where notice_title like '%'||#{keyword}||'%' 
-		or to_char(notice_content) like '%'||#{keyword}||'%'
-		order by notice_regdate desc
+	<select id="noticeSearch" parameterType="noticeVo" resultMap="detailMap">
+		select*from
+		(
+		    select A.*, rownum as RNUM 
+		    from (
+		        select*from noticeView
+		        where notice_title like '%'||#{searchKeyword}||'%' 
+		        or to_char(notice_content) like '%'||#{searchKeyword}||'%'
+		        order by notice_regdate desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
 	</select>
 	
-	<select id="noticeSearchCnt" parameterType="String" resultMap="detailMap">
+	<select id="noticeSearchCnt" parameterType="keywordVo" resultMap="detailMap">
 		select count(*) as cnt from noticeView
-		where notice_title like '%'||#{keyword}||'%' 
-		or to_char(notice_content) like '%'||#{keyword}||'%'
+		where notice_title like '%'||#{searchKeyword}||'%' 
+		or to_char(notice_content) like '%'||#{searchKeyword}||'%'
 		order by notice_regdate desc
 	</select>
 	
@@ -87,9 +97,17 @@
 		    select*from noticeView
 		    where notice_dept2=#{notice_dept2} 
 		    <![CDATA[and rownum<6]]> <![CDATA[]]>
-		    order by notice_regdate desc
+		    order by notice_no desc
 		)
 	</select>
-
+	
+	<!-- qna등록 -->
+	<insert id="insertQna" parameterType="qnaVo">
+		<selectKey keyProperty="qna_no" resultType="int" order="BEFORE">
+			select qna_no.nextval from dual
+		</selectKey>		
+		insert into qna(qna_no, qna_email, qna_title, qna_content, qna_phone)
+		values(#{qna_no}, #{qna_email}, #{qna_title}, #{qna_content}, #{qna_phone})
+	</insert>
 	
 </mapper>

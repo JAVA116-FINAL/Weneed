@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+#qnaTable{
+	text-align: center;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.detailTable{
+	border-collapse: collapse;
+}
+
+.detailTable th{
+	text-align: left;
+}
+
+.align_center{
+	text-align: center;
+}
+
+div#noticeDiv {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+th{
+    border-bottom: 1.5px solid #cecece;
+}
+
+td{
+	border-bottom: 1px solid #cecece;
+	font-size: 15px;
+	height: 50px;
+}
+
+.lastTd{
+	border-bottom: none;
+	font-size: 15px;
+	height: 50px;
+}
+
+.qnaTr:hover {
+	background-color: #f1f1f1; 
+}
+
+.qnaTableSubject{
+	font-size: 40px;
+}
+
+.qnaTablealert{
+	font-size: 20px;
+    margin-bottom: 50px;
+}
+
+form.search {
+    text-align: right;
+    margin-top: 30px;
+}
+
+#searchKeyword {
+    border-radius: 0px;
+    border: 1px solid #cecece;
+    height: 30px;
+}
+
+#commit {
+    height: 30px;
+    border: 1px solid #cecece;
+}
+
+.pagination{
+	list-style: none;
+}
+
+.pagination li{
+	display: inline;
+	margin-right: 15px;
+}
+
+.detailTable{
+	width: 100%;
+}
+
+.userDiv{
+	padding-top: 10px;
+    padding-bottom: 50px;
+}
+
+.adminDiv{
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.hr1{
+	border: 1px solid;
+    color: #cecece;
+    width: 90%;
+}
+
+#qna_r_title{
+	border: 1px solid #cecece;
+	width: 100%;
+    height: 30px;
+}
+
+.frmDiv{
+	margin-bottom: 20px;
+}
+
+.frmBtn{
+	width: 75px;
+    height: 38px;
+    font-size: 15px;
+}
+
+#submit{
+	border: 1px solid #d0d0d0;
+	background-color : #d8d8d8; 
+}
+
+#button{
+	border: 1px solid #d0d0d0;
+	background-color : #efefef;
+}

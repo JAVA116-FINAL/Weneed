@@ -1,6 +1,7 @@
 package com.it.wanted.matchup.model;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +23,6 @@ import com.it.wanted.expertise.model.ExpertiseVO;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemJikmuVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemjikmuDAO;
-import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeDAO;
 import com.it.wanted.resume.model.ResumeVO;
 

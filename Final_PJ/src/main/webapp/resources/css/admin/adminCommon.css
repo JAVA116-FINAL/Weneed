@@ -1,70 +1,76 @@
 a, li, span, label,
 div, h1, h2, h3, h4, h5, h6
 {
-	color: #444444;
-	font-family: 'Open Sans', sans-serif;
+   color: #444444;
+   font-family: 'Open Sans', sans-serif;
 }
 
 body{
-	background-color: #f8f8fa; !important 
-	background: #f8f8fa;
+   background-color: #f8f8fa; !important 
+   background: #f8f8fa;
 }
 
 a{
-	text-decoration: none;
-	color: #444444;
+   text-decoration: none;
+   color: #444444;
 }
 nav{
-	padding-bottom: 10px;
+   padding-bottom: 10px;
 }
 aside{
-	padding: 20px 10px;
-	height: 100%;
-	display: inline;
+   padding: 20px 10px;
+   height: 100%;
+   display: inline;
 }
 
 .adminContainer{
-	max-width: 1060px;
-	width: 100%;
-	padding: 20px 15px;
+   max-width: 1060px;
+   width: 100%;
+   padding: 20px 15px;
     margin-right: auto;
     margin-left: auto;
 }
 
 .admintop{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	text-align: center;
-	padding: 20px 15px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   text-align: center;
+   padding: 20px 15px;
 }
 
 .topWrapper{
-	border-bottom: 1px solid #e1e2e3;
-	background: #fff;
+   border-bottom: 1px solid #e1e2e3;
+   background: #fff;
 }
 
 .adminSecondSection{
-	display: flex;
+   display: flex;
 }
 
 .adminSideMenuBar{
-	width: 200px;
-	display: inline-block;
+   width: 200px;
+   display: inline-block;
 }
 
 .adminTopMenubar > li {
-	float: left;	
-	list-style: none;
-	margin-right: 30px;
-	text-align: center;
+   float: left;   
+   list-style: none;
+   margin-right: 30px;
+   text-align: center;
 }
 
 .adminSubMenu{
+<<<<<<< HEAD
+   font-size: 0.8em;
+   font-weight: bold;
+   padding-top: 10px;
+=======
 	list-style: none;
 	font-size: 0.8em;
 	font-weight: bold;
 	padding-top: 10px;
+>>>>>>> branch 'main' of https://github.com/JAVA116-FINAL/Wanted_jayeon.git
 }
 
 
@@ -72,11 +78,11 @@ aside{
 /* index 페이지*/
 
 .adminMainBtn {
-	padding: 20px 15px;
-	border: 1px solid #444444;
-	border-radius: 5px;
-	cursor: pointer;
-	
+   padding: 20px 15px;
+   border: 1px solid #444444;
+   border-radius: 5px;
+   cursor: pointer;
+   
 }
 
 
@@ -84,9 +90,9 @@ aside{
 /* footer */
 
 #adminfooter{
-	border-top: 1px solid #e1e2e3;
-	text-align: center;	
-	padding: 50px;
-	font-size: 0.8em;
-	background: #fff;
+   border-top: 1px solid #e1e2e3;
+   text-align: center;   
+   padding: 50px;
+   font-size: 0.8em;
+   background: #fff;
 }
