@@ -281,7 +281,7 @@ public class CompanyMatchUpController {
 		String result="찜 제외 실패!";
 		int cnt=matchupComService.delZzim(zzimVo);
 		if(cnt>0) {
-			result="찜 제외 성공!";
+			result="찜 제외 성공!!";
 		}
 		return result;
 	}
