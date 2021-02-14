@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it.wanted.notice.model.NoticeVO;
 import com.it.wanted.notice.model.QnaReplyVO;
 import com.it.wanted.notice.utility.NoticeSearchVO;
 
@@ -51,6 +52,26 @@ public class NoticeAdminServiceImpl implements NoticeAdminService{
 	@Override
 	public int insertQnaReply(QnaReplyVO qnaReplyVo) {
 		return noticeAdminDao.insertQnaReply(qnaReplyVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectNoticeAll(NoticeSearchVO searchVo) {
+		return noticeAdminDao.selectNoticeAll(searchVo);
+	}
+
+	@Override
+	public int selectNoticeAll_cnt(NoticeSearchVO searchVo) {
+		return noticeAdminDao.selectNoticeAll_cnt(searchVo);
+	}
+
+	@Override
+	public int deleteNotice(int notice_no) {
+		return noticeAdminDao.deleteNotice(notice_no);
+	}
+
+	@Override
+	public int updateNotice(NoticeVO noticeVo) {
+		return noticeAdminDao.updateNotice(noticeVo);
 	}
 
 

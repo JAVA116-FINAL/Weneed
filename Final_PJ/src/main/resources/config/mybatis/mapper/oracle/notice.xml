@@ -50,8 +50,16 @@
 	</select>
 	
 	<resultMap type="HashMap" id="detailMap">
+		<result property="notice_no" column="notice_no"/>
+		<result property="admin_no" column="notice_no"/>
+		<result property="notice_title" column="notice_title"/>
 		<result property="notice_content" column="notice_content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="notice_image" column="notice_image" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="notice_dept1" column="notice_dept1"/>
+		<result property="notice_regdate" column="notice_regdate"/>
+		<result property="notice_dept2" column="notice_dept2"/>
+		<result property="notice_dept1_info" column="notice_dept1_info"/>
+		<result property="notice_dept2_info" column="notice_dept2_info"/>
 	</resultMap>
 	
 	<select id="selectDetail" parameterType="int" resultMap="detailMap">

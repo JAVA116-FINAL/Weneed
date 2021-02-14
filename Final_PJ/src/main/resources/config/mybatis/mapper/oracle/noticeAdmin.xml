@@ -11,6 +11,25 @@
 		</where>
 	</sql>
 	
+	<sql id="searchWhere2">
+		<where>
+			<if test="noticeDept1 != 0 and noticeDept2 != 0">
+				notice_dept1=#{noticeDept1} and notice_dept2=#{noticeDept2}
+			</if>
+			<if test="noticeDept2 = 0">
+				notice_dept1=#{noticeDept1}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="searchWhere3">
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+		    	notice_title like '%'||#{searchKeyword}||'%' or to_char(notice_content) like '%'||#{searchKeyword}||'%'
+		    </if>
+		</where>
+	</sql>
+	
 	<!-- 사용자가 등록한 qna 리스트 select -->
 	<select id="selectQnaList" resultType="map">
 		select*from qna
@@ -79,6 +98,46 @@
 		update qna
 		set qna_reply='Y'
 		where qna_no=#{qna_no}
+	</update>
+	
+	<select id="selectNoticeAll" parameterType="searchVo" resultType="map">
+		select*from
+		(
+		    select A.*, rownum as RNUM from
+		    (
+		        select*from noticeview
+		    	<include refid="searchWhere2" />
+		        order by notice_regdate desc
+		    )A
+		    <include refid="searchWhere3" />
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectNoticeAll_cnt" parameterType="searchVo" resultType="int">
+		select count(*) from
+		(
+		    select A.*, rownum as RNUM from
+		    (
+		        select*from noticeview
+		    	<include refid="searchWhere2" />
+		    )A
+		    <include refid="searchWhere3" />
+		)
+	</select>
+	
+	<delete id="deleteNotice" parameterType="int">
+		delete notice
+		where notice_no=#{notice_no}
+	</delete>
+	
+	<update id="updateNotice" parameterType="noticeVo">
+		update notice
+		set notice_title=#{notice_title}, notice_content=#{notice_content}
+		where notice_no=#{notice_no}
 	</update>
 	
 </mapper>	

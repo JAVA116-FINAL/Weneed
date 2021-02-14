@@ -97,7 +97,8 @@ form.search {
     width: 90%;
 }
 
-#qna_r_title{
+
+.frmDiv input{
 	border: 1px solid #cecece;
 	width: 100%;
     height: 30px;
@@ -121,4 +122,8 @@ form.search {
 #button{
 	border: 1px solid #d0d0d0;
 	background-color : #efefef;
+}
+
+.btnDiv{
+	margin-top: 20px;
 }
