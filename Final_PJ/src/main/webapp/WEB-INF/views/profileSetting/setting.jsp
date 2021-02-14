@@ -35,8 +35,112 @@
 			$('#changePassword').hide();
 			$('#leave').show();
 		});
+		
+		/* 회원탈퇴처리 */
+		$('#withdraw-agree-ok').click(function(){
+			$.ajax({
+  				url:"<c:url value='/withdraw.do'/>",
+  				type:"POST",
+  				async:false,
+  				success:function(res){
+  					//alert(res);
+  					var msg =""
+  					if(res){ 
+  						msg="위니드 회원탈퇴가 완료되었습니다.";
+  					}else{
+  						msg="위니드 회원탈퇴 실패!";
+  					}
+  					alert(msg);
+  					window.location = "<c:url value='/index.do'/>";
+  				},
+  				error:function(xhr, status, error){
+  					alert('error! : ' + error);
+  				}
+  			});
+		});
+		
+		$("#resetPweEmailBtn").click(function(){
+  	  		$.ajax({
+  				url:"<c:url value='/resetPwd.do'/>",
+  				type:"POST",
+  				data:{
+  					'email':$("#resetPwdEmail").val()
+  				},
+  				async:false,
+  				success:function(res){
+  					var msg ="이메일로 비밀번호 재설정 링크를 발송하였습니다.";
+  	  				alert(msg);
+  				},
+  				error:function(xhr, status, error){
+  					alert('error! : ' + error);
+  				}  				
+  			});
+		});
+		
 	});
 </script>
+
+<style type="text/css">
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 22px;
+  vertical-align:middle;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 2px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
 
 <div class="setting-container-wrap">
 	<div class="container">
@@ -58,15 +162,20 @@
 					<div class="setNotificationCon">
 						<dl>
 							<dt>마케팅 정보 수신 동의를 하시면, 내 직군 직무에 맞는 큐레이션 뉴스레터를 받을 수 있습니다.</dt>
-							<dd></dd>
+							<dd style="float:right;">
+								<label class="switch">
+								  <input type="checkbox">
+								  <span class="slider round"></span>
+								</label>
+							</dd>
 						</dl>
 					</div>
 				</div>
 				<div id="changePassword">
 					<h3>비밀번호 설정</h3>
-					<input type="email" placeholder="sample@wanted.co.kr" value="">
+					<input type="email" placeholder="sample@wanted.co.kr" value="" id="resetPwdEmail">
 					<p>* 비밀번호를 재설정 할 이메일 계정을 입력해주세요.</p>
-					<button type="button">전송</button>
+					<button type="submit" id="resetPweEmailBtn" style="outline:0;">전송</button>
 				</div>
 				<div id="leave">
 					<h3>탈퇴 시 주의 사항</h3>
@@ -81,7 +190,31 @@
 						<li>기업 서비스에 등록되어 있는 계정일 경우, <b>기업 서비스 접속권한도 동시에 삭제됩니다.</b></li>
 						<li>이상의 내용에 동의하여 탈퇴를 원하실 경우, 아래의 “동의하기” 버튼을 클릭 부탁드립니다.</li>
 					</ul>
-					<button type="button" class="withdraw-agree">동의하기</button>
+					<button type="button" class="withdraw-agree" data-toggle="modal" data-target="#withdrawOk" href="#" data-dismiss="modal" style="outline:none;">동의하기</button>
+					<!-- modal 탈퇴하기 -->
+						<div class="modal fade docs-example-modal-sm" id="withdrawOk" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+						  <div class="modal-dialog" style="padding-left:45px; top:20%;">
+						    <div class="modal-content" style="width:400px; overflow-y:auto; height:100%;">
+						      <div class="modal-header gaeun-modal-header" style="border-bottom:1px solid #eee;">
+						        <h5 class="modal-title h6 modal-wanted-title" id="mySmallModalLabel">탈퇴하기</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none;">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body gaeun-modal-body" style="border-bottom-left-radius:.3rem;border-bottom-right-radius:.3rem;">
+						        <div class="gaeun-modal-body-con2" style="margin-bottom:0;">
+							        <form name="withdraw-agree" method="post" action="">
+							        	<div class="gaeun-login-emailBox" style="text-align:center;">
+							        		<label for="email" class="ge-labelEmail" style="font-size:16px;color:#333;">탈퇴하시겠습니까?</label>
+							        	</div>
+							        	<input type ="submit" class="sendBtn" id="withdraw-agree-ok" value="확인" style="outline:none;">
+							        </form>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						<!-- modal 탈퇴하기 끝 -->
 				</div>
 			</section>
 		</div>

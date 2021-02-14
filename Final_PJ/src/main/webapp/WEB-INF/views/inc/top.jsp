@@ -96,10 +96,11 @@
 	  				},
 	  				success:function(res){
 	  					//alert(res);
+	  					console.log(typeof res);
 	  					var msg =""
 	  					if(res){ //true이면 회원가입 성공
 	  						msg="회원가입 성공! 로그인을 해주세요.";
-	  						$('#join').modal('hide');
+	  						
 	  						$('#join-email').val('');
 	  						$('#join-name').val('');
 	  						$('#join-hp').val('');
@@ -107,7 +108,6 @@
 	  						$('#join-pwdOk').val('');
 	  					}else{
 	  						msg="회원가입 실패";
-	  						$('#join').modal('hide');
 	  						$('#join-email').val('');
 	  						$('#join-name').val('');
 	  						$('#join-hp').val('');
@@ -115,6 +115,7 @@
 	  						$('#join-pwdOk').val('');
 	  					}
 	  					alert(msg);
+	  					window.location = "<c:url value='/index.do'/>";
 	  				},
 	  				error:function(xhr, status, error){
 	  					alert('error! : ' + error);
