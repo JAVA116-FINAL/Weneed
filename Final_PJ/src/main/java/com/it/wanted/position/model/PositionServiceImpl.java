@@ -1,7 +1,6 @@
 package com.it.wanted.position.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +13,8 @@ public class PositionServiceImpl implements PositionService{
 	
 	@Autowired PositionDAO positionDao;
 
-	@Override
 	@Transactional
+	@Override
 	public int insertPosition(PositionVO posVo, List<String> jikmus) {
 		int cnt= positionDao.insertPosition(posVo);
 		System.out.println("포지션 인서트 결과 cnt="+cnt);

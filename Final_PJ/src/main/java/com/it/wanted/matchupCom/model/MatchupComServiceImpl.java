@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MatchupComServiceImpl implements MatchupComService{
@@ -28,6 +29,7 @@ public class MatchupComServiceImpl implements MatchupComService{
 		return matchupComDao.delZzim(zzimVo);
 	}
 
+	@Transactional
 	@Override
 	public Map<String, Object> hasMatchup(String comCode) {
 		//이 메소드가 해야 할 일

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.proposal">
+	<insert id="insertProposal" parameterType="proposalVo">
+		insert into proposal(PROPOSAL_NO, MEM_NO, PROPOSAL_MESSAGE, JOB_TITLE, REGION, MIN_SALARY, MAX_SALARY,
+                     PROPOSAL_CK_FLAG, COM_CODE, COM_MEM_NO, POS_NO)
+		values(PROPOSAL_SEQ.NEXTVAL, #{memNo}, #{proposalMessage}, #{jobTitle}, #{region}, #{minSalary}, #{maxSalary},
+		       1, #{comCode}, #{comMemNo}, #{posNo})
+	</insert>
+	
+	<select id="checkProposalCount" parameterType="positionVo" resultType="int">
+		select count(*) from position where pos_no=#{posNo}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

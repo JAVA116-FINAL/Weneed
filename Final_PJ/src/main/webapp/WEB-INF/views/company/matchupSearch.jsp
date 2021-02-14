@@ -44,6 +44,7 @@ $(function(){
 		}
 	});
 	
+
 	var viewMoreSize=0;
 	//더보기 기능 구현
 	$(document).on('click', '#matchupSearch-viewMoreBtn', function(){
@@ -183,12 +184,8 @@ $(function(){
 		$('#matchupResumeViewDetailBtn').text('상세이력 보기');
 		$('.matchupSearch-downBtn').addClass('hide');
 		
-	//	$('#wantedResumeSimpleMD').on('show.bs.modal', function(event){
-			//일단 레주메 넘버가 필요함 
-			setResume(setSimpleResumeMD, resumeNo);
-	//	});
+		setResume(setSimpleResumeMD, resumeNo);
 	});
-	
 	
 	//이력서 팝업 하단 버튼 클릭 시 데이터 받아다 모달 그려주기 (다시 그려야 함, 상세보기니까..) 
 	$(document).on('click', '#matchupResumeViewDetailBtn', function(){
@@ -197,6 +194,7 @@ $(function(){
 		var resumeNo=parseInt($('.matchupResumeName').text().substr(3, index-3), 10);
 		console.log("하단 버튼 클릭 후 resumeNe="+resumeNo);
 		console.log('다시 그리기 버튼 눌렀다');
+		
 		
 		if($(this).text()=='상세이력 보기'){
 			console.log('상세이력 보기 눌렀다');
@@ -234,11 +232,18 @@ $(function(){
 			console.log('제안하기 눌렀을 때 ');
 			$('#wantedResumeSimpleMD').modal('hide');
 			$('#wantedProposalMD').modal('show');
+			
+			var comcode=$('.matchupSearchResumeOpenBtn').data('comcode');
+			var poslist=$('.matchupSearchResumeOpenBtn').data('poslist');
+			console.log("여기맞니"+comcode);
+			console.log("여기맞니2"+poslist);
+			console.log("여기맞니3"+resumeNo);
+			
+			$('form[name=proposalForm]').children('input[name=resumeNo]').val(resumeNo);
 		}
 		
 	});
 	
-	$('#comServProposalSubmitBtn').click
 	
 });
 
@@ -829,8 +834,8 @@ function makeMemList(mcumem){
 									<i class="fas fa-star <c:if test="${mcumemMap.CNT > 0}">goldStar</c:if>
 									"></i> 찜</button>
 								<!-- 이력서 미리보기 모달 팝업 -->								
-								<button class="matchupSearchResumeOpenBtn" type="button" data-toggle="modal" data-target="#wantedResumeSimpleMD" data-resumeno="${mcumemMap.RESUMENO}">
-									이력서 미리보기</button>
+								<button class="matchupSearchResumeOpenBtn" type="button" data-toggle="modal" data-target="#wantedResumeSimpleMD" data-resumeno="${mcumemMap.RESUMENO}"
+									data-comcode="${sessionScope.comInfoVo.comCode}" data-poslist="${posList}">이력서 미리보기</button>
 							</div>
 						</div>
 					</c:forEach>
