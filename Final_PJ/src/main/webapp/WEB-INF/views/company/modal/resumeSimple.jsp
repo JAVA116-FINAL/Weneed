@@ -20,15 +20,16 @@
 				        		<div class="matchupResume1stSec_div"> <!-- 최상단 이름, 다운로드, 찜버튼 -->
 					        		<span class="matchupResumeName"></span>
 					        		<div>
-						        		<button class="matchupSearch-ZzimBtn matchupResumeSMBtns" id="matchupResumeSimpleZzimBtn"><i class="fas fa-star"></i> 찜</button>
+					        		<button class="matchupSearch-downBtn matchupResumeSMBtns hide"><i class="far fa-save"></i> 다운로드</button>
+						        		<button class="matchupResumeSMBtns" id="matchupResumeSimpleZzimBtn"><i class="fas fa-star"></i> 찜</button>
 					        		</div>
 				        		</div>
-				        		<div>
+				        		<div class="matchupResumeIntroSection">
 				        			<div>
 					        			<span class="matchupResumeSubTitle">E-mail </span><span>연락처는 면접 제안 단계에서 공개됩니다.</span>
 				        			</div>
 				        			<div>
-				        				<span class="matchupResumeSubTitle">Mobile </span><span>연락처는 면접 제안 단계에서 공개됩니다</span>
+				        				<span class="matchupResumeSubTitle">Mobile </span><span>연락처는 면접 제안 단계에서 공개됩니다.</span>
 				        			</div>
 				        		</div>
 			        		</section>
@@ -86,9 +87,9 @@
 			        					<div>
 			        						<span class="matchupResumeSubTitle">스페인어</span><span class="matchupResumeMediumSpan"> 일상회화수준</span>
 			        					</div>
-			        					<div class="matchupResumeCont">
+			        					<div class="matchupResumeCont matchupResumeLangTestCont">
 			        						<span class="matchupResumeMediumSpan matchupResumeBoldSpan">SIELE </span>
-			        						<span class="matchupResumeMediumSpan"> (2010.05)</span>
+			        						<span class="matchupResumeMediumSpan"> (2010.05)</span><br>
 			        					</div>
 			        					<div>
 			        						<span class="matchupResumeMediumSpan">744점</span>
@@ -103,8 +104,11 @@
 			</div>
 			<div class="modal-footer comServJoinModalFooter">
 				<div class="container comServModalFooterCon matchupResumeSpace">
-					<span>*이력서 상세보기를 하면 열람권 1회가 차감됩니다.</span>
-				    <button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="submit">이력서 상세보기</button>
+					<span id="matchupResumeBtnSpan">*이력서 상세보기를 하면 열람권 1회가 차감됩니다.</span>
+					<button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="button"
+				      data-resumeno="${mcumemMap.RESUMENO}">상세이력 보기</button> 
+<%-- 				    <button class="btn btn-primary comServSubmitBtn" id="matchupResumeViewDetailBtn" type="button"
+				      data-toggle="modal" data-target=".wantedResumeSimpleMD" data-resumeno="${mcumemMap.RESUMENO}">상세이력 보기</button>  --%>
 				</div>
 			</div>
 		</div>

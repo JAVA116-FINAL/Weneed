@@ -30,9 +30,21 @@
 		]]>
 		)
 		where rownum=1
-		
 	</select>
-
+	
+	<select id="selectExpertise" parameterType="int" resultType="expertiseVo">
+		select * from expertise where expertise_No=#{expertiserNo}
+	</select>
+	
+	<update id="updateMatchupExpertise" parameterType="expertiseVo">
+		update expertise
+		set jikgun_Code=#{jikgunCode}, career=#{career}, salary=#{salary}, skill=#{skill}
+		where expertise_No=#{expertiseNo}
+	</update>
+	
+	<delete id="deleteExpertise" parameterType="int">
+		delete expertise where expertise_No=#{expertiseNo}
+	</delete>
 </mapper>
 
 

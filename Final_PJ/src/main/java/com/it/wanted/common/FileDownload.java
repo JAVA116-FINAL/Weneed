@@ -23,6 +23,7 @@ public class FileDownload {
 	
 	@RequestMapping("/company/matchupServiceFileDownload.do")
 	public void matchupServfileDownload(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("기업서비스 파일 다운로드");
 		String saveDir= request.getSession().getServletContext().getRealPath("/resources/file");
 		String fileName="wanted_employers_guide_ko.pdf";
 		

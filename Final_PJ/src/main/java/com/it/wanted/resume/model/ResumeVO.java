@@ -16,7 +16,7 @@ public class ResumeVO {
 		private String resumeUpfileflag; //VARCHAR2(10) DEFAULT 'N', /* 첨부파일 여부 */
 		private Timestamp resumeRegdate; //DATE DEFAULT SYSDATE /* 이력서 등록일 */
 		private String langFlag; //VARCHAR2(10) DEFAULT 'KR' /* 언어 한국어:KR, 영어:EN 중국어:CH 일본어:JP   */
-		
+		private int resumeLength;
 		
 		public int getResumeNo() {
 			return resumeNo;
@@ -91,13 +91,21 @@ public class ResumeVO {
 		public void setLangFlag(String langFlag) {
 			this.langFlag = langFlag;
 		}
+		
+		
+		public int getResumeLength() {
+			return resumeLength;
+		}
+		public void setResumeLength(int resumeLength) {
+			this.resumeLength = resumeLength;
+		}
 		@Override
 		public String toString() {
 			return "ResumeVO [resumeNo=" + resumeNo + ", memNo=" + memNo + ", resumeTitle=" + resumeTitle
 					+ ", resumeName=" + resumeName + ", resumeEmail=" + resumeEmail + ", resumeHp=" + resumeHp
 					+ ", resumeIntroduce=" + resumeIntroduce + ", tempFlag=" + tempFlag + ", resumeFile=" + resumeFile
 					+ ", resumeUpfileflag=" + resumeUpfileflag + ", resumeRegdate=" + resumeRegdate + ", langFlag="
-					+ langFlag + "]";
+					+ langFlag + ", resumeLength=" + resumeLength + "]";
 		}
 		
 		

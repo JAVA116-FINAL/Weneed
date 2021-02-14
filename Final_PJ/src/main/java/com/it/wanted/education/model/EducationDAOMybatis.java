@@ -45,4 +45,19 @@ public class EducationDAOMybatis implements EducationDAO{
 		return sqlSession.selectList(namespace+"selectMcumemNo", searchKeyword);
 	}
 
+	@Override
+	public int insertMcuEdu(EducationVO educationVo) {
+		return sqlSession.insert(namespace+"insertMcuEdu",educationVo);
+	}
+
+	@Override
+	public EducationVO selectEduOne(int eduNo) {
+		return sqlSession.selectOne(namespace+"selectEduOne", eduNo);
+	}
+
+	@Override
+	public int updateEduName(EducationVO eduVo) {
+		return sqlSession.update(namespace+"updateEduName",eduVo);
+	}
+
 }

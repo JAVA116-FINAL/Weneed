@@ -45,6 +45,10 @@ section, section > div {
 	display: flex;
 }
 
+.matchupResumeLangTestCont{
+	justify-content: space-between;
+}
+
 .matchupResumeAchievement{
 	margin-top: 10px;	
 }
@@ -64,6 +68,10 @@ section, section > div {
 	font-weight: bold;
 }
 
+#matchupResumeBtnSpan{
+	text-align: left;	
+}
+
 .matchupResumeSMBtns{
 	border: 1px solid #e1e2e3;
 	background: #fff;
@@ -81,4 +89,8 @@ section, section > div {
 #matchupResumeViewDetailBtn{
 	width: 200px;
 	border-radius: 50px;
+}
+
+.matchupModalFooterGuide{
+	text-align: left;
 }

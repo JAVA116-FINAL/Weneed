@@ -250,7 +250,7 @@ function getSalary(){
 				</ul>
 				<div class="logoPlus">+4910</div>
 			</div>
-			<a href="#" class="matchUp-start-box-btn">시작하기</a>
+			<a href="<c:url value='/matchupMem/matchupMemList.do'/>" class="matchUp-start-box-btn">시작하기</a>
 		</div>
 		<div class="salary-upgrade-position-title-box">
 			<h2 class="salary-upgrade-position-title">연봉 업그레이드 포지션</h2>

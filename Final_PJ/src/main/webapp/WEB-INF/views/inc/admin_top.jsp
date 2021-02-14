@@ -13,50 +13,50 @@
 <body style="background-color: #f8f8fa;">
 <div class="topWrapper">
 <div class="adminContainer" >
-	<section class="admintop">
-		<img style="width:100px" src="<c:url value='/resources/images/admin_logo.png'/>">
-		<nav>
-			<ul class="adminTopMenubar">
-				<li class="adminMenuLi">기업정보승인
-					<ul>
-						<li class="adminSubMenu"><a href="<c:url value='/admin/index.do'/>">정보 승인</a></li>
-						<li class="adminSubMenu"><a href="<c:url value='/admin/companyService/comImgPermission.do'/>">이미지 승인</a></li>
-					</ul>
-				</li>
-				<li class="adminMenuLi">매치업
-					<ul>
-						<li class="adminSubMenu"><a href="#">매치업 현황</a></li>
-						<li class="adminSubMenu"><a href="#">매치업 상품</a></li>
-					</ul>
-				</li>
-				<li class="adminMenuLi">포지션/이력서
-					<ul>
-						<li class="adminSubMenu"><a href="#">포지션 조회</a></li>
-						<li class="adminSubMenu"><a href="#">이력서 조회</a></li>
-						<li class="adminSubMenu"><a href="#">지원현황</a></li>
-					</ul>
-				</li>
-				<li class="adminMenuLi">고객센터
-					<ul>
-						<li class="adminSubMenu"><a href="#">이용안내</a></li>
-						<li class="adminSubMenu"><a href="#">문의내역</a></li>
-					</ul>
-				</li>
-				<li class="adminMenuLi">커리어성장
-					<ul>
-						<li class="adminSubMenu"><a href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
-						<li class="adminSubMenu"><a href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
-						<li class="adminSubMenu"><a href="<c:url value='/career/Admin/programAdminWeneed.do'/>">Weneed+</a></li>
-					</ul>
-				</li>
-				<li class="adminMenuLi">직군별연봉
-					<ul>
-						<li class="adminSubMenu"><a href="#">연봉정보 조회</a></li>
-					</ul> 
-				</li>
-			</ul>
-		</nav>
-	</section>
-	</div>
+   <section class="admintop">
+      <img style="width:100px" src="<c:url value='/resources/images/admin_logo.png'/>">
+      <nav>
+         <ul class="adminTopMenubar">
+            <li class="adminMenuLi">기업정보승인
+               <ul>
+                  <li class="adminSubMenu"><a href="<c:url value='/admin/index.do'/>">정보 승인</a></li>
+                  <li class="adminSubMenu"><a href="<c:url value='/admin/companyService/comImgPermission.do'/>">이미지 승인</a></li>
+               </ul>
+            </li>
+            <li class="adminMenuLi">매치업
+               <ul>
+                  <li class="adminSubMenu"><a href="#">매치업 현황</a></li>
+                  <li class="adminSubMenu"><a href="#">매치업 상품</a></li>
+               </ul>
+            </li>
+            <li class="adminMenuLi">포지션/이력서
+               <ul>
+                  <li class="adminSubMenu"><a href="#">포지션 조회</a></li>
+                  <li class="adminSubMenu"><a href="#">이력서 조회</a></li>
+                  <li class="adminSubMenu"><a href="#">지원현황</a></li>
+               </ul>
+            </li>
+            <li class="adminMenuLi">고객센터
+               <ul>
+                  <li class="adminSubMenu"><a href="#">이용안내</a></li>
+                  <li class="adminSubMenu"><a href="#">문의내역</a></li>
+               </ul>
+            </li>
+            <li class="adminMenuLi">커리어성장
+               <ul>
+                  <li class="adminSubMenu"><a href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
+                  <li class="adminSubMenu"><a href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
+                  <li class="adminSubMenu"><a href="<c:url value='/career/Admin/programAdminWeneed.do'/>">Weneed+</a></li>
+               </ul>
+            </li>
+            <li class="adminMenuLi">직군별연봉
+               <ul>
+                  <li class="adminSubMenu"><a href="#">연봉정보 조회</a></li>
+               </ul> 
+            </li>
+         </ul>
+      </nav>
+   </section>
+   </div>
 </div>
-	<section class="adminContainer">
+   <section class="adminContainer">

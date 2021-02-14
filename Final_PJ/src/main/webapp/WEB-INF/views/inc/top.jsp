@@ -53,6 +53,10 @@
     
     <script src="<%=request.getContextPath() %>/resources/js/script.js"></script>
     <script src="<%=request.getContextPath() %>/resources/js/contact.js"></script>
+    
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
   <script type="text/javascript">
   	$(function(){
@@ -388,6 +392,45 @@
   			}
   		});
   		
+  		$('#searchText').keyup(function(){
+	  		$('#searchText').autocomplete({
+	  			source : function(request, response){
+	  				$.ajax({
+	  	  				url:"<c:url value='/mainSearch/autocomplete.do'/>",
+	  	  				type:"GET",
+	  	  				dataType:"json",
+	  	  				data:{keyword:$("#searchText").val()},
+	  	  				success:function(data){
+	  	  					console.log(JSON.stringify(data));
+	  	  					response(
+	  	  						$.map(data, function(item){
+	  	  							return{
+	  	  								label:item.comName,
+	  	  								value:item.comName
+	  	  							}
+	  	  						})  	  								  					
+	  	  					);//response
+	  	  				},
+	  	  				error:function(xhr, status, error){
+	  	  					alert('error! : ' + error);
+	  	  				}  				
+	  	  			});
+	  			},
+	  			minLength:1,
+				autoFocus:false,
+				select:function(event, ui){
+					console.log("전체 data:" + JSON.stringify(ui));
+					console.log("검색 data:" + ui.item.value);
+				},
+				focus:function(event, ui){
+					return false;
+				},
+				close:function(event){
+				}
+	  		});
+  		});
+  		
+  		
   	});
   	
   	
@@ -415,6 +458,14 @@
 .container-top:not(.search-back){
 	height:50px;
 }
+.ui-widget.ui-widget-content{
+	border:none !important;
+	width:100% !important;
+	left:0 !important;
+}
+.ui-menu-item-wrapper{
+	padding:30px;
+}
 
 </style>  
 </head>
@@ -434,8 +485,8 @@
 			  	</button>
 		  
 				<ul class="navbar-nav">
-					<li class="nav-item dropdown" id="navigation" style="padding: 6px 6px;">
-						<a class="nav-link dropdown-toggle" href="<c:url value='/jobsearch/jobsearchDetail.do'/>" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색 </a>
+					<li class="nav-item dropdown" id="navigation" style="padding: 6px 6px;" onclick="location.href='<c:url value="/jobsearch/jobsearchList.do"/>'">
+						<a href="#" class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">탐색</a>
 						<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:100%; border-top:0; margin-top:0; line-height:17px; border-radius:0;">
 							<li><a class="dropdown-item" href="#" style="border-bottom:none;">개발<i class="icon-arrow_right" style="float:right; color:#999; font-size:16px;"></i></a></li>
 							<li><a class="dropdown-item" href="#" style="color:#999;padding:5px 20px;font-size:13px;border-bottom:none;">서버 개발자</a></li>
@@ -659,12 +710,13 @@
 			
 			<!-- 검색 -->
 			<div class="container-top" id="after-search">
-				<form action="#" class="container search-form" style="display:flex;">
-					<input type="text" placeholder="#태그, 회사, 포지션 검색" class="search-input"
-					autocomplete="off" style="border:0; height:36px;">
+				<form action="<c:url value='/mainSearch/search.do?keyword=${param.keyword}'/>" method="get" class="container search-form" style="display:flex;">
+					<input type="text" id="searchText" placeholder="회사, 포지션 검색" value="${param.keyword}" class="search-input" name="keyword"
+					autocomplete="off" style="border:0; height:36px; border-radius:25px;">
 					<i class="icon-search" style="width:16px;left:34px;"></i>
+					<input type="submit" class="search-ok" value="" style="outline:none;">
 					<button type="button" class="closeBtn">
-						<i class="icon-close" style="right:34px;"></i>
+						<i class="icon-close" style="right:34px; top:37%;"></i>
 					</button>
 				</form>
 				<div class="search-bottom-box">
@@ -686,18 +738,6 @@
 							</li>
 							<li class="tag-list-item">
 								<button class="tag-list-item-btn">#연봉상위2~5%</button>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="search-result-wrap">
-					<div class="container" id="result-wrap">
-						<ul class="result-list">
-							<li>
-								<a href="<c:url value='/mainSearch/search.do'/>" class="">
-									<span><i class="icon-search" id="search-icon"></i></span>
-									<span>Product Manager / UX기획자</span>
-								</a>
 							</li>
 						</ul>
 					</div>

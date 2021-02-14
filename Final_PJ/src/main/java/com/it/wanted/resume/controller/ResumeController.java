@@ -34,14 +34,10 @@ import com.itextpdf.text.DocumentException;
 @RequestMapping("/resume")
 public class ResumeController {
 	private static final Logger logger=LoggerFactory.getLogger(ResumeController.class);
-	@Autowired
-	private ResumeService resumeService;
-	@Autowired
-	private MatchupMemService mcumemService;
-	@Autowired
-	private FileUploadUtil fileUploadUtil;
-	@Autowired
-	private PdfFileUtil pdfFileUtil; 
+	@Autowired private ResumeService resumeService;
+	@Autowired private MatchupMemService mcumemService;
+	@Autowired private FileUploadUtil fileUploadUtil;
+	@Autowired private PdfFileUtil pdfFileUtil; 
 	
 	//1.인트로화면보여주기
 	@RequestMapping("/resumeIntro.do")
@@ -68,7 +64,7 @@ public class ResumeController {
 			resumeVo=resumeService.selectResume(memNo);
 			logger.info("resume select 결과=resumeVo{}",resumeVo);
 		}
-				
+		
 		//3
 		model.addAttribute("resumeVo", resumeVo);
 		//4
@@ -93,7 +89,6 @@ public class ResumeController {
 		//3
 		//4
 		return "redirect:/resume/resumeList.do";
-		
 	}
 	
 	//4.이력서 관리화면 
@@ -115,10 +110,8 @@ public class ResumeController {
 		
 			if(mcuResumeNo>0) { 
 				model.addAttribute("mcuResumeNo", mcuResumeNo); 
-				
 			}
 		}
-
 		//3
 		model.addAttribute("resumeList", resumeList);
 		//4
@@ -141,7 +134,6 @@ public class ResumeController {
 		model.addAttribute("rAllVo", rAllVo);
 		//4
 		return "resume/resumeDetail";
-		
 	}
 	
 	//6.이력서 수정처리
@@ -178,11 +170,13 @@ public class ResumeController {
 		
 		ResumeVO rVo=new ResumeVO();
 		rVo.setMemNo(memNo);
-		
 		List<Map<String, Object>> fileList=null;
 		String resumeFile="";
 		try {
+			
 			fileList=fileUploadUtil.fileUplaod(request, FileUploadUtil.RESUME_UP_TYPE);
+			logger.info("파일리스트:",fileList);
+			
 			for (Map<String, Object> fileMap:fileList) {
 				resumeFile=(String) fileMap.get("fileName");
 				logger.info("resumeFile={}",resumeFile);
@@ -226,7 +220,9 @@ public class ResumeController {
 		
 		int result=0;
 		try {
-			pdfFileUtil.createPdf(rAllVo);
+			//pdfFileUtil.createPdf(rAllVo);
+			//pdfFileUtil.createPdf(rAllVo, "C:\\Users\\user\\Downloads\\");
+			pdfFileUtil.createPdf(rAllVo, "C:\\Users\\jazzo\\Downloads\\");
 			result=1;
 		} catch (DocumentException e) {
 			e.printStackTrace();
@@ -240,7 +236,6 @@ public class ResumeController {
 		//JsonParser jsonParser = JsonParser.parse(result);
 		
 		return result;
-		
 	}
 	
 	//9.이력서 파일 다운로드
@@ -252,13 +247,13 @@ public class ResumeController {
 		//3
 		Map<String, Object> map=new HashMap<String, Object>();
 		String upPath=fileUploadUtil.getUploadPath(FileUploadUtil.RESUME_UP_TYPE, request);
+		
 		File file=new File(upPath,resumeFile);
 		map.put("file", file);
 		ModelAndView mav= new ModelAndView("resumeDownloadView",map);
 		//4
 		return mav;
 	}
-	
 	
 	//10.이력서 지우기
 	@ResponseBody
@@ -271,11 +266,10 @@ public class ResumeController {
 		ResumeVO rVo= new ResumeVO();
 		rVo.setMemNo(memNo);
 		rVo.setResumeNo(resumeNo);
-		
 		logger.info("rVo={}",rVo);
 		//2
 		int cnt=resumeService.deleteResume(rVo);
-		logger.info("삭제 결과 cnt={}, rVo={}", cnt,rVo);
+		logger.info("삭제 결과 cnt={}, rVo={}", cnt,cnt);
 		//3
 		//4
 		return cnt;
@@ -313,6 +307,55 @@ public class ResumeController {
 		//4
 		return cnt;
 	}
+	//12.이력서 샘플 파일 다운로드
+		@RequestMapping("/resumeSampleFileDown.do")
+		public ModelAndView resumeSampleFileDown(HttpServletRequest request) {
+			//1
+			logger.info("이력서샘플 파일 다운로드");
+			//2
+			//3
+			Map<String, Object> map=new HashMap<String, Object>();
+			
+			String upPath=request.getSession().getServletContext().getRealPath("/resources/file/");
+			
+			File file=new File(upPath,"sample_resume_ko.pdf");
+			map.put("file", file);
+			ModelAndView mav= new ModelAndView("resumeDownloadView",map);
+			//4
+			return mav;
+		}
+		
 	
+	/* 현빈 */
+	//pdf파일 생성 다운 - memNo 없는 버전
+	@ResponseBody
+	@RequestMapping("/matchupPopupResumeDown.do")
+	public int resumeDownload(@RequestParam (defaultValue = "0") int resumeNo) {
+		//1
+	//	logger.info("pdf파일 다운로드, 파라미터 resumeNo={}",resumeNo);
+		
+		//2
+		ResumeAllVO rAllVo = resumeService.selectResumeByResumeNo(resumeNo);
+		
+		//logger.info("pdf파일 다운로드파라미터 rVo={}",rVo);
+		logger.info("pdf파일 다운로드 파라미터 rAllVo={} resumeNo={}", rAllVo, resumeNo);
+		String downloadPath="C:\\Users\\jazzo\\Downloads\\";
+		
+		int result=0;
+		try {
+			pdfFileUtil.createPdf(rAllVo, downloadPath);
+			result=1;
+		} catch (DocumentException e) {
+			e.printStackTrace();
+			result=0;
+		} catch (IOException e) {
+			e.printStackTrace();
+			result=0;
+		}
+		//3
+		//4
+		
+		return result;
+	}
 	
 }

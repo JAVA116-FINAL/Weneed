@@ -1,6 +1,5 @@
 package com.it.wanted.companyservice.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,32 +21,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.it.wanted.career.model.CareerService;
-import com.it.wanted.career.model.CareerVO;
 import com.it.wanted.cominfo.model.ComInfoService;
 import com.it.wanted.cominfo.model.ComInfoVO;
 import com.it.wanted.commeminfo.model.ComMemInfoService;
-import com.it.wanted.commeminfo.model.ComMemInfoVO;
-import com.it.wanted.commemlist.model.ComMemListService;
-import com.it.wanted.common.MatchupPagination;
-import com.it.wanted.common.MatchupSearchVO;
-import com.it.wanted.common.SearchVO;
 import com.it.wanted.education.model.EducationService;
-import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.jikgun.model.JikgunService;
 import com.it.wanted.jikgun.model.JikgunVO;
 import com.it.wanted.jikmu.model.JikmuService;
 import com.it.wanted.jikmu.model.JikmuVO;
 import com.it.wanted.matchup.model.MatchupMemSearchVO;
 import com.it.wanted.matchup.model.MatchupMemService;
-import com.it.wanted.matchup.model.MatchupMemVO;
 import com.it.wanted.matchupCom.model.MatchupComService;
+import com.it.wanted.matchupCom.model.MatchupComVO;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
+import com.it.wanted.matchupStatus.model.MatchupStatusService;
+import com.it.wanted.position.model.PositionService;
+import com.it.wanted.position.model.PositionVO;
+import com.it.wanted.proposal.model.ProposalVO;
 import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeService;
 
 @Controller
 @RequestMapping("/company")
 public class CompanyMatchUpController {
+	
 	private static final Logger logger=LoggerFactory.getLogger(CompanyMatchUpController.class);
 	@Autowired CareerService careerService;
 	@Autowired MatchupMemService matchupMemService;
@@ -58,25 +55,28 @@ public class CompanyMatchUpController {
 	@Autowired ComMemInfoService comMemInfoService;
 	@Autowired ComInfoService comInfoService;
 	@Autowired ResumeService resumeService;
+	@Autowired MatchupStatusService matchupStatusService; 
+	@Autowired PositionService positionService;
 	
 	@RequestMapping(value = "/matchupService.do", method = RequestMethod.GET)
-	public String matchupMain(HttpServletRequest request, Model model) {
+	public String matchupMain(HttpSession session, HttpServletRequest request, Model model) {
 		logger.info("기업서비스 매치업 메인화면");
 		
 		//여기서 세션에서 comCode 따다가 매치업기업목록에 해당 컴코드가 있으면 session에 매치업기업번호 추가해놓고
 		//redirect company/matchupSearch.do
-		HttpSession session = request.getSession();
+	//	HttpSession session = request.getSession();
 		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
 		logger.info("session에서 읽어온 cominfoVo comVo={}", comVo);
 		String comCode=comVo.getComCode();
 		
 		//분기처리 해야함 매치업 구입기업, 비구입기업
 		String url="";
-		Map<String, Float> checkMap=matchupComService.hasMatchup(comCode);
+		Map<String, Object> checkMap=matchupComService.hasMatchup(comCode);
 		logger.info("받아온 checkMap={}", checkMap);
 		if(checkMap == null) {
 			url="redirect:/company/matchupMain.do";
-		}else if(checkMap.get("leftDate")>0 && checkMap.get("leftCount")>0) { //매치업 구입기업이고 기한내에 있으면
+		}else if(Integer.parseInt(String.valueOf(checkMap.get("LEFTDATE")))>0
+				&& Integer.parseInt(String.valueOf(checkMap.get("LEFTCOUNT")))>0) { //매치업 구입기업이고 기한내에 있으면
 			url="redirect:/company/matchupSearch.do";
 		}
 		return url;
@@ -90,11 +90,17 @@ public class CompanyMatchUpController {
 	}
 	
 	@RequestMapping("/matchupSearch.do")
-	public String matchupSearch(Model model, @ModelAttribute MatchupMemSearchVO searchVo) {
-		searchVo=setSearchInfoDefault(searchVo);
+	public String matchupSearch(Model model, @ModelAttribute MatchupMemSearchVO searchVo,
+			HttpSession session) {
+		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		searchVo=setSearchInfoDefault(searchVo, comVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
+		//매치업 구입 기업만 여기 들어올수 있습니다. 구입한 적이 있는 기업만? 
+		//그럼 그냥 구입내역을 찍어서 리턴시키면 되는 거 아니야?
+		MatchupComVO matchupComVo=matchupComService.selectMatchupCom(comVo.getComCode());
+		Map<String, Object> checkMap=matchupComService.hasMatchup(comVo.getComCode());
 		
-		logger.info("기업서비스 매치업 검색/조회화면, 파라미터 searchVo={}", searchVo);
+		logger.info("기업서비스 매치업 검색/조회화면, 파라미터 searchVo={}, matchupComVo={}", searchVo, matchupComVo);
 		
 		//[1-1] 직군리스트 불러오기
 		List<JikgunVO> jikgunList=jgService.selectAllJikgun();
@@ -107,6 +113,10 @@ public class CompanyMatchUpController {
 		//[1-3] 직무리스트 불러오기 개발에 해당하는
 		List<JikmuVO> jikmuList=jgService.selectJikmuByJikgunCode(basicCode);
 		logger.info("첫번째 직군코드에 해당하는 직무리스트 jikmuList={}", jikmuList);
+		
+		//포지션 목록도.. 불러와야 해요. 제안하기 팝업이 여기서 열리기 때문. 
+		List<PositionVO> posList=positionService.selectPositionByComcode(comVo.getComCode());
+		logger.info("포지션 목록 조회 결과, posList.size={}", posList.size());
 		
 		searchVo.setViewMoreSize(0);
 		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
@@ -130,9 +140,21 @@ public class CompanyMatchUpController {
 		model.addAttribute("jikmuList", jikmuList);
 		model.addAttribute("memList", memList);
 		model.addAttribute("emptyCheck", emptyCheck);
+		model.addAttribute("matchupComVo", matchupComVo);
+		model.addAttribute("checkMap", checkMap);
 		return "company/matchupSearch";
 	}
 
+	@RequestMapping("/sendProposal.do")
+	public String sendProposal(@RequestParam ProposalVO propoVo) {
+		logger.info("제안하기, 파라미터 propoVo={}", propoVo);
+		
+		//제안하기 테이블에 insert 시키는 것이다. 
+		
+		
+		return "/company/matchupSearch.do";
+	}
+	
 	@RequestMapping("/modal/modalButtonsTest.do")
 	public String modalTest() {
 		return "company/modal/modalButtonsTest";
@@ -155,7 +177,7 @@ public class CompanyMatchUpController {
 	@RequestMapping("/viewMoreMatchupMem.do")
 	public List<Map<String, Object>> getMoreMem(@ModelAttribute MatchupMemSearchVO searchVo
 			, Model model){
-		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
 		
 		logger.info("리스트 더보기  시작, searchVo={}", searchVo);
@@ -170,11 +192,10 @@ public class CompanyMatchUpController {
 	}
 
 	@ResponseBody
-	@JsonManagedReference
 	@RequestMapping("/showZzimedList.do")
 	public List<Map<String, Object>> showZzimedList(@ModelAttribute MatchupMemSearchVO searchVo
 		, Model model) {
-		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
 		
 		List<Map<String, Object>> memList=matchupMemService.selectZzimedList(searchVo);
@@ -189,8 +210,9 @@ public class CompanyMatchUpController {
 	@JsonBackReference
 	@RequestMapping("/viewMoreZzimedList.do")
 	public List<Map<String, Object>> getMoreZzimedMem(@ModelAttribute MatchupMemSearchVO searchVo
-			, Model model){
-		searchVo=setSearchInfoDefault(searchVo);
+			, Model model, HttpSession session){
+		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		searchVo=setSearchInfoDefault(searchVo, comVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
 		
 		logger.info("찜한 리스트 더 불러오기 시작, searchVo={}", searchVo);
@@ -206,7 +228,7 @@ public class CompanyMatchUpController {
 	
 	//이력서 그려주려고 데이터 받아오는 것
 	@ResponseBody
-	@RequestMapping("/getSimpleResumeData.do")
+	@RequestMapping("/getResumeData.do")
 	public ResumeAllVO getResumeForMatchupModal(@RequestParam int resumeNo) {
 		ResumeAllVO resumeAllVo=new ResumeAllVO();
 		logger.info("레주메넘버로 레주메 조회 시작, resumeNo={}", resumeNo);
@@ -218,7 +240,7 @@ public class CompanyMatchUpController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/addZzim.do")
+	@RequestMapping(value="/addZzim.do", produces = "application/text; charset=utf8")
 	public String addZzim(@RequestParam int resumeNo, HttpSession session) {
 		ComInfoVO comInfoVo=(ComInfoVO) session.getAttribute("comInfoVo");
 		logger.info("매치업 찜하기, resumeNo={}, comCode={}", resumeNo, comInfoVo.getComCode());
@@ -243,7 +265,7 @@ public class CompanyMatchUpController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/delZzim.do")
+	@RequestMapping(value="/delZzim.do", produces = "application/text; charset=utf8")
 	public String delZzim(@RequestParam int resumeNo, HttpSession session) {
 		ComInfoVO comInfoVo=(ComInfoVO) session.getAttribute("comInfoVo");
 		logger.info("매치업 찜하기, resumeNo={}, comCode={}", resumeNo, comInfoVo.getComCode());
@@ -259,7 +281,7 @@ public class CompanyMatchUpController {
 		String result="찜 제외 실패!";
 		int cnt=matchupComService.delZzim(zzimVo);
 		if(cnt>0) {
-			result="찜 제외 성공!";
+			result="찜 제외 성공!!";
 		}
 		return result;
 	}
@@ -282,8 +304,32 @@ public class CompanyMatchUpController {
 		return result;
 	}
 	
-	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo) {
-		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty()) {
+	@ResponseBody
+	@RequestMapping(value="/updateMatchupStatus.do", produces = "application/text; charset=utf8")
+	public String updateMatchupStatus(@RequestParam int resumeNo, HttpSession session) {
+		logger.info("매치업현황 추가 및 업데이트, 세션 받기 전");
+		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		logger.info("매치업현황 추가 및 업데이트, 파라미터 resumeNo={}, comInfoVo={}", resumeNo, comVo);
+		//여기서 해야 하는 것들 
+		//매칭에 없는 조합이라면 매칭에 추가해주고, 추가되면서 service단에서 이력서 조회 건수 -1 시켜줘야 한다. 
+		
+		int result=matchupStatusService.updateStatus(resumeNo, comVo.getComCode());
+		logger.info("조회 검사 후 result={}", result);
+		
+		String str="";
+		if(result==MatchupStatusService.RESUMECNT_OVER) {
+			str="열람권을 모두 소진했습니다.";
+		}else if(result==MatchupStatusService.RESUMECNT_REDUCED) {
+			str="열람권이 1회 차감되었습니다.";
+		}else if(result==MatchupStatusService.RESUMECNT_READ) {
+			str="이미 조회한 이력서입니다. 열람한 이력서 목록에서 확인하실 수 있습니다.";
+		}
+		return str;
+	}
+	
+	/* 기본 함수들 */
+	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo, String comCode) {
+		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty() || vo.getSearchJikmu().equals("all")) {
 			vo.setSearchJikmu("");
 		}
 		if(vo.getSearchJikgun()==null || vo.getSearchJikgun().isEmpty()) {
@@ -297,6 +343,9 @@ public class CompanyMatchUpController {
 		}
 		if(vo.getSearchMinCareer()==null || vo.getSearchMinCareer().isEmpty()) {
 			vo.setSearchMinCareer("0");
+		}
+		if(vo.getComCode()==null || vo.getComCode().isEmpty()) {
+			vo.setComCode(comCode);
 		}
 		return vo;
 	}

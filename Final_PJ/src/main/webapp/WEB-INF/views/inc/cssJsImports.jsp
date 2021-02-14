@@ -53,4 +53,6 @@
 	
 	<!-- font awesome 아이콘 사용을 위한 킷 https://fontawesome.com/ -->	
 	<script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>
-  
+  	
+  	<!-- 아임포트 -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-x.y.z.js"></script>

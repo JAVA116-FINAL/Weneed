@@ -495,7 +495,7 @@ i.icon-more_vert.icon_jy {
     float: left;
     top: -23px;
     right: 3px;
-    /* pointer-events: none; */
+     /* pointer-events: none; */
 }
 
 span.noResume_jy {
@@ -504,4 +504,15 @@ span.noResume_jy {
     margin-top: 82px;
     display: inline-block;
     color: gray;
+}
+/* 0208 */
+
+button.RWLink_jy {
+    outline: none;
+    border: none;
+}
+
+button.RWLink_jy:focus {
+    outline: none;
+    border: none;
 }

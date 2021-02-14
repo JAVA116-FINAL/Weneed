@@ -26,7 +26,6 @@
   </div>
 </section>
 
-
 <section class="page-title section2-resumeIntro_jy">
   <div class="container container-resumeIntro_jy">
     <div class="row row_jy">
@@ -41,7 +40,6 @@
     </div>
   </div>
 </section>
-
 
 <section class="page-title section3-resumeIntro_jy white_jy">
   <div class="container container-resumeIntro_jy">
@@ -69,7 +67,7 @@
 			<span class="text-white text-resumeIntro_jy">PC/모바일 어디에서나 작성할 수 있고, PDF 파일로 저장과 활용이 쉽습니다.<br>
 				가독성에 중점을 두고 설계하여, 파일 저장/출력시에도 돋보이는 결과물을 얻을 수 있습니다.</span>
 				<div class="divbt-resumeIntro_jy">
-	 				<button type="button" class="bt1-resumeIntro_jy bt-borderNon_jy"  onClick='#'>샘플다운로드</button>	
+	 				<button type="button" class="bt1-resumeIntro_jy bt-borderNon_jy"  onClick='location.href="<c:url value='/resume/resumeSampleFileDown.do'/>"'>샘플다운로드</button>	
 	 				<button type="button" class="bt2-resumeIntro_jy"  onClick='location.href="<c:url value='/resume/resumeRegister.do'/>"'>새 이력서 작성</button>				
  				</div>	
         </div>

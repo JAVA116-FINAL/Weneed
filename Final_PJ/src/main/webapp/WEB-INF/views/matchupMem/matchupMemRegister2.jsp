@@ -45,7 +45,7 @@ $(function(){
 		//alert($('#careerinput_jy').val());
 		$('#careerName').val($('#careerinput_jy').val());
 	});	
-	
+	/* 
 	$("#eduNameModal_jy").keydown(function(e){
 		event.preventDefault();
 		if(e.keyCode == 13) $('#eduName').val($('#eduNameModal_jy').val()); 
@@ -55,30 +55,59 @@ $(function(){
 		event.preventDefault();
 		if(e.keyCode == 13) $('#careerName').val($('#careerinput_jy').val()); 
 	}); 
-
-
+ */
+//전~송! 누르면 날짜체크 year.month year2.month2보다 이전인지 2번이 오늘날짜보다 뒤인지
 	
+	$('#frmMcuRegister2').submit(function(){
+		if($('#eduName').val()==""){
+			alert("학교명을 입력하세요. 작성할 학교명이 없는 경우 없음으로 작성해주세요");
+			event.preventDefault();
+		}else if($('#careerName').val()==""){
+			alert("회사명을 입력하세요. 작성할 회사명이 없는 경우 없음으로 작성해주세요");
+			event.preventDefault();
+		}else if($("#year option:selected").val()!=""){
+			if($("#year option:selected").val()>$("#year2 option:selected").val()){
+				alert("종료일이 시작일보다 먼저일 수 없습니다.");
+				event.preventDefault();
+			}else if($("#year option:selected").val()==$("#year2 option:selected").val()){
+				if($("#month option:selected").val()>$("#month2 option:selected").val()){
+					alert("종료일이 시작일보다 먼저일 수 없습니다.");
+					event.preventDefault();
+				}
+			}
+		}//날짜
+		
+		//글자수 체크하고 인풋에 넣기
+		 var count=0;
+		 var list = new Array();
+		$("input[type=text]").each(function(index, item){
+			count+=$(item).val().length;
+		});
+		count+=$('#taIntro_jy').val().length;
+		$('#resumeLength_jy').val(count);			
+		//alert(count);
+		
+	});//submit!!
 	  
-	
 });//jquery
 
 
 function setDateBox() {
     var dt = new Date();
     var year = "";
-    var com_year = dt.getFullYear();
+    var com_year = dt.getFullYear();//올해년도
 
-    // 발행 뿌려주기
+    // 년도 
     $("#year").append("<option value=''>YYYY</option>");
     $("#year2").append("<option value=''>YYYY</option>");
 
-    // 올해 기준으로 -50년부터 +1년을 보여준다.
+    // 올해 기준 -50년부터 +1년을 보여준다.
     for (var y = (com_year - 50); y <= (com_year + 1); y++) {
       $("#year").append("<option value='" + y + "'>" + y + "</option>");
       $("#year2").append("<option value='" + y + "'>" + y + "</option>");
     }
 
-    // 월 뿌려주기(1월부터 12월)
+    // 월 (1월부터 12월)
     var month;
     $("#month").append("<option value=''>MM</option>");
     $("#month2").append("<option value=''>MM</option>");
@@ -86,20 +115,16 @@ function setDateBox() {
       $("#month").append("<option value='" + i + "'>" + i + "</option>");
       $("#month2").append("<option value='" + i + "'>" + i + "</option>");
     }
-    
 }
 
-
-
-
 </script>
-
 <section class="section doctor-single machupSection_jy">
 	<div class="container machupContainer1_jy">
 		<div class="row machupRow_jy">
 <!-- 프로필구역 -->		
 			<aside class="col-lg-3 col-md-6 machupAside_jy" >
 				<!-- 프로필상자, 사진업로드?-->
+				<div class="profileTitle-dt_jy">프로필</div>
 				<div class="profileblock_jy">
 					<header class="profileHeader_jy">
 						<div class="member-img_jy" style='background-image: url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png"), url("https://static.wanted.co.kr/images/profile_default.png")'>
@@ -112,7 +137,7 @@ function setDateBox() {
 							<div class="asideMail_jy">${memVo.email}</div>
 							<div class="asideHp_jy">${memVo.hp}</div>
 						</div>
-						<button type="button" class="btEdit_jy" value="기본정보수정">기본정보 수정</button>
+						<button type="button" class="btEdit_jy" value="기본정보수정" onClick="location.href='<c:url value="#"/>'">기본정보 수정</button>
 					</header>
 					<div class="info-block mt-4 infoblock_jy">
 						<a href="#" class="profileInfo-a_jy">
@@ -133,11 +158,12 @@ function setDateBox() {
 
 			<div class="col-lg-9 col-md-6 machupWrapperdiv_jy">
 				<div class="doctor-details mt-4 mt-lg-0 machupinner_jy">
-				<form id="frmMcuRegister2" class="appoinment-form" method="post" action="<c:url value='/matchupMem/machupMemRegister2.do'/>">
+				<form id="frmMcuRegister2" class="appoinment-form" method="post" action="<c:url value='/matchupMem/matchupMemRegister2.do'/>">
 					<div class="machupSection_jy">
-							<input type="hidden" name="mcumemNo" value="${mcuVo.mcumemNo}"> 						
-							<input type="hidden" name="memNo" value="${mcuVo.memNo}">		 		
-							<input type="hidden" name="resumeNo" value="${mcuVo.resumeNo}">		 		
+							<input type="hidden" name="mcumemVo.mcumemNo" value="${mcuVo.mcumemNo}"> 						
+							<input type="hidden" name="resumeVo.memNo" value="${mcuVo.memNo}">		 		
+							<input type="hidden" name="resumeVo.resumeNo" value="${mcuVo.resumeNo}">		 		
+							<input type="hidden" id="resumeLength_jy" name="resumeVo.resumeLength" value="">		 		
 							<header class="form-header_jy">	
 								<dl class="form-title_jy">
 									<dt class="machupTitle-dt_jy">학교·직장등록</dt>
@@ -151,7 +177,7 @@ function setDateBox() {
 										<h6 class="formButton-label_jy mcuEditsal_jy">학교</h6>
 							<!-- 학교 -->
 										<div class="spSalary_jy divEdu_jy" id="divEdu_jy">
-											<input type="text" name="eduList[0].eduName" id="eduName" placeholder="학교명 입력" readonly="readonly" value="">
+											<input type="text" name="eduVo.eduName" id="eduName" placeholder="학교명 입력" readonly="readonly" value="">
 										</div>
 										<button type="button" class="btselect_jy mcuEditbtSelect_jy1"  data-toggle="modal" data-target="#eduModal">
 											<i class="icon-arrow_right :before arrowIcon_jy"></i>
@@ -162,26 +188,22 @@ function setDateBox() {
 										<h6 class="formButton-label_jy exceptconOption_jy mcuEditskil_jy">직장</h6>
 							<!-- 직장 -->	
 										<span class="spSkills_jy" id="spSkills_jy">
-											<input type="text" name="crrList[0].careerName"  id="careerName" placeholder="직장명입력" readonly="readonly" value="">
+											<input type="text" name="careerVo.careerName"  id="careerName" placeholder="직장명입력" readonly="readonly" value="">
 											<button type="button" class="btselect_jy mcuEditbtSelect_jy" data-toggle="modal" data-target="#careerModal">	
 												<i class="icon-arrow_right :before arrowIcon_jy"></i>
 											</button>
-											<!-- <input type="text" name="crrList[0].startYear" id="edusyear" maxlength="4" placeholder="YYYY" value="">.
-											<input type="text" name="crrList[0].startMonth" id="edusMonth" maxlength="2" placeholder="MM" value="">-
-											<input type="text" name="crrList[0].endYear" id="edueYear" maxlength="4" placeholder="YYYY" value="">.
-											<input type="text" name="crrList[0].endMonth" id="edueMonth" maxlength="2" placeholder="MM" value=""> -->
-											
+														
 											<span class="periodAria_jy">
-												<select name="crrList[0].startYear" id="year" title="시작년도" class="custom-select"></select>.
-												<select name="crrList[0].startMonth" id="month" title="시작월" class="custom-select"></select>-
-												<select name="crrList[0].endYear" id="year2" title="종료년도" class="custom-select"></select>.
-												<select name="crrList[0].endMonth" id="month2" title="종료월" class="custom-select"></select>
+												<select name="careerVo.startYear" id="year" title="시작년도" class="custom-select"></select>.
+												<select name="careerVo.startMonth" id="month" title="시작월" class="custom-select"></select>-
+												<select name="careerVo.endYear" id="year2" title="종료년도" class="custom-select"></select>.
+												<select name="careerVo.endMonth" id="month2" title="종료월" class="custom-select"></select>
 											</span>
 											<span class="spckbox_jy">
 												<label for="ckcurEmployed">
 													<input type="checkbox" name="ckcurEmployed" id="ckcurEmployed" onClick="$.getCur()"> 현재 재직중
 												</label>
-												<input type='hidden' value='N' id='curEmployed' class='realcurEmployed' name='crrList[0].curEmployed'>
+												<input type='hidden' value='N' id='curEmployed' class='realcurEmployed' name='careerVo.curEmployed'>
 											</span>
 										</span>
 									</div>
@@ -191,11 +213,11 @@ function setDateBox() {
 										<p class="tooltipP_jy">직무내용, 경험, 목표 등을 추가해서 더욱 멋진 소개글을 작성해 보세요</p>
 							<!-- 간단소개글 -->	
 										<span class="spInroduce_jy">
-											<textarea  class="taIntroduce_jy" rows="5" cols="50" name="resumeVo.resumeIntroduce"></textarea>
+											<textarea  id="taIntro_jy"class="taIntroduce_jy" rows="5" cols="50" name="resumeVo.resumeIntroduce"></textarea>
 										</span>
 									</div>
 									
-						<!-- 모달1 salary -->
+						<!-- 모달1 학교 -->
 									<div class="modal fade modalOuter_jy" id="eduModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
 										<div class="modal-dialog modalDialog_jy"  role="document">
 											<div class="modal-content modalContent_jy">
@@ -210,14 +232,14 @@ function setDateBox() {
 														</div>
 														<div class="MosaldivInput_jy">
 															<i class="icon-search"></i>
-															<input type="text" name="eduNameModal_jy" id="eduNameModal_jy"  placeholder="학교명을 입력해주세요" value="">
+															<input type="text" name="eduNameModal_jy" id="eduNameModal_jy" placeholder="학교명을 입력해주세요" value="">
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div> <!-- 모달디브 -->
-							<!-- 모달2 skills-->
+							<!-- 모달2 직장-->
 								<div class="modal fade modalOuter_jy" id="careerModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
 									<div class="modal-dialog modalDialog_jy"  role="document">
 										<div class="modal-content modalContent_jy">
