@@ -41,6 +41,10 @@ label {
 	height: 45px;
 }
 
+.comServProposalModalFooter{
+	align-items: center;
+	text-align: center;
+}
 
 
 

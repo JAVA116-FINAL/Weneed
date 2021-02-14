@@ -121,6 +121,7 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 		return sqlSession.selectList(namespace+"selectMcumemSearchList", mcuMemSearchVo);
 	}
 
+
 	@Override
 	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo) {
 		return sqlSession.selectList(namespace+"selectZzimedList", searchVo);
