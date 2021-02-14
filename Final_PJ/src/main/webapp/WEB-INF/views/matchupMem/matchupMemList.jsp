@@ -171,6 +171,7 @@ $(function(){
 				addExcom+="</li>";	
 				$('#excomUl').append(addExcom);
 				
+				$('.exselectbtName_jy').empty();
 				addExcomdiv+="<li class='spExComList_jy' id='spExcom"+getView.MCUCOM_NO+"'>"+getView.COM_NAME+"</li>";
 				$('#excomulOut').append(addExcomdiv);
 			},	
