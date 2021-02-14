@@ -7,6 +7,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ProposalDAOMy implements ProposalDAO{
 	@Autowired SqlSessionTemplate sqlSession;
-	private String namespace="";
+	private String namespace="com.mybatis.mapper.proposal.";
+	
+	@Override
+	public int insertProposal(ProposalVO propoVo) {
+		return sqlSession.insert(namespace+"insertProposal", propoVo);
+	}
+	
+	@Override
+	public int checkProposalCount(ProposalVO propoVo) {
+		return sqlSession.selectOne(namespace+"checkProposalCount", propoVo);
+	}
 	
 }

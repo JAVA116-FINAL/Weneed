@@ -34,4 +34,5 @@ public interface MatchupMemService {
 	List<Map<String, Object>> selectSearchedMemList(MatchupMemSearchVO mcuMemSearchVo);
 	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo);
 	public int isZzimed(int resumeNo, String comCode);
+	public int selectMemNo(int resumeNo);
 }

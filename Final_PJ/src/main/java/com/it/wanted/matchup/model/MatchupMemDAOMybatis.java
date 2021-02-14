@@ -132,5 +132,10 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	public int isZzimed(MatchupZzimVO zzimVo) {
 		return sqlSession.selectOne(namespace+"isZzimed", zzimVo);
 	}
+
+	@Override
+	public int selectMemNo(int resumeNo) {
+		return sqlSession.selectOne(namespace+"selectMemNo", resumeNo);
+	}
   
 }
