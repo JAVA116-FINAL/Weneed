@@ -10,8 +10,8 @@
 		       1, #{comCode}, #{comMemNo}, #{posNo})
 	</insert>
 	
-	<select id="checkProposalCount" parameterType="positionVo" resultType="int">
-		select count(*) from position where pos_no=#{posNo}
+	<select id="checkProposalCount" parameterType="proposalVo" resultType="int">
+		select count(*) from proposal where pos_no=#{posNo} and mem_no=#{memNo}
 	</select>
 </mapper>
 

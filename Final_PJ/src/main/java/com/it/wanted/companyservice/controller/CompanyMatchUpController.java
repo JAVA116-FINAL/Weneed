@@ -166,7 +166,7 @@ public class CompanyMatchUpController {
 		
 		//제안하기 테이블에 insert 시키는 것이다. 확인은.. 안 해도 되나... 
 		int cnt=proposalService.insertProposal(propoVo);
-		
+		logger.info("제안하기 insert 결과 cnt={}", cnt);
 		String url="/company/matchupSearch.do", msg="제안하기 전송 실패!";
 		
 		if(cnt>0) {
