@@ -26,6 +26,29 @@
 		insert into posJikmu(pos_no, jikmu_code)
 		values(#{posNo}, #{jikmuCode})
 	</insert>
+	
+	
+	<!-- 현빈 0214 추가 잡서치 조회 뷰
+	create or replace view jobsearchView
+	as
+	select pos.pos_no as POSNO, com.com_name as COMNAME, com.com_code as COMCODE,
+	pos.pos_name as POSNAME, pos.min_year as MINYEAR, pos.max_year as MAXYEAR,
+	pos.end_date as ENDDATE,
+	DBMS_LOB.SUBSTR(pos.pos_context, 4000, 1) as POSCONTEXT, 
+	DBMS_LOB.SUBSTR(pos.POS_CAREER,4000, 1) as POSCAREER,
+	DBMS_LOB.SUBSTR(pos.QUALIFICATION,4000, 1) as QUALIFICATION, 
+	DBMS_LOB.SUBSTR(pos.preferential_TREATment,4000, 1) as PREFERENTIALTREATMENT,
+	DBMS_LOB.SUBSTR(pos.welfare_benefits ,4000, 1) as WELFAREBENEFITS, 
+	pos.overseas as OVERSEAS,
+	(select com_img_url from comimginfo where com_img_passed='Y' and com_code=pos.com_code and rownum=1) as COMIMGURL,
+	na.nation_name_kr as NATIONNAMEKR
+	from position pos join cominfo com on pos.com_code=com.com_code
+	left outer join nationlist na on pos.nation_name_kr=na.nation_name_kr
+	order by pos.pos_no desc
+	-->
+	<select id="selectJobsearchList" resultType="map">
+		select * from jobsearchView
+	</select>
 </mapper>
 
 

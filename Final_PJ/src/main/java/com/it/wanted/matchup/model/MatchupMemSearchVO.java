@@ -10,13 +10,7 @@ public class MatchupMemSearchVO {
 	private String searchMaxCareer;
 	private String searchJikmu;
 	private String searchJikgun;
-	
-	public String getSearchJikgun() {
-		return searchJikgun;
-	}
-	public void setSearchJikgun(String searchJikgun) {
-		this.searchJikgun = searchJikgun;
-	}
+	private String comCode;
 	public List<Integer> getMcumemNoList() {
 		return mcumemNoList;
 	}
@@ -53,12 +47,24 @@ public class MatchupMemSearchVO {
 	public void setSearchJikmu(String searchJikmu) {
 		this.searchJikmu = searchJikmu;
 	}
-	
+	public String getSearchJikgun() {
+		return searchJikgun;
+	}
+	public void setSearchJikgun(String searchJikgun) {
+		this.searchJikgun = searchJikgun;
+	}
+	public String getComCode() {
+		return comCode;
+	}
+	public void setComCode(String comCode) {
+		this.comCode = comCode;
+	}
 	@Override
 	public String toString() {
 		return "MatchupMemSearchVO [mcumemNoList=" + mcumemNoList + ", viewMoreSize=" + viewMoreSize
 				+ ", searchKeyword=" + searchKeyword + ", searchMinCareer=" + searchMinCareer + ", searchMaxCareer="
-				+ searchMaxCareer + ", searchJikmu=" + searchJikmu + ", searchJikgun=" + searchJikgun + "]";
+				+ searchMaxCareer + ", searchJikmu=" + searchJikmu + ", searchJikgun=" + searchJikgun + ", comCode="
+				+ comCode + "]";
 	}
 	
 }

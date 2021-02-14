@@ -218,7 +218,7 @@ button.btselect_jy {
 }
 
 button.btselect_jy {
-    color: #80808075;
+   /*  color: #80808075; */
     width: 56%;
     text-align: left;
     padding: 10px;
@@ -536,4 +536,360 @@ strong.suggestCount {
     float: right;
     font-size: large;
     font-weight: bold;
+}
+
+
+/* 0210 */
+
+.redSpan_jy {
+    color: red;
+    font-size: 14px;
+}
+
+
+span.introProposalP_jy.redSpan_jy {
+    font-size: 14px;
+}
+
+button.btEditIntro {
+    border: 1px solid #2196f3;
+    width: 20%;
+    border-radius: 4px;
+    font-size: 15px;
+    padding: 10px;
+    font-weight: 600;
+    color: #2196f3;
+    position: relative;
+    right: -21%
+}
+
+button.btselect_jy {
+    width: 78%;
+    display: inline-block;
+}
+
+i.icon-arrow_right.\:before.arrowIcon_jy {
+    position: absolute;
+    right: 70px;
+}
+
+section.section.doctor-single.machupSection_jy {
+    padding-top: 65px;
+}
+
+.profileTitle-dt_jy {
+    font-size: 17px;
+    color: #505050;
+    font-weight: bolder;
+    margin-bottom: 12px;
+}
+
+.text-md.machupTitlediv_jy {
+    margin-top: 38px;
+}
+
+
+
+button.btselect_jy {
+    border: none;
+    outline: none;
+}
+
+button.btselect_jy {
+    border-bottom: 1px solid #9e9e9e7d;
+    outline: none;
+}
+
+span.spExComList_jy {
+    color: black;
+}
+
+button.DefaultResumeSelector-resumeLang.ResumeSelector-button_jy {
+    border: none;
+    outline: none;
+}
+
+/* 0210 */
+li.resumeListLi {width: 50%;float: left;padding: 10px;position: relative;1pxborder: solid;}
+
+ul#rerumeListUl {
+    height: 400px;
+    padding: 10px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+}
+
+.rsumeListDiv_jy {
+    position: relative;
+}
+
+li.resumeListLi {}
+
+button.resumeSelectbt {
+    width: 100%;
+    position: relative;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    background-color: white;
+    cursor: pointe;
+    border-color: transparent;
+}
+
+.madalResumeListHeader {
+    width: 100%;
+    height: 80px;
+    margin: 50px 0;
+    background-size: contain;
+    background-image: url(https://static.wanted.co.kr/brown/img/file_format/ico_resume_unactive.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.status {
+    top: 12px;
+    left: 10px;
+    position: absolute;
+    color: #333;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.resumeLang {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.isMatchupResume {
+    position: absolute;
+    color: #3366ff;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 1px 5px;
+    top: 150px;
+    left: 15px;
+    border-radius: 2px;
+    background: rgba(51, 102, 255, 0.1);
+}
+
+dl.resumeInfoDl {}
+
+dl.resumeInfoDl {
+    border-top: 1px solid #e0e0e0;
+    text-align: left;
+    padding: 10px 15px;
+}
+
+dt.resumeInfoDt {
+    color: #333;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+dt.resumeRegdtae {}
+
+dt.resumeRegdtae {
+    color: #999;
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: lighter;
+}
+
+p.footerInfo {
+    margin: 0;
+    margin-bottom: 15px;
+    color: #999;
+    font-size: 18px;
+    text-align: left;
+    font-weight: 400;
+}
+
+button#btsetResume_jy {
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 3px;
+    background-color: #258bf7;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.resumeLang {
+    border: 1px solid #9e9e9e73;
+    border-radius: 1px;
+    font-size: 11px;
+    width: 20px;
+    color: gray;
+}
+
+button.resumeSelectbt {
+    border: 1px solid #9e9e9e57;
+}
+
+p.footerInfo {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.modalFooter {
+    padding: 20px;
+}
+
+.modal-header.modalHeader2_jy {/* text-align: center; *//* margin: 0 auto; */}
+
+h5#modalLabel2_jy {
+    font-weight: bold;
+    font-size: 15px;
+    /* text-align: center; */
+    margin-left: auto;
+}
+
+button.close.btCloseModal_jy {
+    font-weight: lighter;
+}
+
+.modalFooter {
+    border-top: 1px solid #9e9e9e36;
+}
+
+.modal-dialog.modalDialog2_jy {
+    margin-top: 158px;
+}
+
+a.pendil1-a_jy {
+    top: 25%;
+}
+
+a.pendil2-a_jy {top: 47%;}
+
+input#refNameModal_jy {
+    width: 90%;
+    border: none;
+}
+
+p.refModalP_jy {
+    font-size: 14px;
+    color: #9e9e9e87;
+    margin-top: 50px;
+}
+
+.modal-dialog.modalrefDialog_jy {
+    top: 30%;
+}
+
+/* 0212 */
+input#refNameModal_jy {
+    width: 90%;
+    border: none;
+    outline: none;
+}
+
+p.refModalP_jy {
+    font-size: 14px;
+    color: #9e9e9e96;
+    margin-top: 50px;
+}
+
+span.exselectbtName_jy {
+    /* width: 80px; */
+    display: inline-block;
+    width: 94%;
+}
+
+.modal-dialog.modalrefDialog_jy {
+    margin-top: 20%;
+}
+
+input#excomInput_jy {
+    width: 88%;
+    border: none;
+    outline: none;
+}
+
+.excominputDiv.listModalDiv {
+    border: 1px solid #9e9e9e63;
+    border-radius: 3px;
+}
+
+h5#modalLabel_jy {
+    margin-left: 36%;
+}
+
+input#refNameInput_jy {
+    border: none;
+    width: 91%;
+}
+
+.ModaldivInput_jy.listModalDiv {
+    border: 1px solid #9e9e9e70;
+    solid cursor: grab;
+    solid cursor: grab;
+    border-radius: 3px;
+}
+
+span#refName {
+    width: 94%;
+    display: inline-block;
+}
+
+/* 0212 */
+
+h5#modalLabel_jy {
+    margin-left: 42%;
+}
+
+li.excomli {
+    display: inline-block;
+    min-width: 18%;
+    border: 1px solid #9e9e9e4d;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 13px;
+    color: black;
+}
+
+button.excomDelbt {
+    margin-left: 3px;
+}
+
+ul.excomUl {
+    margin-bottom: 15px;
+}
+
+ul#searchComListUl {
+    font-size: 13px;
+    color: #9e9e9ee3;
+}
+
+li.searchComListLi {
+    border: 1px solid #9e9e9e30;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+i.icon-arrow_right.\:before.arrowIcon_jy.excomiconjy {
+    bottom: 11%;
+}
+
+.spRefName_jy {
+    color: black;
+}
+
+/* 0213 */
+
+li.spExComList_jy {
+    color: black;
+    max-width: 20%;
+    display: inline-block;
+}
+
+.exselectbtName_jy.refName {
+    color: black;
 }

@@ -6,6 +6,7 @@ p, span, h5, h1, h2, a, button, i, li, label{
 
 /* 첫번째 섹션*/
 .matchupMain-1stSec{
+	display: block;
 	padding: 100px 300px;
 	align-items: center;
 	justify-content: center;
@@ -197,6 +198,10 @@ h1{
 
 /******* 매치업 검색 *******/
 
+.hide{
+	display: none;
+}
+
 .matchupSearch-1stSec{
 	margin: 30px 0px 0px 0px;
 }
@@ -309,7 +314,9 @@ h1{
 	border-top: 1px solid #e1e2e3;
 	border-bottom: 1px solid #e1e2e3;
 }
-
+.matchupSearch-li > a:hover{
+	color: #9d9d9d;
+}
 .matchupSearch-li:last-child{
 	border-right: 1px solid #e1e2e3;
 }
@@ -410,3 +417,54 @@ h1{
 	border: 1px solid #444444;
 	
 }
+
+
+/* 매치업 현황 표시판 */
+.matchupNoticeCon{
+	background: black;
+	border-top: 1px solid #e1e2e3;
+}
+
+.matchupNoticeWrapper{
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+.matchupNoticeTitle{
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #5c85ff;
+	display: block;
+}
+
+.matchupNoticeTitle > i {
+	color: #5c85ff;
+}
+
+.matchupNoticeBtnWrapper{
+	display: flex;
+	align-items: center;
+}
+
+.matchupServiceBuyBtn{
+	color: white;
+	border: 1px solid #e1e2e3;
+	border-radius: 5px;
+	padding: 10px 15px;
+}
+
+.matchupNoticeText{
+	color: #e1e2e3;
+	font-size: 0.8em;
+}
+
+#matchupUseorNotSpan{
+	font-weight: bold;
+}
+
+#matchupViewCountSpan1{
+	color: #808080;
+}
+
+
+

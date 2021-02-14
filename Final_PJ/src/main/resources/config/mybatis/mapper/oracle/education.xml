@@ -40,7 +40,15 @@
 		values(#{eduNo} ,#{resumeNo},#{eduName})
 	</insert>
 	
+	<select id="selectEduOne" parameterType="int" resultType="educationVo">
+		select * from education where edu_No=#{eduNo}	
+	</select>
 	
+	<update id="updateEduName" parameterType="educationVo">
+		update education
+		set edu_Name=#{eduName}
+		where edu_No=#{eduNo}
+	</update>
 	
 	<!-- 현빈 -->
 	<select id="selectMcumemNo" parameterType="String" resultType="int">

@@ -3,9 +3,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<link rel="stylesheet" href="<c:url value='/resources/css/resumeIntro.css'/>">
+<%-- <link rel="stylesheet" href="<c:url value='/resources/css/resumeIntro.css'/>"> --%>
+<link rel="stylesheet" href="<c:url value='/resources/css/jobsearchApply.css'/>">
 
+<script type="text/javascript">
 
+	$(function(){
+/* 자연 */
+ 
+		$('#btApply').click(function(){
+			$.ajax({
+				url:"<c:url value='/jobsearch/apply.do'/>",
+				data:"posNo="+27/* 포지션번호 넣어주기! ${posNo} */,
+				type:"get",
+				success:function(result){
+					$('#asideApply').empty();
+					$('#asideApply').html(result);
+					
+				}
+			});	 		
+		});
+	});
+</script>
 
 <section class="section blog-wrap" style="margin-top:-70px;">
     <div class="container">
@@ -125,99 +144,91 @@
 								</div>
 								
 								<div class="google-map ">
-						
 									<%@ include file="map.jsp" %>
-							
 								</div>
 								
 								<!-- 여기다가 회사 네임카드랑 팔로우 -->								
-									
 								<div style="width: 730px; height:80px; border: 0.3px solid gray">
-										   	<button type="button" class="btnCompan" onClick="location.href='companyDetail.do'" style="outline:none;">
-										   	<div style="width:280px; margin:15px;">
-									   			<div>
-									   				<img alt="" src="<c:url value='https://static.wanted.co.kr/images/wdes/0_5.79fe6c9d.jpg'/>" style="width:50px; height:50px; float:left;">
-									   			</div>
-									   			<div style="float:left; margin-left:10px; text-align:left; font-size:13px; font-weight:bold;">
-									   				<p>바바리퍼블리카(토스)</p>
-									   				<p style="color:gray; margin-top:-8px;">IT, 컨텐츠</p>
-									   			</div>
-									   			</div>
-										   	</button>
-										   
-										   	<button type="button" class="followButton" onClick="location.href='#'" style="font-weight: bold; width:85px; height:30px; background-color:#258bf7; border-radius: 3px; color: #fff; float:right; margin:21px;">
-										   		팔로우
-										   	</button>
+								   	<button type="button" class="btnCompan" onClick="location.href='companyDetail.do'" style="outline:none;">
+								   	<div style="width:280px; margin:15px;">
+							   			<div>
+							   				<img alt="" src="<c:url value='https://static.wanted.co.kr/images/wdes/0_5.79fe6c9d.jpg'/>" style="width:50px; height:50px; float:left;">
+							   			</div>
+							   			<div style="float:left; margin-left:10px; text-align:left; font-size:13px; font-weight:bold;">
+							   				<p>바바리퍼블리카(토스)</p>
+							   				<p style="color:gray; margin-top:-8px;">IT, 컨텐츠</p>
+							   			</div>
+							   			</div>
+								   	</button>
+								   
+								   	<button type="button" class="followButton" onClick="location.href='#'" style="font-weight: bold; width:85px; height:30px; background-color:#258bf7; border-radius: 3px; color: #fff; float:right; margin:21px;">
+								   		팔로우
+								   	</button>
 								</div>
-
-
-							    
 							</div>
 						</div>
 					</div>
 				</div>
             </div>
 <!-- 여기부터 aside -->
-<!-- 자연임포트  ajax 이벤트 걸어야함!!!!-->
-			<c:import url="/jobsearch/apply.do"></c:import>
-<!-- 
-			 <aside class="col-lg-4 asideApply_jy" style="margin-left:-30px;"> 
-				   <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" style="width:350px;">
-						<div class="sidebar-widget schedule-widget mb-3">
-							<div>
-								<h5 class="mb-4">채용보상금</h5>
-								<ul>
-									<li> 
-										<h4>추천인</h4>
-										<p>500,000원</p>
-									</li>
-									<li> 
-										<h4>지원자</h4>
-										<p>500,000원</p>
-									</li>
-								</ul>
-								<button type="button">
-									공유버튼
-								</button>
-							</div>
-							
-							<div class="buttonsdiv_jy">
-								<div class="btdiv_jy bookmarkbtdiv_jy"> 
-									<button class="bookmark_jy" type="button">
-										북마크하기
-									</button>
-								</div>
-								<div class="btdiv_jy applybtdiv_jy">
-									<button class="btapply_jy" type="button">
-										지원하기
-									</button>
-								</div>
-							</div>	
-							
-							<div>
-								<button>
-									<i class="icon-ic_favorite_black_24px :before"></i>
-	좋아요 갯수		 		<span>32</span>
-								</button>
-								<button>
-	좋아요 누른 사람들      <ul>
-										<li style='background-image: url("https://static.wanted.co.kr/images/avatars/1345710/c968c352.jpg"), url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png")'></li>
-										<li style='background-image: url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png"), url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png")'></li>
-										
+<!-- 자연임포트  ajax 이벤트 걸어야함!!!! posNo파라미터로 넣기-->
+			<%-- <div id="displayApply">
+				<c:import url="/jobsearch/apply.do?posNo=27"></c:import>
+			</div> --%>
+			<div id="displayAside">
+				  <aside class="col-lg-4 asideApply_jy" style="margin-left:-30px;" id="asideApply">
+				  <%@include file="aside.jsp"%>
+					   <!-- <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" style="width:350px;">
+							<div class="sidebar-widget schedule-widget mb-3">
+								<div>
+									<h5 class="mb-4">채용보상금</h5>
+									<ul>
+										<li> 
+											<h4>추천인</h4>
+											<p>500,000원</p>
+										</li>
+										<li> 
+											<h4>지원자</h4>
+											<p>500,000원</p>
+										</li>
 									</ul>
-								</button>
-							</div>
-							
-							
-			
-						</div>
-					
-					</div>
+									<button type="button">
+										공유버튼
+									</button>
+								</div>
+								
+								<div class="buttonsdiv_jy">
+									<div class="btdiv_jy bookmarkbtdiv_jy"> 
+										<button class="bookmark_jy" type="button">
+											북마크하기
+										</button>
+									</div>
+									<div class="btdiv_jy applybtdiv_jy">
+										<button class="btapply_jy" type="button" id="btApply">
+											지원하기
+										</button>
+									</div>
+								</div>	
+								
+								<div>
+									<button>
+										<i class="icon-ic_favorite_black_24px :before"></i>
+		좋아요 갯수		 				<span>32</span>
+									</button>
+									<button>
+		좋아요 누른 사람들   				  <ul>
+											<li style='background-image: url("https://static.wanted.co.kr/images/avatars/1345710/c968c352.jpg"), url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png")'></li>
+											<li style='background-image: url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png"), url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png")'></li>
+										</ul>
+									</button>
+								</div>
+						 </div>
+					</div> -->
 	           </aside> 
- -->
+ 			</div>
+ 			
+ 			
  <!-- 어사이드끝 -->     
- 
-       
 			 <section class="section service-2">
 				<div class="container">
 					<div class="row justify-content-center">

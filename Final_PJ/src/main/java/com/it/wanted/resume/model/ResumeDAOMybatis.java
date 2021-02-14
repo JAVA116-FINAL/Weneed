@@ -6,9 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository 
 public class ResumeDAOMybatis implements ResumeDAO{
-	@Autowired
+	@Autowired 
 	private SqlSessionTemplate sqlSession;
 	private final static String namespace ="com.mybatis.mapper.oracle.resume.";
 	
@@ -47,11 +47,27 @@ public class ResumeDAOMybatis implements ResumeDAO{
 		return sqlSession.selectOne(namespace+"selectResumeOne", rVo);
 	}
 
+	
+	/* 현빈 */
+	@Override
+	public ResumeVO selectResumeByResumeNo(int resumeNo) {
+		return sqlSession.selectOne(namespace+"selectResumeByResumeNo", resumeNo);
+	}
+	
 	@Override
 	public int insertMcuResume(ResumeVO rVo) {
 		return sqlSession.update(namespace+"insertMcuResume",rVo);
 	}
-	
+
+	@Override
+	public ResumeVO selectResumeOnebyResumeNo(int resumeNo) {
+		return sqlSession.selectOne(namespace+"selectResumeOnebyResumeNo",resumeNo);
+	}
+
+	@Override
+	public int updateResumeIntroduce(ResumeVO rVo) {
+		return sqlSession.update(namespace+"updateResumeIntroduce",rVo);
+	}
 	
 	
 }

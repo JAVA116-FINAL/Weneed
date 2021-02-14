@@ -1,0 +1,96 @@
+span, button, p{
+	color: #444444;
+}
+
+section, section > div {
+	color: #444444;
+}
+
+.matchupResumeMDSection{
+	border-bottom: 1px solid #444444;
+	display: flex;
+	margin: 0px 10px;
+	padding: 20px 0px;
+}
+
+.matchupResumeName{
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+.matchupResumeMainTitle{
+	font-size: 1.2em;
+	font-weight: bold;
+	width: 150px;
+}
+
+.matchupResumeSubTitle{
+	font-weight: bold;
+}
+
+.matchupResume1stSec_div{
+	display: flex;
+	justify-content: space-between;
+}
+
+.matchupResumeMDSectionFirst{
+	display: block;
+}
+
+.matchupResumeWrapper{
+	width: 530px;
+}
+
+.matchupResumeCont{
+	display: flex;
+}
+
+.matchupResumeLangTestCont{
+	justify-content: space-between;
+}
+
+.matchupResumeAchievement{
+	margin-top: 10px;	
+}
+.matchupResumeSpace{
+	justify-content: space-between;
+}
+
+.matchupResumeLang{
+	margin-bottom: 10px;
+}
+
+.matchupResumeMediumSpan{
+	font-size: 0.9em;
+}
+
+.matchupResumeBoldSpan{
+	font-weight: bold;
+}
+
+#matchupResumeBtnSpan{
+	text-align: left;	
+}
+
+.matchupResumeSMBtns{
+	border: 1px solid #e1e2e3;
+	background: #fff;
+	padding: 10px 20px;
+	border-radius: 20px;
+	font-size: 0.8em;
+	margin-right: 10px;
+}
+
+.comServModalFooterCon{
+	display: flex;
+	align-items: center;
+}
+
+#matchupResumeViewDetailBtn{
+	width: 200px;
+	border-radius: 50px;
+}
+
+.matchupModalFooterGuide{
+	text-align: left;
+}

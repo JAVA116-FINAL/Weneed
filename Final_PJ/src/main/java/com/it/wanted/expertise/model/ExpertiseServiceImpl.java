@@ -7,5 +7,9 @@ import org.springframework.stereotype.Service;
 public class ExpertiseServiceImpl implements ExpertiseService{
 
 	@Autowired ExpertiseDAO expertDao;
+
+	public ExpertiseVO selectExpertise(int expertiseNo) {
+		return expertDao.selectExpertise(expertiseNo);
+	}
 	
 }

@@ -317,7 +317,7 @@ function pwdKeyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아
 						<a href="<c:url value='/index.do'/>" class="comServBtn gotoWantedMain">위니드 홈</a>
 					</div>
 				</div>
-				<c:if test="${!empty comMemId}">
+				<c:if test="${!empty comInfoVo.comCode}">
 					<!-- 로그인 후, 기업서비스 상단-2번 바 추가 노출 -->
 					<div class="header-wrapper22" id="comServHeader2nd">
 						<nav class="comServNavbar">

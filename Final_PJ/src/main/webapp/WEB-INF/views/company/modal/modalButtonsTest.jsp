@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Modal Button Test</title>
+<%@ include file="../../inc/cssJsImports.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/companyService/comServModal.css">
 </head>
 <body>
@@ -24,5 +25,15 @@
 	<button class="comServModal-btn"
 		data-toggle="modal" data-target=".matchupServPaymentMD" style="outline:none;">매치업 결제 팝업</button>
 	<%@ include file="matchupServicePayment.jsp" %>
+	
+	<!-- 이력서 미리보기 팝업  -->
+	<button class="comServModal-btn"
+		data-toggle="modal" data-target=".wantedResumeSimpleMD" style="outline:none;">이력서 미리보기</button>
+	<%@ include file="resumeSimple.jsp" %>
+	
+	<!-- 이력서 상세보기 팝업  -->
+	<button class="comServModal-btn"
+		data-toggle="modal" data-target=".wantedResumeDetailMD" style="outline:none;">이력서 상세보기</button>
+	<%@ include file="resumeDetail.jsp" %>
 </body>
 </html>

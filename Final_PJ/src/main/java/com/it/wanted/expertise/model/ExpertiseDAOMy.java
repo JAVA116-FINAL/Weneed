@@ -28,5 +28,20 @@ public class ExpertiseDAOMy implements ExpertiseDAO{
 	public int selectUptodateExpertNo() {
 		return sqlSession.selectOne(namespace+"selectUptodateExpertNo");
 	}
+
+	@Override
+	public ExpertiseVO selectExpertise(int expertiseNo) {
+		return sqlSession.selectOne(namespace+"selectExpertise", expertiseNo);
+	}
+
+	@Override
+	public int updateMatchupExpertise(ExpertiseVO expertiseVo) {
+		return sqlSession.update(namespace+"updateMatchupExpertise", expertiseVo);
+	}
+
+	@Override
+	public int deleteExpertise(int expertiseNo) {
+		return sqlSession.delete(namespace+"deleteExpertise",expertiseNo);
+	}
 	
 }
