@@ -1,6 +1,8 @@
 package com.it.wanted.jobsearch.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.member.model.MemberService;
 import com.it.wanted.member.model.MemberVO;
+import com.it.wanted.position.model.PositionService;
 import com.it.wanted.resume.model.ResumeService;
 import com.it.wanted.resume.model.ResumeVO;
 
@@ -24,14 +27,22 @@ public class jobsearchController {
 	@Autowired ResumeService resumeService;
 	@Autowired MatchupMemService matchupmemServece;
 	@Autowired MemberService memberService;
+	@Autowired PositionService positionService;
 	
 	@RequestMapping("/jobsearchList.do")
-	public void jobsearchList() {
+	public void jobsearchList(Model model) {
 		logger.info("탐색 목록화면 보여주기");
+		
+		//포지션 번호, 포지션명, 기업코드에 해당하는 기업이름, 
+		//국가코드에 해당하는 국가명, 지역코드에 해당하는 지역명은 시간관계상 생략하는걸로
+		List<Map<String, Object>> posList=positionService.selectJobsearchList();
+		logger.info("모든 탐색공고 목록 가져온 결과, posList.size={}", posList.size());
+		
+		model.addAttribute("posList", posList);
 	}
 	
 	@RequestMapping("/jobsearchDetail.do")
-	public void jobsearchDetail() {
+	public void jobsearchDetail(@RequestParam int posNo) {
 		logger.info("탐색 상세보기 화면보여주기");
 	}
 	

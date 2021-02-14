@@ -1,19 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 직군별연봉 리스트 스타일이랑 같아서 가져다 씀 -->
 <link rel="stylesheet" href="<c:url value='/resources/css/jobSalary.css'/>">
-
 <!-- 슬릭슬라이더 -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
+.jobsearchList-sliderSec{
+	padding-top: 20px;
+	border-bottom: 1px solid #e1e2e3;
+	margin-bottom: 20px;
+}
 .post-slider{
   margin: 20px 10px;
 }
 .post-slider .post-wrapper{
 	height:60px;
 	margin:0px auto;
-	margin-bottom: 10px;
 }
 .post-slider .post-wrapper .post{
 	width:100px;
@@ -29,8 +33,22 @@
 	border-radius: 5px;
 	margin: 0px 10px;
 }
+
+.jobsearchListImg{
+	border-radius: 5px;
+	height: 180px;
+}
+
+.jobsearchDivBounds{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.jobsearchDiv{
+	cursor: pointer;
+}
 </style>
-<script>
+<script type="text/javascript">
 $(function(){
 	$('.post-wrapper').slick({
 		slidesToShow: 8,
@@ -43,8 +61,8 @@ $(function(){
 <!-- 뷰페이지 현빈 작업  -->
 <div class="container">
 	<section class="jobsearchList-sliderSec">
+        <h1 class="sider-title"><a href="#">전체</a></h1>
 		<div class="post-slider">
-        	<h1 class="sider-title"><a href="#">전체</a></h1>
 	        <div class="post-wrapper">
 	          <div class="post">개발</div>
 	          <div class="post">경영·비즈니스</div>
@@ -72,97 +90,19 @@ $(function(){
 			<h2 class="salary-upgrade-position-title">지원 가능한 포지션</h2>
 		</div>
 		<section class="salary-upgrade-position-con">
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
+			<div class="jobsearchDivBounds">
+				<!-- 포지션공고 그려주기 시작 -->
+				<c:forEach var="posViewVo" items="${posList }">
+				<div class="col-lg-3 col-md-6 jobsearchDiv" onclick="location.href='<c:url value="/jobsearch/jobsearchDetail.do?posNo=${posViewVo.POSNO}"/>'">
 					<div class="about-block-item mb-5 mb-lg-0" style="padding-bottom:40px;">
-						<img src="${pageContext.request.contextPath}/resources/images/jobSalary/salary_001.jpg" alt="" class="img-fluid w-100">
-						<h4 class="mt-3 passPredic-pic-title">Machine Learning Engineer(Computer Vision)</h4>
-						<p class="ge-job-card-company-name">플라스크</p>
-						<div class="ge-job-card-company-location">서울
-							<span class="ge-addressDot">.</span><span>한국</span>
-						</div>
+						<img src="${pageContext.request.contextPath}/companyImgUpload/${posViewVo.COMIMGURL}" alt="" class="img-fluid w-100 jobsearchListImg">
+						<h4 class="mt-3 passPredic-pic-title">${posViewVo.POSNAME}</h4>
+						<p class="ge-job-card-company-name">${posViewVo.COMNAME}</p>
 						<div class="ge-reward">채용보상금 1,000,000원</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="about-block-item mb-5 mb-lg-0" style="padding-bottom:40px;">
-						<img src="${pageContext.request.contextPath}/resources/images/jobSalary/salary_002.jpg" alt="" class="img-fluid w-100">
-						<h4 class="mt-3 passPredic-pic-title">개발 총괄책임자-CTO</h4>
-						<p class="ge-job-card-company-name">유니크굿컴퍼니</p>
-						<div class="ge-job-card-company-location">서울
-							<span class="addressDot">.</span><span>한국</span>
-						</div>
-						<div class="ge-reward">채용보상금 1,000,000원</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="about-block-item mb-5 mb-lg-0" style="padding-bottom:40px;">
-						<img src="${pageContext.request.contextPath}/resources/images/jobSalary/salary_003.jpg" alt="" class="img-fluid w-100">
-						<h4 class="mt-3 passPredic-pic-title">FLYBIT(플라이빗) IT부문 총괄책임자 (CTO)</h4>
-						<p class="ge-job-card-company-name">한국디지털거래소</p>
-						<div class="ge-job-card-company-location">서울
-							<span class="addressDot">.</span><span>한국</span>
-						</div>
-						<div class="ge-reward">채용보상금 1,000,000원</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="about-block-item mb-5 mb-lg-0" style="padding-bottom:40px;" >
-						<img src="${pageContext.request.contextPath}/resources/images/jobSalary/salary_004.jpg" alt="" class="img-fluid w-100">
-						<h4 class="mt-3 passPredic-pic-title">테크 리드</h4>
-						<p class="ge-job-card-company-name">퍼블리(PUBLY)</p>
-						<div class="ge-job-card-company-location">서울
-							<span class="addressDot">.</span><span>한국</span>
-						</div>
-						<div class="ge-reward">채용보상금 1,000,000원</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="about-block-item mb-5 mb-lg-0" style="padding-bottom:40px;">
-						<img src="${pageContext.request.contextPath}/resources/images/jobSalary/salary_005.jpg" alt="" class="img-fluid w-100">
-						<h4 class="mt-3 passPredic-pic-title">VP of Engineering</h4>
-						<p class="ge-job-card-company-name">퍼블리(PUBLY)</p>
-						<div class="ge-job-card-company-location">서울
-							<span class="ge-addressDot">.</span><span>한국</span>
-						</div>
-						<div class="ge-reward">채용보상금 1,000,000원</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="about-block-item mb-5 mb-lg-0" style="padding-bottom:40px;" >
-						<img src="${pageContext.request.contextPath}/resources/images/jobSalary/salary_006.jpg" alt="" class="img-fluid w-100">
-						<h4 class="mt-3 passPredic-pic-title">개발팀 리드 (Tech Lead)</h4>
-						<p class="ge-job-card-company-name">스타릭스(Locar)</p>
-						<div class="ge-job-card-company-location">서울
-							<span class="addressDot">.</span><span>한국</span>
-						</div>
-						<div class="ge-reward">채용보상금 1,000,000원</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="about-block-item mb-5 mb-lg-0" style="padding-bottom:40px;" >
-						<img src="${pageContext.request.contextPath}/resources/images/jobSalary/salary_007.jpg" alt="" class="img-fluid w-100">
-						<h4 class="mt-3 passPredic-pic-title">개발자(프론트엔드/백엔드/풀스택)</h4>
-						<p class="ge-job-card-company-name">원패밀리</p>
-						<div class="ge-job-card-company-location">서울
-							<span class="addressDot">.</span><span>한국</span>
-						</div>
-						<div class="ge-reward">채용보상금 1,000,000원</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="about-block-item mb-5 mb-lg-0" style="padding-bottom:40px;">
-						<img src="${pageContext.request.contextPath}/resources/images/jobSalary/salary_008.jpg" alt="" class="img-fluid w-100">
-						<h4 class="mt-3 passPredic-pic-title">매쓰플랫 개발팀 리더(팀장)</h4>
-						<p class="ge-job-card-company-name">프리윌린</p>
-						<div class="ge-job-card-company-location">서울
-							<span class="addressDot">.</span><span>한국</span>
-						</div>
-						<div class="ge-reward">채용보상금 1,000,000원</div>
-					</div>
-				</div>
+				</c:forEach>
+				<!-- 포지션공고 그려주기 끝-->
 			</div>
 		</section>
 	</section>
