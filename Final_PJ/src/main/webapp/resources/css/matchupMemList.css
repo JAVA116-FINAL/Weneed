@@ -218,7 +218,7 @@ button.btselect_jy {
 }
 
 button.btselect_jy {
-    color: #80808075;
+   /*  color: #80808075; */
     width: 56%;
     text-align: left;
     padding: 10px;
@@ -879,5 +879,17 @@ i.icon-arrow_right.\:before.arrowIcon_jy.excomiconjy {
 }
 
 .spRefName_jy {
+    color: black;
+}
+
+/* 0213 */
+
+li.spExComList_jy {
+    color: black;
+    max-width: 20%;
+    display: inline-block;
+}
+
+.exselectbtName_jy.refName {
     color: black;
 }

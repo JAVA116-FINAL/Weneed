@@ -155,12 +155,14 @@ public class ResumeServiceImpl implements ResumeService{
 		try {
 			int count=matchupmemDao.isMatchupMem(rVo.getMemNo());
 			if(count>0) {//매치업회원이면
-				//1.전문분야번호구해놓고 
 				MatchupMemVO matchupmemVo = matchupmemDao.selectMcuMem(rVo.getMemNo());
-				//2. 전문분야지우기
-				cnt=expertDao.deleteExpertise(matchupmemVo.getExpertiseNo());
-				//3.매치업 지우기
-				cnt=matchupmemDao.deleteMatchupmembyResumeNo(rVo.getResumeNo());	
+				//지우려는 이력서가 매치업이력서와 같으면
+				if(matchupmemVo.getResumeNo()==rVo.getResumeNo()) {
+					//1. 전문분야지우기
+					cnt=expertDao.deleteExpertise(matchupmemVo.getExpertiseNo());
+					//2.매치업 지우기
+					cnt=matchupmemDao.deleteMatchupmembyResumeNo(rVo.getResumeNo());
+				}
 			}
 			//4.
 			cnt=resumeDao.deleteResume(rVo);
