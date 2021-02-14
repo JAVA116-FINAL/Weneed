@@ -173,7 +173,10 @@ public class ResumeController {
 		List<Map<String, Object>> fileList=null;
 		String resumeFile="";
 		try {
+			
 			fileList=fileUploadUtil.fileUplaod(request, FileUploadUtil.RESUME_UP_TYPE);
+			logger.info("파일리스트:",fileList);
+			
 			for (Map<String, Object> fileMap:fileList) {
 				resumeFile=(String) fileMap.get("fileName");
 				logger.info("resumeFile={}",resumeFile);
@@ -266,7 +269,7 @@ public class ResumeController {
 		logger.info("rVo={}",rVo);
 		//2
 		int cnt=resumeService.deleteResume(rVo);
-		logger.info("삭제 결과 cnt={}, rVo={}", cnt,rVo);
+		logger.info("삭제 결과 cnt={}, rVo={}", cnt,cnt);
 		//3
 		//4
 		return cnt;

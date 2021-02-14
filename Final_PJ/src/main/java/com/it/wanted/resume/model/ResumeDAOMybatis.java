@@ -6,9 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository 
 public class ResumeDAOMybatis implements ResumeDAO{
-	@Autowired
+	@Autowired 
 	private SqlSessionTemplate sqlSession;
 	private final static String namespace ="com.mybatis.mapper.oracle.resume.";
 	

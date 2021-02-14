@@ -339,7 +339,7 @@ i.icon-icon_match_btn_next.iconNextMcubt_jy {
 }
 
 .ap-resumInfo_jy.matched_jy {
-    width: calc(98% - 97px);
+    width: calc(106% - 89px);
 }
 
 .ap-done_jy {
@@ -535,3 +535,46 @@ button.btapply_jy {
     font-weight: 600;
     border-radius: 25px;
 }
+
+input#ckResumeSave {
+    color: #9e9e9e36;
+    position: relative;
+    top: 28%;
+    left: 31%;
+    zoom: 1.5;
+    /* border-block-color: gray; */
+}
+
+input#ckResumeTemp {
+    color: #9e9e9e36;
+    position: relative;
+    top: 28%;
+    left: 31%;
+    zoom: 1.5;
+}
+
+button#btUpfile {outline: none;}
+
+button.resumeRegister-apply_jy {
+    outline: none;
+}
+
+button#byApplySubmit {
+    outline: none;
+}
+
+button.btback-apply_jy {
+    outline: none;
+}
+
+
+.outerdiv-apply_jy {
+    width: fit-content;
+}
+
+div#displayAside {
+    width: min-content;
+}
+
+
+a.ap-resumEdit_jy {width: fit-content;}
