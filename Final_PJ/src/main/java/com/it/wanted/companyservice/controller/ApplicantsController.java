@@ -132,14 +132,17 @@ public class ApplicantsController {
 
 
 	//서류통과 테스트
-	@ResponseBody
-	@RequestMapping("/statusCheck.do")
-	public List<Map<String, Object>> statusCheck(@RequestParam(defaultValue = "0") int statusFlag) {
-		
-		logger.info("status = {}", statusFlag);
-		List<Map<String, Object>> aList = applicantsService.selectApplicants(statusFlag);
-
-		return aList;
-
-	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping("/statusCheck.do") public List<Map<String, Object>>
+	 * statusCheck(@RequestParam(defaultValue = "0") int statusFlag) {
+	 * 
+	 * logger.info("status = {}", statusFlag); List<Map<String, Object>> aList =
+	 * applicantsService.selectApplicants(statusFlag);
+	 * 
+	 * return aList;
+	 * 
+	 * }
+	 */
 }

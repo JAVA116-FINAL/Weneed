@@ -32,13 +32,15 @@ aside{
 }
 .appli-positionList-title{
 	font-weight: bold;	
-	font-size: 0.8em;
+	/* font-size: 0.8em; */
 	margin-bottom: 10px;
+	color : #acacac;
 }
 
 .appli-positionList-pos{
-	font-weight: bold;
+	font-weight:bold;
 	margin-bottom: 5px;
+	font-size: 0.8em;
 }
 
 .appli-positionList-pos_selected{
@@ -187,9 +189,6 @@ aside{
 
 .appli-checked{
 	background-color: #2c5bf1;
-}
-#appli-checkAllBox{
-	display: none;
 }
 
 .appli-btn-statusChange{
@@ -355,7 +354,8 @@ input:checked + .appli-slider:before {
 }
 
 .appli-object-ele_gold{
-	color: gold;
+	/* color: gold; */
+	color: #c1c1c1;
 }
 
 .appli-waitingDays{
@@ -391,5 +391,24 @@ input:checked + .appli-slider:before {
 
 
 
+
 /* 상태변경 모달 팝업 statusChange */
 
+
+
+/* 지원자 세부 페이지 */
+.appli-detail-sub{
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
+.appli-list-object_detailResumeImg{
+	width: 70px;
+	height: 70px;
+	margin-left: 5px;
+	border-radius: 50%;
+	border: 1px solid #e1e2e3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

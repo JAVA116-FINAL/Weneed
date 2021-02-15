@@ -45,7 +45,7 @@
 	$('input:radio[name=rd-appliPassedFilter_doc]').is(':checked'){
 		alret();
 	}
- */
+ 	*/
 	
 	
 </script>
@@ -107,9 +107,9 @@
 						<!-- 라디오버튼 필터 / 검색창 -->
 						<div>
 
-							<script>
+							<!-- <script>
 									$(function() {
-										if($(':radio[name="rd-appliPassedFilter"]:checked').length < 1){
+										if($('input:radio[name="rd-appliPassedFilter"]:checked').length < 1){
 										    alert('카테고리를 선택해주세요');                        
 										}
 										
@@ -120,29 +120,23 @@
 													data:"statusFlag=" + radioVal ,
 													dataType:"json",
 													success:function(list){
-													/* 	//alert(res);
-														var str="번호 : " +  res.no+"<br>";
-														str+="이름 : " + res.name+"<br>";
-														str+="내용 : " + res.content;
-														
-														$('#result').html(str); */
+													
 														alert(list);
 														
 													},
 													error:function(xhr, status, error){
 														alert("error!! : " + error);
 													}
-											});
 									});
-								</script>
+								</script> -->
 							<!-- 라디오버튼 필터 -->
 							<ul class="appli-ul-filter">
 								<!-- 클릭하면, 스타일 바뀌게 해야함 -->
 
-
+								<!-- checked="checked" -->
 								<li class="appli-li-filter"><input type="radio"
-									name="rd-appliPassedFilter" id="rd-appliPassedFilter_new"
-									checked="checked"> <label
+									name="rd-appliPassedFilter" id="rd-appliPassedFilter_new" 
+									> <label
 									for="rd-appliPassedFilter_new"
 									class="lb-appliPassedFilter lb-appliPassedFilter-selected">
 										<a href='<c:url value="/company/applicants.do?statusFlag=0"/>'">신규
@@ -151,9 +145,9 @@
 								<li class="appli-li-filter"><input type="radio"
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_doc">
 									<label for="rd-appliPassedFilter_doc"
-									class="lb-appliPassedFilter">서류통과(0) <!-- <a
+									class="lb-appliPassedFilter"><a
 										href='<c:url value="/company/applicants.do?statusFlag=${1 }"/>'>서류통과
-											(0)</a> -->
+											(0)</a>
 								</label></li>
 								<li class="appli-li-filter"><input type="radio"
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_passed">
@@ -241,7 +235,6 @@
 						<!-- 리스트에 값 있을 때, 1개 객체  -->
 						<c:if test="${!empty aList}">
 							<c:forEach var="aVo" items="${aList}">
-
 								<div class="appli-list-object">
 									<div class="appli-list-object_info">
 										<div>
@@ -287,7 +280,7 @@
 										</span>  --%>
 
 										<i class="far fa-clock"></i><span class="appli-waitingDays">
-											<c:if test="${aVo['APPLY_PERIOD']>0 }">
+											<c:if test="${aVo['APPLY_PERIOD']>=0 }">
 												${aVo['APPLY_PERIOD'] } 일째 기다림 
 											</c:if>
 										</span>

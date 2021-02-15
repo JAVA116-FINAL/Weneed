@@ -56,5 +56,6 @@
             <beans:ref bean="ComLoginInterceptor"/>
         </interceptor>
     </interceptors>
+
 	
 </beans:beans>

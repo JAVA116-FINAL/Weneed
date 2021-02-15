@@ -23,7 +23,7 @@
 		order by apply_no desc
 	</select>
 	
-	<select id="selectApplicants2"
+	<!-- <select id="selectApplicants2"
 		resultType="map">
 		select A.*, B.pos_name
 		from apply A join position B
@@ -31,7 +31,7 @@
 		B.POS_NO
 		order by apply_no desc
 	</select>
-
+ -->
 	<select id="selectAllPositions" resultType="ApplicantsVO">
 
 		select
