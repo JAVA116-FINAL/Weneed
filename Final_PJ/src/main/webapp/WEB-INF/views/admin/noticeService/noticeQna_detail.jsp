@@ -5,6 +5,33 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/admin/noticeService.css'/>">
 <script src="//cdn.ckeditor.com/4.16.0/basic/ckeditor.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$('form[name=frmWrite]').submit(function(){
+			if($('#qna_r_title').val().length < 1){
+				alert('제목을 입력하세요');
+				$('#qna_r_title').focus();
+				event.preventDefault();
+			}else if($('#qna_r_content').val().length < 1){
+				content();
+				event.preventDefault();
+			}
+		});
+	});
+	
+	function content(){
+		var ckeditor = CKEDITOR.instances['qna_r_content'];
+		if(ckeditor.getData() == ""){
+			alert('내용을 입력하세요');
+			ckeditor.focus();
+			return;
+		}else{
+			document.in_form.submit();
+		}
+	}
+</script>
+
 <div>
 	<div class="userDiv">
 	<h1>1:1문의 상세보기</h1>
@@ -12,6 +39,7 @@
 		
 			<c:set var="qna_no" value="${map['QNA_NO'] }"/>
 			<c:set var="qna_email" value="${map['QNA_EMAIL'] }"/>
+			<c:set var="qna_content" value="${map['QNA_CONTENT'] }"/>
 			
 			<!-- 등록된 문의 출력 -->
 			<table class="detailTable">
@@ -103,8 +131,10 @@
 			<form name="frmWrite" action="<c:url value='/admin/noticeService/noticeQna_write.do'/>" method="post">
 				<div class="frmDiv">
 					<input type="text" name="qna_r_title" id="qna_r_title" placeholder="제목을 입력하세요">
+					
 					<input type="hidden" name="qna_no" id="qna_no" value="${qna_no }">
 					<input type="hidden" name="qna_email" id="qna_email" value="${qna_email }">
+					<input type="hidden" name="qna_content" id="qna_content" value="${qna_content }">
 				</div>
 				<div class="frmDiv">
 					<textarea rows="5" cols="60" name="qna_r_content" id="qna_r_content"></textarea>
