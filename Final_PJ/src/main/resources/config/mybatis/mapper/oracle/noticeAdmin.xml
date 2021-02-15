@@ -140,4 +140,17 @@
 		where notice_no=#{notice_no}
 	</update>
 	
+	<select id="selectByDept1" parameterType="int" resultType="map">
+		select*from noticedept2
+		where notice_dept1=#{notice_dept1}
+	</select>
+	
+	<insert id="insertNotice" parameterType="noticeVo">
+		<selectKey resultType="int" keyProperty="notice_no" order="BEFORE">
+			select notice_no.nextval from dual
+		</selectKey>
+		insert into notice(notice_no, notice_dept1, notice_dept2, notice_title, notice_content)
+		values(#{notice_no}, #{notice_dept1}, #{notice_dept2}, #{notice_title}, #{notice_content})
+	</insert>
+	
 </mapper>	

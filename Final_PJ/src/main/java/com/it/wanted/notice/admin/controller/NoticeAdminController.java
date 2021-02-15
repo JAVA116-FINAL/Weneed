@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.wanted.notice.admin.model.NoticeAdminService;
 import com.it.wanted.notice.model.NoticeService;
@@ -144,13 +144,6 @@ public class NoticeAdminController {
 		
 		return "common/message";
 	}
-
-	@RequestMapping("/notice_write.do")
-	public String notice_write() {
-		logger.info("이용안내 작성 페이지 출력");
-		
-		return "admin/noticeService/notice_write";
-	}
 	
 	@RequestMapping("/notice_detail.do")
 	public String notice_detail(@RequestParam int notice_no, Model model) {
@@ -213,4 +206,40 @@ public class NoticeAdminController {
 		return "common/message";
 	}
 	
+	@RequestMapping(value = "/notice_write.do", method = RequestMethod.GET)
+	public String notice_write_get() {
+		logger.info("이용안내 등록 페이지 - get");
+		
+		return "admin/noticeService/notice_write";
+	}
+	
+	@RequestMapping(value = "/notice_write.do", method = RequestMethod.POST)
+	public String notice_write_post(@ModelAttribute NoticeVO noticeVo, Model model) {
+		logger.info("이용안내 등록 페이지 - post");
+		logger.info("이용안내 작성 noticeVo={}", noticeVo);
+		
+		int cnt=noticeAdminService.insertNotice(noticeVo);
+		
+		String msg="이용안내 업로드 실패", url="/admin/noticeService/notice_write.do";
+		if(cnt>0) {
+			msg="이용안내가 작성되었습니다";
+			url="/admin/noticeService/notice_list.do";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/selectByDept1")
+	public List<Map<String, Object>> selectByDept1(@RequestParam(required = false) int notice_dept1) {
+		logger.info("notice_dept1={}", notice_dept1);
+		
+		List<Map<String, Object>> notice_dept2=noticeAdminService.selectByDept1(notice_dept1);
+		logger.info("notice_dept2={}", notice_dept2);
+		
+		return notice_dept2;
+	}
 }

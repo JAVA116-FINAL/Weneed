@@ -79,6 +79,16 @@ public class NoticeAdminDAOMybatis implements NoticeAdminDAO{
 		return sqlSession.update(namespace+"updateNotice", noticeVo);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectByDept1(int notice_dept1) {
+		return sqlSession.selectList(namespace+"selectByDept1", notice_dept1);
+	}
+
+	@Override
+	public int insertNotice(NoticeVO noticeVo) {
+		return sqlSession.insert(namespace+"insertNotice", noticeVo);
+	}
+
 
 
 }

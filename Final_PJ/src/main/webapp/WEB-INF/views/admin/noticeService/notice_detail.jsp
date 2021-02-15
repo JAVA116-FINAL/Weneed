@@ -10,7 +10,7 @@
 	var notice_no
 	function delete_confirm(notice_no){
 		if(confirm("해당 이용안내를 삭제하시겠습니까?")==true){
-			location.href="/wanted/admin/noticeService/notice_delete.do?notice_no="+notice_no;
+			location.href="<c:url value='/admin/noticeService/notice_delete.do?notice_no='/>"+notice_no;
 		}
 	}
 </script>
@@ -47,10 +47,10 @@
 			</tbody>
 		</table>
 		<div class="btnDiv">
-			<input class="frmBtn" id="button" type="button" value="수정" 
-				onClick="location.href='/wanted/admin/noticeService/notice_update.do?notice_no=${listDetail['notice_no'] }'">
+			<input class="frmBtn" id="button" type="button" value="수정"
+				onClick="location.href='<c:url value="/admin/noticeService/notice_update.do?notice_no="/>${listDetail['notice_no'] }'">
 			<input class="frmBtn" id="button" type="button" value="삭제" onClick="delete_confirm(${listDetail['notice_no'] });">
-			<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='/wanted/admin/noticeService/notice_list.do'">
+			<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='<c:url value="/admin/noticeService/notice_list.do"/>'">
 		</div>
 </div>
 
