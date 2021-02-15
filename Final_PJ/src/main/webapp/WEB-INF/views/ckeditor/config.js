@@ -22,6 +22,8 @@ CKEDITOR.editorConfig = function( config ) {
 
         config.resize_enabled = true;                           // 사이즈 변경
 
+		config.resize_maxWidth = 400;
+
         config.enterMode = CKEDITOR.ENTER_BR;           // 에디터상에서 엔터입력시 <br />로 적용
 
         config.shiftEnterMode = CKEDITOR.ENTER_P;      // shift + enter 시 <p> 로 적용
