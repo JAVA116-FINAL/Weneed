@@ -4,13 +4,13 @@
 context-common.xml
 context-database.xml
 mybatis-config.xml
-fileUpload.properties
 servlet-context.xml
 pom.xml
 log4j.xml
-pom.properties
-database.properties
-pom.properties
+
+target/*
+*.properties
+.classpath
 MANIFEST.MF
 
 ### Eclipse ###
