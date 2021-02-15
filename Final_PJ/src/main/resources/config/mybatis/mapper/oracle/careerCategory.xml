@@ -7,6 +7,11 @@
 		select * from programcategory order by PRO_CATE_NO
 	</select>
 	
+	<select id="selectMatchCategoryName" parameterType="int" resultType="string">
+		select PRO_CATE_NAME
+		from programcategory 
+		where PRO_CATE_NO = #{proCateNo}
+	</select>
 </mapper>
 
 

@@ -12,7 +12,7 @@ public class ProgramVO {
 	private Timestamp proStartDate; /* 프로그램 시작일 */
 	private Timestamp regdate; 	/* 등록일 */
 	private int proType; 	/* 프로그램 타입 */
-	private String imageURL; 	/* 이미지 url */
+	private String proImage; 	/* 이미지 url */
 	private Timestamp regiEndDate; /* 신청마감일 */
 
 	
@@ -88,12 +88,12 @@ public class ProgramVO {
 		this.proType = proType;
 	}
 	
-	public String getImageURL() {
-		return imageURL;
+	public String getProImage() {
+		return proImage;
 	}
 	
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
+	public void setProImage(String proImage) {
+		this.proImage = proImage;
 	}
 	
 	public Timestamp getRegiEndDate() {
@@ -108,7 +108,7 @@ public class ProgramVO {
 	public String toString() {
 		return "ProgramVO [programNo=" + programNo + ", adminNo=" + adminNo + ", proCateNo=" + proCateNo + ", proName="
 				+ proName + ", proSponsor=" + proSponsor + ", proPrice=" + proPrice + ", proStartDate=" + proStartDate
-				+ ", regdate=" + regdate + ", proType=" + proType + ", imageURL=" + imageURL + ", regiEndDate="
+				+ ", regdate=" + regdate + ", proType=" + proType + ", proImage=" + proImage + ", regiEndDate="
 				+ regiEndDate + "]";
 	}
 	

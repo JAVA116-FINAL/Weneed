@@ -16,9 +16,9 @@
 
 
 <!-- 구독신청 배너부분!!!!!!!!! -->
-<section class="page-title bg-1" style="padding:0px; margin:auto;">
+<section class="page-title bg-1" style="padding:0px; margin:auto; margin-top:10px;width:1500px;">
     <a href="<c:url value='subscription.do'/>">
-<section class="_2LiFavTzcqjq8ansnAqKSQ _2bqGiY6XO2ke3gSGZbbVm3" style="padding-bottom: 15%; background-image: url(&quot;https://static.wanted.co.kr/banner/Web_Event_Banner_C.jpg&quot;);"></section>
+<section class="_2LiFavTzcqjq8ansnAqKSQ _2bqGiY6XO2ke3gSGZbbVm3" style="padding-bottom: 10%;"><img src="<c:url value='/resources/images/career/Web_Event_Banner_C3.jpg'/>" style="height: 300px;max-width: 100%; width: 100%;"></section>
 	</a>
 </section>
 
@@ -29,7 +29,7 @@
 
 
 <!-- 슬라이드 메뉴부분!!!!!!!!! -->
-<section class="section doctors">
+<section class="section doctors" style="margin-top: -30px;">
 	<div class="container">
 		<div class="row">
 	 	<div class="careerMenu" style="width:100%; height: 50px; background-color: #fff; padding-bottom:-10px;">				
@@ -100,6 +100,7 @@
 		
 			</div>
 		</div>
+	
 	</div>
 <!-- 슬라이드 메뉴부분 끝  -->
 
@@ -107,14 +108,15 @@
 <!-- 카테고리 이름, 필터, 키워드알림 부분 !!!!!!  -->
 	<div style="width: 100%; height: 50px; margin-top:30px; margin-bottom:40px;">
 		<%@ include file="popup.jsp" %>
+	<%@ include file="programList.jsp" %>	
 	</div>     
 <!-- 필터, 키워드알림 부분 끝  -->
 </div>
 
 
-<!-- 프로젝트 리스트 섹션!!!!!!! -->
+<%-- <!-- 프로젝트 리스트 섹션!!!!!!! -->
 	<%@ include file="programList.jsp" %>	
-<!-- 프로젝트 리스트 섹션 끝 -->
+<!-- 프로젝트 리스트 섹션 끝 --> --%>
 </div>
 </section>
 
