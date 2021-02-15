@@ -15,7 +15,7 @@
 </script>
 
 <div class="align_center" id="noticeDiv">
-	<h1>이용안내</h1>
+	<h1 style="font-size: 40px; margin-bottom: 50px;">이용안내</h1>
 
 <form name="frmPage" method="get" action="<c:url value='notice_list.do'/>">
 	<input type="hidden" name="currentPage">
@@ -70,45 +70,51 @@
 		</tbody>
 	</table>
 	</c:if>
-	
-<form class="search" method="post" action='<c:url value="/admin/noticeService/notice_list.do"/>'>
-	<input type="search" id="searchKeyword" name="searchKeyword" value="${param.searchKeyword}">
-	<input type="submit" id="commit" name="commit" value="검색">
-</form>		
-
+<div class="left">
+	<input class="frmBtn" type="button" id="button" name="button" value="등록"
+		onclick="location.href='<c:url value='/admin/noticeService/notice_write.do'/>'">
+</div>		
+<div class="right">
+	<form class="search" method="post" action='<c:url value="/admin/noticeService/notice_list.do"/>'>
+		<input type="search" id="searchKeyword" name="searchKeyword" value="${param.searchKeyword}">
+		<input type="submit" id="commit" name="commit" value="검색">
+	</form>
+</div>
 <c:set var="totalCnt" value="${pagingInfo.totalRecord}"/>
 <c:if test="${totalCnt>9}">
-<nav>
-	<ul class="pagination">
-
-		<c:if test="${pagingInfo.firstPage>1 }">
-			<li>
-				<a href="#" onclick="boardList(${pagingInfo.firstPage-1})">‹</a>
-	      	</li>
-		</c:if>
-    
-		<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
-			<c:if test="${i==pagingInfo.currentPage }">
-				<li class="pagination-current">
-					<span>${i}</span>
-        		</li>
-			</c:if>
-			
-			<c:if test="${i!=pagingInfo.currentPage }">
+<div class="divBottom">
+	<nav>
+		<ul class="pagination">
+	
+			<c:if test="${pagingInfo.firstPage>1 }">
 				<li>
-					<a href="#" onclick="boardList(${i})">${i}</a>
-				</li>			
+					<a href="#" onclick="boardList(${pagingInfo.firstPage-1})">‹</a>
+		      	</li>
 			</c:if>
-		</c:forEach>
-
-		<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
-	      	<li class="pagination-next">
-	        	<a href="#" onclick="boardList(${pagingInfo.lastPage+1})">></a>
-	    	</li>
-    	</c:if>
-    	
-	</ul>
-</nav>
+	    
+			<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage}">
+				<c:if test="${i==pagingInfo.currentPage }">
+					<li class="pagination-current">
+						<span>${i}</span>
+	        		</li>
+				</c:if>
+				
+				<c:if test="${i!=pagingInfo.currentPage }">
+					<li>
+						<a href="#" onclick="boardList(${i})">${i}</a>
+					</li>			
+				</c:if>
+			</c:forEach>
+	
+			<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
+		      	<li class="pagination-next">
+		        	<a href="#" onclick="boardList(${pagingInfo.lastPage+1})">></a>
+		    	</li>
+	    	</c:if>
+	    	
+		</ul>
+	</nav>
+</div>
 </c:if>
 
 </div>

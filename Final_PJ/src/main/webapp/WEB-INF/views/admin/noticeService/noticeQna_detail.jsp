@@ -5,7 +5,6 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/admin/noticeService.css'/>">
 <script src="//cdn.ckeditor.com/4.16.0/basic/ckeditor.js"></script>
-
 <script type="text/javascript">
 	$(function(){
 		$('form[name=frmWrite]').submit(function(){
@@ -123,7 +122,7 @@
 				</table>
 			</c:forEach>
 			<div style="margin-top: 30px;">
-				<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='/wanted/admin/noticeService/noticeQna_list.do'">
+				<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='<c:url value="/admin/noticeService/noticeQna_list.do"/>'">
 			</div>
 		</c:if>
 		<c:if test="${empty adminDetail }">
@@ -142,7 +141,7 @@
 						CKEDITOR.replace("qna_r_content", {height : 400});
 					</script>  
 				</div>
-				<div class="frmDiv">
+				<div>
 					<input class="frmBtn" id="submit" type="submit" value="등록">
 					<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='/wanted/admin/noticeService/noticeQna_list.do'">
 				</div>

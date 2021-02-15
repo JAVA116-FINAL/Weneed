@@ -74,5 +74,15 @@ public class NoticeAdminServiceImpl implements NoticeAdminService{
 		return noticeAdminDao.updateNotice(noticeVo);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectByDept1(int notice_dept1) {
+		return noticeAdminDao.selectByDept1(notice_dept1);
+	}
+
+	@Override
+	public int insertNotice(NoticeVO noticeVo) {
+		return noticeAdminDao.insertNotice(noticeVo);
+	}
+
 
 }

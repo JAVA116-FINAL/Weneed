@@ -29,4 +29,6 @@ public interface NoticeAdminService {
 	public int selectNoticeAll_cnt(NoticeSearchVO searchVo);
 	public int deleteNotice(int notice_no);
 	public int updateNotice(NoticeVO noticeVo);
+	public List<Map<String, Object>> selectByDept1(int notice_dept1);
+	public int insertNotice(NoticeVO noticeVo);
 }

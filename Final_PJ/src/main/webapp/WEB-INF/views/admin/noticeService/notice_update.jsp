@@ -51,7 +51,7 @@
 		<div class="frmDiv">
 			<input class="frmBtn" id="submit" type="submit" value="수정">
 			<input class="frmBtn" id="button" type="button" value="목록으로"
-				onClick="location.href='/wanted/admin/noticeService/notice_list.do'">
+				onClick="location.href='<c:url value="/admin/noticeService/notice_list.do"/>'">
 		</div>
 	</form>
 </div>
