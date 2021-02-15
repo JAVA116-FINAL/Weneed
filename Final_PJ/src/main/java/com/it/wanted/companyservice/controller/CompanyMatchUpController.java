@@ -35,6 +35,11 @@ import com.it.wanted.matchupCom.model.MatchupComService;
 import com.it.wanted.matchupCom.model.MatchupComVO;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
 import com.it.wanted.matchupStatus.model.MatchupStatusService;
+import com.it.wanted.member.model.MemberService;
+import com.it.wanted.position.model.PositionService;
+import com.it.wanted.position.model.PositionVO;
+import com.it.wanted.proposal.model.ProposalService;
+import com.it.wanted.proposal.model.ProposalVO;
 import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeService;
 
@@ -53,6 +58,9 @@ public class CompanyMatchUpController {
 	@Autowired ComInfoService comInfoService;
 	@Autowired ResumeService resumeService;
 	@Autowired MatchupStatusService matchupStatusService; 
+	@Autowired PositionService positionService;
+	@Autowired ProposalService proposalService;
+	@Autowired MemberService memberService;
 	
 	@RequestMapping(value = "/matchupService.do", method = RequestMethod.GET)
 	public String matchupMain(HttpSession session, HttpServletRequest request, Model model) {
@@ -88,9 +96,9 @@ public class CompanyMatchUpController {
 	@RequestMapping("/matchupSearch.do")
 	public String matchupSearch(Model model, @ModelAttribute MatchupMemSearchVO searchVo,
 			HttpSession session) {
-		searchVo=setSearchInfoDefault(searchVo);
-		searchVo=setBeforeMethod(searchVo);
 		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		searchVo=setSearchInfoDefault(searchVo, comVo.getComCode());
+		searchVo=setBeforeMethod(searchVo);
 		//매치업 구입 기업만 여기 들어올수 있습니다. 구입한 적이 있는 기업만? 
 		//그럼 그냥 구입내역을 찍어서 리턴시키면 되는 거 아니야?
 		MatchupComVO matchupComVo=matchupComService.selectMatchupCom(comVo.getComCode());
@@ -109,6 +117,10 @@ public class CompanyMatchUpController {
 		//[1-3] 직무리스트 불러오기 개발에 해당하는
 		List<JikmuVO> jikmuList=jgService.selectJikmuByJikgunCode(basicCode);
 		logger.info("첫번째 직군코드에 해당하는 직무리스트 jikmuList={}", jikmuList);
+		
+		//포지션 목록도.. 불러와야 해요. 제안하기 팝업이 여기서 열리기 때문. 
+		List<PositionVO> posList=positionService.selectPositionByComcode(comVo.getComCode());
+		logger.info("포지션 목록 조회 결과, posList.size={}", posList.size());
 		
 		searchVo.setViewMoreSize(0);
 		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
@@ -134,9 +146,39 @@ public class CompanyMatchUpController {
 		model.addAttribute("emptyCheck", emptyCheck);
 		model.addAttribute("matchupComVo", matchupComVo);
 		model.addAttribute("checkMap", checkMap);
+		model.addAttribute("posList", posList);
 		return "company/matchupSearch";
 	}
 
+	@RequestMapping("/sendProposal.do")
+	public String sendProposal(@ModelAttribute ProposalVO propoVo, @RequestParam int resumeNo, 
+			HttpSession session, Model model) {
+		logger.info("제안하기, 파라미터 propoVo={}", propoVo);
+		String comMemId=(String)session.getAttribute("comMemId");
+		
+		//멤노와 컴멤노를 가져와야 하네... 
+		int comMemNo=comMemInfoService.selectComMem(comMemId).getComMemNo();
+		propoVo.setComMemNo(comMemNo);
+		
+		//레주메노로 멤노 가져오기
+		int memNo=matchupMemService.selectMemNo(resumeNo);
+		propoVo.setMemNo(memNo);
+		
+		//제안하기 테이블에 insert 시키는 것이다. 확인은.. 안 해도 되나... 
+		int cnt=proposalService.insertProposal(propoVo);
+		logger.info("제안하기 insert 결과 cnt={}", cnt);
+		String url="/company/matchupSearch.do", msg="제안하기 전송 실패!";
+		
+		if(cnt>0) {
+			msg="제안하기 전송 성공!";
+		}
+		
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		//이것도 랜딩페이지 하나 만들어서 보내면 좋겠는데 
+		return "common/message";
+	}
+	
 	@RequestMapping("/modal/modalButtonsTest.do")
 	public String modalTest() {
 		return "company/modal/modalButtonsTest";
@@ -159,7 +201,7 @@ public class CompanyMatchUpController {
 	@RequestMapping("/viewMoreMatchupMem.do")
 	public List<Map<String, Object>> getMoreMem(@ModelAttribute MatchupMemSearchVO searchVo
 			, Model model){
-		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
 		
 		logger.info("리스트 더보기  시작, searchVo={}", searchVo);
@@ -174,11 +216,10 @@ public class CompanyMatchUpController {
 	}
 
 	@ResponseBody
-	@JsonManagedReference
 	@RequestMapping("/showZzimedList.do")
 	public List<Map<String, Object>> showZzimedList(@ModelAttribute MatchupMemSearchVO searchVo
 		, Model model) {
-		searchVo=setSearchInfoDefault(searchVo);
+		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
 		
 		List<Map<String, Object>> memList=matchupMemService.selectZzimedList(searchVo);
@@ -193,8 +234,9 @@ public class CompanyMatchUpController {
 	@JsonBackReference
 	@RequestMapping("/viewMoreZzimedList.do")
 	public List<Map<String, Object>> getMoreZzimedMem(@ModelAttribute MatchupMemSearchVO searchVo
-			, Model model){
-		searchVo=setSearchInfoDefault(searchVo);
+			, Model model, HttpSession session){
+		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		searchVo=setSearchInfoDefault(searchVo, comVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
 		
 		logger.info("찜한 리스트 더 불러오기 시작, searchVo={}", searchVo);
@@ -263,7 +305,7 @@ public class CompanyMatchUpController {
 		String result="찜 제외 실패!";
 		int cnt=matchupComService.delZzim(zzimVo);
 		if(cnt>0) {
-			result="찜 제외 성공!";
+			result="찜 제외 성공!!";
 		}
 		return result;
 	}
@@ -310,7 +352,7 @@ public class CompanyMatchUpController {
 	}
 	
 	/* 기본 함수들 */
-	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo) {
+	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo, String comCode) {
 		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty() || vo.getSearchJikmu().equals("all")) {
 			vo.setSearchJikmu("");
 		}
@@ -325,6 +367,9 @@ public class CompanyMatchUpController {
 		}
 		if(vo.getSearchMinCareer()==null || vo.getSearchMinCareer().isEmpty()) {
 			vo.setSearchMinCareer("0");
+		}
+		if(vo.getComCode()==null || vo.getComCode().isEmpty()) {
+			vo.setComCode(comCode);
 		}
 		return vo;
 	}

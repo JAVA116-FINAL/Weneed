@@ -63,4 +63,5 @@
 	<bean id="sqlSessionTemplate"	class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
 	</bean>
+	
 </beans>

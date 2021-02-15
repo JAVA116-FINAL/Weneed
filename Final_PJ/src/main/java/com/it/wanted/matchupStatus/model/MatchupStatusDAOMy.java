@@ -19,5 +19,15 @@ public class MatchupStatusDAOMy implements MatchupStatusDAO{
 	public int insertStatus(MatchupStatusVO statusVo) {
 		return sqlSession.insert(namespace+"insertStatus", statusVo);
 	}
+
+	@Override
+	public void updateProposalDate(MatchupStatusVO statusVo) {
+		sqlSession.update(namespace+"updateProposalDate", statusVo);
+	}
+
+	@Override
+	public void insertProposal(MatchupStatusVO statusVo) {
+		sqlSession.insert(namespace+"insertProposal", statusVo);
+	}
 	
 }

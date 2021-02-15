@@ -1,8 +1,8 @@
 package com.it.wanted.position.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ public class PositionServiceImpl implements PositionService{
 	
 	@Autowired PositionDAO positionDao;
 
-	@Override
 	@Transactional
+	@Override
 	public int insertPosition(PositionVO posVo, List<String> jikmus) {
 		int cnt= positionDao.insertPosition(posVo);
 		System.out.println("포지션 인서트 결과 cnt="+cnt);
@@ -38,6 +38,16 @@ public class PositionServiceImpl implements PositionService{
 			resultCnt+=positionDao.insertPosJikmu(vo);
 		}
 		return resultCnt;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectJobsearchList() {
+		return positionDao.selectJobsearchList();
+	}
+
+	@Override
+	public List<PositionVO> selectPositionByComcode(String comCode) {
+		return positionDao.selectPositionByComcode(comCode);
 	}
 	
 	

@@ -8,4 +8,5 @@ public interface MatchupMemjikmuDAO {
 	public List<MatchupMemJikmuVO> selectMcuMemjikmubyexpertiseNo(int expertiseNo);
 	public List<Map<String, Object>> selectMjikmuView(int expertiseNo);
 	public int deleteMatchupJikmu(int expertiseNo);
+	public List<Integer> selectMcumemNo(String searchJikmu);
 }

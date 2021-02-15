@@ -50,6 +50,12 @@ public class ApplicantsDAOMybatis implements ApplicantsDAO {
 		return sqlSession.selectList(namespace+"selectApplicants2");
 	}
 
+	/* 자연 */
+	@Override
+	public int insertApply(ApplicantsVO applyVo) {
+		return sqlSession.insert(namespace+"insertApply",applyVo);
+	}
+
 //	@Override
 //	public int updatePeriod(ApplicantsVO appliVo) {
 //		return sqlSession.update(namespace+"updatePeriod",  appliVo);

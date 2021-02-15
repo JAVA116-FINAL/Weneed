@@ -1,10 +1,12 @@
+<%@ include file="../../inc/admin_top.jsp" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-<%@ include file="../../inc/top.jsp" %>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <jsp:useBean id="today" class="java.util.Date"/>
 
+  
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/mainstyle.css'/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/clear.css'/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/mystyle.css'/>" />
@@ -19,21 +21,10 @@
 
 <title>관리자 커리어성장 메인페이지</title>
 
-    
+<script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>    
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
-$( document ).ready( function() {
-	  var Offset = $( '.jbMenu' ).offset();
-	  $( window ).scroll( function() {
-	   if ( $( document ).scrollTop() > Offset.top ) {
-	      $( '.jbMenu' ).addClass( 'fixed' );
-	    }
-	    else {
-	      $( '.jbMenu' ).removeClass( 'fixed' );
-	    }
-	  });
-	});
-	
+
 	
 $(function(){
 	$('.divproList table.proBox2 tbody tr').hover(function(){
@@ -59,7 +50,7 @@ $(function(){
 		}
 		
 		$('form[name=frmList]').prop('action',
-				'<c:url value="/career/Admin/deleteMulti.do"/>');
+				'<c:url value="/career/Admin/deleteProgramMulti.do"/>');
 		$('form[name=frmList]').submit();
 	});	
 	
@@ -97,32 +88,17 @@ body{
 	%>
 	
 <!-- 메뉴 부분!!!!! -->
-<div class="jbMenu" style="width:100%;">
-    	<nav class="navbar navbar-expand-lg navigation" id="navbar" style="background-color:#f8f8fa;">
-		<div class="container" >
-		 	 <div class="navbar-brand">
-				<div class="myNav" style="width:100%;">
-			  <ul class="navbar-nav ml-auto">
-			    <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/careerAdminMain.do'/>">커리어성장 메인</a></li>							  
-			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>			
-			  </ul>	
-			</div>
-			</div>
-		</div>
-		</nav>
-</div>
+
 <!-- 메뉴 탑부분 끝!! -->
 
 
 <!-- 몸통부분!!! -->
-<section class="section blog-wrap">
+<section class="section blog-wrap" style="margin-top:165px; margin-left:-170px;">
 
 <div class="subscribeBody" style="margin-top:-100px;width:1400px; margin-left:auto; margin-right:auto;">
 <!-- 직장인의 커리어 여정을 행복하게 -->
-<div class="img_admin_career2" style="max-height:350px; overflow:hidden;">
-	<img alt="" src="https://scontent-ssn1-1.xx.fbcdn.net/v/t1.0-9/118121468_1722859387865670_6932201002241137751_o.jpg?_nc_cat=105&ccb=2&_nc_sid=dd9801&_nc_ohc=EkvV99Ynvb0AX9KlL8X&_nc_ht=scontent-ssn1-1.xx&oh=15778fa29a00b4a694b1a9b123fca561&oe=602EFE6A" class="campus-recruit-img"  style="max-width:100%;max-height:initial; margin-top:-8%;">
+<div class="img_admin_career2" style="max-height:300px; overflow:hidden;">
+	<img alt="" src="https://scontent-ssn1-1.xx.fbcdn.net/v/t1.0-9/118121468_1722859387865670_6932201002241137751_o.jpg?_nc_cat=105&ccb=2&_nc_sid=dd9801&_nc_ohc=EkvV99Ynvb0AX9KlL8X&_nc_ht=scontent-ssn1-1.xx&oh=15778fa29a00b4a694b1a9b123fca561&oe=602EFE6A" class="campus-recruit-img"  style="max-width:100%;max-height:initial; margin-top:-12.5%;">
 </div>
 
 
@@ -134,10 +110,10 @@ body{
 		
 		<form action="<c:url value='/career/Admin/programAdminList.do'/>" 
 			name="frmPage" method="post">
-			<input type="text" name="currentPage">
-			<input type="text" name="searchCondition" 
+			<input type="hidden" name="currentPage">
+			<input type="hidden" name="searchCondition" 
 				value="${param.searchCondition }">
-			<input type="text" name="searchKeyword"
+			<input type="hidden" name="searchKeyword"
 				value="${param.searchKeyword }">	
 		</form>
 
@@ -382,7 +358,4 @@ body{
 </section>
 
 <!-- 푸터부분!!!!! -->
-	<%@ include file="../../inc/bottom.jsp" %>
-
-	</body>
-	</html>
+	<%@ include file="../../inc/admin_bottom.jsp" %>

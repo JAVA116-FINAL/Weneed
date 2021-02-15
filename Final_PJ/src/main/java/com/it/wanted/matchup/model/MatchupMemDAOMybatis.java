@@ -121,6 +121,7 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 		return sqlSession.selectList(namespace+"selectMcumemSearchList", mcuMemSearchVo);
 	}
 
+
 	@Override
 	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo) {
 		return sqlSession.selectList(namespace+"selectZzimedList", searchVo);
@@ -130,6 +131,11 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	@Override
 	public int isZzimed(MatchupZzimVO zzimVo) {
 		return sqlSession.selectOne(namespace+"isZzimed", zzimVo);
+	}
+
+	@Override
+	public int selectMemNo(int resumeNo) {
+		return sqlSession.selectOne(namespace+"selectMemNo", resumeNo);
 	}
   
 }
