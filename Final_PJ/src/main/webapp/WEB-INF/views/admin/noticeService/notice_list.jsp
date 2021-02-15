@@ -15,7 +15,7 @@
 </script>
 
 <div class="align_center" id="noticeDiv">
-	<h1>이용안내</h1>
+	<h1 style="font-size: 40px; margin-bottom: 50px;">이용안내</h1>
 
 <form name="frmPage" method="get" action="<c:url value='notice_list.do'/>">
 	<input type="hidden" name="currentPage">
