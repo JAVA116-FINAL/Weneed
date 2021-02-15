@@ -219,7 +219,7 @@
 						<div>
 							<!-- 별표 지원자 모아보기 -->
 							<input type="checkbox" id="chkBox-staredApplis"> <label
-								for="chkBox-staredApplis" class="chkBox-staredApplis"></i>별표
+								for="chkBox-staredApplis" class="chkBox-staredApplis">별표
 								지원자 모아보기</label>
 						</div>
 					</div>
