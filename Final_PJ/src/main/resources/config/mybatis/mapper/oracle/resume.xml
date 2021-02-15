@@ -53,8 +53,83 @@
 		delete from resume where mem_No=#{memNo} and resume_No=#{resumeNo}
 	</delete>
 
-
-
+	<!-- 관리자-전체 이력서 조회 -->
+	<!-- <select id="selectResumeAllbyAdmin" resultType="resumeVo">
+		select * from resume  order by resume_No desc
+	</select> -->
+ 	<sql id="searchWherer">
+ 		<where>
+ 			<if test="searchKeyword !null and searchKeyword !=''">
+ 				${searchCondition} like '%'|| #{searchKeyword}||'%'
+ 			</if>
+ 		</where>
+ 	</sql>
+ 	
+	<select id="selectResumeAllbyAdmin" resultType="map" parameterType="searchVo">
+		select* from(
+		select A.*,rownum as Rnum
+		from
+		(
+		    select r.resume_no, r.mem_No,r.resume_Title, r.resume_Name, r.resume_Email, r.resume_hp,
+		   	r.temp_flag, r.resume_Regdate,
+		    c.CAREER_NAME, c.career_Dep, e.edu_Name, e.edu_Major, l.LANG_NAME, l.lang_level,
+		    ai.add_Name,
+		    row_number() over(partition by c.resume_no order by c.resume_no) as firstResume
+		    from resume r  join career c
+		    on r.resume_No=c.resume_No
+		    left outer join education e 
+		    on c.resume_No=e.resume_No
+		    left outer join languages l
+		    on e.resume_No=l.resume_No
+		    left outer join addInformatiod ai
+		    on l.resume_No=ai.resume_No
+		    left outer join link lk
+		    on ai.resume_No=lk.resume_No
+		    order by resume_No desc   
+		)A
+		where firstResume=1 
+		<if test="searchKeyword != null and searchKeyword != ''">
+			and RESUME_NO like '%' || #{searchKeyword} || '%' or MEM_NO like '%' || #{searchKeyword} || '%' or resume_Name like '%' || #{searchKeyword} || '%' or resume_Title like '%' || #{searchKeyword} || '%' 
+			or career_Name like '%' || #{searchKeyword} || '%' or career_Dep like '%' || #{searchKeyword} || '%'
+			or edu_Name like '%' || #{searchKeyword} || '%' or edu_Major like '%' || #{searchKeyword} || '%' or temp_Flag=#{searchKeyword} 
+		</if>
+		) 
+	  <![CDATA[
+     	where RNUM > #{firstRecordIndex} 
+      	and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+      ]]>
+	</select>
+	
+	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
+		select count(*)
+		from
+		(
+		    select r.resume_no, r.mem_No,r.resume_Title, r.resume_Name, r.resume_Email, r.resume_hp,
+		   	r.temp_flag, r.resume_Regdate,
+		    c.CAREER_NAME, c.career_Dep, e.edu_Name, e.edu_Major, l.LANG_NAME, l.lang_level,
+		    ai.add_Name,
+		    row_number() over(partition by c.resume_no order by c.resume_no) as firstResume
+		    from resume r  join career c
+		    on r.resume_No=c.resume_No
+		    left outer join education e 
+		    on c.resume_No=e.resume_No
+		    left outer join languages l
+		    on e.resume_No=l.resume_No
+		    left outer join addInformatiod ai
+		    on l.resume_No=ai.resume_No
+		    left outer join link lk
+		    on ai.resume_No=lk.resume_No
+		    order by resume_No desc   
+		)A
+		where firstResume=1
+		
+		<if test="searchKeyword != null and searchKeyword != ''">
+			and RESUME_NO like '%' || #{searchKeyword} || '%' or MEM_NO like '%' || #{searchKeyword} || '%' or resume_Name like '%' || #{searchKeyword} || '%' or resume_Title like '%' || #{searchKeyword} || '%' 
+			or career_Name like '%' || #{searchKeyword} || '%' or career_Dep like '%' || #{searchKeyword} || '%'
+			or edu_Name like '%' || #{searchKeyword} || '%' or edu_Major like '%' || #{searchKeyword} || '%' or temp_Flag=#{searchKeyword} 
+		</if>
+	</select>
+	
 
 	<!-- 현빈 매치업에서 이력서 그려주기용 -->	
 	<select id="selectResumeByResumeNo" parameterType="int" resultType="resumeVo">
