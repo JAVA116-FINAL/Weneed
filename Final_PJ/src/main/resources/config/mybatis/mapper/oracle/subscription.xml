@@ -6,7 +6,7 @@
 
 		
 	<!-- 구독권 등록처리-->
-		<insert id="insertSubs" parameterType="subsVo">
+<!-- 		<insert id="insertSubs" parameterType="subsVo">
 			<selectKey keyProperty="subNo" resultType="int" order="BEFORE">
 				select subscription_seq.nextval from dual
 			</selectKey>
@@ -16,7 +16,7 @@
 		insert into program(SUB_NO, PAY_NO, SUB_EMAIL, SUB_NAME, SUB_PHONE, SUB_TYPE, SUB_END_DATE)
 		values(#{subNo}, #{payNo}, #{subEmail}, #{subName}, #{subPhone}, #{subType}, #{subEndDate})
 		</insert>
-
+ -->
 		
 
 </mapper>
