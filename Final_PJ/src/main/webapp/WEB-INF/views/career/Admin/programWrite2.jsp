@@ -1,36 +1,25 @@
-<%@ include file="../../inc/top.jsp" %>  
+<%@ include file="../../inc/admin_top.jsp" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<jsp:useBean id="today" class="java.util.Date"/>
 
-  <!-- 지원 css -->
+	<!-- 지원 css -->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programJiwon.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/js/jquery-ui.min.css'/>"> 
 
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programJiwon.css'/>">
-  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
-
-    
     
     <!-- ck에디터 -->
 	<script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
-
+<script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
+<script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>    
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 <script type="text/javascript">
 
-/* 메뉴bar 상단 고정 */
-$( document ).ready( function() {
-	  var Offset = $( '.jbMenu' ).offset();
-	  $( window ).scroll( function() {
-	   if ( $( document ).scrollTop() > Offset.top ) {
-	      $( '.jbMenu' ).addClass( 'fixed' );
-	    }
-	    else {
-	      $( '.jbMenu' ).removeClass( 'fixed' );
-	    }
-	  });
-	});
-	
+
 
 </script>
 
@@ -46,93 +35,56 @@ $( document ).ready( function() {
 	%>
 	
 <!-- 메뉴 부분!!!!! -->
-<div class="jbMenu" style="width:100%;">
-    	<nav class="navbar navbar-expand-lg navigation" id="navbar" style="background-color:#f8f8fa;">
-		<div class="container" >
-		 	 <div class="navbar-brand">
-				<div class="myNav" style="width:100%;">
-			  <ul class="navbar-nav ml-auto">
-			    <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/careerAdminMain.do'/>">커리어성장 메인</a></li>							  
-			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
-			    <a name="title"></a>   
-			  </ul>	
-			</div>
-			</div>
-		</div>
-		</nav>
-</div>
+
 <!-- 메뉴 탑부분 끝!! -->
 
-<section class="section blog-wrap" style="margin-top:-30px;">
 
 
 <div style = "width:980px; max-width: 100%; margin:auto;">
-	<form name="proWrite2" action="<c:url value='/career/Admin/programCompleteAll.do'/>" method="post">
+	<form name="proWrite2" action="<c:url value='/career/Admin/programWrite2.do'/>" method="post">
 		<fieldset>
-		<legend style="color:#258bf7;"><b>프로그램 등록, 두번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
+		<legend style="color:#258bf7; font-size:22px;"><b>프로그램 등록, 두번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
 		<p><b>총 7가지의 구분이 가능합니다! </b></p>		
-		<br>
-		        
-		<!-- 반복문으로 제목 내용 입력받는 칸 만들기 -->
-		<c:forEach var="proVo2" items="${proVo2List}">
-		<p>${proVo2.proTitle}</p>
-		<textarea>${proVo2.proContents}</textarea>
-		</c:forEach>
-		
 
-		
-		
-			<!-- 제목1 내용1 -->
-				<div class="programBodyContents2" style="margin-top:-3px;">
-					<label for="proConNo"> 첫번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle" name="proTitle" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "proContents1" name = "proContents1" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목2 내용2 -->
-				<div class="programBodyContents2">
-					<label for="proConNo"> 두번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle2" name="proTitle2" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "proContents2" name = "proContents2" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목3 내용3 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 세번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle3" name="proTitle3" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description3" name = "description3" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목4 내용4 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 네번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle4" name="proTitle4" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description4" name = "description4" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목5 내용5 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 다섯번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle5" name="proTitle5" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description5" name = "description5" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목6 내용6 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 여섯번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle6" name="proTitle6" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description6" name = "description6" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-				
-			<!-- 제목7 내용7 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 일곱번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle7" name="proTitle7" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description7" name = "description7" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-				
+									<input type="text" name="programNo" value="${param.programNo }">								
+			<!-- 제목, 내용 -->
+
+ 			<div style="margin-top:-50px;">
+				<c:forEach var="i" begin="1" end="7" step="1">
+								<div class="programBodyContents2" style="margin-top:80px;">
+									<input type="text" name="proVo2List[${i-1}].programNo" value="${param.programNo }">								
+									<input type="text" name="proVo2List[${i-1}].proConNo" value="${i}">								
+									<label for="proConNo" id="proConNo" style="color:#258bf7; font-size:18px;"> ${i}번째: </label>
+									<input type="text" class="programTitleTextField" id="proTitle" name="proVo2List[${i-1}].proTitle" placeholder="첫번째 목차의 제목을 적어주세요">
+									<textarea id = "proContents${i}" class="description" name = "proVo2List[${i-1}].proContents" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요">
+										<div>
+										
+										</div>
+									</textarea>
+									<br> 
+								</div>
+				</c:forEach>
+
+
+
+<%-- 
+								<div class="programBodyContents2" style="margin-top:80px;">
+									<input type="text" name="proVo2List[0].programNo" value="${param.programNo }">								
+									<input type="text" name="proVo2List[0].proConNo" value="1">								
+									<label for="proConNo" id="proConNo" style="color:#258bf7; font-size:18px;"> 1번째: </label>
+									<input type="text" class="programTitleTextField" id="proTitle" name="proVo2List[0].proTitle" placeholder="첫번째 목차의 제목을 적어주세요">
+									<textarea id = "proContents1" class="description" name = "proVo2List[0].proContents" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요">
+										<div>
+										
+										</div>
+									</textarea>
+									<br> 
+								</div>
+
+
+		 --%>						
+
+
 		 	<!-- 프로그램 내용2 등록 페이지로 이동 버튼 -->       
 		        <div class="btnCenter">
 		        <input type="submit" class="programBtn" value="등록하기"/>
@@ -147,11 +99,11 @@ $( document ).ready( function() {
 <script type="text/javascript">
 CKEDITOR.replace("proContents1");
 CKEDITOR.replace("proContents2");
-CKEDITOR.replace("description3");
-CKEDITOR.replace("description4");
-CKEDITOR.replace("description5");
-CKEDITOR.replace("description6");
-CKEDITOR.replace("description7");
+CKEDITOR.replace("proContents3");
+CKEDITOR.replace("proContents4");
+CKEDITOR.replace("proContents5");
+CKEDITOR.replace("proContents6");
+CKEDITOR.replace("proContents7");
 
 
 CKEDITOR.config.width = '100%';   // CSS unit (percent).
@@ -167,5 +119,4 @@ CKEDITOR.replace("descriptionImg",{
 
 	});
 </script>
-</body>
-</html>
+<%@ include file="../../inc/admin_bottom.jsp" %>  
