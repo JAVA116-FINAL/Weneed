@@ -135,7 +135,7 @@
 
 								<!-- checked="checked" -->
 								<li class="appli-li-filter"><input type="radio"
-									name="rd-appliPassedFilter" id="rd-appliPassedFilter_new" 
+									name="rd-appliPassedFilter" id="rd-appliPassedFilter_doc" 
 									> <label
 									for="rd-appliPassedFilter_new"
 									class="lb-appliPassedFilter lb-appliPassedFilter-selected">
@@ -207,14 +207,14 @@
 								<!-- 상태변경 모달 include -->
 								<%@ include file="../company/modal/statusChange.jsp"%>
 							</div>
-							<div class="appli-resultInfo-toggleWrapper">
-								<!-- 지원자에게 결과를 알림 토글버튼 -->
+							<!-- <div class="appli-resultInfo-toggleWrapper">
+								지원자에게 결과를 알림 토글버튼
 								<span>지원자에게 결과를 알림</span>&nbsp; <label
 									class="appli-lb-resultInfo-toggle"> <input
 									type="checkbox" checked style="display: none"> <span
 									class="appli-slider appli-slider-round"></span>
 								</label>
-							</div>
+							</div> -->
 						</div>
 						<div>
 							<!-- 별표 지원자 모아보기 -->
