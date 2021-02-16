@@ -67,7 +67,7 @@ function pageFunc(curPage){
 <section class="resumeListSection">
 	<div class="wrap">
 		<!-- <div class="divheader">
-			<h1>매치업 기업회원 조회 관리</h1>
+			<h1>매치업 현황 조회 관리</h1>
 		</div> -->
 		<div class="divSearch">
 		<%-- 	<form name="frmSearch" method="post" action='<c:url value="/admin/adminMatchupStatus.do"/>'>
@@ -95,7 +95,7 @@ function pageFunc(curPage){
 				<tbody>
 					<c:if test="${empty mcustatusList }">
 						<tr class="align_center"> 
-							<td colspan="9">매치업 등록 기업회원이 없습니다.</td>
+							<td colspan="9">매치업 현황이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty mcustatusList }">
