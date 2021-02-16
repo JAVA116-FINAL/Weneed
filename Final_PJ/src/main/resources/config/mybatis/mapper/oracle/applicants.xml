@@ -72,8 +72,57 @@
 		insert into apply(apply_No, mem_No, pos_No, resume_No,apply_Name, apply_Hp, ref_Name)
 		values(#{applyNo}, #{memNo}, #{posNo}, #{resumeNo}, #{applyName}, #{applyHp}, #{refName})
 	</insert>
+	
+	<select id="selectApplyAllbyAdmin" parameterType="searchVo" resultType="map">
+	select * 
+	from(
+	    select b.*, rownum as RNUM from (
+	    
+	        select apply_No, mem_No, resume_No,pos_No,apply_Name,ref_NAME,
+	        (select resume_Title from resume r where r.resume_No=a.resume_No)resume_Title,
+	        (select resume_File from resume r where r.resume_No=a.resume_No)resume_file, 
+        	(select resume_Upfileflag from resume r where r.resume_No=a.resume_No)resume_Upfileflag, 
+	        (select com_Name from comInfo where com_code=(select com_Code from  position p where p.pos_No=a.pos_No)) com_Name,
+	        (select pos_Name from  position p where p.pos_No=a.pos_No ) pos_Name,
+	        (select jikgun_Name from jikgun where jikgun_Code=(select jikgun_code from  position p where p.pos_No=a.pos_No ))jikgun_Name
+	        , status_Flag,apply_regdate
+	        from apply a      
+	        order by apply_No desc
+	    )B 
+	    <if test="searchKeyword != null and searchKeyword != ''">
+	   		where apply_No like '%' || #{searchKeyword} || '%' or mem_No like '%' || #{searchKeyword} || '%' or apply_Name like '%' || #{searchKeyword} || '%' 
+	        or resume_Title like '%' || #{searchKeyword} || '%' or pos_Name like '%' || #{searchKeyword} || '%' or
+	        jikgun_Name like '%' || #{searchKeyword} || '%' or com_Name like '%' || #{searchKeyword} || '%' or ref_Name like '%' || #{searchKeyword} || '%'
+	   </if>
+	
+		)
+		<![CDATA[
+	      where RNUM > #{firstRecordIndex} 
+	      and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+	      ]]>
+	</select>
+	
+	<select id="selectTotalRecordbyAdmin" parameterType="searchVo" resultType="int">
+		select count(*) from (
+         select apply_No, mem_No, resume_No,pos_No,apply_Name,ref_NAME,
+	        (select resume_Title from resume r where r.resume_No=a.resume_No)resume_Title,
+	        (select resume_File from resume r where r.resume_No=a.resume_No)resume_file, 
+        	(select resume_Upfileflag from resume r where r.resume_No=a.resume_No)resume_Upfileflag, 
+	        (select com_Name from comInfo where com_code=(select com_Code from  position p where p.pos_No=a.pos_No)) com_Name,
+	        (select pos_Name from  position p where p.pos_No=a.pos_No ) pos_Name,
+	        (select jikgun_Name from jikgun where jikgun_Code=(select jikgun_code from  position p where p.pos_No=a.pos_No ))jikgun_Name
+	        , status_Flag, apply_regdate
+	        from apply a      
+	        order by apply_No desc
+	        )
+		 <if test="searchKeyword != null and searchKeyword != ''">
+	   		where apply_No like '%' || #{searchKeyword} || '%' or mem_No like '%' || #{searchKeyword} || '%' or apply_Name like '%' || #{searchKeyword} || '%' 
+	        or resume_Title like '%' || #{searchKeyword} || '%' or pos_Name like '%' || #{searchKeyword} || '%' or
+	        jikgun_Name like '%' || #{searchKeyword} || '%' or com_Name like '%' || #{searchKeyword} || '%' or ref_Name like '%' || #{searchKeyword} || '%'
+	   </if>
+	</select>
+	
 </mapper>
-
 
 
 

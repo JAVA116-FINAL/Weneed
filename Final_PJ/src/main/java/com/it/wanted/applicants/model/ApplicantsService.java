@@ -23,4 +23,6 @@ public interface ApplicantsService {
 	
 	/* 자연 */
 	public int insertApply(ApplicantsVO applyVo);
+	public List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo);
+	public int selectTotalRecordbyAdmin(SearchVO searchVo);
 }
