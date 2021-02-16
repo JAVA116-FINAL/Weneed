@@ -135,7 +135,6 @@
 
 					<!-- 추천인 -->
 					<div>
-
 						<div class="appli-list-object" style="padding: 10px 20px">
 							<div class="appli-list-object_info">
 								<div class="appli-list-object_infoResume appli-object-ele">
@@ -146,7 +145,7 @@
 							</div>
 						</div>
 
-						<c:if test="${empty aVo.refName }">
+						<c:if test="${empty aVo.refName}">
 							<div class="appli-list-object-none">
 								<p>추천인이 없습니다.</p>
 							</div>
@@ -173,7 +172,7 @@
 
 					<!-- 이력서.포트폴리오 -->
 					<div>
-						<div class="appli-list-object" style="padding: 10px 20px">
+						<%-- <div class="appli-list-object" style="padding: 10px 20px">
 							<div class="appli-list-object_info">
 								<div class="appli-list-object_infoResume appli-object-ele">
 									<div>
@@ -196,7 +195,7 @@
 						<div>
 							<p class="appli-notiGuide" style="visibility: hidden;">지원자에게
 								15일 안에 합격/불합격 소식을 알려주세요. 좋은 후보자는 여러 곳에서 제안을 받습니다. 타이밍을 놓치지 마세요.</p>
-						</div>
+						</div> --%>
 					</div>
 				</section>
 			</div>

@@ -10,28 +10,38 @@
 			</if>
 		</where>
 	</sql>
+	
+	<select id="selectTotalRecord" parameterType="appliPagingVo"
+		resultType="int">
+		select count(*) from apply
+		where status_flag=#{statusFlag}
+		<include refid="searchWhere"></include>
+	</select>
 
-	<select id="selectApplicants" parameterType="int"
-		resultType="map">
-		
-		<!-- <if test="sf==0"></if> -->
-		select A.*, B.pos_name
-		from apply A join position B
-		on A.POS_NO =
-		B.POS_NO
-		where A.status_flag=#{sf}
-		order by apply_no desc
+	<select id="selectApplicants" parameterType="appliPagingVo" resultType="map">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM
+		    from
+		    (
+		        select AP.*, B.pos_name
+	            from apply AP join position B
+	            on AP.POS_NO =
+	            B.POS_NO
+	            where AP.status_flag=#{statusFlag}
+	            <if test="searchKeyword != null and searchKeyword != ''">
+	               ${searchCondition} like '%' || #{searchKeyword} || '%'
+	            </if> 
+	              order by apply_no desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
 	</select>
 	
-	<!-- <select id="selectApplicants2"
-		resultType="map">
-		select A.*, B.pos_name
-		from apply A join position B
-		on A.POS_NO =
-		B.POS_NO
-		order by apply_no desc
-	</select>
- -->
 	<select id="selectAllPositions" resultType="ApplicantsVO">
 
 		select
@@ -41,11 +51,7 @@
 		order by B.pos_name
 	</select>
 
-	<select id="selectTotalRecord" parameterType="searchVo"
-		resultType="int">
-		select count(*) from apply
-		<include refid="searchWhere"></include>
-	</select>
+	
 
 	<select id="selectByNo" parameterType="int"
 		resultType="ApplicantsVO">

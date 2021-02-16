@@ -8,27 +8,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.it.wanted.common.SearchVO;
 
 @Service
 public class ApplicantsServiceImpl implements ApplicantsService{
 	@Autowired
 	private ApplicantsDAO applicantsDao;
 	
-	private static final Logger logger= LoggerFactory.getLogger(ApplicantsServiceImpl.class);
-	
+
 //	@Override
-//	public List<Map<String, Object>> selectApplicants(String comCode) {
-//		return applicantsDao.selectApplicants(comCode);
+//	public List<Map<String, Object>> selectApplicants(int statusFlag) {
+//		return applicantsDao.selectApplicants(statusFlag);
 //	}
-//	@Override
-//	public List<Map<String, Object>> selectApplicants(ApplicantsVO appliVo) {
-//		return applicantsDao.selectApplicants(appliVo);
-//	}
-	@Override
-	public List<Map<String, Object>> selectApplicants(int statusFlag) {
-		return applicantsDao.selectApplicants(statusFlag);
-	}
+
 
 	@Override
 	public List<ApplicantsVO> selectAllPositions() {
@@ -36,8 +27,8 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 	}
 
 	@Override
-	public int selectTotalRecord(SearchVO searchVo) {
-		return applicantsDao.selectTotalRecord(searchVo);
+	public int selectTotalRecord(AppliPagingVO appliPagingVo) {
+		return applicantsDao.selectTotalRecord(appliPagingVo);
 	}
 
 	@Override
@@ -45,10 +36,12 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 		return applicantsDao.selectByNo(no);
 	}
 
+
 	@Override
-	public List<Map<String, Object>> selectApplicants2() {
-		return applicantsDao.selectApplicants2();
+	public List<Map<String, Object>> selectApplicants(AppliPagingVO appliPagingVo) {
+		return applicantsDao.selectApplicants(appliPagingVo);
 	}
+
 
 //	@Override
 //	public int updatePeriod(ApplicantsVO appliVo) {

@@ -31,7 +31,8 @@
 
 	});
 	
-	function pageFunc(curPage){
+	function pageFunc(curPage, statusflag){
+		$('input[name=statusflag]').val(statusflag);
 		$('input[name=currentPage]').val(curPage);
 		$('form[name=frmPage]').submit();
 	}
@@ -47,14 +48,16 @@
 	}
  	*/
 	
-	
 </script>
 <body>
-	<form action="<c:url value='/company/applicants.do'/>" name="frmPage"
-		method="post" style="display: none;">
-		<input type="text" name="currentPage"> <input type="text"
-			name="searchCondition" value="${param.searchCondition }"> <input
+	<form
+		action="<c:url value='/company/applicants.do?'/>"
+		name="frmPage" method="post"><!--  style="display: none;" -->
+		<input type="text" name="currentPage"> 
+		<input type="text" name="searchCondition" value="${param.searchCondition }"> 
+		<input
 			type="text" name="searchKeyword" value="${param.searchKeyword }">
+		<input type="text" name="statusflag">
 	</form>
 
 	<div class="container">
@@ -135,9 +138,8 @@
 
 								<!-- checked="checked" -->
 								<li class="appli-li-filter"><input type="radio"
-									name="rd-appliPassedFilter" id="rd-appliPassedFilter_doc" 
-									> <label
-									for="rd-appliPassedFilter_new"
+									name="rd-appliPassedFilter" id="rd-appliPassedFilter_doc">
+									<label for="rd-appliPassedFilter_new"
 									class="lb-appliPassedFilter lb-appliPassedFilter-selected">
 										<a href='<c:url value="/company/applicants.do?statusFlag=0"/>'">신규
 											(0)</a>
@@ -147,8 +149,7 @@
 									<label for="rd-appliPassedFilter_doc"
 									class="lb-appliPassedFilter"><a
 										href='<c:url value="/company/applicants.do?statusFlag=${1 }"/>'>서류통과
-											(0)</a>
-								</label></li>
+											(0)</a></label></li>
 								<li class="appli-li-filter"><input type="radio"
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_passed">
 									<label for="rd-appliPassedFilter_passed"
@@ -160,7 +161,7 @@
 									<label for="rd-appliPassedFilter_rejected"
 									class="lb-appliPassedFilter"><a
 										href='<c:url value="/company/applicants.do?statusFlag=3"/>'>불합격
-											(0)</a> </label></li>
+											(0) </a> </label></li>
 								<li class="appli-li-filter"><input type="radio"
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_timeout">
 									<label for="rd-appliPassedFilter_timeout"
@@ -170,17 +171,20 @@
 							</ul>
 						</div>
 						<div class="appli-searchDiv">
-							<!-- 검색창 -->
-							<input type="text" placeholder="지원자, 포지션 검색"
-								class="appli-searchInput" style="height: 33px;">
-							<button class="appli-searchIcon">
-								<i class="fas fa-search"></i>
-							</button>
+							<form name="frmSearch" method="post"
+								action='<c:url value="/company/applicants.do"/>'>
+								<!-- 검색창 -->
+								<input type="text" placeholder="지원자, 포지션 검색"
+									value="${param.searchKeyword }" name="searchKeyword"
+									class="appli-searchInput" style="height: 33px;"> <input
+									type="submit" class="appli-btn-statusChange"
+									style="outline: none;" value="검색">
+							</form>
 						</div>
 					</div>
 
 					<div class="appli-statusChangeDiv">
-						<!-- 체크올, 상태변경, 지원자에게 결과를 알림 on/off, 별표지원자 모아보기 상태변경팝업도 띄워야겠네ㅋㅋ  -->
+						<!-- 체크올, 상태변경, 지원자에게 결과를  알림 on/off, 별표지원자 모아보기 상태변경팝업도 띄워야겠네ㅋㅋ  -->
 						<div class="appli-statusChangeDiv">
 							<!-- 체크, 상태변경, 지원자에게 결과알림 -->
 							<div class="appli-statusChangeDiv">
@@ -207,14 +211,6 @@
 								<!-- 상태변경 모달 include -->
 								<%@ include file="../company/modal/statusChange.jsp"%>
 							</div>
-							<!-- <div class="appli-resultInfo-toggleWrapper">
-								지원자에게 결과를 알림 토글버튼
-								<span>지원자에게 결과를 알림</span>&nbsp; <label
-									class="appli-lb-resultInfo-toggle"> <input
-									type="checkbox" checked style="display: none"> <span
-									class="appli-slider appli-slider-round"></span>
-								</label>
-							</div> -->
 						</div>
 						<div>
 							<!-- 별표 지원자 모아보기 -->
@@ -235,6 +231,11 @@
 						<!-- 리스트에 값 있을 때, 1개 객체  -->
 						<c:if test="${!empty aList}">
 							<c:forEach var="aVo" items="${aList}">
+								<%-- <c:set target="${aVo}" property="SatusFlag" value="${aVo['STATUS_FLAG']}" /> --%>
+								<c:set var="StatusFlag" value="#{aVo.statusFlag }"></c:set>
+								<c:set target="${aVo }" property="statusFlag" value="${aVo['STATUS_FLAG']}"/>
+ 								<%-- <c:set value="${aVo['STATUS_FLAG']}" var="SatusFlag"/> --%>
+
 								<div class="appli-list-object">
 									<div class="appli-list-object_info">
 										<div>
@@ -260,7 +261,7 @@
 												<p class="appli-name-posJikgun">
 													<a
 														href="<c:url value='/company/applicantsDetail.do?no=${aVo["APPLY_NO"]}'/>">
-														${aVo['APPLY_NAME'] } · ${aVo['POS_NAME'] } </a>
+														${aVo['APPLY_NAME'] } · ${aVo['POS_NAME'] }</a>
 												</p>
 											</div>
 										</div>
@@ -281,7 +282,7 @@
 
 										<i class="far fa-clock"></i><span class="appli-waitingDays">
 											<c:if test="${aVo['APPLY_PERIOD']>=0 }">
-												${aVo['APPLY_PERIOD'] } 일째 기다림 
+												${aVo['APPLY_PERIOD'] } 일째 기다림 ${StatusFlag }
 											</c:if>
 										</span>
 									</div>
@@ -290,40 +291,42 @@
 						</c:if>
 					</div>
 
-					<div class="appli-paging-divs">
-						<!-- 페이지 번호 추가 -->
-						<!-- 이전 블럭으로 이동 -->
-						<div class="appli-paging-div appli-paging-div_prev">
+					<div class="appli-paging-divs" style="justify-content: center;">
+						
 							<c:if test="${pagingInfo.firstPage>1 }">
-								<button onclick="pageFunc(${pagingInfo.firstPage-1})">이전</button>
-							</c:if>
-						</div>
-
-						<!-- [1][2][3][4][5][6][7][8][9][10] -->
-						<c:forEach var="i" begin="${pagingInfo.firstPage}"
-							end="${pagingInfo.lastPage}">
-							<c:if test="${i==pagingInfo.currentPage }">
-								<div class="appli-paging-div appli-paging-div_page"
-									style="margin: 0px 3px;">
-									<button style="font-weight: bold">${i}</button>
+								<div class="appli-paging-div appli-paging-div_prev">
+									<button onclick="pageFunc(${pagingInfo.firstPage-1}, ${StatusFlag})">이전</button>
 								</div>
 							</c:if>
-							<c:if test="${i!=pagingInfo.currentPage }">
-								<div class="appli-paging-div appli-paging-div_page"
-									style="margin: 0px 3px;">
-									<button onclick="pageFunc(${i})">${i}</button>
+
+							<!-- [1][2][3][4][5][6][7][8][9][10] -->
+							<c:forEach var="i" begin="${pagingInfo.firstPage}"
+								end="${pagingInfo.lastPage}">
+								<c:if test="${i==pagingInfo.currentPage }">
+									<div class="appli-paging-div appli-paging-div_page"
+										style="margin: 0px 3px;">
+										<button style="font-weight: bold">${i}</button>
+									</div>
+								</c:if>
+								<c:if test="${i!=pagingInfo.currentPage }">
+									<div class="appli-paging-div appli-paging-div_page"
+										style="margin: 0px 3px;">
+										<button onclick="pageFunc(${i},${StatusFlag})">${i}</button>
+									</div>
+								</c:if>
+							</c:forEach>
+
+							<!-- 다음 블럭으로 이동 -->
+							<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
+								<div class="appli-paging-div appli-paging-div_next">
+									<button onclick="pageFunc(${pagingInfo.lastPage+1},${StatusFlag}>)">다음</button>
 								</div>
 							</c:if>
-						</c:forEach>
-
-						<!-- 다음 블럭으로 이동 -->
-						<div class="appli-paging-div appli-paging-div_next">
-							<%-- <c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }"> --%>
-							<button onclick="pageFunc(${pagingInfo.lastPage+1})">다음</button>
-							<%-- </c:if> --%>
-						</div>
-						<!--  페이지 번호 끝 -->
+							<!--  페이지 번호 끝 -->
+						
 					</div>
+
+
 
 				</section>
 				<!-- 페이징 처리 -->
