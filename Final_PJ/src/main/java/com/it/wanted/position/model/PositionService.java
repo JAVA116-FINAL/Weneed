@@ -17,5 +17,4 @@ public interface PositionService {
 	public List<Map<String, Object>> selectPositionAllbyAdmin(SearchVO searchVo);
 	public int selectTotalRecordbyAdmin(SearchVO searchVo);
 
-
 }

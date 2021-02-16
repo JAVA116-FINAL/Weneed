@@ -51,7 +51,7 @@
 	</select>
 	
 	<select id="selectPositionByComcode" parameterType="String" resultType="positionVo">
-		select pos_no, pos_name from position where com_code=#{comCode}
+		select pos_no, pos_name, pos_status, end_date from position where com_code=#{comCode} order by pos_no desc
 	</select>
 	
 <!-- 0216자연 -->

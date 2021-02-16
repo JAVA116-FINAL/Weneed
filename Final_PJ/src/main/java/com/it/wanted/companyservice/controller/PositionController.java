@@ -1,6 +1,7 @@
 package com.it.wanted.companyservice.controller;
 
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.it.wanted.cominfo.model.ComInfoService;
+import com.it.wanted.cominfo.model.ComInfoVO;
 import com.it.wanted.cominfo.model.NationVO;
 import com.it.wanted.commemlist.model.ComMemListService;
 import com.it.wanted.jikgun.model.JikgunService;
@@ -35,9 +37,13 @@ public class PositionController {
 	@Autowired PositionService posService;
 	
 	@RequestMapping("/positionList.do")
-	public void positionList() {
-		logger.info("포지션목록 조회");
+	public void positionList(Model model, HttpSession session) {
+		String comCode=((ComInfoVO)session.getAttribute("comInfoVo")).getComCode();
+		logger.info("포지션목록 조회, 파라미터 comCode={}", comCode);
 		
+		List<PositionVO> posList=posService.selectPositionByComcode(comCode);
+		logger.info("기업코드에 대한 포지션 목록 조회 결과, posList.size={}", posList.size());
+		model.addAttribute("posList", posList);
 	}
 	
 	//포지션 등록 페이지 조회
@@ -66,9 +72,15 @@ public class PositionController {
 	//포지션 등록 승인 요청, 임시저장
 	@RequestMapping(value="/positionAdd.do", method=RequestMethod.POST)
 	public String positionAdd_post(@ModelAttribute PositionVO posVo, 
-			@RequestParam(value="posJikmus", required=true) List<String> jikmus, HttpSession session) {
+			@RequestParam(value="posJikmus", required=true) List<String> jikmus, HttpSession session,
+			Model model) {
 		logger.info("포지션 등록 승인 요청 또는 임시 저장, 파라미터 posVo={} jikmus={}", posVo, jikmus);
 		//필수값 아닌 것 전부 널 처리 해줘야 함, 임시저장을 위해...
+		
+		//직무선택 개수에 따른 후처리.. ConcurrentModificationException 나면 이터레이터로 처리해야 함.
+		//이터레이터로 처리하려다가 NoSuchElement 떠서 람다식을 사용해보았다.
+		jikmus.removeIf(jikmu -> (jikmu == null || jikmu.isEmpty()));
+		logger.info("후처리가 끝난 직무 목록 조회 jikmus={}", jikmus);
 		
 		//승인요청일 때 신입/경력 후처리
 		if(posVo.getPosStatus().equals("2")) {
@@ -144,6 +156,15 @@ public class PositionController {
 		
 		int cnt=posService.insertPosition(posVo, jikmus);
 		logger.info("포지션등록 처리 및 포지션별 직무리스트 인서트 결과 cnt={}", cnt);
+		
+		String url="/company/positionAdd.do", msg="포지션 등록 실패!";
+		if(cnt>0) {
+			url="/company/positionList.do";
+			msg="포지션 등록 성공!";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
 		
 		return "common/message";
 	}
