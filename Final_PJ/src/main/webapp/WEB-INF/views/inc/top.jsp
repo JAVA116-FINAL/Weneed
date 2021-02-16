@@ -99,7 +99,6 @@
 	  					var msg =""
 	  					if(res){ //true이면 회원가입 성공
 	  						msg="회원가입 성공! 로그인을 해주세요.";
-	  						$('#join').modal('hide');
 	  						$('#join-email').val('');
 	  						$('#join-name').val('');
 	  						$('#join-hp').val('');
@@ -107,7 +106,6 @@
 	  						$('#join-pwdOk').val('');
 	  					}else{
 	  						msg="회원가입 실패";
-	  						$('#join').modal('hide');
 	  						$('#join-email').val('');
 	  						$('#join-name').val('');
 	  						$('#join-hp').val('');
@@ -115,6 +113,7 @@
 	  						$('#join-pwdOk').val('');
 	  					}
 	  					alert(msg);
+	  					location.href="http://localhost:9090/Final_PJ/index.do";
 	  				},
 	  				error:function(xhr, status, error){
 	  					alert('error! : ' + error);
@@ -532,7 +531,7 @@
 							</button>
 							<ul class="dropdown-menu" aria-labelledby="dropdown02" style="top:97%; left:-115%; margin-top:0; line-height:17px; border-radius:0; padding:0;">
 								<li><a class="dropdown-item" id="profile-li" href="<c:url value='/mypage/main.do'/>" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:20px 0 10px 0;">MY 위니드</a></li>
-								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">프로필</a></li>
+								<li><a class="dropdown-item" id="profile-li" href="<c:url value='/matchupMem/matchupMemList.do'/>" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">프로필</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;margin-top:10px; border-top:1px solid #e1e2e3;padding:21px 0 11px 0;">지원현황</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">제안받기 현황</a></li>
 								<li><a class="dropdown-item" id="profile-li" href="#" style="border-bottom:none; text-align:center; font-size:15px; color:#333;padding:11px 0px;">좋아요</a></li>

@@ -53,6 +53,45 @@
 	<select id="selectPositionByComcode" parameterType="String" resultType="positionVo">
 		select pos_no, pos_name from position where com_code=#{comCode}
 	</select>
+	
+<!-- 0216자연 -->
+	<select id="selectPositionAllbyAdmin" parameterType="searchVo" resultType="map">
+		select* 
+		from
+		(
+			select A.*,rownum as RNUM 
+			from
+			(
+				select pos_No, 
+				(select com_Name from comInfo c where c.com_Code=p.com_Code)com_Name,
+				(select jikgun_Name from jikgun j where p.jikgun_Code=j.jikgun_Code)jikgun_Name,
+				 pos_Min_Sal,pos_Max_Sal,end_Date,pos_Name,pos_Status,pos_Regdate
+				from position p order by pos_No desc
+			)A 
+			<if test="searchKeyword != null and searchKeyword != ''">
+				where pos_No like '%' || #{searchKeyword} || '%' or com_Name like '%' || #{searchKeyword} || '%' or jikgun_Name like '%' || #{searchKeyword} || '%' or
+				pos_Name like '%' || #{searchKeyword} || '%'
+			</if>
+			
+		)	
+			<![CDATA[
+			where RNUM>#{firstRecordIndex}
+			and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+			]]>
+	</select>
+	<select id="selectTotalRecordbyAdmin" parameterType="searchVo" resultType="int">
+		select count(*) from(
+		select pos_No, 
+		(select com_Name from comInfo c where c.com_Code=p.com_Code)com_Name,
+		(select jikgun_Name from jikgun j where p.jikgun_Code=j.jikgun_Code)jikgun_Name,
+		 pos_Min_Sal,pos_Max_Sal,end_Date,pos_Name,pos_Status,pos_Regdate
+		from position p
+		)
+		<if test="searchKeyword != null and searchKeyword != ''">
+			where pos_No like '%' || #{searchKeyword} || '%' or com_Name like '%' || #{searchKeyword} || '%' or jikgun_Name like '%' || #{searchKeyword} || '%' or
+			pos_Name like '%' || #{searchKeyword} || '%'
+		</if>
+	</select>
 </mapper>
 
 

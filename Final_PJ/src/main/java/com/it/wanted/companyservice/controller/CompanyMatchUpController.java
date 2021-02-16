@@ -171,6 +171,9 @@ public class CompanyMatchUpController {
 		
 		if(cnt>0) {
 			msg="제안하기 전송 성공!";
+		}else if(cnt==0) {
+			msg="이미 제안한 이력서입니다!";
+			url="/company/applicants.do";
 		}
 		
 		model.addAttribute("url", url);

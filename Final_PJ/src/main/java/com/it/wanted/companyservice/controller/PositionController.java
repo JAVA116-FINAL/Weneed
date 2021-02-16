@@ -70,20 +70,21 @@ public class PositionController {
 		logger.info("포지션 등록 승인 요청 또는 임시 저장, 파라미터 posVo={} jikmus={}", posVo, jikmus);
 		//필수값 아닌 것 전부 널 처리 해줘야 함, 임시저장을 위해...
 		
-		
 		//승인요청일 때 신입/경력 후처리
-		if( (posVo.getMinYear()==null || posVo.getMinYear().isEmpty()) 
-				&& (posVo.getMaxYear()==null || posVo.getMaxYear().isEmpty()) 
-				&& posVo.getPosStatus() == "2" ) {
-			posVo.setMinYear("0");
-			posVo.setMaxYear("0");
-		}
-		//임시저장일 때 신입/경력 후처리
-		if( (posVo.getMinYear()==null || posVo.getMinYear().isEmpty()) 
-				&& (posVo.getMaxYear()==null || posVo.getMaxYear().isEmpty()) 
-				&& posVo.getPosStatus() == "1" ) {
-			posVo.setMinYear("");
-			posVo.setMaxYear("");
+		if(posVo.getPosStatus().equals("2")) {
+			if((posVo.getMinYear()==null || posVo.getMinYear().isEmpty())) {
+				posVo.setMinYear("0");
+			}
+			if((posVo.getMaxYear()==null || posVo.getMaxYear().isEmpty())) {
+				posVo.setMaxYear("0");
+			}
+		}else if(posVo.getPosStatus().equals("1")) {
+			if((posVo.getMinYear()==null || posVo.getMinYear().isEmpty())) {
+				posVo.setMinYear("");
+			}
+			if((posVo.getMaxYear()==null || posVo.getMaxYear().isEmpty())) {
+				posVo.setMaxYear("");
+			}
 		}
 		
 		//연봉 후처리

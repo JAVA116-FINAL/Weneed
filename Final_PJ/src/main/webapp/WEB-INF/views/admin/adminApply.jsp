@@ -130,7 +130,7 @@ function pageFunc(curPage){
 									</c:if>
 								</td>
 								<td class="td_jy title_td"><!-- 여기에 탐색디테일 -->
-									<a href='<c:url value="/jobsearch/jobsearchDetail.do?posNo=${map['POS_NO']}"></c:url>'>
+									<a href='<c:url value="/jobsearch/jobsearchDetailAdmin.do?posNo=${map['POS_NO']}&memNo=${map['MEM_NO']}"></c:url>'>
 										${map['POS_NAME'] } 
 									</a>
 								</td> 

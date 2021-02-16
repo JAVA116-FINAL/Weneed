@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.it.wanted.commemlist.model.ComMemListDAO;
 import com.it.wanted.commemlist.model.ComMemListVO;
+import com.it.wanted.common.SearchVO;
 
 @Service
 public class ComInfoServiceImpl implements ComInfoService {
@@ -47,11 +48,6 @@ public class ComInfoServiceImpl implements ComInfoService {
 	}
 
 	@Override
-	public List<ComInfoVO> selectAllCompany() {
-		return comInfoDao.selectAllCompany();
-	}
-
-	@Override
 	@Transactional
 	public List<ComInfoVO> changeStatustoPass(List<String> comCodeArr, List<String> comMemNoArr) {
 		List<ComInfoVO> changedComList=new ArrayList<ComInfoVO>();
@@ -76,6 +72,36 @@ public class ComInfoServiceImpl implements ComInfoService {
 		}
 		
 		return changedComList;
+	}
+
+	@Override
+	public List<ComInfoVO> selectAllCompany(SearchVO searchVo) {
+		return comInfoDao.selectAllCompany(searchVo);
+	}
+
+	@Override
+	public int selectTotalRecord(SearchVO searchVo) {
+		return comInfoDao.selectTotalRecord(searchVo);
+	}
+
+	@Override
+	public List<ComInfoVO> selectAllYetCompany(SearchVO searchVo) {
+		return comInfoDao.selectAllYetCompany(searchVo);
+	}
+
+	@Override
+	public int selectYetTotalRecord(SearchVO searchVo) {
+		return comInfoDao.selectYetTotalRecord(searchVo);
+	}
+
+	@Override
+	public List<ComInfoVO> selectAllPassedCompany(SearchVO searchVo2) {
+		return comInfoDao.selectAllPassedCompany(searchVo2);
+	}
+
+	@Override
+	public int selectPassedTotalRecord(SearchVO searchVo2) {
+		return comInfoDao.selectPassedTotalRecord(searchVo2);
 	}
 	
 	

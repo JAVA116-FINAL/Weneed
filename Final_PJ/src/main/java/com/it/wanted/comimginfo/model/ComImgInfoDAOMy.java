@@ -6,6 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.cominfo.model.ComInfoVO;
+import com.it.wanted.common.SearchVO;
+
 @Repository
 public class ComImgInfoDAOMy implements ComImgInfoDAO{
 	@Autowired SqlSessionTemplate sqlSession;
@@ -39,6 +42,26 @@ public class ComImgInfoDAOMy implements ComImgInfoDAO{
 	@Override
 	public int changeStatustoPass(int comImgNo) {
 		return sqlSession.update(namespace+"changeStatustoPass", comImgNo);
+	}
+
+	@Override
+	public List<ComImgInfoVO> selectAllYetImg(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectAllYetImg", searchVo);
+	}
+
+	@Override
+	public int selectYetTotalRecord(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"selectYetTotalRecord", searchVo);
+	}
+
+	@Override
+	public List<ComImgInfoVO> selectAllPassedImg(SearchVO searchVo2) {
+		return sqlSession.selectList(namespace+"selectAllPassedImg", searchVo2);
+	}
+
+	@Override
+	public int selectPassedTotalRecord(SearchVO searchVo2) {
+		return sqlSession.selectOne(namespace+"selectPassedTotalRecord", searchVo2);
 	}
 	
 }

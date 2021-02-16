@@ -19,6 +19,7 @@ import com.it.wanted.common.Utility;
 import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.matchupCom.model.MatchupComService;
 import com.it.wanted.matchupStatus.model.MatchupStatusService;
+import com.it.wanted.position.model.PositionService;
 import com.it.wanted.resume.model.ResumeService;
 
 
@@ -30,6 +31,7 @@ public class AdminMainController {
 	@Autowired MatchupMemService matchupMemService;
 	@Autowired MatchupComService matchupComService;
 	@Autowired MatchupStatusService matchupStatusService;
+	@Autowired PositionService positionService;
 	private Logger logger=LoggerFactory.getLogger(AdminMainController.class);
 	
 	@RequestMapping("/index.do")
@@ -184,4 +186,34 @@ public class AdminMainController {
 		//4
 		return "admin/adminMatchupStatus";
 	}
+	
+	/* 0216자연 */
+	@RequestMapping("/adminPosition.do")
+	public String adminPosition(@ModelAttribute SearchVO searchVo, Model model) {
+		//1
+		logger.info("adminPosition 조회 파라미터 searchVo={}",searchVo);
+		//2
+		//[1]pagingInfo셋팅
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(10);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//[2]searchVo셋팅
+		searchVo.setRecordCountPerPage(10);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<Map<String, Object>> posList = positionService.selectPositionAllbyAdmin(searchVo);
+		logger.info("포지션 조회 posList.size()",posList.size());
+		int totalRecord=positionService.selectTotalRecordbyAdmin(searchVo);
+		logger.info(" 포지션조회 총 레코드수 totalRecord={}", totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		//3
+		model.addAttribute("posList", posList);
+		model.addAttribute("pagingInfo", pagingInfo);
+		//4
+		return "admin/adminPosition";
+	}
+
+	
 }

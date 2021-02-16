@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.it.wanted.common.SearchVO;
+
 @Service
 public class PositionServiceImpl implements PositionService{
 	
@@ -26,8 +28,10 @@ public class PositionServiceImpl implements PositionService{
 		//직무 잘라주기 
 		List<String> cutJm=new ArrayList<String>();
 		for(int i=0; i<jikmus.size(); i++) {
-			System.out.println(jikmus.get(i).substring(23));
-			cutJm.add(jikmus.get(i).substring(23));
+			System.out.println(jikmus.get(i).length());
+			String jmjm=jikmus.get(i);
+			jmjm=jmjm.substring(23);
+			cutJm.add(jmjm);
 		}
 		int resultCnt=0;
 		//선택한 jm들에 대해 하나씩 posNo와 매핑해서 넣어 준다
@@ -50,7 +54,17 @@ public class PositionServiceImpl implements PositionService{
 		return positionDao.selectPositionByComcode(comCode);
 	}
 
-	
+
+
+	@Override
+	public List<Map<String, Object>> selectPositionAllbyAdmin(SearchVO searchVo) {
+		return positionDao.selectPositionAllbyAdmin(searchVo);
+	}
+
+	@Override
+	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
+		return positionDao.selectTotalRecordbyAdmin(searchVo);
+	}
 
 	
 	

@@ -25,4 +25,10 @@ public interface ApplicantsService {
 	public int insertApply(ApplicantsVO applyVo);
 	public List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo);
 	public int selectTotalRecordbyAdmin(SearchVO searchVo);
+	
+	/*가은*/
+	public int selectApplyComplete(int memNo);
+	public int selectDocumentPass(int memNo);
+	public int selectFinalAccept(int memNo);
+	public int selectFinalFail(int memNo);
 }
