@@ -55,6 +55,17 @@
             <beans:ref bean="ComLoginInterceptor"/>
         </interceptor>
     </interceptors>
+    
+	<!-- 로그인 인터셉터 -->
+	<beans:bean id="LoginInterceptor" class="com.it.wanted.controller.LoginInterceptor"></beans:bean>
+    
+    <interceptors>
+        <interceptor>
+            <mapping path="/mypage/main.do"/>
+           	<mapping path="/profileSetting/setting.do"/>
+            <beans:ref bean="loginInterceptor"/>
+        </interceptor>
+    </interceptors>
 
 	
 </beans:beans>

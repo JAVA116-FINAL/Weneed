@@ -56,6 +56,27 @@ public class ApplicantsDAOMybatis implements ApplicantsDAO {
 		return sqlSession.insert(namespace+"insertApply",applyVo);
 	}
 
+	/* 가은 */
+	@Override
+	public int selectApplyComplete(int memNo) {
+		return sqlSession.selectOne(namespace+"selectApplyComplete", memNo);
+	}
+
+	@Override
+	public int selectDocumentPass(int memNo) {
+		return sqlSession.selectOne(namespace +"selectDocumentPass", memNo);
+	}
+
+	@Override
+	public int selectFinalAccept(int memNo) {
+		return sqlSession.selectOne(namespace+"selectFinalAccept", memNo);
+	}
+
+	@Override
+	public int selectFinalFail(int memNo) {
+		return sqlSession.selectOne(namespace+"selectFinalFail", memNo);
+	}
+
 //	@Override
 //	public int updatePeriod(ApplicantsVO appliVo) {
 //		return sqlSession.update(namespace+"updatePeriod",  appliVo);
