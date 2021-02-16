@@ -1,9 +1,13 @@
 package com.it.wanted.matchupStatus.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.it.wanted.common.SearchVO;
 import com.it.wanted.matchup.model.MatchupMemDAO;
 import com.it.wanted.matchupCom.model.MatchupComDAO;
 
@@ -47,6 +51,17 @@ public class MatchupStatusServiceImpl implements MatchupStatusService{
 		}
 		
 		return result;
+	}
+
+	/* 0216자연 */
+	@Override
+	public List<Map<String, Object>> selectMatchupStatusbyAdmin(SearchVO searchVo) {
+		return matchupStatusDao.selectMatchupStatusbyAdmin(searchVo);
+	}
+
+	@Override
+	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
+		return matchupStatusDao.selectTotalRecordbyAdmin(searchVo);
 	}
 	
 }
