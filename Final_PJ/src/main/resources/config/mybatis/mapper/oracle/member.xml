@@ -42,4 +42,10 @@
 		set pwd=#{pwd} where email=#{email}
 	</update>
 	
+	<update id="withdrawMember" parameterType="String">
+		update memberinfo
+		set outdate = sysdate
+		where email=#{email}
+	</update>
+	
 </mapper>

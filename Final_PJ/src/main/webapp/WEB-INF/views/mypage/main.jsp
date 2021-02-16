@@ -15,9 +15,9 @@
 				</div>
 				<div>
 					<dl>
-						<dt>이이름</dt>
-						<dd>이메일주소</dd>
-						<dd>휴대폰번호</dd>
+						<dt>${memVo.name }</dt>
+						<dd>${memVo.email }</dd>
+						<dd>${memVo.hp }</dd>
 					</dl>
 				</div>
 				<a class="basicInfoLink" href="#"><span>기본정보수정</span></a>
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="leftDiv">
-					<span>계정 설정</span>
+					<a href="<c:url value='/profileSetting/setting.do'/>">계정 설정</a>
 			</div>
 		</div>
 		<div class="rightSideDivGroup">
@@ -47,13 +47,13 @@
 				<h2 class="subTitleinRightDivs">지원 현황</h2>
 				<div class="onlyStatus">
 					<a class="applyStatusNum" href="">
-						<strong>0</strong><span>지원 완료</span></a>
+						<strong>${applyComplete}</strong><span>지원 완료</span></a>
 					<a class="applyStatusNum" href="">
-						<strong>0</strong><span>서류 통과</span></a>
+						<strong>${documentPass}</strong><span>서류 통과</span></a>
 					<a class="applyStatusNum" href="">
-						<strong>0</strong><span>최종 합격</span></a>
+						<strong>${finalAccept}</strong><span>최종 합격</span></a>
 					<a class="applyStatusNum" href="">
-						<strong>0</strong><span>불합격</span></a>
+						<strong>${finalFail}</strong><span>불합격</span></a>
 				</div>
 			</div>
 			<div class="rightDiv">

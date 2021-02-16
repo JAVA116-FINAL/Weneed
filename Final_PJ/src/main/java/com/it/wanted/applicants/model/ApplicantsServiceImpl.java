@@ -65,6 +65,27 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
 		return applicantsDao.selectTotalRecordbyAdmin(searchVo);
 	}
+	
+	/* 가은 */
+	@Override
+	public int selectApplyComplete(int memNo) {
+		return applicantsDao.selectApplyComplete(memNo);
+	}
+
+	@Override
+	public int selectDocumentPass(int memNo) {
+		return applicantsDao.selectDocumentPass(memNo);
+	}
+
+	@Override
+	public int selectFinalAccept(int memNo) {
+		return applicantsDao.selectFinalAccept(memNo);
+	}
+
+	@Override
+	public int selectFinalFail(int memNo) {
+		return applicantsDao.selectFinalFail(memNo);
+	}
 
 //	@Override
 //	public int updatePeriod(ApplicantsVO appliVo) {

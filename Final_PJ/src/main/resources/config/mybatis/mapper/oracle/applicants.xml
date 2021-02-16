@@ -122,6 +122,20 @@
 	   </if>
 	</select>
 	
+	<!-- 가은 -->
+	<select id="selectApplyComplete" parameterType="int" resultType="int">
+		select count(*) as applyComplete from apply where status_flag=0 and mem_no=#{memNo}
+	</select>
+	<select id="selectDocumentPass" parameterType="int" resultType="int">
+		select count(*) as documentPass from apply where status_flag=1 and mem_no=#{memNo}
+	</select>
+	<select id="selectFinalAccept" parameterType="int" resultType="int">
+		select count(*) as documentPass from apply where status_flag=2 and mem_no=#{memNo}
+	</select>
+	<select id="selectFinalFail" parameterType="int" resultType="int">
+		select count(*) as documentPass from apply where status_flag=3 and mem_no=#{memNo}
+	</select>
+	
 </mapper>
 
 

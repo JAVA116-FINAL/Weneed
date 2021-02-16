@@ -143,6 +143,54 @@ public class MemberController {
 		return "redirect:/index.do";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/resetPwd.do")
+	public void resetPwd(@ModelAttribute MemberVO vo, HttpServletResponse response) {
+		logger.info("ajax 이용 - 비밀번호재설정, vo={}", vo);
+		
+		memberService.resetPwd(response, vo);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/resetPwdOk.do")
+	public boolean resetPwdOk(@RequestParam String pwd,
+			HttpSession session, HttpServletResponse response) {
+		String email = (String) session.getAttribute("email");
+		logger.info("email={}", email);
+		logger.info("비밀번호 재설정 처리, 파라미터 pwd={}", pwd);
+		
+		boolean bool = false;
+		int cnt = memberService.updatePwd(pwd);
+		logger.info("비밀번호 update결과, cnt={}", cnt);
+		
+		if(cnt>0) {
+			bool= true;
+		}
+		
+		return bool;
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("/withdraw.do")
+	public boolean memberOut(HttpSession session, HttpServletResponse response) {
+		String email = (String) session.getAttribute("email");
+		logger.info("탈퇴처리 파라미터:email={}", email);
+		
+		boolean bool = false;
+		int cnt = memberService.withdrawMember(email);
+		if(cnt>0) {
+			bool = true;
+			session.removeAttribute("email");
+			session.removeAttribute("name");
+			session.removeAttribute("mem_no");
+			session.removeAttribute("fileName");
+		}
+		
+		logger.info("bool={}", bool);
+		return bool;
+	}
 	
 }
 

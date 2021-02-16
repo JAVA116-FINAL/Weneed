@@ -8,5 +8,7 @@ public interface MemberDAO {
 	public MemberVO selectMember(String email);
 	public int checkLoginEmail(String email);
 	public int updatePw(MemberVO vo);
+	public int withdrawMember(String email);
+	public int updatePwd(String pwd);
 	
 }
