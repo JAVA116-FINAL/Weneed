@@ -4,7 +4,36 @@
 $(function(){
 	$('#comServProposalSubmitBtn').click(function(){
 		//유효성 검사 해주자 
-		
+		if($('textarea[name=proposalMessage]').val().length<1){
+			alert('제안메시지를 입력해주세요.');
+			$('textarea[name=proposalMessage]').focus();
+			return false;
+		}
+		if($('input[name=jobTitle]').val().length<1){
+			alert('직급을 입력해주세요.');
+			$('input[name=jobTitle]').focus();
+			return false;
+		}
+		if($('input[name=minSalary]').val().length<1){
+			alert('최소연봉을 입력해주세요.');
+			$('input[name=minSalary]').focus();
+			return false;
+		}
+		if($('input[name=maxSalary]').val().length<1){
+			alert('최대연봉을 입력해주세요.');
+			$('input[name=maxSalary]').focus();
+			return false;
+		}
+		if($('input[name=region]').val().length<1){
+			alert('근무지역을 입력해주세요.');
+			$('input[name=region]').focus();
+			return false;
+		}
+		if($('input[name=stockOption]').val().length<1){
+			alert('스톡옵션 여부를 입력해주세요.');
+			$('input[name=stockOption]').focus();
+			return false;
+		}
 		//직급, 최소연봉, 최대연봉, 근무지역, 스톡옵션여부
 		
 		$('form[name=proposalForm]').submit();
@@ -26,8 +55,8 @@ $(function(){
 				    <div class="table-responsive">
 						<div class="container">
 						<form action="<c:url value='/company/sendProposal.do'/>" method="post" name="proposalForm">
-							<input type="text" name="resumeNo" value="">
-							<input type="text" name="comCode" value="${sessionScope.comInfoVo.comCode}">
+							<input type="hidden" name="resumeNo" value="">
+							<input type="hidden" name="comCode" value="${sessionScope.comInfoVo.comCode}">
 							<div class="propo-boundDiv">
 				        		<label class="propo-block">제안 메시지</label>
 								<textarea name="proposalMessage" class="propo-block" rows="4" style="width:400px;"></textarea>
@@ -40,8 +69,8 @@ $(function(){
 								<div>
 									<label class="propo-block">연봉<span style="font-weight: normal;"> (단위: 만 원)</span></label>
 									<div>
-										<input name="minSalary" class="propo-shortInput" type="text">
-										 ~ <input name="maxSalary" class="propo-shortInput" type="text">
+										<input name="minSalary" class="propo-shortInput" type="number" style="height:45px;">
+										 ~ <input name="maxSalary" class="propo-shortInput" type="number" style="height:45px;">
 									</div>
 								</div>
 							</div>

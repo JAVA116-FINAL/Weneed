@@ -51,6 +51,8 @@ public class ProposalServiceImpl implements ProposalService{
 				System.out.println("이력서 열람과 동시에 제안했음");
 			}
 			System.out.println("제안일자까지 업데이트 완료");
+		}else {
+			result=0; //이미 제안한 이력서일 때
 		}
 		
 		return result;
