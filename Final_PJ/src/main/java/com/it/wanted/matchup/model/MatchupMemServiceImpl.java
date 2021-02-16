@@ -16,6 +16,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.it.wanted.career.model.CareerDAO;
 import com.it.wanted.career.model.CareerVO;
+import com.it.wanted.common.SearchVO;
 import com.it.wanted.education.model.EducationDAO;
 import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.expertise.model.ExpertiseDAO;
@@ -217,6 +218,17 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	@Override
 	public int updateMatchupjobFlag(MatchupMemVO mcuVo) {
 		return matchupMemDao.updateMatchupjobFlag(mcuVo);
+	}
+	
+	/* 2/15 */
+	@Override
+	public List<Map<String, Object>> selectMatchupMemAllbyAdmin(SearchVO searchVo) {
+		return matchupMemDao.selectMatchupMemAllbyAdmin(searchVo);
+	}
+	
+	@Override
+	public int totalRecordbyAdmin(SearchVO searchVo) {
+		return matchupMemDao.totalRecordbyAdmin(searchVo);
 	}
 	
 	

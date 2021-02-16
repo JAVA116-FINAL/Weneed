@@ -18,10 +18,15 @@ public class NoticeSearchVO {
 	
 	/** 검색키워드 */
 	private String searchKeyword = "";
+	
+	private int noticeDept1;
+	private int noticeDept2;
 
-    public void setSearchVO(NoticeSearchVO bean){
+	public void setSearchVO(NoticeSearchVO bean){
     	this.currentPage = bean.currentPage;
     	this.searchKeyword = bean.getSearchKeyword();
+    	this.noticeDept1 = bean.getNoticeDept1();
+    	this.noticeDept2 = bean.getNoticeDept1();
     	this.blockSize = bean.blockSize;
     	this.firstRecordIndex = bean.firstRecordIndex;
     	this.lastRecordIndex = bean.lastRecordIndex;
@@ -76,11 +81,28 @@ public class NoticeSearchVO {
 		this.searchKeyword = searchKeyword;
 	}
 
+	public int getNoticeDept1() {
+		return noticeDept1;
+	}
+
+	public void setNoticeDept1(int noticeDept1) {
+		this.noticeDept1 = noticeDept1;
+	}
+	
+	public int getNoticeDept2() {
+		return noticeDept2;
+	}
+
+	public void setNoticeDept2(int noticeDept2) {
+		this.noticeDept2 = noticeDept2;
+	}
+
 	@Override
 	public String toString() {
-		return "SearchVO [currentPage=" + currentPage + ", blockSize=" + blockSize + ", firstRecordIndex="
+		return "NoticeSearchVO [currentPage=" + currentPage + ", blockSize=" + blockSize + ", firstRecordIndex="
 				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex + ", recordCountPerPage="
-				+ recordCountPerPage + ", searchKeyword=" + searchKeyword + "]";
+				+ recordCountPerPage + ", searchKeyword=" + searchKeyword + ", noticeDept1=" + noticeDept1
+				+ ", noticeDept2=" + noticeDept2 + "]";
 	}
 	
     

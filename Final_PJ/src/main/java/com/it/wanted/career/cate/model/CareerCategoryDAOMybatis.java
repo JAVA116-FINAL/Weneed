@@ -18,5 +18,10 @@ public class CareerCategoryDAOMybatis implements CareerCategoryDAO{
 		List<CareerCategoryVO> list=sqlSession.selectList(namespace+"selectCareerCategoryAll");
 		
 		return list;
+	}
+
+	@Override
+	public String selectMatchCategoryName(int proCateNo) {
+		return sqlSession.selectOne(namespace + "selectMatchCategoryName", proCateNo);
 	} 
 }

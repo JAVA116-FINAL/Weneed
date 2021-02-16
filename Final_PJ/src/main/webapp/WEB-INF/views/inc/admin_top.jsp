@@ -26,21 +26,21 @@
             </li>
             <li class="adminMenuLi">매치업
                <ul>
-                  <li class="adminSubMenu"><a href="#">매치업 현황</a></li>
+                  <li class="adminSubMenu"><a href="<c:url value='/admin/adminMatchup.do'/>">매치업 현황</a></li>
                   <li class="adminSubMenu"><a href="#">매치업 상품</a></li>
                </ul>
             </li>
             <li class="adminMenuLi">포지션/이력서
                <ul>
                   <li class="adminSubMenu"><a href="#">포지션 조회</a></li>
-                  <li class="adminSubMenu"><a href="#">이력서 조회</a></li>
-                  <li class="adminSubMenu"><a href="#">지원현황</a></li>
+                  <li class="adminSubMenu"><a href='<c:url value="/admin/adminResume.do"/>'>이력서 조회</a></li>
+                  <li class="adminSubMenu"><a href='<c:url value="/admin/adminApply.do"/>'>지원현황</a></li>
                </ul>
             </li>
             <li class="adminMenuLi">고객센터
                <ul>
-                  <li class="adminSubMenu"><a href="#">이용안내</a></li>
-                  <li class="adminSubMenu"><a href="#">문의내역</a></li>
+                  <li class="adminSubMenu"><a href="<c:url value='/admin/noticeService/notice_list.do'/>">이용안내</a></li>
+                  <li class="adminSubMenu"><a href="<c:url value='/admin/noticeService/noticeQna_list.do'/>">문의내역</a></li>
                </ul>
             </li>
             <li class="adminMenuLi">커리어성장

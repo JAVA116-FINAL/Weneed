@@ -2,6 +2,7 @@ package com.it.wanted.resume.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import com.it.wanted.addinformatiod.model.AddinformatiodDAO;
 import com.it.wanted.addinformatiod.model.AddinformatiodVO;
 import com.it.wanted.career.model.CareerDAO;
 import com.it.wanted.career.model.CareerVO;
+import com.it.wanted.common.SearchVO;
 import com.it.wanted.education.model.EducationDAO;
 import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.expertise.model.ExpertiseDAO;
@@ -269,7 +271,15 @@ public class ResumeServiceImpl implements ResumeService{
 	public ResumeVO selectResumeOnebyResumeNo(int resumeNo) {
 		return resumeDao.selectResumeOnebyResumeNo(resumeNo);
 	}
-
+	
+	@Override
+	public List<Map<String, Object>> selectResumeAllbyAdmin(SearchVO searchVo) {
+		return resumeDao.selectResumeAllbyAdmin(searchVo);
+	}
+	@Override
+	public int selectTotalRecord(SearchVO searchVo) {
+		return resumeDao.selectTotalRecord(searchVo);
+	}
 	
 	
 	/* 현빈 */
@@ -354,4 +364,8 @@ public class ResumeServiceImpl implements ResumeService{
 		logger.info("resumeAllVo={}",resumeAllVo);
 		return resumeAllVo;
 	}
+
+
+
+
 }

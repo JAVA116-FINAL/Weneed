@@ -51,6 +51,9 @@ public class PositionServiceImpl implements PositionService{
 	public List<PositionVO> selectPositionByComcode(String comCode) {
 		return positionDao.selectPositionByComcode(comCode);
 	}
+
+	
+
 	
 	
 }
