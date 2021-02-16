@@ -296,4 +296,8 @@
 		where mcumem_no=#{mcumemNo} and com_code=#{comCode}
 	</select>
 	
+	<select id="selectMemNo" parameterType="int" resultType="int">
+		select mem_no from matchupmem where resume_no=#{resumeNo}
+	</select>
+	
 </mapper>

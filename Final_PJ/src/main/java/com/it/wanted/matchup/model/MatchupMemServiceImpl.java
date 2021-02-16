@@ -388,5 +388,9 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return mcumemNoList;
 	}
 
+	@Override
+	public int selectMemNo(int resumeNo) {
+		return matchupMemDao.selectMemNo(resumeNo);
+	}
 	
 }

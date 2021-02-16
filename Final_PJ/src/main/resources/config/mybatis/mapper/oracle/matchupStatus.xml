@@ -13,7 +13,6 @@
 		values(matchupstatus_seq.nextval, #{mcucomNo}, #{mcumemNo}, 1)
 	</insert>
 	
-	
 	<select id="selectMatchupStatusbyAdmin" parameterType="searchVo" resultType="map">
 		select * from(
 			select a.* , rownum as RNUM from(
@@ -29,6 +28,7 @@
 	      and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
 	      ]]>
 	</select>
+
 	<select id="selectTotalRecordbyAdmin" parameterType="searchVo" resultType="int">
 		select count(*) from(
 			select mcustatus_No, mcucom_No, mcumem_No,
@@ -38,6 +38,18 @@
 			order by mcustatus_No desc 
 		)
 	</select>
+
+  /* 현빈 */
+	<insert id="insertProposal" parameterType="matchupStatusVo">
+		insert into matchupStatus(mcustatus_no, mcucom_no, mcumem_no, proposal_date, matchup_flag)
+		values(matchupstatus_seq.nextval, #{mcucomNo}, #{mcumemNo}, sysdate, 2)
+	</insert>
+	
+	<update id="updateProposalDate" parameterType="matchupStatusVo">
+		update matchupStatus
+		set proposal_date=sysdate, matchup_flag=2
+		where mcumem_no=#{mcumemNo} and mcucom_no=#{mcucomNo}
+	</update>
 </mapper>
 
 

@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+$(function(){
+	$('#comServProposalSubmitBtn').click(function(){
+		//유효성 검사 해주자 
+		
+		//직급, 최소연봉, 최대연봉, 근무지역, 스톡옵션여부
+		
+		$('form[name=proposalForm]').submit();
+	});
+});
+</script>
 <div id="wantedProposalMD" class="modal fade docs-example-modal-sm wantedProposalMD" tabindex="-1" 
 	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
 	  <div class="modal-dialog">
@@ -15,6 +26,8 @@
 				    <div class="table-responsive">
 						<div class="container">
 						<form action="<c:url value='/company/sendProposal.do'/>" method="post" name="proposalForm">
+							<input type="text" name="resumeNo" value="">
+							<input type="text" name="comCode" value="${sessionScope.comInfoVo.comCode}">
 							<div class="propo-boundDiv">
 				        		<label class="propo-block">제안 메시지</label>
 								<textarea name="proposalMessage" class="propo-block" rows="4" style="width:400px;"></textarea>
@@ -38,9 +51,9 @@
 									<span class="propo-posGuide">*포지션 선택 시 지원자가 해당 포지션으로 이동합니다.</span>
 								</div>
 								<select name="posNo" class="propo-block propo-longInput">
-									<c:forEach var="posVo" items="${posList}">
-										<option value="${posVo.posNo}">${posVo.posName}</option>
-									</c:forEach>
+								<c:forEach var="posVo" items="${posList}">
+									<option value="${posVo.posNo}">${posVo.posName}</option>
+								</c:forEach>
 								</select>
 							</div>
 							<div class="propo-boundDiv">

@@ -35,8 +35,10 @@ import com.it.wanted.matchupCom.model.MatchupComService;
 import com.it.wanted.matchupCom.model.MatchupComVO;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
 import com.it.wanted.matchupStatus.model.MatchupStatusService;
+import com.it.wanted.member.model.MemberService;
 import com.it.wanted.position.model.PositionService;
 import com.it.wanted.position.model.PositionVO;
+import com.it.wanted.proposal.model.ProposalService;
 import com.it.wanted.proposal.model.ProposalVO;
 import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeService;
@@ -57,6 +59,8 @@ public class CompanyMatchUpController {
 	@Autowired ResumeService resumeService;
 	@Autowired MatchupStatusService matchupStatusService; 
 	@Autowired PositionService positionService;
+	@Autowired ProposalService proposalService;
+	@Autowired MemberService memberService;
 	
 	@RequestMapping(value = "/matchupService.do", method = RequestMethod.GET)
 	public String matchupMain(HttpSession session, HttpServletRequest request, Model model) {
@@ -142,17 +146,37 @@ public class CompanyMatchUpController {
 		model.addAttribute("emptyCheck", emptyCheck);
 		model.addAttribute("matchupComVo", matchupComVo);
 		model.addAttribute("checkMap", checkMap);
+		model.addAttribute("posList", posList);
 		return "company/matchupSearch";
 	}
 
 	@RequestMapping("/sendProposal.do")
-	public String sendProposal(@RequestParam ProposalVO propoVo) {
+	public String sendProposal(@ModelAttribute ProposalVO propoVo, @RequestParam int resumeNo, 
+			HttpSession session, Model model) {
 		logger.info("제안하기, 파라미터 propoVo={}", propoVo);
+		String comMemId=(String)session.getAttribute("comMemId");
 		
-		//제안하기 테이블에 insert 시키는 것이다. 
+		//멤노와 컴멤노를 가져와야 하네... 
+		int comMemNo=comMemInfoService.selectComMem(comMemId).getComMemNo();
+		propoVo.setComMemNo(comMemNo);
 		
+		//레주메노로 멤노 가져오기
+		int memNo=matchupMemService.selectMemNo(resumeNo);
+		propoVo.setMemNo(memNo);
 		
-		return "/company/matchupSearch.do";
+		//제안하기 테이블에 insert 시키는 것이다. 확인은.. 안 해도 되나... 
+		int cnt=proposalService.insertProposal(propoVo);
+		logger.info("제안하기 insert 결과 cnt={}", cnt);
+		String url="/company/matchupSearch.do", msg="제안하기 전송 실패!";
+		
+		if(cnt>0) {
+			msg="제안하기 전송 성공!";
+		}
+		
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		//이것도 랜딩페이지 하나 만들어서 보내면 좋겠는데 
+		return "common/message";
 	}
 	
 	@RequestMapping("/modal/modalButtonsTest.do")

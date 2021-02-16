@@ -1,9 +1,26 @@
-<%@ include file="../../inc/top.jsp" %>  
+<%@ include file="../../inc/admin_top.jsp" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<jsp:useBean id="today" class="java.util.Date"/>
+
+  
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/mainstyle.css'/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/clear.css'/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/mystyle.css'/>" />
+  
+  <!-- 커리어성장 카테고리메뉴 css -->
+  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick.css'/>">
+  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick-theme.css'/>">
     
+  <!-- 커리어성장 필터 팝업창 css -->
+  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jiwonPopup.css'/>">
+  <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
+
+<title>관리자 커리어성장 메인페이지</title>
+
 	<!-- 지원 css -->
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/careerAdminJiwon.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programJiwon.css'/>">
@@ -14,26 +31,21 @@
     <!-- ck에디터 -->
 	<script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
 
-<!-- 캘린더 -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
 
 <script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
+<script src="https://kit.fontawesome.com/25b3da3ff3.js" crossorigin="anonymous"></script>    
+<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
+
+<!-- 캘린더 -->
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/js/jquery-ui-timepicker-addon.css'/>">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script type="text/css" src="<c:url value='/resources/css/js/jquery-ui-timepicker-addon.js'/>"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+<script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script>
 <script type="text/javascript">
 
-/* 메뉴bar 상단 고정 */
-$( document ).ready( function() {
-	  var Offset = $( '.jbMenu' ).offset();
-	  $( window ).scroll( function() {
-	   if ( $( document ).scrollTop() > Offset.top ) {
-	      $( '.jbMenu' ).addClass( 'fixed' );
-	    }
-	    else {
-	      $( '.jbMenu' ).removeClass( 'fixed' );
-	    }
-	  });
-	});
-	
 	
 /* 유효성 검사 */	
 
@@ -75,12 +87,30 @@ $(function(){
 	
 });
 
+//날짜 포맷
+/* function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear(),
+       hour = '' + d.getHours(),
+       minute = '' + d.getMinutes(),
+       second = '' + d.getSeconds();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    if (hour.length < 2) hour = '0' + hour;
+    if (minute.length < 2) minute = '0' + minute;
+    if (second.length < 2) second = '0' + second;
+   
+    return [year, month, day].join('-')+" "+[hour, minute, second].join(':');
+};
+ */
 
 /* 캘린더 */
 $(function() {
        //input을 datepicker로 선언
 	$.datepicker.setDefaults({
-			dateFormat: 'yy/mm/dd' //Input Display Format 변경
+			dateFormat: 'yy-mm-dd 00:00:00' //Input Display Format 변경
            ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
            ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
            ,changeYear: true //콤보박스에서 년 선택 가능
@@ -93,60 +123,44 @@ $(function() {
            ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
            ,minDate: "+1D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
            ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)     
-	
-       		// timepicker 설정
+               // timepicker 설정
                ,timeFormat:'HH:mm:ss'
                ,controlType:'select'
+               ,oneLine:true
        });                    	
        
-		$("#proStartDate").datepicker();
-		$("#regiEndDate").datepicker();
+ 
+        $("#proStartDate").datepicker();
+        $("#regiEndDate").datepicker();
 
-		
+
        //초기값을 오늘 날짜로 설정
-            $('#proStartDate').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)   });
-
-}); 
+            $('#proStartDate').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)   
+            
+  
+            
+            
+});        
+			
 
 </script>
 
 
 
 <body>
-	<%
-		String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");  //userID에 해당 세션 사용자의 값을 스트링 형식으로 바꿔서 넣어줌으로써 해당 사용자의 접속 유무를 알 수 있음
-	}
-	%>
+
 	
 <!-- 메뉴 부분!!!!! -->
-<div class="jbMenu" style="width:100%;">
-    	<nav class="navbar navbar-expand-lg navigation" id="navbar" style="background-color:#f8f8fa;">
-		<div class="container" >
-		 	 <div class="navbar-brand">
-				<div class="myNav" style="width:100%;">
-			  <ul class="navbar-nav ml-auto">
-			    <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/careerAdminMain.do'/>">커리어성장 메인</a></li>							  
-			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
-			    <a name="title"></a>   
-			  </ul>	
-			</div>
-			</div>
-		</div>
-		</nav>
-</div>
+
 <!-- 메뉴 탑부분 끝!! -->
 
-<section class="section blog-wrap" style="margin-top:-30px;">
+<section class="section blog-wrap" style="margin-top:0px;">
 
 
 <div style = "width:980px; max-width: 100%; margin:auto;">
 	<form name="proWrite1" method="post" action='<c:url value="/career/Admin/programWrite.do"/>' enctype="multipart/form-data">
 		<fieldset>
-		<legend style="color:#258bf7;"><b>프로그램 등록, 첫번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
+		<legend style="color:#258bf7; font-size: 22px;"><b>프로그램 등록, 첫번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
 		<br>
 			<!-- 프로그램 이름 -->
 		        <div class="proInfoDiv">
@@ -154,19 +168,18 @@ $(function() {
 					<input type="text" class="programTitleTextField" id="proName" name="proName" placeholder="프로그램 이름을 적어주세요">
 		        </div>
 			<!-- 프로그램 카테고리 -->
-			<div class="proInfoDiv" id="">
-			
-			<label for="proCateNo">프로그램 카테고리</label>
-            <select name="proCateNo" id="proCateNo" title="카테고리" class="programTitleTextField">
-            	<option value="0">선택하세요</option>
-            	<!-- 반복문 시작 -->	
-            	<c:forEach var="ccgVo" items="${ccgList }">
-					<option value="${ccgVo.proCateNo}">
-						${ccgVo.proCateName }</option>
-				</c:forEach>  	
- 				<!-- 반복문 끝 -->	         
-            </select>            
-		  </div>
+			<div class="proInfoDiv" id="">	
+				<label for="proCateNo">프로그램 카테고리</label>
+	            <select name="proCateNo" id="proCateNo" title="카테고리" class="programTitleTextField">
+	            	<option value="0">선택하세요</option>
+	            	<!-- 반복문 시작 -->	
+	            	<c:forEach var="ccgVo" items="${ccgList }">
+						<option value="${ccgVo.proCateNo}">
+							${ccgVo.proCateName }</option>
+					</c:forEach>  	
+	 				<!-- 반복문 끝 -->	         
+	            </select>            
+			  </div>
 		        
 		        
 			<!-- 프로그램 타입 (이벤트, 북클럽, 교육강연) -->
@@ -187,11 +200,12 @@ $(function() {
 					<label for="proSponsor" class="proWriteLabel"> 주최자: </label>
 					<input type="text" class="programTitleTextField" id="proSponsor" name="proSponsor" placeholder="주최자를 적어주세요">
 		        </div>
+
 		
 			<!-- 프로그램 시작일 -->
 		        <div class="proInfoDiv">
 					<label for="proStartDate" class="proWriteLabel"> 프로그램 시작일: </label>
-					<input type="text" class="programTitleTextField" id="proStartDate" name="proStartDate" placeholder="프로그램 시작일을 선택해주세요">
+					<input type="text" class="programTitleTextField" id="proStartDate" name="proStartDate"  placeholder="프로그램 시작일을 선택해주세요">
 		        </div>
 		
 			<!-- 프로그램 가격 -->
@@ -207,11 +221,6 @@ $(function() {
 		        </div>
 		
 			<!-- 프로그램 썸네일 이미지 url -->  
-	<!--        <div class="proInfoDiv">
-					<label for="imgUrl" class="proWriteLabel"> 프로그램 썸네일 이미지 url: </label><br>
-					<input type="file" class="" id="imgUrl" name="imgUrl" placeholder="프로그램 썸네일 이미지 url을 넣어주세요">
-		        </div> -->
-		
 		        <div class="proInfoDiv">
 		
 						<div class="inputArea">
@@ -234,7 +243,6 @@ $(function() {
 		 		</div>
 		
 
-		     	
 		    <!-- 관리자 번호는 나중에 세션에서 넘겨주기? -->        
 		        <div class="proInfoDiv">
 					<!-- 관리자 번호 -->
@@ -243,8 +251,8 @@ $(function() {
 		        
 		 	<!-- 프로그램 내용등록 페이지로 이동 버튼 -->       
 		        <div class="btnCenter" style="margin-top:120px;">
-		            <input type = "submit" class="programBtn" value="저장"/>
-		            <input type = "Button" class="programBtn" value="취소" onclick="location.href='<c:url value='/career/Admin/careerAdminMain.do'/>'">         
+		            <input type = "submit" class="programBtn" id="sendButton" value="저장"/>
+		            <input type = "button" class="programBtn" value="취소" onclick="location.href='<c:url value='/career/Admin/careerAdminMain.do'/>'">         
 		        </div>
 		</fieldset>
 	</form>
@@ -255,4 +263,4 @@ $(function() {
 
 
 </script>
-<%@ include file="../../inc/bottom.jsp" %>  
+<%@ include file="../../inc/admin_bottom.jsp" %>  

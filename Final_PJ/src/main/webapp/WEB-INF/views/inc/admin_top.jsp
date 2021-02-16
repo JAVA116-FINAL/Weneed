@@ -38,8 +38,8 @@
             </li>
             <li class="adminMenuLi">고객센터
                <ul>
-                  <li class="adminSubMenu"><a href="#">이용안내</a></li>
-                  <li class="adminSubMenu"><a href="#">문의내역</a></li>
+                  <li class="adminSubMenu"><a href="<c:url value='/admin/noticeService/notice_list.do'/>">이용안내</a></li>
+                  <li class="adminSubMenu"><a href="<c:url value='/admin/noticeService/noticeQna_list.do'/>">문의내역</a></li>
                </ul>
             </li>
             <li class="adminMenuLi">커리어성장
