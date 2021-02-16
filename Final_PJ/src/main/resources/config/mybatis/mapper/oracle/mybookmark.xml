@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.mybookmark">
+	<select id="isBookmark" resultType="int" parameterType="mybookmarkVo">
+		select count(*) from mybookmark 
+		where mem_No=#{memNo} and pos_No=#{posNo}
+	</select>
+	
+	<insert id="insertBookmark" parameterType="mybookmarkVo">
+		<selectKey keyProperty="bookmarkNo" resultType="int" order="BEFORE">
+			select mybookmark_seq.nextval from dual
+		</selectKey>
+		insert into mybookmark (bookmark_No, mem_No, pos_No)
+		values(#{bookmarkNo},#{memNo},#{posNo})
+	</insert>
+	
+	<delete id="deleteBookmark" parameterType="mybookmarkVo">
+		delete from mybookmark 
+		where mem_No=#{memNo} and pos_No=#{posNo}
+	</delete>
+	
+</mapper>

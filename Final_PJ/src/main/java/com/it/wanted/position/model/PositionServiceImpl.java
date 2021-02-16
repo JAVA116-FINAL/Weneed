@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.it.wanted.common.SearchVO;
+
 @Service
 public class PositionServiceImpl implements PositionService{
 	
@@ -50,7 +52,17 @@ public class PositionServiceImpl implements PositionService{
 		return positionDao.selectPositionByComcode(comCode);
 	}
 
-	
+
+
+	@Override
+	public List<Map<String, Object>> selectPositionAllbyAdmin(SearchVO searchVo) {
+		return positionDao.selectPositionAllbyAdmin(searchVo);
+	}
+
+	@Override
+	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
+		return positionDao.selectTotalRecordbyAdmin(searchVo);
+	}
 
 	
 	

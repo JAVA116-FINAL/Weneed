@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.wanted.applicants.model.ApplicantsService;
 import com.it.wanted.applicants.model.ApplicantsVO;
@@ -29,6 +30,8 @@ import com.it.wanted.jobsearchdetail.model.JobsearchdetailService;
 import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.member.model.MemberService;
 import com.it.wanted.member.model.MemberVO;
+import com.it.wanted.mybookmark.MybookmarkService;
+import com.it.wanted.mybookmark.MybookmarkVO;
 import com.it.wanted.position.model.PositionService;
 import com.it.wanted.position.model.PositionVO;
 import com.it.wanted.resume.model.ResumeService;
@@ -44,6 +47,7 @@ public class jobsearchController {
 	@Autowired PositionService positionService;
 	@Autowired ApplicantsService applyService;
 	@Autowired JobsearchdetailService jobsearchdetailService;
+	@Autowired MybookmarkService mybookmarkService;
 	
 	@RequestMapping("/jobsearchList.do")
 	public void jobsearchList(Model model) {
@@ -130,13 +134,94 @@ public class jobsearchController {
 		logger.info("지원하기 처리하기 파라미터 applyVo", applyVo);
 		//2
 		int cnt=applyService.insertApply(applyVo);
+		logger.info("지원결과 cnt={}",cnt);
 		//3
 		//4
-		if(cnt<0) {
-			model.addAttribute("msg", "지원실패!");
-			model.addAttribute("url", "/jobsearch/jobsearchDetail.do?posNo="+applyVo.getPosNo());
-			return "common/message"; 
-		}
-		return "redirect:/jobsearch/jobsearchList.do"; 
+		String msg="지원실패", url="/jobsearch/jobsearchDetail.do?posNo="+applyVo.getPosNo();
+		if(cnt>0) {
+		msg="정상적으로 지원완료 되었습니다.";
+		url="/jobsearch/jobsearchList.do";
+		}		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "common/message"; 
 	}
+	
+	@RequestMapping("/jobsearchDetailAdmin.do")
+	public String jobsearchDetailAdmin(@RequestParam (defaultValue = "0") int posNo, @RequestParam (defaultValue = "0") int memNo, Model model) {
+		logger.info("탐색 상세보기 화면보여주기");
+		
+		String memName = "관리자";
+		logger.info(" memName={}", "관리자");
+		logger.info("탐색 상세보기 파라미터={}", posNo);
+		PositionVO posVo = new PositionVO();
+		
+		posVo = jobsearchdetailService.selectPositionInfoJobSearch(posNo);
+		logger.info("탐색 상세보기 posVo={}", posVo);
+		
+		ComInfoVO cominfoVo = new ComInfoVO();
+		cominfoVo = jobsearchdetailService.selectComNameByComNo(posNo);
+		logger.info("탐색 상세보기 기업정보 cominfoVo={}", cominfoVo);
+		
+		/* 기업 이미지 불러오기 */
+		String comImg = jobsearchdetailService.selectComImage(posNo);
+		
+		/* 비슷한 포지션 보여주기 */
+		
+		List<Map<String, Object>> jsDetailsViewVoList = jobsearchdetailService.selectAllRecruites(posNo);
+		
+		/*
+		 * List<JobSearchDetailsViewVO> jsDetailsViewVoList = jobsearchdetailService.selectAllRecruites(posNo);
+		 */
+		logger.info("비슷한 포지션 글 조회 결과, jsDetailsViewVoList.size={}", jsDetailsViewVoList.size());
+		logger.info("비슷한 포지션 글 조회 결과, jsDetailsViewVoList={}", jsDetailsViewVoList);
+		
+		model.addAttribute("memName", memName);
+		model.addAttribute("posVo", posVo);
+		model.addAttribute("cominfoVo", cominfoVo); 
+		model.addAttribute("comImg", comImg); 
+		model.addAttribute("jsDetailsViewVoList", jsDetailsViewVoList); 
+		
+		return "jobsearch/jobsearchDetail";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/bookmark.do",method = RequestMethod.GET,produces = "application/text; charset=utf8")
+	public String doBookmark(@RequestParam (defaultValue = "0") int posNo, HttpSession session) {
+		//1 
+		int memNo=(int) session.getAttribute("mem_no");
+		logger.info("북마크화면 파라미터 posNo={},memNo={}",posNo,memNo);
+		if(memNo==0) {
+			return "북마크는 로그인 한 회원만 가능합니다.";
+		}
+		MybookmarkVO mybookmarkVo=new MybookmarkVO();
+		mybookmarkVo.setMemNo(memNo);
+		mybookmarkVo.setPosNo(posNo);
+		//2
+		//[1]기존에 북마크가 되어있는지 확인
+		int count=mybookmarkService.isBookmark(mybookmarkVo);
+		logger.info("count={}",count);
+		String msg="";
+		int cnt=0;
+		//[2]있으면 삭제
+		if(count>0) {
+			cnt=mybookmarkService.deleteBookmark(mybookmarkVo);
+			logger.info("북마크 삭제cnt={}",cnt);
+			if(cnt>0) {
+				msg= "북마크 해제되었습니다.";
+			}
+		}else {
+			//[3]없으면 등록
+			cnt=mybookmarkService.insertBookmark(mybookmarkVo);
+			logger.info("북마크 등록cnt={}",cnt);
+			if(cnt>0) {
+				msg= "북마크 설정되었습니다.";
+			}
+		}
+		return msg;
+	}
+	
+	
+	
+	
 }
