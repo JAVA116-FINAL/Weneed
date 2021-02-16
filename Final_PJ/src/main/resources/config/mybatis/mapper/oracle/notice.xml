@@ -8,19 +8,19 @@
 		(
 		    select*from noticeView
 		    where notice_dept1=1
-			<![CDATA[and rownum<=6]]>
 		    order by notice_regdate desc
 		)
+		<![CDATA[where rownum<=6]]>
 	</select>
 	
 	<select id="selectMain2" resultType="map">
 		select * from
 		(
 		    select*from noticeView
-		    where notice_dept1=2 
-		    <![CDATA[and rownum<=6]]>
+		    where notice_dept1=2
 		    order by notice_regdate desc
-		)                                                                         
+		)
+		<![CDATA[where rownum<=6]]>                                                                    
 	</select>
 	
 	<select id="selectMain3" resultType="map">
@@ -28,9 +28,9 @@
 		(
 		    select*from noticeView
 		    where notice_dept1=3
-		    <![CDATA[and rownum<=6]]>
-		    order by notice_no desc
+		    order by notice_regdate desc
 		)
+		<![CDATA[where rownum<=6]]>
 	</select>
 	
 	<select id="selectByDept2" parameterType="int" resultType="map">
@@ -96,7 +96,7 @@
 		(
 		    select*from noticeView
 		    where notice_dept2=#{notice_dept2} 
-		    <![CDATA[and rownum<6]]> <![CDATA[]]>
+		    <![CDATA[and rownum<6]]>
 		    order by notice_no desc
 		)
 	</select>

@@ -1,8 +1,12 @@
 package com.it.wanted.career.admin.model;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +15,7 @@ import com.it.wanted.common.SearchVO;
 
 @Repository
 public class ProgramDAOMybatis implements ProgramDAO{
+	private static final Logger logger = LoggerFactory.getLogger(ProgramServiceImpl.class);
 
 	@Autowired 
 	private SqlSessionTemplate sqlSession; 
@@ -41,15 +46,51 @@ public class ProgramDAOMybatis implements ProgramDAO{
 	}
 
 	@Override
-	public List<ProgramVO2> insertProgram2(ProgramVO2 proVo2) {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertProgram2(ProgramVO2 proVo2) {
+		return sqlSession.insert(namespace+"insertProgram2", proVo2);
+	}
+
+	@Override
+	public int updateProgramEdit1(ProgramVO proVo) {
+		return sqlSession.update(namespace+"updateProgramEdit1", proVo);
 	}
 
 	/*
-	 * @Override public List<ProgramVO2> insertProgram2(ProgramVO2 proVo2) { return
-	 * sqlSession.insert(namespace+"insertProgram2", proVo2); }
+	 * @Override public List<Map<String, Object>>
+	 * selectProgramDetailsView(ProgramVO2 proVo2) { return
+	 * sqlSession.selectList(namespace+"selectProgramDetailsView", proVo2); }
 	 */
+
+	@Override
+	public int insertIntoProgramContents(ProgramVO2 proVo2Con) {
+        	int cnt = sqlSession.insert(namespace+"insertIntoProgramContents", proVo2Con);
+		return cnt;
+    }
+
+	@Override
+	public List<ProgramVO2> selectProgramContentsView(int programNo) {
+		return sqlSession.selectList(namespace+"selectProgramContentsView", programNo);
+	}
+
+	@Override
+	public ProgramVO selectProgramView(int programNo) {
+		return sqlSession.selectOne(namespace+"selectProgramView", programNo);
+	}
+
+	@Override
+	public int updateProgramEditTotal(ProgramVO2 proVo2Con) {
+		int cnt = sqlSession.update(namespace+"updateProgramEditTotal", proVo2Con);
+		return cnt;
+	}
+
+	@Override
+	public int deleteOneProgram(ProgramVO proVo) {
+		return sqlSession.delete(namespace+"deleteOneProgram", proVo);
+	}	
+				
+
+}
+
+
 	 
 	
-}

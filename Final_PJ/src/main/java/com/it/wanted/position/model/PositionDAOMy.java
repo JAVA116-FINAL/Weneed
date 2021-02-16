@@ -37,5 +37,7 @@ public class PositionDAOMy implements PositionDAO{
 	public List<PositionVO> selectPositionByComcode(String comCode) {
 		return sqlSession.selectList(namespace+"selectPositionByComcode", comCode);
 	}
+
+
 	
 }

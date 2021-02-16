@@ -56,6 +56,16 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 		return applicantsDao.insertApply(applyVo);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo) {
+		return applicantsDao.selectApplyAllbyAdmin(searchVo);
+	}
+
+	@Override
+	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
+		return applicantsDao.selectTotalRecordbyAdmin(searchVo);
+	}
+	
 	/* 가은 */
 	@Override
 	public int selectApplyComplete(int memNo) {

@@ -117,7 +117,46 @@
 	<select id="selectOnebymatchupMemNo" parameterType="int" resultType="matchupMemVo">
 		select * from matchupmem where mcumem_No=#{mcumemNo}
 	</select>
+	<!-- 2/15 -->
+ 	<sql id="searchWhere">
+    	<where>
+       		 <if test="searchKeyword != null and searchKeyword != ''">
+           		mcumem_No like '%' || #{searchKeyword} || '%' or
+           		mem_No like '%' || #{searchKeyword} || '%' or
+           		jobsearch_Flag = #{searchKeyword} or
+           		ref_Name like '%' || #{searchKeyword} || '%' or
+           		resume_Title like '%' || #{searchKeyword} || '%' or
+           		Edu_Name like '%' || #{searchKeyword} || '%' or
+           		Edu_Major like '%' || #{searchKeyword} || '%' or
+           		career_Name like '%' || #{searchKeyword} || '%' or
+           		career_Dep like '%' || #{searchKeyword} || '%' or
+           		jikgun_Name like '%' || #{searchKeyword} || '%' or
+           		Career= #{searchKeyword}or
+           		salary like '%' || #{searchKeyword} || '%' or
+           		skill like '%' || #{searchKeyword} || '%' 
+        	</if>
+     	</where>   
+   	</sql>
 	
+	<select id="selectMatchupMemAllbyAdmin" parameterType="searchVo" resultType="matchupDetailsViewVo">
+		select* from(
+		    select a.*, rownum as RNUM from (   
+		        select * from matchupMemDetailsView 
+				<include refid="searchWhere"></include>	        
+		        order by mcumem_no desc, edu_No desc, career desc
+		    )a
+		)
+	 	<![CDATA[
+	      where RNUM > #{firstRecordIndex} 
+	      and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+	      ]]>
+	</select>
+	
+	<select id="totalRecordbyAdmin" parameterType="searchVo" resultType="int">
+		select count(*) from matchupMemDetailsView 
+		<include refid="searchWhere"></include>
+		order by mcumem_no desc
+	</select>
 	
 	
 	<!-- 현빈 -->
@@ -255,6 +294,10 @@
 		select count(*) as CNT
 		from matchuplike
 		where mcumem_no=#{mcumemNo} and com_code=#{comCode}
+	</select>
+	
+	<select id="selectMemNo" parameterType="int" resultType="int">
+		select mem_no from matchupmem where resume_no=#{resumeNo}
 	</select>
 	
 </mapper>

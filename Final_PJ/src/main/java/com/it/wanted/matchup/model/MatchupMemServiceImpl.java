@@ -16,6 +16,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.it.wanted.career.model.CareerDAO;
 import com.it.wanted.career.model.CareerVO;
+import com.it.wanted.common.SearchVO;
 import com.it.wanted.education.model.EducationDAO;
 import com.it.wanted.education.model.EducationVO;
 import com.it.wanted.expertise.model.ExpertiseDAO;
@@ -219,6 +220,17 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return matchupMemDao.updateMatchupjobFlag(mcuVo);
 	}
 	
+	/* 2/15 */
+	@Override
+	public List<Map<String, Object>> selectMatchupMemAllbyAdmin(SearchVO searchVo) {
+		return matchupMemDao.selectMatchupMemAllbyAdmin(searchVo);
+	}
+	
+	@Override
+	public int totalRecordbyAdmin(SearchVO searchVo) {
+		return matchupMemDao.totalRecordbyAdmin(searchVo);
+	}
+	
 	
 	/* 현빈 */
 	@Override
@@ -374,6 +386,11 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		System.out.println("검색결과 매치업멤넘 리스트 길이="+mcumemNoList.size());
 		
 		return mcumemNoList;
+	}
+
+	@Override
+	public int selectMemNo(int resumeNo) {
+		return matchupMemDao.selectMemNo(resumeNo);
 	}
 	
 }

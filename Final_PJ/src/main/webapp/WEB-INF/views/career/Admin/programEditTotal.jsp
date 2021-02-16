@@ -117,168 +117,66 @@ $(function(){
 	<div style = "width:980px; max-width: 100%; margin:auto;">
 
 		<!-- 첫번째파트 폼 (program)테이블 부분 수정 -->
-			<form name="proEditTotal" action="<c:url value='programDetail.do?proNo=${pro.proNo }'/>" method="post">
+			<form name="proEditTotal" action="<c:url value='programEditTotal.do'/>" method="post">
 				
-				<!--  수정시 필요한 proNo를 hidden 필드에 넣는다-->
-			    <input type="hidden" name="proNo" value="${param.proNo}"/>
-				
-				<fieldset>
-				<legend style="color:#258bf7;"><b>프로그램 수정 페이지   &nbsp;</b><i class="fas fa-eraser fa-1x"></i></legend>
-				<br>
-		    
-					<!-- 프로그램 이름 -->
-				        <div class="proInfoDiv">
-							<label class="proWriteLabel"> 프로그램 이름: </label>
-							<input type="text" class="programTitleTextField" id="proName" name="proName" value="${proVo.proName}">
-				        </div>
-					<!-- 프로그램 카테고리 -->
-				        <div class="proInfoDiv" id="cateName">
-							<label id="cateName" class="proWriteLabel"> 프로그램 카테고리: </label><br><br>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="인사">인사</a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="Wanted Plus"> Wanted Plus </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="커리어"> 커리어 </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="경영·비즈니스"> 경영·비즈니스 </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="기술/IT"> 기술/IT </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="마케팅·광고"> 마케팅·광고 </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="크리에이티브"> 크리에이티브 </a></label><br>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="디자인"> 디자인 </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="리더십"> 리더십 </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="교육"> 교육 </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="UX"> UX </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="데이터"> 데이터 </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="브랜딩"> 브랜딩 </a></label>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="개발"> 개발 </a></label> 
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="핀테크"> 핀테크 </a></label> 
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="건강"> 건강 </a></label><br>
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="금융"> 금융 </a></label> 
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="영어"> 영어 </a></label> 
-							<label><a><input type="checkbox" class="cateCheckBox" name="cateName" value="고객서비스·리테일"> 고객서비스·리테일 </label> 
-				        </div>
-				        
-					<!-- 프로그램 타입 (이벤트, 북클럽, 교육강연) -->
-				        <div class="proInfoDiv">
-							<label class="proWriteLabel"> 프로그램 타입: </label>
-							<select name="proType" id="proType" title="프로그램 타입" class="programTitleTextField">
-								<option value="${proVo.proType}" selected></option>
-								<option value="0">프로그램 타입을 선택해주세요</option>
-								<option name="proType" value="1">이벤트</option>
-								<option name="proType" value="2">북클럽</option>
-								<option name="proType" value="3">교육 강의</option>
-							
-			
-					<!-- 반복문 돌려서 프로그램 타입 뿌려주기 -->
-				<!-- 참고하기 -->
-					<%--       
-				      	<c:forEach var="cgVo" items="${cgList }">
-							<option value="${cgVo.categoryNo}">
-								${cgVo.categoryName }</option>
-						</c:forEach>   
-					--%>	
-					<!-- 반복문 끝 -->	
-							
-							</select>
-				        </div>		        
-				
-				
-					<!-- 주최자 -->
-				        <div class="proInfoDiv">
-							<label class="proWriteLabel"> 주최자: </label>
-							<input type="text" class="programTitleTextField" id="proSponsor" name="proSponsor" value="${proVo.proSponsor}">
-				        </div>
-				
-					<!-- 프로그램 시작일 -->
-				        <div class="proInfoDiv">
-							<label class="proWriteLabel"> 프로그램 시작일: </label>
-							<input type="text" class="programTitleTextField" id="proStartDate" name="proStartDate" value="${proVo.proStartDate}">
-				        </div>
-				
-					<!-- 프로그램 가격 -->
-				        <div class="proInfoDiv">
-							<label class="proWriteLabel"> 프로그램 가격: </label>
-							<input type="text" class="programTitleTextField" id="proPrice" name="proPrice" value="${proVo.proPrice}">
-				        </div>
-				
-					<!-- 프로그램 신청 마감일 -->
-				        <div class="proInfoDiv">
-							<label class="proWriteLabel"> 프로그램 신청 마감일: </label>
-							<input type="text" class="programTitleTextField" id="regiEndDate" name="regiEndDate" value="${proVo.regiEndDate}">
-				        </div>
-				
-					<!-- 프로그램 썸네일 이미지 url -->  
-				        <div class="proInfoDiv">
-							<label for="imgUrl" class="proWriteLabel"> 프로그램 썸네일 이미지 url: </label><br>
-							<input type="file" class="" id="imgUrl" name="imgUrl" value="${proVo.imgUrl}">
-				        </div>
-				
-				     	
-				    <!-- 관리자 번호는 세션에서 넘겨주기? -->        
-				        <div class="proInfoDiv">
-							<!-- 관리자 번호 -->
-							<input type="hidden" class="" id="adminNo" name="adminNo">
-				        </div>
-	
-		<!-- 첫번째파트 폼 (program)테이블 부분 수정 끝!!!!-->
-	
-	
-			
-		<!-- 프로그램 두번째 파트 (proContents)테이블 부분 수정!!! -->
+		<!--  수정시 필요한 programNo를 hidden 필드에 넣는다-->
 		
-		<!-- 제목1 내용1 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 첫번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle1" name="proTitle1" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description1" name = "description1" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목2 내용2 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 두번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle2" name="proTitle2" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description2" name = "description2" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목3 내용3 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 세번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle3" name="proTitle3" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description3" name = "description3" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목4 내용4 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 네번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle4" name="proTitle4" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description4" name = "description4" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목5 내용5 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 다섯번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle5" name="proTitle5" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description5" name = "description5" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-			
-			<!-- 제목6 내용6 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 여섯번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle6" name="proTitle6" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description6" name = "description6" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
-				
-			<!-- 제목7 내용7 -->
-				<div class="programBodyContents2">
-					<label proWriteLabel> 일곱번째: </label>
-					<input type="text" class="programTitleTextField" id="proTitle7" name="proTitle7" placeholder="첫번째 목차의 제목을 적어주세요">
-					<textarea id = "description7" name = "description7" class="description" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요"></textarea> 
-				</div>
+		<fieldset>
+		<legend style="color:#258bf7;"><b>프로그램 내용, 수정 페이지   &nbsp;</b><i class="fas fa-eraser fa-1x"></i></legend>
+		<br>
+    			
+									    <input type="text" name="programNo" value="${param.programNo}"/>
+		<!-- 프로그램 두번째 파트 (proContents)테이블 부분 수정!!! -->
+			<!-- 반복문으로 제목 내용 뿌려주기 -->
+	 			<div style="margin-top:-50px;">
+
+
+
+
+				<c:forEach var="proVo2" items="${proConList }">	
+										<a name="title${proVo2.proConNo}"></a>		
+										<br><br>			
+										  <input type="text" name="proVo2List[${proVo2.proConNo-1}].programNo" value="${param.programNo}"/>
+										  <input type="text" name="proVo2List[${proVo2.proConNo-1}].proConNo" value="${proVo2.proConNo}"/>
+										
+										<div class="parag" id="parag2" style="margin-top: 50px;">
+										<label>${proVo2.proConNo}번째</label><br>
+											<input type="text" class="programTitleTextField" id="proTitle" name="proVo2List[${proVo2.proConNo-1}].proTitle" value="${proVo2.proTitle }">
+											<textarea id = "proContents${proVo2.proConNo}" class="description" name = "proVo2List[${proVo2.proConNo-1}].proContents" rows = "5" cols = "80">
+										<div>
+										${proVo2.proContents}
+										</div>
+									</textarea>
+										</div>	
+				</c:forEach>
+
+
+	 									
+										<!-- 제목, 내용 -->
+<%-- 				<c:forEach var="proVo2" items="${proConList }">	
+										<a name="title${proVo2.proConNo}"></a>		
+										<br><br>
+										<input type="text" name="proVo2List[${proVo2.proConNo}].programNo" value="${param.programNo }">								
+										<input type="text" name="proVo2List[${proVo2.proConNo}].proConNo" value="${i}">		
+										<div class="parag" id="parag2" style="margin-top: 50px;">
+										<label>${proVo2.proConNo}번째</label>
+											<input type="text" class="programTitleTextField" id="proTitle" name="proVo2List[${proVo2.proConNo}].proTitle" placeholder="첫번째 목차의 제목을 적어주세요" value="${proVo2.proTitle }">
+									<textarea id = "proContents${proVo2.proConNo}" class="description" name = "proVo2List[${proVo2.proConNo}].proContents" rows = "5" cols = "80" placeholder = "상품설명을 입력하세요">
+										<div>
+										${proVo2.proContents}
+										</div>
+									</textarea>
+										</div>
+				</c:forEach> --%>
+<!-- 제목, 내용 반복문 끝!!! -->		
 		<!-- 프로그램 두번째 파트 (proContents)테이블 부분 수정 끝!!! -->
 	
 	
 		<!-- 페이지 이동 버튼 -->       
 			    <div class="btnCenter" style="margin-top:80px;">
 			       <input type = "submit" class="programBtn" value="저장"/>
-				   <input type = "button" onclick="location.href='programDelete.do'" class="programBtn" value="목록으로" />         
-			       <input type="button" onclick="location.href='programDelete.do?proNo=${proVo.proNo}'" class="programBtn" value="삭제"/>
+				   <input type = "button" onclick="location.href='programAdminList.do'" class="programBtn" value="목록으로" />         
+			       <input type="button" onclick="location.href='programDelete.do?proNo=${proVo.programNo}'" class="programBtn" value="삭제"/>
 		        </div>
 
 		</fieldset>
@@ -294,41 +192,14 @@ $(function(){
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
 <script type="text/javascript">
-/* 캘린더 */
 
-$(function() {
-       //input을 datepicker로 선언
-	$.datepicker.setDefaults({
-			dateFormat: 'yy-mm-dd' //Input Display Format 변경
-           ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-           ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
-           ,changeYear: true //콤보박스에서 년 선택 가능
-           ,changeMonth: true //콤보박스에서 월 선택 가능          
-           ,showOn: "focus" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-           ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
-           ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
-           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
-           ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
-           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
-           ,minDate: "+1D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-           ,maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
-       });                    	
-       
-		$("#proStartDate").datepicker();
-		$("#regiEndDate").datepicker();
-
-       //초기값을 오늘 날짜로 설정
-            $('#proStartDate').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)   });
-
-});
-
-CKEDITOR.replace("description1");
-CKEDITOR.replace("description2");
-CKEDITOR.replace("description3");
-CKEDITOR.replace("description4");
-CKEDITOR.replace("description5");
-CKEDITOR.replace("description6");
-CKEDITOR.replace("description7");
+CKEDITOR.replace("proContents1");
+CKEDITOR.replace("proContents2");
+CKEDITOR.replace("proContents3");
+CKEDITOR.replace("proContents4");
+CKEDITOR.replace("proContents5");
+CKEDITOR.replace("proContents6");
+CKEDITOR.replace("proContents7");
 
 
 CKEDITOR.config.width = '100%';   // CSS unit (percent).

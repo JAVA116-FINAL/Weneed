@@ -3,6 +3,7 @@ package com.it.wanted.matchup.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.wanted.common.SearchVO;
 import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeVO;
 
@@ -24,7 +25,8 @@ public interface MatchupMemService {
 	public int updateMatchupRefName(MatchupMemVO mcuVo);
 	public MatchupMemVO selectOnebymatchupMemNo(int mcumemNo);
 	public int updateMatchupjobFlag(MatchupMemVO mcuVo);
-	
+	public List<Map<String, Object>> selectMatchupMemAllbyAdmin(SearchVO searchVo);
+	public int totalRecordbyAdmin(SearchVO searchVo);
 
 	
 	/* 현빈 */
@@ -34,4 +36,5 @@ public interface MatchupMemService {
 	List<Map<String, Object>> selectSearchedMemList(MatchupMemSearchVO mcuMemSearchVo);
 	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo);
 	public int isZzimed(int resumeNo, String comCode);
+	public int selectMemNo(int resumeNo);
 }

@@ -14,6 +14,7 @@
 	margin-bottom: 20px;
 }
 
+
 .proWriteLabel{
 	margin-top: 20px;
 	color:  #383838;
@@ -30,7 +31,6 @@
 	margin-bottom: 20px;	
 }
 .programBodyContents2{
-	margin-top: 35px;
 	margin-bottom: 20px;	
 	height: 700px;
 }
@@ -97,4 +97,7 @@
 
 .select_img img{
 	margin: 20px 0;
+}
+#contentLoop img{
+	max-width: 700px;
 }

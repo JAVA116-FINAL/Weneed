@@ -11,4 +11,6 @@ public interface PositionService {
 	List<Map<String, Object>> selectJobsearchList();
 	List<PositionVO> selectPositionByComcode(String comCode);
 
+
+
 }

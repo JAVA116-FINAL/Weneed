@@ -70,7 +70,7 @@ body{
 
 <!-- 몸통부분!!! -->
 <div class="subscribeBody">
-	<img alt="https://static.wanted.co.kr/images/temp/f5c32b52.jpg" src="https://static.wanted.co.kr/images/temp/f5c32b52.jpg" class="campus-recruit-img" style="width:100%;">
+	<img alt="https://static.wanted.co.kr/images/temp/f5c32b52.jpg" src="<c:url value='/resources/images/career/f5c32b52.png'/>" class="campus-recruit-img" style="width:100%;">
 </div>
 
 <div style="background-color:black; text-align:center">
@@ -84,7 +84,7 @@ body{
 <a name="title1"></a>
 
 <div>
-	<img alt="https://static.wanted.co.kr/images/events/1012/85b26153.png" src="https://static.wanted.co.kr/images/events/1012/85b26153.png" class="campus-recruit-img" style="width:100%;">
+	<img alt="https://static.wanted.co.kr/images/events/1012/85b26153.png" src="<c:url value='/resources/images/career/85b26153.jpg'/>" class="campus-recruit-img" style="width:100%;">
 </div>
 
 
@@ -102,14 +102,14 @@ body{
 
 <!-- 이용권 (Plan) 섹션 -->
 <div>
-	<img alt="https://static.wanted.co.kr/images/events/1012/04a2ac8e.png" src="https://static.wanted.co.kr/images/events/1012/04a2ac8e.png" class="campus-recruit-img" style="width:100%;">
+	<img alt="https://static.wanted.co.kr/images/events/1012/04a2ac8e.png" src="<c:url value='/resources/images/career/04a2ac8e.jpg'/>" class="campus-recruit-img" style="width:100%;">
 <a name="title3"></a>
 </div>
 
 <!-- 안내사항 (Notice) 섹션 -->
 
 <div>
-	<img alt="https://static.wanted.co.kr/images/temp/560d0fad.png" src="https://static.wanted.co.kr/images/temp/560d0fad.png" class="campus-recruit-img" style="width:100%;">	
+	<img alt="https://static.wanted.co.kr/images/temp/560d0fad.png" src="<c:url value='/resources/images/career/560d0fad.jpg'/>" class="campus-recruit-img" style="width:100%;">	
 </div>
 
 
