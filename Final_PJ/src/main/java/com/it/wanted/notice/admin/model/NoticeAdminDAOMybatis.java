@@ -89,6 +89,11 @@ public class NoticeAdminDAOMybatis implements NoticeAdminDAO{
 		return sqlSession.insert(namespace+"insertNotice", noticeVo);
 	}
 
+	@Override
+	public int updateReply_mute(int qna_no) {
+		return sqlSession.update(namespace+"updateReply_mute", qna_no);
+	}
+
 
 
 }

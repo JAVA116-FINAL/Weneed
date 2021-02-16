@@ -242,4 +242,21 @@ public class NoticeAdminController {
 		
 		return notice_dept2;
 	}
+	
+	@RequestMapping("/noticeQna_mute")
+	public String noticeQna_mute(@RequestParam int qna_no, Model model) {
+		logger.info("문의 무시하기 qna_no={}", qna_no);
+		
+		int cnt=noticeAdminService.updateReply_mute(qna_no);
+		
+		String msg="문의 무시 처리 실패", url="/admin/noticeService/noticeQna_detail.do?qna_no="+qna_no;
+		if(cnt>0) {
+			msg="문의가 무시되었습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 }

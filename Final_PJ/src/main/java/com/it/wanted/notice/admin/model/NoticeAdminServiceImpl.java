@@ -84,5 +84,10 @@ public class NoticeAdminServiceImpl implements NoticeAdminService{
 		return noticeAdminDao.insertNotice(noticeVo);
 	}
 
+	@Override
+	public int updateReply_mute(int qna_no) {
+		return noticeAdminDao.updateReply_mute(qna_no);
+	}
+
 
 }

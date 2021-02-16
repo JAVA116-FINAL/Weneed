@@ -90,13 +90,23 @@
 		    select*from qna 
 		    <include refid="searchWhere" />
 		)
-		where qna_reply = 'N'
+		<![CDATA[
+		where qna_reply = 'N' 
+		and qna_reply != 'M'
+		]]>
 	</select>
 	
 	<!-- 답변여부 업데이트 -->
 	<update id="updateReply" parameterType="int">
 		update qna
 		set qna_reply='Y'
+		where qna_no=#{qna_no}
+	</update>
+	
+	<!-- 문의 무시하기 -->
+	<update id="updateReply_mute" parameterType="int">
+		update qna
+		set qna_reply='M'
 		where qna_no=#{qna_no}
 	</update>
 	

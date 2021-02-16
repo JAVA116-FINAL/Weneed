@@ -29,6 +29,13 @@
 			document.in_form.submit();
 		}
 	}
+	
+	var qnq_no
+	function mute_confirm(qna_no){
+		if(confirm("악성 문의 또는 위니드와 관계없는 문의일 경우 무시할 수 있습니다. 무시하시겠습니까?")==true){
+			location.href="<c:url value='/admin/noticeService/noticeQna_mute.do?qna_no='/>"+qna_no;
+		}
+	}
 </script>
 
 <div>
@@ -37,6 +44,7 @@
 		<c:forEach var="map" items="${userDetail }">
 		
 			<c:set var="qna_no" value="${map['QNA_NO'] }"/>
+			<c:set var="qna_reply" value="${map['QNA_REPLY'] }"/>
 			<c:set var="qna_email" value="${map['QNA_EMAIL'] }"/>
 			<c:set var="qna_content" value="${map['QNA_CONTENT'] }"/>
 			
@@ -58,6 +66,9 @@
 						</c:if>
 						<c:if test="${map['QNA_REPLY'] == 'N'}">
 							<td style="color: #ff3a3a">미답변</td>
+						</c:if>
+						<c:if test="${map['QNA_REPLY'] == 'M'}">
+							<td>무시</td>
 						</c:if>
 					</tr>
 					<tr>
@@ -89,6 +100,7 @@
 	</div>
 
 	<div class="adminDiv">
+	<c:if test="${qna_reply != 'M' }">
 		<c:if test="${!empty adminDetail }">
 		<h1>1:1문의 답변</h1>
 			<c:forEach var="map" items="${adminDetail }">
@@ -143,10 +155,17 @@
 				</div>
 				<div>
 					<input class="frmBtn" id="submit" type="submit" value="등록">
-					<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='/wanted/admin/noticeService/noticeQna_list.do'">
+					<input class="frmBtn" id="button" type="button" value="무시" onClick="mute_confirm(${qna_no });">
+					<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='<c:url value="/admin/noticeService/noticeQna_list.do"/>'">
 				</div>
 			</form>
 		</c:if>
+	</c:if>
+	<c:if test="${qna_reply == 'M' }">
+		<div>
+			<input class="frmBtn" id="button" type="button" value="목록으로" onClick="location.href='<c:url value="/admin/noticeService/noticeQna_list.do"/>'">
+		</div>
+	</c:if>
 	</div>
 </div>
 
