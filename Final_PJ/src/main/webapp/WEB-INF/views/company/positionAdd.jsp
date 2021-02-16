@@ -188,7 +188,7 @@ $(function(){
 		$('#posEmails').val(emailBounding());
 		//상태값 승인요청 hidden = 2
 		/* 채용포지션 상태 1 임시저장, 2 승인요청, 3 승인됨, 4 종료 */
-		$('#posStatus').val(2);
+		$('#posStatus').val('2');
 		$('#positionAddForm').submit();
 	});
 	

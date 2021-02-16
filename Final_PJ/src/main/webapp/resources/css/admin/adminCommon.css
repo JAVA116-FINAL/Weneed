@@ -76,17 +76,33 @@ aside{
 
 
 /* index 페이지*/
+.adminContextContainer{
+	align-items: center;
+	text-align: center;
+	position: relative;
+}
 
+.adminMainTextContainer{
+	position: absolute;
+	top: 0;
+	right: 0;
+	
+}
 .adminMainBtn {
    padding: 20px 15px;
    border: 1px solid #444444;
    border-radius: 5px;
    cursor: pointer;
-   
 }
 
+.adminMainImage{
+	display: inline;
+}
 
-
+.adminMainText{
+	font-size: 1.4em;
+	margin-bottom: 10px;
+}
 /* footer */
 
 #adminfooter{

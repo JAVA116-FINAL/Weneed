@@ -9,17 +9,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value='/resources/css/admin/adminCommon.css'/>">
+<%@ include file="cssJsImports.jsp" %>
 </head>
 <body style="background-color: #f8f8fa;">
 <div class="topWrapper">
 <div class="adminContainer" >
    <section class="admintop">
-      <img style="width:100px" src="<c:url value='/resources/images/admin_logo.png'/>">
+      <img style="width:100px" src="<c:url value='/resources/images/admin_logo.png'/>" onclick="location.href='/admin/index.do'">
       <nav>
          <ul class="adminTopMenubar">
             <li class="adminMenuLi">기업정보승인
                <ul>
-                  <li class="adminSubMenu"><a href="<c:url value='/admin/index.do'/>">정보 승인</a></li>
+                  <li class="adminSubMenu"><a href="<c:url value='/admin/companyService/comInfoPermission.do'/>">정보 승인</a></li>
                   <li class="adminSubMenu"><a href="<c:url value='/admin/companyService/comImgPermission.do'/>">이미지 승인</a></li>
                </ul>
             </li>
@@ -48,11 +49,6 @@
                   <li class="adminSubMenu"><a href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
                   <li class="adminSubMenu"><a href="<c:url value='/career/Admin/programAdminWeneed.do'/>">Weneed+</a></li>
                </ul>
-            </li>
-            <li class="adminMenuLi">직군별연봉
-               <ul>
-                  <li class="adminSubMenu"><a href="#">연봉정보 조회</a></li>
-               </ul> 
             </li>
          </ul>
       </nav>

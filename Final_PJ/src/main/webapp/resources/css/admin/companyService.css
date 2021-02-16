@@ -17,6 +17,7 @@ h2{
 	border-collapse: collapse;
 	padding: 5px 10px;
 	background: #fff;
+	font-size: 0.8em;
 }
 
 .weneed-adminTable > th,
@@ -35,3 +36,34 @@ h2{
 	background-color: #fff;
 	border-radius: 5px;
 }
+
+.divPage > a, span {
+	font-size: 0.9em;
+}
+
+.divPage{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#weneedAdmin-comInfoBeforeSec,
+#weneedAdmin-comInfoPassedSec,
+.weneedAdmin-comImgPermissionSec{
+	margin-bottom: 20px;	
+}
+
+.clickedTab{
+	font-weight: bold;
+}
+
+.hide{
+	display: none;
+}
+
+.weneedAdmin-comPermiSubtitle{
+	display: block;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+

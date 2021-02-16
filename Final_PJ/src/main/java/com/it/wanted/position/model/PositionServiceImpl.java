@@ -26,8 +26,10 @@ public class PositionServiceImpl implements PositionService{
 		//직무 잘라주기 
 		List<String> cutJm=new ArrayList<String>();
 		for(int i=0; i<jikmus.size(); i++) {
-			System.out.println(jikmus.get(i).substring(23));
-			cutJm.add(jikmus.get(i).substring(23));
+			System.out.println(jikmus.get(i).length());
+			String jmjm=jikmus.get(i);
+			jmjm=jmjm.substring(23);
+			cutJm.add(jmjm);
 		}
 		int resultCnt=0;
 		//선택한 jm들에 대해 하나씩 posNo와 매핑해서 넣어 준다

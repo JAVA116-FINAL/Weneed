@@ -33,6 +33,50 @@
 		set com_img_passed = 'Y'
 		where com_img_no=#{comImgNo}
 	</update>
+	
+	<select id="selectYetTotalRecord" parameterType="searchVo" resultType="int">
+		select count(*) from comImgInfo where com_Img_Passed='N'
+	</select>
+	
+	<select id="selectAllYetImg" parameterType="searchVo" resultType="comImgInfoVo">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM
+		    from
+		    (
+		        select com_Img_No, com_Code, com_Img_Url, com_Img_Passed
+		        from comImgInfo 
+		        where com_Img_Passed='N' order by com_Img_No desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectPassedTotalRecord" parameterType="searchVo" resultType="int">
+		select count(*) from comImgInfo where com_Img_Passed='Y'
+	</select>
+	
+	<select id="selectAllPassedImg" parameterType="searchVo" resultType="comImgInfoVo">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM
+		    from
+		    (
+		        select com_Img_No, com_Code, com_Img_Url, com_Img_Passed
+		        from comImgInfo 
+		        where com_Img_Passed='Y' order by com_Img_No desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
 </mapper>
 
 
