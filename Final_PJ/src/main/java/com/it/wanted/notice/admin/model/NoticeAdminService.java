@@ -19,6 +19,8 @@ public interface NoticeAdminService {
 	public int selectReply_cnt(NoticeSearchVO searchVo);
 	//답변여부 'Y'로 업데이트
 	public int updateReply(int qna_no);
+	//답변여부 'M'로 업데이트 - 문의 무시
+	public int updateReply_mute(int qna_no);
 	
 	public List<Map<String, Object>> selectQnaList_search(NoticeSearchVO searchVo);
 	public int selectQnaList_cnt(NoticeSearchVO searchVo);

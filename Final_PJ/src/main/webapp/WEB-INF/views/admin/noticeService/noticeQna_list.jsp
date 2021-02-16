@@ -59,6 +59,9 @@
 				<c:if test="${qnaVo.QNA_REPLY == 'N'}">
 					<td style="color: #ff3a3a">미답변</td>
 				</c:if>
+				<c:if test="${qnaVo.QNA_REPLY == 'M'}">
+					<td>무시</td>
+				</c:if>
 					<td>
 						${qnaVo.QNA_EMAIL }
 					</td>
