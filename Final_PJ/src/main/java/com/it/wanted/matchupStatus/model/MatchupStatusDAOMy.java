@@ -33,7 +33,7 @@ public class MatchupStatusDAOMy implements MatchupStatusDAO{
 	@Override
 	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"selectTotalRecordbyAdmin", searchVo);
-
+	}
   /* 현빈 */
   @Override
 	public void updateProposalDate(MatchupStatusVO statusVo) {

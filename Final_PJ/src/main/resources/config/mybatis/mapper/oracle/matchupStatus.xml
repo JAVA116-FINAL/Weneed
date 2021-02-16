@@ -39,7 +39,7 @@
 		)
 	</select>
 
-  /* 현빈 */
+ <!--  /* 현빈 */ -->
 	<insert id="insertProposal" parameterType="matchupStatusVo">
 		insert into matchupStatus(mcustatus_no, mcucom_no, mcumem_no, proposal_date, matchup_flag)
 		values(matchupstatus_seq.nextval, #{mcucomNo}, #{mcumemNo}, sysdate, 2)
