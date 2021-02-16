@@ -53,6 +53,43 @@
 	<select id="selectSearchmatchupCombyComName" parameterType="String" resultType="map">
 		select * from mcucomview where com_Name like '%'|| #{comName} ||'%'
 	</select>
+	<select id="selectMatchupComAllbyAdmin" parameterType="searchVo" resultType="map">
+	select *
+      from
+      (
+          select A.*, rownum as RNUM
+          from
+          (
+			select  
+			mcucom_No, (select com_Name from cominfo c where c.com_Code=m.com_Code) com_Name ,
+			(select EMCPD_Name from matchupproduct p where m.EMCPD_No=p.EMCPD_No)pd_Name,
+			resume_Read_Count,max_Resume_Count,MCUPD_Buydate,MCUPD_EXDATE,trunc(MCUPD_EXDATE-sysdate) Days
+			from matchupCom m order by mcucom_No desc
+			 )A
+			 <if test="searchKeyword != null and searchKeyword != ''">
+			 where mcucom_No like '%' || #{searchKeyword} || '%' or com_Name like '%' || #{searchKeyword} || '%' or pd_Name like '%' || #{searchKeyword} || '%'
+			 </if>
+      )
+      <![CDATA[
+      where RNUM > #{firstRecordIndex} 
+      and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+      ]]>
+			
+	</select>
+	<select id="selectTotalRordbyAdmin" parameterType="searchVo" resultType="int">
+		select count(*) from(
+			select  
+			mcucom_No, (select com_Name from cominfo c where c.com_Code=m.com_Code) com_Name ,
+			(select EMCPD_Name from matchupproduct p where m.EMCPD_No=p.EMCPD_No)pd_Name,
+			resume_Read_Count,max_Resume_Count,MCUPD_Buydate,MCUPD_EXDATE,trunc(MCUPD_EXDATE-sysdate) Days
+			from matchupCom m order by mcucom_No desc
+			)
+			 <if test="searchKeyword != null and searchKeyword != ''">
+			 where mcucom_No like '%' || #{searchKeyword} || '%' or com_Name like '%' || #{searchKeyword} || '%' or pd_Name like '%' || #{searchKeyword} || '%'
+			 </if>
+	</select>
+	
+	
 	
 </mapper>
 

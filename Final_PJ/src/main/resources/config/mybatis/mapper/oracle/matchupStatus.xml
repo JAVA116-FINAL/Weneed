@@ -12,6 +12,32 @@
 		insert into matchupStatus(mcustatus_no, mcucom_no, mcumem_no, matchup_flag)
 		values(matchupstatus_seq.nextval, #{mcucomNo}, #{mcumemNo}, 1)
 	</insert>
+	
+	
+	<select id="selectMatchupStatusbyAdmin" parameterType="searchVo" resultType="map">
+		select * from(
+			select a.* , rownum as RNUM from(
+			select mcustatus_No, mcucom_No, mcumem_No,
+			(select  com_Name from comInfo c where c.com_Code=(select com_Code from matchupCom m1 where m1.mcucom_No=m2.mcuCom_No))com_Name,
+			(select name from memberInfo m4 where m4.MEM_NO= (select mem_No from matchupmem  m3 where m2.mcumem_No=m3.mcumem_No))mem_Name,
+			match_Date, proposal_Date,proposal_Check_Date, proposal_Ok_Date,expire_Date,matchup_Flag from matchupstatus m2
+			order by mcustatus_No desc 
+			)a 
+		)
+		  <![CDATA[
+	      where RNUM > #{firstRecordIndex} 
+	      and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+	      ]]>
+	</select>
+	<select id="selectTotalRecordbyAdmin" parameterType="searchVo" resultType="int">
+		select count(*) from(
+			select mcustatus_No, mcucom_No, mcumem_No,
+			(select  com_Name from comInfo c where c.com_Code=(select com_Code from matchupCom m1 where m1.mcucom_No=m2.mcuCom_No))com_Name,
+			(select name from memberInfo m4 where m4.MEM_NO= (select mem_No from matchupmem  m3 where m2.mcumem_No=m3.mcumem_No))mem_Name,
+			match_Date, proposal_Date,proposal_Check_Date, proposal_Ok_Date,expire_Date,matchup_Flag from matchupstatus m2
+			order by mcustatus_No desc 
+		)
+	</select>
 </mapper>
 
 

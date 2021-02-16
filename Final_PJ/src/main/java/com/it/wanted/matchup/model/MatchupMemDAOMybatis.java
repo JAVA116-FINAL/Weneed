@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.common.SearchVO;
 import com.it.wanted.matchupCom.model.MatchupZzimVO;
 
 @Repository
@@ -100,6 +101,18 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 		return sqlSession.delete(namespace+"deleteMatchupmembyResumeNo",resumeNo);
 	}
 	
+	@Override
+	public List<Map<String, Object>> selectMatchupMemAllbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectMatchupMemAllbyAdmin", searchVo);
+	}
+
+	/* 2/15 */
+	@Override
+	public int totalRecordbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"totalRecordbyAdmin", searchVo);
+	}
+
+	
 	/* 현빈 */
 	@Override
 	public List<MatchupMemVO> selectOpen() {
@@ -132,5 +145,6 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	public int isZzimed(MatchupZzimVO zzimVo) {
 		return sqlSession.selectOne(namespace+"isZzimed", zzimVo);
 	}
+
   
 }

@@ -7,7 +7,7 @@
 <style type="text/css">
 
 .divheader>h1 {
-    font-size: xx-large;
+    font-size: x-large;
     margin-bottom: 30px;
     color: gray;
 }
@@ -32,6 +32,11 @@ thead {
 }
 input.inputKeyword {
     height: 33px;
+}
+
+th.th_jy {
+    font: status-bar;
+    font-weight: 700;
 }
 </style>
 

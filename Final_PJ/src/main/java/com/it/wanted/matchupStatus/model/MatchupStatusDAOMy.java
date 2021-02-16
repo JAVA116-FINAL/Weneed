@@ -1,8 +1,13 @@
 package com.it.wanted.matchupStatus.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.it.wanted.common.SearchVO;
 
 @Repository
 public class MatchupStatusDAOMy implements MatchupStatusDAO{
@@ -18,6 +23,16 @@ public class MatchupStatusDAOMy implements MatchupStatusDAO{
 	@Override
 	public int insertStatus(MatchupStatusVO statusVo) {
 		return sqlSession.insert(namespace+"insertStatus", statusVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMatchupStatusbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectMatchupStatusbyAdmin",searchVo);
+	}
+
+	@Override
+	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"selectTotalRecordbyAdmin", searchVo);
 	}
 	
 }

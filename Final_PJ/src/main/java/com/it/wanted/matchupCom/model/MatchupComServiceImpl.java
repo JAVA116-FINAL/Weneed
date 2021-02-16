@@ -8,6 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it.wanted.common.SearchVO;
+
 @Service
 public class MatchupComServiceImpl implements MatchupComService{
 	
@@ -62,4 +64,15 @@ public class MatchupComServiceImpl implements MatchupComService{
 	public List<Map<String, Object>> selectSearchmatchupCombyComName(String comName) {
 		return matchupComDao.selectSearchmatchupCombyComName(comName);
   }
+
+	/* 0216 */
+	@Override
+	public List<Map<String, Object>> selectMatchupComAllbyAdmin(SearchVO searchVo) {
+		return matchupComDao.selectMatchupComAllbyAdmin(searchVo);
+	}
+
+	@Override
+	public int selectTotalRordbyAdmin(SearchVO searchVo) {
+		return matchupComDao.selectTotalRordbyAdmin(searchVo);
+	}
 }
