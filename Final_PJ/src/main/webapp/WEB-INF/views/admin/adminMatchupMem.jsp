@@ -79,36 +79,54 @@ function pageFunc(curPage){
 		<div class="tableWrapper">
 			<table class="table table-bordered table_jy"> 
 				<%-- <caption>매치업 회원 관리</caption> --%>
+				<colgroup>
+					<col style="width:1%;" />
+					<%-- <col style="width:5%;" /> --%>
+					<col style="width:7%;" />
+					<col style="width:8%;" />
+					<col style="width:8%;" />		
+					<col style="width:5%;" />		
+					<col style="width:5%;" />		
+					<col style="width:3%;" />		
+					<col style="width:3%;" />		
+					<col style="width:5%;" />		
+					<col style="width:10%;" />		
+					<col style="width:5%;" />		
+					<col style="width:1%;" />		
+				</colgroup>
 				 	<thead>
 						<tr class="tr_jy"> 
-							<th class="th_jy">No.</th>
-							<th class="th_jy">회원번호</th>
-							<th class="th_jy">이력서</th>
-							<th class="th_jy">학교</th>
-							<th class="th_jy">학과</th>
-							<th class="th_jy">회사</th>
-							<th class="th_jy">부서</th>
-							<th class="th_jy">직군</th>
-							<th class="th_jy">경력</th>
-							<th class="th_jy">연봉</th>
-							<th class="th_jy">기술</th>
-							<th class="th_jy">추천인</th>
-							<th class="th_jy">구직</th>
+							<th scope="col" class="th_jy">No.</th>
+					<!-- 		<th scope="col" class="th_jy">회원번호</th> -->
+							<th scope="col" class="th_jy">이력서</th>
+							<th scope="col" class="th_jy">학교</th>
+							<th scope="col" class="th_jy">학과</th>
+							<th scope="col" class="th_jy">회사</th>
+							<th scope="col" class="th_jy">부서</th>
+							<th scope="col" class="th_jy">직군</th>
+							<th scope="col" class="th_jy">경력</th>
+							<th scope="col" class="th_jy">연봉</th>
+							<th scope="col" class="th_jy">기술</th>
+							<th scope="col" class="th_jy">추천인</th>
+							<th scope="col" class="th_jy">구직</th>
 						</tr>
 				 	</thead>
 				<tbody>
 					<c:if test="${empty mcumemList }">
 						<tr class="align_center"> 
-							<td colspan="13">매치업 등록 회원이 없습니다.</td>
+							<td colspan="12">매치업 등록 회원이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty mcumemList }">
 						<c:forEach var="mVo" items="${mcumemList }">
 							<tr class="tr_jy">
 								<td class="td_jy">${mVo.mcumemNo} </td>
-								<td class="td_jy">${mVo.memNo} </td>
+								<%-- <td class="td_jy">${mVo.memNo} </td> --%>
 								<td class="td_jy title_td">
-									<a href='<c:url value="/resume/resumeDetailAdmin.do?resumeNo=${resumeNo}&memNo=${memNo}"></c:url>'>
+									<%-- <a href='<c:url value="/resume/resumeDetailAdmin.do?resumeNo=${resumeNo}&memNo=${memNo}"></c:url>'>
+										${mVo.resumeTitle} 
+									</a> --%>
+									<a href='#' onclick="window.open('<c:url value="/resume/resumeDetailAdmin.do?resumeNo=${mVo.resumeNo}&memNo=${mVo.memNo}"/>','newwin','width=1024,height=768,top=0,left=0,scrollbars=yes');return false;">
 										${mVo.resumeTitle} 
 									</a>
 								</td>
