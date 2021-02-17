@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it.wanted.comimginfo.model.ComImgInfoVO;
 import com.it.wanted.common.PaginationInfo;
+import com.it.wanted.common.PaginationInfoJsonImgVO;
+import com.it.wanted.common.PaginationInfoJsonPositionVO;
 import com.it.wanted.common.SearchVO;
 import com.it.wanted.common.Utility;
 import com.it.wanted.position.model.PositionService;
@@ -84,6 +87,62 @@ public class AdminPositionController {
 		return count;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/positionPermissionYet.do")
+	public PaginationInfoJsonPositionVO positionPermissionYet(@RequestParam int curPage) {
+		logger.info("위니드 승인 요청 포지션 조회, 파라미터 curPage={}", curPage);
+		
+		SearchVO searchVo=new SearchVO();
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(5);
+		pagingInfo.setCurrentPage(curPage);
+		
+		//[2] SearchVo 셋팅
+		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		//YET 리스트 
+		List<Map<String, Object>> posList=posService.selectAllYetPosition(searchVo);
+		logger.info("기업이미지 승인요청건 조회 결과, posList.size={}", posList.size());
 	
+		int totalRecord=posService.selectYetTotalRecord();
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		PaginationInfoJsonPositionVO posVo=new PaginationInfoJsonPositionVO();
+		posVo.setPosList(posList);
+		posVo.setPagingInfo(pagingInfo);
+		
+		return posVo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/positionPermissionPassed.do")
+	public PaginationInfoJsonPositionVO positionPermissionPassed(@RequestParam int curPage) {
+		logger.info("위니드 승인 완료 포지션 조회, 파라미터 curPage={}", curPage);
+		
+		SearchVO searchVo=new SearchVO();
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(5);
+		pagingInfo.setCurrentPage(curPage);
+		
+		//[2] SearchVo 셋팅
+		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		//YET 리스트 
+		List<Map<String, Object>> posList=posService.selectAllPassedPosition(searchVo);
+		logger.info("기업이미지 승인완료건 조회 결과, posList.size={}", posList.size());
+	
+		int totalRecord=posService.selectPassedTotalRecord();
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		PaginationInfoJsonPositionVO posVo=new PaginationInfoJsonPositionVO();
+		posVo.setPosList(posList);
+		posVo.setPagingInfo(pagingInfo);
+		
+		return posVo;
+	}
 	
 }
