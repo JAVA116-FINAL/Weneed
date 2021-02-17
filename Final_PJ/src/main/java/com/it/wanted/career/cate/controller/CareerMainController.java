@@ -1,6 +1,9 @@
 package com.it.wanted.career.cate.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +31,20 @@ public class CareerMainController {
 	
 	
 	@RequestMapping("/careerMain.do")
-	public void career(){
+	public void career(HttpSession session, Model model){
 		logger.info("career 화면 보여주기");
+		
+		List<ProgramVO> proVoMainList = new ArrayList<ProgramVO>(); 
+		proVoMainList =	programService.selectAllProgramsForMain();
+		logger.info("프로그램들 보여주기 proVoMainList={}", proVoMainList);
+		
+		
+		List<CareerCategoryVO> proCateNameList = new ArrayList<CareerCategoryVO>(); 
+		proCateNameList = programService.selectMatchCategoryNameMain(); 
+		logger.info("프로그램별 해당 카테고리 이름 리스트  proCateNameList={}", proCateNameList);
+		 		
+		model.addAttribute("proVoMainList", proVoMainList);
+		model.addAttribute("proCateNameList", proCateNameList);
 		
 	}
 	

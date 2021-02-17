@@ -75,9 +75,7 @@ $( document ).ready( function() {
 					<div class="row">
 						<div class="col-lg-12 mb-5">						
 							<div class="single-blog-item">
-								<img
-									src="<c:url value='/resources/images/career/${proVo.proImage }'/>"
-									alt="" class="img-fluid">
+								<img src="<%=request.getContextPath() %>/programImgUpload/${proVo.proImage} alt="" class="img-fluid">
 				  	
 								<!-- 태그넣기 -->
 								<div class="sidebar-widget tags mb-3" style="margin-top:20px;margin-bottom: -60px;">
@@ -90,58 +88,39 @@ $( document ).ready( function() {
 
 
 								<div class="blog-item-content mt-5">
-									<div class="blog-item-meta mb-3"></div>
 
 									<!-- 내용부분 전체 시작!! -->
 
-									<div style="color: black;">
+								<div style="color: black; margin-top:-130px;">
 
-
-<%-- 				  	<c:forEach var="proVo2" items="${proConList }">				  	
-										<!-- 제목, 내용 1 -->
-
-										<div class="parag" id="parag1">
-											<a name="title"><h3>
-													<b>${proVo2.proTitle }</b>
-												</h3></a> <br>
-											<div>${proVo2.proContents }</div>
-
-									 	</div>
-					</c:forEach> 
-					--%>
-					
-					
-
-			<!-- 반복문으로 제목 내용 뿌려주기 -->
-									
+									<!-- 반복문으로 제목 내용 뿌려주기 -->
+															
 										<!-- 제목, 내용 -->
-				<c:forEach var="proVo2" items="${proConList }">	
-										<a name="title${proVo2.proConNo}"></a>		
-										<br><br>	
-										<div class="parag" id="parag2" style="margin-top: 50px;">
-										<label>${proVo2.proConNo}번째</label>
-											
-													<b>${proVo2.proTitle}</b>
-												 
-												<br>
-												<div id="contentLoop" style="width:700px;">
-													${proVo2.proContents } 
-												</div>
+										<c:forEach var="proVo2" items="${proConList }">	
+										<div style="margin-top:-70px;">						
+											<c:if test="${!empty proConList }">
+																<a name="title${proVo2.proConNo}"></a>		
+																<br><br>	
+																<div class="parag" id="parag2" style="margin-top: 50px;">											
+																			<h2><b>${proVo2.proTitle}</b></h2>
+																		 
+																		<br>
+																		<div id="contentLoop" style="width:700px;">
+																			${proVo2.proContents } 
+																		</div>
+																</div>
+													</c:if>
 										</div>
-				</c:forEach>
-<!-- 제목, 내용 반복문 끝!!! -->
-
+										</c:forEach>
+						<!-- 제목, 내용 반복문 끝!!! -->
+						
+											</div>
 									</div>
-								</div>
-
 							</div>
-
-
-
-						</div>
+					</div>
 				</div>
-				</div>
-				
+			</div>
+										
 <!-- aside 부분!!!! -->				
 				<div class="col-lg-4">
 					<div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" >
@@ -154,8 +133,8 @@ $( document ).ready( function() {
 							
 									<div style="font:12px;"><span>일자</span></div>
 									<div style="color:black; font:12px;"><span><fmt:formatDate value="${proVo.proStartDate}" pattern="yyyy-MM-dd"/></span></div><br>
-									<div style="font:12px;"><span>장소</span></div>
-									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br>
+<!-- 									<div style="font:12px;"><span>장소</span></div>
+									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br> -->
 									<div style="font:12px;"><span>주최자</span></div>
 									<div style="color:black; font:12px;"><span>${proVo.proSponsor}</span></div>
 							
@@ -193,10 +172,10 @@ $( document ).ready( function() {
 
  <br>
 			<div style="margin:auto; text-align:center;">
-							<input type="text" name=programNo value="${param.programNo }">
+							<input type="hidden" name=programNo value="${param.programNo }">
 				
 							<div style="text-align:center";>
-								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programEdit1.do?programNo=${param.programNo}'" style="outline:none;">수정</button>					      									
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programEdit1sec.do?programNo=${param.programNo}'" style="outline:none;">수정</button>					      									
 								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programAdminList.do'" style="outline:none;">프로그램 목록</button>					      									
 								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programDelete.do?programNo=${param.programNo}'" style="outline:none; width:160px;">삭제</button>					      									
 							</div>
@@ -205,6 +184,5 @@ $( document ).ready( function() {
 	</section>
 
 
+<%@ include file="../../inc/admin_bottom.jsp" %>  
 
-</body>
-</html>

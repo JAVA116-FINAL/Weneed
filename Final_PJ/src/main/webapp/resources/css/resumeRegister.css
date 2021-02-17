@@ -16,6 +16,7 @@ select.realselect_jy {
 input.title-input_jy {
 	border: none;font-size: xx-large;color: #383333;
 	outline:none;
+	width: 100%;
 	}
 
 button.btResume-down_jy {
@@ -358,8 +359,6 @@ input.dep_jy.eduDetail_jy {
     /* margin-left: 83px; */
 }
 
-button#btlangTest_jy {}
-
 .btAdd2_jy {
     color: #2196f3;
     font-size: 14px;
@@ -410,8 +409,6 @@ ul#ul6_jy112 {
     /* width: 80%; */
     margin-left: 47px;
 }
-
-input.dep_jy {}
 
 .testN_jy+input.dep_jy {
     width: 118px;
@@ -518,6 +515,10 @@ input:-internal-autofill-selected {
 input.dep_jy {
     width: 300px;
 }
+
+/* 0217 */
+
 input.title-input_jy {
     width: 100%;
 }
+

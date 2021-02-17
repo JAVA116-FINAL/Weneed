@@ -3,41 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../../inc/admin_top.jsp"%>
-<!-- <style type="text/css">
-
-.divheader>h1 {
-    font-size: x-large;
-    margin-bottom: 30px;
-    color: gray;
-}
-
-table.table.table-bordered.table_jy {
-    font: status-bar;
-    text-align: center;
-    font-size: smaller;
-    background: white;
-}
-
-thead {
-    font-size: initial;
-    color: #454545;
-}
-.divPage_jy {
-    text-align: center;
-}
-.divSearch {
-    TEXT-ALIGN: RIGHT;
-    MARGIN-BOTTOM: 10PX;
-}
-input.inputKeyword {
-    height: 33px;
-}
-
-th.th_jy {
-    font: status-bar;
-    font-weight: 700;
-}
-</style> -->
 <link rel="stylesheet" href="<c:url value='/resources/css/admin/companyService.css'/>">
 <script type="text/javascript">
 $(function(){
@@ -78,7 +43,7 @@ $(function(){
 		var curPageP=$('input[name=currentPageP]').val();
 		//승인요청건 테이블을 다시 그려주는 ajax 
 		$.ajax({
-			url:"<c:url value='/admin/companyService/comInfoPermissionYet.do'/>",
+			url:"<c:url value='/admin/positionPermissionYet.do'/>",
 			type:"post",
 			dataType:"json",
 			data:{
@@ -95,7 +60,7 @@ $(function(){
 		
 		//승인완료건 테이블을 다시 그려주는 ajax
 		$.ajax({
-			url:"<c:url value='/admin/companyService/comInfoPermissionPassed.do'/>",
+			url:"<c:url value='/admin/positionPermissionPassed.do'/>",
 			type:"post",
 			dataType:"json",
 			data:{
@@ -157,7 +122,7 @@ function pageFuncY(curPage){
 	var here = $('#weneedadmin-tbodyYet');
 	var here2 = $('#weneedAdmin-comInfoDivPageBefore');
 	$.ajax({
-		url:"<c:url value='/admin/companyService/positionPermissionYet.do'/>",
+		url:"<c:url value='/admin/positionPermissionYet.do'/>",
 		type:"get",
 		dataType:"json",
 		data:{
@@ -179,7 +144,7 @@ function pageFuncP(curPage){
 	var here2 = $('#weneedAdmin-comInfoDivPagePassed');
 	
 	$.ajax({
-		url:"<c:url value='/admin/companyService/positionPermissionPassed.do'/>",
+		url:"<c:url value='/admin/positionPermissionPassed.do'/>",
 		type:"get",
 		dataType:"json",
 		data:{
@@ -198,33 +163,46 @@ function pageFuncP(curPage){
 
 function drawTrY(jsonVo, pasteHere){
 	pasteHere.html('');
-	var pageLength=jsonVo.comList.length;
+	var pageLength=jsonVo.posList.length;
 	//리스트의 개수만큼
 	console.log("pageLength:"+pageLength);
 	for(posMap of jsonVo.posList){
+		//직군, 마감일, 최소, 최대
+		if(posMap.JIKGUN_NAME==null){
+			posMap.JIKGUN_NAME="";
+		}
+		if(posMap.END_DATE==null){
+			posMap.END_DATE="";
+		}
+		if(posMap.POS_MIN_SAL==null){
+			posMap.POS_MIN_SAL="";
+		}
+		if(posMap.POS_MAX_SAL== null){
+			posMap.POS_MAX_SAL="";
+		}
 		var str="<tr class='weneed-adminTable'><td>";
-		var str="<input type='checkbox' name='weneed-adminStatusChkbox-before'></td>";
-		var str="<td>"+posMap.POSNO+"</td>";
-		var str="<td>"+posMap.COMNAME+"</td>";
-		var str="<td>"+posMap.JIKGUNNAME+"</td>";
-		var str="<td class='title_td'>";
-		var str="<a href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POSNO+"&memNo=1000'/>'>";
-		var str=posMap.POSNAME+"</a></td>";
-		var str="<td>"+posMap.POSMINSAL+"</td>";
-		var str="<td>"+posMap.POSMAXSAL+"</td>";
-		var str="<td><fmt:formatDate value='${posMap.POSREGDATE}' pattern='yyyy-MM-dd'/></td></td>";
-		var str="<td>"+posMap.ENDDATE+"</td>";
-		if(posMap.POSSTATUS == 1){ str+="임시저장";}
-		if(posMap.POSSTATUS == 2){ str+="승인요청";}
-		if(posMap.POSSTATUS == 3){ str+="승인";}
-		if(posMap.POSSTATUS == 4){ str+="종료";}
-		var str="</td>";
-		var str="</tr>";	
+		str+="<input type='checkbox' name='weneed-adminStatusChkbox-before'></td>";
+		str+="<td>"+posMap.POS_NO+"</td>";
+		str+="<td>"+posMap.COM_NAME+"</td>";
+		str+="<td>"+posMap.JIKGUN_NAME+"</td>";
+		str+="<td class='title_td'>";
+		str+="<a href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POS_NO+"&memNo=1000'/>'>";
+		str+=posMap.POS_NAME+"</a></td>";
+		str+="<td>"+posMap.POS_MIN_SAL+"</td>";
+		str+="<td>"+posMap.POS_MAX_SAL+"</td>";
+		str+="<td><fmt:formatDate value='${posMap.POSREGDATE}' pattern='yyyy-MM-dd'/></td></td>";
+		str+="<td>"+posMap.END_DATE+"</td>";
+		str+="<td>";
+		if(posMap.POS_STATUS == 1){ str+="임시저장";}
+		if(posMap.POS_STATUS == 2){ str+="승인요청";}
+		if(posMap.POS_STATUS == 3){ str+="승인";}
+		if(posMap.POS_STATUS == 4){ str+="종료";}
+		str+="</td>";
+		str+="</tr>";	
 		
-		pasteHere.append(str);
+		$('#weneedadmin-tbodyYet').append(str);
 	}
 }
-
 
 function drawTrP(jsonVo, pasteHere){
 	pasteHere.html('');
@@ -232,27 +210,39 @@ function drawTrP(jsonVo, pasteHere){
 	//리스트의 개수만큼
 	console.log("pageLength:"+pageLength);
 	for(posMap of jsonVo.posList){
-		
+		if(posMap.JIKGUN_NAME==null){
+			posMap.JIKGUN_NAME="";
+		}
+		if(posMap.END_DATE==null){
+			posMap.END_DATE="";
+		}
+		if(posMap.POS_MIN_SAL==null){
+			posMap.POS_MIN_SAL="";
+		}
+		if(posMap.POS_MAX_SAL== null){
+			posMap.POS_MAX_SAL="";
+		}
 		var str="<tr class='weneed-adminTable'><td>";
-		var str="<input type='checkbox' name='weneed-adminStatusChkbox-before'></td>";
-		var str="<td>"+posMap.POSNO+"</td>";
-		var str="<td>"+posMap.COMNAME+"</td>";
-		var str="<td>"+posMap.JIKGUNNAME+"</td>";
-		var str="<td class='title_td'>";
-		var str="<a href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POSNO+"&memNo=1000'/>'>";
-		var str=posMap.POSNAME+"</a></td>";
-		var str="<td>"+posMap.POSMINSAL+"</td>";
-		var str="<td>"+posMap.POSMAXSAL+"</td>";
-		var str="<td><fmt:formatDate value='${posMap.POSREGDATE}' pattern='yyyy-MM-dd'/></td></td>";
-		var str="<td>"+posMap.ENDDATE+"</td>";
-		if(posMap.POSSTATUS == 1){ str+="임시저장";}
-		if(posMap.POSSTATUS == 2){ str+="승인요청";}
-		if(posMap.POSSTATUS == 3){ str+="승인";}
-		if(posMap.POSSTATUS == 4){ str+="종료";}
-		var str="</td>";
-		var str="</tr>";
+		str+="<input type='checkbox' name='weneed-adminStatusChkbox-after'></td>";
+		str+="<td>"+posMap.POS_NO+"</td>";
+		str+="<td>"+posMap.COM_NAME+"</td>";
+		str+="<td>"+posMap.JIKGUN_NAME+"</td>";
+		str+="<td class='title_td'>";
+		str+="<a href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POS_NO+"&memNo=1000'/>'>";
+		str+=posMap.POS_NAME+"</a></td>";
+		str+="<td>"+posMap.POS_MIN_SAL+"</td>";
+		str+="<td>"+posMap.POS_MAX_SAL+"</td>";
+		str+="<td><fmt:formatDate value='${posMap.POSREGDATE}' pattern='yyyy-MM-dd'/></td></td>";
+		str+="<td>"+posMap.END_DATE+"</td>";
+		str+="<td>";
+		if(posMap.POS_STATUS == 1){ str+="임시저장";}
+		if(posMap.POS_STATUS == 2){ str+="승인요청";}
+		if(posMap.POS_STATUS == 3){ str+="승인";}
+		if(posMap.POS_STATUS == 4){ str+="종료";}
+		str+="</td>";
+		str+="</tr>";
 		
-		pasteHere.append(str);
+		$('#weneedadmin-tbodyPassed').append(str);
 	}
 }
 
@@ -317,16 +307,12 @@ function drawPageDivP(jsonVo, pasteHere){
 }
 </script>
 <body>
-<form action="<c:url value='/admin/adminPosition.do'/>" name="frmPage" method="post">
-	<input type="hidden" name="currentPage">
-	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
-</form>
 <div class="container">
 	<div class="weneedAdmin-permissionTab">
-		<h2>포지션 승인 처리</h2>
+		<h2>포지션 승인</h2>
 	</div>
 	<section id="weneedAdmin-comInfoBeforeSec">
-		<form action="<c:url value='/admin/companyService/posPermission.do'/>" name="frmPageY" method="post">
+		<form action="<c:url value='/admin/positionPermission.do'/>" name="frmPageY" method="post">
 			<input type="hidden" name="currentPageY" value="${pagingInfoPassed.currentPage}">
 			<input type="hidden" name="typeCheck" value="Y">
 		</form>
@@ -416,7 +402,7 @@ function drawPageDivP(jsonVo, pasteHere){
 	</section>
 
 	<section id="weneedAdmin-comInfoPassedSec">
-		<form action="<c:url value='/admin/companyService/comInfoPermission.do'/>" name="frmPageP" method="post">
+		<form action="<c:url value='/admin/PositionPermission.do'/>" name="frmPageP" method="post">
 			<input type="hidden" name="currentPageP" value="${pagingInfoPassed.currentPage}">
 			<input type="hidden" name="typeCheck" value="P">
 		</form>
@@ -446,7 +432,7 @@ function drawPageDivP(jsonVo, pasteHere){
 					<c:forEach var="map" items="${posListPassed }">
 						<tr class="weneed-adminTable">
 							<td>
-								<input type="checkbox" name="weneed-adminStatusChkbox-before">
+								<input type="checkbox" name="weneed-adminStatusChkbox-after">
 							</td>
 							<td>${map['POS_NO']} </td>
 							<td>${map['COM_NAME'] } </td>

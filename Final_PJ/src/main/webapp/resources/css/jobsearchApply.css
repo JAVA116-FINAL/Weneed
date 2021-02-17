@@ -576,7 +576,7 @@ a.ap-resumEdit_jy {width: fit-content;}
 
 
 div#displayAside {
-    position: absolute;
+ 
     display: inline-block;
     right: 175px;
 }
@@ -616,4 +616,35 @@ button.bookmark_jy {
     background: white;
     color: #36f;
     border: 1px solid #36f;
+}
+
+/* 210217자연 */
+.outerdiv-apply_jy {
+    width: auto;
+}
+
+aside#asideApply {
+    max-width: 443px;
+}
+span.ap-mcuFlagsp_jy {
+    margin-top: 5px;
+    display: inline-block;
+}
+
+h4.ap-resumInfoTitleh4_jy {
+}
+
+.ap-resumInfo_jy.matched_jy {
+    width: 70%;
+}
+
+p.ap-resumName_jy {
+    max-width: calc(86% - 26px);
+}
+div#displayAside {
+    max-width: 375px;
+}
+
+span.ap-mcuFlagsp_jy {
+    margin: 3px 0;
 }
