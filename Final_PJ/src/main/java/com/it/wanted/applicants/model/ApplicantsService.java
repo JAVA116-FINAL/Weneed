@@ -5,7 +5,7 @@ import java.util.Map;
 
 
 public interface ApplicantsService {
-	public List<ApplicantsVO> selectAllPositions();
+	public List<ApplicantsVO> selectAllPositions(String comCode);
 
 	public int selectTotalRecord(AppliPagingVO appliPagingVo);
 
@@ -16,9 +16,15 @@ public interface ApplicantsService {
 
 	public int updateByNo(int no);
 
-	public List<Map<String, Object>> selectAll();
+	//public List<Map<String, Object>> selectAll();
 
 	public int updateStatus(ApplicantsVO applicantsVo);
+
+	public List<Map<String, Object>> selectAll();
+
+	public int countBunmo(AppliPagingVO appliPagingVo);
+
+	public int countBunja(AppliPagingVO appliPagingVo);
 
 
 //	public List<Map<String, Object>> selectApplicants(ApplicantsVO appliVo);

@@ -14,19 +14,14 @@ public class ApplicantsDAOMybatis implements ApplicantsDAO {
 	private SqlSessionTemplate sqlSession;
 	private final static String namespace ="com.mybatis.mapper.oracle.applicants.";
 
-//
-//	@Override
-//	public List<Map<String, Object>> selectApplicants(int statusFlag) {
-//		return sqlSession.selectList(namespace+"selectApplicants",statusFlag);
-//	}
 	@Override
 	public List<Map<String, Object>> selectApplicants(AppliPagingVO appliPagingVo) {
 		return sqlSession.selectList(namespace+"selectApplicants",appliPagingVo);
 	}
 
 	@Override
-	public List<ApplicantsVO> selectAllPositions() {
-		return sqlSession.selectList(namespace+"selectAllPositions");
+	public List<ApplicantsVO> selectAllPositions(String comCode) {
+		return sqlSession.selectList(namespace+"selectAllPositions",comCode);
 	}
 
 	@Override
@@ -51,14 +46,17 @@ public class ApplicantsDAOMybatis implements ApplicantsDAO {
 
 	@Override
 	public int updateStatus(ApplicantsVO applicantsVo) {
-		// TODO Auto-generated method stub
 		return sqlSession.update(namespace+"updateStatus", applicantsVo);
 	}
 
+	@Override
+	public int countBunmo(AppliPagingVO appliPagingVo) {
+		return sqlSession.selectOne(namespace+"countBunmo",appliPagingVo);
+	}
 
-//	@Override
-//	public int updatePeriod(ApplicantsVO appliVo) {
-//		return sqlSession.update(namespace+"updatePeriod",  appliVo);
-//	}
+	@Override
+	public int countBunja(AppliPagingVO appliPagingVo) {
+		return sqlSession.selectOne(namespace+"countBunja",appliPagingVo);
+	}
 
 }

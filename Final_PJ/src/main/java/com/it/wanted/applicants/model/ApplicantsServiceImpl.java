@@ -13,17 +13,10 @@ import org.springframework.stereotype.Service;
 public class ApplicantsServiceImpl implements ApplicantsService{
 	@Autowired
 	private ApplicantsDAO applicantsDao;
-	
-
-//	@Override
-//	public List<Map<String, Object>> selectApplicants(int statusFlag) {
-//		return applicantsDao.selectApplicants(statusFlag);
-//	}
-
 
 	@Override
-	public List<ApplicantsVO> selectAllPositions() {
-		return applicantsDao.selectAllPositions();
+	public List<ApplicantsVO> selectAllPositions(String comCode) {
+		return applicantsDao.selectAllPositions(comCode);
 	}
 
 	@Override
@@ -47,14 +40,26 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 		return applicantsDao.updateByNo(no);
 	}
 
+
+
+	@Override
+	public int updateStatus(ApplicantsVO applicantsVo) {
+		return applicantsDao.updateStatus(applicantsVo);
+	}
+
 	@Override
 	public List<Map<String, Object>> selectAll() {
 		return applicantsDao.selectAll();
 	}
 
 	@Override
-	public int updateStatus(ApplicantsVO applicantsVo) {
-		return applicantsDao.updateStatus(applicantsVo);
+	public int countBunmo(AppliPagingVO appliPagingVo) {
+		return applicantsDao.countBunmo(appliPagingVo);
+	}
+
+	@Override
+	public int countBunja(AppliPagingVO appliPagingVo) {
+		return applicantsDao.countBunja(appliPagingVo);
 	}
 
 

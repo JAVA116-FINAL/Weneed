@@ -9,30 +9,21 @@
 
 <script type="text/javascript"
 	src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
+<style>
+li {
+	padding-right: 15px;
+	padding-top: 3px;
+}
+</style>
 <script type="text/javascript">
 	$(function() {
-		$('#rd-appliPassedFilter_new').attr('checked', 'checked');
 
-		//리스트 아이템을 누르면 addClass removeClass를 반복한다. 이거 함수로 만들어볼깡
-		/* $('.appli-li-filter').click(
-				function() {
-					const num = $('.appli-li-filter').index($(this));
-					//선택한 (바뀔) 탭메뉴의 인덱스를 가져온다
-					$('.lb-appliPassedFilter').removeClass(
-							"lb-appliPassedFilter-selected");
-					//전체 리스트에 대해 셀렉티드 클래스 제거
-					$('.lb-appliPassedFilter:eq(' + num + ')').addClass(
-							"lb-appliPassedFilter-selected");
-					//선택한 탭메뉴 인덱스에 클래스 추가
-				}); */
-
-		
-		
 
 	});
 	
-	function pageFunc(curPage, statusflag){
+	function pageFunc(curPage, statusflag,posNo){
 		$('input[name=statusflag]').val(statusflag);
+		$('input[name=posNo]').val(posNo);
 		$('input[name=currentPage]').val(curPage);
 		$('form[name=frmPage]').submit();
 	}
@@ -57,12 +48,13 @@
 <body>
 	<form
 		action="<c:url value='/company/applicants.do?statusFlag=${status}'/>"
-		name="frmPage" method="post" style="display: none;"><!--  style="display: none;" -->
-		<input type="text" name="currentPage"> 
-		<input type="text" name="searchCondition" value="${param.searchCondition }"> 
-		<input
+		name="frmPage" method="post" style="display: none;">
+		<!--  style="display: none;" -->
+		<input type="text" name="currentPage"> <input type="text"
+			name="searchCondition" value="${param.searchCondition }"> <input
 			type="text" name="searchKeyword" value="${param.searchKeyword }">
-		<input type="text" name="statusflag" >
+		<input type="text" name="statusflag">
+		<input type="text" name="posNo">
 	</form>
 
 	<div class="container">
@@ -79,7 +71,7 @@
 						<c:if test="${!empty posList}">
 							<c:forEach var="pList" items="${posList}">
 								<p class="appli-positionList-pos " style="font-size: 12px;">
-									<a href="#">
+									<a href='<c:url value="/company/applicants.do?statusFlag=${status}&posNo=${pList.posNo}"/>'> 
 										<c:out value="${pList.posName }"></c:out>
 									</a>
 							</c:forEach>
@@ -99,7 +91,7 @@
 						<div class="appli-responseInfo">
 							<div class="appli-responseInfo_obj">
 								<span class="appli-span-allResponse">전체 응답률</span>&nbsp; <strong
-									class="appli-bigNumber-blue">95.0%</strong>
+									class="appli-bigNumber-blue">${responPer}% </strong>
 							</div>
 							<div class="appli-responseInfo_obj">
 								<span>응답 지연</span>&nbsp; <strong class="appli-bigNumber-red">0명</strong>
@@ -147,34 +139,34 @@
 								<li class="appli-li-filter"><input type="radio"
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_doc">
 									<label for="rd-appliPassedFilter_new"
-									class="lb-appliPassedFilter">
-										<a href='<c:url value="/company/applicants.do?statusFlag=0"/>'">신규
-											</a>
+									class="lb-appliPassedFilter"> <a
+										href='<c:url value="/company/applicants.do?statusFlag=0&posNo=${posNo}"/>'">신규
+									</a>
 								</label></li>
 								<li class="appli-li-filter"><input type="radio"
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_doc">
 									<label for="rd-appliPassedFilter_doc"
 									class="lb-appliPassedFilter"><a
-										href='<c:url value="/company/applicants.do?statusFlag=${1 }"/>'>서류통과
-											</a></label></li>
+										href='<c:url value="/company/applicants.do?statusFlag=${1 }&posNo=${posNo}"/>'>서류통과
+									</a></label></li>
 								<li class="appli-li-filter"><input type="radio"
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_passed">
 									<label for="rd-appliPassedFilter_passed"
 									class="lb-appliPassedFilter"><a
-										href='<c:url value="/company/applicants.do?statusFlag=2"/>'>최종합격
-											</a> </label></li>
+										href='<c:url value="/company/applicants.do?statusFlag=2&posNo=${posNo}"/>'>최종합격
+									</a> </label></li>
 								<li class="appli-li-filter"><input type="radio"
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_rejected">
 									<label for="rd-appliPassedFilter_rejected"
 									class="lb-appliPassedFilter"><a
-										href='<c:url value="/company/applicants.do?statusFlag=3"/>'>불합격
-											</a> </label></li>
+										href='<c:url value="/company/applicants.do?statusFlag=3&posNo=${posNo}"/>'>불합격
+									</a> </label></li>
 								<li class="appli-li-filter"><input type="radio"
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_timeout">
 									<label for="rd-appliPassedFilter_timeout"
 									class="lb-appliPassedFilter"><a
-										href='<c:url value="/company/applicants.do?statusFlag=4"/>'>기간만료
-											</a> </label></li>
+										href='<c:url value="/company/applicants.do?statusFlag=4&posNo=${posNo}"/>'>기간만료
+									</a> </label></li>
 							</ul>
 						</div>
 						<div class="appli-searchDiv">
@@ -183,8 +175,7 @@
 								<!-- 검색창 -->
 								<input type="text" placeholder="지원자, 포지션 검색"
 									value="${param.searchKeyword }" name="searchKeyword"
-									class="appli-searchInput" style="height: 33px;"> 
-								<input
+									class="appli-searchInput" style="height: 33px;"> <input
 									type="submit" class="appli-btn-statusChange"
 									style="outline: none;" value="검색">
 							</form>
@@ -210,6 +201,8 @@
 												$('.chBox').prop("checked", false);
 											}
 										});
+										
+										
 									});
 								</script>
 
@@ -245,43 +238,19 @@
 									<div class="appli-list-object_info">
 										<div>
 											<input type="checkbox"
-												class="appli-object-ele appli-object-ele-chk chBox" id="chBox"
-												name="chBox" data-cartNum="${aVo['APPLY_NO']}"> 
+												class="appli-object-ele appli-object-ele-chk chBox"
+												id="chBox" name="chBox" data-cartNum="${aVo['APPLY_NO']}">
 											<span
 												class="fas fa-star appli-object-ele appli-object-ele_gold favo"
-												id="favo+${aVo['APPLY_NO']}" onclick="favoFunc(${aVo['APPLY_NO']})"></span>
-											<span style="display: none; color: gold;" id="colorChk">a</span>
+												id="favo+${aVo['APPLY_NO']}"
+												onclick="favoFunc(${aVo['APPLY_NO']})"></span> <span
+												style="display: none; color: gold;" id="colorChk">a</span>
 											<script>
 												$('.chBox').click(function(){
 													$('#appli-checkAll').prop("checked",false);
 												});
 												
-												/* $('#favo').click(function(){
-													$.ajax{
-														url:"<c:url value='/company/applicants.do?statusFlag=${status}'/>",
-														type:"GET",
-														data:"applyNo=" + ${aVo['APPLY_NO']} ,
-														dataType:"json",
-														success:function(list){
-															var f = $("#favo").css('color');
-															var gold = $('#colorChk').css('color');
-															if(f!=gold){
-																$("#favo").css("color","gold");
-															}else{
-																$("#favo").css("color","gray");
-															}
-														},
-														error:function(xhr, status, error){
-															alert("error!! : " + error);
-														}
-													
-													}
-													
-												}); */
-												
-												/* function favoFunc(applyNo){
-													$("#favo").css("color","gold");
-												} */
+												/* $('input[name=chBox]:checked') */
 											</script>
 
 										</div>
@@ -293,7 +262,7 @@
 												<p class="appli-resume-no">No. ${aVo['APPLY_NO'] }</p>
 												<p class="appli-name-posJikgun">
 													<a
-														href="<c:url value='/company/applicantsDetail.do?applyNo=${aVo["APPLY_NO"]}&statusFlag=${status}'/>">
+														href="<c:url value='/company/applicantsDetail.do?applyNo=${aVo["APPLY_NO"]}&statusFlag=${status}&posNo=${posNo}'/>">
 														${aVo['APPLY_NAME'] } · ${aVo['POS_NAME'] }</a>
 												</p>
 											</div>
@@ -325,38 +294,38 @@
 					</div>
 
 					<div class="appli-paging-divs" style="justify-content: center;">
-							
-							<c:if test="${pagingInfo.firstPage>1 }">
-								<div class="appli-paging-div appli-paging-div_prev">
-									<button onclick="pageFunc(${pagingInfo.firstPage-1}, ${status})">이전</button>
+
+						<c:if test="${pagingInfo.firstPage>1 }">
+							<div class="appli-paging-div appli-paging-div_prev">
+								<button onclick="pageFunc(${pagingInfo.firstPage-1}, ${status}, ${posNo })">이전</button>
+							</div>
+						</c:if>
+
+						<!-- [1][2][3][4][5][6][7][8][9][10] -->
+						<c:forEach var="i" begin="${pagingInfo.firstPage}"
+							end="${pagingInfo.lastPage}">
+							<c:if test="${i==pagingInfo.currentPage }">
+								<div class="appli-paging-div appli-paging-div_page"
+									style="margin: 0px 3px;">
+									<button style="font-weight: bold">${i}</button>
 								</div>
 							</c:if>
-
-							<!-- [1][2][3][4][5][6][7][8][9][10] -->
-							<c:forEach var="i" begin="${pagingInfo.firstPage}"
-								end="${pagingInfo.lastPage}">
-								<c:if test="${i==pagingInfo.currentPage }">
-									<div class="appli-paging-div appli-paging-div_page"
-										style="margin: 0px 3px;">
-										<button style="font-weight: bold">${i}</button>
-									</div>
-								</c:if>
-								<c:if test="${i!=pagingInfo.currentPage }">
-									<div class="appli-paging-div appli-paging-div_page"
-										style="margin: 0px 3px;">
-										<button onclick="pageFunc(${i},${status})">${i} </button>
-									</div>
-								</c:if>
-							</c:forEach>
-
-							<!-- 다음 블럭으로 이동 -->
-							<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
-								<div class="appli-paging-div appli-paging-div_next">
-									<button onclick="pageFunc(${pagingInfo.lastPage+1},${status}>)">다음</button>
+							<c:if test="${i!=pagingInfo.currentPage }">
+								<div class="appli-paging-div appli-paging-div_page"
+									style="margin: 0px 3px;">
+									<button onclick="pageFunc(${i},${status},${posNo })">${i}</button>
 								</div>
 							</c:if>
-							<!--  페이지 번호 끝 -->
-						
+						</c:forEach>
+
+						<!-- 다음 블럭으로 이동 -->
+						<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
+							<div class="appli-paging-div appli-paging-div_next">
+								<button onclick="pageFunc(${pagingInfo.lastPage+1},${status},${posNo })">다음</button>
+							</div>
+						</c:if>
+						<!--  페이지 번호 끝 -->
+
 					</div>
 
 

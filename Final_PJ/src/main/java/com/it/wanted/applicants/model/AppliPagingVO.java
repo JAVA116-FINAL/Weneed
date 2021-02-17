@@ -5,8 +5,27 @@ import com.it.wanted.common.SearchVO;
 public class AppliPagingVO extends SearchVO{
 	private int applyNo;
 	private int statusFlag;
-
+	private String comCode;
+	private int posNo;
 	
+	
+	
+	public int getPosNo() {
+		return posNo;
+	}
+
+	public void setPosNo(int posNo) {
+		this.posNo = posNo;
+	}
+
+	public String getComCode() {
+		return comCode;
+	}
+
+	public void setComCode(String comCode) {
+		this.comCode = comCode;
+	}
+
 	public int getApplyNo() {
 		return applyNo;
 	}
@@ -25,7 +44,8 @@ public class AppliPagingVO extends SearchVO{
 
 	@Override
 	public String toString() {
-		return "ApplicantsSearchVO [statusFlag=" + statusFlag + "]";
+		return "AppliPagingVO [applyNo=" + applyNo + ", statusFlag=" + statusFlag + ", comCode=" + comCode + ", posNo="
+				+ posNo + "]";
 	}
 	
 	

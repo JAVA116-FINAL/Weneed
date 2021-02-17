@@ -47,11 +47,13 @@
 					<!-- <ul style="font-size: 0.8em; "> -->
 					<p class="appli-positionList-pos appli-positionList-pos_selected"
 						style="font-size: 12px;">
-						전체 포지션
+						<a href='<c:url value="/company/applicants.do"/>'>전체 포지션</a>
 						<c:if test="${!empty posList}">
 							<c:forEach var="pList" items="${posList}">
 								<p class="appli-positionList-pos " style="font-size: 12px;">
-									<c:out value="${pList.posName }"></c:out>
+									<a href='<c:url value="/company/applicants.do?statusFlag=${0}&posNo=${pList.posNo}"/>'> 
+										<c:out value="${pList.posName }"></c:out>
+									</a>
 							</c:forEach>
 						</c:if>
 				</div>
@@ -60,6 +62,7 @@
 						style="color: #acacac; font-weight: bold;">종료</h5>
 				</div>
 			</aside>
+			
 			<div>
 				<!-- contents 영역 -->
 				<section>
@@ -121,7 +124,7 @@
 											지원 :
 											<c:out value="${applyRegdate }"></c:out>
 										</p>
-										<c:if test="${aVo.statusFlag ==1 }">
+										<c:if test="${!empty aVo.docPassRegdate}">
 											<p class="appli-name-posJikgun">
 												<fmt:formatDate value="${aVo.docPassRegdate }"
 													pattern="yyyy-MM-dd HH:mm:ss" var="docPassRegdate" />
@@ -129,7 +132,7 @@
 												<c:out value="${docPassRegdate }"></c:out>
 											</p>
 										</c:if>
-										<c:if test="${aVo.statusFlag ==2 }">
+										<c:if test="${!empty aVo.passRegdate}">
 											<p class="appli-name-posJikgun">
 												<fmt:formatDate value="${aVo.passRegdate }"
 													pattern="yyyy-MM-dd HH:mm:ss" var="passRegdate" />
@@ -137,7 +140,7 @@
 												<c:out value="${passRegdate }"></c:out>
 											</p>
 										</c:if>
-										<c:if test="${aVo.statusFlag ==3 }">
+										<c:if test="${!empty aVo.regectRegdate}">
 											<p class="appli-name-posJikgun">
 												<fmt:formatDate value="${aVo.regectRegdate }"
 													pattern="yyyy-MM-dd HH:mm:ss" var="regectRegdate" />

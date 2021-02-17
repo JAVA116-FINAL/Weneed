@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface ApplicantsDAO {
 
-	public List<ApplicantsVO> selectAllPositions();
+	public List<ApplicantsVO> selectAllPositions(String comCode);
 
 	public int selectTotalRecord(AppliPagingVO appliPagingVo);
 
@@ -20,5 +20,8 @@ public interface ApplicantsDAO {
 	public List<Map<String, Object>> selectAll();
 
 	public int updateStatus(ApplicantsVO applicantsVo);
+
+	public int countBunmo(AppliPagingVO appliPagingVo);
+	public int countBunja(AppliPagingVO appliPagingVo);
 
 }
