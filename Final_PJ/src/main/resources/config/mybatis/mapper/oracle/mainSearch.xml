@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.mainSearch">
-<!-- 검색조건:회사 -->
+<!-- 검색조건:회사 !-->
 	<select id="searchComInfo" resultType="mainSearchVo" parameterType="String">
 		select a.com_name, a.industry , b.com_img_url
 		from comInfo a, comImgInfo b
