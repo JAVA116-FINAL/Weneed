@@ -66,4 +66,34 @@ public class PositionServiceImpl implements PositionService{
 		return positionDao.selectTotalRecordbyAdmin(searchVo);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectAllYetPosition(SearchVO searchVo) {
+		return positionDao.selectAllYetPosition(searchVo);
+	}
+
+	@Override
+	public int selectYetTotalRecord() {
+		return positionDao.selectYetTotalRecord();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllPassedPosition(SearchVO searchVo2) {
+		return positionDao.selectAllPassedPosition(searchVo2);
+	}
+
+	@Override
+	public int selectPassedTotalRecord() {
+		return positionDao.selectPassedTotalRecord();
+	}
+
+	@Override
+	public int changeStatustoPass(List<Integer> posNoList) {
+		int res=0;
+		for(int posNo : posNoList) {
+			positionDao.changeStatustoPass(posNo);
+			res++;
+		}
+		return res;
+	}
+
 }

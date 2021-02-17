@@ -32,7 +32,8 @@
             </li>
             <li class="adminMenuLi">포지션/이력서
                <ul>
-                    <li class="adminSubMenu"><a href='<c:url value="/admin/adminPosition.do"/>'>포지션 조회</a></li>
+                  <li class="adminSubMenu"><a href='<c:url value="/admin/adminPosition.do"/>'>포지션 조회</a></li>
+                  <li class="adminSubMenu"><a href='<c:url value="/admin/positionPermission.do"/>'>포지션 승인</a></li>
                   <li class="adminSubMenu"><a href='<c:url value="/admin/adminResume.do"/>'>이력서 조회</a></li>
                   <li class="adminSubMenu"><a href='<c:url value="/admin/adminApply.do"/>'>지원현황</a></li>
                </ul>
