@@ -68,6 +68,7 @@
             <mapping path="/resume/*.do"/>
             <mapping path="/matchupMem/*.do"/>
             <mapping path="/jobsearch/bookmark.do"/>
+            <mapping path="/profileSetting/setting.do"/>
             <exclude-mapping path="/resume/resumeIntro.do"/>
             <exclude-mapping path="/resume/resumeSampleFileDown.do"/>
             <exclude-mapping path="/resume/resumeDown.do"/>

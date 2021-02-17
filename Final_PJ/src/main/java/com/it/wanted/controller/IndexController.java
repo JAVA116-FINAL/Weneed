@@ -1,27 +1,24 @@
 package com.it.wanted.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.it.wanted.career.admin.model.ProgramVO;
+import com.it.wanted.main.search.model.MainSearchService;
+import com.it.wanted.main.search.model.MainSearchVO;
 
 @Controller
 public class IndexController {
 	private static final Logger logger
 		= LoggerFactory.getLogger(IndexController.class);
 	
-	@RequestMapping("/index.do")
-	public void index() {
-		logger.info("index화면 보여주기");
-	}
-	
-	/*
-	 * @RequestMapping("/main/beforeLoginMain.do") public void beforeLoginMain() {
-	 * logger.info("로그인 전 메인 화면 보여주기"); }
-	 * 
-	 * @RequestMapping("/main/afterLoginMain.do") public void afterLoginMain() {
-	 * logger.info("로그인 후 메인 화면 보여주기"); }
-	 */
+	@Autowired private MainSearchService mainSearchService;
 	
 	@RequestMapping("/main/onboarding.do")
 	public void onboarding() {
@@ -60,6 +57,21 @@ public class IndexController {
 	@RequestMapping("/profileSetting/passwordChange.do")
 	public void passwordChange() {
 		logger.info("passwordChange 보여주기");
+	}
+	
+	//메인
+	@RequestMapping("/index.do")
+	public String mainList(Model model) {
+		List<MainSearchVO> listNewRecruit = mainSearchService.selectNewRecruit();
+		List<ProgramVO> listMainCareerList = mainSearchService.selectMainCareerList();
+		
+		logger.info("신규회사 list={}",listNewRecruit);
+		logger.info("커리어 성장 list={}",listMainCareerList);
+			
+		model.addAttribute("listNewRecruit", listNewRecruit);
+		model.addAttribute("listMainCareerList", listMainCareerList);
+			
+		return "/index";
 	}
 	
 	
