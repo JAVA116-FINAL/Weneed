@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../inc/company_top.jsp" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/imgUpload.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/position.css'/>">
@@ -7,14 +8,13 @@
 $(function(){
 	$('#tabImg').attr("checked", 'checked');
 	
-	//[이미지 / 정보] 탭 기능 구현
+	//[전체 / 개발 ] 탭 기능 구현.. 여기선 의미 없지만
 	$('#tabImg').click(function(){
 		$('.infoSection').addClass('hide');
 		$('.imgSection').removeClass('hide');
 		
 		$('#tabImgLabel').addClass('selectedTab');
 		$('#tabInfoLabel').removeClass('selectedTab');
-		
 		
 	});
 	$('#tabInfo').click(function(){
@@ -25,32 +25,8 @@ $(function(){
 		$('#tabImgLabel').removeClass('selectedTab');
 	});
 	
-	
-	/* 여러개면 이것이 필요해 
-	
-	$('#rd-appliPassedFilter_new').attr('checked', 'checked');
-	
-	//리스트 아이템을 누르면 addClass removeClass를 반복한다. 이거 함수로 만들어볼깡
-	$('.appli-li-filter').click(function(){
-		const num=$('.appli-li-filter').index($(this));
-		//선택한 (바뀔) 탭메뉴의 인덱스를 가져온다
-		$('.lb-appliPassedFilter').removeClass("lb-appliPassedFilter-selected");
-		//전체 리스트에 대해 셀렉티드 클래스 제거
-		$('.lb-appliPassedFilter:eq('+num+')').addClass("lb-appliPassedFilter-selected");
-		//선택한 탭메뉴 인덱스에 클래스 추가
-	});
-	
-	
-	*/
 });
 
-
-//이미지 업로드 기능 구현
-	const imgFileInput= document.querySelector('#imgFileInput');
-	
-	$('#comServImgAddBtn').click(function(){
-		imgFileInput.click();
-	});
 </script>
 <body>
 	<div class="container">
@@ -71,40 +47,76 @@ $(function(){
 		<section class="posSection">
 			<h2 class="comServTitle">채용중</h2>
 			<div class="posBoxWrapper">
-				<div class="posBoxWrapper2">
-					<div class="posBox">
-						<h4 class="posJikMu">Data & Backend Junior Developer</h4>
-						<span class="posDueDate">상시</span>
-					</div>
-					<div class="posDueDateDiv">
-						<a class="posDueDateLink" href="#">마감일 설정 <i class="fas fa-chevron-right"></i></a>
-					</div>
-				</div>
+				<c:forEach var="posVo" items="${posList}">
+					<c:if test="${posVo.posStatus == 3}">
+						<div class="posBoxWrapper2" onclick="location.href='<c:url value="/company/positionEdit.do?posNo=${posVo.posNo}"/>'">
+							<div class="posBox">
+								<h4 class="posJikMu">${posVo.posName} / ${posVo.posStatus}</h4>
+								<span class="posDueDate">
+								<c:if test="${!empty posVo.endDate}">
+									${posVo.endDate}
+								</c:if>
+								<c:if test="${empty posVo.endDate}">
+									상시
+								</c:if>
+									</span>
+							</div>
+							<div class="posDueDateDiv">
+								<a class="posDueDateLink" href="#">마감일 설정 <i class="fas fa-chevron-right"></i></a>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
 			</div>
 		</section>
 		<section class="posSection">
 			<h2 class="comServTitle">심사중</h2>
 			<div class="posBoxWrapper">
-				<div class="posBoxWrapper2">
-					<div class="posBox">
-						<h4 class="posJikMu">Data & Backend Junior Developer</h4>
-						<span class="posDueDate">상시</span>
+				<c:forEach var="posVo" items="${posList}">
+				<c:if test="${posVo.posStatus eq 2}">
+					<div class="posBoxWrapper2" onclick="location.href='<c:url value="/company/positionEdit.do?posNo=${posVo.posNo}"/>'">
+						<div class="posBox">
+							<h4 class="posJikMu">${posVo.posName }</h4>
+							<span class="posDueDate">
+							<c:if test="${!empty posVo.endDate}">
+								${posVo.endDate}
+							</c:if>
+							<c:if test="${empty posVo.endDate}">
+								상시
+							</c:if>
+								</span>
+						</div>
+						<div class="posDueDateDiv">
+							<a class="posDueDateLink" href="#">마감일 설정 <i class="fas fa-chevron-right"></i></a>
+						</div>
 					</div>
-					<div class="posDueDateDiv">
-						<a class="posDueDateLink" href="#">마감일 설정 <i class="fas fa-chevron-right"></i></a>
-					</div>
-				</div>
+				</c:if>
+			</c:forEach>
 			</div>
 		</section>
 		<section class="posSection posSectionTemp">
 			<h2 class="comServTitle posSectionTemp">임시 저장</h2>
 			<div class="posBoxWrapper">
-				<div class="posBoxWrapper2">
-					<div class="posBox">
-						<h4 class="posJikMu posSectionTemp">Data & Backend Junior Developer</h4>
-						<span class="posDueDate posSectionTemp">상시</span>
-					</div>
-				</div>
+				<c:forEach var="posVo" items="${posList}">
+					<c:if test="${posVo.posStatus eq 1}">
+						<div class="posBoxWrapper2" onclick="location.href='<c:url value="/company/positionEdit.do?posNo=${posVo.posNo}"/>'">
+							<div class="posBox">
+								<h4 class="posJikMu">${posVo.posName}</h4>
+								<span class="posDueDate">
+								<c:if test="${!empty posVo.endDate}">
+									${posVo.endDate}
+								</c:if>
+								<c:if test="${empty posVo.endDate}">
+									상시
+								</c:if>
+									</span>
+							</div>
+							<div class="posDueDateDiv">
+								<a class="posDueDateLink" href="#">마감일 설정 <i class="fas fa-chevron-right"></i></a>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
 			</div>
 		</section>
 	</div>

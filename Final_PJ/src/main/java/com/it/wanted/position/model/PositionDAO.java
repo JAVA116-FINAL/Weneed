@@ -19,6 +19,12 @@ public interface PositionDAO {
 	/* 자연0216 */
 	public List<Map<String, Object>>selectPositionAllbyAdmin(SearchVO searchVo);
 	public int selectTotalRecordbyAdmin(SearchVO searchVo);
-
+	
+	/* 0217현빈*/
+	List<Map<String, Object>> selectAllYetPosition(SearchVO searchVo);
+	int selectYetTotalRecord();
+	List<Map<String, Object>> selectAllPassedPosition(SearchVO searchVo2);
+	int selectPassedTotalRecord();
+	int changeStatustoPass(int posNo);
 
 }

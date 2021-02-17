@@ -58,9 +58,14 @@ public class jobsearchController {
 	@RequestMapping("/jobsearchDetail.do")
 	public void jobsearchDetail(@RequestParam int posNo, HttpSession session, Model model) {
 		logger.info("탐색 상세보기 화면보여주기");
-		
-		int memNo= (Integer) session.getAttribute("mem_no"); 
-		String email= (String)session.getAttribute("email");
+		int memNo=0;
+		String email="";
+		if(session.getAttribute("mem_no") != null ) {
+			memNo= (Integer) session.getAttribute("mem_no"); 
+		}
+		if(session.getAttribute("email")!= null) {
+			email= (String)session.getAttribute("email");
+		}
 		
 		String memName = jobsearchdetailService.selectMemberName(email);
 		logger.info("회원이름 memName={}", memName);
@@ -88,8 +93,6 @@ public class jobsearchController {
 		 */
 		logger.info("비슷한 포지션 글 조회 결과, jsDetailsViewVoList.size={}", jsDetailsViewVoList.size());
 		logger.info("비슷한 포지션 글 조회 결과, jsDetailsViewVoList={}", jsDetailsViewVoList);
-		
-
 		
 		model.addAttribute("memName", memName);
 		model.addAttribute("posVo", posVo);
