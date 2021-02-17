@@ -135,7 +135,17 @@
 	<select id="selectFinalFail" parameterType="int" resultType="int">
 		select count(*) as documentPass from apply where status_flag=3 and mem_no=#{memNo}
 	</select>
-	
+	<select id="selectApplyTotal" parameterType="int" resultType="int">
+		select count(*) as total from apply where status_flag>=0 and mem_no=#{memNo}
+	</select>
+	<select id="selectApplyList" parameterType="int" resultType="map">
+		select a.com_name, b.pos_name, c.apply_regdate, c.status_flag
+		from cominfo a inner join position b 
+		on a.com_code=b.com_code
+		inner join apply c
+		on b.pos_no=c.pos_no
+		where c.mem_no=#{memNo}
+	</select>
 </mapper>
 
 

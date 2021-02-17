@@ -9,6 +9,7 @@ h1{
 }
 label{
 	margin-bottom: 0px;
+	margin-right: 20px;
 }
 
 input, select{
@@ -40,13 +41,24 @@ textarea{
 	resize: none;
 }
 
-label{
-	margin-right: 20px;
-}
 .positionAdd-wrapper{
 	display: flex;
+	
 }
 
+.posBoxWrapper{
+	display: flex;
+	flex-wrap: wrap;
+}
+.posBoxWrapper2{
+	margin-right: 20px;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.posDueDateDiv{
+	height: 36px;
+}
 .positionAdd-1stSec{
 	margin-bottom: 20px;
 }

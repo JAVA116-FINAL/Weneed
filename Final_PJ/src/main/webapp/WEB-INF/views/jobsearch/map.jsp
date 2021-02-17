@@ -5,7 +5,7 @@
 <head>
 <!-- Google Map -->
 <script src="<%=request.getContextPath() %>/resources/plugins/google-map/map.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key="></script>    
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlM5WtKSjJE19oUZMIhrkEO3hlnhWGJ1M"></script>    
  
 <script type="text/javascript">
       function initialize() {

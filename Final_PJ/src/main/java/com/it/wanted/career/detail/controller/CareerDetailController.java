@@ -29,13 +29,14 @@ public class CareerDetailController {
 	  @RequestMapping("/detailPage.do") 
 	  public void detailPage_get(@RequestParam int programNo, HttpSession session, Model model) {
 			  logger.info("일반회원 프로그램 상세페이지, 파라미터 programNo={}", programNo);
-			  
-				/*
-				 * if (programNo == 0) { model.addAttribute("msg", "잘못된 url입니다.");
-				 * model.addAttribute("url", "/career/Mainpage/careerMain.do");
-				 * 
-				 * return "common/message"; }
-				 */
+			 
+			  /*
+			  int memNo= (Integer) session.getAttribute("mem_no"); 
+			  String email= (String)session.getAttribute("email");
+			  			
+			  String memName = programService.selectMembersName(email);
+			  logger.info("회원이름 memName={}", memName);
+			  */
 			  
 			  List<ProgramVO2> proConList = new ArrayList<ProgramVO2>(); 
 			  proConList = programService.selectProgramContentsView(programNo);
@@ -45,9 +46,13 @@ public class CareerDetailController {
 			  proVo=programService.selectProgramView(programNo);
 			  logger.info("프로그램 기본 상세보기 조회, 결과 proVo={}", proVo);
 			  
+			  /* 함께보면 좋은 이벤트 */			  
+			  List<ProgramVO> proVoRecList = programService.selectSimilarProgram();
 			  
+			 // model.addAttribute("memName", memName);
 			  model.addAttribute("proConList", proConList); 
 			  model.addAttribute("proVo", proVo);
+			  model.addAttribute("proVoRecList", proVoRecList);
 			  
 			  
 	  }
@@ -70,5 +75,7 @@ public class CareerDetailController {
 	  
 	  }
 	 
+	  
+	  
 
 }

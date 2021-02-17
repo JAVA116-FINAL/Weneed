@@ -24,6 +24,8 @@ public class PositionServiceImpl implements PositionService{
 		//posVo의 no가 필요한디... 포지션명으로 불러와볼까
 		int posNo=positionDao.selectPosNo(posVo);
 		System.out.println("포지션 번호 조회 결과 posNo="+posNo);
+		System.out.println("직무목록 조회 결과 jikmus.size="+jikmus.size());
+		System.out.println("직무목록 조회 결과 jikmus="+jikmus);
 		
 		//직무 잘라주기 
 		List<String> cutJm=new ArrayList<String>();
@@ -54,8 +56,6 @@ public class PositionServiceImpl implements PositionService{
 		return positionDao.selectPositionByComcode(comCode);
 	}
 
-
-
 	@Override
 	public List<Map<String, Object>> selectPositionAllbyAdmin(SearchVO searchVo) {
 		return positionDao.selectPositionAllbyAdmin(searchVo);
@@ -66,6 +66,34 @@ public class PositionServiceImpl implements PositionService{
 		return positionDao.selectTotalRecordbyAdmin(searchVo);
 	}
 
-	
-	
+	@Override
+	public List<Map<String, Object>> selectAllYetPosition(SearchVO searchVo) {
+		return positionDao.selectAllYetPosition(searchVo);
+	}
+
+	@Override
+	public int selectYetTotalRecord() {
+		return positionDao.selectYetTotalRecord();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllPassedPosition(SearchVO searchVo2) {
+		return positionDao.selectAllPassedPosition(searchVo2);
+	}
+
+	@Override
+	public int selectPassedTotalRecord() {
+		return positionDao.selectPassedTotalRecord();
+	}
+
+	@Override
+	public int changeStatustoPass(List<Integer> posNoList) {
+		int res=0;
+		for(int posNo : posNoList) {
+			positionDao.changeStatustoPass(posNo);
+			res++;
+		}
+		return res;
+	}
+
 }

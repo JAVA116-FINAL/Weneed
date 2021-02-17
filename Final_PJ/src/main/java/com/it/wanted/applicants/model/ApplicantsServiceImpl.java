@@ -87,6 +87,16 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 		return applicantsDao.selectFinalFail(memNo);
 	}
 
+	@Override
+	public int selectApplyTotal(int memNo) {
+		return applicantsDao.selectApplyTotal(memNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectApplyList(int memNo) {
+		return applicantsDao.selectApplyList(memNo);
+	}
+
 //	@Override
 //	public int updatePeriod(ApplicantsVO appliVo) {
 //		// TODO Auto-generated method stub

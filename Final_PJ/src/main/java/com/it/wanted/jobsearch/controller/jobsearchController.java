@@ -1,6 +1,5 @@
 package com.it.wanted.jobsearch.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,19 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.wanted.applicants.model.ApplicantsService;
 import com.it.wanted.applicants.model.ApplicantsVO;
-import com.it.wanted.career.admin.model.ProgramVO;
-import com.it.wanted.career.admin.model.ProgramVO2;
-import com.it.wanted.comimginfo.model.ComImgInfoVO;
 import com.it.wanted.cominfo.model.ComInfoVO;
-import com.it.wanted.jobsearchdetail.model.JobSearchAllVO;
-import com.it.wanted.jobsearchdetail.model.JobSearchDetailVO;
-import com.it.wanted.jobsearchdetail.model.JobSearchDetailsViewVO;
 import com.it.wanted.jobsearchdetail.model.JobsearchdetailService;
 import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.member.model.MemberService;
 import com.it.wanted.member.model.MemberVO;
-import com.it.wanted.mybookmark.MybookmarkService;
-import com.it.wanted.mybookmark.MybookmarkVO;
+import com.it.wanted.mybookmark.model.MybookmarkService;
+import com.it.wanted.mybookmark.model.MybookmarkVO;
 import com.it.wanted.position.model.PositionService;
 import com.it.wanted.position.model.PositionVO;
 import com.it.wanted.resume.model.ResumeService;
@@ -65,9 +58,14 @@ public class jobsearchController {
 	@RequestMapping("/jobsearchDetail.do")
 	public void jobsearchDetail(@RequestParam int posNo, HttpSession session, Model model) {
 		logger.info("탐색 상세보기 화면보여주기");
-		
-		int memNo= (Integer)session.getAttribute("mem_no");
-		String email= (String)session.getAttribute("email");
+		int memNo=0;
+		String email="";
+		if(session.getAttribute("mem_no") != null ) {
+			memNo= (Integer) session.getAttribute("mem_no"); 
+		}
+		if(session.getAttribute("email")!= null) {
+			email= (String)session.getAttribute("email");
+		}
 		
 		String memName = jobsearchdetailService.selectMemberName(email);
 		logger.info("회원이름 memName={}", memName);
@@ -95,8 +93,6 @@ public class jobsearchController {
 		 */
 		logger.info("비슷한 포지션 글 조회 결과, jsDetailsViewVoList.size={}", jsDetailsViewVoList.size());
 		logger.info("비슷한 포지션 글 조회 결과, jsDetailsViewVoList={}", jsDetailsViewVoList);
-		
-
 		
 		model.addAttribute("memName", memName);
 		model.addAttribute("posVo", posVo);

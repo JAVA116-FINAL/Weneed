@@ -61,14 +61,14 @@ $(function(){
 		var curPageP=$('input[name=currentPageP]').val();
 		//승인요청건 테이블을 다시 그려주는 ajax 
 		$.ajax({
-			url:"<c:url value='/admin/companyService/comInfoPermissionYet.do'/>",
+			url:"<c:url value='/admin/comInfoPermissionYet.do'/>",
 			type:"post",
 			dataType:"json",
 			data:{
-				"curPageY":curPageY
+				"curPage":curPageY
 			},
 			success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
-				alert('승인요청건 조회 성공!');
+			//	alert('승인요청건 조회 성공!');
 				pageFuncY(curPageY);
 			},
 			error:function(xhr, status, error){
@@ -78,14 +78,14 @@ $(function(){
 		
 		//승인완료건 테이블을 다시 그려주는 ajax
 		$.ajax({
-			url:"<c:url value='/admin/companyService/comInfoPermissionPassed.do'/>",
+			url:"<c:url value='/admin/comInfoPermissionPassed.do'/>",
 			type:"post",
 			dataType:"json",
 			data:{
-				"curPageP":curPageP
+				"curPage":curPageP
 			},
 			success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
-				alert('승인완료건 조회 성공!');
+			//	alert('승인완료건 조회 성공!');
 				pageFuncY(curPageP);
 			},
 			error:function(xhr, status, error){
