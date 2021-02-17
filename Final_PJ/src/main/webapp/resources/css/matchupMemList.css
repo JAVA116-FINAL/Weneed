@@ -53,7 +53,6 @@ input.inputimg_jy {
     color: lightslategray;
 }
 
-a {}
 
 .profileblock_jy {
     border: 1px solid #8080802e;
@@ -890,6 +889,22 @@ li.spExComList_jy {
 .exselectbtName_jy.refName {
     color: black;
 }
-/* 0217 */
 
-i.icon-edit.pencilEdit_jy1 {top: 110%;}
+/* 0217 */
+li.spExComList_jy {
+    max-width: 50%;
+}
+
+li.spExComList_jy {
+    max-width: 50%;
+}
+
+i.icon-edit.pencilEdit_jy1 {
+   
+    margin-left: 50px;
+}
+
+a.pendil2-a_jy {
+    top: 59%;
+}
+
