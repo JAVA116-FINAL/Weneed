@@ -61,7 +61,7 @@ $(function(){
 		var curPageP=$('input[name=currentPageP]').val();
 		//승인요청건 테이블을 다시 그려주는 ajax 
 		$.ajax({
-			url:"<c:url value='/admin/companyService/comInfoPermissionYet.do'/>",
+			url:"<c:url value='/admin/comInfoPermissionYet.do'/>",
 			type:"post",
 			dataType:"json",
 			data:{
@@ -78,7 +78,7 @@ $(function(){
 		
 		//승인완료건 테이블을 다시 그려주는 ajax
 		$.ajax({
-			url:"<c:url value='/admin/companyService/comInfoPermissionPassed.do'/>",
+			url:"<c:url value='/admin/comInfoPermissionPassed.do'/>",
 			type:"post",
 			dataType:"json",
 			data:{
