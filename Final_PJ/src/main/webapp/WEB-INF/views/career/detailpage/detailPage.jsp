@@ -47,7 +47,11 @@ $( document ).ready( function() {
 #contentLoop img{
 	max-width: 700px;
 }
-
+h2 {
+    font-size: xx-large;
+    font-weight: bolder;
+    text-align: center;
+}
 
 </style> 
 <div class="jbMenu" style="width:100%;">
@@ -75,23 +79,34 @@ $( document ).ready( function() {
 					<div class="row">
 						<div class="col-lg-12 mb-5">						
 							<div class="single-blog-item">
-								<img
-<%-- 									src="<c:url value='/progamImgUpload/${proVo.proImage }'/>"
- --%>									src="<c:url value='/resources/images/career/${proVo.proImage }'/>"
-									alt="" class="img-fluid" style="margin-left:60px;">
+								<img src="<c:url value='/progamImgUpload/${proVo.proImage }'/>"
+
+									alt="" class="img-fluid" style="width:700px;">
 				  	
 								<!-- 태그넣기 -->
-								<div class="sidebar-widget tags mb-3" style="margin-top:20px;margin-bottom: -60px;">
+								<div class="sidebar-widget tags mb-3" style="margin-top:40px;">
+									<span>| 키워드 </span>
 									<a href="#">#WantedPlus</a> 
 									<a href="#">#BookClub</a> 
 									<a href="#">#자기개발</a> 
 									<a href="#">#커리어성장</a> 
 									<a href="#">#IT,컨텐츠</a>
+									
+									<span>| 유형</span>
+									<c:if test="${proVo.proType  == 1}">
+										<a href="#" style="color:blue;">#이벤트</a>
+									</c:if>
+									<c:if test="${proVo.proType == 2}">
+										<a href="#">#북클럽</a>
+									</c:if>
+									<c:if test="${proVo.proType == 3}">
+										<a href="#">#교육·강연</a>
+									</c:if>
 								</div>
 
 
 								<div class="blog-item-content mt-5">
-									<div class="blog-item-meta mb-3"></div>
+									<div class="blog-item-meta mb-3" style="margin-top: -70px;"></div>
 
 									<!-- 내용부분 전체 시작!! -->
 
@@ -104,7 +119,7 @@ $( document ).ready( function() {
 																<div class="parag" id="parag2" style="margin-top: 25px;">
 																<label>${proVo2.proConNo}번째</label>
 																	
-																			<b>${proVo2.proTitle}</b>
+																			<h2>${proVo2.proTitle}</h2>
 																		 
 																		<br>
 																		<div id="contentLoop" style="width:700px;">
@@ -133,8 +148,6 @@ $( document ).ready( function() {
 							
 									<div style="font:12px;"><span>일자</span></div>
 									<div style="color:black; font:12px;"><span><fmt:formatDate value="${proVo.proStartDate}" pattern="yyyy-MM-dd"/></span></div><br>
-									<div style="font:12px;"><span>장소</span></div>
-									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br>
 									<div style="font:12px;"><span>주최자</span></div>
 									<div style="color:black; font:12px;"><span>${proVo.proSponsor}</span></div>
 							
@@ -161,62 +174,24 @@ $( document ).ready( function() {
 	
 	<div class="container">
 			<!-- 프로젝트 리스트 섹션!!!!!!! -->
-		<div class="row shuffle-wrapper portfolio-gallery" style="margin:auto; margin-top: 50px;">
-		      	<div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat1&quot;,&quot;cat2&quot;]">
-			      	<div class="position-relative doctor-inner-box">
-				        <div class="doctor-profile">
-			               <div class="doctor-img">
-			               		<img src="<c:url value='https://static.wanted.co.kr/images/tags/ebfb705e.jpg'/>" alt="" class="img-fluid w-100">
-			               </div>
-			            </div>
-		                <div class="content mt-3">
-		                	<h4 class="mb-0"><a href="doctor-single.html">Just Do it</a></h4>
-		                	<p>나이스</p>
-		                </div> 
-			      	</div>
-		      	</div>
-		
+			<h2>함께 보면 좋은 이벤트</h2>
+		<div class="row shuffle-wrapper portfolio-gallery" style="margin:auto; margin-top: 50px;">		
+	       <c:forEach var="proVoRec" items="${proVoRecList}">
 		      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat2&quot;]">
 		        	<div class="position-relative doctor-inner-box">
 				        <div class="doctor-profile">
 				        	<div class="doctor-img">
-				               <img src="<c:url value='https://static.wanted.co.kr/images/tags/ebfb705e.jpg'/>" alt="" class="img-fluid w-100">
+				               <img src="<c:url value='/programImgUpload/${proVoRec.proImage}'/>" alt="" class="img-fluid w-100">
 				            </div>
 			            </div>
 		                <div class="content mt-3">
-		                	<h4 class="mb-0"><a href="doctor-single.html">야 너두? 야 나두!</a></h4>
-		                	<p>조정석</p>
+		                	<h4 class="mb-0"><a href="doctor-single.html">${proVoRec.proName}</a></h4>
+		                	<p>${proVoRec.proSponsor}</p>
 		                </div> 
 			      	</div>
 		      </div>
+		   </c:forEach>
 		
-		      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat3&quot;]">
-		        	<div class="position-relative doctor-inner-box">
-				        <div class="doctor-profile">
-				        	<div class="doctor-img">
-				               <img src="<c:url value='https://static.wanted.co.kr/images/tags/ebfb705e.jpg'/>" alt="" class="img-fluid w-100">
-				            </div>
-			            </div>
-		                <div class="content mt-3">
-		                	<h4 class="mb-0"><a href="doctor-single.html">Impossible is nothing</a></h4>
-		                	<p>아디도다스</p>
-		                </div> 
-			      	</div>
-		      </div>
-		
-		      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat3&quot;,&quot;cat4&quot;]">
-		        	<div class="position-relative doctor-inner-box">
-				        <div class="doctor-profile">
-				        	<div class="doctor-img">
-				               <img src="<c:url value='https://static.wanted.co.kr/images/tags/ebfb705e.jpg'/>" alt="" class="img-fluid w-100">
-				            </div>
-			            </div>
-		                <div class="content mt-3">
-		                	<h4 class="mb-0"><a href="doctor-single.html">야 너두? 야 나두!</a></h4>
-		                	<p>조정석</p>
-		                </div> 
-			      	</div>
-		      </div>
 		 </div>     
  <!-- 프로젝트 리스트 섹션 끝 -->
 	

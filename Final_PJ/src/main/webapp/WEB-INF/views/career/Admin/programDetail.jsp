@@ -76,7 +76,7 @@ $( document ).ready( function() {
 						<div class="col-lg-12 mb-5">						
 							<div class="single-blog-item">
 								<img
-									src="<c:url value='/resources/images/career/${proVo.proImage }'/>"
+									src="<c:url value='/programImgUpload/${proVo.proImage }'/>"
 									alt="" class="img-fluid">
 				  	
 								<!-- 태그넣기 -->
@@ -154,8 +154,8 @@ $( document ).ready( function() {
 							
 									<div style="font:12px;"><span>일자</span></div>
 									<div style="color:black; font:12px;"><span><fmt:formatDate value="${proVo.proStartDate}" pattern="yyyy-MM-dd"/></span></div><br>
-									<div style="font:12px;"><span>장소</span></div>
-									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br>
+<!-- 									<div style="font:12px;"><span>장소</span></div>
+									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br> -->
 									<div style="font:12px;"><span>주최자</span></div>
 									<div style="color:black; font:12px;"><span>${proVo.proSponsor}</span></div>
 							
@@ -193,7 +193,7 @@ $( document ).ready( function() {
 
  <br>
 			<div style="margin:auto; text-align:center;">
-							<input type="text" name=programNo value="${param.programNo }">
+							<input type="hidden" name=programNo value="${param.programNo }">
 				
 							<div style="text-align:center";>
 								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programEdit1.do?programNo=${param.programNo}'" style="outline:none;">수정</button>					      									

@@ -36,4 +36,8 @@ public interface ApplicantsDAO {
 
 	public int selectFinalFail(int memNo);
 
+	public int selectApplyTotal(int memNo);
+
+	public List<Map<String, Object>> selectApplyList(int memNo);
+
 }

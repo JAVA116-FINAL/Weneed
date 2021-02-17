@@ -245,6 +245,7 @@ $(function(){
 													${fn:substring(rVo.resumeTitle, 0,27) } ...
 												</c:if>
 												<c:if test="${fn:length(rVo.resumeTitle)<27}">						
+
 													${rVo.resumeTitle}
 												</c:if>
 											<%-- ${rVo.resumeTitle} --%>

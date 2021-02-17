@@ -6,10 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <jsp:useBean id="today" class="java.util.Date"/>
 
-  
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/mainstyle.css'/>" />
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/clear.css'/>" />
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/programList/mystyle.css'/>" />
+
   
   <!-- 커리어성장 카테고리메뉴 css -->
   <link rel="stylesheet" type="text/css" href="<c:url value='/resources/plugins/slick-carousel/slick/slick.css'/>">
@@ -87,24 +84,6 @@ $(function(){
 	
 });
 
-//날짜 포맷
-/* function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear(),
-       hour = '' + d.getHours(),
-       minute = '' + d.getMinutes(),
-       second = '' + d.getSeconds();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    if (hour.length < 2) hour = '0' + hour;
-    if (minute.length < 2) minute = '0' + minute;
-    if (second.length < 2) second = '0' + second;
-   
-    return [year, month, day].join('-')+" "+[hour, minute, second].join(':');
-};
- */
 
 /* 캘린더 */
 $(function() {
@@ -135,23 +114,14 @@ $(function() {
 
 
        //초기값을 오늘 날짜로 설정
-            $('#proStartDate').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)   
-            
-  
-            
+            $('#proStartDate').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)         
             
 });        
-			
-
 </script>
-
-
-
 <body>
 
 	
 <!-- 메뉴 부분!!!!! -->
-
 <!-- 메뉴 탑부분 끝!! -->
 
 <section class="section blog-wrap" style="margin-top:0px;">
@@ -160,7 +130,7 @@ $(function() {
 <div style = "width:980px; max-width: 100%; margin:auto;">
 	<form name="proWrite1" method="post" action='<c:url value="/career/Admin/programWrite.do"/>' enctype="multipart/form-data">
 		<fieldset>
-		<legend style="color:#258bf7; font-size: 22px;"><b>프로그램 등록, 첫번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
+		<legend style="color:#258bf7; font-size: 30px;"><b>프로그램 등록, 첫번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
 		<br>
 			<!-- 프로그램 이름 -->
 		        <div class="proInfoDiv">
@@ -169,7 +139,7 @@ $(function() {
 		        </div>
 			<!-- 프로그램 카테고리 -->
 			<div class="proInfoDiv" id="">	
-				<label for="proCateNo">프로그램 카테고리</label>
+				<label for="proCateNo"><b>프로그램 카테고리</b></label>
 	            <select name="proCateNo" id="proCateNo" title="카테고리" class="programTitleTextField">
 	            	<option value="0">선택하세요</option>
 	            	<!-- 반복문 시작 -->	
@@ -224,7 +194,7 @@ $(function() {
 		        <div class="proInfoDiv">
 		
 						<div class="inputArea">
-						 <label for="imageUpload">이미지</label><br>
+						 <label for="imageUpload">이미지</label><br><br>
 						 <input type="file" id="imageUpload" name="imageUpload" />
 						 <div class="select_img"><img src="" /></div>
 						 
@@ -246,11 +216,11 @@ $(function() {
 		    <!-- 관리자 번호는 나중에 세션에서 넘겨주기? -->        
 		        <div class="proInfoDiv">
 					<!-- 관리자 번호 -->
-					<input type="text" class="" id="adminNo" name="adminNo">
+					<input type="text" class="" id="adminNo" name="adminNo" value="1">
 		        </div>
 		        
 		 	<!-- 프로그램 내용등록 페이지로 이동 버튼 -->       
-		        <div class="btnCenter" style="margin-top:120px;">
+		        <div class="btnCenter" style="margin-top:60px;">
 		            <input type = "submit" class="programBtn" id="sendButton" value="저장"/>
 		            <input type = "button" class="programBtn" value="취소" onclick="location.href='<c:url value='/career/Admin/careerAdminMain.do'/>'">         
 		        </div>
