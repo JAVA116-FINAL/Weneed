@@ -49,8 +49,9 @@ public class ProgramWriteController {
 	// 프로그램 글쓰기(등록) 화면 보여주기
 
 	@RequestMapping(value = "/programWrite.do", method = RequestMethod.GET)
-	public void insertGet(Model model) {
+	public void insertGet(HttpSession session, Model model) {
 		// 1.
+		
 		logger.info("프로그램 등록 화면 보여주기");
 
 		List<CareerCategoryVO> ccgList = careerCategoryService.selectCareerCategoryAll();
@@ -111,6 +112,11 @@ public class ProgramWriteController {
 		ProgramVO proVo = programService.selectByProgramNo(programNo);
 		logger.info("프로그램 등록 1 상세보기 결과, proVo={}", proVo);
 
+		List<CareerCategoryVO> ccgList = careerCategoryService.selectCareerCategoryAll();
+
+		logger.info("카테고리 조회 결과 ccgList.size{}=", ccgList.size());
+
+		model.addAttribute("ccgList", ccgList);		
 		model.addAttribute("proVo", proVo);
 
 	}

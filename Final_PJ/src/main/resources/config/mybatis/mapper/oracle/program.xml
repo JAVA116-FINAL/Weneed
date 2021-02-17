@@ -4,6 +4,13 @@
 
 <mapper namespace="com.mybatis.mapper.oracle.program">
 	
+	<!-- 일반 회원이름 불러오기 -->
+	<select id="selectMemberName" parameterType="string" resultType="String">
+	    <![CDATA[
+			select name from MEMBERINFO where email=#{email}
+		]]>
+	</select>
+	
 	<sql id="searchWhereList">
 		<where>
 			<if test="searchKeyword != null and searchKeyword != ''">
@@ -185,7 +192,34 @@ select * from ProgramDetailsView;
 			(select admin_pwd from admininfo where admin_no = #{adminNo}) = #{pwd}
 		</delete>
 		
+	
+	<!-- 이벤트추천 / 목록 -->
+		<select id="selectSimilarProgram" resultType="programVo">
+			select * from(
+				select program_No, pro_Name, pro_sponsor, pro_Type, pro_Start_Date, regi_End_Date, pro_Image 
+				from program         
+				order by program_No DESC
+				)
+			<![CDATA[
+				where rownum < 5
+			]]>
+		</select>
+
+
+	<!-- 커리어성장 목록 -->
+		<select id="selectAllProgramsForMain" resultType="programVo">
+			select program_No, pro_Name, pro_sponsor, pro_Type, pro_Start_Date, regi_End_Date, pro_Image, pro_cate_no 
+			from program         
+			order by program_No DESC
+		</select>
 		
+	
+	<!-- 카테고리 이름 불러오기 -->
+		<select id="selectMatchCategoryNameMain" parameterType="int" resultType="careerCategoryVO">
+			select * from programcategory order by PRO_CATE_NO
+		</select>
+	
+	
 		
 	<!-- 프로그램 디테일 일반회원 커리어 디테일페이지에 뿌려주기 (select) -->
 <!-- 		<select id="selectByProgramNoAll" parameterType="int" resultType="programVo">
@@ -194,6 +228,10 @@ select * from ProgramDetailsView;
 			on p.programNo = c.programNo 
 			where program_No = #{programNo}
 		</select>		 -->
+	
+	
+	
+	
 	
 </mapper>
 
