@@ -87,6 +87,16 @@ public class ApplicantsDAOMybatis implements ApplicantsDAO {
 		return sqlSession.selectOne(namespace+"selectFinalFail", memNo);
 	}
 
+	@Override
+	public int selectApplyTotal(int memNo) {
+		return sqlSession.selectOne(namespace+"selectApplyTotal", memNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectApplyList(int memNo) {
+		return sqlSession.selectList(namespace+"selectApplyList", memNo);
+	}
+
 //	@Override
 //	public int updatePeriod(ApplicantsVO appliVo) {
 //		return sqlSession.update(namespace+"updatePeriod",  appliVo);

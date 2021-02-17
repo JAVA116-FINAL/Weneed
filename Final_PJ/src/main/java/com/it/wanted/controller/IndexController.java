@@ -62,9 +62,5 @@ public class IndexController {
 		logger.info("passwordChange 보여주기");
 	}
 	
-	@RequestMapping("/mypage/applicationsStatus.do")
-	public void applicationsStatus() {
-		logger.info("applicationsStatus 보여주기");
-	}
 	
 }
