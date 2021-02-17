@@ -62,6 +62,7 @@
   				success:function(res){
   					var msg ="위니드 회원 탈퇴가 완료되었습니다. 그동안 위니드를 이용해 주셔서 감사드립니다.";
   	  				alert(msg);
+  	  				location.reload();
   				},
   				error:function(xhr, status, error){
   					alert('error! : ' + error);

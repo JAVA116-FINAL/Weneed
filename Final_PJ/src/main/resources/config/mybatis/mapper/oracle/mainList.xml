@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.afterLoginMain">
+	<select id="selectNewRecruitList" resultType="mainSearchVo">
+		select b.com_img_url, a.com_name, a.industry
+		from comInfo a join comimgInfo b
+		on a.com_code = b.com_code
+		<![CDATA[
+		where com_logo='N' and ROWNUM <= 4 order by a.com_regdate DESC
+		]]>
+	</select>
+	
+</mapper>
