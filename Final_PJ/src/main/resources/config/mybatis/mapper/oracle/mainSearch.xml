@@ -35,11 +35,11 @@
 	
 	<!-- 메인 -->
 	<select id="selectNewRecruitList" resultType="mainSearchVo">
-	select com_code, com_Name, industry,
+	select * from (select com_code, com_Name, industry,
 	(select com_Img_Url from comimgInfo c1 where c1.com_Code=c2.com_code and c1.com_logo like '%N%' and rownum=1)as com_img_url
-	from comInfo c2 where (select com_Img_Url from comimgInfo c1 where c1.com_Code=c2.com_code and rownum=1) is not null 
+	from comInfo c2 where (select com_Img_Url from comimgInfo c1 where c1.com_Code=c2.com_code and rownum=1) is not null order by com_regdate desc)
 	<![CDATA[
-		and rownum <=4 order by com_regdate desc
+	where rownum<=4
 	]]>
 	</select>
 	
