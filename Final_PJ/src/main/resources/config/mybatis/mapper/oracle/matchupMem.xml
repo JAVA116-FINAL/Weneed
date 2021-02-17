@@ -172,25 +172,25 @@
 	<!-- 검색용 view 0217 업데이트
 	create or replace view matchupMemSearchView
 	as
-	select rownum as RNUM,  A.*
-	from
-	(
-	select m.mcumem_no as MCUMEMNO, m.resume_no AS RESUMENO, m.mem_no AS MEMNO, m.expertise_no AS EXPERTISENO, 
-	       m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITLE,
-	       r.resume_name AS RESUMENAME, DBMS_LOB.SUBSTR(r.resume_introduce, 4000, 1) AS RESUMEINTRODUCE, r.lang_flag AS LANGFLAG, 
-	       c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
-	       x.jikGun_code AS JIKGUNCODE, x.career AS CAREER, x.skill AS SKILL,
-	       (select jikmu_name from jikmu j where j.JIKMU_CODE=
+	select rownum as RN,  A.*
+       from (
+        select m.resume_no AS RESUMENO, m.mcumem_no as MCUMEMNO, m.mem_no AS MEMNO, m.expertise_no AS EXPERTISENO, 
+               m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITLE,
+               r.resume_name AS RESUMENAME, DBMS_LOB.SUBSTR(r.resume_introduce, 4000, 1) AS RESUMEINTRODUCE, r.lang_flag AS LANGFLAG, 
+               c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
+               x.jikGun_code AS JIKGUNCODE, x.career AS CAREER, x.skill AS SKILL,
+               (select jikmu_name from jikmu j where j.JIKMU_CODE=
 	            (select jikmu_code from matchupmemjikmu mjm where mjm.expertise_no=m.expertise_no and rownum=1)) as JIKMUNAME, 
 	       (select jikgun_name from jikgun jk where jk.jikgun_code=
-	            (select jikgun_code from expertise e where e.expertise_no=m.expertise_no)) as JIKGUNNAME
-	from matchupMem m join resume r on m.resume_No = r.resume_no 
-	left outer join career c on c.resume_no=m.resume_no
-	left outer join education e on e.resume_no=m.resume_no
-	left outer join expertise x on x.expertise_no=m.expertise_no
-	where m.resumeopen_flag='Y'
-	order by m.mcumem_no
-	)A;
+	            (select jikgun_code from expertise e where e.expertise_no=m.expertise_no)) as JIKGUNNAME,
+	        ROW_NUMBER() OVER(PARTITION BY m.mcumem_no ORDER BY r.resume_regdate) rcnt
+        from matchupMem m join resume r on m.resume_No = r.resume_no 
+        left outer join career c on c.resume_no=m.resume_no
+        left outer join education e on e.resume_no=m.resume_no
+        left outer join expertise x on x.expertise_no=m.expertise_no
+        where m.resumeopen_flag='Y'
+        )A
+        where rcnt=1;
 	 -->
 	 
 	<!-- 검색된 리스트 보기
@@ -219,20 +219,19 @@
 	
 	<!-- 검색결과 -->
 	<select id="selectMcumemSearchList" parameterType="matchupMemSearchVo" resultType="map">
-		select * from 
+		select  * from 
 	    (
-	    	select A.* from
+	    	select C.* from
 		    (
 		        select rownum as RN, 
 	        	(select count(*) from matchuplike l where com_code=#{comCode} and l.mcumem_no=m.mcumemno) as CNT,
 	        	m.* from matchupMemSearchView m
-	        	left outer join matchupmemjikmu mu on m.EXPERTISENO=mu.expertise_no
 		        where m.mcumemNo in
 		        <foreach collection="mcumemNoList" item="mcumemNo" open="(" close=")" separator=",">
 					#{mcumemNo}
 				</foreach>
 	            and to_number(translate(career, '신입', '0')) between #{searchMinCareer} and #{searchMaxCareer}
-			) A
+			) C
 			<![CDATA[
 			where RN > #{viewMoreSize}
 			and RN <= #{viewMoreSize}+5
@@ -248,14 +247,14 @@
 		    from (
 			    select rownum as rn, 
 			    	(select count(*) from matchuplike l where com_code=#{comCode} and l.mcumem_no=v.mcumemno) as cnt, v.* 
-			    from matchupMemSearchView v left outer join matchuplike l on l.mcumem_no=v.mcumemNo
+			    from matchupMemSearchView v join matchuplike l on l.mcumem_no=v.mcumemNo
 			    where com_code=#{comCode} 
 				) A
 		<![CDATA[
 		where rn > #{viewMoreSize}
 		and rn <= #{viewMoreSize}+5
-		)
 		]]>
+		)
 	</select>
 	<!-- 찜한목록 불러오기 이전 sql문 백업 
 	select * from (

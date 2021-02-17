@@ -267,6 +267,7 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		//이제 매치업넘버리스트는 완성됐어 이거에 대한 이력서리스트를 가져와야 해
 		mcuMemSearchVo.setMcumemNoList(mcumemNoList);
 		System.out.println("mcumemNoList.size(): "+mcumemNoList.size());
+		System.out.println("mcumemNoList: "+mcumemNoList);
 		
 		//System.out.println("searchMinCareer: "+mcuMemSearchVo.getSearchMinCareer());
 		//System.out.println("searchMaxCareer: "+mcuMemSearchVo.getSearchMaxCareer());
@@ -361,12 +362,9 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		if(jikmu.isEmpty()) { //true
 			System.out.println("7번 if문 통과");
 		}
-		if(jikmu == null) {
-			System.out.println("8번 if문 통과");
-		}
 		
 		//직무를 선택한 경우에만 확인하고 싶어.
-		if( !jikmu.equals("") || !jikmu.isEmpty() ) { //앞에서 디폴트값 작업을 해줌
+		if( !jikmu.equals("") && !jikmu.isEmpty() && !jikmu.equals("all")) { //앞에서 디폴트값 작업을 해줌
 			System.out.println("직무를 선택한 경우, if문 안에 들어왔다!");
 			//멤버직무에 해당하는 매치업번호 리스트.. 를 보고 이거랑 검색결과가 일치하는 애들만 보내면 돼 
 			List<Integer> jikmuMcumemNoList=mmjikmuDao.selectMcumemNo(mcuMemSearchVo.getSearchJikmu());
@@ -376,12 +374,11 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 			//iterator 써보기
 			Iterator<Integer> iter=mcumemNoList.iterator();
 			while(iter.hasNext()) {
-				if(!jikmuMcumemNoList.contains(iter.next())) iter.remove();
+				if(!jikmuMcumemNoList.contains(iter.next())) {
+					iter.remove();
+				}
 			}
-			/*
-			for(Integer no : mcumemNoList) {
-				if(!jikmuMcumemNoList.contains(no)) mcumemNoList.remove(no);
-			}*/
+			
 		}
 		
 		System.out.println("검색결과 매치업멤넘 리스트 길이="+mcumemNoList.size());

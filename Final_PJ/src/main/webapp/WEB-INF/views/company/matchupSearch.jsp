@@ -664,7 +664,7 @@ function makeMemList(mcumem){
 					<option value="${jikgunVo.jikgunCode}">${jikgunVo.jikgunName}</option>			
 				</c:forEach>
 			</select>
-			<select id="matchupSearch-jikmuSelect" class="matchupSearch-select matchupSearch-selectLong"> 
+			<select id="matchupSearch-jikmuSelect" value="all" class="matchupSearch-select matchupSearch-selectLong"> 
 				<option value="all">전체</option>
 				<c:forEach var="jikmuVo" items="${jikmuList}">
 					<option value="${jikmuVo.jikmuCode}"

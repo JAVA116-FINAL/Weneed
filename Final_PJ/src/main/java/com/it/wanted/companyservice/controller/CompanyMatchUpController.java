@@ -105,7 +105,9 @@ public class CompanyMatchUpController {
 		Map<String, Object> checkMap=matchupComService.hasMatchup(comVo.getComCode());
 		
 		logger.info("기업서비스 매치업 검색/조회화면, 파라미터 searchVo={}, matchupComVo={}", searchVo, matchupComVo);
-		
+		if(searchVo.getSearchJikmu().isEmpty() || searchVo.getSearchJikmu() == null) {
+			searchVo.setSearchJikmu("all");
+		}
 		//[1-1] 직군리스트 불러오기
 		List<JikgunVO> jikgunList=jgService.selectAllJikgun();
 		logger.info("직군리스트 불러오기 결과 jikgunList={}", jikgunList);
