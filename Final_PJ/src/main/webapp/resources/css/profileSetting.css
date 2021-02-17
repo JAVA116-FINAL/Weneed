@@ -320,11 +320,14 @@ html{
 }
 .status-table-header{
 	border-bottom:1px solid #d1d1d1;
-	display:flex;
 	font-size:13px;
 }
+.status-table-header tr{
+	width:100%;
+	display:table-cell;
+}
 .status-company{
-	width:30%;
+	width:20%;
 	text-align:left;
 	color:#86939e;
 	font-weight:500;
@@ -334,7 +337,7 @@ html{
 }
 
 .status-position{
-	width:25%;
+	width:45%;
 	text-align:left;
 	color:#86939e;
 	font-weight:500;
@@ -343,7 +346,7 @@ html{
 	overflow:hidden;
 }
 .status-time{
-	width:15%;
+	width:20%;
 	text-align:left;
 	color:#86939e;
 	font-weight:500;
@@ -353,7 +356,7 @@ html{
 }
 
 .status-status{
-	width:13%;
+	width:15%;
 	text-align:left;
 	color:#86939e;
 	font-weight:500;
@@ -361,15 +364,7 @@ html{
 	padding:10px;
 	overflow:hidden;
 }
-.status-recommendation{
-	width:17%;
-	text-align:left;
-	color:#86939e;
-	font-weight:500;
-	float:left;
-	padding:10px;
-	overflow:hidden;
-}
+
 .status-table-empty{
 	margin-top:80px;
 	text-align:center;
@@ -392,6 +387,7 @@ html{
 	font-size:16px;
 	font-weight:400;
 	opacity:0.4;
+	padding-top:30px;
 }
 
 .status-summary{
@@ -419,7 +415,7 @@ html{
 	font-weight:300;
 	line-height:1;
 }
-.status-summary-item dd{
+.status-summary-item td{
 	margin-top:10px;
 	font-size:16px;
 	font-weight:400;
@@ -430,11 +426,21 @@ html{
 }
 
 
+.statusListBox{
+	width:100%;
+}
 
+.statusListTr{
+	border-bottom:1px solid #f0f0f0;
+}
 
-
-
-
+.statusListTr:last-child{
+	border-bottom:1px solid #d1d1d1;
+}
+.statusListTr td{
+	color:#333;
+	font-size:12px;
+}
 
 
 

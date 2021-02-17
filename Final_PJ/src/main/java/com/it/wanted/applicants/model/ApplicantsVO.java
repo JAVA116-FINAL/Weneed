@@ -25,8 +25,18 @@ public class ApplicantsVO {
 	//기업코드
 	private String comCode;
 	
+	//기업이름
+	private String comName;
 	
 	
+	public String getComName() {
+		return comName;
+	}
+
+	public void setComName(String comName) {
+		this.comName = comName;
+	}
+
 	public int getApplyPeriod() {
 		return applyPeriod;
 	}
@@ -170,8 +180,10 @@ public class ApplicantsVO {
 				+ applyRegdate + ", posName=" + posName + ", statusFlag=" + statusFlag + ", favoFlag=" + favoFlag
 				+ ", docPassRegdate=" + docPassRegdate + ", regectRegdate=" + regectRegdate + ", passRegdate="
 				+ passRegdate + ", applyPeriod=" + applyPeriod + ", resumeFile=" + resumeFile + ", comCode=" + comCode
-				+ "]";
+				+ ", comName=" + comName + "]";
 	}
+
+	
 	
 	
 	
