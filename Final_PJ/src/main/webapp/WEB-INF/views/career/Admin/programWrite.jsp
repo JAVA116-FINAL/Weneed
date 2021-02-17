@@ -129,7 +129,6 @@ $(function() {
 
 <div style = "width:980px; max-width: 100%; margin:auto;">
 	<form name="proWrite1" method="post" action='<c:url value="/career/Admin/programWrite.do"/>' enctype="multipart/form-data">
-		<fieldset>
 		<legend style="color:#258bf7; font-size: 30px;"><b>프로그램 등록, 첫번째 단계   &nbsp;</b><i class="far fa-folder-open" ></i></legend>
 		<br>
 			<!-- 프로그램 이름 -->
@@ -216,7 +215,7 @@ $(function() {
 		    <!-- 관리자 번호는 나중에 세션에서 넘겨주기? -->        
 		        <div class="proInfoDiv">
 					<!-- 관리자 번호 -->
-					<input type="text" class="" id="adminNo" name="adminNo" value="1">
+					<input type="hidden" class="" id="adminNo" name="adminNo" value="1">
 		        </div>
 		        
 		 	<!-- 프로그램 내용등록 페이지로 이동 버튼 -->       
@@ -224,7 +223,6 @@ $(function() {
 		            <input type = "submit" class="programBtn" id="sendButton" value="저장"/>
 		            <input type = "button" class="programBtn" value="취소" onclick="location.href='<c:url value='/career/Admin/careerAdminMain.do'/>'">         
 		        </div>
-		</fieldset>
 	</form>
 </div>
 </section>

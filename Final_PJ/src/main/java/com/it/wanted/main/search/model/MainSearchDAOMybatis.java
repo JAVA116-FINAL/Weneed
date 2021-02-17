@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.career.admin.model.ProgramVO;
+
 @Repository
 public class MainSearchDAOMybatis implements MainSearchDAO {
 
@@ -27,5 +29,15 @@ public class MainSearchDAOMybatis implements MainSearchDAO {
 	@Override
 	public List<MainSearchVO> getSearchKeyword(String keyword) {
 		return sqlSession.selectList(namespace+"getSearchKeyword", keyword);
+	}
+
+	@Override
+	public List<MainSearchVO> getNewRecruit() {
+		return sqlSession.selectList(namespace+"selectNewRecruitList");
+	}
+
+	@Override
+	public List<ProgramVO> getMainCareerList() {
+		return sqlSession.selectList(namespace+"selectMainCareerList");
 	}
 }

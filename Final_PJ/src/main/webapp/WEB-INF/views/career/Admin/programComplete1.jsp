@@ -40,12 +40,12 @@ body{
  b{
  	color: #4b9bef;
  }
- .complDiv span{
- 	padding-left: 50px;
- }
+
  .complDiv p{
  	font-size: 18px;
  }
+
+ 
 </style>
 	
 <script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
@@ -55,18 +55,17 @@ body{
 
 <!-- 메뉴 탑부분 끝!! -->
   
-<section class="section blog-wrap">
+<section class="section blog-wrap" style = "margin-top:-60px;">
 
 
 <div style = "width:980px; max-width: 100%; margin:auto;">
 
 	<form name="proComplete1" action="<c:url value='/career/Admin/programWrite2.do'/>" method="get">
-		<fieldset>
 		<legend style="color:#258bf7;font-size: 30px;"><b>프로그램 등록, 첫번째 단계 완료! &nbsp;&nbsp;</b><i class="fas fa-check fa-1x"></i></legend>
-		<p style="font-size: 20px;"><b>&emsp;계속해서 두번째 단계를 완료해주세요.</b></p>
+		<p style="font-size: 20px;"><b>계속해서 두번째 단계를 완료해주세요.</b></p>
 		<br>
 			
-			<div class="complDiv" style="padding-left:50px;">
+			<div class="complDiv">
 			<!-- 프로그램 번호 보내주기 -->
 		        <div class="proInfoDiv">
 					<label class="line">
@@ -144,7 +143,7 @@ body{
 		        <div class="proInfoDiv">
 				    <p class="line"><span class="sp1"> <b>프로그램 썸네일 이미지 url: </b></span></p><br><br>				
 					<div style="text-align:center;">
-						<img src="<c:url value='/programImgUpload/${proVo.proImage}'/>" border=0; width=560; alt=${proVo.proImage};>
+						<img src="<%=request.getContextPath() %>/programImgUpload/${proVo.proImage}" border=0; width=560; alt=${proVo.proImage}>
 					</div>
 		        </div>
 		     	</div>
@@ -161,7 +160,6 @@ body{
 		        <input type="button" class="programBtn" style="cursor:pointer;" value="수정"/>
  		        <input type="button" class="programBtn" value="두번째 단계로" style="width:130px; cursor:pointer;"/>
 
-		</fieldset>
 	</form>
 
 </div>

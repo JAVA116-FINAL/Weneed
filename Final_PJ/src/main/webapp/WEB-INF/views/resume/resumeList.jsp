@@ -216,10 +216,10 @@ $(function(){
 											<span class="RWName">
 												<h3>
 												<label for="resumeTitle"> 
-														<c:if test="${fn:length(rVo.resumeTitle)>=30}">
-															${fn:substring(rVo.resumeTitle, 0,30) } ...
+														<c:if test="${fn:length(rVo.resumeTitle)>=27}">
+															${fn:substring(rVo.resumeTitle, 0,27) } ...
 														</c:if>
-														<c:if test="${fn:length(rVo.resumeTitle)<30}">						
+														<c:if test="${fn:length(rVo.resumeTitle)<27}">						
 															${rVo.resumeTitle}
 														</c:if>							
 													<%-- ${rVo.resumeTitle} --%>
@@ -241,10 +241,11 @@ $(function(){
 									<c:if test="${rVo.resumeUpfileflag eq 'Y' }">
 										<span class="rFileName_jy">
 											<a href="<c:url value='/resume/resumeFileDown.do?resumeNo=${rVo.resumeNo}&resumeFile=${rVo.resumeFile}'/>">
-												<c:if test="${fn:length(rVo.resumeTitle)>=30}">
-													${fn:substring(rVo.resumeTitle, 0,30) } ...
+												<c:if test="${fn:length(rVo.resumeTitle)>=40}">
+													${fn:substring(rVo.resumeTitle, 0,40) } ...
 												</c:if>
-												<c:if test="${fn:length(rVo.resumeTitle)<30}">						
+												<c:if test="${fn:length(rVo.resumeTitle)<40}">						
+
 													${rVo.resumeTitle}
 												</c:if>
 											<%-- ${rVo.resumeTitle} --%>

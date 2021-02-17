@@ -64,8 +64,10 @@ public class ProgramWriteController {
 
 	// 프로그램 등록하기 (등록 처리)
 	@RequestMapping(value = "/programWrite.do", method = RequestMethod.POST)
-	public String insertPost(@ModelAttribute ProgramVO proVo, HttpServletRequest request, Model model) {
+	public String insertPost(@ModelAttribute ProgramVO proVo, HttpServletRequest request, HttpSession session, Model model) {
+		 String path = session.getServletContext().getRealPath("/");
 
+		
 		logger.info("프로그램 등록 처리, 파라미터 proVo={}", proVo);
 		// 파일 업로드
 
@@ -106,7 +108,7 @@ public class ProgramWriteController {
 
 	// 프로그램 작성 확인 1 페이지
 	@RequestMapping(value = "/programComplete1.do", method = RequestMethod.GET)
-	public void programComplete1(@RequestParam int programNo, Model model) {
+	public void programComplete1(@RequestParam int programNo, HttpSession session, Model model) {
 		logger.info("programComplete1 프로그램 파트1 상세보기, 파라미터 programNo={}", programNo);
 
 		ProgramVO proVo = programService.selectByProgramNo(programNo);
@@ -123,7 +125,7 @@ public class ProgramWriteController {
 
 	// 프로그램 작성 수정 1 뷰페이지
 	@RequestMapping(value = "/programEdit1.do", method = RequestMethod.GET)
-	public String programEdit1(@RequestParam(defaultValue = "0") int programNo, Model model) {
+	public String programEdit1(@RequestParam(defaultValue = "0") int programNo, HttpSession session, Model model) {
 		logger.info("programEdit1 프로그램 내용1 수정페이지 보여주기 programNo=", programNo);
 
 		List<CareerCategoryVO> ccgList = careerCategoryService.selectCareerCategoryAll();
@@ -143,7 +145,7 @@ public class ProgramWriteController {
 
 	// 프로그램 작성 수정 1 수정처리
 	@RequestMapping(value = "/programEdit1.do", method = RequestMethod.POST)
-	public String programEdit1_post(@RequestParam(defaultValue = "0") int programNo, ProgramVO proVo, Model model,
+	public String programEdit1_post(@RequestParam(defaultValue = "0") int programNo, ProgramVO proVo, HttpSession session, Model model,
 			HttpServletRequest request) {
 		logger.info("프로그램 수정1 처리, 파라미터 proVo={}", proVo);
 		// 파일 업로드
@@ -196,7 +198,7 @@ public class ProgramWriteController {
 
 	@RequestMapping(value="/programWrite2.do", method=RequestMethod.POST)
 	public String insertProgram2_post(@ModelAttribute ProgramAllVO proAllVo, int programNo,
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, HttpSession session, Model model) {
 		/*
 		 * String userid =(String) session.getAttribute("userid");
 		 * vo.setCustomerId(userid);
@@ -232,7 +234,7 @@ public class ProgramWriteController {
 	/* 프로그램 목록 */
 
 	@RequestMapping("/programAdminList.do")
-	public String programAdminListShow(@ModelAttribute SearchVO searchVo, Model model) {
+	public String programAdminListShow(@ModelAttribute SearchVO searchVo, HttpSession session, Model model) {
 		// 1
 
 		logger.info("글 목록 페이지, 파라미터 searchVo={}", searchVo);
@@ -295,6 +297,71 @@ public class ProgramWriteController {
 	}
 	
 	
+	
+	// 프로그램 작성 후 수정 1 뷰페이지
+	@RequestMapping(value = "/programEdit1sec.do", method = RequestMethod.GET)
+	public String programEdit1sec(@RequestParam(defaultValue = "0") int programNo, HttpSession session, Model model) {
+		logger.info("programEdit1 프로그램 내용1 수정페이지 보여주기 programNo=", programNo);
+
+		List<CareerCategoryVO> ccgList = careerCategoryService.selectCareerCategoryAll();
+		logger.info("카테고리 조회 결과 ccgList.size{}=", ccgList.size());
+		model.addAttribute("ccgList", ccgList);
+
+		ProgramVO proVo = programService.selectByProgramNo(programNo);
+
+		logger.info("수정화면, 조회 결과 proVo={}", proVo);
+
+		// 3
+		model.addAttribute("proVo", proVo);
+
+		// 4
+		return "career/Admin/programEdit1sec";
+	}
+
+	
+	
+	// 프로그램 작성 후  수정 1 수정처리
+	@RequestMapping(value = "/programEdit1sec.do", method = RequestMethod.POST)
+	public String programEdit1sec_post(@RequestParam(defaultValue = "0") int programNo, ProgramVO proVo, HttpSession session, Model model,
+			HttpServletRequest request) {
+		logger.info("프로그램 수정1 처리, 파라미터 proVo={}", proVo);
+		// 파일 업로드
+
+		List<Map<String, Object>> fileList = null;
+		String proImage = "";
+		try {
+			fileList = fileUploadUtil.fileUplaod(request, FileUploadUtil.PRO_IMAGE_TYPE);
+
+			for (Map<String, Object> fileMap : fileList) {
+				proImage = (String) fileMap.get("fileName");
+			}
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			logger.info("파일 수정 실패!");
+		} catch (IOException e) {
+			e.printStackTrace();
+			logger.info("파일 수정 실패!");
+		}
+
+		proVo.setProImage(proImage);
+
+		// 2
+		int cnt = programService.updateProgramEdit1(proVo);
+		logger.info("프로그램 수정 결과, cnt={}", cnt);
+
+		String msg = "프로그램 수정 실패", url = "/career/Admin/programEdit1sec.do?prorgramNo="+proVo.getProgramNo();
+		if (cnt > 0) {
+			msg = "프로그램의 기본정보가 수정되었습니다.";
+			url = "/career/Admin/programEditTotal.do?programNo=" + proVo.getProgramNo();
+		}
+
+		// 3
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
+
 	/* 프로그램 2단계 수정 페이지 보여주기*/
 	@RequestMapping(value="/programEditTotal.do", method=RequestMethod.GET)
 	public void programEditTotal(@RequestParam int programNo, HttpSession session, Model model) {
@@ -314,9 +381,10 @@ public class ProgramWriteController {
 	  public String EditTotal_post(@RequestParam int programNo, Model model, ProgramAllVO proAllVo, HttpSession session) { 
 			
 		  
-		  
-			List<ProgramVO2> proConList =proAllVo.getProVo2List();
-			logger.info("프로그램 내용 상세보기 결과, proConList.size={}", proConList.size());
+		  	List<ProgramVO2> proConList = new ArrayList<ProgramVO2>();
+			
+			  proConList =proAllVo.getProVo2List();
+			 			logger.info("프로그램 내용 상세보기 결과, proConList.size={}", proConList.size());
 			
 			  int cnt=0; 
 			  if(proConList != null && !proConList.isEmpty()) { 
@@ -351,7 +419,7 @@ public class ProgramWriteController {
 	  
 	  /* 프로그램 한개 삭제 뷰페이지  */
 		@RequestMapping(value="/programDelete.do", method=RequestMethod.GET)
-		public String programDelete_get(@RequestParam (defaultValue = "0") int programNo, Model model) {
+		public String programDelete_get(@RequestParam (defaultValue = "0") int programNo, HttpSession session, Model model) {
 			logger.info("programDelete 프로그램 내용1 삭제페이지 보여주기 파라미터 programNo={}", programNo);
 			
 			  
@@ -374,7 +442,7 @@ public class ProgramWriteController {
 	/* 프로그램 한개 삭제 */
 	
 	  @RequestMapping(value="/programDelete.do", method = RequestMethod.POST)
-	  public String programDelete_post(@RequestParam int programNo, Model model) {
+	  public String programDelete_post(@RequestParam int programNo, HttpSession session, Model model) {
 		  //1
 		  logger.info("프로그램 삭제 처리, 파라미터 proVo={}", programNo);
 			/*
@@ -405,7 +473,7 @@ public class ProgramWriteController {
 	/* 프로그램 여러 개 삭제 */
 	
 	  @RequestMapping("/deleteProgramMulti.do") 
-	  public String delMulti(@ModelAttribute ProgramListVO programListVo, HttpServletRequest request, Model model) {
+	  public String delMulti(@ModelAttribute ProgramListVO programListVo, HttpServletRequest request, HttpSession session, Model model) {
 		  
 		  logger.info("선택한 프로그램 삭제 처리, 파라미터 programListVo={}", programListVo);
 	  
