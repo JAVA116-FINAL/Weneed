@@ -510,7 +510,6 @@
 				  		<li class="nav-item" id="resume" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/resume/resumeList.do'/>">이력서</a></li>
 				  		<li class="nav-item" id="matchupMem" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/matchupMem/matchupMemList.do'/>">매치업</a></li>
 				  	</c:if>
-				   	<li class="nav-item" style="padding: 6px 6px;"><a class="nav-link" href="<c:url value='/freelancer/freelancerMain.do'/>">프리랜서</a></li>
 				</ul>
 			  
 				<aside class="beforeLoginAside">

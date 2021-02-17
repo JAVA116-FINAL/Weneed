@@ -42,6 +42,21 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 		return applicantsDao.selectApplicants(appliPagingVo);
 	}
 
+	@Override
+	public int updateByNo(int no) {
+		return applicantsDao.updateByNo(no);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAll() {
+		return applicantsDao.selectAll();
+	}
+
+	@Override
+	public int updateStatus(ApplicantsVO applicantsVo) {
+		return applicantsDao.updateStatus(applicantsVo);
+	}
+
 
 //	@Override
 //	public int updatePeriod(ApplicantsVO appliVo) {

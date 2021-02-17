@@ -14,6 +14,12 @@ public interface ApplicantsService {
 	public List<Map<String, Object>> selectApplicants(AppliPagingVO appliPagingVo);
 //	public List<Map<String, Object>> selectApplicants(int statusFlag);
 
+	public int updateByNo(int no);
+
+	public List<Map<String, Object>> selectAll();
+
+	public int updateStatus(ApplicantsVO applicantsVo);
+
 
 //	public List<Map<String, Object>> selectApplicants(ApplicantsVO appliVo);
 

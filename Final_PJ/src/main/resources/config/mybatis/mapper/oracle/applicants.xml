@@ -8,7 +8,7 @@
 			<if test="searchKeyword != null and searchKeyword != ''">
 				${searchCondition} like '%' || #{searchKeyword} || '%'
 			</if>
-		</where>
+		</where>	
 	</sql>
 	
 	<select id="selectTotalRecord" parameterType="appliPagingVo"
@@ -26,14 +26,10 @@
 		    from
 		    (
 		        select AP.*, B.pos_name
-	            from apply AP join position B
-	            on AP.POS_NO =
-	            B.POS_NO
-	            where AP.status_flag=#{statusFlag}
-	            <if test="searchKeyword != null and searchKeyword != ''">
-	               ${searchCondition} like '%' || #{searchKeyword} || '%'
-	            </if> 
-	              order by apply_no desc
+	            from apply AP inner join position B
+	            on AP.POS_NO = B.POS_NO
+	            where AP.status_flag=#{statusFlag}        
+		        order by apply_no desc
 		    )A
 		)
 		<![CDATA[
@@ -41,6 +37,31 @@
 		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
 		]]>
 	</select>
+	
+<!-- 	<select id="selectApplicants" parameterType="appliPagingVo" resultType="map">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM
+		    from
+		    (
+		        select AP.*, B.pos_name
+	            from apply AP join position B
+	            on AP.POS_NO =
+	            B.POS_NO
+	            where AP.status_flag=#{statusFlag}
+	            <if test="searchKeyword != ''">
+	              and ap.apply_name like '%' || #{searchKeyword} || '%' or b.pos_name like '%' || #{searchKeyword} || '%'
+	            </if> 
+	            <include refid="searchWhere"></include>
+	              order by apply_no desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select> -->
 	
 	<select id="selectAllPositions" resultType="ApplicantsVO">
 
@@ -55,10 +76,9 @@
 
 	<select id="selectByNo" parameterType="int"
 		resultType="ApplicantsVO">
-		select A.*, B.pos_name
-		from apply A join position B
-		on
-		A.POS_NO = B.POS_NO
+		select *
+		from apply A inner join position B on A.POS_NO = B.POS_NO
+		inner join resume R on A.RESUME_NO = R.RESUME_NO
 		where apply_no = #{applyNo}
 	</select>
 
@@ -68,6 +88,25 @@
 		where apply_no=#{applyNo}
 
 	</update> -->
+	
+	<update id="updateByNo" parameterType="int">
+		update apply
+		set status_flag=4
+		where apply_no = #{no}
+	</update>
+	
+	<select id="selectAll" resultType="map">
+		select AP.*, B.pos_name
+	    from apply AP inner join position B
+	    on AP.POS_NO = B.POS_NO
+		order by apply_no desc
+	</select>
+	
+	<update id="updateStatus" parameterType="applicantsVo">
+		update apply
+		set status_flag=#{statusFlag}
+		where apply_no = #{applyNo}
+	</update>
 </mapper>
 
 

@@ -21,12 +21,39 @@ public class ApplicantsVO {
 	
 	//이력서 파일명 필요한가
 	private String resumeFile;
+	private String resumeUpfileflag;
+	private String resumeTitle;
+	private Timestamp resumeRegdate;
 	
 	//기업코드
 	private String comCode;
 	
 	
 	
+	public Timestamp getResumeRegdate() {
+		return resumeRegdate;
+	}
+
+	public void setResumeRegdate(Timestamp resumeRegdate) {
+		this.resumeRegdate = resumeRegdate;
+	}
+
+	public String getResumeTitle() {
+		return resumeTitle;
+	}
+
+	public void setResumeTitle(String resumeTitle) {
+		this.resumeTitle = resumeTitle;
+	}
+
+	public String getResumeUpfileflag() {
+		return resumeUpfileflag;
+	}
+
+	public void setResumeUpfileflag(String resumeUpfileflag) {
+		this.resumeUpfileflag = resumeUpfileflag;
+	}
+
 	public int getApplyPeriod() {
 		return applyPeriod;
 	}
@@ -169,8 +196,9 @@ public class ApplicantsVO {
 				+ ", applyHp=" + applyHp + ", refName=" + refName + ", resumeNo=" + resumeNo + ", applyRegdate="
 				+ applyRegdate + ", posName=" + posName + ", statusFlag=" + statusFlag + ", favoFlag=" + favoFlag
 				+ ", docPassRegdate=" + docPassRegdate + ", regectRegdate=" + regectRegdate + ", passRegdate="
-				+ passRegdate + ", applyPeriod=" + applyPeriod + ", resumeFile=" + resumeFile + ", comCode=" + comCode
-				+ "]";
+				+ passRegdate + ", applyPeriod=" + applyPeriod + ", resumeFile=" + resumeFile + ", resumeUpfileflag="
+				+ resumeUpfileflag + ", resumeTitle=" + resumeTitle + ", resumeRegdate=" + resumeRegdate + ", comCode="
+				+ comCode + "]";
 	}
 	
 	
