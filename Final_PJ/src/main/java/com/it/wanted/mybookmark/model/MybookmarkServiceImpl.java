@@ -1,4 +1,4 @@
-package com.it.wanted.mybookmark;
+package com.it.wanted.mybookmark.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

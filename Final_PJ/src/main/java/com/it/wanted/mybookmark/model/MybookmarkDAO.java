@@ -1,4 +1,4 @@
-package com.it.wanted.mybookmark;
+package com.it.wanted.mybookmark.model;
 
 public interface MybookmarkDAO {
 
