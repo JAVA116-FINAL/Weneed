@@ -1,4 +1,4 @@
-package com.it.wanted.mybookmark;
+package com.it.wanted.mybookmark.model;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

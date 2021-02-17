@@ -1,6 +1,5 @@
 package com.it.wanted.jobsearch.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,19 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it.wanted.applicants.model.ApplicantsService;
 import com.it.wanted.applicants.model.ApplicantsVO;
-import com.it.wanted.career.admin.model.ProgramVO;
-import com.it.wanted.career.admin.model.ProgramVO2;
-import com.it.wanted.comimginfo.model.ComImgInfoVO;
 import com.it.wanted.cominfo.model.ComInfoVO;
-import com.it.wanted.jobsearchdetail.model.JobSearchAllVO;
-import com.it.wanted.jobsearchdetail.model.JobSearchDetailVO;
-import com.it.wanted.jobsearchdetail.model.JobSearchDetailsViewVO;
 import com.it.wanted.jobsearchdetail.model.JobsearchdetailService;
 import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.member.model.MemberService;
 import com.it.wanted.member.model.MemberVO;
-import com.it.wanted.mybookmark.MybookmarkService;
-import com.it.wanted.mybookmark.MybookmarkVO;
+import com.it.wanted.mybookmark.model.MybookmarkService;
+import com.it.wanted.mybookmark.model.MybookmarkVO;
 import com.it.wanted.position.model.PositionService;
 import com.it.wanted.position.model.PositionVO;
 import com.it.wanted.resume.model.ResumeService;
