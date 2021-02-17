@@ -97,7 +97,7 @@ $(function(){
 				<form action="<c:url value='/jobsearch/apply.do'/>" method="post" name="frmApply" id="frmApply">					
 					<h3 class="h3-apply_jy">지원정보</h3>
 						<%-- 포지션번호 넣기! <input type="hidden" name="posNo" value="${posNo}"> --%>
-						<input type="hidden" name="posNo" value="27">
+						<input type="hidden" name="posNo" value="${param.posNo}">
 						<input type="hidden" name="memNo" value="${memVo.memNo }">
 					<div class="infotmation_jy">
 						<label for="name" class="lb-apply_jy">

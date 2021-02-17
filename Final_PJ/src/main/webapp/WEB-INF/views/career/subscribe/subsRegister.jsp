@@ -78,6 +78,33 @@
   	});
   	
   });
+  
+  $(function(){	  	
+	  	$('form[name=weneedFrm]').submit(function(){
+	  		var now = new Date();
+	  		var nowTime3 = now.getFullYear();
+	  		nowTime += '-' + now.getMonth() + 4 ;
+	  		nowTime += '-' + now.getDate();
+	  		nowTime += ' ' + now.getHours();
+	  		nowTime += ':' + now.getMinutes();
+	  		nowTime += ':' + now.getSeconds();
+
+	  		var nowTime6 = Now.getFullYear();
+	  		nowTime += '-' + now.getMonth() + 7 ;
+	  		nowTime += '-' + now.getDate();
+	  		nowTime += ' ' + now.getHours();
+	  		nowTime += ':' + now.getMinutes();
+	  		nowTime += ':' + now.getSeconds();	  		
+
+	  		if($('#subType').val() == '3'){
+	  			$('input[name=subEndDate]').attr('value',nowTime3);
+	  		}else if($('#subType').val() == '6'){
+	  			$('#subEndDate').val(nowTime6);
+	  			$('input[name=subEndDate]').attr('value',nowTime6);	  			
+	  		}			
+	  	});
+	  	
+	  });
   </script>
   <style type="text/css">
   .subPayField{
@@ -99,7 +126,7 @@
               <div style="font-size:13px; color:gray; margin-top:30px;"><p>20,000명 이상의 직장인이 선택한 원티드의 모든 강연, 컨퍼런스 영상을 무제한으로 시청하고, 업계 최고의 전문가와 함께하는 온오프라인 세미나, 북클럽에 참여할 수 있는 기회 </p></div><br>
               <div class="filter" style="width: 100%; height: 70px; margin-top:-20px;">
               <button id="youSureBtn" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:190px; height:40px;padding:0px,0px; 
-              			background-color:#fff; font-size:15px; color:blue">이벤트 정보 상세보기<i class="fas fa-angle-double-right"></i></button>
+              			background-color:#fff; font-size:15px; color:blue">구독권 정보 상세보기<i class="fas fa-angle-double-right"></i></button>
           </div>
           </div>
       </div>
@@ -119,7 +146,7 @@
                     			<div class="row" style="margin-top: -20px;">
 										<!-- 계정 칸 -->
 										<label>계정</label>
-				                            <input name="subEmail" id="subEmail" type="text" class="form-control" placeholder="이메일" style="height:40px; margin-bottom: 30px;">
+				                            <input name="subEmail" id="subEmail" type="text" class="form-control" placeholder="이메일" value="${memVo.email}" style="height:40px; margin-bottom: 30px;">
 				                            <br>
 				                        
 										<!-- 이메일 (이벤트 정보 수신용*) -->
@@ -130,13 +157,13 @@
 				                        
 				                        <!-- 이름* -->
 										<label>이름</label>
-											<input name="subName" id="subName" type="text" class="form-control" placeholder="이름" style="height:40px; margin-bottom: 30px;">
+											<input name="subName" id="subName" type="text" class="form-control" placeholder="이름" value="${memVo.name}" style="height:40px; margin-bottom: 30px;">
 				                       		<br>
 				
 				
 										<!-- 전화번호 칸 -->
 										<label>전화번호</label><br>
-				                                <input name="subPhone" id="subPhone" type="text" class="form-control" placeholder="전화번호" style="height:40px; margin-bottom: 30px;">
+				                                <input name="subPhone" id="subPhone" type="text" class="form-control" placeholder="전화번호" value="${memVo.hp}" style="height:40px; margin-bottom: 30px;">
 				                                <br><br>
 				                            
 				                       
@@ -173,6 +200,10 @@
 							          	 	</label>
 							          	 	<br>
 		          	 	
+							          	 	<label for="subEndDate" class="">
+								          	 		<input type="hidden" id="subEndDate" name="subEndDate" value="${nowTime3 }" style="width:20px;"/>
+								          	 		<input type="hidden" id="subEndDate" name="subEndDate" value="${nowTime6}" style="width:20px;"/>
+							          	 	</label>
 							          	 	
 										    </div>
 											  <input type="submit" id="checkoutBtn" class="btnFilter" style="float:right; margin-top: 40px; margin-left:10px;background-color:#3366ff; outline:none; border-radius:2em; border:none; height: 40px; width: 120px; color:#fff" value="신청하기">
@@ -213,7 +244,7 @@
 							<p><b>계속 진행하겠습니까?</b></p></div>
 					</div>
 				<div class="modal-footer">
-					<a class="btn" id="modalY" href="<c:url value='/career/Mainpage/careerMain.do'/>">예</a>
+					<a class="btn" id="modalY" href="<c:url value='/career/Mainpage/subscription.do'/>">예</a>
 					<button class="btn" type="button" data-dismiss="modal">아니요</button>
 				</div>
 			</div>

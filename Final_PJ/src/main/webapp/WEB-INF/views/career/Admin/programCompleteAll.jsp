@@ -62,5 +62,4 @@
 
 
 
-</body>
-</html>
+<%@ include file="../../inc/admin_bottom.jsp" %>  

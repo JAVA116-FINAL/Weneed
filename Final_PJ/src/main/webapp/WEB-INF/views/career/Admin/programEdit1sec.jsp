@@ -31,8 +31,8 @@
 $(function(){
 	$('#proName').focus();
 	
-	$('form[name=proEdit1]').find('input[type=button]').click(function(){
-		location.href='<c:url value="/career/Admin/programComplete1.do?programNo=${proVo.programNo}"/>';
+	$('form[name=proEditsec]').find('input[type=button]').click(function(){
+		location.href='<c:url value="/career/Admin/programDetail.do?programNo=${proVo.programNo}"/>';
 	});
 	
 	$('form[name=proEdit1]').submit(function(){
@@ -83,7 +83,7 @@ $(function(){
 <section class="section blog-wrap">
 
 <div style = "width:980px; max-width: 100%; margin:auto;">
-	<form name="proEdit1" action="<c:url value='/career/Admin/programEdit1.do'/>" method="post" enctype="multipart/form-data">
+	<form name="proEditsec" action="<c:url value='/career/Admin/programEdit1sec.do'/>" method="post" enctype="multipart/form-data">
 		
 		<!--  수정시 필요한 programNo를 hidden 필드에 넣는다-->
 	    <input type="hidden" name="programNo" value="${param.programNo}"/>
