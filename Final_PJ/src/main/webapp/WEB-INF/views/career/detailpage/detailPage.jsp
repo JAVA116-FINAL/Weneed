@@ -47,10 +47,9 @@ $( document ).ready( function() {
 #contentLoop img{
 	max-width: 700px;
 }
-h2 {
-    font-size: xx-large;
+h3 {
+    font-size: x-large;
     font-weight: bolder;
-    text-align: center;
 }
 
 </style> 
@@ -106,23 +105,21 @@ h2 {
 
 
 								<div class="blog-item-content mt-5">
-									<div class="blog-item-meta mb-3" style="margin-top: -70px;"></div>
+									<div class="blog-item-meta mb-3" style="margin-top: -40px;"></div>
 
 									<!-- 내용부분 전체 시작!! -->
 
-									<div style="color: black;">
+									<div style="color: black; margin-top:30px;">
 									<!-- 반복문으로 제목 내용 뿌려주기 -->						
 									<!-- 제목, 내용 -->
 										<c:forEach var="proVo2" items="${proConList }">	
 																<a name="title${proVo2.proConNo}"></a>		
 																
-																<div class="parag" id="parag2" style="margin-top: 25px;">
-																<label>${proVo2.proConNo}번째</label>
-																	
-																			<h2>${proVo2.proTitle}</h2>
+																<div class="parag" id="parag2" style="margin-top: 85px;">
+																			<h3>${proVo2.proTitle}</h3>
 																		 
 																		<br>
-																		<div id="contentLoop" style="width:700px;">
+																		<div id="contentLoop" style="width:700px; margin-top:20px;">
 																			${proVo2.proContents } 
 																		</div>
 																</div>
@@ -155,8 +152,8 @@ h2 {
 							<br>
 							<div class="sidebar-contatct-info mt-4" style="margin-top:-20px;padding-top:-10px;">
 
-								<button onclick="location.href='buyProgram.do'" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:150px; height:50px;padding:10px, 7px; background-color:#3366ff; font-size:12px; color:white">참가신청</button>
-								<button onclick="location.href='subsRegister.do'" class="btnFilter" style="border:0.3px solid gray; border-radius:3em; outline:none; width:150px; height:50px; margin-left: 20px; padding:10px, 7px; background-color:#fff; font-size:12px; color:black">구독하고 할인받기</button>
+								<button onclick="location.href='<c:url value="/career/subscribe/buyProgram.do"/>'" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:150px; height:50px;padding:10px, 7px; background-color:#3366ff; font-size:12px; color:white">참가신청</button>
+								<button onclick="location.href='<c:url value="/career/subscribe/subsRegister.do"/>'" class="btnFilter" style="border:0.3px solid gray; border-radius:3em; outline:none; width:150px; height:50px; margin-left: 20px; padding:10px, 7px; background-color:#fff; font-size:12px; color:black">구독하고 할인받기</button>
 							
 							</div>
 						</div>
@@ -170,11 +167,11 @@ h2 {
 	</div>
 <hr>
 
-							<input type="text" name=programNo value="${param.programNo }">
+							<input type="hidden" name=programNo value="${param.programNo }">
 	
 	<div class="container">
 			<!-- 프로젝트 리스트 섹션!!!!!!! -->
-			<h2>함께 보면 좋은 이벤트</h2>
+			<h3>함께 보면 좋은 이벤트</h3>
 		<div class="row shuffle-wrapper portfolio-gallery" style="margin:auto; margin-top: 50px;">		
 	       <c:forEach var="proVoRec" items="${proVoRecList}">
 		      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat2&quot;]">
@@ -201,7 +198,7 @@ h2 {
 
  <br>
 <div style="width: 20%; margin:auto;">
-<a href="<c:url value='/career/mainpage/careerMain.do'/>" target="_blank" class="btn btn-main btn-icon btn-round-full" style="background-color:#fff; outline:none; border:0.3px solid gray; border-radius:2em; color: black;">이벤트 모두 보기<i class="icofont-simple-right ml-2  "></i></a>
+<a href="<c:url value='/career/mainpage/careerMain.do'/>" target="_blank" class="btn btn-main btn-icon btn-round-full" style="background-color:#fff; outline:none; border:0.3px solid gray; border-radius:2em; font-size:17px; color: black;">이벤트 모두 보기<i class="icofont-simple-right ml-2  "></i></a>
 </div>
 	</div>
 	</section>

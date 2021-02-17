@@ -69,11 +69,11 @@
             <div class="feature-icon mb-3">
              <button type="button" onclick="location.href='/main/afterLoginMain.do'" id="img_btn" style="background-color:#fff; outline:none; border:none;"><img src="<c:url value='/resources/images/weneedLogo.png'/>" style="width:150px;"></button>
             </div>
-            <div style="font-size:25px; color:gray; margin-top:30px;">Weneed Plus / 6개월권 구독</div>    <!-- 3개월 구독시: 무제한으로 즐기는 직군별 커리어 콘텐츠 라고 뜸 -->
+            <div style="font-size:25px; color:gray; margin-top:30px;">Weneed Plus / 정기구독권</div>    
               <div style="font-size:13px; color:gray; margin-top:30px;"><p>20,000명 이상의 직장인이 선택한 원티드의 모든 강연, 컨퍼런스 영상을 무제한으로 시청하고, 업계 최고의 전문가와 함께하는 온오프라인 세미나, 북클럽에 참여할 수 있는 기회 </p></div><br>
               <div class="filter" style="width: 100%; height: 70px; margin-top:-20px;">
               <button id="youSureBtn" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:190px; height:40px;padding:0px,0px; 
-              			background-color:#fff; font-size:15px; color:blue">이벤트 정보 상세보기<i class="fas fa-angle-double-right"></i></button>
+              			background-color:#fff; font-size:15px; color:blue">구독권 정보 상세보기<i class="fas fa-angle-double-right"></i></button>
           </div>
           </div>
       </div>
@@ -103,14 +103,14 @@ IMP.request_pay({
     amount : 14000,
     buyer_email : '${subEmail}',
     buyer_name : '${subName}',
-    buyer_tel : '${subPhone}',
+    buyer_tel : '${subHp}',
     buyer_addr : '비공개',
     buyer_postcode : '비공개'
 }, function(rsp) {
     if ( rsp.success ) {
     	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
     	jQuery.ajax({
-    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+    		url: "<c:url value='/career/subscribe/paymentsComplete.do'/>", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
     		type: 'POST',
     		dataType: 'json',
     		data: {

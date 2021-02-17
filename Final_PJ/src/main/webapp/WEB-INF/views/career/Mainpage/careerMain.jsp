@@ -220,7 +220,7 @@
 					        								style="cursor:pointer; border:0.3px solid rgb(198, 198, 198); border-radius:0.4em; height:405px;">
 							        <div class="doctor-profile">
 							        	<div class="doctor-img" style="height:180px;border-bottom:0.3px solid rgb(198, 198, 198);">				        	
-							               <img src="<c:url value='/programImgUpload/hrhr_20210215130914143.PNG'/>" alt="${proVoMain.proImage }" class="img-fluid w-100" style="width:100%; height: 100%;background-size: cover;">
+							               <img src="<c:url value='/programImgUpload/${proVoMain.proImage }'/>" alt="${proVoMain.proImage }" class="img-fluid w-100" style="width:100%; height: 100%;background-size: cover;">
 							            </div>
 						            </div>
 					                <div class="content mt-3" style="padding:0px 15px 15px 15px;">

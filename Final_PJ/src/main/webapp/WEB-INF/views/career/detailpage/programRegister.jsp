@@ -99,7 +99,7 @@
               <div style="font-size:13px; color:gray; margin-top:30px;"><p>${proVo.proName} </p></div><br>
               <div class="filter" style="width: 100%; height: 70px; margin-top:-20px;">
               <button id="youSureBtn" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:190px; height:40px;padding:0px,0px; 
-              			background-color:#fff; font-size:15px; color:blue">이벤트 정보 상세보기<i class="fas fa-angle-double-right"></i></button>
+              			background-color:#fff; font-size:15px; color:blue">프로그램 정보 상세보기<i class="fas fa-angle-double-right"></i></button>
           </div>
           </div>
       </div>

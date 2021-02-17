@@ -87,7 +87,7 @@ body{
 
 
 <!-- 몸통부분!!! -->
-<section class="section blog-wrap" style="margin-top:165px; margin-left:-170px;">
+<section class="section blog-wrap" style="margin-top:69px; margin-left:-170px;">
 
 <div class="subscribeBody" style="margin-top:-100px;width:1400px; margin-left:auto; margin-right:auto;">
 <!-- 직장인의 커리어 여정을 행복하게 -->
@@ -102,7 +102,7 @@ body{
 	<!-- 키워드 검색 파라미터 넘겨져서 받는곳 -->
 	 
 		
-		<form action="<c:url value='/career/Admin/programAdminList.do'/>" 
+	<form action="<c:url value='/career/Admin/programAdminList.do'/>" 
 			name="frmPage" method="post">
 			<input type="hidden" name="currentPage">
 			<input type="hidden" name="searchCondition" 
@@ -114,7 +114,7 @@ body{
 	
 	<form name="frmList" method="post" 
 	action="<c:url value='/career/Admin/programAdminList.do'/>">	
-		<h2>프로그램 리스트</h2>
+		<div style="margin-top:50px;"><h2>프로그램 리스트</h2></div>
 		<c:if test="${!empty param.searchKeyword }">
 			<p>검색어 : ${param.searchKeyword}, ${pagingInfo.totalRecord }  
 				건 검색되었습니다.</p>
@@ -122,25 +122,7 @@ body{
 		
 		<!-- 이벤트별 조회 -->
 		<div style="text-align:right; margin-right:235px;margin-bottom: 10px;">	
-		         	프로그램 조회
-		        <select name="searchEvent">
-		            <option value="pro_Type" 
-		            	<c:if test="${param.searchKeyword == 1}">
-		            		selected="selected"
-		            	</c:if>
-		            >이벤트</option>
-		            <option value="pro_Type" 
-		            	<c:if test="${param.searchKeyword == 2}">
-		            		selected="selected"
-		            	</c:if>
-		            >북클럽</option>
-		            <option value="pro_Type" 
-		            	<c:if test="${param.searchKeyword == 3}">
-		            		selected="selected"
-		            	</c:if>
-		            >교육/강의</option>
-		        </select>   
-
+		     
 			프로그램 조회
 			
 			<select name="proType">
