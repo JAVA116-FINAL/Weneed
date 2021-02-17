@@ -518,3 +518,6 @@ input:-internal-autofill-selected {
 input.dep_jy {
     width: 300px;
 }
+input.title-input_jy {
+    width: 100%;
+}

@@ -9,21 +9,46 @@
 <script type="text/javascript">
 
 	$(function(){
-/* 자연 */
- 
+/* 여기부터 자연 */
 		$('#btApply').click(function(){
 			$.ajax({
 				url:"<c:url value='/jobsearch/apply.do'/>",
-				data:"posNo="+27/* 포지션번호 넣어주기! ${posNo} */,
+				data:"posNo="+ ${param.posNo},/* 포지션번호 넣어주기! ${posNo} */
 				type:"get",
 				success:function(result){
 					$('#asideApply').empty();
 					$('#asideApply').html(result);
-					
+				},
+				error:function(xhr,status,error){
+					alert("error!!:"+error);
 				}
 			});	 		
 		});
+		
+		$('#btBookmark').click(function(){
+			//alert(${param.posNo});
+			$.ajax({
+				url:"<c:url value='/jobsearch/bookmark.do'/>",
+				data:"posNo="+ ${param.posNo},//posNo,memNo
+				type:"get",
+				dataType:"text",
+				success:function(res){
+					alert(res);
+					//console.log(res); 
+					//console.dir();
+				},
+				error:function(xhr,status,error){
+					alert("error!!:"+error);
+				}
+			});
+		});
+		/*여기까지 자연 */
+		
+		
 	});
+	
+
+	
 </script>
 
 <section class="section blog-wrap" style="margin-top:-70px;">
@@ -142,7 +167,7 @@
 				<c:import url="/jobsearch/apply.do?posNo=27"></c:import>
 			</div> --%>
 			<div id="displayAside">
-				  <aside class="col-lg-4 asideApply_jy" style="margin-left:-30px;" id="asideApply">
+				  <aside class="col-lg-4 asideApply_jy" id="asideApply">
 				  <%@include file="aside.jsp"%>
 					   <!-- <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" style="width:350px;">
 							<div class="sidebar-widget schedule-widget mb-3">

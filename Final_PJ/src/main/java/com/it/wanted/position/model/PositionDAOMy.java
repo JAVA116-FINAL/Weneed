@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.common.SearchVO;
+
 @Repository
 public class PositionDAOMy implements PositionDAO{
 	@Autowired SqlSessionTemplate sqlSession;
@@ -39,5 +41,39 @@ public class PositionDAOMy implements PositionDAO{
 	}
 
 
+	@Override
+	public List<Map<String, Object>> selectPositionAllbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectPositionAllbyAdmin",searchVo);
+	}
+
+	@Override
+	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"selectTotalRecordbyAdmin",searchVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllYetPosition(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectAllYetPosition", searchVo);
+	}
+
+	@Override
+	public int selectYetTotalRecord() {
+		return sqlSession.selectOne(namespace+"selectYetTotalRecord");
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllPassedPosition(SearchVO searchVo2) {
+		return sqlSession.selectList(namespace+"selectAllPassedPosition", searchVo2);
+	}
+
+	@Override
+	public int selectPassedTotalRecord() {
+		return sqlSession.selectOne(namespace+"selectPassedTotalRecord");
+	}
+
+	@Override
+	public int changeStatustoPass(int posNo) {
+		return sqlSession.update(namespace+"changeStatustoPass", posNo);
+	}
 	
 }

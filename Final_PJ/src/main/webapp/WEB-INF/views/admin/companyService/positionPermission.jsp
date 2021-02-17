@@ -1,55 +1,72 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../../inc/admin_top.jsp"%>
+<!-- <style type="text/css">
+
+.divheader>h1 {
+    font-size: x-large;
+    margin-bottom: 30px;
+    color: gray;
+}
+
+table.table.table-bordered.table_jy {
+    font: status-bar;
+    text-align: center;
+    font-size: smaller;
+    background: white;
+}
+
+thead {
+    font-size: initial;
+    color: #454545;
+}
+.divPage_jy {
+    text-align: center;
+}
+.divSearch {
+    TEXT-ALIGN: RIGHT;
+    MARGIN-BOTTOM: 10PX;
+}
+input.inputKeyword {
+    height: 33px;
+}
+
+th.th_jy {
+    font: status-bar;
+    font-weight: 700;
+}
+</style> -->
+<link rel="stylesheet" href="<c:url value='/resources/css/admin/companyService.css'/>">
 <script type="text/javascript">
-	
 $(function(){
-	//들어왔다
-	/* if($('input[name=currentPage]').val() != ''){ //근데 페이징 체크해서 들어온거면 승인 완료 건을 보여줘야 함
-		$('#weneedAdmin-showInfoListPassed').addClass('clickedTab');
-		$('#weneedAdmin-comInfoBeforeSec').addClass('hide');
-		$('#weneedAdmin-comInfoPassedSec').removeClass('hide');
-	}
-	if($('input[name=currentPage]').val() == ''){
-		$('#weneedAdmin-showInfoListBefore').addClass('clickedTab');
-		$('#weneedAdmin-comInfoPassedSec').addClass('hide');
-		$('#weneedAdmin-comInfoBeforeSec').removeClass('hide');
-	}
-	 */
-	
 	$('#weneed-adminBtn-pass').click(function(){
-		const comCodeArr=[]; //체크박스값을 담을 어레이
-		const comMemNoArr=[]; //멤버번호값을 담을 어레이
+		const posNoArr=[]; //체크박스값을 담을 어레이
 		var checkboxes=$('input:checkbox[name=weneed-adminStatusChkbox-before]');
 		
 		//선택한 체크박스의 회사코드를 추출하여 배열에 집어넣는 작업
 		checkboxes.each(function(){
 		//	console.log(checkboxes.is(':checked'));
 			if($(this).is(':checked')){
-				var comCode=$(this).parent().next().html();
-				var comMemNo=$(this).parent().siblings(':eq(5)').html();
-				console.log("comCode: "+comCode);
-				console.log("comMemNo: "+comMemNo);
-				comCodeArr.push(comCode);
-				comMemNoArr.push(comMemNo);
+				var posNo=$(this).parent().next().html();
+				console.log("posNo: "+posNo);
+				posNoArr.push(posNo);
 			}
 		});
-		console.log("comCodeArr: "+comCodeArr);
-		console.log("comMemNoArr: "+comMemNoArr);
 		
 		var data = {
-			"comCodeList":comCodeArr,
-			"comMemNoList":comMemNoArr
+			"posNoList":posNoArr,
 		};
 		
+		//상태값을 변경하기 위한 함수
 		$.ajax({
-			url:"<c:url value='/admin/companyService/comInfoStatustoPass.do'/>",
+			url:"<c:url value='/admin/positionStatustoPass.do'/>",
 			type:"post",
 			dataType:"json",
 			data:data,
 			success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
-				//alert('성공!');
+				alert('성공!');
 				location.reload();
 			},
 			error:function(xhr, status, error){
@@ -114,14 +131,33 @@ $(function(){
 			$('input[name=weneed-adminStatusChkbox-after]').prop('checked', false);
 		}
 	});
-	
 });
-	
+
+//이렇게 줄일 수 있음 좋겠는데.. 나중에 줄여보자. 리팩토링!
+function pageFunc(url, curPage, here, here2, drawTr, drawPageDiv){
+	$.ajax({
+		url:url,
+		type:"get",
+		dataType:"json",
+		data:{
+			"curPage":curPage
+		},
+		success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
+		//	alert('승인요청건 조회 성공!');
+			drawTr(result, here);
+			drawPageDiv(result, here2);
+		},
+		error:function(xhr, status, error){
+			alert('승인요청건 조회 error!: '+error);
+		}
+	});
+}
+
 function pageFuncY(curPage){
 	var here = $('#weneedadmin-tbodyYet');
 	var here2 = $('#weneedAdmin-comInfoDivPageBefore');
 	$.ajax({
-		url:"<c:url value='/admin/companyService/comInfoPermissionYet.do'/>",
+		url:"<c:url value='/admin/companyService/positionPermissionYet.do'/>",
 		type:"get",
 		dataType:"json",
 		data:{
@@ -143,7 +179,7 @@ function pageFuncP(curPage){
 	var here2 = $('#weneedAdmin-comInfoDivPagePassed');
 	
 	$.ajax({
-		url:"<c:url value='/admin/companyService/comInfoPermissionPassed.do'/>",
+		url:"<c:url value='/admin/companyService/positionPermissionPassed.do'/>",
 		type:"get",
 		dataType:"json",
 		data:{
@@ -165,33 +201,25 @@ function drawTrY(jsonVo, pasteHere){
 	var pageLength=jsonVo.comList.length;
 	//리스트의 개수만큼
 	console.log("pageLength:"+pageLength);
-	for(comVo of jsonVo.comList){
-		if(comVo.comRegNo == null){
-			comVo.comRegNo='';
-		}
-		if(comVo.comSize == null){
-			comVo.comSize='';
-		}
-		if(comVo.profit == null){
-			comVo.profit='';
-		}
-		if(comVo.comMemNo == null){
-			comVo.comMemNo='';
-		}
-		
-		var str='';
-		str+='<tr class="weneed-adminTable">';		
-		str+='<td>';		
-		str+='<input type="checkbox" name="weneed-adminStatusChkbox-before">';		
-		str+='</td>';		
-		str+='<td>'+comVo.comCode+'</td>';		
-		str+='<td>'+comVo.comName+'</td>';		
-		str+='<td>'+comVo.comRegNo+'</td>';		
-		str+='<td>'+comVo.comSize+'</td>';		
-		str+='<td>'+comVo.profit+'</td>';		
-		str+='<td>'+comVo.comMemNo+'</td>';		
-		str+='<td>'+comVo.comInfoPassed+'</td>';		
-		str+='</tr>';		
+	for(posMap of jsonVo.posList){
+		var str="<tr class='weneed-adminTable'><td>";
+		var str="<input type='checkbox' name='weneed-adminStatusChkbox-before'></td>";
+		var str="<td>"+posMap.POSNO+"</td>";
+		var str="<td>"+posMap.COMNAME+"</td>";
+		var str="<td>"+posMap.JIKGUNNAME+"</td>";
+		var str="<td class='title_td'>";
+		var str="<a href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POSNO+"&memNo=1000'/>'>";
+		var str=posMap.POSNAME+"</a></td>";
+		var str="<td>"+posMap.POSMINSAL+"</td>";
+		var str="<td>"+posMap.POSMAXSAL+"</td>";
+		var str="<td><fmt:formatDate value='${posMap.POSREGDATE}' pattern='yyyy-MM-dd'/></td></td>";
+		var str="<td>"+posMap.ENDDATE+"</td>";
+		if(posMap.POSSTATUS == 1){ str+="임시저장";}
+		if(posMap.POSSTATUS == 2){ str+="승인요청";}
+		if(posMap.POSSTATUS == 3){ str+="승인";}
+		if(posMap.POSSTATUS == 4){ str+="종료";}
+		var str="</td>";
+		var str="</tr>";	
 		
 		pasteHere.append(str);
 	}
@@ -200,36 +228,29 @@ function drawTrY(jsonVo, pasteHere){
 
 function drawTrP(jsonVo, pasteHere){
 	pasteHere.html('');
-	var pageLength=jsonVo.comList.length;
+	var pageLength=jsonVo.posList.length;
 	//리스트의 개수만큼
 	console.log("pageLength:"+pageLength);
-	for(comVo of jsonVo.comList){
-		if(comVo.comRegNo == null){
-			comVo.comRegNo='';
-		}
-		if(comVo.comSize == null){
-			comVo.comSize='';
-		}
-		if(comVo.profit == null){
-			comVo.profit='';
-		}
-		if(comVo.comMemNo == null){
-			comVo.comMemNo='';
-		}
+	for(posMap of jsonVo.posList){
 		
-		var str='';
-		str+='<tr class="weneed-adminTable">';		
-		str+='<td>';		
-		str+='<input type="checkbox" name="weneed-adminStatusChkbox-after">';		
-		str+='</td>';		
-		str+='<td>'+comVo.comCode+'</td>';		
-		str+='<td>'+comVo.comName+'</td>';		
-		str+='<td>'+comVo.comRegNo+'</td>';		
-		str+='<td>'+comVo.comSize+'</td>';		
-		str+='<td>'+comVo.profit+'</td>';		
-		str+='<td>'+comVo.comMemNo+'</td>';		
-		str+='<td>'+comVo.comInfoPassed+'</td>';		
-		str+='</tr>';		
+		var str="<tr class='weneed-adminTable'><td>";
+		var str="<input type='checkbox' name='weneed-adminStatusChkbox-before'></td>";
+		var str="<td>"+posMap.POSNO+"</td>";
+		var str="<td>"+posMap.COMNAME+"</td>";
+		var str="<td>"+posMap.JIKGUNNAME+"</td>";
+		var str="<td class='title_td'>";
+		var str="<a href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POSNO+"&memNo=1000'/>'>";
+		var str=posMap.POSNAME+"</a></td>";
+		var str="<td>"+posMap.POSMINSAL+"</td>";
+		var str="<td>"+posMap.POSMAXSAL+"</td>";
+		var str="<td><fmt:formatDate value='${posMap.POSREGDATE}' pattern='yyyy-MM-dd'/></td></td>";
+		var str="<td>"+posMap.ENDDATE+"</td>";
+		if(posMap.POSSTATUS == 1){ str+="임시저장";}
+		if(posMap.POSSTATUS == 2){ str+="승인요청";}
+		if(posMap.POSSTATUS == 3){ str+="승인";}
+		if(posMap.POSSTATUS == 4){ str+="종료";}
+		var str="</td>";
+		var str="</tr>";
 		
 		pasteHere.append(str);
 	}
@@ -294,45 +315,18 @@ function drawPageDivP(jsonVo, pasteHere){
 	}
 	$('#weneedAdmin-comInfoDivPagePassed').append(str);
 }
-
-$.send=function(curPage){
-	$('#currentPage').val(curPage);
-	
-	$.ajax({
-		url:"<c:url value='/zipcode/ajaxZipcode.do'/>",
-		type:"post",
-		data:$('#frmZip').serializeArray(),
-		dataType:"xml",
-		success:function(xmlStr){
-			//alert(xmlStr);
-			totalCount=$(xmlStr).find('totalCount').html();
-			var errorCode=$(xmlStr).find('errorCode').html();
-			var errorMessage=$(xmlStr).find('errorMessage').text();
-			
-			if(errorCode!=0){ //정상이 아니면
-				alert(errorCode + "=>" + errorMessage); 
-			}else{
-				if(xmlStr!=null){
-					$.makeList(xmlStr);
-					$.pageMake();
-				}
-			}
-		},
-		error:function(xhr, status, error){
-			alert('error! : '+error);
-		}
-	});
-}
 </script>
-<link rel="stylesheet" href="<c:url value='/resources/css/admin/companyService.css'/>">
-</head>
 <body>
+<form action="<c:url value='/admin/adminPosition.do'/>" name="frmPage" method="post">
+	<input type="hidden" name="currentPage">
+	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+</form>
 <div class="container">
 	<div class="weneedAdmin-permissionTab">
-		<h2>기업 정보 승인</h2>
+		<h2>포지션 승인 처리</h2>
 	</div>
 	<section id="weneedAdmin-comInfoBeforeSec">
-		<form action="<c:url value='/admin/companyService/comInfoPermission.do'/>" name="frmPageY" method="post">
+		<form action="<c:url value='/admin/companyService/posPermission.do'/>" name="frmPageY" method="post">
 			<input type="hidden" name="currentPageY" value="${pagingInfoPassed.currentPage}">
 			<input type="hidden" name="typeCheck" value="Y">
 		</form>
@@ -345,31 +339,50 @@ $.send=function(curPage){
 			<thead>
 				<tr class="weneed-adminTable">
 					<th style="width: 35px;"><input type="checkbox" id="weneed-admin-CheckAll"></th>
-					<th style="width: 105px;">회사코드</th>
-					<th style="width: 240px;">회사명</th>
-					<th style="width: 125px;">사업자등록번호</th>
-					<th style="width: 110px;">팀원수</th>
-					<th style="width: 125px;">매출액/투자규모</th>
-					<th style="width: 110px;">등록회원번호</th>
-					<th style="width: 80px;">승인상태</th>
+					<th style="width: 40px;">No.</th>
+					<th style="width: 120px;">기업명</th>
+					<th style="width: 50px;">직군</th>
+					<th style="width: 300px;">포지션명</th>
+					<th style="width: 80px;">최소연봉</th>
+					<th style="width: 80px;">최대연봉</th>
+					<th style="width: 90px;">등록일</th>
+					<th style="width: 90px;">마감일</th>
+					<th style="width: 80px;">상태</th>
 				</tr>
 			</thead>
 			<tbody id="weneedadmin-tbodyYet">
-				<c:forEach var="comInfoVo" items="${comListYet}">
-					<!-- 이걸 그려서 붙여야 하고 -->
-					<tr class="weneed-adminTable">
-						<td>
-							<input type="checkbox" name="weneed-adminStatusChkbox-before">
-						</td>
-						<td>${comInfoVo.comCode}</td>
-						<td>${comInfoVo.comName}</td>
-						<td>${comInfoVo.comRegNo}</td>
-						<td>${comInfoVo.comSize}</td>
-						<td>${comInfoVo.profit}</td>
-						<td>${comInfoVo.comMemNo}</td>
-						<td>${comInfoVo.comInfoPassed}</td>
-					</tr>
-				</c:forEach>
+				<c:if test="${empty posListYet }">
+						<tr class="align_center"> 
+							<td colspan="9">포지션 등록내역이 없습니다.</td>
+						</tr>
+				</c:if>
+				<c:if test="${!empty posListYet }">
+					<c:forEach var="map" items="${posListYet }">
+						<tr class="weneed-adminTable">
+							<td>
+								<input type="checkbox" name="weneed-adminStatusChkbox-before">
+							</td>
+							<td>${map['POS_NO']} </td>
+							<td>${map['COM_NAME'] } </td>
+							<td>${map['JIKGUN_NAME'] } </td>
+							<td class="title_td">
+								<a href='<c:url value="/jobsearch/jobsearchDetailAdmin.do?posNo=${map['POS_NO']}&memNo=1000"></c:url>'>
+									${map['POS_NAME'] } 
+								</a>
+							</td>
+							<td>${map['POS_MIN_SAL'] } </td>
+							<td>${map['POS_MAX_SAL'] } </td>
+							<td> <fmt:formatDate value="${map['POS_REGDATE'] }" pattern="yyyy-MM-dd"/></td>
+							<td> ${map['END_DATE'] }</td>
+							<td>
+								<c:if test="${map['POS_STATUS'] eq '1'}">임시저장</c:if>
+								<c:if test="${map['POS_STATUS'] eq '2'}">승인요청</c:if>
+								<c:if test="${map['POS_STATUS'] eq '3'}">승인</c:if>
+								<c:if test="${map['POS_STATUS'] eq '4'}">종료</c:if>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 		<!-- 페이징 디브 -->
@@ -412,30 +425,50 @@ $.send=function(curPage){
 			<thead>
 				<tr class="weneed-adminTable">
 					<th style="width: 35px;"><input type="checkbox" id="weneed-admin-CheckAll-ed"></th>
-					<th style="width: 105px;">회사코드</th>
-					<th style="width: 240px;">회사명</th>
-					<th style="width: 125px;">사업자등록번호</th>
-					<th style="width: 110px;">팀원수</th>
-					<th style="width: 125px;">매출액/투자규모</th>
-					<th style="width: 110px;">등록회원번호</th>
-					<th style="width: 80px;">승인상태</th>
+					<th style="width: 40px;">No.</th>
+					<th style="width: 120px;">기업명</th>
+					<th style="width: 50px;">직군</th>
+					<th style="width: 300px;">포지션명</th>
+					<th style="width: 80px;">최소연봉</th>
+					<th style="width: 80px;">최대연봉</th>
+					<th style="width: 90px;">등록일</th>
+					<th style="width: 90px;">마감일</th>
+					<th style="width: 80px;">상태</th>
 				</tr>
 			</thead>
 			<tbody id="weneedadmin-tbodyPassed">
-				<c:forEach var="comInfoVo" items="${comListPassed}">
-					<tr class="weneed-adminTable">
-						<td>
-							<input type="checkbox" name="weneed-adminStatusChkbox-after">
-						</td>
-						<td>${comInfoVo.comCode}</td>
-						<td>${comInfoVo.comName}</td>
-						<td>${comInfoVo.comRegNo}</td>
-						<td>${comInfoVo.comSize}</td>
-						<td>${comInfoVo.profit}</td>
-						<td>${comInfoVo.comMemNo}</td>
-						<td>${comInfoVo.comInfoPassed}</td>
-					</tr>
-				</c:forEach>
+				<c:if test="${empty posListPassed }">
+						<tr class="align_center"> 
+							<td colspan="9">포지션 등록내역이 없습니다.</td>
+						</tr>
+				</c:if>
+				<c:if test="${!empty posListPassed }">
+					<c:forEach var="map" items="${posListPassed }">
+						<tr class="weneed-adminTable">
+							<td>
+								<input type="checkbox" name="weneed-adminStatusChkbox-before">
+							</td>
+							<td>${map['POS_NO']} </td>
+							<td>${map['COM_NAME'] } </td>
+							<td>${map['JIKGUN_NAME'] } </td>
+							<td class="title_td">
+								<a href='<c:url value="/jobsearch/jobsearchDetailAdmin.do?posNo=${map['POS_NO']}&memNo=1000"></c:url>'>
+									${map['POS_NAME'] } 
+								</a>
+							</td>
+							<td>${map['POS_MIN_SAL'] } </td>
+							<td>${map['POS_MAX_SAL'] } </td>
+							<td> <fmt:formatDate value="${map['POS_REGDATE'] }" pattern="yyyy-MM-dd"/></td>
+							<td> ${map['END_DATE'] }</td>
+							<td>
+								<c:if test="${map['POS_STATUS'] eq '1'}">임시저장</c:if>
+								<c:if test="${map['POS_STATUS'] eq '2'}">승인요청</c:if>
+								<c:if test="${map['POS_STATUS'] eq '3'}">승인</c:if>
+								<c:if test="${map['POS_STATUS'] eq '4'}">종료</c:if>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 		<!-- 페이징 디브 -->

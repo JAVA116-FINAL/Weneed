@@ -146,7 +146,7 @@
 						<div class="col-lg-3 col-md-6"
 							style="padding-left: 0px; padding-right: 0px;">
 							<div class="card h-100">
-								<a href="#">
+								<a href="<c:url value='/career/Mainpage/careerMain.do'/>">
 									<div class="card-body"
 										style="border: transparent; padding: 0px;">
 										<img class="card-img-top"
@@ -164,7 +164,7 @@
 						<div class="col-lg-3 col-md-6"
 							style="padding-left: 0px; padding-right: 0px;">
 							<div class="card h-100">
-								<a href="#">
+								<a href="<c:url value='/matchupMem/matchupMemIntro.do'/>">
 									<div class="card-body"
 										style="border: transparent; padding: 0px;">
 										<img class="card-img-top"
@@ -182,7 +182,7 @@
 						<div class="col-lg-3 col-md-6"
 							style="padding-left: 0px; padding-right: 0px;">
 							<div class="card h-100">
-								<a href="#">
+								<a href="<c:url value='/notice/notice_detail.do?notice_no=113'/>">
 									<div class="card-body"
 										style="border: transparent; padding: 0px;">
 										<img class="card-img-top"

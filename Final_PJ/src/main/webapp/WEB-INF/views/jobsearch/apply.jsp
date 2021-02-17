@@ -54,14 +54,11 @@ $(function(){
 				resumeStr+="</li>";
 				
 				$('#ulResumeList').append(resumeStr);
-		
-				
 			},
 			error:function(xhr,status,error){
 				alert("error!:"+error);
 			}
 		}); //ajax
-		
 	});//change이벤트
 	
 	$('.ckResumeSave').click(function(){
@@ -79,7 +76,6 @@ $(function(){
 			alert('제출할 이력서를 선택하세요!');
 			event.PreventDefault();
 		}
-		
 		$('#frmApply').submit();
 	});
 	

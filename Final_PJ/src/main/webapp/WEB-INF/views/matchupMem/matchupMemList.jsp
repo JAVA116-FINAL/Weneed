@@ -171,7 +171,8 @@ $(function(){
 				addExcom+="</li>";	
 				$('#excomUl').append(addExcom);
 				
-				$('.exselectbtName_jy').empty();
+				/* $('.exselectbtName_jy').empty(); */
+				$('#selectExComli').empty();
 				addExcomdiv+="<li class='spExComList_jy' id='spExcom"+getView.MCUCOM_NO+"'>"+getView.COM_NAME+"</li>";
 				$('#excomulOut').append(addExcomdiv);
 			},	
@@ -381,7 +382,7 @@ $(function(){
 																</c:forEach>
 															</c:if>	
 															<c:if test="${empty mVo.mcuexList}">
-																<li class="exselectbtName_jy">선택하기</li>
+																<li class="exselectbtName_jy" id="selectExComli">선택하기</li>
 															</c:if>
 														</ul>	
 													</div>

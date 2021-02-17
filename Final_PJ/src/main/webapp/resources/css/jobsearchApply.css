@@ -339,7 +339,7 @@ i.icon-icon_match_btn_next.iconNextMcubt_jy {
 }
 
 .ap-resumInfo_jy.matched_jy {
-    width: calc(106% - 89px);
+    width: calc(99% - 85px);
 }
 
 .ap-done_jy {
@@ -510,11 +510,6 @@ p.ap-wantedResumeP_jy {
     letter-spacing: normal;
 }
 
-.ap-wantedResumediv2_jy {
-    /* padding-top: 30px; */
-    /* padding-bottom: 30px; */
-}
-
 .ap-wantedResumediv1_jy {
     padding-top: 30px;
     padding-bottom: 30px;
@@ -583,5 +578,42 @@ a.ap-resumEdit_jy {width: fit-content;}
 div#displayAside {
     position: absolute;
     display: inline-block;
-    right: 220px;
+    right: 175px;
+}
+
+
+/* 0216 */
+
+.jobsearch-contetns_jy {
+    margin-bottom: 103px;
+}
+
+
+aside#asideApply {max-width: 360px;}
+
+button.bookmark_jy {
+    width: 100%;
+    height: 50px;
+    background: #213bf3ba;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 25px;
+}
+
+
+.btdiv_jy.bookmarkbtdiv_jy {
+    margin-bottom: 10px;
+}
+
+.sidebar-widget.schedule-widget.mb-3 {
+    border: 1px solid #9e9e9e5e;
+    background: white;
+    border-radius: 4px;
+}
+
+button.bookmark_jy {
+    background: white;
+    color: #36f;
+    border: 1px solid #36f;
 }

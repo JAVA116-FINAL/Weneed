@@ -3,6 +3,8 @@ package com.it.wanted.position.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.wanted.common.SearchVO;
+
 public interface PositionDAO {
 
 	int insertPosition(PositionVO posVo);
@@ -14,5 +16,15 @@ public interface PositionDAO {
 	List<PositionVO> selectPositionByComcode(String comCode);
 	
 
+	/* 자연0216 */
+	public List<Map<String, Object>>selectPositionAllbyAdmin(SearchVO searchVo);
+	public int selectTotalRecordbyAdmin(SearchVO searchVo);
+	
+	/* 0217현빈*/
+	List<Map<String, Object>> selectAllYetPosition(SearchVO searchVo);
+	int selectYetTotalRecord();
+	List<Map<String, Object>> selectAllPassedPosition(SearchVO searchVo2);
+	int selectPassedTotalRecord();
+	int changeStatustoPass(int posNo);
 
 }

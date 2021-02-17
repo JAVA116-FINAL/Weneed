@@ -54,7 +54,117 @@ public class ResumeServiceImpl implements ResumeService{
 	public ResumeVO selectResume(int memNo) {
 		return resumeDao.selectResume(memNo);
 	}
+	
+	@Override
+	@Transactional
+	public int updateResume(ResumeAllVO resumeAllVo) {
+		
+		logger.info("이력서 등록resumeALlVo={}",resumeAllVo);
+		ResumeVO rVo= resumeAllVo.getResumeVo();
+		List<CareerVO>crrList=resumeAllVo.getCrrList();
+		List<AchievementVO>achList=resumeAllVo.getAchList();
+		List<EducationVO>eduList=resumeAllVo.getEduList();
+		List<AddinformatiodVO>addList=resumeAllVo.getAddList();
+		List<LanguagesVO>langList=resumeAllVo.getLangList();
+		List<LanguagestestVO>testList=resumeAllVo.getTestList();
+		List<LinkVO>linkList=resumeAllVo.getLinkList();
+				
+		int cnt=0;
+		
+		try {
+			//이력서 등록
+			cnt=resumeDao.updateResume(rVo);
+			logger.info("이력서 등록rVo={}, cnt={}",rVo,cnt);
+			
+			//경력 List등록
+			if(crrList!=null&& !crrList.isEmpty()) {
+				for(int i=0;i<crrList.size();i++) {
+					CareerVO crrVo=crrList.get(i);
+					if(crrVo.getCareerNo()!=0) {
+						cnt=careerDao.updateCareer(crrVo);
+						logger.info("커리어 등록crrVo={}, cnt={}",crrVo,cnt);
+					}
+				}//for
+				
+				//성과List등록
+				if(achList!=null&&!achList.isEmpty()) {
+					for(int i=0;i<achList.size();i++) {
+						AchievementVO achVo=achList.get(i);
+						if(achVo.getAchNo()!=0) {
+							cnt=achievmentDao.updateAch(achVo);
+							logger.info("성과 등록achVo={}, cnt={}",achVo,cnt);
+						}
+					}//for
+				}//if
+			 }//바깥 if
+			
+			//교육
+			if(eduList!=null&& !eduList.isEmpty()) {
+				for (int i = 0; i < eduList.size(); i++) {
+					EducationVO eduVo=eduList.get(i);
+					if(eduVo.getEduNo()!=0) {
+						cnt=educationDao.updateEdu(eduVo);
+						logger.info("교육사항등록eduVo={}, cnt={}",eduVo,cnt);
+					}
+				}//for
+			}//if
+			
+			//기타활동
+			if(addList!=null&& !addList.isEmpty()) {
+				for (int i = 0; i < addList.size(); i++) {
+					AddinformatiodVO addVo=addList.get(i);
+					if(addVo.getAddNo()!=0) {
+						cnt=addinformatiodDao.updateAdd(addVo);
+						logger.info("기타활동사항 등록 addVo={}, cnt={}",addVo,cnt);
+					}
+				}
+			}
+			
+			//언어
+			if(langList!=null&& !langList.isEmpty()) {
+				for (int i = 0; i < langList.size(); i++) {
+					LanguagesVO langVo = langList.get(i);
+					
+					if(langVo.getLangNo()!=0) {
+						cnt=languagesDao.updateLang(langVo);
+						logger.info("외국어사항 등록langVo={}, cnt={}",langVo,cnt);
+					}
+				}
+				
+				//어학
+				if(testList!=null&& !testList.isEmpty()) {
+					for (int i = 0; i < testList.size(); i++) {
+						LanguagestestVO testVo = testList.get(i);
+						if(testVo.getLangtestNo()!=0) {
+							cnt=languagestestDao.updateLangtest(testVo);
+							logger.info("어학시험 등록 testVo={}",testVo,cnt);
+						}
+					}//for
+				}//if
+				
+			}//if언어
+			
+			//링크
+			if(linkList!=null&& !linkList.isEmpty()) {
+				for (int i = 0; i < linkList.size(); i++) {
+					LinkVO linkVo = linkList.get(i);
+					if(linkVo.getLinkNo()!=0) {
+						cnt=linkDao.updateLink(linkVo);
+						logger.info("기타활동사항 등록 linkVo={}, cnt={}",linkVo,cnt);
+					}//if
+				}//for
+			}//if
+				
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return cnt;
+	}
+	
 
+	/*
 	@Override
 	@Transactional
 	public int updateResume(ResumeAllVO resumeAllVo) {
@@ -138,7 +248,7 @@ public class ResumeServiceImpl implements ResumeService{
 		}
 		return cnt;
 	}
-
+*/
 	@Override
 	public List<ResumeVO> selectResumeAll(int memNo) {
 		return resumeDao.selectResumeAll(memNo);

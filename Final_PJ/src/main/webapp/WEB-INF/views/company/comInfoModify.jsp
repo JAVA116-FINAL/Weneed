@@ -288,7 +288,7 @@ function readURL(input) {
 	                  	<span class="comServFormTitle">회사/서비스 소개</span><span class="comServInfoSentence">(3,000자 제한)</span><span class="comServRequired">*</span>
 	                      <textarea style="background-color: #ffffff;outline-color: #dbdbdb;display:block;width:207%"
 	                      name="comIntro" id="comIntro" class="form-control comServFormInput" rows="6" placeholder="회사 정보 입력"
-	                      value="${comInfoVo.comIntro}"></textarea>
+	                      >${comInfoVo.comIntro}</textarea>
 	                  </div>
 	                 </div>
 	                </div>
