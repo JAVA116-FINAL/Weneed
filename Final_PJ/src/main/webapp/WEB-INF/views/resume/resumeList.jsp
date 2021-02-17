@@ -241,10 +241,10 @@ $(function(){
 									<c:if test="${rVo.resumeUpfileflag eq 'Y' }">
 										<span class="rFileName_jy">
 											<a href="<c:url value='/resume/resumeFileDown.do?resumeNo=${rVo.resumeNo}&resumeFile=${rVo.resumeFile}'/>">
-												<c:if test="${fn:length(rVo.resumeTitle)>=27}">
-													${fn:substring(rVo.resumeTitle, 0,27) } ...
+												<c:if test="${fn:length(rVo.resumeTitle)>=40}">
+													${fn:substring(rVo.resumeTitle, 0,40) } ...
 												</c:if>
-												<c:if test="${fn:length(rVo.resumeTitle)<27}">						
+												<c:if test="${fn:length(rVo.resumeTitle)<40}">						
 
 													${rVo.resumeTitle}
 												</c:if>
