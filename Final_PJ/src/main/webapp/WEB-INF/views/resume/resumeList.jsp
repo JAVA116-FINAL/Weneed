@@ -215,8 +215,17 @@ $(function(){
 							 			<a href="<c:url value='/resume/resumeDetail.do?resumeNo=${rVo.resumeNo}'/>" id="alocation_jy"+${rVo.resumeNo }>
 											<span class="RWName">
 												<h3>
-													<input type="text" name="resumeTitle" id="resumeTitleEdit_jy"+${rVo.resumeNo} readonly="readonly" value="${rVo.resumeTitle}" class="nameEdit_jy"></input>
+												<label for="resumeTitle"> 
+														<c:if test="${fn:length(rVo.resumeTitle)>=27}">
+															${fn:substring(rVo.resumeTitle, 0,27) } ...
+														</c:if>
+														<c:if test="${fn:length(rVo.resumeTitle)<27}">						
+															${rVo.resumeTitle}
+														</c:if>							
+													<%-- ${rVo.resumeTitle} --%>
+													<input type="hidden" name="resumeTitle" id="resumeTitleEdit_jy"+${rVo.resumeNo} readonly="readonly" value="${rVo.resumeTitle}" class="nameEdit_jy"></input>
 													<input type="hidden" name="resumeNo" id="resumeNo_jy" value="${rVo.resumeNo}"></input>
+												</label>
 												</h3>
 											</span>
 											<span class="RWRegdate"><p><fmt:formatDate value="${rVo.resumeRegdate}" pattern="yyyy.MM.dd"/></p></span>
@@ -232,15 +241,21 @@ $(function(){
 									<c:if test="${rVo.resumeUpfileflag eq 'Y' }">
 										<span class="rFileName_jy">
 											<a href="<c:url value='/resume/resumeFileDown.do?resumeNo=${rVo.resumeNo}&resumeFile=${rVo.resumeFile}'/>">
-											${rVo.resumeTitle}
-												<%-- 
-												<span class="RWName">
-													<h3>
-														<input type="text" name="resumeTitle" id="resumeTitleEdit_jy"+${rVo.resumeNo} readonly="readonly" value="${rVo.resumeTitle}" class="nameEdit_jy"></input>
-														<input type="hidden" name="resumeNo" id="resumeNo_jy" value="${rVo.resumeNo}"></input>
-													</h3>
-												</span> 
-												--%>
+												<c:if test="${fn:length(rVo.resumeTitle)>=27}">
+													${fn:substring(rVo.resumeTitle, 0,27) } ...
+												</c:if>
+												<c:if test="${fn:length(rVo.resumeTitle)<27}">						
+													${rVo.resumeTitle}
+												</c:if>
+											<%-- ${rVo.resumeTitle} --%>
+											<%-- 
+											<span class="RWName">
+												<h3>
+													<input type="text" name="resumeTitle" id="resumeTitleEdit_jy"+${rVo.resumeNo} readonly="readonly" value="${rVo.resumeTitle}" class="nameEdit_jy"></input>
+													<input type="hidden" name="resumeNo" id="resumeNo_jy" value="${rVo.resumeNo}"></input>
+												</h3>
+											</span> 
+											--%>
 											</a>
 										</span>
 										<span class="RWRegdate"><p><fmt:formatDate value="${rVo.resumeRegdate}" pattern="yyyy.MM.dd"/></p></span>

@@ -1,0 +1,79 @@
+=>로그인 인터셉터
+/resume/resumeRegister.do   글자수세기, 언어변환, 삭제확인, 다운로드
+/resume/resumeList.do	    다운(이름이 중복되는경우), 파일이면 다운로드, 업, 삭제, 수정, 
+
+/resume/resumeDetail.do 
+resume/resumeEdit.do
+/resume//deleteResume.do    확인문구
+/deleteResumeFile.do
+
+/resume//resumefileUpload.do 새창열기
+/resume/resumeDown.do
+/resume/resumeFileDown.do 이력서파일 다운
+/resume/resumeSampleFileDown.do
+
+/resume/resumeDetailAdmin.do"(관리자가 조회!)
+
+=> 매치업 등록하기 누르면 -회원인지 이력서 있는지 확인 둘다만족하면 리스트, 이력서 없으면 register2로 넘김 
+회원아니면 레지스터로 넘어가서 화면 출력(직군리스트, 회원VO)
+/matchupMem/matchupMemRegister.do
+/matchupMem/matchupMemRegister2.do
+/matchupMem/matchupGetJikmu.do
+
+/matchupMem/matchupMemList.do
+/matchupMem/matchupMemChangeResume.do
+/matchupMem/matchupMemEdit1.do?expertiseNo=${mVo.MMDetailsVo.expertiseNo}
+/matchupMem/matchupMemEdit2.do?mcumemNo=${mVo.MMDetailsVo.mcumemNo}&eduNo=${mVo.MMDetailsVo.eduNo} &careerNo=${mVo.MMDetailsVo.careerNo}"
+/matchupMem/matchupRefNameUpdate.do
+/matchupMem/matchupjobFlagUpdate.do
+/matchupMem/matchupSearchCom.do
+/matchupMem/matchupExComRegister.do
+/matchupMem/matchupExComDelete.do
+/matchupMem/matchupExComSelectView.do
+
+/jobsearch/jobsearchDetail.do
+
+
+메인
+/resume/resumeIntro.do
+/matchupMem/matchupMemIntro.do
+
+
+어드민
+
+/admin/adminResume.do 이력서 조회
+/admin/adminApply.do 지원하기 조회
+
+
+
+
+pdf파일 완성
+파일다운로드하기
+모달이 필요한 곳
+
+
+api쓴것들 정리 각각 화면에서 쓰기
+어떤 api썻다.
+어떻게 구현했다.-간단
+
+
+1. /*/target/**, manifest-Inf, properties
+타겟- 깃이그노어에 올렸더니 거의해결이 됐다. 클래스파일에서도 충돌
+
+2. sts에서 빌드 오토매티컬리 => 체크풀기
+
+3. 프로젝트 클린(업데이트 프로젝트에서 프로젝트 클린-타켓 클래스화일지워짐)
+
+4. 프로젝트를 부랜치에 푸쉬 머지하면 클래스없는 애들 적용
+
+5. 모든 팀장에 풀받기 
+
+
+수업마치고 30분동안은 작업 안하고 팀장에 풀리퀘스트 온것 머지
+같은파일인 경우=>얘기하기 작업마치고 풀리퀘하면 풀 받아서 작업하기
+
+
+
+
+113facba4f73617891660a56978a97c5
+
