@@ -9,7 +9,6 @@ button.btEdit_jy {
     margin-top: 20px;
 }
 
-.member-img_jy {}
 
 .member-img_jy {
     background-size: contain;
@@ -28,8 +27,6 @@ i.icon-camera_icon.camerai_jy {
     padding: 5px;
     border-radius: 20px;
 }
-
-.member-img_jy {}
 
 input.inputimg_jy {
     display: none;
@@ -893,3 +890,6 @@ li.spExComList_jy {
 .exselectbtName_jy.refName {
     color: black;
 }
+/* 0217 */
+
+i.icon-edit.pencilEdit_jy1 {top: 110%;}
