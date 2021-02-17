@@ -273,6 +273,7 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		
 		mcumemSearchResultList=matchupMemDao.selectMcumemSearchList(mcuMemSearchVo);
 		System.out.println("매치업넘버리스트에 해당하는 매치업멤버 뷰 조회 결과, mcumemSearchResultList.size="+mcumemSearchResultList.size());
+		System.out.println("매치업넘버리스트에 해당하는 매치업멤버 뷰 조회 결과, mcumemSearchResultList="+mcumemSearchResultList);
 	
 		return mcumemSearchResultList;
 	}

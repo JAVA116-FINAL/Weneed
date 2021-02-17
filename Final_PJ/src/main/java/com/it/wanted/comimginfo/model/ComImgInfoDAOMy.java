@@ -63,5 +63,10 @@ public class ComImgInfoDAOMy implements ComImgInfoDAO{
 	public int selectPassedTotalRecord(SearchVO searchVo2) {
 		return sqlSession.selectOne(namespace+"selectPassedTotalRecord", searchVo2);
 	}
+
+	@Override
+	public int selectPassedCntByComCode(String comCode) {
+		return sqlSession.selectOne(namespace+"selectPassedCntByComCode", comCode);
+	}
 	
 }

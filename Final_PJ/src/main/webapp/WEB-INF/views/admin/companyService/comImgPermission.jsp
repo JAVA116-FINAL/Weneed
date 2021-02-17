@@ -77,7 +77,7 @@ function pageFuncY(curPage){
 			"curPage":curPage
 		},
 		success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
-			alert('승인요청건 조회 성공!');
+		//	alert('승인요청건 조회 성공!');
 			drawTrY(result, here);
 			drawPageDivY(result, here2);
 		},
@@ -99,7 +99,7 @@ function pageFuncP(curPage){
 			"curPage":curPage
 		},
 		success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
-			alert('승인완료건 조회 성공!');
+		//	alert('승인완료건 조회 성공!');
 			drawTrP(result, here);
 			drawPageDivP(result, here2);
 		},

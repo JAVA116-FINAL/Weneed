@@ -169,7 +169,7 @@
 	</select>
 	
 	
-	<!-- 검색용 view 0213 업데이트
+	<!-- 검색용 view 0217 업데이트
 	create or replace view matchupMemSearchView
 	as
 	select rownum as RNUM,  A.*
@@ -177,11 +177,11 @@
 	(
 	select m.mcumem_no as MCUMEMNO, m.resume_no AS RESUMENO, m.mem_no AS MEMNO, m.expertise_no AS EXPERTISENO, 
 	       m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITLE,
-	       r.resume_name AS RESUMENAME, r.resume_introduce AS RESUMEINTRODUCE, r.lang_flag AS LANGFLAG, 
+	       r.resume_name AS RESUMENAME, DBMS_LOB.SUBSTR(r.resume_introduce, 4000, 1) AS RESUMEINTRODUCE, r.lang_flag AS LANGFLAG, 
 	       c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
 	       x.jikGun_code AS JIKGUNCODE, x.career AS CAREER, x.skill AS SKILL,
 	       (select jikmu_name from jikmu j where j.JIKMU_CODE=
-	            (select jikmu_code from matchupmemjikmu mjm where mjm.expertise_no=m.expertise_no)) as JIKMUNAME, 
+	            (select jikmu_code from matchupmemjikmu mjm where mjm.expertise_no=m.expertise_no and rownum=1)) as JIKMUNAME, 
 	       (select jikgun_name from jikgun jk where jk.jikgun_code=
 	            (select jikgun_code from expertise e where e.expertise_no=m.expertise_no)) as JIKGUNNAME
 	from matchupMem m join resume r on m.resume_No = r.resume_no 

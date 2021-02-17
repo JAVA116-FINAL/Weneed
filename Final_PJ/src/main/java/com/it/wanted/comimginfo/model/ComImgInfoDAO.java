@@ -17,5 +17,6 @@ public interface ComImgInfoDAO {
 	int selectYetTotalRecord(SearchVO searchVo);
 	List<ComImgInfoVO> selectAllPassedImg(SearchVO searchVo2);
 	int selectPassedTotalRecord(SearchVO searchVo2);
+	int selectPassedCntByComCode(String comCode);
 
 }

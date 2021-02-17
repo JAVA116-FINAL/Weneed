@@ -125,6 +125,7 @@ public class CompanyMatchUpController {
 		searchVo.setViewMoreSize(0);
 		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
 		logger.info("5번째 리스트까지 불러오기 결과, memList.size={}", memList.size());
+		logger.info("5번째 리스트까지 불러오기 결과, memList={}", memList);
 		
 		Map<String, Object> emptyMapCheck=new HashMap<String, Object>();
 		String emptyCheck="";
@@ -227,6 +228,7 @@ public class CompanyMatchUpController {
 		
 		List<Map<String, Object>> memList=matchupMemService.selectZzimedList(searchVo);
 		logger.info("찜한 목록 조회 결과, memList.size={}", memList.size());
+		logger.info("찜한 목록 조회 결과, memList={}", memList);
 
 		searchVo=setAfterMethod(searchVo);
 		

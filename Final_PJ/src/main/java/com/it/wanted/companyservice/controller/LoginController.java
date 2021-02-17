@@ -61,7 +61,6 @@ public class LoginController {
 			session.setAttribute("comMemName", comMemInfoVo.getComMemName());
 			//멤버정보를 통째로 가져와서 사용할 수 있는 것들 
 			// 1 멤버번호, 2 멤버이름, 3 멤버번호를 사용해서 기업정보 불러오기 
-			
 			//기업정보 등록 여부 확인.. 있는거 말고 승인됐는지 확인한다
 			int regedCheck=comMemListService.checkComReged(comMemLoginId);
 			logger.info("기업정보 등록 여부 확인 결과 regedCheck={}", regedCheck);

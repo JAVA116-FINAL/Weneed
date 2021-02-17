@@ -271,7 +271,11 @@ function setResume(resumeStyle, resumeNo){
 function drawLang(resumeAllVo){
 	if(resumeAllVo.langList.length>0){
 		var language='';
+		
 		for(lang of resumeAllVo.langList){
+			if(lang.langName==null){
+				lang.langName="";
+			}
 			language+='<div class="matchupResumeLang">';
 			language+='<div>';
 			language+='<span class="matchupResumeSubTitle">'+lang.langName+'</span><span class="matchupResumeMediumSpan"> '+lang.langLevel+'</span>';
@@ -280,6 +284,9 @@ function drawLang(resumeAllVo){
 			
 			if(resumeAllVo.testList.length>0){
 				for(test of resumeAllVo.testList){
+					if(test.langtestName==null){
+						test.langtestName="";
+					}
 					language+='<span class="matchupResumeMediumSpan matchupResumeBoldSpan">'+test.langtestName;
 					language+=' '+test.langtestScore+'</span>';
 					language+='<span class="matchupResumeMediumSpan">'+test.getYear+'.'+test.getMonth+'</span>';
@@ -297,6 +304,13 @@ function drawLang(resumeAllVo){
 function drawAdd(resumeAllVo){
 	if(resumeAllVo.addList.length>0){
 		for(add of resumeAllVo.addList){
+			if(add.addName==null){
+				add.addName="";
+			}
+			if(add.addDetails==null){
+				add.addDetails="";
+			}
+
 			var additional='';
 			additional+='<div class="matchupResumeCont matchupResumeSpace">';
 			additional+='<div class="matchupResumeSubTitle">'+add.addName+'</div>';
@@ -348,6 +362,18 @@ function setSimpleResumeMD(resumeAllVo){
 	});
 	
 	for(crr of resumeAllVo.crrList){
+		if(crr.careerDep==null){
+			crr.careerDep="";		
+		}
+		if(crr.careerName==null){
+			crr.careerName="";
+		}
+		if(crr.startYear==null || crr.startMonth==null || crr.endYear==null || crr.endMonth==null){
+			crr.startYear='';
+			crr.startMonth='';
+			crr.endYear='';
+			crr.endMonth='';
+		}
 		var career='';
 		career+='<div class="matchupResumeCont matchupResumeSpace">';
 		career+='<div>';
@@ -361,16 +387,28 @@ function setSimpleResumeMD(resumeAllVo){
 	}
 	
 	for(edu of resumeAllVo.eduList){
-		var education='';
-		education+='<div class="matchupResumeCont matchupResumeSpace">';
-		education+='<div class="matchupResumeSubTitle">'+edu.eduName+'</div>';
-		education+='<div>'+edu.startYear+'.'+edu.startMonth+' ~ '+edu.endYear+'.'+edu.endMonth+'</div>';
-		education+='</div>';
-		education+='<div>';
-		education+='<div>'+edu.eduMajor+'</div>';
-		education+='</div>';
-		
-		$('.matchupResumeWrapper:eq(1)').append(education);
+		if(edu.eduName!=null && edu.eduName != ''){
+			var education='';
+			if(edu.eduMajor==null){
+				edu.eduMajor="";
+			}
+			if(edu.startYear==null || edu.startMonth==null || edu.endYear==null || edu.endMonth==null){
+				edu.startYear="";
+				edu.startMonth="";
+				edu.endYear="";
+				edu.endMonth="";
+			}
+			
+			education+='<div class="matchupResumeCont matchupResumeSpace">';
+			education+='<div class="matchupResumeSubTitle">'+edu.eduName+'</div>';
+			education+='<div>'+edu.startYear+'.'+edu.startMonth+' ~ '+edu.endYear+'.'+edu.endMonth+'</div>';
+			education+='</div>';
+			education+='<div>';
+			education+='<div>'+edu.eduMajor+'</div>';
+			education+='</div>';
+			
+			$('.matchupResumeWrapper:eq(1)').append(education);
+		}
 	}
 	
 	drawLang(resumeAllVo);
@@ -426,6 +464,12 @@ function setDetailResumeMD(resumeAllVo){
 	$('.matchupResumeIntroSection').append(intro);
 	
 	for(crr of resumeAllVo.crrList){
+		if(crr.careerDep==null){
+			crr.careerDep="";		
+		}
+		if(crr.careerName==null){
+			crr.careerName="";
+		}
 		var career='';
 		career+='<div class="matchupResumeCont matchupResumeSpace">';
 		career+='<div>';
@@ -437,12 +481,28 @@ function setDetailResumeMD(resumeAllVo){
 		
 		if(resumeAllVo.achList.length>0){
 			for(ach of resumeAllVo.achList){
-				career+='<div class="matchupResumeCont matchupResumeSpace matchupResumeAchievement">';
-				career+='<div>'+ach.achName+'</div>';
-				career+='<div class="matchupResumeMediumSpan">'+ach.startYear+'.'+ach.startMonth +' ~ '+ach.endYear+'.'+ach.endMonth+'</div>';
-				career+='</div>';
-				career+='<div>'+ach.achDetails+'</div>';
-				career+='<div class="matchupResumeMDLightLine"></div>';
+				console.log("성과"+ach);
+				if(ach!=null){
+					if(ach.achDetails==null){
+						ach.achDetails="";
+					}
+					if(ach.achName==null){
+						ach.achName="";
+					}
+					
+					career+='<div class="matchupResumeCont matchupResumeSpace matchupResumeAchievement">';
+					career+='<div>'+ach.achName+'</div>';
+					career+='<div class="matchupResumeMediumSpan">';
+					if(ach.startYear!=null || ach.startMonth!=null || ach.endYear!=null || ach.endMonth!=null){
+						career+=ach.startYear+'.'+ach.startMonth +' ~ '+ach.endYear+'.'+ach.endMonth;
+					}
+					career+='</div>';
+					career+='</div>';
+					career+='<div>'+ach.achDetails+'</div>';
+					career+='<div class="matchupResumeMDLightLine"></div>';
+				
+				}
+				
 			}
 		}
 		$('.matchupResumeWrapper:eq(0)').append(career);
@@ -450,6 +510,12 @@ function setDetailResumeMD(resumeAllVo){
 	
 	for(edu of resumeAllVo.eduList){
 		var education='';
+		if(edu.eduName==null){
+			edu.eduName="";
+		}
+		if(edu.eduMajor==null){
+			edu.eduMajor="";
+		}
 		education+='<div class="matchupResumeCont matchupResumeSpace">';
 		education+='<div class="matchupResumeSubTitle">'+edu.eduName+'</div>';
 		education+='<div>'+edu.startYear+'.'+edu.startMonth+' ~ '+edu.endYear+'.'+edu.endMonth+'</div>';
