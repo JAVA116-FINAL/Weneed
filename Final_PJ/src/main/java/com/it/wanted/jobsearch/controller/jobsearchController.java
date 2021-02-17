@@ -66,7 +66,7 @@ public class jobsearchController {
 	public void jobsearchDetail(@RequestParam int posNo, HttpSession session, Model model) {
 		logger.info("탐색 상세보기 화면보여주기");
 		
-		int memNo= (Integer) session.getAttribute("mem_no"); 
+		int memNo= (Integer)session.getAttribute("mem_no");
 		String email= (String)session.getAttribute("email");
 		
 		String memName = jobsearchdetailService.selectMemberName(email);
