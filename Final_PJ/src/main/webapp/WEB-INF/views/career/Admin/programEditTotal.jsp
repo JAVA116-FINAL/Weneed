@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<%@ include file="../../inc/top.jsp" %>  
+<%@ include file="../../inc/admin_top.jsp" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,38 +40,17 @@ $( document ).ready( function() {
 	
 /* 유효성 검사 */	
 $(function(){
-	$('#proName').focus();
+	$('#proTitle').focus();
 	
-
 	
-	$('form[name=proEdit1]').submit(function(){
-		if($('#proName').val().length<1){
-			alert('프로그램 이름을 입력하세요');
-			$('#proName').focus();
+	$('form[name=proEditTotal]').submit(function(){
+		if($('#proTitle').val().length<1){
+			alert('프로그램 부제목은 필수입니다!');
+			$('#proTitle').focus();
 			event.preventDefault();
-		}else if($("input[name=cateName]:checkbox").is(':checked')==false){
-			alert('카테고리를 선택하세요');
-			location.href="#cateName";
-			event.preventDefault();
-		}else if($('#proType').val()=='0'){
-			alert('프로그램 타입을 선택하세요');
-			$('#proType').focus();
-			event.preventDefault();
-		}else if($('#proStartDate').val().length<1){
-			alert('프로그램 시작일은 언제인가요?');
-			$('#proStartDate').focus();
-			event.preventDefault();
-		}else if($('#proPrice').val().length<1){
-			alert('프로그램 가격은요?');
-			$('#proPrice').focus();
-			event.preventDefault();
-		}else if($('#regiEndDate').val().length<1){
-			alert('프로그램 신청 마감일은 언제인가요?');
-			$('#regiEndDate').focus();
-			event.preventDefault();
-		}else if($('#imgUrl').val()==''){
-			alert('프로그램 썸네일 이미지는 필수입니다!');
-			$('#imgUrl').focus();
+		}else if($('#contentsDiv').val().length<1){
+			alert('프로그램 내용을 입력해주세요!');
+			$('#contentsDiv').focus();
 			event.preventDefault();
 		}			
 	});
@@ -101,23 +80,19 @@ $(function(){
 		<legend style="color:#258bf7;"><b>프로그램 내용, 수정 페이지   &nbsp;</b><i class="fas fa-eraser fa-1x"></i></legend>
 		<br>
     			
-									    <input type="text" name="programNo" value="${param.programNo}"/>
+									    <input type="hidden" name="programNo" value="${param.programNo}"/>
 		<!-- 프로그램 두번째 파트 (proContents)테이블 부분 수정!!! -->
 			<!-- 반복문으로 제목 내용 뿌려주기 -->
-	 			<div style="margin-top:-50px;">
-
-
-
-
+	 		<div style="margin-top:-50px;">
 				<c:forEach var="proVo2" items="${proConList }">	
 										<a name="title${proVo2.proConNo}"></a>		
 										<br><br>			
-										  <input type="text" name="proVo2List[${proVo2.proConNo-1}].programNo" value="${param.programNo}"/>
-										  <input type="text" name="proVo2List[${proVo2.proConNo-1}].proConNo" value="${proVo2.proConNo}"/>
+										  <input type="hidden" name="proVo2List[${proVo2.proConNo-1}].programNo" value="${param.programNo}"/>
+										  <input type="hidden" name="proVo2List[${proVo2.proConNo-1}].proConNo" value="${proVo2.proConNo}"/>
 										
-										<div class="parag" id="parag2" style="margin-top: 50px;">
+										<div class="parag" id="parag2" style="margin-top: 20px;">
 										<label>${proVo2.proConNo}번째</label><br>
-											<input type="text" class="programTitleTextField" id="proTitle" name="proVo2List[${proVo2.proConNo-1}].proTitle" value="${proVo2.proTitle }">
+											<input type="text" class="programTitleTextField" id="proTitle${i}" name="proVo2List[${proVo2.proConNo-1}].proTitle" value="${proVo2.proTitle }">
 											<textarea id = "proContents${proVo2.proConNo}" class="description" name = "proVo2List[${proVo2.proConNo-1}].proContents" rows = "5" cols = "80">
 										<div>
 										${proVo2.proContents}
@@ -162,11 +137,8 @@ $(function(){
 </div>
 </section>
 
-<%@ include file="../../inc/bottom.jsp" %>  
 
-	<!-- 캘린더 -->
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+
 <script type="text/javascript">
 
 CKEDITOR.replace("proContents1");
@@ -183,8 +155,8 @@ CKEDITOR.config.height = '450px';   // CSS unit (percent).
 
 
 </script>
-</body>
-</html>
+<%@ include file="../../inc/admin_bottom.jsp" %>  
+
 
 
 
