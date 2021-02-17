@@ -84,31 +84,7 @@ $(function(){
 <script src="http://code.jquery.com.jquery-3.5.1.min.js"></script>
 </head>
 <body>
-	<%
-		String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");  //userID에 해당 세션 사용자의 값을 스트링 형식으로 바꿔서 넣어줌으로써 해당 사용자의 접속 유무를 알 수 있음
-	}
-	%>
-	
 <!-- 메뉴 부분!!!!! -->
-<div class="jbMenu" style="width:100%;">
-    	<nav class="navbar navbar-expand-lg navigation" id="navbar" style="background-color:#f8f8fa;">
-		<div class="container" >
-		 	 <div class="navbar-brand">
-				<div class="myNav" style="width:100%;">
-			  <ul class="navbar-nav ml-auto">
-			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programList.do'/>">프로그램 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title3">Notice</a></li>				
-			    <a name="title"></a>   
-			  </ul>	
-			</div>
-			</div>
-		</div>
-		</nav>
-</div>
 <!-- 메뉴 탑부분 끝!! -->
 
 

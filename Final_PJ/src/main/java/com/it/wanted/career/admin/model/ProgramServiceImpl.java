@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.it.wanted.career.cate.model.CareerCategoryVO;
 import com.it.wanted.common.SearchVO;
 
 @Service
@@ -100,6 +101,26 @@ public class ProgramServiceImpl implements ProgramService {
 	@Transactional
 	public int deleteOneProgram(ProgramVO proVo) {
 			return programDao.deleteOneProgram(proVo);
+	}
+
+	@Override
+	public String selectMembersName(String email) {
+		return programDao.selectMembersName(email);
+	}
+
+	@Override
+	public List<ProgramVO> selectSimilarProgram() {
+		return programDao.selectSimilarProgram();
+	}
+
+	@Override
+	public List<ProgramVO> selectAllProgramsForMain() {
+		return programDao.selectAllProgramsForMain();
+	}
+
+	@Override
+	public List<CareerCategoryVO> selectMatchCategoryNameMain() {
+		return programDao.selectMatchCategoryNameMain();
 	}
 
 	

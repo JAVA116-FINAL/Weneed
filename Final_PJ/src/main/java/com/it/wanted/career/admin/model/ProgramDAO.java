@@ -3,6 +3,7 @@ package com.it.wanted.career.admin.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.wanted.career.cate.model.CareerCategoryVO;
 import com.it.wanted.common.SearchVO;
 
 public interface ProgramDAO {
@@ -18,6 +19,10 @@ public interface ProgramDAO {
 	public List<ProgramVO2> selectProgramContentsView(int programNo);
 	public int updateProgramEditTotal(ProgramVO2 proVo2Con);
 	public int deleteOneProgram(ProgramVO proVo);
+	public String selectMembersName(String email);
+	public List<ProgramVO> selectSimilarProgram();
+	public List<ProgramVO> selectAllProgramsForMain();
+	public List<CareerCategoryVO> selectMatchCategoryNameMain();
 
 
 }

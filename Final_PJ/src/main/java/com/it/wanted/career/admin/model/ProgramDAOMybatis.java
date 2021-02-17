@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.career.cate.model.CareerCategoryVO;
 import com.it.wanted.common.SearchVO;
 
 
@@ -86,6 +87,26 @@ public class ProgramDAOMybatis implements ProgramDAO{
 	@Override
 	public int deleteOneProgram(ProgramVO proVo) {
 		return sqlSession.delete(namespace+"deleteOneProgram", proVo);
+	}
+
+	@Override
+	public String selectMembersName(String email) {
+		return sqlSession.selectOne(namespace+"selectMembersName", email);
+	}
+
+	@Override
+	public List<ProgramVO> selectSimilarProgram() {
+		return sqlSession.selectList(namespace+"selectSimilarProgram");
+	}
+
+	@Override
+	public List<ProgramVO> selectAllProgramsForMain() {
+		return sqlSession.selectList(namespace+"selectAllProgramsForMain");
+	}
+
+	@Override
+	public List<CareerCategoryVO> selectMatchCategoryNameMain() {
+		return sqlSession.selectList(namespace+"selectMatchCategoryNameMain");
 	}	
 				
 

@@ -80,13 +80,7 @@ body{
 	
 </head>	
 <body>
-	<%
-		String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");  //userID에 해당 세션 사용자의 값을 스트링 형식으로 바꿔서 넣어줌으로써 해당 사용자의 접속 유무를 알 수 있음
-	}
-	%>
-	
+
 <!-- 메뉴 부분!!!!! -->
 
 <!-- 메뉴 탑부분 끝!! -->
@@ -146,7 +140,7 @@ body{
 		            	</c:if>
 		            >교육/강의</option>
 		        </select>   
-<%-- 
+
 			프로그램 조회
 			
 			<select name="proType">
@@ -172,7 +166,7 @@ body{
 					</c:if>
 				>신청 마감 완료</option>				
 			</select>
- --%>			<button><i class="fas fa-search"></i></button>		
+ 			<button><i class="fas fa-search"></i></button>		
 		</div>
 		<!-- 이벤트별 조회 끝 -->
 		

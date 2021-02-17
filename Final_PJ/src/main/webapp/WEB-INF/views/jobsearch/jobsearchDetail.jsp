@@ -217,9 +217,7 @@
 						<div class="row">
 							<c:forEach var="map" items="${jsDetailsViewVoList}">
 								<div class="col-lg-3 col-md-6 ">
-									<div class="department-block mb-5">	
-									<c:out value="${jsViewList.jobsresearchdetailsList }"/>				
-			
+									<div class="department-block mb-5">				
 										<img src="<c:url value='/companyImgUpload/${map["COM_IMG_URL"]}'/>" class="img-fluid w-100"> 
 											<div class="content">
 												<a href="#" class="read-more">
