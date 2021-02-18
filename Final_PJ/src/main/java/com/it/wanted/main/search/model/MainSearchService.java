@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.it.wanted.career.admin.model.ProgramVO;
+import com.it.wanted.position.model.PosNewVO;
 
 public interface MainSearchService {
 
@@ -16,5 +17,7 @@ public interface MainSearchService {
 	List<MainSearchVO> selectNewRecruit();
 
 	List<ProgramVO> selectMainCareerList();
+
+	List<PosNewVO> selectMainNewPos();
 
 }

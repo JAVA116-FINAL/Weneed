@@ -14,7 +14,7 @@
 
 <!-- 검색조건:포지션 -->
 	<select id="searchPosition" resultType="mainSearchVo" parameterType="String">
-		select a.com_name, a.nation, a.region, b.com_img_url, c.pos_name
+		select a.com_name, a.nation, a.region, b.com_img_url, c.pos_name, c.pos_no
 		from comInfo a inner join comImgInfo b on a.COM_CODE = b.COM_CODE
 		inner join position c on a.COM_CODE = c.COM_CODE
 		<if test="value!=null">
@@ -35,21 +35,31 @@
 	
 	<!-- 메인 -->
 	<select id="selectNewRecruitList" resultType="mainSearchVo">
-	select com_code, com_Name, industry,
+	select * from (select com_code, com_Name, industry,
 	(select com_Img_Url from comimgInfo c1 where c1.com_Code=c2.com_code and c1.com_logo like '%N%' and rownum=1)as com_img_url
-	from comInfo c2 where (select com_Img_Url from comimgInfo c1 where c1.com_Code=c2.com_code and rownum=1) is not null 
+	from comInfo c2 where (select com_Img_Url from comimgInfo c1 where c1.com_Code=c2.com_code and rownum=1) is not null order by com_regdate desc)
 	<![CDATA[
-		and rownum <=4 order by com_regdate desc
+	where rownum<=4
 	]]>
 	</select>
 	
 	<select id="selectMainCareerList" resultType="programVo">
 	select *
-	from (select pro_image, pro_name from program
+	from (select pro_image, pro_name, program_no from program
 		where pro_image is not null order by regdate desc)
 	<![CDATA[
 	where rownum <=6
 	]]>
 	</select>
+	
+	<select id="selectMainNewPosition" resultType="posNewVo">
+		select * from(select c2.com_name, c2.nation, c2.region, c3.pos_name, c3.pos_no,
+		(select com_img_url from comimginfo c1 where c1.com_code=c2.com_code and c1.com_logo like '%N%' and rownum=1)as com_img_url
+		from cominfo c2, position c3 where c2.com_code=c3.com_code order by c3.pos_regdate desc)
+		<![CDATA[
+		where rownum<=4
+		]]>
+	</select>
+	
 	
 </mapper>
