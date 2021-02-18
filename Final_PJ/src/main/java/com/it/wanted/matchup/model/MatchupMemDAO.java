@@ -25,6 +25,8 @@ public interface MatchupMemDAO {
 	public int deleteMatchupmembyResumeNo(int resumeNo);
 	public List<Map<String, Object>>selectMatchupMemAllbyAdmin(SearchVO searchVo); 
 	public int totalRecordbyAdmin(SearchVO searchVo);
+	public int matchupLikeCountbyMemNo(int memNo);
+	
 	
 	/* 현빈 */
 	List<MatchupMemVO> selectOpen();

@@ -164,7 +164,36 @@ $(function(){
 		}
 	});
 	
-	
+	$('#upfile').change(function(){
+		if($('#upfile').val().length<1){	
+			alert('업로드할 파일을 선택하세요');
+			return false;
+		}
+   		var form = $('#frmUpfile')[0];
+	 	var formData = new FormData(form);// FormData 객체 생성
+		
+		  $.ajax({
+			url:"<c:url value='/mypage/fileUpload.do'/>",
+			type:"POST",
+			dataType:"text",
+			data:formData,
+			processData: false,
+			contentType: false,
+			cache: false,
+			success:function(resUp){
+				//alert(resUp);
+				var imgStr="";
+				imgStr="<img class='img_member_jy'  src='"+resUp+"'>";
+				$('#memberImg').empty();
+				$('#memberImg').html(imgStr);
+				
+			},
+			error:function(xhr,status,error){
+				alert("error!:"+error);
+			}
+		}); //ajax
+		
+	});//change이벤트
 
 });//jquery
 
@@ -180,30 +209,43 @@ $(function(){
 				<div class="profileTitle-dt_jy">프로필</div>
 				<div class="profileblock_jy">
 					<header class="profileHeader_jy">
-						<div class="member-img_jy" style='background-image: url("https://s3.ap-northeast-2.amazonaws.com/wanted-public/profile_default.png"), url("https://static.wanted.co.kr/images/profile_default.png")'>
+						<div id="divupfile" class="member-img_jy">
 						 <!-- 폼은 어디갔니 -->
-							<input class="inputimg_jy" type="file" accept="image/*">
-							<i class="icon-camera_icon camerai_jy"></i> 
+							<div class="memberImg" id="memberImg">
+								<c:if test="${empty memVo.fileName }">
+									<i class="fas fa-user fa-5x"></i>
+								</c:if>
+								<c:if test="${!empty memVo.fileName }">
+									<img class="img_member_jy" alt="회원이미지" src="<c:url value='/resources/memberImgUpload/${memVo.fileName }'/>">
+								</c:if>
+							</div>
+							<form name="frmUpfile" id="frmUpfile" method="post" enctype="multipart/form-data" action="<c:url value='/mypage/fileUpload.do'/>">
+								<input class="inputimg_jy" type="file" name="upfile" id="upfile" accept="image/*" >
+								<input type="hidden" name="oldFileName" value="${memVo.fileName}"/>
+								<button id="btUpfile" type="button" onclick="$('#upfile').trigger('click');">
+									<i class="icon-camera_icon camerai_jy"></i>
+								</button>
+							</form>
 						</div>
 						<div class="asideMe_jy">
 							<div class="asideName_jy">${memVo.name}</div>
 							<div class="asideMail_jy">${memVo.email}</div>
 							<div class="asideHp_jy">${memVo.hp}</div>
 						</div>
-						<button type="button" class="btEdit_jy" value="기본정보수정">기본정보 수정</button>
+						<button type="button" class="btEdit_jy" value="기본정보수정" onclick="location.href='<c:url value="/mypage/profileEdit.do"/>'">기본정보 수정</button>
 					</header>
 					<div class="info-block mt-4 infoblock_jy">
 						<a href="#" class="profileInfo-a_jy">
 							<span class="spWant_jy">원해요</span>
-							<strong class="wantCount_jy">0</strong>
+							<strong class="wantCount_jy">${likeCnt }</strong>
 						</a>
 						<a href="#" class="profileInfo-a_jy">
 							<span class="spOpen_jy">열람</span>
-							<strong class="openCount">0</strong>
+							<strong class="openCount">${openResumeCnt }</strong>
 						</a>
 						<a href="#" class="profileInfo-a_jy">
 							<span class="spSuggest">받은제안</span>
-							<strong class="suggestCount">0</strong>
+							<strong class="suggestCount">${proposalCnt }</strong>
 						</a>
 					</div>
 				</div>

@@ -47,5 +47,16 @@
 		set outdate = sysdate
 		where email=#{email}
 	</update>
+	<!-- 0218자연 -->
+	<update id="updateMemInfobyMemNo" parameterType="memberVo">
+		update memberInfo
+		set name=#{name}, email=#{email} ,hp=#{hp}
+		where mem_No=#{memNo}
+	</update>
+	<update id="updateMemberImg" parameterType="memberVo">
+		update memberInfo
+		set fileName=#{fileName},fileSize=#{fileSize},originalFileName=#{originalFileName}
+		where mem_No=#{memNo}
+	</update>
 	
 </mapper>

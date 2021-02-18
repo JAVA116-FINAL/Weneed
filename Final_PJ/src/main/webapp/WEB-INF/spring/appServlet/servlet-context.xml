@@ -42,7 +42,7 @@
 	</beans:bean>
 	
 	<!-- 기업서비스 로그인 인터셉터 -->
-	<beans:bean id="ComLoginInterceptor" class="com.it.wanted.companyservice.controller.ComLoginInterceptor"></beans:bean>
+		<beans:bean id="ComLoginInterceptor" class="com.it.wanted.companyservice.controller.ComLoginInterceptor"></beans:bean>
     
     <interceptors>
         <interceptor>
@@ -64,6 +64,8 @@
             <mapping path="/mypage/main.do"/>
            	<mapping path="/profileSetting/setting.do"/>
             
+            <!-- 자연0218추가 -->
+            <mapping path="/mypage/profileEdit.do"/>
             <!-- 자연 -->
             <mapping path="/resume/*.do"/>
             <mapping path="/matchupMem/*.do"/>

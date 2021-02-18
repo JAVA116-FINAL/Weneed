@@ -15,6 +15,6 @@ public interface MatchupStatusService {
 	/* 0207 자연 */
 	public List<Map<String, Object>> selectMatchupStatusbyAdmin(SearchVO searchVo); 
 	public int selectTotalRecordbyAdmin(SearchVO searchVo);
-	
+	public int openResumeCountbyMemNo(int memNo);
 	
 }

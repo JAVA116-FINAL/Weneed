@@ -63,5 +63,10 @@ public class MatchupStatusServiceImpl implements MatchupStatusService{
 	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
 		return matchupStatusDao.selectTotalRecordbyAdmin(searchVo);
 	}
+
+	@Override
+	public int openResumeCountbyMemNo(int memNo) {
+		return matchupStatusDao.openResumeCountbyMemNo(memNo);
+	}
 	
 }

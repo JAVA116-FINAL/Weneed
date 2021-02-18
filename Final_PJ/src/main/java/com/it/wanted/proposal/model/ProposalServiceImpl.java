@@ -57,5 +57,11 @@ public class ProposalServiceImpl implements ProposalService{
 		
 		return result;
 	}
+
+	/* 0218자연 */
+	@Override
+	public int proposalCountbyMemNo(int memNo) {
+		return proposalDao.proposalCountbyMemNo(memNo);
+	}
 	
 }
