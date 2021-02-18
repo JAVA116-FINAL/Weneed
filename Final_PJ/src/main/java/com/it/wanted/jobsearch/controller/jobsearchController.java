@@ -77,9 +77,14 @@ public class jobsearchController {
 		posVo = jobsearchdetailService.selectPositionInfoJobSearch(posNo);
 		logger.info("탐색 상세보기 posVo={}", posVo);
 		
-		ComInfoVO cominfoVo = new ComInfoVO();
+		
+		/*ComInfoVO cominfoVo = new ComInfoVO();
 		cominfoVo = jobsearchdetailService.selectComNameByComNo(posNo);
-		logger.info("탐색 상세보기 기업정보 cominfoVo={}", cominfoVo);
+		logger.info("탐색 상세보기 기업정보 cominfoVo={}", cominfoVo);*/
+		
+		//유정 추가 - 탐색 상세보기 국가, 도시정보 추가
+		Map<String, Object> comInfoMap=jobsearchdetailService.selectComNameByComNo_2(posNo);
+		logger.info("탐색 상세보기 기업정보 comInfoMap={}", comInfoMap);
 		
 		/* 기업 이미지 불러오기 */
 		String comImg = jobsearchdetailService.selectComImage(posNo);
@@ -96,7 +101,8 @@ public class jobsearchController {
 		
 		model.addAttribute("memName", memName);
 		model.addAttribute("posVo", posVo);
-		model.addAttribute("cominfoVo", cominfoVo); 
+		//model.addAttribute("cominfoVo", cominfoVo); 
+		model.addAttribute("comInfoMap", comInfoMap);
 		model.addAttribute("comImg", comImg); 
 		model.addAttribute("jsDetailsViewVoList", jsDetailsViewVoList); 
 	}

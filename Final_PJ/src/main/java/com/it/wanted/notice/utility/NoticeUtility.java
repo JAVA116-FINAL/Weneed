@@ -4,7 +4,7 @@ public class NoticeUtility {
 	
 	public String splitContent(String notice_content, String notice_keyword) {
 			
-		//</p>단위로 문자열 자름
+		//<br>단위로 문자열 자름
 		String[] str1=notice_content.split("<br>");
 		
 		int arrCnt=0;
