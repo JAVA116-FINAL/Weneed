@@ -96,7 +96,7 @@
 			<div class="carrer-chance-title-wrap">
 				<div class="carrer-box-title-div">
 					<h2 class="carrer-box-title">커리어 성장의 기회</h2>
-					<a href="#"><h6 class="event-more-btn">다양한 이벤트 더보기></h6></a>
+					<a href="<c:url value='/career/Mainpage/careerMain.do'/>"><h6 class="event-more-btn">다양한 이벤트 더보기></h6></a>
 				</div>
 			</div>
 			<div class="row align-items-center">
@@ -104,7 +104,7 @@
 					<c:forEach var="vo2" items="${listMainCareerList }">
 						<a href="<c:url value='/career/detailpage/detailPage.do?programNo=${vo2.programNo }'/>" style="display:block;">
 							<div class="testimonial-block style-2"
-								style="background:url('<c:url value='/programImgUpload/${vo2.proImage }' />') center/cover no-repeat; height:270px;padding:0; border-radius:3px; box-shoadow:inset 0 0 0 1px rgb(0 0 0 / 10%);">
+								style="background:url('<c:url value='/programImgUpload/${vo2.proImage }' />') center/cover no-repeat; height:250px;padding:0; border-radius:3px; box-shoadow:inset 0 0 0 1px rgb(0 0 0 / 10%);">
 								<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">${vo2.proName }</h3></div>
 							</div>
 						</a>

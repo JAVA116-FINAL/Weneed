@@ -45,8 +45,34 @@
 					<img src="<c:url value='/companyImgUpload/${vo.comImgUrl }' />" class="img-fluid w-100">
 					<h4 class="mt-3 passPredic-pic-title">${vo.posName }</h4>
 					<p class="ge-job-card-company-name">${vo.comName }</p>
-					<div class="ge-job-card-company-location">${vo.region }
-						<span class="ge-addressDot">.</span><span>${vo.nation }</span>
+					<div class="ge-job-card-company-location">
+						<c:set var="region" value="${vo.region }"/>
+						<c:choose>
+							<c:when test="${region eq 'KR11' }">서울</c:when>
+							<c:when test="${region eq 'KR12' }">부산</c:when>
+							<c:when test="${region eq 'KR13' }">대구</c:when>
+							<c:when test="${region eq 'KR14' }">인천</c:when>
+							<c:when test="${region eq 'KR19' }">경기</c:when>
+							<c:when test="${region eq 'JP11' }">도쿄</c:when>
+							<c:when test="${region eq 'JP12' }">오사카</c:when>
+							<c:when test="${region eq 'JP13' }">교토</c:when>
+							<c:when test="${region eq 'JP14' }">후쿠오카</c:when>
+							<c:when test="${region eq 'JP15' }">ETC</c:when>
+							<c:when test="${region eq 'TW11' }">타이페이</c:when>
+							<c:when test="${region eq 'TW12' }">가오슝</c:when>
+						</c:choose>
+						<span class="ge-addressDot">.</span>
+						<span>
+						<c:set var="nation" value="${vo.nation }"/>
+						<c:choose>
+							<c:when test="${nation eq 'KR' }">한국</c:when>
+							<c:when test="${nation eq 'TW' }">대만</c:when>
+							<c:when test="${nation eq 'SG' }">싱가폴</c:when>
+							<c:when test="${nation eq 'JP' }">일본</c:when>
+							<c:when test="${nation eq 'HK' }">홍콩</c:when>
+							<c:when test="${nation eq 'ETC' }">기타</c:when>
+						</c:choose>
+						</span>
 					</div>
 					<div class="ge-reward">채용보상금 1,000,000원</div>
 				</div>

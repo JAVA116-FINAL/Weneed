@@ -170,6 +170,19 @@ public class MemberController {
 		return bool;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/goMain.do")
+	public String goMain(HttpSession session, HttpServletResponse response) {
+		String email = (String) session.getAttribute("email");
+		logger.info("email={}", email);
+		
+		session.removeAttribute("email");
+		session.removeAttribute("name");
+		session.removeAttribute("mem_no");
+		session.removeAttribute("fileName");
+		
+		return "redirect:/profileSetting/setting.do";
+	}
 	
 	
 	@ResponseBody
