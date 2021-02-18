@@ -3,6 +3,8 @@ package com.it.wanted.applicants.model;
 import java.util.List;
 import java.util.Map;
 
+import com.it.wanted.common.SearchVO;
+
 
 public interface ApplicantsService {
 	public List<ApplicantsVO> selectAllPositions(String comCode);
@@ -25,6 +27,24 @@ public interface ApplicantsService {
 	public int countBunmo(AppliPagingVO appliPagingVo);
 
 	public int countBunja(AppliPagingVO appliPagingVo);
+
+	int insertApply(ApplicantsVO applyVo);
+
+	int selectApplyComplete(int memNo);
+
+	int selectDocumentPass(int memNo);
+
+	int selectFinalAccept(int memNo);
+
+	int selectFinalFail(int memNo);
+
+	int selectTotalRecordbyAdmin(SearchVO searchVo);
+
+	List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo);
+
+	int selectApplyTotal(int memNo);
+
+	List<Map<String, Object>> selectApplyList(int memNo);
 
 
 //	public List<Map<String, Object>> selectApplicants(ApplicantsVO appliVo);

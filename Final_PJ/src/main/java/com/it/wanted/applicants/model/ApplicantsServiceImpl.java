@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it.wanted.common.SearchVO;
+
 
 @Service
 public class ApplicantsServiceImpl implements ApplicantsService{
@@ -69,6 +71,51 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 //		return applicantsDao.updatePeriod(appliVo);
 //	}
 
+	/* 자연 */
+	@Override
+	public int insertApply(ApplicantsVO applyVo) {
+		return applicantsDao.insertApply(applyVo);
+	}
 
+	@Override
+	public List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo) {
+		return applicantsDao.selectApplyAllbyAdmin(searchVo);
+	}
+
+	@Override
+	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
+		return applicantsDao.selectTotalRecordbyAdmin(searchVo);
+	}
+	
+	/* 가은 */
+	@Override
+	public int selectApplyComplete(int memNo) {
+		return applicantsDao.selectApplyComplete(memNo);
+	}
+
+	@Override
+	public int selectDocumentPass(int memNo) {
+		return applicantsDao.selectDocumentPass(memNo);
+	}
+
+	@Override
+	public int selectFinalAccept(int memNo) {
+		return applicantsDao.selectFinalAccept(memNo);
+	}
+
+	@Override
+	public int selectFinalFail(int memNo) {
+		return applicantsDao.selectFinalFail(memNo);
+	}
+
+	@Override
+	public int selectApplyTotal(int memNo) {
+		return applicantsDao.selectApplyTotal(memNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectApplyList(int memNo) {
+		return applicantsDao.selectApplyList(memNo);
+	}
 
 }

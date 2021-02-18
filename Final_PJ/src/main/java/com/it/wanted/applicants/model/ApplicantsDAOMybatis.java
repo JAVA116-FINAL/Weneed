@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.common.SearchVO;
+
 
 @Repository
 public class ApplicantsDAOMybatis implements ApplicantsDAO {
@@ -59,4 +61,50 @@ public class ApplicantsDAOMybatis implements ApplicantsDAO {
 		return sqlSession.selectOne(namespace+"countBunja",appliPagingVo);
 	}
 
+	/* 자연 */
+	@Override
+	public int insertApply(ApplicantsVO applyVo) {
+		return sqlSession.insert(namespace+"insertApply",applyVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectApplyAllbyAdmin",searchVo);
+	}
+
+	@Override
+	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"selectTotalRecordbyAdmin",searchVo);
+	}
+	
+	/* 가은 */
+	@Override
+	public int selectApplyComplete(int memNo) {
+		return sqlSession.selectOne(namespace+"selectApplyComplete", memNo);
+	}
+
+	@Override
+	public int selectDocumentPass(int memNo) {
+		return sqlSession.selectOne(namespace +"selectDocumentPass", memNo);
+	}
+
+	@Override
+	public int selectFinalAccept(int memNo) {
+		return sqlSession.selectOne(namespace+"selectFinalAccept", memNo);
+	}
+
+	@Override
+	public int selectFinalFail(int memNo) {
+		return sqlSession.selectOne(namespace+"selectFinalFail", memNo);
+	}
+
+	@Override
+	public int selectApplyTotal(int memNo) {
+		return sqlSession.selectOne(namespace+"selectApplyTotal", memNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectApplyList(int memNo) {
+		return sqlSession.selectList(namespace+"selectApplyList", memNo);
+	}
 }
