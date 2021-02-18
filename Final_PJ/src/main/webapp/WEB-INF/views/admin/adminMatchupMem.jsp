@@ -41,6 +41,21 @@ th.th_jy {
     font: status-bar;
     font-weight: 700;
 }
+
+td.td_jy.skilltd {
+    max-width: 142px;
+}
+
+td.td_jy.reftd {max-width: 10px;padding-left: 0;padding-right: 0;}
+
+td.td_jy {
+    max-width: 59px;
+}
+
+td.td_jy {
+    padding-left: 0.5px;
+    padding-right: 0.5px;
+}
 </style>
 
 <script type="text/javascript">
@@ -81,33 +96,33 @@ function pageFunc(curPage){
 				<%-- <caption>매치업 회원 관리</caption> --%>
 				<colgroup>
 					<col style="width:1%;" />
-					<%-- <col style="width:5%;" /> --%>
+					<%-- <col style="width:7%;" /> --%>
+					<col style="width:10%;" />
 					<col style="width:7%;" />
-					<col style="width:8%;" />
-					<col style="width:8%;" />		
-					<col style="width:5%;" />		
-					<col style="width:5%;" />		
+					<col style="width:7%;" />		
+					<col style="width:6%;" />		
+					<col style="width:6%;" />		
 					<col style="width:3%;" />		
 					<col style="width:3%;" />		
 					<col style="width:5%;" />		
 					<col style="width:10%;" />		
-					<col style="width:5%;" />		
+					<col style="width:2.5%;" />		
 					<col style="width:1%;" />		
-				</colgroup>
+				</colgroup> 
 				 	<thead>
 						<tr class="tr_jy"> 
 							<th scope="col" class="th_jy">No.</th>
 					<!-- 		<th scope="col" class="th_jy">회원번호</th> -->
-							<th scope="col" class="th_jy">이력서</th>
-							<th scope="col" class="th_jy">학교</th>
-							<th scope="col" class="th_jy">학과</th>
+							<th scope="col" class="th_jy resumetd">이력서</th>
+							<th scope="col" class="th_jy edutd">학교</th>
+							<th scope="col" class="th_jy majortd">학과</th>
 							<th scope="col" class="th_jy">회사</th>
 							<th scope="col" class="th_jy">부서</th>
 							<th scope="col" class="th_jy">직군</th>
 							<th scope="col" class="th_jy">경력</th>
 							<th scope="col" class="th_jy">연봉</th>
-							<th scope="col" class="th_jy">기술</th>
-							<th scope="col" class="th_jy">추천인</th>
+							<th scope="col" class="th_jy skilltd">기술</th>
+							<th scope="col" class="th_jy reftd">추천인</th>
 							<th scope="col" class="th_jy">구직</th>
 						</tr>
 				 	</thead>
@@ -131,14 +146,14 @@ function pageFunc(curPage){
 									</a>
 								</td>
 								<td class="td_jy">${mVo.eduName} </td>
-								<td class="td_jy">${mVo.eduMajor } </td>
+								<td class="td_jy majortd">${mVo.eduMajor } </td>
 								<td class="td_jy">${mVo.careerName} </td>
-								<td class="td_jy">${mVo.careerDep } </td>
+								<td class="td_jy deptd">${mVo.careerDep } </td>
 								<td class="td_jy">${mVo.jikgunName } </td>
 								<td class="td_jy">${mVo.career} <c:if test="${mVo.career ne '신입' and  !empty mVo.career}">년</c:if> </td>
 								<td class="td_jy">${mVo.salary} </td>
-								<td class="td_jy">${mVo.skill} </td>
-								<td class="td_jy">${mVo.refName} </td>
+								<td class="td_jy skilltd">${mVo.skill} </td>
+								<td class="td_jy reftd">${mVo.refName} </td>
 								<td class="td_jy">${mVo.jobsearchFlag} </td>
 							</tr>
 						</c:forEach>
