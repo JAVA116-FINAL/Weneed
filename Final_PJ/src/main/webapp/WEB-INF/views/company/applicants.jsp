@@ -16,24 +16,122 @@ li {
 }
 </style>
 <script type="text/javascript">
+	/* function chkFunc(applyNo) {
+		alert(applyNo);
+	} *///$('input:checkbox[id="checkbox_id"]').is(":checked") == true
+
+	var select_obj = '';
+	$('input:checkbox[name="chBox"]').is(":checked").each(function(index) {
+	   if (index != 0) {
+	        select_obj += ', ';
+	   }
+	   select_obj += $(this).val();
+	   alert(select_obj);
+	}); 
+	
+	
 	$(function() {
-		//favo
-		$(document).on('click', '.favo', function(){
-			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
-			console.log('resumeStr: '+resumeStr);
-			var resumeNo=parseInt(resumeStr.substr(3), 10);
-			console.log('resumeNo: '+resumeNo);
+		
+		
+/* 		$('input:checkbox[name=chBox]').click(function() {
+			alert("1");
+		});  */
+		
+		
+		
+		$('#appli-btn-statusChange').click(function(){
+			const applyNoArr=[]; //체크박스값을 담을 어레이
+			var checkboxes=$('input:checkbox[name=chBox]');
 			
-			if($(this).children('i').hasClass('goldStar')){
-				$(this).children('i').removeClass('goldStar');
-				delZzim(resumeNo);
-			}else{
-				$(this).children('i').addClass('goldStar');
-				addZzim(resumeNo);
+			//선택한 체크박스의 회사코드를 추출하여 배열에 집어넣는 작업
+			/* checkboxes.each(function(){
+			//	console.log(checkboxes.is(':checked'));
+				if($(this).is(':checked')){
+					var posNo=$(this).parent().next().html();
+					console.log("posNo: "+posNo);
+					posNoArr.push(posNo);
+				}
+			}); */
+			
+			var data = {
+				"applyNoList":applyNoArr,
+			};
+			
+			//상태값을 변경하기 위한 함수
+			$.ajax({
+				url:"<c:url value='/admin/positionStatustoPass.do'/>",
+				type:"post",
+				dataType:"json",
+				data:data,
+				success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
+					alert('성공!');
+					location.reload();
+				},
+				error:function(xhr, status, error){
+					alert('error!: '+error);
+				}
+			});
+			
+			var curPageY=$('input[name=currentPageY]').val();
+			var curPageP=$('input[name=currentPageP]').val();
+			//승인요청건 테이블을 다시 그려주는 ajax 
+			$.ajax({
+				url:"<c:url value='/admin/positionPermissionYet.do'/>",
+				type:"post",
+				dataType:"json",
+				data:{
+					"curPage":curPageY
+				},
+				success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
+				//	alert('승인요청건 조회 성공!');
+					pageFuncY(curPageY);
+				},
+				error:function(xhr, status, error){
+					alert('승인요청건 조회 error!: '+error);
+				}
+			});
+			
+			//승인완료건 테이블을 다시 그려주는 ajax
+			$.ajax({
+				url:"<c:url value='/admin/positionPermissionPassed.do'/>",
+				type:"post",
+				dataType:"json",
+				data:{
+					"curPage":curPageP
+				},
+				success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
+				//	alert('승인완료건 조회 성공!');
+					pageFuncY(curPageP);
+				},
+				error:function(xhr, status, error){
+					alert('승인완료건 조회 error!: '+error);
+				}
+			});
+		
+		});
+			
+		//승인 전 전체선택하기
+		$('#weneed-admin-CheckAll').click(function(){
+			if($(this).is(':checked')){
+				$('input[name=weneed-adminStatusChkbox-before]').prop('checked', true);
+			}
+			else {
+				$('input[name=weneed-adminStatusChkbox-before]').prop('checked', false);
+			}
+		});
+		
+		//승인 완료 전체선택하기
+		$('#weneed-admin-CheckAll-ed').click(function(){
+			if($(this).is(':checked')){
+				$('input[name=weneed-adminStatusChkbox-after]').prop('checked', true);
+			}
+			else {
+				$('input[name=weneed-adminStatusChkbox-after]').prop('checked', false);
 			}
 		});
 
 	});
+	
 	
 	function pageFunc(curPage, statusflag,posNo){
 		$('input[name=statusflag]').val(statusflag);
@@ -47,9 +145,9 @@ li {
 	}); */
 	
 	function favoFunc(applyNo){
-		alert(applyNo);
-		/* alert('#favo'+applyNo); */
-		$('#favo'+applyNo).css("color","gold");
+		//alert(applyNo);
+		alert('.favo'+applyNo);
+		$(this).css("color","gold");
 	}
 	 
 	/* //서류통과 클릭 시
@@ -194,8 +292,9 @@ li {
 								<input type="text" placeholder="지원자, 포지션 검색"
 									value="${param.searchKeyword }" name="searchKeyword"
 									class="appli-searchInput" style="height: 33px;"> <input
-									type="submit" class="appli-btn-statusChange"
-									style="outline: none;" value="검색">
+									type="submit" class="appli-btn-search"
+									style="outline: none; border: 1px solid #c1c1c1; font-size: 0.8em; font-weight: bold; padding: 0px 10px; margin-right: 10px;"
+									value="검색">
 							</form>
 						</div>
 					</div>
@@ -226,7 +325,8 @@ li {
 
 								<button class="appli-btn-statusChange" data-toggle="modal"
 									data-target=".comServAppliStatusChangeMD"
-									style="outline: none;" data-cartNum="${aVo['APPLY_NO']}">상태변경</button>
+									data-applyno="${aVo['APPLY_NO']}" style="outline: none;">상태변경</button>
+									
 								<!-- 상태변경 모달 include -->
 								<%@ include file="../company/modal/statusChange.jsp"%>
 							</div>
@@ -234,8 +334,24 @@ li {
 						<div>
 							<!-- 별표 지원자 모아보기 -->
 							<input type="checkbox" id="chkBox-staredApplis"> <label
-								for="chkBox-staredApplis" class="chkBox-staredApplis">별표
-								지원자 모아보기</label>
+								for="chkBox-staredApplis" class="chkBox-staredApplis"
+								onclick="favoAll()">별표 지원자 모아보기</label>
+							<script type="text/javascript">
+								/* $('.chkBox-staredApplis').click(function() {
+									var favoAll = $('.staredApplis').prop('checked');
+									
+									if()
+								}); */
+								
+								$('#appli-checkAll').click(function() {
+											var chkAll = $('#appli-checkAll').prop('checked');
+											
+											if(chkAll){
+												$('.chBox').prop("checked", true);
+											}else{
+												$('.chBox').prop("checked", false);
+											}
+							</script>
 						</div>
 
 					</div>
@@ -263,13 +379,11 @@ li {
 										<div>
 											<input type="checkbox"
 												class="appli-object-ele appli-object-ele-chk chBox"
-												id="chBox" name="chBox" data-cartNum="${aVo['APPLY_NO']}">
-											<span
-												class="fas fa-star appli-object-ele appli-object-ele_gold favo"
-												id="favo+${aVo['APPLY_NO']}"
-												onclick="favoFunc(${aVo['APPLY_NO']})"></span> 
-											<span
-												style="display: none; color: gold;" id="colorChk">a</span>
+												id="chBox" name="chBox" value="${aVo['APPLY_NO']}"> <span
+												class="fas fa-star appli-object-ele appli-object-ele_gold favo+${aVo['APPLY_NO']}"
+												id="favo" onclick="favoFunc(${aVo['APPLY_NO']})"></span>
+											<!-- id="favo+${aVo['APPLY_NO']} -->
+											<span style="display: none; color: gold;" id="colorChk">a</span>
 											<script>
 												$('.chBox').click(function(){
 													$('#appli-checkAll').prop("checked",false);

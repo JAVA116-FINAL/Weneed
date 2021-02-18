@@ -189,6 +189,14 @@ aside {
 	margin-right: 10px;
 }
 
+.appli-btn-search {
+	border: 1px solid #c1c1c1;
+	font-size: 0.8em;
+	font-weight: bold;
+	padding: 0px 10px;
+	margin-right: 10px;
+}
+
 .appli-lb-resultInfo-toggle, .chkBox-staredApplis {
 	font-size: 0.8em;
 }

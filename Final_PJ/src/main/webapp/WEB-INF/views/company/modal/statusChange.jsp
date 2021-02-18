@@ -15,10 +15,10 @@
 				    <div class="table-responsive">
 				        <div class="container">
 			        		<span>선택한 지원자를 </span>
-			        		<select>
-			        			<option>서류합격</option>
-			        			<option>최종합격</option>
-			        			<option>불합격</option>
+			        		<select name="modalStatus" id="modalStatus">
+			        			<option value="1">서류합격</option>
+			        			<option value="2">최종합격</option>
+			        			<option value="3">불합격</option>
 			        		</select>
 			        		<span>으로 상태변경 하시겠습니까?</span>
 			      		</div>
@@ -32,4 +32,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		var status = $('#modalStatus option:selected').val();
+		
+	</script>
 </div>
