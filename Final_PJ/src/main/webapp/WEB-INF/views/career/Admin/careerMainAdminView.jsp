@@ -1,4 +1,4 @@
-<%@ include file="../../inc/top.jsp" %>
+<%@ include file="../../inc/admin_top.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,9 +11,7 @@
 	<script type="text/javascript" src="<c:url value='/resources/code.jquery.com/jquery-1.11.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/code.jquery.com/jquery-migrate-1.2.1.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/plugins/slick-carousel/slick/slick.min.js'/>"></script>
-    <script type="text/javascript" src="<c:url value='/resources/plugins/counterup/jquery.waypoints.min.js'/>"></script>
-    <script type="text/javascript" src="<c:url value='/resources/plugins/shuffle/shuffle.min.js'/>"></script>
-    <script type="text/javascript" src="<c:url value='/resources/plugins/counterup/jquery.counterup.min.js'/>"></script>
+
 <style type="text/css">
 .slick-prev{
 	height:50px;
@@ -59,21 +57,30 @@
 	padding:0 4px;
 	margin-bottom:10px;
 }
+.slick-list {
+    height: 100px;
+}
+.col-12.text-center.mb-5 {
+    background-color: #f8f8fa;
+}
 .doctors .btn-group .btn {
     border-radius: 0.3em;
     margin: 0px 6px;
     text-transform: capitalize;
     font-size: 16px;
-    padding: .6rem 0.3rem;
+    padding: .6rem 0.1rem;
     background: #eef0f4;
     color: #000000;
     height: 50px;
-    width: 150px;
+    width: 250px;
     margin-bottom: -19px;
     cursor: pointer;
 }
-.slick-list {
-    height: 100px;
+.asideBtn{
+	cursor:pointer; 
+	outline:none; 
+	border:none; 
+	background-color:transparent;
 }
 </style>
 
@@ -102,10 +109,9 @@
 </script>
 
 
-
 <div>
 	<!-- 구독신청 배너부분!!!!!!!!! -->
-			<section class="page-title bg-1" style="padding:0px; margin:auto; margin-top:10px;width:1500px;">
+			<section class="page-title bg-1" style="padding:0px; margin:auto; margin-left:-210px;width:1500px;">
 			<div class="_2LiFavTzcqjq8ansnAqKSQ _2bqGiY6XO2ke3gSGZbbVm3" style="padding-bottom: 10%;cursor:pointer;" 
 						onclick="location.href='<c:url value="subscription.do"/>'"><img src="<c:url value='/resources/images/career/Web_Event_Banner_C3.jpg'/>" style="height: 300px;max-width: 100%; width: 100%;"></div>
 			</section>
@@ -125,76 +131,19 @@
 								            <input type="radio" name="shuffle-filter" value="all" checked="checked" style="width:0px;"/>전체
 								          </label>	 -->						          
 							          	
-							          	<c:forEach var="ccVo" items="${ccgList}">
-							          		<c:if test="${ccVo.proCateNo == 80 }">
+							          	<c:forEach var="proCateBtn" items="${proCateNameList}">
+							          		<c:if test="${proCateBtn.proCateNo == 0 }">
 								         		<label class="btn active " >
 									            <input type="radio" name="shuffle-filter" value="all" checked="checked" style="width:0px;"/>전체
 									          	</label>								          		
 							          		</c:if>
-							          		<c:if test="${ccVo.proCateNo != 80 }">
+							          		<c:if test="${proCateBtn.proCateNo != 0 }">
 											  <label class="btn">
-									            <input type="radio" name="shuffle-filter" value="cat(${ccVo.proCateNo}-79)" style="width:0px;"/>${ccVo.proCateName}
+									            <input type="radio" name="shuffle-filter" value="cate${proCateBtn.proCateNo}" style="width:0px;"/>${proCateBtn.proCateName}
 									          </label>
 								          	</c:if>
 										</c:forEach>
-										
-								          <!-- <label class="btn ">
-								            <input type="radio" name="shuffle-filter" value="cat1" style="width:0px;"/>인사
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat2" style="width:0px;" />Wanted Plus
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat3" style="width:0px;"/>커리어
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat4" style="width:0px;"/>경영·비즈니스
-								          </label>
-								           <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat5" style="width:0px;"/>기술/IT
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat6" style="width:0px;"/>마케팅·광고
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat7" style="width:0px;"/>크리에이티브
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat8" style="width:0px;"/>디자인
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat9" style="width:0px;"/>리더십
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat10" style="width:0px;"/>교육
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat11" style="width:0px;"/>UX
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat12" style="width:0px;"/>데이터
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat12" style="width:0px;"/>브랜딩
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat12" style="width:0px;"/>개발
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat12" style="width:0px;"/>핀테크
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat12" style="width:0px;"/>건강
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat12" style="width:0px;"/>금융
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat12" style="width:0px;"/>영어
-								          </label>
-								          <label class="btn">
-								            <input type="radio" name="shuffle-filter" value="cat12" style="width:0px;"/>고객서비스·리테일
-								          </label>  -->
+
 								          
 								        </div>
 									
@@ -207,16 +156,31 @@
       
 				<!-- 카테고리 이름, 필터, 키워드알림 부분 !!!!!!  -->
 					<div style="width: 100%; height: 50px; margin-top:30px; margin-bottom:40px;">
-						<%@ include file="popup.jsp" %>	    
+						<%@ include file="../Mainpage/popup.jsp" %>	    
 					</div>
 				<!-- 필터, 키워드알림 부분 끝  -->
+				<aside style="float right;">
+						<div class="asideBtn" style="float:right; position:fixed; margin-left:1150px; margin-top:-170px;">
+								<div class="">
+									<button type="button" onclick="location.href='<c:url value="/career/Mainpage/careerMain.do"/>'" title="커리어성장 관리자 메인으로">
+										<i class="fas fa-home fa-3x" style="color:#258bf7;"></i><br><br>
+									</button>
+								</div>
+								<div>
+									<button type="button" onclick="location.href='<c:url value="/career/Admin/programAdminList.do"/>'" title="프로그램 목록">
+										<i class="fas fa-list fa-3x" style="color:#258bf7;"></i><br><br>
+									</button>
+								</div style="float:left; margin-left:-10px;">						      									
+					</div>
+				</aside>
+
 
 
 				<!-- 프로젝트 리스트 섹션!!!!!!! -->
      				
-			      <div class="row shuffle-wrapper portfolio-gallery" style="margin:auto; margin-top: 20px;">		
+			      <div class="row shuffle-wrapper portfolio-gallery" style="margin:auto; margin-top: -20px;">		
 			 		<c:forEach var="proVoMain" items="${proVoMainList }">		 					
-					      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat(${proVoMain.proCateNo}-79)&quot;]">		      
+					      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cate${proVoMain.proCateNo}&quot;]">		      
 					        	
 					        	<div class="position-relative doctor-inner-box" onclick="location.href='<c:url value="/career/detailpage/detailPage.do?programNo=${proVoMain.programNo}"/>'" 
 					        								style="cursor:pointer; border:0.3px solid rgb(198, 198, 198); border-radius:0.4em; height:405px;">
@@ -254,7 +218,9 @@
       				
 	<!-- 프로젝트 리스트 섹션 끝 --> 
 		</div>
+
 </section>
+
 </div>
 
 
@@ -264,5 +230,9 @@
 
 
 <!-- 푸터부분!!!!! -->
-	<%@ include file="../../inc/bottom.jsp" %>
+	<%@ include file="../../inc/admin_bottom.jsp" %>
 
+
+    
+  </body>
+  </html>

@@ -37,6 +37,7 @@
 .jobsearchListImg{
 	border-radius: 5px;
 	height: 180px;
+	object-fit: cover;
 }
 
 .jobsearchDivBounds{

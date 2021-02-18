@@ -152,7 +152,7 @@ h3 {
 							<br>
 							<div class="sidebar-contatct-info mt-4" style="margin-top:-20px;padding-top:-10px;">
 
-								<button onclick="location.href='<c:url value="/career/subscribe/buyProgram.do"/>'" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:150px; height:50px;padding:10px, 7px; background-color:#3366ff; font-size:12px; color:white">참가신청</button>
+								<button onclick="location.href='<c:url value="/career/detailpage/buyProgram.do?programNo=${param.programNo }"/>'" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:150px; height:50px;padding:10px, 7px; background-color:#3366ff; font-size:12px; color:white">참가신청</button>
 								<button onclick="location.href='<c:url value="/career/subscribe/subsRegister.do"/>'" class="btnFilter" style="border:0.3px solid gray; border-radius:3em; outline:none; width:150px; height:50px; margin-left: 20px; padding:10px, 7px; background-color:#fff; font-size:12px; color:black">구독하고 할인받기</button>
 							
 							</div>

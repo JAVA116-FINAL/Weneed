@@ -41,7 +41,7 @@
 									<i class="fas fa-list fa-5x" style="color:#258bf7;"></i><br><br>
 					      			<input type="button" class="programComBtn" style="cursor:pointer;" value="프로그램 목록" style="width:130px;"/>
 								</button>					      									
-								<button type="button" onclick="location.href='<c:url value="/career/Mainpage/careerMain.do"/>'" style="cursor:pointer; outline:none; border:none; background-color:transparent;">
+								<button type="button" onclick="location.href='<c:url value="/career/Admin/careerMainAdminView.do"/>'" style="cursor:pointer; outline:none; border:none; background-color:transparent;">
 									<i class="fas fa-home fa-5x" style="color:#258bf7;"></i><br><br>
 					      			<input type="button" class="programComBtn" style="cursor:pointer;" value="커리어성장 메인으로" style="width:150px;"/>
 								</button>					      									
