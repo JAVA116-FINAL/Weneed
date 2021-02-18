@@ -648,3 +648,9 @@ div#displayAside {
 span.ap-mcuFlagsp_jy {
     margin: 3px 0;
 }
+
+ /* 0219 */
+/* aside#asideApply {width: 180%;} */
+li.li-apply_jy {
+    width: 283px;
+}
