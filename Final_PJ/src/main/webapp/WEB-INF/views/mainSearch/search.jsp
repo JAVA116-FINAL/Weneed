@@ -40,6 +40,7 @@
 		<div class="row">
 		<c:forEach var="vo" items="${searchPos }">
 			<div class="col-lg-3 col-md-6">
+			<a href="<c:url value='/jobsearch/jobsearchDetail.do?posNo=${vo.posNo }'/>" style="display:block;">
 				<div class="about-block-item mb-5 mb-lg-0" style="padding-bottom:40px;">
 					<img src="<c:url value='/companyImgUpload/${vo.comImgUrl }' />" class="img-fluid w-100">
 					<h4 class="mt-3 passPredic-pic-title">${vo.posName }</h4>
@@ -49,6 +50,7 @@
 					</div>
 					<div class="ge-reward">채용보상금 1,000,000원</div>
 				</div>
+			</a>
 			</div>
 		</c:forEach>
 		</div>
