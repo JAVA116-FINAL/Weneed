@@ -15,5 +15,8 @@ public class CareerCategoryServiceImpl implements CareerCategoryService{
 	public List<CareerCategoryVO> selectCareerCategoryAll() {
 		return careerCategoryDao.selectCareerCategoryAll();
 	}
+	public String selectMatchCategoryName(int proCateNo) {
+		return careerCategoryDao.selectMatchCategoryName(proCateNo);
+	}
 }
 

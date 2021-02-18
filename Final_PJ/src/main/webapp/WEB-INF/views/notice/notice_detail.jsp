@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="notice_inc/notice_top.jsp"%>
-
+<%@include file="notice_inc/notice_script.jsp" %>
 <!-- 고객센터 안내 상세보기 페이지 -->
 <main role="main">
 <section class="breadcrumb"></section>
@@ -9,8 +9,8 @@
     <div class="col-md-9 col-sm-9 col-xs-12 breadcrumb-container-path" style="float:left;">
         <ol class="breadcrumbs">
   
-    <li title="원티드 고객센터">
-        <a href="<c:url value='notice.do'/>">원티드 고객센터</a>
+    <li title="위니드 고객센터">
+        <a href="<c:url value='notice.do'/>">위니드 고객센터</a>
     </li>
     <li title="${listDetail['notice_dept1_info'] }">
         <a href='<c:url value="notice_dept1.do?notice_dept1=${listDetail['notice_dept1'] }"/>'>
@@ -29,9 +29,9 @@
     <div class="col-md-3 col-sm-3 col-xs-12 breadcrumb-container-search" style="float:right;">
     
 		<form role="search" class="search" data-search=""
-			action="<c:url value='notice_search.do'/>" accept-charset="UTF-8" method="post">
-			<input type="search" name="keyword" id="id="notice_search" placeholder="검색" aria-label="검색">
-			<input type="submit" name="commit"value="검색">
+			data-instant="true" autocomplete="off" action="<c:url value='notice_search.do'/>">
+			<input type="search" name="searchKeyword" id="notice_search" autocomplete="off"> 
+			<input type="submit" id="commit" name="commit" value="검색">
 		</form>
 		
     </div>
@@ -71,7 +71,7 @@
 
 <div class="container" id="new_request_container">
     <span id="article_new_request_label">또 다른 질문이 있으십니까?&nbsp;&nbsp;&nbsp;
-    	<a href="<c:url value='notice_qna.do'/>" id="article_new_request_button">
+    	<a href="<c:url value='notice_qna.do'/>" id="article_new_request_button" > 
     		다른 문의 등록하기 &gt;
     	</a>
     </span>

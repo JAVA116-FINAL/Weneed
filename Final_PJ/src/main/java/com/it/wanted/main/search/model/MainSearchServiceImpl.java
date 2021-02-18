@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it.wanted.career.admin.model.ProgramVO;
+
 @Service
 public class MainSearchServiceImpl implements MainSearchService {
 
@@ -24,6 +26,16 @@ public class MainSearchServiceImpl implements MainSearchService {
 	@Override
 	public List<MainSearchVO> getSearchKeyword(String keyword) {
 		return mainSearchDao.getSearchKeyword(keyword);
+	}
+
+	@Override
+	public List<MainSearchVO> selectNewRecruit() {
+		return mainSearchDao.getNewRecruit();
+	}
+
+	@Override
+	public List<ProgramVO> selectMainCareerList() {
+		return mainSearchDao.getMainCareerList();
 	}
 	
 }

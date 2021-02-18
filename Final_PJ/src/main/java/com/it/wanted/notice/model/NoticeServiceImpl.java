@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it.wanted.notice.utility.KeywordVO;
+
 @Service
 public class NoticeServiceImpl implements NoticeService{
 	
@@ -52,13 +54,18 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public List<Map<String, Object>> noticeSearch(String keyword) {
-		return noticeDao.noticeSearch(keyword);
+	public List<NoticeVO> noticeSearch(KeywordVO searchVo) {
+		return noticeDao.noticeSearch(searchVo);
 	}
 
 	@Override
-	public Map<String, Object> noticeSearchCnt(String keyword) {
-		return noticeDao.noticeSearchCnt(keyword);
+	public Map<String, Object> noticeSearchCnt(KeywordVO searchVo) {
+		return noticeDao.noticeSearchCnt(searchVo);
+	}
+
+	@Override
+	public int insertQna(QnaVO vo) {
+		return noticeDao.insertQna(vo);
 	}
 
 }

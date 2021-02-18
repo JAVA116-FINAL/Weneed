@@ -13,6 +13,7 @@ public class NoticeVO {
 	private String notice_dept1_info; /* 대분류 상세 */
 	private String notice_dept2_info; /* 소분류 상세 */
 	private Timestamp notice_regdate; /* 등록일 */
+	
 	public int getNotice_no() {
 		return notice_no;
 	}

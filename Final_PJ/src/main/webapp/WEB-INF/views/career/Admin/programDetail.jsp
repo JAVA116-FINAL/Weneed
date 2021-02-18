@@ -19,12 +19,11 @@ $( document ).ready( function() {
 	    }
 	  });
 	});
-	
 
 
 </script>
-<!-- 
-<style="type="text/css">
+
+<style "type="text/css">
  body{
 	margin:0px;
 	padding:0px;
@@ -42,17 +41,27 @@ $( document ).ready( function() {
 	margin-bottom: 50px;      
 }
 
-</style> -->
+.jbMenu.fixed {
+ 	z-index: 999;
+}
+#contentLoop img{
+	max-width: 700px;
+}
+h3 {
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+</style> 
 <div class="jbMenu" style="width:100%;">
     	<nav class="navbar navbar-expand-lg navigation" id="navbar" style="background-color:#f8f8fa;">
 		<div class="container" >
 		 	 <div class="navbar-brand">
 				<div class="myNav" style="width:100%;">
 			  <ul class="navbar-nav ml-auto">
-			    <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/careerAdminMain.do'/>">커리어성장 메인</a></li>							  
-			  <li class="nav-item active"><a class="nav-link" href="<c:url value='/career/Admin/programWrite.do'/>">프로그램 등록</a></li>
-			   <li class="nav-item"><a class="nav-link" href="<c:url value='/career/Admin/programAdminList.do'/>">프로그램 조회</a></li>
-			    <li class="nav-item"><a class="nav-link" href="#title2">Wanted+ 조회</a></li>			
+				<c:forEach var="proVo2" items="${proConList }">	
+			    <li class="nav-item"><a class="nav-link" href="#title${proVo2.proConNo}">${proVo2.proTitle}</a></li>
+				</c:forEach>
 			  </ul>	
 			</div>
 			</div>
@@ -67,11 +76,9 @@ $( document ).ready( function() {
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="row">
-						<div class="col-lg-12 mb-5">
+						<div class="col-lg-12 mb-5">						
 							<div class="single-blog-item">
-								<img
-									src="<c:url value='/resources/images/career/${proVo.imageURL }'/>"
-									alt="" class="img-fluid">
+								<img src="<%=request.getContextPath() %>/programImgUpload/${proVo.proImage} alt="" class="img-fluid">
 				  	
 								<!-- 태그넣기 -->
 								<div class="sidebar-widget tags mb-3" style="margin-top:20px;margin-bottom: -60px;">
@@ -84,152 +91,55 @@ $( document ).ready( function() {
 
 
 								<div class="blog-item-content mt-5">
-									<div class="blog-item-meta mb-3"></div>
 
 									<!-- 내용부분 전체 시작!! -->
 
-									<div style="color: black;">
+								<div style="color: black; margin-top:-130px;">
 
-				  	<c:forEach var="proVo2" items="${proVoList2 }">				  	
-										<!-- 제목, 내용 1 -->
-
-										<div class="parag" id="parag1">
-											<a name="title"><h3>
-													<b>${proVo2.proTitle }</b>
-												</h3></a> <br>
-											<div>${proVo2.proContents }</div>
-
+									<!-- 반복문으로 제목 내용 뿌려주기 -->
+															
+										<!-- 제목, 내용 -->
+										<c:forEach var="proVo2" items="${proConList }">	
+										<div style="margin-top:-70px;">						
+											<c:if test="${!empty proConList }">
+																<a name="title${proVo2.proConNo}"></a>		
+																<br><br>	
+																<div class="parag" id="parag2" style="margin-top: 50px;">											
+																			<h3>${proVo2.proTitle}</h3>
+																		 
+																		<br>
+																		<div id="contentLoop" style="width:700px;">
+																			${proVo2.proContents } 
+																		</div>
+																</div>
+													</c:if>
 										</div>
-					</c:forEach>
-
-										<!-- 
-									<blockquote class="quote">A brand for a company is
-										like a reputation for a person. You earn reputation by trying
-										to do hard things well.</blockquote> -->
-
-										<!-- 제목, 내용2 -->
-										<div class="parag" id="parag2" style="margin-top: 50px;">
-											<a name="title2"><h3>
-													<b>${proVo2.proTitle }</b>
-												</h3></a> <br>
-											<div>
-												<p>
-													${proVo2.proContents } 
-												</p>
+										</c:forEach>
+						<!-- 제목, 내용 반복문 끝!!! -->
+						
 											</div>
-										</div>
-
-										<!-- 제목, 내용 3 -->
-										<div class="parag" id="parag3" style="margin-top: 50px;">
-											<a name="title3"><h3>
-													<b>프로그램 상세</b>
-												</h3></a> <br>
-											<div>원티드 북클럽은 이렇게 진행됩니다. 1. 사전 질문 - 신청 후 1일 이내에 사전 질문지가
-												전달됩니다. - 사전 질문 내용은 Intro 모임에서 활용됩니다. (*질문지 내용 : 간단 본인 소개,
-												커리어 소개, 북클럽 신청 이유 등) 2. 안내 메일 - 북클럽 시작 2일 전까지 첫 모임 안내 메일이
-												전달됩니다. (*안내 메일 내용 : 온/오프라인 진행 방식, 준비사항, 기타 공지 등) 3. 북클럽 시작 -
-												총 5번의 모임을 통해 멤버들을 알아가고 책 그리고 관련된 주제들에 대해 이야기 나눠보세요. - 상시로
-												카카오톡 비밀 채팅방을 통해 자료와 의견도 공유하고 자유롭게 소통하세요.</div>
-										</div>
-
-										<!-- 제목, 내용 4 -->
-										<div class="parag" id="parag4" style="margin-top: 50px;">
-											<a name="title4"><h3>
-													<b>클럽장 소개</b>
-												</h3></a> <br>
-											<div>사단법인 점프(JUMP) 지역확산팀 부팀장 김결 작가는 아니지만 글은 쓰고 있는 김결이라고
-												합니다. 초등학교부터 대학교까지 14년간 야구를 전문적으로 해온 야구선수 출신이지만 현재는 전혀 다른 분야인
-												비영리 소셜벤처에서 일하고, 꾸준히 블로그에 글을 쓰며 프로 N잡러를 꿈꾸는 평범한 행복러입니다. 저는
-												평범한 사람도 글을 쓸 수 있다는 것을 믿고, 디지털 세상에서 글이란 아날로그를 어떻게 사용해야 하는지
-												고민하고 다양한 방법을 시험하고 실행하고 있어요. 캄보디아에서 봉사활동을 하며 시를 쓰기 시작했고 현재까지
-												블로그에 Book Review, Media Review, Travel Diary, Think Memo,
-												Walk Insight, Job소리, 여섯 가지 카테고리로 다양한 글을 올리고 있어요. 다양한 사람과
-												얘기하는 걸 좋아해서 팟캐스트를 기획해 운영을 하고 있기도 해요. 제일 좋아하는 책을 꼽으라면 슬램덩크로
-												인생의 교훈, 재미, 성장 등 많은 것을 발견할 수 있는 책이라고 할 수 있죠. 전직 야구 선수 출신으로
-												제법 활동적이며, 한 달 50km 이상 러닝을 꾸준히 하고 있어요. 강릉-속초 종주도 하고, 현재는 매일
-												일만 보 이상을 걸으며 산책하는 재미에 푹 빠져있어요. 야구선수 출신, 비영리 소셜 벤처, 팟캐스트
-												기획/운영까지 평범하지만 다양한 경험을 한 저와 함께 근손실이 아닌 글손실 방지를 해보실까요? - 블로그 -
-												팟캐스트 - 인스타그램</div>
-										</div>
-
-										<!-- 제목, 내용 5 -->
-										<div class="parag" id="parag5" style="margin-top: 50px;">
-											<a name="title5"><h3>
-													<b>참가비용</b>
-												</h3></a> <br>
-											<div>-</div>
-										</div>
-
-
-										<!-- 제목, 내용 6 -->
-										<div class="parag" id="parag6" style="margin-top: 50px;">
-											<a name="title6"><h3>
-													<b>후기</b>
-												</h3></a> <br>
-											<div>"혼자 책을 읽는 것과 함께 책을 읽는 것은 완전히 다른 경험이다" 혼자 책을 읽는 것과
-												함께 책을 읽는 것은 완전히 다른 경험이었습니다. 같은 부분을 읽어도 여러 다른 생각을 나눌 수 있어서
-												좋았고, 서로의 고민에 공감하며 함께 나누는 대화 속에서 많은 에너지를 얻어갈 수 있었습니다. 몇 권의
-												책으로 좋은 분들과 연결되고 이전보다 더 넓게 생각할 수 있어서 즐거웠습니다. - 북클럽 참가자 박지영님 -
-
-												"온라인으로 진행할 수 있다는 점이 가장 마음에 들었다" 평소에 바빠서 독서 모임을 등록하지 못하고
-												있었는데, 장소 부담 없이 온라인으로 진행할 수 있어서 바로 신청했습니다. 원티드 북클럽을 통해 만난 업계의
-												리더, 담당자분들과 토론하고, 메신저를 통해 경험, 인사이트를 공유하면서 많은 고민들을 해결할 수
-												있었습니다. 실질적인 도움을 많이 받아서 너무 좋았습니다. :) - 북클럽 참가자 김예리님 - "같은
-												관심사를 갖고 있는 사람들과 함께 고민할 수 있었던 소중한 시간이었다" 북클럽에 함께 참여하신 다양한 분들과
-												함께 소통하고 공유하며 커뮤니티를 형성할 수 있어서 좋았습니다. 같은 관심사를 가지고 있는 분들과 고민을
-												나누며 본질적인 가치에 더 가깝게 다가갈 수 있었습니다. 여러 방면으로 의미 있는 북클럽이었습니다. -
-												북클럽 참가자 박명규님 - "다양한 경험과 노하우를 공유하여 책을 다각도로 보고 생각할 수 있었다" 온라인
-												모임이었지만 생각보다 편했습니다. 평소 인간관계의 틀에서 벗어나 다양한 인사이트, 경험을 가지고 계신 분들과
-												만나서 신선하고 좋았습니다. 다양한 경험과 노하우를 아낌없이 공유해줘서 책을 다각도로 보고 생각할 수
-												있었습니다. 또한, 고민을 털어 놓았을 때 모두 함께 해결책을 찾아주려고 애써주시는 모습도 너무
-												인상적이었습니다. 원티드 북클럽 강추합니다! - 북클럽 참가자 나윤숙님 -</div>
-
-										</div>
-
-
-										<!-- 제목, 내용 7 -->
-										<div class="parag" id="parag7" style="margin-top: 50px;">
-											<a name="title1"><h3>
-													<b>안내/설문</b>
-												</h3></a> <br> <b>혜택과 복지</b> <br>
-
-											<div>본 북클럽은 Wanted Plus를 구매해야 참가할 수 있는 프로그램입니다. 본 북클럽은
-												소수 인원의 활발한 소통을 목적으로 하는 모임으로 정원은 10명입니다. 조기 마감될 수 있습니다. 신청 후
-												진행 순서는 '프로그램 상세' 내용을 확인해 주시기 바랍니다. 책 구매는 북클럽에서 지원하지 않으며,
-												오프라인 모임 비용은 참가 비용에 포함되어 있습니다. 온라인 세션은 Google Meet을 통해 진행됩니다.
-
-											</div>
-
-										</div>
-
-
 									</div>
-								</div>
-
 							</div>
-
-
-
-						</div>
+					</div>
 				</div>
-				</div>
-				
+			</div>
+										
 <!-- aside 부분!!!! -->				
 				<div class="col-lg-4">
 					<div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" >
 
 
 						<div class="sidebar-widget schedule-widget mb-3" style="background-color:#fff; margin-left:-60px; margin-top:-20px; width:380px">
-							<h5 class="mb-4"><b>${proVo.proName}</b></h5>
+							<h5 class="mb-4"><b>${proVo['proName']}</b></h5>
 
 							<ul class="list-unstyled">
 							
 									<div style="font:12px;"><span>일자</span></div>
 									<div style="color:black; font:12px;"><span><fmt:formatDate value="${proVo.proStartDate}" pattern="yyyy-MM-dd"/></span></div><br>
-									<div style="font:12px;"><span>장소</span></div>
-									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br>
+<!-- 									<div style="font:12px;"><span>장소</span></div>
+									<div style="color:black; font:12px;"><span>세종 S씨어터</span></div><br> -->
 									<div style="font:12px;"><span>주최자</span></div>
-									<div style="color:black; font:12px;"><span>${proVo.proSponsor }</span></div>
+									<div style="color:black; font:12px;"><span>${proVo.proSponsor}</span></div>
 							
 							</ul>
 							<br><br><br>
@@ -265,17 +175,17 @@ $( document ).ready( function() {
 
  <br>
 			<div style="margin:auto; text-align:center;">
+							<input type="hidden" name=programNo value="${param.programNo }">
 				
 							<div style="text-align:center";>
-								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programEditTotal.do?programNo=${proVo.programNo}'" style="outline:none;">수정</button>					      									
-								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programList.do'" style="outline:none;">프로그램 목록</button>					      									
-								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/careerAdminMain.do'" style="outline:none; width:160px;">커리어성장 메인으로</button>					      									
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programEdit1sec.do?programNo=${param.programNo}'" style="outline:none;">수정</button>					      									
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programAdminList.do'" style="outline:none;">프로그램 목록</button>					      									
+								<button type="button" class="programComBtn" onclick="location.href='/career/Admin/programDelete.do?programNo=${param.programNo}'" style="outline:none; width:160px;">삭제</button>					      									
 							</div>
 			</div>
 	</div>
 	</section>
 
 
+<%@ include file="../../inc/admin_bottom.jsp" %>  
 
-</body>
-</html>

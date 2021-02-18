@@ -330,8 +330,6 @@ function pwdKeyupCheck(inputId, inputName, alertId){ //매개변수로 인풋아
 									<a class="comServNav-item-link" href="<c:url value='/company/matchupService.do'/>">매치업</a></li>
 								<li class="comServNav-item">
 									<a class="comServNav-item-link comServSelectedMenu" href="<c:url value='/company/comInfoModify.do'/>">기업정보</a></li>
-								<li class="comServNav-item">
-									<a class="comServNav-item-link" href="#">계정관리</a></li>
 							</ul>
 						</nav>
 					</div>

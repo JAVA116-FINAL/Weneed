@@ -29,6 +29,8 @@ public class ApplicantsVO {
 	private String comCode;
 	//기업이름
 	private String comName;
+	
+	
 	public String getComName() {
 		return comName;
 	}
@@ -36,31 +38,7 @@ public class ApplicantsVO {
 	public void setComName(String comName) {
 		this.comName = comName;
 	}
-
-	public Timestamp getResumeRegdate() {
-		return resumeRegdate;
-	}
-
-	public void setResumeRegdate(Timestamp resumeRegdate) {
-		this.resumeRegdate = resumeRegdate;
-	}
-
-	public String getResumeTitle() {
-		return resumeTitle;
-	}
-
-	public void setResumeTitle(String resumeTitle) {
-		this.resumeTitle = resumeTitle;
-	}
-
-	public String getResumeUpfileflag() {
-		return resumeUpfileflag;
-	}
-
-	public void setResumeUpfileflag(String resumeUpfileflag) {
-		this.resumeUpfileflag = resumeUpfileflag;
-	}
-
+  
 	public int getApplyPeriod() {
 		return applyPeriod;
 	}
@@ -209,7 +187,8 @@ public class ApplicantsVO {
 	}
 
 
-
-
-
+	
+	
+	
+	
 }

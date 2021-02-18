@@ -3,6 +3,7 @@ package com.it.wanted.notice.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -10,13 +11,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.it.wanted.notice.cate.model.NoticeCateService;
 import com.it.wanted.notice.model.NoticeService;
 import com.it.wanted.notice.model.NoticeVO;
+import com.it.wanted.notice.model.QnaVO;
+import com.it.wanted.notice.utility.EmailSender;
+import com.it.wanted.notice.utility.KeywordVO;
+import com.it.wanted.notice.utility.NoticePagination;
+import com.it.wanted.notice.utility.NoticePagingUtility;
+import com.it.wanted.notice.utility.NoticeUtility;
 
 @Controller
 @RequestMapping("/notice")
@@ -26,7 +35,7 @@ public class NoticeController {
 	
 	@Autowired NoticeService noticeService;
 	@Autowired NoticeCateService noticeCateService;
-	
+	@Autowired EmailSender emailSender; //메일발송
 	
 	@RequestMapping("/notice.do")
 	public String notice(Model model) {
@@ -45,11 +54,6 @@ public class NoticeController {
 		logger.info("원티드 소식={}", listMain3);
 		
 		return "notice/notice";
-	}
-	
-	@RequestMapping("/notice_qna.do")
-	public void notice_qna() {
-		logger.info("notice_qna 출력");
 	}
 	
 	@RequestMapping("/notice_dept1.do")
@@ -100,11 +104,6 @@ public class NoticeController {
 		return "notice/notice_detail";
 	}
 	
-	@RequestMapping("/notice_result.do")
-	public void notice_result() {
-		logger.info("notice_result 출력");
-	}
-	
 	@RequestMapping("/notice_inc/notice_showByDept2.do")
 	public String notice_selectByDept2(@RequestParam(defaultValue = "0") int notice_dept2,
 			Model model) {
@@ -127,21 +126,34 @@ public class NoticeController {
 		return "notice/notice_inc/notice_other";
 	}
 	
-	@RequestMapping(value = "/notice_search.do", method = RequestMethod.POST)
-	public String noticeSearch(HttpServletRequest request, Model model) {
-		String keyword=request.getParameter("keyword");
-		logger.info("notice_search 출력, keyword={}", keyword);
+	//페이징도 같이
+	@RequestMapping("/notice_search.do")
+	public String noticeSearch(@ModelAttribute KeywordVO keywordVo, Model model) {
+		logger.info("keywordVo={}", keywordVo);
 		
-		List<Map<String, Object>>listSelect=noticeService.noticeSearch(keyword);
-		Map<String, Object>listSelectCnt=noticeService.noticeSearchCnt(keyword);
+		//페이징
+		NoticePagination pagingInfo=new NoticePagination();
+		pagingInfo.setBlockSize(NoticePagingUtility.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(keywordVo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(NoticePagingUtility.RECORD_COUNT);
+		
+		keywordVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		keywordVo.setRecordCountPerPage(NoticePagingUtility.RECORD_COUNT);
+		
+		List<NoticeVO>listSelect=noticeService.noticeSearch(keywordVo);
+		
+		Map<String, Object> listSelectCnt=noticeService.noticeSearchCnt(keywordVo);
+		
+		int totalRecord=Integer.parseInt(String.valueOf(listSelectCnt.get("CNT")));
+		logger.info("totalRecord={}", totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
 		
 		model.addAttribute("listSelect", listSelect);
-		model.addAttribute("listSelectCnt", listSelectCnt);
-		model.addAttribute("keyword", keyword);
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		logger.info("listSelect.size={}", listSelect.size());
-		logger.info("listSelectCnt={}", listSelectCnt);
-		
+		logger.info("listSelect={}", listSelect);
+
 		return "notice/notice_search";
 	}
 	
@@ -162,4 +174,63 @@ public class NoticeController {
 		return "notice/notice_inc/notice_split";
 	}
 	
+	@RequestMapping(value = "/notice_qna.do", method = RequestMethod.GET)
+	public String notice_qna() {
+		logger.info("notice_qna 출력");
+		
+		return "notice/notice_qna";
+	}
+	
+	@RequestMapping( value = "/notice_qna.do", method = RequestMethod.POST)
+	public String notice_qna_ok(@ModelAttribute QnaVO qnaVo, 
+			HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		logger.info("문의등록, 파라미터 qnaVo={}", qnaVo);		
+		
+		int cnt=noticeService.insertQna(qnaVo);
+		
+		logger.info("문의등록 결과, cnt={}", cnt);
+		
+		redirectAttributes.addAttribute("receiver", qnaVo.getQna_email());
+		redirectAttributes.addAttribute("subject", qnaVo.getQna_title());
+		redirectAttributes.addAttribute("content", qnaVo.getQna_content());
+		redirectAttributes.addAttribute("no", qnaVo.getQna_no());
+		
+		return "redirect:/notice/notice_email_send.do";
+	}
+	
+	@RequestMapping("/notice_email_send.do")
+	public String notice_email_send(RedirectAttributes redirectAttributes
+			, @RequestParam String receiver, String subject, String content, int no) {
+		logger.info("receiver={}", receiver);
+		logger.info("subject={}", subject);
+		logger.info("content={}", content);
+		logger.info("no={}", no);
+		
+		String sender="weneed@admil.com";
+		content="<p>"+"안녕하세요, 위니드 고객센터입니다."+"<br>"+"문의가 정상 접수되었습니다."+"<br><br>"+
+				"문의제목: "+subject+"<br><br>"+
+				"영업일 기준 최대 1~2일 이내 안내 드릴 수 있도록 최선을 다하겠습니다."+"<br><br>"+
+				"감사합니다."+"<br><br>"+"위니드 드림"+"<br><br>"+"<hr color='#ececec' size='1px'>"+"</p>"; //하단 위니드 이미지 태그 추가, 링크도 추가할 것
+		subject="문의가 정상 접수되었습니다. ("+subject+")";
+		
+		try {
+			emailSender.sendEmail(subject, content, receiver, sender);
+			logger.info("이메일 발송 성공");
+		}catch (MessagingException e) {
+			logger.info("이메일 발송 실패");
+			e.printStackTrace();
+		}
+		
+		redirectAttributes.addAttribute("no", no);
+		
+		return "redirect:/notice/notice_qna_ok.do"; //문의 등록 완료 안내 페이지로 이동할 것
+	}
+	
+	@RequestMapping("/notice_qna_ok.do")
+	public String notice_qna_ok(@RequestParam int no, Model model) {
+		logger.info("문의등록 완료 뷰 출력, no={}", no);
+		
+		model.addAttribute("no", no);
+		return "notice/notice_qna_ok";
+	}
 }

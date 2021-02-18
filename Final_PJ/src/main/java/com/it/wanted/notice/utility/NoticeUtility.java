@@ -1,4 +1,4 @@
-package com.it.wanted.notice.controller;
+package com.it.wanted.notice.utility;
 
 public class NoticeUtility {
 	

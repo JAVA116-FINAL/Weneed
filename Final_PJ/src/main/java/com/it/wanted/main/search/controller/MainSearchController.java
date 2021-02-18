@@ -1,11 +1,7 @@
 package com.it.wanted.main.search.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonArray;
-import com.it.wanted.common.SearchVO;
 import com.it.wanted.main.search.model.MainSearchService;
 import com.it.wanted.main.search.model.MainSearchVO;
 
@@ -47,19 +41,6 @@ public class MainSearchController {
 		return "mainSearch/search";
 	}
 	
-	/*@ResponseBody
-	@RequestMapping("/autocomplete.do")
-	public List<Map<String, Object>> AutoTest(@RequestParam(value="keyword") String keyword, Locale locale, HttpServletRequest request, 
-			HttpServletResponse response, MainSearchVO vo){
-		logger.info("keyword={}", keyword);
-		
-		List<Map<String, Object>> list3 = mainSearchService.getSearchKeyword(keyword);
-		logger.info("list3={}", list3);
-		logger.info("keyword가 포함된 결과 list3.size={}", list3.size());
-		
-		return list3;
-	}*/
-	
 	@ResponseBody
 	@RequestMapping("/autocomplete.do")
 	public List<MainSearchVO> AutoTest(@RequestParam(value="keyword") String keyword, Locale locale, HttpServletRequest request, 
@@ -72,4 +53,7 @@ public class MainSearchController {
 		
 		return list3;
 	}
+	
+	
+	
 }

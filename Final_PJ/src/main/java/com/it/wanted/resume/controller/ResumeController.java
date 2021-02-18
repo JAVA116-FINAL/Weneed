@@ -173,7 +173,10 @@ public class ResumeController {
 		List<Map<String, Object>> fileList=null;
 		String resumeFile="";
 		try {
+			
 			fileList=fileUploadUtil.fileUplaod(request, FileUploadUtil.RESUME_UP_TYPE);
+			logger.info("파일리스트:",fileList);
+			
 			for (Map<String, Object> fileMap:fileList) {
 				resumeFile=(String) fileMap.get("fileName");
 				logger.info("resumeFile={}",resumeFile);
@@ -266,7 +269,7 @@ public class ResumeController {
 		logger.info("rVo={}",rVo);
 		//2
 		int cnt=resumeService.deleteResume(rVo);
-		logger.info("삭제 결과 cnt={}, rVo={}", cnt,rVo);
+		logger.info("삭제 결과 cnt={}, rVo={}", cnt,cnt);
 		//3
 		//4
 		return cnt;
@@ -321,6 +324,24 @@ public class ResumeController {
 			//4
 			return mav;
 		}
+		
+		//13.이력서 상세보기/수정(관리자)
+		@RequestMapping("/resumeDetailAdmin.do")
+		public String resumeDetailAdmin(@RequestParam (defaultValue = "0")int resumeNo, @RequestParam (defaultValue = "0") int memNo, Model model) {
+			//1
+			logger.info("이력서 상세보기 화면보여주기 파라미터 resumeNo={}, memNo={}",resumeNo, memNo);
+			ResumeVO rVo= new ResumeVO();
+			rVo.setMemNo(memNo);
+			rVo.setResumeNo(resumeNo);
+			//2
+			ResumeAllVO rAllVo = resumeService.selectResumeDetail(rVo);
+			logger.info("이력서 상세보기 결과rAllVo={}",rAllVo);
+			//3
+			model.addAttribute("rAllVo", rAllVo);
+			//4
+			return "resume/resumeDetail";
+		}
+		
 		
 	
 	/* 현빈 */

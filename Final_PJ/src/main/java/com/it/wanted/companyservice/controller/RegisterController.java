@@ -126,21 +126,19 @@ public class RegisterController {
 		int cnt=comInfoService.insertComInfo(comInfoVo);
 		logger.info("회사정보등록 처리 결과, cnt={}", cnt);
 		
-		String msg="", url="", returnUrl="";
+		String msg="", url="";
 		if(cnt>0) { //입력 성공
 			msg="기업 정보 제출이 완료되었습니다. 1영업일 후 승인처리됩니다.";
 			url="/company/welcome.do";
-			returnUrl="common/message2";
 		}else {
 			msg="기업 정보 제출이 실패했습니다.";
 			url="/company/register.do";
-			returnUrl="common/message";
 		}
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
-		//안내화면 하나 만들어줘야겠네
+		//안내화면 하나 만들어줘야겠네..
 		return "common/message";
 	}
 	

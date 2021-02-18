@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.it.wanted.cominfo.model.ComInfoVO;
+import com.it.wanted.common.SearchVO;
+
 @Service
 public class ComImgInfoServiceImpl implements ComImgInfoService{
 	@Autowired ComImgInfoDAO comImgInfoDao;
@@ -32,6 +35,26 @@ public class ComImgInfoServiceImpl implements ComImgInfoService{
 	@Override
 	public int changeStatustoPass(int imgNo) {
 		return comImgInfoDao.changeStatustoPass(imgNo);
+	}
+
+	@Override
+	public List<ComImgInfoVO> selectAllYetImg(SearchVO searchVo) {
+		return comImgInfoDao.selectAllYetImg(searchVo);
+	}
+
+	@Override
+	public int selectYetTotalRecord(SearchVO searchVo) {
+		return comImgInfoDao.selectYetTotalRecord(searchVo);
+	}
+
+	@Override
+	public List<ComImgInfoVO> selectAllPassedImg(SearchVO searchVo2) {
+		return comImgInfoDao.selectAllPassedImg(searchVo2);
+	}
+
+	@Override
+	public int selectPassedTotalRecord(SearchVO searchVo2) {
+		return comImgInfoDao.selectPassedTotalRecord(searchVo2);
 	}
 	
 }

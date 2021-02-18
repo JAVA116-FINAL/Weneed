@@ -101,30 +101,12 @@
 			</div>
 			<div class="row align-items-center">
 				<div class="col-lg-12 testimonial-wrap-2">
-					<div class="testimonial-block style-2"
-						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_001.jpg') center/cover no-repeat; height:270px;padding:0;">
-						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">Wanted Plus : 무제한으로 즐기는</h3></div>
-					</div>
-	
-					<div class="testimonial-block style-2"
-						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_002.jpg') center/cover no-repeat; height:270px;padding:0;">
-						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">우리회사 제품 라이브커머스로 팔기</h3></div>
-					</div>
-	
-					<div class="testimonial-block style-2"
-						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_003.jpg') center/cover no-repeat; height:270px;padding:0;">
-						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">Wanted Career Talk #8. DATA 누구에게나 처음은 있었다.</h3></div>
-					</div>
-	
-					<div class="testimonial-block style-2"
-						style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_004.jpg') center/cover no-repeat; height:270px;padding:0;">
-						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">스터디살롱 : Where I am</h3></div>
-					</div>
-	
-					<div class="testimonial-block style-2"
-					style="background:url('${pageContext.request.contextPath}/resources/images/main/main_career_005.jpg') center/cover no-repeat; height:270px;padding:0;">
-						<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">실전 프로젝트로 배우는 딥러닝 컴퓨터비전</h3></div>
-					</div>
+					<c:forEach var="vo2" items="${listMainCareerList }">
+						<div class="testimonial-block style-2"
+							style="background:url('<c:url value='/programImgUpload/${vo2.proImage }' />') center/cover no-repeat; height:270px;padding:0;">
+							<div style="position:relative; top:266px;"><h3 class="mt-3 passPredic-pic-title">${vo2.proName }</h3></div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 		</section>
@@ -133,39 +115,20 @@
 		<div class="newJob-box">
 			<div class="carrer-chance-title-wrap">
 				<div class="newJob-title-div">
-					<h2 class="newJob-box-title">신규 채용 회사</h2>
+					<h2 class="newJob-box-title">신규 회사</h2>
 				</div>
 			</div>
 				<section class="fetaure-page ">
 						<div class="row">
+						<c:forEach var="vo" items="${listNewRecruit }">
 							<div class="col-lg-3 col-md-6">
 								<div class="about-block-item mb-5 mb-lg-0">
-									<img src="${pageContext.request.contextPath}/resources/images/main/main_newJob_001.jpg" alt="" class="img-fluid w-100">
-									<h4 class="mt-3 passPredic-pic-title">언더독스</h4>
-									<div class="ge-job-card-company-location">교육</div>
+									<img src="<c:url value='/companyImgUpload/${vo.comImgUrl }' />" alt="" class="img-fluid w-100">
+									<h4 class="mt-3 passPredic-pic-title">${vo.comName }</h4>
+									<div class="ge-job-card-company-location">${vo.industry }</div>
 								</div>
 							</div>
-							<div class="col-lg-3 col-md-6">
-								<div class="about-block-item mb-5 mb-lg-0">
-									<img src="${pageContext.request.contextPath}/resources/images/main/main_newJob_002.jpg" alt="" class="img-fluid w-100">
-									<h4 class="mt-3 passPredic-pic-title">루닛(Lunit)</h4>
-									<div class="ge-job-card-company-location">IT, 컨텐츠</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-6">
-								<div class="about-block-item mb-5 mb-lg-0">
-									<img src="${pageContext.request.contextPath}/resources/images/main/main_newJob_003.jpg" alt="" class="img-fluid w-100">
-									<h4 class="mt-3 passPredic-pic-title">메가존</h4>
-									<div class="ge-job-card-company-location">IT, 컨텐츠</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-6">
-								<div class="about-block-item">
-									<img src="${pageContext.request.contextPath}/resources/images/main/main_newJob_004.jpg" alt="" class="img-fluid w-100">
-									<h4 class="mt-3 passPredic-pic-title">이쿠얼키(인공지능수학깨봉)</h4>
-									<div class="ge-job-card-company-location">교육</div>
-								</div>
-							</div>
+						</c:forEach>
 						</div>
 				</section>
 		</div>
@@ -216,7 +179,7 @@
 		<div class="weekRefer-box">
 			<div class="weekRefer-title-wrap">
 				<div class="weekRefer-title-div">
-					<h2 class="weekRefer-box-title">금주의 추천</h2>
+					<h2 class="weekRefer-box-title">신규 채용 포지션</h2>
 				</div>
 			</div>
 				<section class="fetaure-page ">

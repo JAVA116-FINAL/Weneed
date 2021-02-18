@@ -1,11 +1,14 @@
 package com.it.wanted.career.admin.model;
 
+import java.util.List;
+
 public class ProgramVO2 {
 	private int proConNo;  		/* 프로그램내용번호 */
 	private int programNo;  	/* 프로그램 번호 */
 	private String proTitle; 	/* 제목 */
 	private String proContents; 		/* 내용 */
 	
+	private List<ProgramVO2> proVo2List;
 	
 	public int getProConNo() {
 		return proConNo;
@@ -39,6 +42,15 @@ public class ProgramVO2 {
 		this.proContents = proContents;
 	}
 	
+	
+	public List<ProgramVO2> getProVo2List() {
+		return proVo2List;
+	}
+
+	public void setProVo2List(List<ProgramVO2> proVo2List) {
+		this.proVo2List = proVo2List;
+	}
+
 	@Override
 	public String toString() {
 		return "Program2VO [proConNo=" + proConNo + ", programNo=" + programNo + ", proTitle=" + proTitle

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.mapper.noticeAdmin">
+	<sql id="searchWhere">
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+				qna_title like '%'||#{searchKeyword}||'%' or to_char(qna_content) like '%'||#{searchKeyword}||'%'
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="searchWhere2">
+		<where>
+			<if test="noticeDept1 != 0 and noticeDept2 != 0">
+				notice_dept1=#{noticeDept1} and notice_dept2=#{noticeDept2}
+			</if>
+			<if test="noticeDept2 = 0">
+				notice_dept1=#{noticeDept1}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="searchWhere3">
+		<where>
+			<if test="searchKeyword != null and searchKeyword != ''">
+		    	notice_title like '%'||#{searchKeyword}||'%' or to_char(notice_content) like '%'||#{searchKeyword}||'%'
+		    </if>
+		</where>
+	</sql>
+	
+	<!-- 사용자가 등록한 qna 리스트 select -->
+	<select id="selectQnaList" resultType="map">
+		select*from qna
+		order by qna_no desc
+	</select>
+	
+	<select id="selectQnaList_search" parameterType="searchVo" resultType="map">
+		select*from
+		(
+		    select A.*, rownum as RNUM from
+		    (
+		    	select*from qna
+		    	<include refid="searchWhere" />
+		        order by qna_regdate desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectQnaList_cnt" parameterType="searchVo" resultType="int">
+		select count(*) as cnt from qna
+		where qna_title like '%'||#{searchKeyword}||'%' 
+		or to_char(qna_content) like '%'||#{searchKeyword}||'%'
+	</select>
+	
+	<resultMap type="HashMap" id="detailUser">
+		<result property="QNA_CONTENT" column="qna_content" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	
+	<resultMap type="HashMap" id="detailAdmin">
+		<result property="QNA_R_CONTENT" column="qna_r_content" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	
+	<select id="selectQnaDetail_user" parameterType="int" resultMap="detailUser">
+		select*from qna
+		where qna_no=#{qna_no}
+	</select>
+	
+	<!-- detail에서 함게 출력될 답변 -->
+	<select id="selectQnaDetail_admin" parameterType="int" resultMap="detailAdmin">
+		select*from qnareply
+		where qna_no=#{qna_no}
+	</select>
+	
+	<!-- 1:1문의 답변 등록 -->
+	<insert id="insertQnaReply" parameterType="qnaReplyVo">
+		insert into qnareply(qna_no, admin_no, qna_email, qna_r_title, qna_r_content)
+		values(#{qna_no}, 1, #{qna_email}, #{qna_r_title}, #{qna_r_content})
+	</insert>
+	
+	<!-- 미답변 1:1문의 갯수 -->
+	<select id="selectReply_cnt" parameterType="searchVo" resultType="int">
+		select count(*) from
+		(
+		    select*from qna 
+		    <include refid="searchWhere" />
+		)
+		<![CDATA[
+		where qna_reply = 'N' 
+		and qna_reply != 'M'
+		]]>
+	</select>
+	
+	<!-- 답변여부 업데이트 -->
+	<update id="updateReply" parameterType="int">
+		update qna
+		set qna_reply='Y'
+		where qna_no=#{qna_no}
+	</update>
+	
+	<!-- 문의 무시하기 -->
+	<update id="updateReply_mute" parameterType="int">
+		update qna
+		set qna_reply='M'
+		where qna_no=#{qna_no}
+	</update>
+	
+	<select id="selectNoticeAll" parameterType="searchVo" resultType="map">
+		select*from
+		(
+		    select A.*, rownum as RNUM from
+		    (
+		        select*from noticeview
+		    	<include refid="searchWhere2" />
+		        order by notice_regdate desc
+		    )A
+		    <include refid="searchWhere3" />
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectNoticeAll_cnt" parameterType="searchVo" resultType="int">
+		select count(*) from
+		(
+		    select A.*, rownum as RNUM from
+		    (
+		        select*from noticeview
+		    	<include refid="searchWhere2" />
+		    )A
+		    <include refid="searchWhere3" />
+		)
+	</select>
+	
+	<delete id="deleteNotice" parameterType="int">
+		delete notice
+		where notice_no=#{notice_no}
+	</delete>
+	
+	<update id="updateNotice" parameterType="noticeVo">
+		update notice
+		set notice_title=#{notice_title}, notice_content=#{notice_content}
+		where notice_no=#{notice_no}
+	</update>
+	
+	<select id="selectByDept1" parameterType="int" resultType="map">
+		select*from noticedept2
+		where notice_dept1=#{notice_dept1}
+	</select>
+	
+	<insert id="insertNotice" parameterType="noticeVo">
+		<selectKey resultType="int" keyProperty="notice_no" order="BEFORE">
+			select notice_no.nextval from dual
+		</selectKey>
+		insert into notice(notice_no, notice_dept1, notice_dept2, notice_title, notice_content)
+		values(#{notice_no}, #{notice_dept1}, #{notice_dept2}, #{notice_title}, #{notice_content})
+	</insert>
+	
+</mapper>	

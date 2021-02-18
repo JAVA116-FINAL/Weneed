@@ -5,7 +5,7 @@
 <head>
 <!-- Google Map -->
 <script src="<%=request.getContextPath() %>/resources/plugins/google-map/map.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key="></script>    
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlM5WtKSjJE19oUZMIhrkEO3hlnhWGJ1M"></script>    
  
 <script type="text/javascript">
       function initialize() {
@@ -36,7 +36,7 @@
                map: map,
                icon: image, // 마커로 사용할 이미지(변수)
 //             info: '말풍선 안에 들어갈 내용',
-               title: '서대전네거리역이지롱~' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+               title: '여기다' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
         });
          
         var content = "이곳은 서대전네거리역이다! <br/> 지하철 타러 가자~"; // 말풍선 안에 들어갈 내용

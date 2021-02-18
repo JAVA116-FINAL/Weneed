@@ -26,6 +26,128 @@
 		insert into posJikmu(pos_no, jikmu_code)
 		values(#{posNo}, #{jikmuCode})
 	</insert>
+	
+	
+	<!-- 현빈 0214 추가 잡서치 조회 뷰
+	create or replace view jobsearchView
+	as
+	select pos.pos_no as POSNO, com.com_name as COMNAME, com.com_code as COMCODE,
+	pos.pos_name as POSNAME, pos.min_year as MINYEAR, pos.max_year as MAXYEAR,
+	pos.end_date as ENDDATE,
+	DBMS_LOB.SUBSTR(pos.pos_context, 4000, 1) as POSCONTEXT, 
+	DBMS_LOB.SUBSTR(pos.POS_CAREER,4000, 1) as POSCAREER,
+	DBMS_LOB.SUBSTR(pos.QUALIFICATION,4000, 1) as QUALIFICATION, 
+	DBMS_LOB.SUBSTR(pos.preferential_TREATment,4000, 1) as PREFERENTIALTREATMENT,
+	DBMS_LOB.SUBSTR(pos.welfare_benefits ,4000, 1) as WELFAREBENEFITS, 
+	pos.overseas as OVERSEAS,
+	(select com_img_url from comimginfo where com_img_passed='Y' and com_code=pos.com_code and rownum=1) as COMIMGURL,
+	na.nation_name_kr as NATIONNAMEKR
+	from position pos join cominfo com on pos.com_code=com.com_code
+	left outer join nationlist na on pos.nation_name_kr=na.nation_name_kr
+	order by pos.pos_no desc
+	-->
+	<select id="selectJobsearchList" resultType="map">
+		select * from jobsearchView
+	</select>
+	
+	<select id="selectPositionByComcode" parameterType="String" resultType="positionVo">
+		select pos_no, pos_name, pos_status, end_date from position where com_code=#{comCode} order by pos_no desc
+	</select>
+	
+<!-- 0216자연 -->
+	<select id="selectPositionAllbyAdmin" parameterType="searchVo" resultType="map">
+		select* 
+		from
+		(
+			select A.*,rownum as RNUM 
+			from
+			(
+				select pos_No, 
+				(select com_Name from comInfo c where c.com_Code=p.com_Code)com_Name,
+				(select jikgun_Name from jikgun j where p.jikgun_Code=j.jikgun_Code)jikgun_Name,
+				 pos_Min_Sal,pos_Max_Sal,end_Date,pos_Name,pos_Status,pos_Regdate
+				from position p order by pos_No desc
+			)A 
+			<if test="searchKeyword != null and searchKeyword != ''">
+				where pos_No like '%' || #{searchKeyword} || '%' or com_Name like '%' || #{searchKeyword} || '%' or jikgun_Name like '%' || #{searchKeyword} || '%' or
+				pos_Name like '%' || #{searchKeyword} || '%'
+			</if>
+			
+		)	
+			<![CDATA[
+			where RNUM>#{firstRecordIndex}
+			and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+			]]>
+	</select>
+	<select id="selectTotalRecordbyAdmin" parameterType="searchVo" resultType="int">
+		select count(*) from(
+		select pos_No, 
+		(select com_Name from comInfo c where c.com_Code=p.com_Code)com_Name,
+		(select jikgun_Name from jikgun j where p.jikgun_Code=j.jikgun_Code)jikgun_Name,
+		 pos_Min_Sal,pos_Max_Sal,end_Date,pos_Name,pos_Status,pos_Regdate
+		from position p
+		)
+		<if test="searchKeyword != null and searchKeyword != ''">
+			where pos_No like '%' || #{searchKeyword} || '%' or com_Name like '%' || #{searchKeyword} || '%' or jikgun_Name like '%' || #{searchKeyword} || '%' or
+			pos_Name like '%' || #{searchKeyword} || '%'
+		</if>
+	</select>
+	
+	
+	<select id="selectYetTotalRecord" resultType="int">
+		select count(*) from position where pos_status=2
+	</select>
+	
+	<select id="selectAllYetPosition" parameterType="searchVo" resultType="map">
+		select* 
+		from
+		(
+			select A.*,rownum as RNUM 
+			from
+			(
+				select pos_No, 
+				(select com_Name from comInfo c where c.com_Code=p.com_Code)com_Name,
+				(select jikgun_Name from jikgun j where p.jikgun_Code=j.jikgun_Code)jikgun_Name,
+				 pos_Min_Sal,pos_Max_Sal,end_Date,pos_Name,pos_Status,pos_Regdate
+				from position p where p.pos_status=2 order by pos_No desc
+			)A 
+		)	
+		<![CDATA[
+		where RNUM>#{firstRecordIndex}
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectPassedTotalRecord" resultType="int">
+		select count(*) from position where pos_status=3
+	</select>
+	
+	<select id="selectAllPassedPosition" parameterType="searchVo" resultType="map">
+		select* 
+		from
+		(
+			select A.*,rownum as RNUM 
+			from
+			(
+				select pos_No, 
+				(select com_Name from comInfo c where c.com_Code=p.com_Code)com_Name,
+				(select jikgun_Name from jikgun j where p.jikgun_Code=j.jikgun_Code)jikgun_Name,
+				 pos_Min_Sal,pos_Max_Sal,end_Date,pos_Name,pos_Status,pos_Regdate
+				from position p where p.pos_status=3 order by pos_No desc
+			)A 
+		)	
+		<![CDATA[
+		where RNUM>#{firstRecordIndex}
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	
+	<update id="changeStatustoPass" parameterType="int">
+		update position
+		set pos_status=3
+		where pos_no=#{posNo}
+	</update>
 </mapper>
 
 

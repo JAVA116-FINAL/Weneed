@@ -27,6 +27,7 @@ public class FileUploadUtil {
 	public static final int PDS_TYPE=1;  //자료실에서 사용
 	public static final int IMAGE_TYPE=2; //상품등록에서 사용
 	public static final int RESUME_UP_TYPE=3; //이력서등록에서 사용
+	public static final int PRO_IMAGE_TYPE = 4; //프로그램등록에서 사용
 	
 	@Resource(name="fileUploadProperties")
 	private Properties fileUploadProps;
@@ -110,6 +111,12 @@ public class FileUploadUtil {
 			}else {
 				upPath=fileUploadProps.getProperty("imageFile.upload.path");
 			}
+		}else if(type==PRO_IMAGE_TYPE) { //이미지일 때
+			if(testGb.equals("test")) { 
+				upPath=fileUploadProps.getProperty("proImage.upload.path.test");
+			}else {
+				upPath=fileUploadProps.getProperty("proImage.upload.path");
+			}			
 		}else if(type==RESUME_UP_TYPE) {//이력서 등록일 때 
 			if(testGb.equals("test")) {
 				upPath=fileUploadProps.getProperty("resumeFile.upload.path.test");

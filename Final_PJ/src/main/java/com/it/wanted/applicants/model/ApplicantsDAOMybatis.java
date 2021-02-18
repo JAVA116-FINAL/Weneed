@@ -92,7 +92,6 @@ public class ApplicantsDAOMybatis implements ApplicantsDAO {
 	public int selectFinalAccept(int memNo) {
 		return sqlSession.selectOne(namespace+"selectFinalAccept", memNo);
 	}
-
 	@Override
 	public int selectFinalFail(int memNo) {
 		return sqlSession.selectOne(namespace+"selectFinalFail", memNo);
@@ -107,4 +106,10 @@ public class ApplicantsDAOMybatis implements ApplicantsDAO {
 	public List<Map<String, Object>> selectApplyList(int memNo) {
 		return sqlSession.selectList(namespace+"selectApplyList", memNo);
 	}
+
+//	@Override
+//	public int updatePeriod(ApplicantsVO appliVo) {
+//		return sqlSession.update(namespace+"updatePeriod",  appliVo);
+//	}
+
 }

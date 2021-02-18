@@ -27,7 +27,6 @@
 		<beans:property name="order" value="1" />
 	</beans:bean>
 	
-	
 	<context:component-scan base-package="com.it.wanted" use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller" 
 		type="annotation"/>
@@ -56,4 +55,31 @@
             <beans:ref bean="ComLoginInterceptor"/>
         </interceptor>
     </interceptors>
+    
+	<!-- 로그인 인터셉터 -->
+	<beans:bean id="LoginInterceptor" class="com.it.wanted.controller.LoginInterceptor"></beans:bean>
+    
+    <interceptors>
+        <interceptor>
+            <mapping path="/mypage/main.do"/>
+           	<mapping path="/profileSetting/setting.do"/>
+            
+            <!-- 자연 -->
+            <mapping path="/resume/*.do"/>
+            <mapping path="/matchupMem/*.do"/>
+            <mapping path="/jobsearch/bookmark.do"/>
+            <mapping path="/profileSetting/setting.do"/>
+            <exclude-mapping path="/resume/resumeIntro.do"/>
+            <exclude-mapping path="/resume/resumeSampleFileDown.do"/>
+            <exclude-mapping path="/resume/resumeDown.do"/>
+            <exclude-mapping path="/resume/resumeFileDown.do"/>
+			<exclude-mapping path="/resume/resumeDetailAdmin.do"/>
+            <exclude-mapping path="/matchupMem/matchupMemIntro.do"/>
+			<!-- 여기까지 -->
+            <beans:ref bean="loginInterceptor"/>
+            
+        </interceptor>
+    </interceptors>
+
+	
 </beans:beans>

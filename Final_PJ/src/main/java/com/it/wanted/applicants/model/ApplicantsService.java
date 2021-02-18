@@ -50,4 +50,18 @@ public interface ApplicantsService {
 //	public List<Map<String, Object>> selectApplicants(ApplicantsVO appliVo);
 
 //	public int updatePeriod(ApplicantsVO appliVo);
+	
+	/* 자연 */
+	public int insertApply(ApplicantsVO applyVo);
+	public List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo);
+	public int selectTotalRecordbyAdmin(SearchVO searchVo);
+	
+	/*가은*/
+	public int selectApplyComplete(int memNo);
+	public int selectDocumentPass(int memNo);
+	public int selectFinalAccept(int memNo);
+	public int selectFinalFail(int memNo);
+	public int selectApplyTotal(int memNo);
+
+	public List<Map<String, Object>> selectApplyList(int memNo);
 }

@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.common.SearchVO;
+
 @Repository
 public class MatchupComDAOMy implements MatchupComDAO{
 
@@ -57,6 +59,16 @@ public class MatchupComDAOMy implements MatchupComDAO{
 	@Override
 	public List<Map<String, Object>> selectSearchmatchupCombyComName(String comName) {
 		return sqlSession.selectList(namespace+"selectSearchmatchupCombyComName",comName);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMatchupComAllbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectMatchupComAllbyAdmin",searchVo);
+	}
+
+	@Override
+	public int selectTotalRordbyAdmin(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"selectTotalRordbyAdmin",searchVo);
 	}
 	
 }

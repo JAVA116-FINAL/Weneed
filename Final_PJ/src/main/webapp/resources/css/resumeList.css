@@ -495,7 +495,7 @@ i.icon-more_vert.icon_jy {
     float: left;
     top: -23px;
     right: 3px;
-     pointer-events: none;
+     /* pointer-events: none; */
 }
 
 span.noResume_jy {
@@ -515,4 +515,9 @@ button.RWLink_jy {
 button.RWLink_jy:focus {
     outline: none;
     border: none;
+}
+/* 0217 */
+.nav-item.dropdown.RWdropdown_jy.show {
+    position: relative;
+    top: 25px;
 }

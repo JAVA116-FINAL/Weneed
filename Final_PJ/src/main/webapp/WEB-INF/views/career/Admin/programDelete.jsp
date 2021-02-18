@@ -29,17 +29,19 @@ $( document ).ready( function() {
 	});
 
 
-	$(function(){
+ 	$(function(){
 		$('form[name=proDelete]').submit(function(){
-			if($('#pwd').val().length<1){
+			/* if($('#pwd').val().length<1){
 				alert('비밀번호를 입력하세요');
 				$('#pwd').focus();
 				event.preventDefault();
 			}else if(!confirm('삭제하시겠습니까?')){
-				event.preventDefault();
+ */
+		 if(!confirm('삭제하시겠습니까?')){
+		 	event.preventDefault();
 			}
 		});
-	});	
+	});	 
 </script>	
 	
 <title>프로그램 내용 등록 페이지</title>
@@ -94,17 +96,18 @@ $( document ).ready( function() {
 				<!-- 프로그램 이름 -->
 			        <div>
 			        	<div class="delLine">
-							<span> " ${proVo.proNo } " </span><span style="color:gray;"> 번 프로그램을</span><br> 							
+			        		<label name="adminNo">${proVo.adminNo}</label>
+							<span> " ${param.programNo } " </span><span style="color:gray;"> 번 프로그램을</span><br> 							
 							<br>
 							<div>정말로 삭제하시겠습니까?</div>		        
 			        	</div>
 				        <br>
 				      
 				        
-				       <div style="text-align:center;">           
+				  <!--      <div style="text-align:center;">           
 				           <label for="pwd">비밀번호</label>
 				           <input type="password" id="pwd" name="pwd" style="height:30px;"/>   
-			      	  </div>
+			      	  </div> -->
 			  		</div>
 			
 	           

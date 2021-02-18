@@ -35,17 +35,72 @@
 			#{comSize}, #{comIntro}, #{comYear}, #{comEmails}, #{comPhone}, #{comWebsite}, #{comKeywords}, #{comRecom}, #{comMemNo})
 	</insert>
 	
-	<select id="selectAllCompany" resultType="comInfoVo">
-		select * from comInfo
-	</select>
-	
 	<update id="changeStatusYettoPass" parameterType="string">
 		update cominfo
 		set com_info_passed='PASSED'
 		where com_code=#{comCode}
 	</update>
 	
+	<select id="selectAllCompany" parameterType="searchVo" resultType="comInfoVo">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM
+		    from
+		    (
+		        select com_code, com_name, profit, com_reg_no, com_size, com_mem_no, com_info_passed
+		        from cominfo 
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
 	
+	<select id="selectYetTotalRecord" parameterType="searchVo" resultType="int">
+		select count(*) from comInfo where com_info_passed='YET'
+	</select>
+	
+	<select id="selectAllYetCompany" parameterType="searchVo" resultType="comInfoVo">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM
+		    from
+		    (
+		        select com_code, com_name, profit, com_reg_no, com_size, com_mem_no, com_info_passed
+		        from cominfo 
+		        where com_info_passed='YET' order by com_code desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectPassedTotalRecord" parameterType="searchVo" resultType="int">
+		select count(*) from comInfo where com_info_passed='PASSED'
+	</select>
+	
+	<select id="selectAllPassedCompany" parameterType="searchVo" resultType="comInfoVo">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM
+		    from
+		    (
+		        select com_code, com_name, profit, com_reg_no, com_size, com_mem_no, com_info_passed
+		        from cominfo 
+		        where com_info_passed='PASSED' order by com_code desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
 </mapper>
 
 

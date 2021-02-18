@@ -117,7 +117,46 @@
 	<select id="selectOnebymatchupMemNo" parameterType="int" resultType="matchupMemVo">
 		select * from matchupmem where mcumem_No=#{mcumemNo}
 	</select>
+	<!-- 2/15 -->
+ 	<sql id="searchWhere">
+    	<where>
+       		 <if test="searchKeyword != null and searchKeyword != ''">
+           		mcumem_No like '%' || #{searchKeyword} || '%' or
+           		mem_No like '%' || #{searchKeyword} || '%' or
+           		jobsearch_Flag = #{searchKeyword} or
+           		ref_Name like '%' || #{searchKeyword} || '%' or
+           		resume_Title like '%' || #{searchKeyword} || '%' or
+           		Edu_Name like '%' || #{searchKeyword} || '%' or
+           		Edu_Major like '%' || #{searchKeyword} || '%' or
+           		career_Name like '%' || #{searchKeyword} || '%' or
+           		career_Dep like '%' || #{searchKeyword} || '%' or
+           		jikgun_Name like '%' || #{searchKeyword} || '%' or
+           		Career= #{searchKeyword}or
+           		salary like '%' || #{searchKeyword} || '%' or
+           		skill like '%' || #{searchKeyword} || '%' 
+        	</if>
+     	</where>   
+   	</sql>
 	
+	<select id="selectMatchupMemAllbyAdmin" parameterType="searchVo" resultType="matchupDetailsViewVo">
+		select* from(
+		    select a.*, rownum as RNUM from (   
+		        select * from matchupMemDetailsView 
+				<include refid="searchWhere"></include>	        
+		        order by mcumem_no desc, edu_No desc, career desc
+		    )a
+		)
+	 	<![CDATA[
+	      where RNUM > #{firstRecordIndex} 
+	      and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+	      ]]>
+	</select>
+	
+	<select id="totalRecordbyAdmin" parameterType="searchVo" resultType="int">
+		select count(*) from matchupMemDetailsView 
+		<include refid="searchWhere"></include>
+		order by mcumem_no desc
+	</select>
 	
 	
 	<!-- 현빈 -->
@@ -129,36 +168,29 @@
 		select mcumem_no from matchupmem where resume_no=#{resumeNo}
 	</select>
 	
-<!-- 얘는 이제 필요 없어. 맨 처음에 5개씩 보여주려고 썼던 코드
- 	<select id="selectTenMem" parameterType="int" resultType="map">
-		select * from matchupMemSearchView
-		<![CDATA[
-		    where RNUM > #{firstRecord}
-		    and RNUM <= #{firstRecord}+5
-		]]>
-	</select> -->	
 	
-	<!-- 검색용 view 
+	<!-- 검색용 view 0213 업데이트
 	create or replace view matchupMemSearchView
 	as
-	select rownum as RNUM, A.*
+	select rownum as RNUM,  A.*
 	from
 	(
 	select m.mcumem_no as MCUMEMNO, m.resume_no AS RESUMENO, m.mem_no AS MEMNO, m.expertise_no AS EXPERTISENO, 
-		   m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITL,
-		   r.resume_name AS RESUMENAME, r.resume_introduce AS RESUMEINTRODUCE, r.lang_flag AS LANGFLAG, 
-		   c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
+	       m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITLE,
+	       r.resume_name AS RESUMENAME, r.resume_introduce AS RESUMEINTRODUCE, r.lang_flag AS LANGFLAG, 
+	       c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
 	       x.jikGun_code AS JIKGUNCODE, x.career AS CAREER, x.skill AS SKILL,
-	       (select count(*) from matchuplike where mcumem_no=m.mcumem_no) as CNT
-	from matchupMem m join resume r 
-	on m.resume_No = r.resume_no 
-	join career c on c.resume_no=m.resume_no
-	join education e on e.resume_no=m.resume_no
-	join expertise x on x.expertise_no=m.expertise_no
+	       (select jikmu_name from jikmu j where j.JIKMU_CODE=
+	            (select jikmu_code from matchupmemjikmu mjm where mjm.expertise_no=m.expertise_no)) as JIKMUNAME, 
+	       (select jikgun_name from jikgun jk where jk.jikgun_code=
+	            (select jikgun_code from expertise e where e.expertise_no=m.expertise_no)) as JIKGUNNAME
+	from matchupMem m join resume r on m.resume_No = r.resume_no 
+	left outer join career c on c.resume_no=m.resume_no
+	left outer join education e on e.resume_no=m.resume_no
+	left outer join expertise x on x.expertise_no=m.expertise_no
 	where m.resumeopen_flag='Y'
 	order by m.mcumem_no
-	)A join matchupmemjikmu mu on A.EXPERTISENO=mu.expertise_no
-	where mu.jikmu_code='JM001';
+	)A;
 	 -->
 	 
 	<!-- 검색된 리스트 보기
@@ -187,30 +219,46 @@
 	
 	<!-- 검색결과 -->
 	<select id="selectMcumemSearchList" parameterType="matchupMemSearchVo" resultType="map">
-		select B.* from 
+		select * from 
 	    (
 	    	select A.* from
 		    (
-		        select rownum as RN, m.* from matchupMemSearchView m
+		        select rownum as RN, 
+	        	(select count(*) from matchuplike l where com_code=#{comCode} and l.mcumem_no=m.mcumemno) as CNT,
+	        	m.* from matchupMemSearchView m
+	        	left outer join matchupmemjikmu mu on m.EXPERTISENO=mu.expertise_no
 		        where m.mcumemNo in
-		        (3000, 3002, 3003, 3004, 3005, 3006, 3008, 3009, 3010, 3011, 3012, 3013, 3014, 3015, 3016, 3017, 3018, 3019, 3020, 3021, 3022, 3023, 3024, 3025, 3026, 3027, 3028, 3029, 3030, 3031, 3032, 3033, 3034, 3035, 3036, 3037, 3038, 3039, 3040, 3041, 3042, 3043, 3044, 3045, 3046, 3047, 3048, 3049, 3050, 3051, 3052, 3053, 3054, 3055, 3056, 3057, 3058, 3059, 3060, 3061, 3062, 3063, 3064, 3065, 3066, 3067, 3068, 3069, 3070, 3071, 3072, 3073, 3074, 3075, 3076, 3077, 3078, 3079, 3080, 3081, 3082, 3083, 3084, 3085, 3086, 3087, 36, 40, 3088, 3089, 3090, 3091, 3092, 3093, 3094, 3095, 3096, 3097)
-	            and 
-	            to_number(translate(career, '신입', '0')) between 0 and 100
+		        <foreach collection="mcumemNoList" item="mcumemNo" open="(" close=")" separator=",">
+					#{mcumemNo}
+				</foreach>
+	            and to_number(translate(career, '신입', '0')) between #{searchMinCareer} and #{searchMaxCareer}
 			) A
 			<![CDATA[
 			where RN > #{viewMoreSize}
 			and RN <= #{viewMoreSize}+5
 			]]>
-	    ) B	
-		<if test="searchJikmu != ''">
-			join matchupmemjikmu mu on B.EXPERTISENO=mu.expertise_no
-	        and mu.jikmu_code=#{searchJikmu}
-		</if>		
+	    ) 
 	</select>
 	
 	<!-- 찜한 목록 불러오기  -->
 	<select id="selectZzimedList" parameterType="matchupMemSearchVo" resultType="map">
-		select * from (
+		select * from
+		(
+		    select A.* 
+		    from (
+			    select rownum as rn, 
+			    	(select count(*) from matchuplike l where com_code=#{comCode} and l.mcumem_no=v.mcumemno) as cnt, v.* 
+			    from matchupMemSearchView v left outer join matchuplike l on l.mcumem_no=v.mcumemNo
+			    where com_code=#{comCode} 
+				) A
+		<![CDATA[
+		where rn > #{viewMoreSize}
+		and rn <= #{viewMoreSize}+5
+		)
+		]]>
+	</select>
+	<!-- 찜한목록 불러오기 이전 sql문 백업 
+	select * from (
 	    	select rownum as RNUM, A.* from
 	        (
 		        select m.mcumem_no as MCUMEMNO, m.resume_no AS RESUMENO, m.mem_no AS MEMNO, m.expertise_no AS EXPERTISENO, 
@@ -225,8 +273,12 @@
 		        join education e on e.resume_no=m.resume_no
 		        join expertise x on x.expertise_no=m.expertise_no
 		        where m.resumeopen_flag='Y'
+		        and m.mcumem_No in
+		        <foreach collection="mcumemNoList" item="mcumemNo" open="(" close=")" separator=",">
+					#{mcumemNo}
+				</foreach>
 		        and to_number(translate(career, '신입', '0')) between #{searchMinCareer} and #{searchMaxCareer}
-		        order by m.mcumem_no
+		        order by m.mcumem_No
 	        )A
 	        <![CDATA[
 	        where cnt>0
@@ -236,7 +288,7 @@
 	    where RNUM > #{viewMoreSize}
 		and RNUM <=  #{viewMoreSize}+5
 		]]>
-	</select>
+	-->
 	
 	<select id="isZzimed" parameterType="matchupZzimVo" resultType="int">
 		select count(*) as CNT
@@ -244,16 +296,8 @@
 		where mcumem_no=#{mcumemNo} and com_code=#{comCode}
 	</select>
 	
+	<select id="selectMemNo" parameterType="int" resultType="int">
+		select mem_no from matchupmem where resume_no=#{resumeNo}
+	</select>
+	
 </mapper>
-
-<!-- 
-select * from matchupMemSearchView
-		where mcumemNo in
-		<foreach collection="mcumemNoList" item="mcumemNo" open="(" close=")" separator=",">
-			#{mcumemNo}
-		</foreach>
-		<![CDATA[
-		    and RNUM > #{viewMoreSize}
-		    and RNUM <= #{viewMoreSize}+5
-		]]>
- -->

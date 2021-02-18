@@ -165,6 +165,282 @@ html{
 	font-weight:600;
 }
 
+/* 비밀번호 재설정 페이지 */
+.resetPwdWrapper{
+	height:100%;
+	width:100%;
+	display:absolute;
+	position:fixed;
+	top:0;
+	z-index:1;
+	align-items:center;
+	justify-content:center;
+	display:flex;
+}
+
+.resetPwdWrapper:before{
+	content:'';
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:rgb(0, 0, 0, 0.8);
+	z-index:-1;
+}
+
+.resetPwdBox{
+	width:400px;
+	border-radius:4px;
+	background-color:#fff;
+}
+
+.resetPwdTitle{
+	font-size:16px;
+	font-weight:500;
+	text-align:center;
+	padding:17px 0px;
+	border-bottom:1px solid #eee;
+}
+
+.resetPwdInputWrap{
+	padding:20px;
+}
+.resetPwdError{
+	font-size:11px;
+	display:block;
+	margin:0 0 14px;
+	color:red;
+}
+
+.resetPwdInputWrap input{
+	width:100%;
+	margin-bottom:14px;
+	color:#333;
+	font-size:15px;
+	border-radius:3px;
+	border:1px solid #dbdbdb;
+	padding:10px;
+}
+
+.resetPwdOkBtn{
+	color:#fff;
+	background-color:#3366ff;
+	height:50px;
+	width:100%;
+	border:0;
+	border-radius:3px;
+}
+
+.resetPwdOkBox header{
+	color:#fff;
+	font-size:26px;
+	border-bottom:0;
+	font-weight:500;
+	text-align:center;
+	padding:17px 0px;
+}
+
+.mainBtn{
+	background-color:#3366ff;
+	height:50px;
+	width:100%;
+	border-radius:3px;
+	color:#fff;
+	border:0;
+	font-weight:600;
+}
+
+
+.withdrawBtn{
+	margin-top:8px;
+	width:100%;
+	height:54px;
+	border-radius:27px;
+	background-color:#3366ff;
+	font-size:16px;
+	font-weight:600;
+	color:#fff;
+	border:0;
+}
+
+.withdrawLabel{
+	font-size:16px;
+	text-align:center;
+	font-weight:500;
+	color:#333;
+}
+
+
+/* 지원현황 */
+.applicationsStatus-container-wrap{
+	padding-bottom:100px;
+	display:flex;
+}
+.applyStatus-left-nav{
+	position:relative;
+}
+.applyStatus-left-nav-title >p{
+	font-size:18px;
+	font-weight:700;
+	color:#333;
+	padding:50px 0 20px;
+}
+.applyStatus-left-nav-detail{
+	margin:20px 0 auto;
+}
+
+.applyStatus-left-nav-detail >section{
+	float:left;
+	width:80%;
+}
+.nav-detail-btn >ul>li{
+	margin:0;
+	color:#333;
+	font-size:14px;
+	font-weight:400;
+}
+.nav-detail-btn >ul>li+li{
+	margin-top:15px;
+}
+.linkActive{
+	color:#3366ff;
+	font-weight:bold;
+}
+
+.writeStatusWrapper{
+	margin:0 0 20px;
+}
+.status-total{
+	color:#3b3b40;
+	font-size:14px;
+	font-weight:400;
+	margin-bottom:10px;
+}
+.status-table-header{
+	border-bottom:1px solid #d1d1d1;
+	font-size:13px;
+}
+.status-table-header tr{
+	width:100%;
+	display:table-cell;
+}
+.status-company{
+	width:20%;
+	text-align:left;
+	color:#86939e;
+	font-weight:500;
+	float:left;
+	padding:10px;
+	overflow:hidden;
+}
+
+.status-position{
+	width:45%;
+	text-align:left;
+	color:#86939e;
+	font-weight:500;
+	float:left;
+	padding:10px;
+	overflow:hidden;
+}
+.status-time{
+	width:20%;
+	text-align:left;
+	color:#86939e;
+	font-weight:500;
+	float:left;
+	padding:10px;
+	overflow:hidden;
+}
+
+.status-status{
+	width:15%;
+	text-align:left;
+	color:#86939e;
+	font-weight:500;
+	float:left;
+	padding:10px;
+	overflow:hidden;
+}
+
+.status-table-empty{
+	margin-top:80px;
+	text-align:center;
+}
+
+
+.status-table-empty >dt .icon-search:before{
+	content:"\e923";
+	padding:20px;
+	display:inline-block;
+	border-radius:50%;
+	background-color:rgb(0,0,0,0.02);
+	color:rgb(0,0,0,0.1);
+	font-size:30px;
+}
+
+.empty-result-text{
+	margin-top:10px;
+	color:#3b3d40;
+	font-size:16px;
+	font-weight:400;
+	opacity:0.4;
+	padding-top:30px;
+}
+
+.status-summary{
+	margin-bottom:50px;
+}
+
+.status-summary-item{
+	width:19%;
+	display:inline-block;
+	min-width:120px;
+	text-align:center;
+	color:#86939c;
+	text-align:center;
+	border-right:1px solid #d1d1d1;
+}
+.summary-item-active{
+	color:#176fd8;
+}
+
+.status-summary-item dl{
+	margin:0;
+}
+.status-summary-item dt{
+	font-size:40px;
+	font-weight:300;
+	line-height:1;
+}
+.status-summary-item td{
+	margin-top:10px;
+	font-size:16px;
+	font-weight:400;
+}
+
+.status-summary-item:last-child{
+	border-right:0;
+}
+
+
+.statusListBox{
+	width:100%;
+}
+
+.statusListTr{
+	border-bottom:1px solid #f0f0f0;
+}
+
+.statusListTr:last-child{
+	border-bottom:1px solid #d1d1d1;
+}
+.statusListTr td{
+	color:#333;
+	font-size:12px;
+}
 
 
 

@@ -64,7 +64,6 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 		return applicantsDao.countBunja(appliPagingVo);
 	}
 
-
 //	@Override
 //	public int updatePeriod(ApplicantsVO appliVo) {
 //		// TODO Auto-generated method stub

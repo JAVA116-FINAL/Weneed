@@ -147,10 +147,75 @@ public class MemberServiceImpl implements MemberService{
 			System.out.close();
 		}
 	}
+	
+	@Override
+	public void resetPwd(HttpServletResponse response, MemberVO vo) {
+		response.setContentType("text/html;charset=utf-8");
+		
+		sendEmail2(vo, "resetpw");
+
+		System.out.println("이메일로 비밀번호 재설정 링크를 발송하였습니다.");
+		System.out.close();
+	}
+	
+	@Override
+	public void sendEmail2(MemberVO vo, String div) {
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.gmail.com"; 
+		String hostSMTPid = "weneedinfoteam@gmail.com";//서버 이메일 주소(보내는 사람 이메일 주소)
+		String hostSMTPpwd = "dnlslem123";//서버 이메일 비번(보내는 사람 이메일 비번)
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "weneedinfoteam@gmail.com";//보내는 사람 이메일주소(받는 사람 이메일에 표시됨)
+		String fromName = "위니드";//프로젝트이름 또는 보내는 사람 이름
+		String subject = "";
+		String msg = "";
+
+		if(div.equals("resetpw")) {
+			subject = "[위니드] 비밀번호 초기화";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana; padding-bottom:30px;'>";
+			msg += "<h3 style='color: blue; margin-top:20px; margin-bottom:40px;'>";
+			msg += "비밀번호를 재설정 하시려면 하단의 '비밀번호 재설정'을 클릭하세요.</h3>";
+			msg += "<a href='http://localhost:9090/Final_PJ/profileSetting/passwordChange.do' style='background-color:#3366ff;font-size:15px;border-radius:4px;padding:15px 25px; color:#fff;text-decoration:none'>비밀번호 재설정 ";
+			msg += "</a></div>";
+		}
+
+		// 받는 사람 E-Mail 주소
+		String mail = vo.getEmail();
+		try {
+			HtmlEmail email = new HtmlEmail();
+			email.setDebug(true);
+			email.setCharset(charSet);
+			email.setSSL(true);
+			email.setHostName(hostSMTP);
+			email.setSmtpPort(465);
+
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
+			email.setTLS(true);
+			email.addTo(mail, charSet);
+			email.setFrom(fromEmail, fromName, charSet);
+			email.setSubject(subject);
+			email.setHtmlMsg(msg);
+			email.send();
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+		}
+	}
+
+	@Override
+	public int withdrawMember(String email) {
+		return memberDao.withdrawMember(email);
+	}
+
+	@Override
+	public int updatePwd(String pwd) {
+		return memberDao.updatePwd(pwd);
+	}
+
 
 	
 
-	
 }
 
 

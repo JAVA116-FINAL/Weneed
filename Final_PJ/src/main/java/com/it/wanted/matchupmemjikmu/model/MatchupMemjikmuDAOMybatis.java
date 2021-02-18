@@ -31,6 +31,11 @@ public class MatchupMemjikmuDAOMybatis implements MatchupMemjikmuDAO{
 	public int deleteMatchupJikmu(int expertiseNo) {
 		return sqlSession.delete(namespace+"deleteMatchupJikmu",expertiseNo);
 	}
+
+	@Override
+	public List<Integer> selectMcumemNo(String searchJikmu) {
+		return sqlSession.selectList(namespace+"selectMcumemNo", searchJikmu);
+	}
 	
 	
 	

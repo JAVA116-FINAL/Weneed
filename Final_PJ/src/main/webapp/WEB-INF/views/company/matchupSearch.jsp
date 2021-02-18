@@ -11,8 +11,6 @@ $(function(){
 		$('.matchupSearch-li').removeClass('matchupSearch-selectedLi');
 		$('.matchupSearch-li:eq('+num+')').addClass('matchupSearch-selectedLi')
 	});
-	
-	
 
 	//찜 버튼 금색 토글
 	$(document).on('click', '.matchupSearch-ZzimBtn', function(){
@@ -46,6 +44,7 @@ $(function(){
 		}
 	});
 	
+
 	var viewMoreSize=0;
 	//더보기 기능 구현
 	$(document).on('click', '#matchupSearch-viewMoreBtn', function(){
@@ -100,6 +99,7 @@ $(function(){
 				$('input[name=searchJikmu]').val(jikmu);
 				$('input[name=searchJikgun]').val(jikgun);
 				$('#matchupSearchkeyword').val(keyword);
+				$('input[name=searchComCode]').val(comCode);
 			},
 			error:function(error){
 				alert('error!:'+error);
@@ -123,7 +123,7 @@ $(function(){
 		$('form[name=matchupSearchForm]').submit();
 	});
 	
-	//찜한 이력서 보기.. 이 경우엔 검색어랑 경력 다 같이 가야할거같은뎅... 
+	//찜한 이력서 보기..
 	$('#matchupSearch-Zzimed-list').click(function(){
 		console.log('찜한 이력서 보기');
 		var keyword=$('#matchupSearchkeyword').val();
@@ -153,6 +153,7 @@ $(function(){
 				for(mcumem of memList){
 					makeMemList(mcumem);
 				}
+				
 				if(memList.length!=5){
 					$('#matchupSearch-viewMoreBtn').hide();
 				}
@@ -167,14 +168,15 @@ $(function(){
 				$('#matchupSearchkeyword').val(keyword);
 			},
 			error:function(xhr, status, error){
-				alert('error! '+error);
+				alert('찜한 목록 보기 실패! '+error);
 			}
 		});
 	});
 	
 	//var resumeNo=0;
 	//버튼 선택 시 해당하는 데이터를 모달 팝업에 뿌려주는 기능
- 	$('.matchupSearchResumeOpenBtn').click(function(){
+// 	$('.matchupSearchResumeOpenBtn').click(function(){
+	$(document).on('click', '.matchupSearchResumeOpenBtn', function(){
  		var resumeNo=$(this).data('resumeno');
 		console.log(resumeNo)
 		$('#wantedResumeSimpleMDLabel').text('이력서 미리보기');
@@ -182,12 +184,8 @@ $(function(){
 		$('#matchupResumeViewDetailBtn').text('상세이력 보기');
 		$('.matchupSearch-downBtn').addClass('hide');
 		
-		$('#wantedResumeSimpleMD').on('show.bs.modal', function(event){
-			//일단 레주메 넘버가 필요함 
-			setResume(setSimpleResumeMD, resumeNo);
-		});
+		setResume(setSimpleResumeMD, resumeNo);
 	});
-	
 	
 	//이력서 팝업 하단 버튼 클릭 시 데이터 받아다 모달 그려주기 (다시 그려야 함, 상세보기니까..) 
 	$(document).on('click', '#matchupResumeViewDetailBtn', function(){
@@ -197,13 +195,14 @@ $(function(){
 		console.log("하단 버튼 클릭 후 resumeNe="+resumeNo);
 		console.log('다시 그리기 버튼 눌렀다');
 		
+		
 		if($(this).text()=='상세이력 보기'){
 			console.log('상세이력 보기 눌렀다');
-			setResume(setDetailResumeMD, resumeNo);
 			$('#wantedResumeSimpleMDLabel').text('상세이력 보기');
 			$('#matchupResumeBtnSpan').html('유능한 인재는 여러 기업에서 면접 제안을 받습니다.<br>기회를 놓치지 마세요!');
 			$('#matchupResumeViewDetailBtn').text('제안하기');
 			$('.matchupSearch-downBtn').removeClass('hide');
+			setResume(setDetailResumeMD, resumeNo);
 			
 			//이력서 조회 -1.. 기조회한 이력서면 떨어지면 안댐. 진행현황 테이블에도 추가하자 같이
 			$.ajax({
@@ -234,10 +233,17 @@ $(function(){
 			$('#wantedResumeSimpleMD').modal('hide');
 			$('#wantedProposalMD').modal('show');
 			
-			//제안하기 기능도 맨들어줘야 합니다. ajax? 일반 컨트롤러?
+			var comcode=$('.matchupSearchResumeOpenBtn').data('comcode');
+			var poslist=$('.matchupSearchResumeOpenBtn').data('poslist');
+			console.log("여기맞니"+comcode);
+			console.log("여기맞니2"+poslist);
+			console.log("여기맞니3"+resumeNo);
+			
+			$('form[name=proposalForm]').children('input[name=resumeNo]').val(resumeNo);
 		}
 		
 	});
+	
 	
 });
 
@@ -413,7 +419,9 @@ function setDetailResumeMD(resumeAllVo){
 	var intro='';
 	intro+='<br>';
 	intro+='<span>';
-	intro+=resumeAllVo.resumeVo.resumeIntroduce;
+	if(resumeAllVo.resumeVo.resumeIntroduce != null){
+		intro+=resumeAllVo.resumeVo.resumeIntroduce;
+	}
 	intro+='</span>';
 	$('.matchupResumeIntroSection').append(intro);
 	
@@ -517,8 +525,13 @@ function makeMemList(mcumem){
 	str+='<span>No.'+ mcumem.RESUMENO +'</span>';
 	str+='</div>';
 	str+='<div class="matchupSearch-resume-2nd">';
-	str+='<span>직군직종명</span>';
-	str+='<span>';
+	str+='<span>'+mcumem.JIKGUNNAME;
+	
+	if(mcumem.JIKMUNAME != null){
+		str+=' / '+mcumem.JIKMUNAME;
+	}
+	
+	str+='</span><span>';
 	
 	if(mcumem.CAREER == '신입'){
 		str+=mcumem.CAREER+'</span>';
@@ -530,6 +543,7 @@ function makeMemList(mcumem){
 	str+='<div class="matchupSearch-resume-3rd">';
 	str+='<button class="matchupSearch-ZzimBtn"><i class="fas fa-star';
 	
+	console.log("mcumem.CNT: "+mcumem.CNT)
 	if(mcumem.CNT > 0){
 		str+=' goldStar';
 	}
@@ -587,7 +601,11 @@ function makeMemList(mcumem){
 			<select id="matchupSearch-jikmuSelect" class="matchupSearch-select matchupSearch-selectLong"> 
 				<option value="all">전체</option>
 				<c:forEach var="jikmuVo" items="${jikmuList}">
-					<option value="${jikmuVo.jikmuCode}">${jikmuVo.jikmuName}</option>			
+					<option value="${jikmuVo.jikmuCode}"
+						<c:if test="${searchVo.searchJikmu eq jikmuVo.jikmuCode}">
+							selected
+						</c:if>
+					>${jikmuVo.jikmuName}</option>			
 				</c:forEach>
 			</select>
 			<div class="matchupSearch-searchFilter">
@@ -758,8 +776,7 @@ function makeMemList(mcumem){
 		<section class="matchupSearch-2ndSec"> <!-- 목록  -->
 			<div class="matchupSearch-tabBound">
 				<ul class="matchupSearch-resultList">
-					<li class="matchupSearch-li matchupSearch-selectedLi">
-						<a style="display:block;" href="<c:url value='/company/matchupSearch.do'/>">목록 전체</a></li>
+					<li class="matchupSearch-li matchupSearch-selectedLi" onclick="location.reload()">목록 전체</li>
 					<li class="matchupSearch-li" id="matchupSearch-Zzimed-list">찜한 이력서</li>
 					<li class="matchupSearch-li">미열람 이력서</li>
 					<li class="matchupSearch-li">열람한 이력서</li>
@@ -795,7 +812,13 @@ function makeMemList(mcumem){
 								<span>No.${mcumemMap.RESUMENO}</span>
 							</div>
 							<div class="matchupSearch-resume-2nd"> <!-- 이력서 목록 -->
-								<span>직군직종</span>
+								<span>${mcumemMap.JIKGUNNAME}
+								<c:if test="${!empty mcumemMap.JIKMUNAME}">
+									<c:if test="${mcumemMap.JIKMUNAME ne 'undefined'}">
+										<c:set value=" / ${mcumemMap.JIKMUNAME}" var="jikmuName"/>
+										 ${jikmuName}
+									</c:if>
+								</c:if></span>
 								<span>
 									<c:if test="${mcumemMap.CAREER eq '신입' }">
 										${mcumemMap.CAREER}
@@ -811,8 +834,8 @@ function makeMemList(mcumem){
 									<i class="fas fa-star <c:if test="${mcumemMap.CNT > 0}">goldStar</c:if>
 									"></i> 찜</button>
 								<!-- 이력서 미리보기 모달 팝업 -->								
-								<button class="matchupSearchResumeOpenBtn" type="button" data-toggle="modal" data-target="#wantedResumeSimpleMD" data-resumeno="${mcumemMap.RESUMENO}">
-									이력서 미리보기</button>
+								<button class="matchupSearchResumeOpenBtn" type="button" data-toggle="modal" data-target="#wantedResumeSimpleMD" data-resumeno="${mcumemMap.RESUMENO}"
+									data-comcode="${sessionScope.comInfoVo.comCode}" data-poslist="${posList}">이력서 미리보기</button>
 							</div>
 						</div>
 					</c:forEach>

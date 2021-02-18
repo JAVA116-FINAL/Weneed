@@ -31,19 +31,25 @@
 		from position
 		where pos_name like '%'||#{keyword}||'%'
 	</select>
-	<!-- <select id="getSearchKeyword" resultType="map" parameterType="mainSearchVo">
-		select distinct b.pos_name
-		from comInfo a, position b
-		where a.COM_CODE = b.COM_CODE
-		and a.com_name like '%'||#{keyword}||'%' or b.pos_name like '%'||#{keyword}||'%'
-	</select> -->
 	
-	<!-- <select id="getSearchKeyword" resultType="mainSearchVo" parameterType="String">
-		select distinct a.com_name , b.pos_name
-		from comInfo a, position b
-		where a.COM_CODE = b.COM_CODE
-		<if test="value!=null"></if>
-		and com_name like '%'||#{value}||'%' or pos_name like '%'||#{value}||'%'
-	</select> -->
+	
+	<!-- 메인 -->
+	<select id="selectNewRecruitList" resultType="mainSearchVo">
+	select com_code, com_Name, industry,
+	(select com_Img_Url from comimgInfo c1 where c1.com_Code=c2.com_code and c1.com_logo like '%N%' and rownum=1)as com_img_url
+	from comInfo c2 where (select com_Img_Url from comimgInfo c1 where c1.com_Code=c2.com_code and rownum=1) is not null 
+	<![CDATA[
+		and rownum <=4 order by com_regdate desc
+	]]>
+	</select>
+	
+	<select id="selectMainCareerList" resultType="programVo">
+	select *
+	from (select pro_image, pro_name from program
+		where pro_image is not null order by regdate desc)
+	<![CDATA[
+	where rownum <=6
+	]]>
+	</select>
 	
 </mapper>
