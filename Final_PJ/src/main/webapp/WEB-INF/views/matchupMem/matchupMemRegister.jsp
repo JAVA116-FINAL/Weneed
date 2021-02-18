@@ -412,7 +412,7 @@ $(function(){
 																	<div class="modalDivSelect1_jy">
 																		<label for="skillsinput_jy" >스킬</label>
 																		<div class="skillinputDiv" onClick="$.setSkills()">																	
-																			<input type="hidden" >
+																			<input hidden="hidden" >
 																			<input type="text" name="skillsinput_jy" id="skillsinput_jy" placeholder="보유스킬을 작성해주세요" value="">
 																			<i class="icon-search"></i>
 																		</div>

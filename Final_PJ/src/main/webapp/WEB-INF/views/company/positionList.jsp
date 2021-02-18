@@ -39,8 +39,13 @@ $(function(){
 				<label for="posTab-developer" id="tabInfoLabel" class="comInfoRegiTab">개발</label>
 			</div>
 			<div>
+				<c:if test="${imgCnt>=2}">
 				<a id="positionAddBtn" class="btn btn-main btn-round-full" 
 					href="<c:url value='/company/positionAdd.do'/>">포지션 추가</a>
+				</c:if>
+				<c:if test="${imgCnt<2}">
+				<span>승인된 기업 이미지가 2장 이상이면 포지션 등록이 가능합니다. </span>
+				</c:if>
 			</div>
 		</section>
 		<!-- 채용중 -->
@@ -51,7 +56,7 @@ $(function(){
 					<c:if test="${posVo.posStatus == 3}">
 						<div class="posBoxWrapper2" onclick="location.href='<c:url value="/company/positionEdit.do?posNo=${posVo.posNo}"/>'">
 							<div class="posBox">
-								<h4 class="posJikMu">${posVo.posName} / ${posVo.posStatus}</h4>
+								<h4 class="posJikMu">${posVo.posName}</h4>
 								<span class="posDueDate">
 								<c:if test="${!empty posVo.endDate}">
 									${posVo.endDate}

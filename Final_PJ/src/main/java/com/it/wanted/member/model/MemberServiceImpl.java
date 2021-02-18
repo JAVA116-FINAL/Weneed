@@ -224,8 +224,15 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.updateMemberImg(memberVo);
 	}
 
+	@Override
+	public int isMyEmailCheck(MemberVO memberVo) {
+		return memberDao.isMyEmailCheck(memberVo);
+	}
 
-	
+	@Override
+	public int isMyHpCheck(MemberVO memberVo) {
+		return memberDao.isMyHpCheck(memberVo);
+	}
 
 }
 

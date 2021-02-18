@@ -203,6 +203,7 @@ public class MypageMainController {
 			int cnt=memberService.updateMemberImg(memberVo);
 			if(cnt>0) {
 				memberVo=memberService.selectMember(memberVo.getEmail());
+				session.setAttribute("fileName", memberVo.getFileName());
 				//파일 업로드 됐을때 기존파일 있으면 지우기
 			
 				if(fileName!=null && ! fileName.isEmpty()) {

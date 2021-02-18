@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../inc/cssJsImports.jsp" %>
 <%@ include file="../inc/admin_top.jsp"%>
+
 <style type="text/css">
 
 .divheader>h1 {
@@ -37,6 +39,12 @@ input.inputKeyword {
 th.th_jy {
     font: status-bar;
     font-weight: 700;
+}
+td.td_jy.title_td {
+    max-width: 180px;
+}
+td.td_jy.comTitle {
+    max-width: 134px;
 }
 </style>
 
@@ -96,11 +104,17 @@ function pageFunc(curPage){
 						<c:forEach var="map" items="${posList }">
 							<tr class="tr_jy">
 								<td class="td_jy">${map['POS_NO']} </td>
-								<td class="td_jy">${map['COM_NAME'] } </td>
+								<td class="td_jy comTitle">${map['COM_NAME'] } </td>
 								<td class="td_jy">${map['JIKGUN_NAME'] } </td>
 								<td class="td_jy title_td">
 									<a href='<c:url value="/jobsearch/jobsearchDetailAdmin.do?posNo=${map['POS_NO']}&memNo=1000"></c:url>'>
-										${map['POS_NAME'] } 
+										<%-- <c:if test="${fn:length(map['POS_NAME'])>=10}">
+											${fn:substring(map['POS_NAME'], 0,10) } ...
+										</c:if>
+										<c:if test="${fn:length(map['POS_NAME'])<10}">						
+											${map['POS_NAME'] }
+										</c:if>		 --%>
+										${map['POS_NAME'] }
 									</a>
 								</td>
 								<td class="td_jy">${map['POS_MIN_SAL'] } </td>

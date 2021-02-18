@@ -36,5 +36,8 @@ public interface MatchupMemDAO {
 	public List<Map<String, Object>> selectZzimedList(MatchupMemSearchVO searchVo);
 	public int isZzimed(MatchupZzimVO zzimVo);
 	public int selectMemNo(int resumeNo);
+	public List<Map<String, Object>> selectDidntReadList(MatchupMemSearchVO searchVo);
+	public List<Map<String, Object>> selectReadList(MatchupMemSearchVO searchVo);
+	public List<Map<String, Object>> selectProposedList(MatchupMemSearchVO searchVo);
 
 }

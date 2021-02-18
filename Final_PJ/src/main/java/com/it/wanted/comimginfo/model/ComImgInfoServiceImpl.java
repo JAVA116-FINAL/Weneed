@@ -56,5 +56,10 @@ public class ComImgInfoServiceImpl implements ComImgInfoService{
 	public int selectPassedTotalRecord(SearchVO searchVo2) {
 		return comImgInfoDao.selectPassedTotalRecord(searchVo2);
 	}
+
+	@Override
+	public int selectPassedCntByComCode(String comCode) {
+		return comImgInfoDao.selectPassedCntByComCode(comCode);
+	}
 	
 }

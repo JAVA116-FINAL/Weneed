@@ -7,20 +7,14 @@ section.profileEditSection_jy {
     margin-left: 20px;
 }
 
-form#frmProfileEdit {
-    /* border: 1px solid gray; */
-    /* border-radius: 4px; */
-    /* background: white; */
-}
 
-input#name {
+input#inputName {
     border: none;
     outline: none;
     border-bottom: 1px solid #9e9e9e4a;
     width: 80%;
 }
 
-h6 {}
 
 label.lbName {
     display: inline-block;
@@ -48,16 +42,15 @@ header.formHeader_jy {
 
 .formTitle_jy>dd {color: #9e9e9e;}
 
-input#name {}
 
-input#email {
+input#inputEmail {
     border: none;
     outline: none;
     border-bottom: 1px solid #9e9e9e4a;
     width: 80%;
 }
 
-input#hp {
+input#inputHp {
     border: none;
     outline: none;
     border-bottom: 1px solid #9e9e9e4a;
@@ -88,7 +81,6 @@ footer.formfooter {
     margin-top: 47px;
 }
 
-span {}
 
 a.basicInfoLink>span {
     color: #217bf3;
@@ -120,3 +112,58 @@ i.icon-camera_icon.camerai_jy {
  input.inputimg_jy {
     display: none;
 } 
+/* 0218 */
+span#email_error {
+    /* width: 50%; */
+    color: red;
+    font-weight: 600;
+}
+
+input#inputEmail {
+    border: none;
+}
+
+input#inputName {
+    border: none;
+    width: 50%;
+}
+
+span#name_error {color: red;font-weight: 600;}
+
+input#inputHp {border: none;}
+
+span#hp_error {
+    color: red;
+    font-weight: 600;
+}
+
+span.wrapInput {
+    border-bottom: 1px solid #9e9e9ea1;
+    display: inline-block;
+    width: 80%;
+}
+
+input#inputEmail {
+    width: auto;
+}
+
+input#inputHp {
+    width: auto;
+}
+
+span#email_error {
+    font-size: 13px;
+}
+
+
+span#hp_error {
+    font-size: 13px;
+}
+
+input#inputName {
+    width: auto;
+}
+
+span#name_error {
+    font-size: 13px;
+}

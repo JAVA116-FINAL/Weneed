@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.it.wanted.career.admin.model.ProgramVO;
 import com.it.wanted.main.search.model.MainSearchService;
 import com.it.wanted.main.search.model.MainSearchVO;
+import com.it.wanted.position.model.PosNewVO;
 
 @Controller
 public class IndexController {
@@ -64,12 +65,15 @@ public class IndexController {
 	public String mainList(Model model) {
 		List<MainSearchVO> listNewRecruit = mainSearchService.selectNewRecruit();
 		List<ProgramVO> listMainCareerList = mainSearchService.selectMainCareerList();
+		List<PosNewVO> listMainNewPosiiton = mainSearchService.selectMainNewPos();
 		
 		logger.info("신규회사 list={}",listNewRecruit);
 		logger.info("커리어 성장 list={}",listMainCareerList);
+		logger.info("신규 포지션 list={}",listMainNewPosiiton);
 			
 		model.addAttribute("listNewRecruit", listNewRecruit);
 		model.addAttribute("listMainCareerList", listMainCareerList);
+		model.addAttribute("listMainNewPosiiton", listMainNewPosiiton);
 			
 		return "/index";
 	}

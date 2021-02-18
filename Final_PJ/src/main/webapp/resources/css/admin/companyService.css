@@ -21,7 +21,7 @@ h2{
 }
 
 .weneed-adminTable > th,
-.weneed-adminTable > td:first-child{
+.weneed-adminTable > td{
 	text-align: center;
 }
 

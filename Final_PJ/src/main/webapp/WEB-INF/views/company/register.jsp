@@ -171,8 +171,8 @@ $(function(){
                   <div class="col-lg-6">
                      <div class="form-group boundDivSpan">
                   		<span class="comServFormTitle">사업자 등록 번호</span><span class="comServRequired">*</span>
-                        <input style="background-color: #ffffff;outline-color: #dbdbdb;"
-                        name="comRegNo" id="comRegNo" type="text" class="form-control comServFormInput" placeholder="'-' 제외 10자리">
+                        <input style="background-color: #ffffff;outline-color: #dbdbdb;" maxlength="10" onkeypress="checklength()"
+                        name="comRegNo" id="comRegNo" type="number" class="form-control comServFormInput" placeholder="'-' 제외 10자리">
                    		<span class="alertSpan" id="alertSpanComRegNo"></span> 
                    </div>
                 </div>

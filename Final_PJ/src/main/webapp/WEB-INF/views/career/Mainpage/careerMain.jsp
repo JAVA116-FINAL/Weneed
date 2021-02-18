@@ -11,7 +11,9 @@
 	<script type="text/javascript" src="<c:url value='/resources/code.jquery.com/jquery-1.11.0.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/code.jquery.com/jquery-migrate-1.2.1.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/plugins/slick-carousel/slick/slick.min.js'/>"></script>
-
+    <script type="text/javascript" src="<c:url value='/resources/plugins/counterup/jquery.waypoints.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/resources/plugins/shuffle/shuffle.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/resources/plugins/counterup/jquery.counterup.min.js'/>"></script>
 <style type="text/css">
 .slick-prev{
 	height:50px;
@@ -123,19 +125,19 @@
 								            <input type="radio" name="shuffle-filter" value="all" checked="checked" style="width:0px;"/>전체
 								          </label>	 -->						          
 							          	
-							          	<c:forEach var="proCateBtn" items="${proCateNameList}">
-							          		<c:if test="${proCateBtn.proCateNo == 0 }">
+							          	<c:forEach var="ccVo" items="${ccgList}">
+							          		<c:if test="${ccVo.proCateNo == 80 }">
 								         		<label class="btn active " >
 									            <input type="radio" name="shuffle-filter" value="all" checked="checked" style="width:0px;"/>전체
 									          	</label>								          		
 							          		</c:if>
-							          		<c:if test="${proCateBtn.proCateNo != 0 }">
+							          		<c:if test="${ccVo.proCateNo != 80 }">
 											  <label class="btn">
-									            <input type="radio" name="shuffle-filter" value="cate${proCateBtn.proCateNo}" style="width:0px;"/>${proCateBtn.proCateName}
+									            <input type="radio" name="shuffle-filter" value="cat(${ccVo.proCateNo}-79)" style="width:0px;"/>${ccVo.proCateName}
 									          </label>
 								          	</c:if>
 										</c:forEach>
-
+										
 								          <!-- <label class="btn ">
 								            <input type="radio" name="shuffle-filter" value="cat1" style="width:0px;"/>인사
 								          </label>
@@ -214,7 +216,7 @@
      				
 			      <div class="row shuffle-wrapper portfolio-gallery" style="margin:auto; margin-top: 20px;">		
 			 		<c:forEach var="proVoMain" items="${proVoMainList }">		 					
-					      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cate${proVoMain.proCateNo}&quot;]">		      
+					      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat(${proVoMain.proCateNo}-79)&quot;]">		      
 					        	
 					        	<div class="position-relative doctor-inner-box" onclick="location.href='<c:url value="/career/detailpage/detailPage.do?programNo=${proVoMain.programNo}"/>'" 
 					        								style="cursor:pointer; border:0.3px solid rgb(198, 198, 198); border-radius:0.4em; height:405px;">
@@ -262,9 +264,5 @@
 
 
 <!-- 푸터부분!!!!! -->
-<%-- 	<%@ include file="../../inc/bottom.jsp" %> --%>
+	<%@ include file="../../inc/bottom.jsp" %>
 
-
-    
-  </body>
-  </html>

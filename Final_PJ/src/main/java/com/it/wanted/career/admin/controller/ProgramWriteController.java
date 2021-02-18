@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.api.client.http.HttpRequest;
 import com.it.wanted.career.admin.model.ProgramAllVO;
 import com.it.wanted.career.admin.model.ProgramListVO;
 import com.it.wanted.career.admin.model.ProgramSelectAllVO;
@@ -441,22 +442,31 @@ public class ProgramWriteController {
 	  
 	/* 프로그램 한개 삭제 */
 	
-	  @RequestMapping(value="/programDelete.do", method = RequestMethod.POST)
-	  public String programDelete_post(@RequestParam int programNo, HttpSession session, Model model) {
+	  @RequestMapping("/programDelete.do")
+	  public String programDelete_post(@RequestParam int programNo, HttpSession session, HttpServletRequest request, Model model) {
 		  //1
 		  logger.info("프로그램 삭제 처리, 파라미터 proVo={}", programNo);
-			/*
-			 * int programNo = programVo.getProgramNo();
-			 */			
-		  ProgramVO proVo = programService.selectByProgramNo(programNo);
+				
+
 		  //2
-		  int cnt=programService.deleteOneProgram(proVo);
+		  int cnt=programService.deleteOneProgram(programNo);
 		  logger.info("프로그램 결과, cnt={}", cnt);
 
-			String msg="프로그램 삭제 실패", url="/career/Admin/programDelete.do?programNo="+proVo.getProgramNo();
+			String msg="프로그램 삭제 실패", url="/career/Admin/programDelete.do?programNo="+programNo;
 			if(cnt>0) {
 				msg="글삭제되었습니다.";
 				url="/career/Admin/programAdminList.do";
+				
+				if(programNo!=0) { //체크된 것만 파일삭제
+					String proImage
+					=fileUploadUtil.getUploadPath(FileUploadUtil.PRO_IMAGE_TYPE, request);
+					File delFile = new File(proImage, proImage);
+					if(delFile.exists()) {
+						boolean bool =delFile.delete();
+						logger.info("상품 이미지 파일 삭제 여부:{}", bool);
+					}
+				}				
+
 			}
 
 			//3
@@ -499,7 +509,7 @@ public class ProgramWriteController {
 				  if(programNo!=0) { 
 					  //체크된 것만 파일삭제 
 					 
-						String upPath = fileUploadUtil.getUploadPath(FileUploadUtil.PRO_IMAGE_TYPE, request);
+					 String upPath = fileUploadUtil.getUploadPath(FileUploadUtil.PRO_IMAGE_TYPE, request);
 					
 					  File delFile = new File(upPath, proVo.getProImage()); 
 					  
@@ -509,6 +519,8 @@ public class ProgramWriteController {
 					  } 
 				  }
 			  }//for 
+			  
+			  url="/career/Admin/programAdminList.do";
 		  }
 
 		  model.addAttribute("msg", msg); 
@@ -518,10 +530,6 @@ public class ProgramWriteController {
 		  
 		  }
 		 
-	  
-	  
-	  
-	  
 
 
 	@RequestMapping("/programCompleteAll.do")
@@ -529,10 +537,27 @@ public class ProgramWriteController {
 		logger.info("programCompleteAll 프로그램 등록완료 페이지 보여주기");
 	}
 
-	/*
-	 * @RequestMapping("/programDetail.do") public void programDetail() {
-	 * logger.info("programDetail 프로그램 등록 미리보기 페이지 보여주기"); }
-	 */
+	
+	
+	 @RequestMapping("careerMainAdminView.do") 
+	 public void careerMainAdminView(HttpSession session, Model model) {
+	
+			logger.info("career 화면 보여주기");
+			
+			List<ProgramVO> proVoMainList = new ArrayList<ProgramVO>(); 
+			proVoMainList =	programService.selectAllProgramsForMain();
+			logger.info("프로그램들 보여주기 proVoMainList={}", proVoMainList);
+			
+			
+			List<CareerCategoryVO> proCateNameList = new ArrayList<CareerCategoryVO>(); 
+			proCateNameList = programService.selectMatchCategoryNameMain(); 
+			logger.info("프로그램별 해당 카테고리 이름 리스트  proCateNameList={}", proCateNameList);
+			 		
+			model.addAttribute("proVoMainList", proVoMainList);
+			model.addAttribute("proCateNameList", proCateNameList);
+ 
+		 
+	 }
 
-
+	 
 }

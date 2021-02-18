@@ -186,7 +186,7 @@ function drawTrY(jsonVo, pasteHere){
 		str+="<td>"+posMap.COM_NAME+"</td>";
 		str+="<td>"+posMap.JIKGUN_NAME+"</td>";
 		str+="<td class='title_td'>";
-		str+="<a href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POS_NO+"&memNo=1000'/>'>";
+		str+="<a target='_blank' href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POS_NO+"&memNo=1000'/>'>";
 		str+=posMap.POS_NAME+"</a></td>";
 		str+="<td>"+posMap.POS_MIN_SAL+"</td>";
 		str+="<td>"+posMap.POS_MAX_SAL+"</td>";
@@ -228,7 +228,7 @@ function drawTrP(jsonVo, pasteHere){
 		str+="<td>"+posMap.COM_NAME+"</td>";
 		str+="<td>"+posMap.JIKGUN_NAME+"</td>";
 		str+="<td class='title_td'>";
-		str+="<a href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POS_NO+"&memNo=1000'/>'>";
+		str+="<a target='_blank' href='<c:url value='/jobsearch/jobsearchDetailAdmin.do?posNo="+posMap.POS_NO+"&memNo=1000'/>'>";
 		str+=posMap.POS_NAME+"</a></td>";
 		str+="<td>"+posMap.POS_MIN_SAL+"</td>";
 		str+="<td>"+posMap.POS_MAX_SAL+"</td>";
@@ -352,7 +352,7 @@ function drawPageDivP(jsonVo, pasteHere){
 							<td>${map['COM_NAME'] } </td>
 							<td>${map['JIKGUN_NAME'] } </td>
 							<td class="title_td">
-								<a href='<c:url value="/jobsearch/jobsearchDetailAdmin.do?posNo=${map['POS_NO']}&memNo=1000"></c:url>'>
+								<a target="_blank" href='<c:url value="/jobsearch/jobsearchDetailAdmin.do?posNo=${map['POS_NO']}&memNo=1000"></c:url>'>
 									${map['POS_NAME'] } 
 								</a>
 							</td>
@@ -438,7 +438,7 @@ function drawPageDivP(jsonVo, pasteHere){
 							<td>${map['COM_NAME'] } </td>
 							<td>${map['JIKGUN_NAME'] } </td>
 							<td class="title_td">
-								<a href='<c:url value="/jobsearch/jobsearchDetailAdmin.do?posNo=${map['POS_NO']}&memNo=1000"></c:url>'>
+								<a target="_blank" href='<c:url value="/jobsearch/jobsearchDetailAdmin.do?posNo=${map['POS_NO']}&memNo=1000"></c:url>'>
 									${map['POS_NAME'] } 
 								</a>
 							</td>

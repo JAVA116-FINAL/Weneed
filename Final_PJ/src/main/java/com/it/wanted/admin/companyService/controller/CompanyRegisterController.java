@@ -26,7 +26,7 @@ import com.it.wanted.common.SearchVO;
 import com.it.wanted.common.Utility;
 
 @Controller
-@RequestMapping("/admin/companyService")
+@RequestMapping("/admin")
 public class CompanyRegisterController {
 
 	private static final Logger logger=LoggerFactory.getLogger(CompanyRegisterController.class);

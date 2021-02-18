@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.it.wanted.comimginfo.model.ComImgInfoService;
 import com.it.wanted.cominfo.model.ComInfoService;
 import com.it.wanted.cominfo.model.ComInfoVO;
 import com.it.wanted.cominfo.model.NationVO;
@@ -32,6 +33,7 @@ public class PositionController {
 	private static final Logger logger=LoggerFactory.getLogger(PositionController.class);
 	@Autowired JikgunService jkService;
 	@Autowired ComInfoService comInfoService;
+	@Autowired ComImgInfoService comImgInfoService;
 	@Autowired ComMemListService comMemListService;
 	@Autowired PositionService posService;
 	
@@ -42,6 +44,12 @@ public class PositionController {
 		
 		List<PositionVO> posList=posService.selectPositionByComcode(comCode);
 		logger.info("기업코드에 대한 포지션 목록 조회 결과, posList.size={}", posList.size());
+		
+		//기업코드에 대한 승인된 이미지 개수를 조회하여 2개 아래면 포지션 추가가 되지 않음
+		int imgCnt=comImgInfoService.selectPassedCntByComCode(comCode);
+		logger.info("기업의 승인된 이미지 개수 imgCnt={}", imgCnt);
+		
+		model.addAttribute("imgCnt", imgCnt);
 		model.addAttribute("posList", posList);
 	}
 	
