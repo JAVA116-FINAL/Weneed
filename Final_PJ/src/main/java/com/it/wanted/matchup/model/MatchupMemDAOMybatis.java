@@ -171,5 +171,4 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 		return sqlSession.selectList(namespace+"selectProposedList", searchVo);
 	}
 
-  
 }

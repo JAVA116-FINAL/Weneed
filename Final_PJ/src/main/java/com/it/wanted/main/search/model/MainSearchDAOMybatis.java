@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.it.wanted.career.admin.model.ProgramVO;
+import com.it.wanted.position.model.PosNewVO;
 
 @Repository
 public class MainSearchDAOMybatis implements MainSearchDAO {
@@ -39,5 +40,10 @@ public class MainSearchDAOMybatis implements MainSearchDAO {
 	@Override
 	public List<ProgramVO> getMainCareerList() {
 		return sqlSession.selectList(namespace+"selectMainCareerList");
+	}
+
+	@Override
+	public List<PosNewVO> getMainPosList() {
+		return sqlSession.selectList(namespace +"selectMainNewPosition");
 	}
 }
