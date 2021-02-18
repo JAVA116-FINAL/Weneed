@@ -50,7 +50,18 @@
 
 	
 </script>
-
+<style type="text/css">
+.replyBtn{
+    cursor: default;
+    border: 1px solid #36f;
+    color: #36f;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 5px;
+    margin-right: 5px
+}
+</style>
 <section class="section blog-wrap" style="margin-top:-70px;">
     <div class="container">
         <div class="row">
@@ -62,17 +73,28 @@
 				
 							<div class="blog-item-content mt-5">
 				<!-- 상세페이지 제목/ 직무 -->
-								<h2 class="mb-4 text-md">${posVo.posName}</h2>
+								<h2 class="mb-4 text-md" style="font-size: 22px;">${posVo.posName}</h2>
 				<!-- 회사명, 회사정보페이지로 연결 -->
+								
+								<!-- 회사명, 응답률, 지역 나란히 출력되도록 위치 조정 (유정) -->
+								<div class="companyInfo_jy" style="margin-top: -15px;">				
+									<div class="replyperbt_jy">
+										<span class="comName_jy" > <a href="#"> ${comInfoMap.COM_NAME }</a></span>
+										<button type="button" class="replyBtn">응답률 평균이상</button>
+										<span> | ${comInfoMap.REGION_NAME_KR } · ${comInfoMap.NATION_NAME_KR }</span>	
+									</div>
+								</div>
+								<!-- 기존 코드!
 								<div class="companyInfo_jy">				
-									<span class="comName_jy"> <a href="#"> ${comInfoMap.COM_NAME }</a></span>
+									<span class="comName_jy" > <a href="#"> ${comInfoMap.COM_NAME }</a></span>
 									<div class="replyperbt_jy">
 											<button style="cursor:default" type="button" >응답률 평균이상</button>
 									</div>
 									<span> | ${comInfoMap.REGION_NAME_KR } · ${comInfoMap.NATION_NAME_KR }</span>	
 								</div>
+								 -->
 				<!-- 회사정보 태그넣기 -->				
-								<div class="sidebar-widget tags mb-3">
+								<div class="sidebar-widget tags mb-3" style="margin-top: 20px;">
 									<a href="#">#통신비</a>
 									<a href="#">#단체보험</a>
 									<a href="#">#건강검진</a>
