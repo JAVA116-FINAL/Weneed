@@ -16,7 +16,7 @@ public class AppliPagingVO extends SearchVO{
 
 	public void setPosNo(int posNo) {
 		this.posNo = posNo;
-	}
+	} 
 
 	public String getComCode() {
 		return comCode;

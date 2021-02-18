@@ -81,7 +81,7 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 	public List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo) {
 		return applicantsDao.selectApplyAllbyAdmin(searchVo);
 	}
-
+ 
 	@Override
 	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
 		return applicantsDao.selectTotalRecordbyAdmin(searchVo);

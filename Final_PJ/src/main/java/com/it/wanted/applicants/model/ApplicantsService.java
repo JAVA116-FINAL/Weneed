@@ -8,7 +8,7 @@ import com.it.wanted.common.SearchVO;
 
 public interface ApplicantsService {
 	public List<ApplicantsVO> selectAllPositions(String comCode);
-
+ 
 	public int selectTotalRecord(AppliPagingVO appliPagingVo);
 
 	public ApplicantsVO selectByNo(int no);

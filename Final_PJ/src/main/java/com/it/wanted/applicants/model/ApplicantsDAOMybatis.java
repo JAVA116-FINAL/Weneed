@@ -66,7 +66,7 @@ public class ApplicantsDAOMybatis implements ApplicantsDAO {
 	public int insertApply(ApplicantsVO applyVo) {
 		return sqlSession.insert(namespace+"insertApply",applyVo);
 	}
-
+ 
 	@Override
 	public List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo) {
 		return sqlSession.selectList(namespace+"selectApplyAllbyAdmin",searchVo);

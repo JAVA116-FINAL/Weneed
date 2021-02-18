@@ -10,7 +10,7 @@
 			</if>
 		</where>	
 	</sql>
-	
+	 
 	<select id="selectTotalRecord" parameterType="appliPagingVo"
 		resultType="int">
 		select count(*) 

@@ -18,7 +18,7 @@ public class ApplicantsVO {
 	private Timestamp regectRegdate;	
 	private Timestamp passRegdate;	
 	private int applyPeriod;
-
+ 
 	//이력서 파일명 필요한가
 	private String resumeFile;
 	private String resumeUpfileflag;

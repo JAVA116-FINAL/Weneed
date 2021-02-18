@@ -37,7 +37,7 @@ li {
 		/* alert('#favo'+applyNo); */
 		$('#favo'+applyNo).css("color","gold");
 	}
-	
+	 
 	/* //서류통과 클릭 시
 	$('input:radio[name=rd-appliPassedFilter_doc]').is(':checked'){
 		alret();
