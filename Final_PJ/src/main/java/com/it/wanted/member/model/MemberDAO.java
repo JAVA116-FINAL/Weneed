@@ -12,4 +12,6 @@ public interface MemberDAO {
 	public int updatePwd(String pwd);
 	public int updateMemInfobyMemNo(MemberVO memberVo);
 	public int updateMemberImg(MemberVO memberVo);
+	public int isMyEmailCheck(MemberVO memberVo);
+	public int isMyHpCheck(MemberVO memberVo);
 }

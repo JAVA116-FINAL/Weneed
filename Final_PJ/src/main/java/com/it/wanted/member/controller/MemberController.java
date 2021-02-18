@@ -170,8 +170,6 @@ public class MemberController {
 		return bool;
 	}
 	
-	
-	
 	@ResponseBody
 	@RequestMapping("/withdraw.do")
 	public boolean memberOut(HttpSession session, HttpServletResponse response) {
@@ -189,6 +187,58 @@ public class MemberController {
 		}
 		
 		logger.info("bool={}", bool);
+		return bool;
+	}
+	
+	/* 0218 자연 */
+	@ResponseBody
+	@RequestMapping("/ajaxCheckEmailEdit.do")
+	public boolean ajaxCheckEmailEdit(@RequestParam String email, HttpSession session) {
+		int memNo= (int) session.getAttribute("mem_no");
+		logger.info("ajax 이용 - 이메일 중복 확인, email={}, memNo={}", email, memNo);
+		MemberVO memberVo= new MemberVO();
+		memberVo.setEmail(email);
+		memberVo.setMemNo(memNo);
+		
+		boolean bool = false;
+		int result = memberService.checkEmail(email);
+		logger.info("이메일 중복확인 결과, result={}", result);
+		if(result==MemberService.EXIST_EMAIL) {
+			int cnt=memberService.isMyEmailCheck(memberVo);
+			if(cnt>0) {//memNo랑 email로 비교했을때 이건 내 이메일이다!
+				return false;
+			}
+			bool = true; //이미 존재
+			
+		}else if(result==MemberService.NON_EXIST_EMAIL) {
+			bool= false; //사용 가능
+		}
+		
+		return bool;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajaxCheckHpEdit.do")
+	public boolean ajaxCheckHpEdit(@RequestParam String hp, HttpSession session) {
+		int memNo=(int) session.getAttribute("mem_no");
+		logger.info("ajax 이용 - 휴대폰 유효성 검사, hp={}, memNo={}", hp,memNo);
+		MemberVO memberVo=new MemberVO();
+		memberVo.setHp(hp);
+		memberVo.setMemNo(memNo);
+		
+		boolean bool = false;
+		int result = memberService.checkHp(hp);
+		logger.info("휴대폰 번호 중복확인 결과, result={}", result);
+		if(result==MemberService.EXIST_HP) {
+			int cnt=memberService.isMyHpCheck(memberVo);
+			if(cnt>0) {
+				return false;
+			}
+			bool = true; //이미 존재
+		}else if(result==MemberService.NON_EXIST_HP) {
+			bool = false; //사용 가능
+		}
+		
 		return bool;
 	}
 	
