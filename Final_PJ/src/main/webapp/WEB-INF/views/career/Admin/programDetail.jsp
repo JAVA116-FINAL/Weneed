@@ -47,7 +47,10 @@ $( document ).ready( function() {
 #contentLoop img{
 	max-width: 700px;
 }
-
+h3 {
+    font-size: x-large;
+    font-weight: bolder;
+}
 
 </style> 
 <div class="jbMenu" style="width:100%;">
@@ -102,7 +105,7 @@ $( document ).ready( function() {
 																<a name="title${proVo2.proConNo}"></a>		
 																<br><br>	
 																<div class="parag" id="parag2" style="margin-top: 50px;">											
-																			<h2><b>${proVo2.proTitle}</b></h2>
+																			<h3>${proVo2.proTitle}</h3>
 																		 
 																		<br>
 																		<div id="contentLoop" style="width:700px;">
