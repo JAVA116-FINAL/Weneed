@@ -8,51 +8,87 @@
 			<if test="searchKeyword != null and searchKeyword != ''">
 				${searchCondition} like '%' || #{searchKeyword} || '%'
 			</if>
-		</where>
+		</where>	
 	</sql>
-
-	<select id="selectApplicants" parameterType="int"
-		resultType="map">
-		
-		<!-- <if test="sf==0"></if> -->
-		select A.*, B.pos_name
-		from apply A join position B
-		on A.POS_NO =
-		B.POS_NO
-		where A.status_flag=#{sf}
-		order by apply_no desc
-	</select>
-	
-	<select id="selectApplicants2"
-		resultType="map">
-		select A.*, B.pos_name
-		from apply A join position B
-		on A.POS_NO =
-		B.POS_NO
-		order by apply_no desc
-	</select>
-
-	<select id="selectAllPositions" resultType="ApplicantsVO">
-
-		select
-		distinct(B.pos_name)
-		from apply A join position B
-		on A.POS_NO = B.POS_NO
-		order by B.pos_name
-	</select>
-
-	<select id="selectTotalRecord" parameterType="searchVo"
+	 
+	<select id="selectTotalRecord" parameterType="appliPagingVo"
 		resultType="int">
-		select count(*) from apply
+		select count(*) 
+		from apply AP inner join position B
+		on AP.POS_NO = B.POS_NO
+		where status_flag=#{statusFlag}
+		and B.com_code=#{comCode}
+		<if test="posNo!=0">
+		            and B.pos_no=#{posNo}    
+	    </if>
 		<include refid="searchWhere"></include>
 	</select>
 
+	<select id="selectApplicants" parameterType="appliPagingVo" resultType="map">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM
+		    from
+		    (
+		        select AP.*, B.pos_name, B.com_code
+	            from apply AP inner join position B
+	            on AP.POS_NO = B.POS_NO
+	            where AP.status_flag=#{statusFlag}  
+	            and B.com_code=#{comCode}
+	            <if test="posNo!=0">
+		            and B.pos_no=#{posNo}    
+	            </if>
+		        order by apply_no desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+<!-- 	<select id="selectApplicants" parameterType="appliPagingVo" resultType="map">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM
+		    from
+		    (
+		        select AP.*, B.pos_name
+	            from apply AP join position B
+	            on AP.POS_NO =
+	            B.POS_NO
+	            where AP.status_flag=#{statusFlag}
+	            <if test="searchKeyword != ''">
+	              and ap.apply_name like '%' || #{searchKeyword} || '%' or b.pos_name like '%' || #{searchKeyword} || '%'
+	            </if> 
+	            <include refid="searchWhere"></include>
+	              order by apply_no desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select> -->
+	
+	<select id="selectAllPositions" resultType="ApplicantsVO">
+		select
+		distinct(B.pos_name), B.pos_no
+		from apply A join position B
+		on A.POS_NO = B.POS_NO
+		where B.com_code=#{comCode}     
+		order by B.pos_name
+	</select>
+
+	
+
 	<select id="selectByNo" parameterType="int"
 		resultType="ApplicantsVO">
-		select A.*, B.pos_name
-		from apply A join position B
-		on
-		A.POS_NO = B.POS_NO
+		select *
+		from apply A inner join position B on A.POS_NO = B.POS_NO
+		inner join resume R on A.RESUME_NO = R.RESUME_NO
 		where apply_no = #{applyNo}
 	</select>
 
@@ -63,6 +99,47 @@
 
 	</update> -->
 	
+	<update id="updateByNo" parameterType="int">
+		update apply
+		set status_flag=4
+		where apply_no = #{no}
+	</update>
+	
+	<select id="selectAll" resultType="map">
+		select AP.*, B.pos_name,B.com_code
+		from apply AP inner join position B
+		on AP.POS_NO = B.POS_NO
+		order by apply_no desc
+	</select>
+	
+	<update id="updateStatus" parameterType="applicantsVo">
+		update apply
+		<if test="statusFlag==1">
+			set status_flag=#{statusFlag}, doc_pass_regdate=sysdate
+		</if>
+		<if test="statusFlag==2">
+			set status_flag=#{statusFlag}, pass_regdate=sysdate
+		</if>
+		<if test="statusFlag==3">
+			set status_flag=#{statusFlag}, regect_pass_regdate=sysdate
+		</if>
+		where apply_no = #{applyNo}
+	</update>
+	
+	<select id="countBunmo" parameterType="appliPagingVo" resultType="int">
+		select count(*)
+		from apply AP inner join position B
+		on AP.POS_NO = B.POS_NO
+		where B.com_code = #{comCode}
+	</select>
+	
+	<select id="countBunja" parameterType="appliPagingVo" resultType="int">
+		select count(*)
+		from apply AP inner join position B
+		on AP.POS_NO = B.POS_NO
+		where B.com_code = #{comCode}
+		and status_flag!=0 and status_flag!=4
+	</select>
 	
 	<!-- 자연 -->
 	<insert id="insertApply" parameterType="ApplicantsVO">

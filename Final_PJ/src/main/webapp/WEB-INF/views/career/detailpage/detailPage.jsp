@@ -78,7 +78,7 @@ h3 {
 					<div class="row">
 						<div class="col-lg-12 mb-5">						
 							<div class="single-blog-item">
-								<img src="<c:url value='/progamImgUpload/${proVo.proImage }'/>"
+								<img src="<c:url value='/programImgUpload/${proVo.proImage }'/>"
 
 									alt="" class="img-fluid" style="width:700px;">
 				  	
@@ -91,7 +91,7 @@ h3 {
 									<a href="#">#커리어성장</a> 
 									<a href="#">#IT,컨텐츠</a>
 									
-									<span>| 유형</span>
+									<span>| 유형&emsp;</span>
 									<c:if test="${proVo.proType  == 1}">
 										<a href="#" style="color:blue;">#이벤트</a>
 									</c:if>
