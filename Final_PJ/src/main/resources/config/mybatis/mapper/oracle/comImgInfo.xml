@@ -77,6 +77,10 @@
 		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
 		]]>
 	</select>
+	
+	<select id="selectPassedCntByComCode" parameterType="string" resultType="int">
+		select count(*) from comImgInfo where com_code=#{comCode} and com_img_passed='Y'
+	</select>
 </mapper>
 
 

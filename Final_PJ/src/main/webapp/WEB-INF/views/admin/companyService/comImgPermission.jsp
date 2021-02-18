@@ -30,7 +30,7 @@ $(function(){
 		};
 		
 		$.ajax({
-			url:"<c:url value='/admin/companyService/comImgStatustoPass.do'/>",
+			url:"<c:url value='/admin/comImgStatustoPass.do'/>",
 			type:"post",
 			dataType:"json",
 			data:data,
@@ -70,14 +70,14 @@ function pageFuncY(curPage){
 	var here = $('#weneedadmin-tbodyYet');
 	var here2 = $('#weneedAdmin-comInfoDivPageBefore');
 	$.ajax({
-		url:"<c:url value='/admin/companyService/comImgPermissionYet.do'/>",
+		url:"<c:url value='/admin/comImgPermissionYet.do'/>",
 		type:"get",
 		dataType:"json",
 		data:{
 			"curPage":curPage
 		},
 		success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
-			alert('승인요청건 조회 성공!');
+		//	alert('승인요청건 조회 성공!');
 			drawTrY(result, here);
 			drawPageDivY(result, here2);
 		},
@@ -92,14 +92,14 @@ function pageFuncP(curPage){
 	var here2 = $('#weneedAdmin-comInfoDivPagePassed');
 	
 	$.ajax({
-		url:"<c:url value='/admin/companyService/comImgPermissionPassed.do'/>",
+		url:"<c:url value='/admin/comImgPermissionPassed.do'/>",
 		type:"get",
 		dataType:"json",
 		data:{
 			"curPage":curPage
 		},
 		success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
-			alert('승인완료건 조회 성공!');
+		//	alert('승인완료건 조회 성공!');
 			drawTrP(result, here);
 			drawPageDivP(result, here2);
 		},
@@ -247,11 +247,11 @@ function drawPageDivP(jsonVo, pasteHere){
 			<table class="weneed-adminTable">
 				<thead>
 					<tr class="weneed-adminTable">
-						<th><input type="checkbox" id="weneed-admin-CheckAll"></th>
-						<th>번호</th>
-						<th>회사코드</th>
-						<th>이미지</th>
-						<th>승인상태</th>
+						<th style="width:70px;"><input type="checkbox" id="weneed-admin-CheckAll"></th>
+						<th style="width:105px;">번호</th>
+						<th style="width:200px;">회사코드</th>
+						<th style="width:460px;">이미지</th>
+						<th style="width:155px;">승인상태</th>
 					</tr>
 				</thead>
 				<!-- foreach문으로 전부 불러오기  -->
@@ -304,11 +304,11 @@ function drawPageDivP(jsonVo, pasteHere){
 			<table class="weneed-adminTable">
 				<thead>
 					<tr class="weneed-adminTable">
-						<th><input type="checkbox" id="weneed-admin-CheckAll-ed"></th>
-						<th>번호</th>
-						<th>회사코드</th>
-						<th>이미지</th>
-						<th>승인상태</th>
+						<th style="width:70px;"><input type="checkbox" id="weneed-admin-CheckAll-ed"></th>
+						<th style="width:105px;">번호</th>
+						<th style="width:200px;">회사코드</th>
+						<th style="width:460px;">이미지</th>
+						<th style="width:155px;">승인상태</th>
 					</tr>
 				</thead>
 				<!-- foreach문으로 전부 불러오기  -->

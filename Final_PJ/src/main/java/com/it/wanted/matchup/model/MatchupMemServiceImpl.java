@@ -273,12 +273,14 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		//이제 매치업넘버리스트는 완성됐어 이거에 대한 이력서리스트를 가져와야 해
 		mcuMemSearchVo.setMcumemNoList(mcumemNoList);
 		System.out.println("mcumemNoList.size(): "+mcumemNoList.size());
+		System.out.println("mcumemNoList: "+mcumemNoList);
 		
 		//System.out.println("searchMinCareer: "+mcuMemSearchVo.getSearchMinCareer());
 		//System.out.println("searchMaxCareer: "+mcuMemSearchVo.getSearchMaxCareer());
 		
 		mcumemSearchResultList=matchupMemDao.selectMcumemSearchList(mcuMemSearchVo);
 		System.out.println("매치업넘버리스트에 해당하는 매치업멤버 뷰 조회 결과, mcumemSearchResultList.size="+mcumemSearchResultList.size());
+		System.out.println("매치업넘버리스트에 해당하는 매치업멤버 뷰 조회 결과, mcumemSearchResultList="+mcumemSearchResultList);
 	
 		return mcumemSearchResultList;
 	}
@@ -299,6 +301,7 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return zzimedList;
 	}
 
+	@Transactional
 	@Override
 	public int isZzimed(int resumeNo, String comCode) {
 		int cnt=0;
@@ -366,12 +369,9 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		if(jikmu.isEmpty()) { //true
 			System.out.println("7번 if문 통과");
 		}
-		if(jikmu == null) {
-			System.out.println("8번 if문 통과");
-		}
 		
 		//직무를 선택한 경우에만 확인하고 싶어.
-		if( !jikmu.equals("") || !jikmu.isEmpty() ) { //앞에서 디폴트값 작업을 해줌
+		if( !jikmu.equals("") && !jikmu.isEmpty() && !jikmu.equals("all")) { //앞에서 디폴트값 작업을 해줌
 			System.out.println("직무를 선택한 경우, if문 안에 들어왔다!");
 			//멤버직무에 해당하는 매치업번호 리스트.. 를 보고 이거랑 검색결과가 일치하는 애들만 보내면 돼 
 			List<Integer> jikmuMcumemNoList=mmjikmuDao.selectMcumemNo(mcuMemSearchVo.getSearchJikmu());
@@ -381,12 +381,11 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 			//iterator 써보기
 			Iterator<Integer> iter=mcumemNoList.iterator();
 			while(iter.hasNext()) {
-				if(!jikmuMcumemNoList.contains(iter.next())) iter.remove();
+				if(!jikmuMcumemNoList.contains(iter.next())) {
+					iter.remove();
+				}
 			}
-			/*
-			for(Integer no : mcumemNoList) {
-				if(!jikmuMcumemNoList.contains(no)) mcumemNoList.remove(no);
-			}*/
+			
 		}
 		
 		System.out.println("검색결과 매치업멤넘 리스트 길이="+mcumemNoList.size());
@@ -399,5 +398,55 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return matchupMemDao.selectMemNo(resumeNo);
 	}
 
+	/* 0218 현빈 추가 */
+	@Override
+	@Transactional
+	public List<Map<String, Object>> selectDidntReadList(MatchupMemSearchVO searchVo) {
+		List<Integer> mcumemNoList=new ArrayList<Integer>();
+		List<Map<String, Object>> didntReadList=new ArrayList<Map<String,Object>>();
+		
+		//검색어로 검색하고 중복을 제거한 결과
+		mcumemNoList=getMcuMemNoList(mcumemNoList, searchVo);
+		searchVo.setMcumemNoList(mcumemNoList);
+		System.out.println("미열람한 목록 서칭용 searchVo 세팅값: "+searchVo);
+
+		didntReadList=matchupMemDao.selectDidntReadList(searchVo);
+		System.out.println("미열람한 목록 서칭 결과, didntReadList.size="+didntReadList.size());
+		
+		return didntReadList;
+	}
+
+	@Override
+	@Transactional
+	public List<Map<String, Object>> selectReadList(MatchupMemSearchVO searchVo) {
+		List<Integer> mcumemNoList=new ArrayList<Integer>();
+		List<Map<String, Object>> ReadList=new ArrayList<Map<String,Object>>();
+		
+		//검색어로 검색하고 중복을 제거한 결과
+		mcumemNoList=getMcuMemNoList(mcumemNoList, searchVo);
+		searchVo.setMcumemNoList(mcumemNoList);
+		System.out.println("열람한 목록 서칭용 searchVo 세팅값: "+searchVo);
+
+		ReadList=matchupMemDao.selectReadList(searchVo);
+		System.out.println("열람한 목록 서칭 결과, ReadList.size="+ReadList.size());
+		
+		return ReadList;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectProposedList(MatchupMemSearchVO searchVo) {
+		List<Integer> mcumemNoList=new ArrayList<Integer>();
+		List<Map<String, Object>> PropoList=new ArrayList<Map<String,Object>>();
+		
+		//검색어로 검색하고 중복을 제거한 결과
+		mcumemNoList=getMcuMemNoList(mcumemNoList, searchVo);
+		searchVo.setMcumemNoList(mcumemNoList);
+		System.out.println("열람한 목록 서칭용 searchVo 세팅값: "+searchVo);
+
+		PropoList=matchupMemDao.selectProposedList(searchVo);
+		System.out.println("열람한 목록 서칭 결과, PropoList.size="+PropoList.size());
+		
+		return PropoList;
+	}
 	
 }

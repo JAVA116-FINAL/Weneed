@@ -37,7 +37,17 @@
 		
 		
 		$('.mainBtn').click(function(){
-			location.href="<c:url value='/index.do'/>";
+			$.ajax({
+  				url:"<c:url value='/goMain.do'/>",
+  				type:"POST",
+  				data:"",
+  				success:function(res){
+  					location.href="<c:url value='/index.do'/>";
+  				},
+  				error:function(xhr, status, error){
+  					alert('error! : ' + error);
+  				}  				
+  			});
 		});
 	});
 </script>

@@ -105,7 +105,6 @@ public class CompanyMatchUpController {
 		Map<String, Object> checkMap=matchupComService.hasMatchup(comVo.getComCode());
 		
 		logger.info("기업서비스 매치업 검색/조회화면, 파라미터 searchVo={}, matchupComVo={}", searchVo, matchupComVo);
-		
 		//[1-1] 직군리스트 불러오기
 		List<JikgunVO> jikgunList=jgService.selectAllJikgun();
 		logger.info("직군리스트 불러오기 결과 jikgunList={}", jikgunList);
@@ -125,6 +124,7 @@ public class CompanyMatchUpController {
 		searchVo.setViewMoreSize(0);
 		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
 		logger.info("5번째 리스트까지 불러오기 결과, memList.size={}", memList.size());
+		logger.info("5번째 리스트까지 불러오기 결과, memList={}", memList);
 		
 		Map<String, Object> emptyMapCheck=new HashMap<String, Object>();
 		String emptyCheck="";
@@ -206,7 +206,6 @@ public class CompanyMatchUpController {
 			, Model model){
 		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
-		
 		logger.info("리스트 더보기  시작, searchVo={}", searchVo);
 
 		List<Map<String, Object>> memList=matchupMemService.selectSearchedMemList(searchVo);
@@ -224,10 +223,55 @@ public class CompanyMatchUpController {
 		, Model model) {
 		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
-		
 		List<Map<String, Object>> memList=matchupMemService.selectZzimedList(searchVo);
 		logger.info("찜한 목록 조회 결과, memList.size={}", memList.size());
+		logger.info("찜한 목록 조회 결과, memList={}", memList);
 
+		searchVo=setAfterMethod(searchVo);
+		
+		return memList;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/showDidntReadList.do")
+	public List<Map<String, Object>> showDidntReadList(@ModelAttribute MatchupMemSearchVO searchVo
+			, Model model) {
+		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
+		searchVo=setBeforeMethod(searchVo);
+		List<Map<String, Object>> memList=matchupMemService.selectDidntReadList(searchVo);
+		logger.info("찜한 목록 조회 결과, memList.size={}", memList.size());
+		logger.info("찜한 목록 조회 결과, memList={}", memList);
+		
+		searchVo=setAfterMethod(searchVo);
+		
+		return memList;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/showReadList.do")
+	public List<Map<String, Object>> showReadList(@ModelAttribute MatchupMemSearchVO searchVo
+			, Model model) {
+		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
+		searchVo=setBeforeMethod(searchVo);
+		List<Map<String, Object>> memList=matchupMemService.selectReadList(searchVo);
+		logger.info("찜한 목록 조회 결과, memList.size={}", memList.size());
+		logger.info("찜한 목록 조회 결과, memList={}", memList);
+		
+		searchVo=setAfterMethod(searchVo);
+		
+		return memList;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/showProposedList.do")
+	public List<Map<String, Object>> showProposedList(@ModelAttribute MatchupMemSearchVO searchVo
+			, Model model) {
+		searchVo=setSearchInfoDefault(searchVo, searchVo.getComCode());
+		searchVo=setBeforeMethod(searchVo);
+		List<Map<String, Object>> memList=matchupMemService.selectProposedList(searchVo);
+		logger.info("찜한 목록 조회 결과, memList.size={}", memList.size());
+		logger.info("찜한 목록 조회 결과, memList={}", memList);
+		
 		searchVo=setAfterMethod(searchVo);
 		
 		return memList;
@@ -241,7 +285,6 @@ public class CompanyMatchUpController {
 		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
 		searchVo=setSearchInfoDefault(searchVo, comVo.getComCode());
 		searchVo=setBeforeMethod(searchVo);
-		
 		logger.info("찜한 리스트 더 불러오기 시작, searchVo={}", searchVo);
 
 		List<Map<String, Object>> memList=matchupMemService.selectZzimedList(searchVo);
@@ -249,6 +292,25 @@ public class CompanyMatchUpController {
 		
 		//이걸 왜 하지
 		searchVo=setAfterMethod(searchVo);
+		
+		return memList;
+	}
+	
+	@ResponseBody
+	@JsonBackReference
+	@RequestMapping("/viewMoreDidntReadList.do")
+	public List<Map<String, Object>> getMoreDidntReadMem(@ModelAttribute MatchupMemSearchVO searchVo
+			, Model model, HttpSession session){
+		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		searchVo=setSearchInfoDefault(searchVo, comVo.getComCode());
+		searchVo=setBeforeMethod(searchVo);
+		logger.info("찜한 리스트 더 불러오기 시작, searchVo={}", searchVo);
+		
+		List<Map<String, Object>> memList=matchupMemService.selectDidntReadList(searchVo);
+		logger.info("찜한 리스트 더 불러오기 결과, memList.size={}", memList.size());
+		
+		//이걸 왜 하지
+		//searchVo=setAfterMethod(searchVo);
 		
 		return memList;
 	}
@@ -356,8 +418,8 @@ public class CompanyMatchUpController {
 	
 	/* 기본 함수들 */
 	public MatchupMemSearchVO setSearchInfoDefault(MatchupMemSearchVO vo, String comCode) {
-		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty() || vo.getSearchJikmu().equals("all")) {
-			vo.setSearchJikmu("");
+		if(vo.getSearchJikmu()==null || vo.getSearchJikmu().isEmpty()) {
+			vo.setSearchJikmu("all");
 		}
 		if(vo.getSearchJikgun()==null || vo.getSearchJikgun().isEmpty()) {
 			vo.setSearchJikgun("");

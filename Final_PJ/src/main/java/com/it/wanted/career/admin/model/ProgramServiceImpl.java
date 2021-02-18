@@ -45,8 +45,8 @@ public class ProgramServiceImpl implements ProgramService {
 	public int deleteProgramMulti(List<ProgramVO> proList) {
 		int cnt = 0;
 		try {
-			for (ProgramVO vo : proList) {
-				int programNo = vo.getProgramNo();
+			for (ProgramVO proDelVo : proList) {
+				int programNo = proDelVo.getProgramNo();
 				if (programNo != 0) { // 체크된 것만 삭제
 					cnt = programDao.deleteProgram(programNo);
 				}
@@ -99,8 +99,8 @@ public class ProgramServiceImpl implements ProgramService {
 		
 	@Override
 	@Transactional
-	public int deleteOneProgram(ProgramVO proVo) {
-			return programDao.deleteOneProgram(proVo);
+	public int deleteOneProgram(int programNo) {
+			return programDao.deleteOneProgram(programNo);
 	}
 
 	@Override
@@ -124,24 +124,5 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 
 	
-	/*
-	 * @Override public int insertIntoProgramContents(ProgramVO2 proVo2) {
-	 * 
-	 * List<ProgramVO2> proVo2List = proVoAll.getProVo2List();
-	 * List<ProgramVO2> proVo2List = new ArrayList<ProgramVO2>(); int cnt=0;
- 
-	 * 
-	 * int cnt=0; if(proVoConList != null && !proVoConList.isEmpty()) {
-	 * 
-	 * for(ProgramVO2 proVo2Con : proVoConList) {
-	 * cnt=programDao.insertIntoProgramContents(proVo2Con);
-	 * logger.info("프로그램 내용 등록 결과, cnt={}", cnt); } }
-	 * 
-	 * 
-	 * int cnt=programDao.insertIntoProgramContents(proVo2);
-	 * logger.info("프로그램 내용 등록 결과, cnt={}", cnt);
-	 * 
-	 * return cnt; }
-	 */
 
 }

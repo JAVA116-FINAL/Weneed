@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../inc/cssJsImports.jsp" %>
 <%@ include file="../inc/admin_top.jsp"%>
+
 <style type="text/css">
 
 .divheader>h1 {

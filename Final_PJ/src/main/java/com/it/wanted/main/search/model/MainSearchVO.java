@@ -1,6 +1,7 @@
 package com.it.wanted.main.search.model;
 
 public class MainSearchVO {
+	private int posNo;
 	private String comCode;
 	private String nation;
 	private String region;
@@ -8,6 +9,12 @@ public class MainSearchVO {
 	private String industry;
 	private String comImgUrl;
 	private String posName;
+	public int getPosNo() {
+		return posNo;
+	}
+	public void setPosNo(int posNo) {
+		this.posNo = posNo;
+	}
 	public String getComCode() {
 		return comCode;
 	}
@@ -52,12 +59,10 @@ public class MainSearchVO {
 	}
 	@Override
 	public String toString() {
-		return "MainSearchVO [comCode=" + comCode + ", nation=" + nation + ", region=" + region + ", comName=" + comName
-				+ ", industry=" + industry + ", comImgUrl=" + comImgUrl + ", posName=" + posName + "]";
+		return "MainSearchVO [posNo=" + posNo + ", comCode=" + comCode + ", nation=" + nation + ", region=" + region
+				+ ", comName=" + comName + ", industry=" + industry + ", comImgUrl=" + comImgUrl + ", posName="
+				+ posName + "]";
 	}
-	
-	
-	
 	
 	
 }
