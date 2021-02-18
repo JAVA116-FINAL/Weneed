@@ -17,7 +17,21 @@ li {
 </style>
 <script type="text/javascript">
 	$(function() {
-
+		//favo
+		$(document).on('click', '.favo', function(){
+			var resumeStr=$(this).parent().siblings('.matchupSearch-resume-1st').children('span').text();
+			console.log('resumeStr: '+resumeStr);
+			var resumeNo=parseInt(resumeStr.substr(3), 10);
+			console.log('resumeNo: '+resumeNo);
+			
+			if($(this).children('i').hasClass('goldStar')){
+				$(this).children('i').removeClass('goldStar');
+				delZzim(resumeNo);
+			}else{
+				$(this).children('i').addClass('goldStar');
+				addZzim(resumeNo);
+			}
+		});
 
 	});
 	
@@ -53,8 +67,8 @@ li {
 		<input type="text" name="currentPage"> <input type="text"
 			name="searchCondition" value="${param.searchCondition }"> <input
 			type="text" name="searchKeyword" value="${param.searchKeyword }">
-		<input type="text" name="statusflag">
-		<input type="text" name="posNo">
+		<input type="text" name="statusflag"> <input type="text"
+			name="posNo">
 	</form>
 
 	<div class="container">
@@ -67,11 +81,12 @@ li {
 					<!-- <ul style="font-size: 0.8em; "> -->
 					<p class="appli-positionList-pos appli-positionList-pos_selected"
 						style="font-size: 12px;">
-						<a href="#">전체 포지션</a>
+						<a href='<c:url value="/company/applicants.do"/>'>전체 포지션</a>
 						<c:if test="${!empty posList}">
 							<c:forEach var="pList" items="${posList}">
 								<p class="appli-positionList-pos " style="font-size: 12px;">
-									<a href='<c:url value="/company/applicants.do?statusFlag=${status}&posNo=${pList.posNo}"/>'> 
+									<a
+										href='<c:url value="/company/applicants.do?statusFlag=${status}&posNo=${pList.posNo}"/>'>
 										<c:out value="${pList.posName }"></c:out>
 									</a>
 							</c:forEach>
@@ -91,7 +106,10 @@ li {
 						<div class="appli-responseInfo">
 							<div class="appli-responseInfo_obj">
 								<span class="appli-span-allResponse">전체 응답률</span>&nbsp; <strong
-									class="appli-bigNumber-blue">${responPer}% </strong>
+									class="appli-bigNumber-blue"> <c:if
+										test="${responPer =='NaN' }">0%</c:if> <c:if
+										test="${responPer !='NaN' }">${responPer}%</c:if>
+								</strong>
 							</div>
 							<div class="appli-responseInfo_obj">
 								<span>응답 지연</span>&nbsp; <strong class="appli-bigNumber-red">0명</strong>
@@ -171,7 +189,7 @@ li {
 						</div>
 						<div class="appli-searchDiv">
 							<form name="frmSearch" method="post"
-								action='<c:url value="/company/applicants.do"/>'>
+								action='<c:url value="/company/applicants.do?statusFlag=${status}&posNo=${posNo}"/>'>
 								<!-- 검색창 -->
 								<input type="text" placeholder="지원자, 포지션 검색"
 									value="${param.searchKeyword }" name="searchKeyword"
@@ -219,7 +237,13 @@ li {
 								for="chkBox-staredApplis" class="chkBox-staredApplis">별표
 								지원자 모아보기</label>
 						</div>
+
 					</div>
+					<%-- <c:if test="${!empty param.searchKeyword }">
+						<p style="font-size: 0.8em; font-weight: bold; color: #5a5a5a;">
+							${pagingInfo.totalRecord } 건의 지원자 목록이 조회되었습니다.
+						</p>
+					</c:if> --%>
 					<div>
 						<!-- 리스트 뿌리기.. 디비에서 읽어온걸로, 틀만 잡아주어봅시다 -->
 						<!-- 리스트에 값 없을 때 -->
@@ -243,7 +267,8 @@ li {
 											<span
 												class="fas fa-star appli-object-ele appli-object-ele_gold favo"
 												id="favo+${aVo['APPLY_NO']}"
-												onclick="favoFunc(${aVo['APPLY_NO']})"></span> <span
+												onclick="favoFunc(${aVo['APPLY_NO']})"></span> 
+											<span
 												style="display: none; color: gold;" id="colorChk">a</span>
 											<script>
 												$('.chBox').click(function(){
@@ -269,19 +294,6 @@ li {
 										</div>
 									</div>
 									<div>
-										<%-- <fmt:formatDate value="${now }" pattern="yyMMddHHmmss"
-											var="nowtime" />
-										<fmt:parseNumber value="${now.time/(1000*60*60*24) }"
-											integerOnly="true" var="nowDate" scope="request"></fmt:parseNumber>
-										<fmt:parseNumber
-											value="${(aVo['APPLY_REGDATE']).time/(1000*60*60*24) }"
-											integerOnly="true" var="aRegdate" scope="page"></fmt:parseNumber>
-										<c:set value="${nowDate-aRegdate }" var="dateDiff"></c:set>
-										<i class="far fa-clock"></i><span class="appli-waitingDays">
-											
-											<c:out value="${dateDiff}"></c:out> 일째 기다림
-										</span>  --%>
-
 										<i class="far fa-clock"></i><span class="appli-waitingDays">
 											<c:if test="${aVo['APPLY_PERIOD']>=0 }">
 												${aVo['APPLY_PERIOD'] } 일째 기다림 
@@ -297,7 +309,8 @@ li {
 
 						<c:if test="${pagingInfo.firstPage>1 }">
 							<div class="appli-paging-div appli-paging-div_prev">
-								<button onclick="pageFunc(${pagingInfo.firstPage-1}, ${status}, ${posNo })">이전</button>
+								<button
+									onclick="pageFunc(${pagingInfo.firstPage-1}, ${status}, ${posNo })">이전</button>
 							</div>
 						</c:if>
 
@@ -321,7 +334,8 @@ li {
 						<!-- 다음 블럭으로 이동 -->
 						<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
 							<div class="appli-paging-div appli-paging-div_next">
-								<button onclick="pageFunc(${pagingInfo.lastPage+1},${status},${posNo })">다음</button>
+								<button
+									onclick="pageFunc(${pagingInfo.lastPage+1},${status},${posNo })">다음</button>
 							</div>
 						</c:if>
 						<!--  페이지 번호 끝 -->

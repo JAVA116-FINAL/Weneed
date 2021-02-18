@@ -46,15 +46,12 @@ public class ApplicantsController {
 
 		//기업 코드 구하기
 		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
-		logger.info("session에서 읽어온 cominfoVo comVo={}", comVo);
 		String comCode=comVo.getComCode();
 
 
 		// 포지션 목록 가져오기
 		List<ApplicantsVO> posList = applicantsService.selectAllPositions(comCode);
 		logger.info("포지션 목록 조회 결과 posList.size = {}", posList.size());
-
-
 
 		List<Map<String, Object>> firstList = applicantsService.selectAll();
 
@@ -65,10 +62,7 @@ public class ApplicantsController {
 			long d = (time.getTime() - appliReg.getTime()) /(24*60*60*1000);
 
 			if(d>15) {
-				//aList.get(i).put("STATUS_FLAG",4);	//기간 만료
-				//update status_flag = 4로
 				int no = Integer.parseInt(String.valueOf(firstList.get(i).get("APPLY_NO")));
-				//logger.info("기간 만료로 수정할 no = {}",no);
 				int cnt = applicantsService.updateByNo(no);
 			}
 			firstList.get(i).put("APPLY_PERIOD", d);
