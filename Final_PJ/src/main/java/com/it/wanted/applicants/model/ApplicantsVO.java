@@ -31,6 +31,14 @@ public class ApplicantsVO {
 	private String comName;
 	
 	
+	public String getResumeUpfileflag() {
+		return resumeUpfileflag;
+	}
+
+	public void setResumeUpfileflag(String resumeUpfileflag) {
+		this.resumeUpfileflag = resumeUpfileflag;
+	}
+
 	public String getComName() {
 		return comName;
 	}

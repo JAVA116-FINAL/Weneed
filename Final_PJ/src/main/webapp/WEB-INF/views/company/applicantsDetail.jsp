@@ -51,7 +51,7 @@
 						<c:if test="${!empty posList}">
 							<c:forEach var="pList" items="${posList}">
 								<p class="appli-positionList-pos " style="font-size: 12px;">
-									<a href='<c:url value="/company/applicants.do?statusFlag=${0}&posNo=${pList.posNo}"/>'> 
+									<a href='<c:url value="/company/applicants.do?statusFlag=0&posNo=${pList.posNo}"/>'> 
 										<c:out value="${pList.posName }"></c:out>
 									</a>
 							</c:forEach>
