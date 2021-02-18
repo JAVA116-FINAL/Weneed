@@ -65,11 +65,11 @@
 								<h2 class="mb-4 text-md">${posVo.posName}</h2>
 				<!-- 회사명, 회사정보페이지로 연결 -->
 								<div class="companyInfo_jy">				
-									<span class="comName_jy"> <a href="#"> ${cominfoVo.comName }</a></span>
+									<span class="comName_jy"> <a href="#"> ${comInfoMap.COM_NAME }</a></span>
 									<div class="replyperbt_jy">
 											<button style="cursor:default" type="button" >응답률 평균이상</button>
 									</div>
-									<span> | ${cominfoVo.region } · ${cominfoVo.nation }</span>	
+									<span> | ${comInfoMap.REGION_NAME_KR } · ${comInfoMap.NATION_NAME_KR }</span>	
 								</div>
 				<!-- 회사정보 태그넣기 -->				
 								<div class="sidebar-widget tags mb-3">
@@ -131,7 +131,7 @@
 <!-- 마감일, 회사주소, 지도-->									
 								<div style="margin: 15px; color: black; font-size:15px;">
 									<span style="color:gray;">마감일 &nbsp;&nbsp;&emsp;</span><span><b>${proVo.endDate }</b></span><br>
-									<span style="color:gray;">근무지역 &nbsp;&nbsp;</span><span><b>${cominfoVo.comAddress }</b></span>
+									<span style="color:gray;">근무지역 &nbsp;&nbsp;</span><span><b>${comInfoMap.COM_ADDRESS }</b></span>
 								</div>
 								
 								<div class="google-map ">
@@ -146,8 +146,8 @@
 							   				<img alt="" src="<c:url value='/companyImgUpload/${comImg}'/>" style="width:50px; height:50px; float:left;">
 							   			</div>
 							   			<div style="float:left; margin-left:10px; text-align:left; font-size:13px; font-weight:bold;">
-							   				<p>${cominfoVo.comName }</p>
-							   				<p style="color:gray; margin-top:-8px;">${cominfoVo.industry }</p>
+							   				<p>${comInfoMap.COM_NAME }</p>
+							   				<p style="color:gray; margin-top:-8px;">${comInfoMap.INDUSTRY }</p>
 							   			</div>
 							   			</div>
 								   	</button>

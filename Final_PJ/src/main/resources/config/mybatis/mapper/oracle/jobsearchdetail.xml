@@ -80,6 +80,21 @@ on m.jikmu_code = u.jikmu_code;
 			select*from cominfoview
 			where pos_no=#{pos_no}
 		</select>
+<!-- cominfoview
+create or replace view cominfoview
+as
+select A.POS_NO, A.COM_NAME, A.COM_ADDRESS, A.INDUSTRY, B.NATION_CODE, B.NATION_NAME_KR, B.REGION_NAME_KR from
+(
+    select p.pos_no, i.com_name, i.com_address, i.region, i.nation, i.industry
+    from cominfo i join position p
+    on i.com_code = p.com_code
+)A
+join
+(
+    select*from regionview
+)B
+on A.region=B.region_code;
+ -->		
 </mapper>
 
 
