@@ -247,11 +247,11 @@ function drawPageDivP(jsonVo, pasteHere){
 			<table class="weneed-adminTable">
 				<thead>
 					<tr class="weneed-adminTable">
-						<th><input type="checkbox" id="weneed-admin-CheckAll"></th>
-						<th>번호</th>
-						<th>회사코드</th>
-						<th>이미지</th>
-						<th>승인상태</th>
+						<th style="width:70px;"><input type="checkbox" id="weneed-admin-CheckAll"></th>
+						<th style="width:105px;">번호</th>
+						<th style="width:200px;">회사코드</th>
+						<th style="width:460px;">이미지</th>
+						<th style="width:155px;">승인상태</th>
 					</tr>
 				</thead>
 				<!-- foreach문으로 전부 불러오기  -->
@@ -304,11 +304,11 @@ function drawPageDivP(jsonVo, pasteHere){
 			<table class="weneed-adminTable">
 				<thead>
 					<tr class="weneed-adminTable">
-						<th><input type="checkbox" id="weneed-admin-CheckAll-ed"></th>
-						<th>번호</th>
-						<th>회사코드</th>
-						<th>이미지</th>
-						<th>승인상태</th>
+						<th style="width:70px;"><input type="checkbox" id="weneed-admin-CheckAll-ed"></th>
+						<th style="width:105px;">번호</th>
+						<th style="width:200px;">회사코드</th>
+						<th style="width:460px;">이미지</th>
+						<th style="width:155px;">승인상태</th>
 					</tr>
 				</thead>
 				<!-- foreach문으로 전부 불러오기  -->

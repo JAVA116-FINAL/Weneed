@@ -156,6 +156,20 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 		return sqlSession.selectOne(namespace+"selectMemNo", resumeNo);
 	}
 
-	
+	@Override
+	public List<Map<String, Object>> selectDidntReadList(MatchupMemSearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectDidntReadList", searchVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectReadList(MatchupMemSearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectReadList", searchVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectProposedList(MatchupMemSearchVO searchVo) {
+		return sqlSession.selectList(namespace+"selectProposedList", searchVo);
+	}
+
   
 }

@@ -181,14 +181,14 @@
 	select rownum as RN,  A.*
        from (
         select m.resume_no AS RESUMENO, m.mcumem_no as MCUMEMNO, m.mem_no AS MEMNO, m.expertise_no AS EXPERTISENO, 
-               m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITLE,
-               r.resume_name AS RESUMENAME, DBMS_LOB.SUBSTR(r.resume_introduce, 4000, 1) AS RESUMEINTRODUCE, r.lang_flag AS LANGFLAG, 
-               c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
-               x.jikGun_code AS JIKGUNCODE, x.career AS CAREER, x.skill AS SKILL,
-               (select jikmu_name from jikmu j where j.JIKMU_CODE=
-	            (select jikmu_code from matchupmemjikmu mjm where mjm.expertise_no=m.expertise_no and rownum=1)) as JIKMUNAME, 
-	       (select jikgun_name from jikgun jk where jk.jikgun_code=
-	            (select jikgun_code from expertise e where e.expertise_no=m.expertise_no)) as JIKGUNNAME,
+            m.jobsearch_flag AS JOBSEARCHFLAG, m.resumeopen_flag AS RESUMEOPENFLAG, r.resume_title AS RESUMETITLE,
+            r.resume_name AS RESUMENAME, DBMS_LOB.SUBSTR(r.resume_introduce, 4000, 1) AS RESUMEINTRODUCE, 
+            r.lang_flag AS LANGFLAG, c.career_name AS CAREERNAME, e.edu_name AS EDUNAME, e.edu_major AS EDUMAJOR, 
+            x.jikGun_code AS JIKGUNCODE, x.career AS CAREER, x.skill AS SKILL,
+            (select jikmu_name from jikmu j where j.JIKMU_CODE=
+  		    (select jikmu_code from matchupmemjikmu mjm where mjm.expertise_no=m.expertise_no and rownum=1)) as JIKMUNAME, 
+     		(select jikgun_name from jikgun jk where jk.jikgun_code=
+            (select jikgun_code from expertise e where e.expertise_no=m.expertise_no)) as JIKGUNNAME,
 	        ROW_NUMBER() OVER(PARTITION BY m.mcumem_no ORDER BY r.resume_regdate) rcnt
         from matchupMem m join resume r on m.resume_No = r.resume_no 
         left outer join career c on c.resume_no=m.resume_no
@@ -249,18 +249,21 @@
 	<select id="selectZzimedList" parameterType="matchupMemSearchVo" resultType="map">
 		select * from
 		(
-		    select A.* 
+		    select Z.* 
 		    from (
-			    select rownum as rn, 
-			    	(select count(*) from matchuplike l where com_code=#{comCode} and l.mcumem_no=v.mcumemno) as cnt, v.* 
-			    from matchupMemSearchView v join matchuplike l on l.mcumem_no=v.mcumemNo
-			    where com_code=#{comCode} 
-				) A
+			    select rownum as rn,
+				(select count(*) from matchuplike l where l.mcumem_no=v.mcumemno and l.com_code=#{comCode}) as cnt,
+				v.* from matchupmemsearchview v where v.mcumemno in (select mcumem_no from matchuplike where 
+				com_code=#{comCode})
+				) Z
+				<![CDATA[
+				where cnt>0
+				]]>	
+		)
 		<![CDATA[
 		where rn > #{viewMoreSize}
 		and rn <= #{viewMoreSize}+5
 		]]>
-		)
 	</select>
 	<!-- 찜한목록 불러오기 이전 sql문 백업 
 	select * from (
@@ -305,5 +308,49 @@
 		select mem_no from matchupmem where resume_no=#{resumeNo}
 	</select>
 	
+	<select id="selectDidntReadList" parameterType="matchupMemSearchVo" resultType="map">
+		select *
+			from (
+			    select rownum as rn, v.*, 
+			    (select count(*) from matchuplike l where l.mcumem_no=v.mcumemno and l.com_code=#{comCode}) as cnt
+			    from matchupmemsearchview v where v.mcumemno not in 
+			    (select mcumem_no from matchupstatus where mcucom_no 
+			        = (select mcucom_no from matchupcom where com_code=#{comCode}))
+			)A
+			 <![CDATA[
+		    where RN > #{viewMoreSize}
+			and RN <=  #{viewMoreSize}+5
+		]]>
+	</select>
 	
+	<select id="selectReadList" parameterType="matchupMemSearchVo" resultType="map">
+		select *
+			from (
+			    select rownum as rn, v.*,
+			    (select count(*) from matchuplike l where l.mcumem_no=v.mcumemno and l.com_code=#{comCode}) as cnt
+			     from matchupmemsearchview v where v.mcumemno in 
+			    (select mcumem_no from matchupstatus where mcucom_no 
+			        = (select mcucom_no from matchupcom where com_code=#{comCode}))
+			)A
+			 <![CDATA[
+		    where RN > #{viewMoreSize}
+			and RN <=  #{viewMoreSize}+5
+			]]>
+	</select>
+	
+	<select id="selectProposedList" parameterType="matchupMemSearchVo" resultType="map">
+		select *
+			from (
+			    select rownum as RN, v.*,
+			    (select count(*) from matchuplike where mcumem_no=v.mcumemno and com_code=#{comCode}) as cnt
+			     from matchupmemsearchview v
+			     where v.mcumemno in 
+			    (select mcumem_no from matchupstatus where mcucom_no
+			        = (select mcucom_no from matchupcom where com_code=#{comCode}) and matchup_flag=2)
+			)A
+			 <![CDATA[
+		    where RN > #{viewMoreSize}
+			and RN <=  #{viewMoreSize}+5
+			]]>
+	</select>
 </mapper>

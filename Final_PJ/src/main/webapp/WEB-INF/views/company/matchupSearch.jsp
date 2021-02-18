@@ -5,11 +5,14 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/companyService/matchup.css'/>">
 <script type="text/javascript">
 $(function(){
+	var viewMoreSize=0;
 	//리스트 선택 시 표시해주기
 	$('.matchupSearch-li').click(function(){
 		var num=$(this).index(); //부모 요소를 기준으로 내가 몇번째 자식이냐
 		$('.matchupSearch-li').removeClass('matchupSearch-selectedLi');
-		$('.matchupSearch-li:eq('+num+')').addClass('matchupSearch-selectedLi')
+		$('.matchupSearch-li:eq('+num+')').addClass('matchupSearch-selectedLi');
+		viewMoreSize=0; //메뉴 바꿀때마다 사이즈 초기화
+		$('#matchupSearch-viewMoreBtn').show(); //메뉴 바꿀때마다 더보기버튼 노출
 	});
 
 	//찜 버튼 금색 토글
@@ -44,8 +47,7 @@ $(function(){
 		}
 	});
 	
-
-	var viewMoreSize=0;
+	
 	//더보기 기능 구현
 	$(document).on('click', '#matchupSearch-viewMoreBtn', function(){
 		//console.log('눌렀당');
@@ -63,8 +65,17 @@ $(function(){
 			console.log('전체 더보기!');
 			urlstr="<c:url value='/company/viewMoreMatchupMem.do'/>";
 		}else if($('.matchupSearch-li').eq(1).hasClass('matchupSearch-selectedLi')){ //찜한목록보기면
-			console.log('찜한목록 더보기!');
-			urlstr="<c:url value='/company/viewMoreZzimedList.do'/>";
+			console.log('찜한목록만 더보기!');
+			urlstr="<c:url value='/company/showZzimedList.do'/>";
+		}else if($('.matchupSearch-li').eq(2).hasClass('matchupSearch-selectedLi')){ //미열람 이력서만 보기 
+			console.log('미열람 이력서만 더보기!');
+			urlstr="<c:url value='/company/showDidntReadList.do'/>";
+		}else if($('.matchupSearch-li').eq(3).hasClass('matchupSearch-selectedLi')){ //열람 이력서만 보기 
+			console.log('열람 이력서만 더보기!');
+			urlstr="<c:url value='/company/showReadList.do'/>";
+		}else if($('.matchupSearch-li').eq(3).hasClass('matchupSearch-selectedLi')){ //면접제안한 이력서만 보기 
+			console.log('면접제안한 이력서만 더보기!');
+			urlstr="<c:url value='/company/showProposedList.do'/>";
 		}
 		
 		$.ajax({
@@ -123,9 +134,7 @@ $(function(){
 		$('form[name=matchupSearchForm]').submit();
 	});
 	
-	//찜한 이력서 보기..
-	$('#matchupSearch-Zzimed-list').click(function(){
-		console.log('찜한 이력서 보기');
+	function showMatchupList(url){
 		var keyword=$('#matchupSearchkeyword').val();
 		var minCareer=$('#minCareerSelect').val();
 		var maxCareer=$('#maxCareerSelect').val();
@@ -133,7 +142,7 @@ $(function(){
 		var jikgun=$('#matchupSearch-jikgunSelect').val();
 		var comCode=$('input[name=searchComCode]').val();
 		$.ajax({
-			url:"<c:url value='/company/showZzimedList.do'/>",
+			url:url,
 			dataType:"json",
 			type:"get",
 			data:{
@@ -168,10 +177,77 @@ $(function(){
 				$('#matchupSearchkeyword').val(keyword);
 			},
 			error:function(xhr, status, error){
-				alert('찜한 목록 보기 실패! '+error);
+				alert('목록 보기 실패! '+error);
 			}
 		});
+	}
+	
+	$('#matchupSearch-Zzimed-list').click(function(){
+		console.log('찜한 이력서 보기');
+		showMatchupList("<c:url value='/company/showZzimedList.do'/>");
 	});
+	$('#matchupSearch-DidntRead-list').click(function(){
+		console.log('미열람한 이력서 보기');
+		showMatchupList("<c:url value='/company/showDidntReadList.do'/>");
+	});
+	$('#matchupSearch-Read-list').click(function(){
+		console.log('열람한 이력서 보기');
+		showMatchupList("<c:url value='/company/showReadList.do'/>");
+	});
+	$('#matchupSearch-Proposed-list').click(function(){
+		console.log('면접제안한 이력서 보기');
+		showMatchupList("<c:url value='/company/showProposedList.do'/>");
+	});
+	
+	
+	/* $('#matchupSearch-DidntRead-list').click(function(){
+		console.log('미열람한 이력서 보기');
+		var keyword=$('#matchupSearchkeyword').val();
+		var minCareer=$('#minCareerSelect').val();
+		var maxCareer=$('#maxCareerSelect').val();
+		var jikmu=$('#matchupSearch-jikmuSelect').val();
+		var jikgun=$('#matchupSearch-jikgunSelect').val();
+		var comCode=$('input[name=searchComCode]').val();
+		$.ajax({
+			url:"<c:url value='/company/showDidntReadList.do'/>",
+			dataType:"json",
+			type:"get",
+			data:{
+				"viewMoreSize":viewMoreSize,
+				"searchKeyword":keyword,
+				"searchMaxCareer":maxCareer,
+				"searchMinCareer":minCareer,
+				"searchJikmu":jikmu,
+				"searchJikgun":jikgun,
+				"comCode":comCode
+			},
+			success:function(memList){
+				console.log(memList.length);
+				memListSize=memList.length;
+				$('#matchupSearch-resumeListDiv').html("");
+				
+				for(mcumem of memList){
+					makeMemList(mcumem);
+				}
+				
+				if(memList.length!=5){
+					$('#matchupSearch-viewMoreBtn').hide();
+				}
+				
+				$('#matchupSearch-record').val(viewMoreSize);
+				$('input[name=searchKeyword]').val(keyword);
+				$('input[name=searchMinCareer]').val(minCareer);
+				$('input[name=searchMaxCareer]').val(maxCareer);
+				$('input[name=searchJikmu]').val(jikmu);
+				$('input[name=searchJikgun]').val(jikgun);
+				$('input[name=searchComCode]').val(comCode);
+				$('#matchupSearchkeyword').val(keyword);
+			},
+			error:function(xhr, status, error){
+				alert('미열람한 목록 보기 실패! '+error);
+			}
+		});
+	}); */
 	
 	//var resumeNo=0;
 	//버튼 선택 시 해당하는 데이터를 모달 팝업에 뿌려주는 기능
@@ -235,16 +311,13 @@ $(function(){
 			
 			var comcode=$('.matchupSearchResumeOpenBtn').data('comcode');
 			var poslist=$('.matchupSearchResumeOpenBtn').data('poslist');
-			console.log("여기맞니"+comcode);
-			console.log("여기맞니2"+poslist);
-			console.log("여기맞니3"+resumeNo);
+			console.log("comcode"+comcode);
+			console.log("poslist2"+poslist);
+			console.log("resumeNo3"+resumeNo);
 			
 			$('form[name=proposalForm]').children('input[name=resumeNo]').val(resumeNo);
 		}
-		
 	});
-	
-	
 });
 
 //이력서 정보 세팅하는 메소드 
@@ -297,7 +370,6 @@ function drawLang(resumeAllVo){
 			
 			$('.matchupResumeWrapper:eq(3)').append(language);
 		}
-		
 	}
 }
 
@@ -500,9 +572,7 @@ function setDetailResumeMD(resumeAllVo){
 					career+='</div>';
 					career+='<div>'+ach.achDetails+'</div>';
 					career+='<div class="matchupResumeMDLightLine"></div>';
-				
 				}
-				
 			}
 		}
 		$('.matchupResumeWrapper:eq(0)').append(career);
@@ -852,9 +922,9 @@ function makeMemList(mcumem){
 				<ul class="matchupSearch-resultList">
 					<li class="matchupSearch-li matchupSearch-selectedLi" onclick="location.reload()">목록 전체</li>
 					<li class="matchupSearch-li" id="matchupSearch-Zzimed-list">찜한 이력서</li>
-					<li class="matchupSearch-li">미열람 이력서</li>
-					<li class="matchupSearch-li">열람한 이력서</li>
-					<li class="matchupSearch-li">면접 제안한 이력서</li>
+					<li class="matchupSearch-li" id="matchupSearch-DidntRead-list">미열람 이력서</li>
+					<li class="matchupSearch-li" id="matchupSearch-Read-list">열람한 이력서</li>
+					<li class="matchupSearch-li" id="matchupSearch-Proposed-list">면접 제안한 이력서</li>
 				</ul>
 			</div>
 			<div class="matchupSearch-resultOrderFilters">

@@ -301,6 +301,7 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return zzimedList;
 	}
 
+	@Transactional
 	@Override
 	public int isZzimed(int resumeNo, String comCode) {
 		int cnt=0;
@@ -397,5 +398,55 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return matchupMemDao.selectMemNo(resumeNo);
 	}
 
+	/* 0218 현빈 추가 */
+	@Override
+	@Transactional
+	public List<Map<String, Object>> selectDidntReadList(MatchupMemSearchVO searchVo) {
+		List<Integer> mcumemNoList=new ArrayList<Integer>();
+		List<Map<String, Object>> didntReadList=new ArrayList<Map<String,Object>>();
+		
+		//검색어로 검색하고 중복을 제거한 결과
+		mcumemNoList=getMcuMemNoList(mcumemNoList, searchVo);
+		searchVo.setMcumemNoList(mcumemNoList);
+		System.out.println("미열람한 목록 서칭용 searchVo 세팅값: "+searchVo);
+
+		didntReadList=matchupMemDao.selectDidntReadList(searchVo);
+		System.out.println("미열람한 목록 서칭 결과, didntReadList.size="+didntReadList.size());
+		
+		return didntReadList;
+	}
+
+	@Override
+	@Transactional
+	public List<Map<String, Object>> selectReadList(MatchupMemSearchVO searchVo) {
+		List<Integer> mcumemNoList=new ArrayList<Integer>();
+		List<Map<String, Object>> ReadList=new ArrayList<Map<String,Object>>();
+		
+		//검색어로 검색하고 중복을 제거한 결과
+		mcumemNoList=getMcuMemNoList(mcumemNoList, searchVo);
+		searchVo.setMcumemNoList(mcumemNoList);
+		System.out.println("열람한 목록 서칭용 searchVo 세팅값: "+searchVo);
+
+		ReadList=matchupMemDao.selectReadList(searchVo);
+		System.out.println("열람한 목록 서칭 결과, ReadList.size="+ReadList.size());
+		
+		return ReadList;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectProposedList(MatchupMemSearchVO searchVo) {
+		List<Integer> mcumemNoList=new ArrayList<Integer>();
+		List<Map<String, Object>> PropoList=new ArrayList<Map<String,Object>>();
+		
+		//검색어로 검색하고 중복을 제거한 결과
+		mcumemNoList=getMcuMemNoList(mcumemNoList, searchVo);
+		searchVo.setMcumemNoList(mcumemNoList);
+		System.out.println("열람한 목록 서칭용 searchVo 세팅값: "+searchVo);
+
+		PropoList=matchupMemDao.selectProposedList(searchVo);
+		System.out.println("열람한 목록 서칭 결과, PropoList.size="+PropoList.size());
+		
+		return PropoList;
+	}
 	
 }
