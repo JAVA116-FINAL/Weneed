@@ -87,64 +87,6 @@ select * from ProgramDetailsView;
 	
 	
 	
-<!-- 	<resultMap type="ProgramAllVO" id="programListResultMap">
-		<association property="programVO" column="programNo" javaType="ProgramVO">
-			<id column="programNo" jdbcType="BIGINT" property="programNo"/>
-			<result column="adminNo" jdbcType="BIGINT" property="adminNo"/>
-			<result column="proCateNo" jdbcType="BIGINT" property="proCateNo"/>
-			<result column="proName" jdbcType="VARCHAR" property="proName"/>
-			<result column="proSponsor" jdbcType="VARCHAR" property="proSponsor"/>
-			<result column="proPrice" jdbcType="BIGINT" property="proPrice"/>
-			<result column="proStartDate" jdbcType="TIMESTAMP" property="proStartDate"/>
-			<result column="regiEndDate" jdbcType="TIMESTAMP" property="regiEndDate"/>
-			<result column="proType" jdbcType="BIGINT" property="proType"/>
-			<result column="proImage" jdbcType="VARCHAR" property="proImage"/>
-			<result column="regdate" jdbcType="TIMESTAMP" property="regdate"/>
-		</association>
-		<collection property="programDetailsList" select="selectProgramDetailsView" column="programNo" javaType="ArrayList" ofType="map">
-		</collection>
-	</resultMap>
- -->
-	
-
-	
-	
-	
-	
-	
-<!-- 	
-	<resultMap type="ProgramAllVO" id="programListResultMap">
-		<association property="programVO" column="programNo" javaType="ProgramVO">
-			<id column="programNo" jdbcType="BIGINT" property="programNo"/>
-			<result column="adminNo" jdbcType="BIGINT" property="adminNo"/>
-			<result column="proCateNo" jdbcType="BIGINT" property="proCateNo"/>
-			<result column="proName" jdbcType="VARCHAR" property="proName"/>
-			<result column="proSponsor" jdbcType="VARCHAR" property="proSponsor"/>
-			<result column="proPrice" jdbcType="BIGINT" property="proPrice"/>
-			<result column="proStartDate" jdbcType="TIMESTAMP" property="proStartDate"/>
-			<result column="regiEndDate" jdbcType="TIMESTAMP" property="regiEndDate"/>
-			<result column="proType" jdbcType="BIGINT" property="proType"/>
-			<result column="proImage" jdbcType="VARCHAR" property="proImage"/>
-			<result column="regdate" jdbcType="TIMESTAMP" property="regdate"/>
-		</association>
-		<collection property="programDetailsList" select="selectProgramDetailsView" column="programNo" javaType="ArrayList" ofType="map">
-		</collection>
-	</resultMap>
-	
-			<result column="" jdbcType="" property=""/>
-			<result column="" jdbcType="" property=""/>
-			<result column="" jdbcType="" property=""/>
-			
-			
-			
-	<select id="selectProgramDetailsView" parameterType="int" resultType="map">
-		select * from ProgramDetailsView
-		where p.program_no = #{programNo}	
-	</select>
-	
- -->
-		
-		
 	<!-- 프로그램 조회에 프로그램들 리스트 뿌려주기-->
 					<!--	<select id="selectAllprogram" resultType="programVo">
 								select program_No, pro_Name, pro_Type, pro_Start_Date, regi_End_Date, regdate 
@@ -160,7 +102,7 @@ select * from ProgramDetailsView;
 			    select A.*, rownum as RNUM
 			    from
 			    (
-			        select program_No, pro_Name, pro_Type, pro_Start_Date, regi_End_Date, regdate 
+			        select program_No, pro_Image, pro_Name, pro_Type, pro_Start_Date, regi_End_Date, regdate 
 			        from program 
 					<include refid="searchWhereList" />	        
 			        order by program_No DESC
@@ -185,11 +127,9 @@ select * from ProgramDetailsView;
 		</delete>	
 		
 	<!-- 프로그램 한개 삭제 -->	
-		<delete id="deleteOneProgram" parameterType="programVo">
+		<delete id="deleteOneProgram" parameterType="int">
 			delete from program
 			where program_no = #{programNo}
-			and
-			(select admin_pwd from admininfo where admin_no = #{adminNo}) = #{pwd}
 		</delete>
 		
 	

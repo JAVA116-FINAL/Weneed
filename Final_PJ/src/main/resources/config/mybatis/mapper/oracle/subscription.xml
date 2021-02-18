@@ -24,6 +24,12 @@
 		from memberinfo
 		where email = #{email}
 	</select>
+	
+	<!-- 프로그램 기본정보 가져오기 -->
+	<select id="selectProgramInfo" parameterType="int" resultType="programVo">
+		select * from program
+		where program_no = #{programNo}
+	</select>
 </mapper>
 
 

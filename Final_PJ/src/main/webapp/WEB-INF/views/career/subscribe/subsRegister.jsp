@@ -110,6 +110,18 @@
   .subPayField{
   	margin: 10px;
   }
+  
+  .btnFilter{
+	  border:none; 
+	  border-radius:3em; 
+	  outline:none; 
+	  width:240px; 
+	  height:40px;
+	  padding:0px,0px; 
+	  background-color:#fff; 
+	  font-size:15px; 
+	  color:blue;
+	  }
   </style>
 </head>
 <body>
@@ -125,8 +137,7 @@
             <div style="font-size:25px; color:gray; margin-top:30px;">Weneed Plus / 정기구독권</div>    <!-- 3개월 구독시: 무제한으로 즐기는 직군별 커리어 콘텐츠 라고 뜸 -->
               <div style="font-size:13px; color:gray; margin-top:30px;"><p>20,000명 이상의 직장인이 선택한 원티드의 모든 강연, 컨퍼런스 영상을 무제한으로 시청하고, 업계 최고의 전문가와 함께하는 온오프라인 세미나, 북클럽에 참여할 수 있는 기회 </p></div><br>
               <div class="filter" style="width: 100%; height: 70px; margin-top:-20px;">
-              <button id="youSureBtn" class="btnFilter" style="border:none; border-radius:3em; outline:none; width:190px; height:40px;padding:0px,0px; 
-              			background-color:#fff; font-size:15px; color:blue">구독권 정보 상세보기<i class="fas fa-angle-double-right"></i></button>
+              <button id="youSureBtn" class="btnFilter">구독권 정보 상세보기<i class="fas fa-angle-double-right"></i></button>
           </div>
           </div>
       </div>
