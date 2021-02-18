@@ -139,7 +139,7 @@
 								</div>
 								
 								<!-- 여기다가 회사 네임카드랑 팔로우 -->								
-								<div style="width: 730px; height:80px; border: 0.3px solid gray">
+								<div style="width: 730px; height:80px; border: 1px solid #e1e2e3;">
 								   	<button type="button" class="btnCompan" onClick="location.href='companyDetail.do'" style="outline:none;">
 								   	<div style="width:280px; margin:15px;">
 							   			<div>
@@ -166,7 +166,7 @@
 			<%-- <div id="displayApply">
 				<c:import url="/jobsearch/apply.do?posNo=27"></c:import>
 			</div> --%>
-			<div id="displayAside">
+			<div id="displayAside" style="position: inherit;">
 				  <aside class="col-lg-4 asideApply_jy" id="asideApply">
 				  <%@include file="aside.jsp"%>
 					   <!-- <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" style="width:350px;">

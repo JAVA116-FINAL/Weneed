@@ -75,7 +75,11 @@ on m.jikmu_code = u.jikmu_code;
 		</select>	
 	
 
-				
+		<!-- 회사정보 불러오기(국가코드 및 도시명 한글로) 유정 추가 -->
+		<select id="selectComNameByComNo_2" parameterType="int" resultType="map">
+			select*from cominfoview
+			where pos_no=#{pos_no}
+		</select>
 </mapper>
 
 

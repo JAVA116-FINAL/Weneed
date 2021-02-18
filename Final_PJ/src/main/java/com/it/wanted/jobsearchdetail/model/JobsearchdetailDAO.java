@@ -16,4 +16,6 @@ public interface JobsearchdetailDAO {
 	public List<Map<String, Object>> selectAllRecruites(int posNo);
 	public String selectMemberName(String email);	
 	
+	/*유정 추가*/
+	public Map<String, Object> selectComNameByComNo_2(int posNo);
 }
