@@ -38,9 +38,9 @@
 	}
 </script>
 
-<div>
+<div id="noticeDiv">
 	<div class="userDiv">
-	<h1>1:1문의 상세보기</h1>
+	<h1 class="detailH1">1:1문의 상세보기</h1>
 		<c:forEach var="map" items="${userDetail }">
 		
 			<c:set var="qna_no" value="${map['QNA_NO'] }"/>
@@ -102,7 +102,7 @@
 	<div class="adminDiv">
 	<c:if test="${qna_reply != 'M' }">
 		<c:if test="${!empty adminDetail }">
-		<h1>1:1문의 답변</h1>
+		<h1 class="detailH1">1:1문의 답변</h1>
 			<c:forEach var="map" items="${adminDetail }">
 				<!-- 등록된 답변 출력 -->
 				<table class="detailTable">
@@ -138,7 +138,7 @@
 			</div>
 		</c:if>
 		<c:if test="${empty adminDetail }">
-		<h1>1:1문의 등록</h1>
+		<h1 class="detailH1">1:1문의 등록</h1>
 			<form name="frmWrite" action="<c:url value='/admin/noticeService/noticeQna_write.do'/>" method="post">
 				<div class="frmDiv">
 					<input type="text" name="qna_r_title" id="qna_r_title" placeholder="제목을 입력하세요">

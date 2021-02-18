@@ -39,4 +39,7 @@ public interface MemberService {
 	//비밀번호 재설정2
 	public int updatePwd(String pwd);
 	
+	//0218자연
+	public int updateMemInfobyMemNo(MemberVO memberVo);
+	public int updateMemberImg(MemberVO memberVo);
 }

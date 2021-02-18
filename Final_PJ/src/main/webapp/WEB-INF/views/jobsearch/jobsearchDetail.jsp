@@ -50,7 +50,40 @@
 
 	
 </script>
-
+<style type="text/css">
+.replyBtn{
+    cursor: default;
+    border: 1px solid #36f;
+    color: #36f;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 5px;
+    margin-right: 5px
+}
+.container{
+	color: #444444;
+}
+#comImg{
+    width: 700px;
+    height: 500px;
+    object-fit: cover;
+}
+.positionList{
+	margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+}
+.nameCard{
+	width: 730px;
+	height:80px;
+	border: 1px solid #e1e2e3;
+	margin-top: 50px;
+	border-radius: 3px;
+}
+</style>
 <section class="section blog-wrap" style="margin-top:-70px;">
     <div class="container">
         <div class="row">
@@ -58,21 +91,34 @@
                 <div class="row">
 					<div class="col-lg-12 mb-5">
 						<div class="single-blog-item">
-							<img src="<c:url value='/companyImgUpload/${comImg}'/>" alt="" class="img-fluid">
+							<img src="<c:url value='/companyImgUpload/${comImg}'/>" alt="" class="img-fluid" id="comImg">
 				
 							<div class="blog-item-content mt-5">
 				<!-- 상세페이지 제목/ 직무 -->
-								<h2 class="mb-4 text-md">${posVo.posName}</h2>
+								<h2 class="mb-4 text-md" style="font-size: 22px;">${posVo.posName}</h2>
 				<!-- 회사명, 회사정보페이지로 연결 -->
+								
+								<!-- 회사명, 응답률, 지역 나란히 출력되도록 위치 조정 (유정) -->
+								<div class="companyInfo_jy" style="margin-top: -15px; font-size: 14px;">				
+									<div class="replyperbt_jy">
+										<span class="comName_jy" > <a href="#"> ${comInfoMap.COM_NAME }</a></span>
+										<button type="button" class="replyBtn">응답률 높음</button>
+										<span> | ${comInfoMap.REGION_NAME_KR } · ${comInfoMap.NATION_NAME_KR }</span>
+										<c:set var="nation" value="${comInfoMap.NATION_NAME_KR }"/>
+										<c:set var="region" value="${comInfoMap.REGION_NAME_KR }"/>
+									</div>
+								</div>
+								<!-- 기존 코드!
 								<div class="companyInfo_jy">				
-									<span class="comName_jy"> <a href="#"> ${cominfoVo.comName }</a></span>
+									<span class="comName_jy" > <a href="#"> ${comInfoMap.COM_NAME }</a></span>
 									<div class="replyperbt_jy">
 											<button style="cursor:default" type="button" >응답률 평균이상</button>
 									</div>
-									<span> | ${cominfoVo.region } · ${cominfoVo.nation }</span>	
+									<span> | ${comInfoMap.REGION_NAME_KR } · ${comInfoMap.NATION_NAME_KR }</span>	
 								</div>
+								 -->
 				<!-- 회사정보 태그넣기 -->				
-								<div class="sidebar-widget tags mb-3">
+								<div class="sidebar-widget tags mb-3" style="margin-top: 20px;">
 									<a href="#">#통신비</a>
 									<a href="#">#단체보험</a>
 									<a href="#">#건강검진</a>
@@ -129,9 +175,9 @@
 								</div><!-- jobsearchcontents div -->
 								<hr>
 <!-- 마감일, 회사주소, 지도-->									
-								<div style="margin: 15px; color: black; font-size:15px;">
-									<span style="color:gray;">마감일 &nbsp;&nbsp;&emsp;</span><span><b>${proVo.endDate }</b></span><br>
-									<span style="color:gray;">근무지역 &nbsp;&nbsp;</span><span><b>${cominfoVo.comAddress }</b></span>
+								<div style="color: black; font-size:16px; margin-bottom: 20px;">
+									<span style="color:gray; margin-bottom: 20px;"><b>마감일</b> &nbsp;&nbsp;&emsp;</span><span><b>${proVo.endDate }</b></span><br>
+									<span style="color:gray; margin-bottom: 20px;"><b>근무지역</b> &nbsp;&nbsp;</span><span><b>${comInfoMap.COM_ADDRESS }</b></span>
 								</div>
 								
 								<div class="google-map ">
@@ -139,15 +185,15 @@
 								</div>
 								
 								<!-- 여기다가 회사 네임카드랑 팔로우 -->								
-								<div style="width: 730px; height:80px; border: 0.3px solid gray">
+								<div class="nameCard">
 								   	<button type="button" class="btnCompan" onClick="location.href='companyDetail.do'" style="outline:none;">
 								   	<div style="width:280px; margin:15px;">
 							   			<div>
 							   				<img alt="" src="<c:url value='/companyImgUpload/${comImg}'/>" style="width:50px; height:50px; float:left;">
 							   			</div>
-							   			<div style="float:left; margin-left:10px; text-align:left; font-size:13px; font-weight:bold;">
-							   				<p>${cominfoVo.comName }</p>
-							   				<p style="color:gray; margin-top:-8px;">${cominfoVo.industry }</p>
+							   			<div style="float:left; margin-left:10px; text-align:left; font-size:15px; font-weight: 600;">
+							   				<p>${comInfoMap.COM_NAME }</p>
+							   				<p style="color:gray; margin-top:-8px;">${comInfoMap.INDUSTRY }</p>
 							   			</div>
 							   			</div>
 								   	</button>
@@ -166,7 +212,7 @@
 			<%-- <div id="displayApply">
 				<c:import url="/jobsearch/apply.do?posNo=27"></c:import>
 			</div> --%>
-			<div id="displayAside">
+			<div id="displayAside" style="position: inherit;">
 				  <aside class="col-lg-4 asideApply_jy" id="asideApply">
 				  <%@include file="aside.jsp"%>
 					   <!-- <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0" style="width:350px;">
@@ -222,13 +268,14 @@
  <!-- 어사이드끝 -->     
 					<!--  <section class="section service-2"> -->
 						<div class="container">
-							<div class="row justify-content-center">
-								<div class="col-lg-7 text-center">
-									<div class="section-title" style="margin-top: 50px;">
-					<!-- 세션에서 이름가져와서 뿌리기 -->				
-										<h2><b>${memName}님, 이 포지션을 찾고 계셨나요?</b></h2>					
-									</div>
-								</div>
+							<div class="positionList">
+					<!-- 세션에서 이름가져와서 뿌리기 -->
+								<c:if test="${!empty memName}">
+									<h2 style="text-align: left;"><b>${memName}님, 이 포지션을 찾고 계셨나요?</b></h2>
+								</c:if>
+								<c:if test="${empty memName}">
+									<h2 style="text-align: left;"><b>이 포지션을 찾고 계셨나요?</b></h2>
+								</c:if>
 							</div>
 					
 					<c:if test="${empty jsDetailsViewVoList }">
@@ -243,14 +290,17 @@
 							<c:forEach var="map" items="${jsDetailsViewVoList}">
 								<div class="col-lg-3 col-md-6 ">
 									<div class="department-block mb-5">				
-										<img src="<c:url value='/companyImgUpload/${map["COM_IMG_URL"]}'/>" class="img-fluid w-100"> 
+										<img src="<c:url value='/companyImgUpload/${map["COM_IMG_URL"]}'/>" class="img-fluid w-100" style="margin-bottom: 20px;"> 
 											<div class="content">
 												<a href="#" class="read-more">
-														<h4 class="mt-4 mb-2 title-color">${map["POS_NAME"]}</h4>
-														<span class="mb-4">${map['COM_NAME']}</span><br>
-														<span class="mb-4">${map['JIKMU_NAME']}</span><br>												
-														<span>${map['REGION']}ㆍ${map['NATION']}</span><br>
-														<span>채용보상금 1,000,000원</span>
+														<span style="color: #333; font-size: 17px; font-weight: 600;">${map["POS_NAME"]}</span><br>
+														<span class="mb-4" style="font-size: 14px; font-weight: 600;">${map['COM_NAME']}</span><br>
+														<!-- 직무명은 불러올 필요가 없는 것 같아 주석처리합니다!
+														<span class="mb-4" style="font-size: 14px;">${map['JIKMU_NAME']}</span><br>												
+														국가, 도시는 한글로 받아오기 위해 c:set 이용해 불러왔습니다									
+														<span>${map['REGION']}ㆍ${map['NATION']}</span><br> -->
+														<span style="font-size: 14px; color: #999">${region}ㆍ${nation}</span><br>
+														<span style="font-size: 14px; color: #666">채용보상금 1,000,000원</span>
 												</a>
 											</div>
 									</div>

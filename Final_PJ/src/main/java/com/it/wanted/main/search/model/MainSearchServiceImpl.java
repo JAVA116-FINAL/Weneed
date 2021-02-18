@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.it.wanted.career.admin.model.ProgramVO;
+import com.it.wanted.position.model.PosNewVO;
 
 @Service
 public class MainSearchServiceImpl implements MainSearchService {
@@ -36,6 +37,11 @@ public class MainSearchServiceImpl implements MainSearchService {
 	@Override
 	public List<ProgramVO> selectMainCareerList() {
 		return mainSearchDao.getMainCareerList();
+	}
+
+	@Override
+	public List<PosNewVO> selectMainNewPos() {
+		return mainSearchDao.getMainPosList();
 	}
 	
 }

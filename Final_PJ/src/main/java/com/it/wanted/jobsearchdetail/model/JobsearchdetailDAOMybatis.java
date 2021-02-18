@@ -41,6 +41,11 @@ public class JobsearchdetailDAOMybatis implements JobsearchdetailDAO{
 	@Override
 	public String selectMemberName(String email) {
 		return sqlSession.selectOne(namespace+"selectMemberName", email);
+	}
+
+	@Override
+	public Map<String, Object> selectComNameByComNo_2(int posNo) {
+		return sqlSession.selectOne(namespace+"selectComNameByComNo_2", posNo);
 	}	
 	
 }

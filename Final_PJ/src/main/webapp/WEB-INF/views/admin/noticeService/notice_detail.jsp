@@ -16,7 +16,7 @@
 </script>
 
 <div id="noticeDiv">
-	<h1>이용안내 상세보기</h1>
+	<h1 class="detailH1">이용안내 상세보기</h1>
 		<table class="detailTable">
 			<colgroup>
 				<col width="15%">

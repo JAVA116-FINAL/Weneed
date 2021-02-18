@@ -43,5 +43,10 @@ public class JobsearchdetailServiceImpl implements JobsearchdetailService{
 	public String selectMemberName(String email) {
 		return jobsearchdetailDao.selectMemberName(email);
 	}
+
+	@Override
+	public Map<String, Object> selectComNameByComNo_2(int posNo) {
+		return jobsearchdetailDao.selectComNameByComNo_2(posNo);
+	}
 	
 }

@@ -231,6 +231,12 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 		return matchupMemDao.totalRecordbyAdmin(searchVo);
 	}
 	
+	/* 0218자연 */
+	@Override
+	public int matchupLikeCountbyMemNo(int memNo) {
+		return matchupMemDao.matchupLikeCountbyMemNo(memNo);
+	}
+	
 	
 	/* 현빈 */
 	@Override
@@ -392,5 +398,6 @@ public class MatchupMemServiceImpl implements MatchupMemService{
 	public int selectMemNo(int resumeNo) {
 		return matchupMemDao.selectMemNo(resumeNo);
 	}
+
 	
 }
