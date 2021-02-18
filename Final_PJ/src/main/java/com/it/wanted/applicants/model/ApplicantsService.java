@@ -46,4 +46,8 @@ public interface ApplicantsService {
 	public int selectApplyTotal(int memNo);
 
 	public List<Map<String, Object>> selectApplyList(int memNo);
+
+	public int changeStatus1(int applyNo);
+	public int changeStatus2(int applyNo);
+	public int changeStatus3(int applyNo);
 }

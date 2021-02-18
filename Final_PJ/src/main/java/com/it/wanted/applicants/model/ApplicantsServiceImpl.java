@@ -117,4 +117,19 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 		return applicantsDao.selectApplyList(memNo);
 	}
 
+	@Override
+	public int changeStatus1(int applyNo) {
+		return applicantsDao.changeStatus1(applyNo);
+	}
+
+	@Override
+	public int changeStatus2(int applyNo) {
+		return applicantsDao.changeStatus2(applyNo);		
+	}
+
+	@Override
+	public int changeStatus3(int applyNo) {
+		return applicantsDao.changeStatus3(applyNo);		
+	}
+
 }

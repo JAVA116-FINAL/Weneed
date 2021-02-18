@@ -25,6 +25,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import com.it.wanted.applicants.model.AppliPagingVO;
 import com.it.wanted.applicants.model.ApplicantsService;
 import com.it.wanted.applicants.model.ApplicantsVO;
+import com.it.wanted.comimginfo.model.ComImgInfoVO;
 import com.it.wanted.cominfo.model.ComInfoVO;
 import com.it.wanted.common.PaginationInfo;
 import com.it.wanted.common.Utility;
@@ -38,6 +39,34 @@ public class ApplicantsController {
 	@Autowired
 	private ApplicantsService applicantsService;
 
+	@ResponseBody
+	@RequestMapping("/changeStatus.do")
+	public boolean changeStatus(@RequestParam(value = "applyNoList[]") List<Integer> applyNoList,
+			@RequestParam(defaultValue="3") int modalStatus) {
+		
+		boolean bool = false;
+		logger.info("modal ={}", modalStatus);
+		int cnt = 0;
+		if(modalStatus==1) {
+			for(int applyNo:applyNoList) {
+				cnt = applicantsService.changeStatus1(applyNo);
+			}
+		}else if(modalStatus==2) {
+			for(int applyNo:applyNoList) {
+				cnt = applicantsService.changeStatus2(applyNo);
+			}
+		}else {
+			for(int applyNo:applyNoList) {
+				cnt = 	applicantsService.changeStatus3(applyNo);
+			}
+			
+		}
+		
+		if(cnt>0) {
+			bool =true;
+		}
+		return bool;
+	}
 
 	@RequestMapping("/applicants.do")
 	public String applicantsMain(HttpSession session, Model model, @ModelAttribute AppliPagingVO appliPagingVo
@@ -46,12 +75,15 @@ public class ApplicantsController {
 
 		//기업 코드 구하기
 		ComInfoVO comVo=(ComInfoVO) session.getAttribute("comInfoVo");
+		logger.info("session에서 읽어온 cominfoVo comVo={}", comVo);
 		String comCode=comVo.getComCode();
 
 
 		// 포지션 목록 가져오기
 		List<ApplicantsVO> posList = applicantsService.selectAllPositions(comCode);
 		logger.info("포지션 목록 조회 결과 posList.size = {}", posList.size());
+
+
 
 		List<Map<String, Object>> firstList = applicantsService.selectAll();
 
@@ -62,7 +94,10 @@ public class ApplicantsController {
 			long d = (time.getTime() - appliReg.getTime()) /(24*60*60*1000);
 
 			if(d>15) {
+				//aList.get(i).put("STATUS_FLAG",4);	//기간 만료
+				//update status_flag = 4로
 				int no = Integer.parseInt(String.valueOf(firstList.get(i).get("APPLY_NO")));
+				//logger.info("기간 만료로 수정할 no = {}",no);
 				int cnt = applicantsService.updateByNo(no);
 			}
 			firstList.get(i).put("APPLY_PERIOD", d);
@@ -83,7 +118,7 @@ public class ApplicantsController {
 		appliPagingVo.setStatusFlag(statusFlag);
 		appliPagingVo.setComCode(comCode);
 		appliPagingVo.setPosNo(posNo);
-
+		
 		model.addAttribute("status",statusFlag);
 		model.addAttribute("posNo",posNo);
 
@@ -181,6 +216,14 @@ public class ApplicantsController {
 
 		//4
 		return "common/message";
+	}
+	
+	@RequestMapping(value="/sendStatus.do", method = RequestMethod.POST)
+	public String sendStatus(@ModelAttribute ApplicantsVO applicantsVo,
+			Model model) {
+		
+		//4
+		return "company/applicants";
 	}
 
 }
