@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.it.wanted.career.admin.model.ProgramService;
 import com.it.wanted.career.admin.model.ProgramVO;
 import com.it.wanted.career.admin.model.ProgramVO2;
+import com.it.wanted.career.detail.model.CareerSubsService;
+import com.it.wanted.member.model.MemberVO;
 
 @Controller
 @RequestMapping("/career/detailpage")
@@ -23,6 +25,7 @@ public class CareerDetailController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CareerDetailController.class);
 	@Autowired private ProgramService programService;
+	@Autowired private CareerSubsService subsService;
 	
 	
 	/* 회원 디테일페이지 뷰 보여주기 */
@@ -59,20 +62,33 @@ public class CareerDetailController {
 			 
 
 	
-	  @RequestMapping("/programRegister.do")
-	  public void programRegister_get(@RequestParam	int programNo, HttpSession session, Model model) {
+	  /* 개별 프로그램 구매 */
+	  @RequestMapping("/buyProgram.do") 
+	  public void buyProgram(@RequestParam int programNo, HttpSession session, Model model){
 		  
-		  logger.info("programRegister 프로그램 신청 뷰페이지보기, 파라미터 programNo={}", programNo);
+			logger.info("프로그램 구매 페이지 보여주기");
+			
+			int memNo=0;
+			String email="";
+			if(session.getAttribute("mem_no") != null ) {
+				memNo= (Integer) session.getAttribute("mem_no"); 
+			}
+			if(session.getAttribute("email")!= null) {
+				email= (String)session.getAttribute("email");
+			}
+			
+			MemberVO memVo = new MemberVO();
+			memVo = subsService.selectMemberNameSub(email);
+			logger.info("회원이메일 email={}", email);
+			logger.info("회원이름 memName={}", memVo);
+			
+			ProgramVO proVo = new ProgramVO();
+			proVo = subsService.selectProgramInfo(programNo);
+			
+			model.addAttribute("email", email);
+			model.addAttribute("memVo", memVo);		  
+			model.addAttribute("proVo", proVo);		  
 		  
-		  
-			/*
-			 * ProgramVO proVo = new ProgramVO();
-			 * proVo=programService.selectProgramView(programNo);
-			 * logger.info("프로그램 기본정보 조회, 결과 proVo={}", proVo);
-			 * 
-			 * model.addAttribute("proVo", proVo);
-			 */
-	  
 	  }
 	 
 	  

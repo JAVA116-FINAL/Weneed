@@ -85,8 +85,8 @@ public class ProgramDAOMybatis implements ProgramDAO{
 	}
 
 	@Override
-	public int deleteOneProgram(ProgramVO proVo) {
-		return sqlSession.delete(namespace+"deleteOneProgram", proVo);
+	public int deleteOneProgram(int programNo) {
+		return sqlSession.delete(namespace+"deleteOneProgram", programNo);
 	}
 
 	@Override

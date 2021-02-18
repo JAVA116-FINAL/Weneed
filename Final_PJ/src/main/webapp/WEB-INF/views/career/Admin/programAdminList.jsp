@@ -41,16 +41,15 @@ function pageFunc(curPage){
 
 $(function(){
 	$('#btDel').click(function(){
-		var len
-			=$('.divproList .proBox2 tbody')
+		var len = 
+			$('.divproList .proBox2 tbody')
 				.find('input[type=checkbox]:checked').length;
 		if(len==0){
 			alert('삭제할 프로그램을 선택해주세요!');
 			return false;	
 		}
 		
-		$('form[name=frmList]').prop('action',
-				'<c:url value="/career/Admin/deleteProgramMulti.do"/>');
+		$('form[name=frmList]').prop('action','<c:url value="/career/Admin/deleteProgramMulti.do"/>');
 		$('form[name=frmList]').submit();
 	});	
 	
@@ -72,8 +71,24 @@ body{
      position: fixed;
      top: 0px;
 }
-.subscribeBody {
- } 
+.asideBtn{
+	cursor:pointer; 
+	outline:none; 
+	border:none; 
+	background-color:transparent;
+} 
+table.proBox2 {
+    width: 90%;
+    height: 450px;
+    margin: auto;
+    font-size: large;
+}
+.divproList {
+    border-top: gray;
+    border-top: 1px solid gray;
+    padding-top: 20px;
+    border-bottom: 1px solid gray;
+}
 </style>
 	
 
@@ -114,14 +129,14 @@ body{
 	
 	<form name="frmList" method="post" 
 	action="<c:url value='/career/Admin/programAdminList.do'/>">	
-		<div style="margin-top:50px;"><h2>프로그램 리스트</h2></div>
+		<div style="margin-top:10px;"><h2>프로그램 리스트</h2></div>
 		<c:if test="${!empty param.searchKeyword }">
 			<p>검색어 : ${param.searchKeyword}, ${pagingInfo.totalRecord }  
 				건 검색되었습니다.</p>
 		</c:if>
 		
 		<!-- 이벤트별 조회 -->
-		<div style="text-align:right; margin-right:235px;margin-bottom: 10px;">	
+		<div style="text-align:right; margin-right:60px;margin-bottom: 10px;">	
 		     
 			프로그램 조회
 			
@@ -173,22 +188,23 @@ body{
 		
 		
 		<div class="divproList">
-		<table class="proBox2" style="width: 70%;margin:auto;"
+		<table class="proBox2" style="width: 90%;margin:auto;"
 			 	summary="프로그램 번호, 프로그램 이름, 프로그램 신청 마감일, 작성자, 작성일에 대한 정보를 제공합니다.">
-			<caption>프로그램 리스트</caption>
 			<colgroup>
+				<col style="width:2%;" />
 				<col style="width:5%;" />
+				<col style="width:16%;" />
+				<col style="width:30%;" />
+				<col style="width:9%;" />
 				<col style="width:8%;" />
-				<col style="width:38%;" />
-				<col style="width:12%;" />
-				<col style="width:12%;" />
-				<col style="width:13%;" />
-				<col style="width:12%;" />		
+				<col style="width:11%;" />
+				<col style="width:8%;" />		
 			</colgroup>
 			<thead>
 			  <tr>
 				<th><input type="checkbox" name="chkAll" ></th>	  
 			    <th scope="col">번호</th>
+			    <th scope="col">이미지</th>
 			    <th scope="col">프로그램 이름</th>
 			    <th scope="col">프로그램 구분</th>
 			    <th scope="col">시작일</th>
@@ -208,19 +224,23 @@ body{
 				  	<c:forEach var="proVo" items="${plist }">				  	
 						<tr  style="text-align:center">
 							<td>
-								<input type="checkbox" name="proItems[${k}].programNo" value="${proVo.programNo}">
-							</td>						
-							
+								<input type="checkbox" name="proItems[${k}].programNo" value="${proVo.programNo}">							
+							</td>		
+								<input type="hidden" name="proItems[${k}].proImage" value="${proVo.proImage}">
+											
 							<td>${proVo.programNo}</td>
+							<td>
+							<img src="<c:url value='/programImgUpload/${proVo.proImage }'/>" alt="" class="img-fluid" style="width:340px; height:155px;">
+							</td>
 							<td style="text-align:left">
 		 					<a href
 					="<c:url value='/career/Admin/programDetail.do?programNo=${proVo.programNo}'/>"> 
 								<!-- 제목이 긴 경우 일부만 보여주기 -->
-								<c:if test="${fn:length(proVo.proName)>=50}">
-									${fn:substring(proVo.proName, 0,50) } ...
+								<c:if test="${fn:length(proVo.proName)>=30}">
+									&emsp;${fn:substring(proVo.proName, 0,30) } ...
 								</c:if>
-								<c:if test="${fn:length(proVo.proName)<50}">						
-									${proVo.proName}
+								<c:if test="${fn:length(proVo.proName)<30}">						
+									&emsp;${proVo.proName}
 								</c:if>
 							</a>
 							</td>
@@ -261,7 +281,7 @@ body{
 
 <!-- 페이징부분!!!!!! -->
 
-		<div class="divPage">
+		<div class="divPage" style="margin-top:10px; font-size:18px;">
 			<!-- 페이지 번호 추가 -->		
 			<!-- 이전 블럭으로 이동 -->
 		 	<c:if test="${pagingInfo.firstPage>1 }">	
@@ -291,7 +311,7 @@ body{
 			<!--  페이지 번호 끝 -->
 		</div>
 		
-			<div style="text-align:right; margin-right:235px;">
+			<div style="text-align:right; margin-left:1155px; width:150px; font-size:18px;">
 				<input type="button" value="선택한 상품 삭제" id="btDel">
 			</div>		
 	</form>	
@@ -300,11 +320,11 @@ body{
 		
 		
 		
-		<div class="divSearch">
+		<div class="divSearch" >
 		   	<form name="frmSearch" method="post" 
 		   		action='<c:url value="/career/Admin/programAdminList.do"/>'>
-		        <select name="searchCondition">
-		            <option value="pro_Name" 
+		        <select name="searchCondition" style="height:32px; font-size:16px;">
+		            <option value="pro_Name"  
 		            	<c:if test="${param.searchCondition == 'pro_Name'}">
 		            		selected="selected"
 		            	</c:if>
@@ -312,9 +332,9 @@ body{
 		        </select>   
        	 		       	 
 		        <input type="text" name="searchKeyword" title="검색어 입력"
-		        	value="${param.searchKeyword}" style="height:20px;"> 	   
-				<input type="submit" value="검색">
-				<input type="button" onclick=location.href="<c:url value=''/>" value="초기화">
+		        	value="${param.searchKeyword}" style="height:33px;"> 	   
+				<input type="submit" style="height:35; font-size: 16px;" value="검색">
+				<input type="button" style="height:35; font-size: 16px;" onclick=location.href="<c:url value=''/>" value="초기화">
 		    </form>
 		</div>
 
@@ -329,6 +349,14 @@ body{
 
 <!-- 프로그램 리스트부분 끝!!!! -->
 
+							<aside style="float:right;">
+									<div class="asideBtn" style="float:right; position:fixed; margin-left:20px; margin-top:-970px;">
+											<div class="">
+												<button type="button" onclick="location.href='<c:url value="/career/Admin/careerMainAdminView.do"/>'" title="커리어성장 관리자 메인으로">
+													<i class="fas fa-home fa-3x" style="color:#258bf7;"></i><br><br>
+												</button>
+											</div>
+							</aside>
 
 </div> <!-- subscribeBody 디브끝 -->
 </section>

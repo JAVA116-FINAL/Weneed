@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.it.wanted.career.admin.model.ProgramVO;
 import com.it.wanted.member.model.MemberVO;
 
 
@@ -21,6 +22,11 @@ public class CareerSubsDAOMybatis implements CareerSubsDAO{
 	@Override
 	public MemberVO selectMemberNameSub(String email) {
 		return sqlSession.selectOne(namespace+"selectMemberNameSub", email);
+	}
+
+	@Override
+	public ProgramVO selectProgramInfo(int programNo) {
+		return sqlSession.selectOne(namespace+"selectProgramInfo", programNo);
 	}
 
 

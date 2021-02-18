@@ -42,4 +42,9 @@ public interface MemberService {
 	//0218자연
 	public int updateMemInfobyMemNo(MemberVO memberVo);
 	public int updateMemberImg(MemberVO memberVo);
+	
+	/* 0219자연 */
+	public int isMyEmailCheck(MemberVO memberVo);
+	public int isMyHpCheck(MemberVO memberVo);
+
 }
