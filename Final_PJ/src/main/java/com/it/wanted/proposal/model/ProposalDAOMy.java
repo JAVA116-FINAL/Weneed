@@ -18,5 +18,10 @@ public class ProposalDAOMy implements ProposalDAO{
 	public int checkProposalCount(ProposalVO propoVo) {
 		return sqlSession.selectOne(namespace+"checkProposalCount", propoVo);
 	}
+
+	@Override
+	public int proposalCountbyMemNo(int memNo) {
+		return sqlSession.selectOne(namespace+"proposalCountbyMemNo", memNo);
+	}
 	
 }

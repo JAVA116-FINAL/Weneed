@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+section.profileEditSection_jy {
+    border: 1px solid #80808040;
+    border-radius: 4px;
+    background: white;
+    margin-left: 20px;
+}
+
+form#frmProfileEdit {
+    /* border: 1px solid gray; */
+    /* border-radius: 4px; */
+    /* background: white; */
+}
+
+input#name {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #9e9e9e4a;
+    width: 80%;
+}
+
+h6 {}
+
+label.lbName {
+    display: inline-block;
+    width: 100%;
+}
+
+.lbName>h6 {
+    display: inline-block;
+    margin: 30px 0;
+    font-size: 15px;
+    color: #9e9e9e;
+    margin-right: 50px;
+    width: 47px;
+}
+
+header.formHeader_jy {
+    margin-left: 28px;
+    /* color: gray; */
+}
+
+.formTitle_jy>dt {
+    color: #505050;:;
+    font-size: large;
+}
+
+.formTitle_jy>dd {color: #9e9e9e;}
+
+input#name {}
+
+input#email {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #9e9e9e4a;
+    width: 80%;
+}
+
+input#hp {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #9e9e9e4a;
+    width: 80%;
+}
+
+button#profileEdit {
+    border: 1px solid #217ff3;
+    border-radius: 4px;
+    width: 180px;
+    height: 49px;
+    background: #217ff3;
+    color: white;
+    font-weight: 600;
+}
+
+footer.formfooter {
+    text-align: end;
+    margin-right: 57px;
+    /* display: inline-block; */
+    /* right: 1px; */
+    margin-top: 53px;
+}
+
+
+
+.formblok_jy {
+    margin-top: 47px;
+}
+
+span {}
+
+a.basicInfoLink>span {
+    color: #217bf3;
+    font-weight: 600;
+}
+
+input#upfile {
+    display: none;
+}
+
+img.img_member_jy {
+    width: 85px;
+    height: 85px;
+    border-radius: 70%;
+}
+
+/* 0218 */
+img.img_member_jy {
+    width: 85px;
+    height: 85px;
+    border-radius: 70%;
+}
+
+i.icon-camera_icon.camerai_jy {
+    margin: 0;
+    margin-left: 68%;
+
+}
+ input.inputimg_jy {
+    display: none;
+} 

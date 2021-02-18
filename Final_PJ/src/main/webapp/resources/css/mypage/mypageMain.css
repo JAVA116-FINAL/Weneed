@@ -279,3 +279,26 @@ p{
 .nonebookLikeA{
 	color: #258bf7;
 }
+
+/* 210218자연 */
+img.img_member_jy {
+    width: 85px;
+    height: 85px;
+    border-radius: 70%;
+}
+
+i.icon-camera_icon.camerai_jy {
+    margin: 0;
+    margin-left: 68%;
+
+}
+ input.inputimg_jy {
+    display: none;
+} 
+.leftDiv:first-child {
+    height: 368px;
+}
+
+button#btUpfile {
+    margin-left: 50px;
+}

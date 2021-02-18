@@ -1,17 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/mypageMain.css">
+<script type="text/javascript">
+$(function(){
+	
+	$('#upfile').change(function(){
+		if($('#upfile').val().length<1){	
+			alert('업로드할 파일을 선택하세요');
+			return false;
+		}
+   		var form = $('#frmUpfile')[0];
+	 	var formData = new FormData(form);// FormData 객체 생성
+		
+		  $.ajax({
+			url:"<c:url value='/mypage/fileUpload.do'/>",
+			type:"POST",
+			dataType:"text",
+			data:formData,
+			processData: false,
+			contentType: false,
+			cache: false,
+			success:function(resUp){
+				//alert(resUp);
+				var imgStr="";
+				imgStr="<img class='img_member_jy'  src='"+resUp+"'>";
+				$('#memberImg').empty();
+				$('#memberImg').html(imgStr);
+				
+			},
+			error:function(xhr,status,error){
+				alert("error!:"+error);
+			}
+		}); //ajax
+		
+	});//change이벤트
+		
+});
+
+</script>
 <div class="container">
 	<h2 class="mypageTitle">MY 위니드</h2>
 	<div class="divWrapper">
 		<div class="leftSideDivGroup">
 			<div class="leftDiv">
 				<div class="proImg">
-					<i class="fas fa-user fa-5x"></i>
-					<img src=""/>
-					<div class="cameraIcon">
-						<i class="fas fa-camera"></i>
-					</div>
+					<div id="divupfile" class="member-img_jy">
+						 <!-- 폼은 어디갔니 -->
+							<div class="memberImg" id="memberImg">
+								<c:if test="${empty memVo.fileName }">
+									<i class="fas fa-user fa-5x"></i>
+								</c:if>
+								<c:if test="${!empty memVo.fileName }">
+									<img class="img_member_jy" alt="회원이미지" src="<c:url value='/resources/memberImgUpload/${memVo.fileName }'/>">
+								</c:if>
+							</div>
+							<form name="frmUpfile" id="frmUpfile" method="post" enctype="multipart/form-data" action="<c:url value='/mypage/fileUpload.do'/>">
+								<input class="inputimg_jy" type="file" name="upfile" id="upfile" accept="image/*" >
+								<input type="hidden" name="oldFileName" value="${memVo.fileName}"/>
+								<button id="btUpfile" type="button" onclick="$('#upfile').trigger('click');">
+									<i class="icon-camera_icon camerai_jy"></i>
+								</button>
+							</form>
+						</div>
 				</div>
 				<div>
 					<dl>
@@ -20,7 +70,7 @@
 						<dd>${memVo.hp }</dd>
 					</dl>
 				</div>
-				<a class="basicInfoLink" href="#"><span>기본정보수정</span></a>
+				<a class="basicInfoLink" onclick="location.href='<c:url value="/mypage/profileEdit.do"/>'"><span>기본정보수정</span></a>
 			</div>
 			<div class="leftDiv leftPoint">
 				<span>포인트</span><span class="number">1,000P</span>
@@ -29,13 +79,13 @@
 				<div>
 					<span>원해요 
 					<i style="color:#bbbbbb;" class="far fa-question-circle"></i>
-					</span><a href="#" class="number">0</a>
+					</span><a href="#" class="number">${likeCnt }</a>
 				</div>
 				<div>
-					<span>열람</span><a href="#" class="number">0</a>
+					<span>열람</span><a href="#" class="number">${openResumeCnt }</a>
 				</div>
 				<div>
-					<span>받은 제안</span><a href="#" class="number">0</a>
+					<span>받은 제안</span><a href="#" class="number">${proposalCnt }</a>
 				</div>
 			</div>
 			<div class="leftDiv">

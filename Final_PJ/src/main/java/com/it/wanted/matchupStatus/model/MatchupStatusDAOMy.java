@@ -44,5 +44,11 @@ public class MatchupStatusDAOMy implements MatchupStatusDAO{
 	public void insertProposal(MatchupStatusVO statusVo) {
 		sqlSession.insert(namespace+"insertProposal", statusVo);
 	}
+
+	/* 0218자연 */
+	@Override
+	public int openResumeCountbyMemNo(int memNo) {
+		return sqlSession.selectOne(namespace+"openResumeCountbyMemNo", memNo);
+	}
 	
 }

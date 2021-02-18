@@ -17,5 +17,8 @@ public interface MatchupStatusDAO {
   /* 현빈 */
 	void updateProposalDate(MatchupStatusVO statusVo);
 	void insertProposal(MatchupStatusVO statusVo);
-
+	
+	/* 0218 자연 */
+	public int openResumeCountbyMemNo(int memNo);
+	
 }

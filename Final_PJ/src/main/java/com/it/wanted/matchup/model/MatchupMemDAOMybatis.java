@@ -111,7 +111,12 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	public int totalRecordbyAdmin(SearchVO searchVo) {
 		return sqlSession.selectOne(namespace+"totalRecordbyAdmin", searchVo);
 	}
-
+	
+	/* 0218자연 */
+	@Override
+	public int matchupLikeCountbyMemNo(int memNo) {
+		return sqlSession.selectOne(namespace+"matchupLikeCountbyMemNo",memNo);
+	}
 	
 	/* 현빈 */
 	@Override
@@ -150,5 +155,7 @@ public class MatchupMemDAOMybatis implements MatchupMemDAO{
 	public int selectMemNo(int resumeNo) {
 		return sqlSession.selectOne(namespace+"selectMemNo", resumeNo);
 	}
+
+	
   
 }

@@ -159,6 +159,12 @@
 	</select>
 	
 	
+	<!-- 0218자연 -->
+	<select id="matchupLikeCountbyMemNo" parameterType="int" resultType="int">
+		select count(*) from matchuplike where mcumem_No=(select mcumem_No from matchupMem where mem_No=#{memNo})
+	</select>
+	
+	
 	<!-- 현빈 -->
 	<select id="selectOpen" resultType="matchupMemVo">
 		select * from matchupMem where resumeopen_flag='Y'
@@ -299,5 +305,6 @@
 	<select id="selectMemNo" parameterType="int" resultType="int">
 		select mem_no from matchupmem where resume_no=#{resumeNo}
 	</select>
+	
 	
 </mapper>
