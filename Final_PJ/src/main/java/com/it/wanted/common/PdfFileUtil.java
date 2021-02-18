@@ -111,6 +111,12 @@ public class PdfFileUtil {
 				String sMonth=crrVo.getStartMonth();
 				String eYear=crrVo.getEndYear();
 				String eMonth=crrVo.getEndMonth();
+				if(cName==null||cName.isEmpty()) {
+					cName="";
+				}
+				if(cDep==null||cDep.isEmpty()) {
+					cDep="";
+				}
 				
 				document.add(new Paragraph("\n"+cName,font));
 				document.add(new Paragraph(cDep,new Font(baseFont,11)));
@@ -123,8 +129,38 @@ public class PdfFileUtil {
 						AchievementVO achVo = achList.get(j);
 						if(achVo.getCareerNo()==crrVo.getCareerNo()) {
 			//들여쓰기.. 회색 hr
+							String achName=achVo.getAchName();
+							String achStartYear=achVo.getStartYear();
+							String achStartMonth=achVo.getStartMonth();
+							String achEndYear=achVo.getEndYear();
+							String achEndMonth=achVo.getEndMonth();
+							String achDetails= achVo.getAchDetails();
+							
+							if(achName==null||achName.isEmpty()) {
+								achName="";
+							}
+							if(achStartYear==null||achStartYear.isEmpty()) {
+								achStartYear="";
+							}
+							if(achStartMonth==null||achStartMonth.isEmpty()) {
+								achStartMonth="";
+							}
+							if(achEndYear==null||achEndYear.isEmpty()) {
+								achEndYear="";
+							}
+							if(achEndMonth==null|| achEndMonth.isEmpty()) {
+								achEndMonth="";
+							}
+							if(achDetails==null||achDetails.isEmpty()) {
+								achDetails="";
+							}
+							
+							document.add(new Paragraph("\t\t·주요성과: "+achName+"\t"+achStartYear+"."+achStartMonth+"-"+achEndYear+"."+achEndMonth,new Font(baseFont,10)));
+							document.add(new Paragraph("\t\t"+achDetails,new Font(baseFont,10)));
+							/*
 							document.add(new Paragraph("\t\t·주요성과: "+achVo.getAchName()+"\t"+achVo.getStartYear()+"."+achVo.getStartMonth()+"-"+achVo.getEndYear()+"."+achVo.getEndMonth(),new Font(baseFont,10)));
 							document.add(new Paragraph("\t\t"+achVo.getAchDetails(),new Font(baseFont,10)));
+							*/
 							//document.add(chunc.NEWLINE);
 						}//if
 					}//for
@@ -142,10 +178,42 @@ public class PdfFileUtil {
 		if(eduList!=null&& !eduList.isEmpty()) {
 			for (int i = 0; i < eduList.size(); i++) {
 				EducationVO eduVo = eduList.get(i);
+				String eduStartYear=eduVo.getStartYear();
+				String eduStartMonth=eduVo.getStartMonth();
+				String eduEndYear=eduVo.getEndYear();
+				String eduEndMonth=eduVo.getEndMonth();
+				String eduName=eduVo.getEduName();
+				String eduMajor=eduVo.getEduMajor();
+				
+				if(eduStartYear==null||eduStartYear.isEmpty()) {
+					eduStartYear="";
+				}
+				if(eduStartMonth==null||eduStartMonth.isEmpty()) {
+					eduStartMonth="";
+				}
+				if(eduEndYear==null||eduEndYear.isEmpty()) {
+					eduEndYear="";
+				}
+				if(eduEndMonth==null||eduEndMonth.isEmpty()) {
+					eduEndMonth="";
+				}
+				if(eduName==null||eduName.isEmpty()) {
+					eduName="";
+				}
+				if(eduMajor==null|| eduMajor.isEmpty()) {
+					eduMajor="";
+				}
+				if(eduStartYear!=""|| eduStartMonth!=""|| eduEndYear!=""||eduEndMonth!="") {
+					document.add(new Paragraph(eduStartYear+"."+eduStartMonth+"-"+eduEndYear+"."+eduEndMonth,new Font(baseFont,10)));
+				}
+				
+				document.add(new Paragraph(eduName,font));
+				document.add(new Paragraph(eduMajor,new Font(baseFont,10)));
+				/*
 				document.add(new Paragraph(eduVo.getStartYear()+"."+eduVo.getStartMonth()+"-"+eduVo.getEndYear()+"."+eduVo.getEndMonth(),new Font(baseFont,10)));
 				document.add(new Paragraph(eduVo.getEduName(),font));
 				document.add(new Paragraph(eduVo.getEduMajor(),new Font(baseFont,10)));
-				
+				*/
 			}//for
 		}//if
 		
@@ -158,10 +226,19 @@ public class PdfFileUtil {
 		if(addList!=null&& !addList.isEmpty()) {
 			for (int i = 0; i < addList.size(); i++) {
 				 AddinformatiodVO addVo = addList.get(i);
+				 String addGetYear=addVo.getGetYear();
+				 String addGetMonth=addVo.getGetMonth();
+				 String addName=addVo.getAddName();
+				 String addDetails=addVo.getAddDetails();
+				 
+				document.add(new Paragraph(addGetYear+"."+addGetMonth,new Font(baseFont,10)));
+				document.add(new Paragraph(addName,font));
+				document.add(new Paragraph(addDetails,new Font(baseFont,10)));
+				/*
 				document.add(new Paragraph(addVo.getGetYear()+"."+addVo.getGetMonth(),new Font(baseFont,10)));
 				document.add(new Paragraph(addVo.getAddName(),font));
 				document.add(new Paragraph(addVo.getAddDetails(),new Font(baseFont,10)));
-				
+				*/
 			}//for
 		}//if
 		
@@ -174,7 +251,9 @@ public class PdfFileUtil {
 		if(addList!=null&& !langList.isEmpty()) {
 			for (int i = 0; i < langList.size(); i++) {
 				  LanguagesVO langVo = langList.get(i);
-				document.add(new Paragraph(langVo.getLangName(),font));
+				  String langName=langVo.getLangName();
+					/* document.add(new Paragraph(langVo.getLangName(),font)); */
+				document.add(new Paragraph(langName,font));
 				
 				String langLevel=null;
 				if(langVo.getLangLevel()==1) {
@@ -183,8 +262,9 @@ public class PdfFileUtil {
 					langLevel="비즈니스 가능";
 				}else if(langVo.getLangLevel()==3) {
 					langLevel="일상생활 가능";
-				}	
-						
+				}else if(langVo.getLangLevel()==0) {
+					langLevel="";
+				}
 				document.add(new Paragraph(langLevel,new Font(baseFont,10)));
 				
 				if(testList!=null&&testList.isEmpty()) {
@@ -192,9 +272,17 @@ public class PdfFileUtil {
 						 LanguagestestVO testVo = testList.get(j);
 						if(testVo.getLangNo()==langVo.getLangNo()) {
 			//들여쓰기.. 회색 hr
+							String testName=testVo.getLangtestName();
+							String testGetYear=testVo.getGetYear();
+							String testGetMonth=testVo.getGetMonth();
+							String testScore=testVo.getLangtestScore();
+							
+							document.add(new Paragraph("\t\t·"+testName+"\t"+testGetYear+"."+testGetMonth,new Font(baseFont,10)));
+							document.add(new Paragraph("\t\t"+testScore,new Font(baseFont,10)));
+							/*
 							document.add(new Paragraph("\t\t·"+testVo.getLangtestName()+"\t"+testVo.getGetYear()+"."+testVo.getGetMonth(),new Font(baseFont,10)));
 							document.add(new Paragraph("\t\t"+testVo.getLangtestScore(),new Font(baseFont,10)));
-							
+							*/
 						}//if
 					}//for
 					
@@ -214,7 +302,12 @@ public class PdfFileUtil {
 		if(linkList!=null&& !linkList.isEmpty()) {
 			for (int i = 0; i < linkList.size(); i++) {
 				LinkVO linkVo = linkList.get(i);
-				document.add(new Paragraph(linkVo.getLinkUrl(),new Font(baseFont,10)));
+				String linkUrl=linkVo.getLinkUrl();
+				if(linkUrl==null||linkUrl.isEmpty()) {
+					linkUrl="";
+				}
+				document.add(new Paragraph(linkUrl,new Font(baseFont,10)));
+				/* document.add(new Paragraph(linkVo.getLinkUrl(),new Font(baseFont,10))); */
 				
 			}//for
 		}//if

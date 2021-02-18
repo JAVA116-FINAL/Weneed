@@ -67,6 +67,17 @@ public class MemberDAOMybatis implements MemberDAO{
 		return sqlSession.update(namespace+"updateMemberImg",memberVo);
 	}
 
+	/* 0219자연 */
+	@Override
+	public int isMyEmailCheck(MemberVO memberVo) {
+		return sqlSession.selectOne(namespace+"isMyEmailCheck",memberVo);
+	}
+
+	@Override
+	public int isMyHpCheck(MemberVO memberVo) {
+		return sqlSession.selectOne(namespace+"isMyHpCheck",memberVo);
+	}
+
 }
 
 

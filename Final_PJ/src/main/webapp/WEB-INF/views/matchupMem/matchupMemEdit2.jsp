@@ -280,7 +280,7 @@ function setDateBox() {
 														</div>
 														<div class="MosaldivInput_jy">
 															<i class="icon-search"></i>
-															<input type="hidden" value="">
+															<input hidden="hidden"/>
 															<input type="text" name="eduNameModal_jy" id="eduNameModal_jy" placeholder="학교명을 입력해주세요" value="">
 														</div>
 													</div>
@@ -303,7 +303,7 @@ function setDateBox() {
 														<div class="modalDivSelect1_jy">
 															<div class="skillinputDiv">																	
 																<i class="icon-search"></i>
-																<input type="hidden" value="">
+																<input hidden="hidden"/>
 																<input type="text" name="careerinput_jy" id="careerinput_jy" placeholder="회사명을 입력해주세요" value="" >
 															</div>
 														</div>
