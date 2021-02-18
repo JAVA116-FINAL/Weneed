@@ -71,18 +71,15 @@
             <mapping path="/resume/*.do"/>
             <mapping path="/matchupMem/*.do"/>
             <mapping path="/jobsearch/bookmark.do"/>
-            <!-- 0218자연추가 -->
-            <mapping path="/jobsearch/apply.do"/>
-            
+	<!-- 자연0218추가 -->
+           <mapping path="/jobsearch/apply.do"/>
 
             <exclude-mapping path="/resume/resumeIntro.do"/>
             <exclude-mapping path="/resume/resumeSampleFileDown.do"/>
             <exclude-mapping path="/resume/resumeDown.do"/>
             <exclude-mapping path="/resume/resumeFileDown.do"/>
-
 						<exclude-mapping path="/resume/resumeDetailAdmin.do"/>
 						<exclude-mapping path="/resume/matchupPopupResumeDown.do"/>
-
             <exclude-mapping path="/matchupMem/matchupMemIntro.do"/>
 			<!-- 여기까지 -->
             <beans:ref bean="loginInterceptor"/>
