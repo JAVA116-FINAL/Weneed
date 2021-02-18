@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../inc/company_top.jsp"%>
 <jsp:useBean id="now" class="java.util.Date" />
 <jsp:useBean id="apply"
@@ -7,54 +8,122 @@
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/companyService/applicants.css'/>">
 
-<script type="text/javascript"
-	src="<c:url value='/resources/js/jquery-3.5.1.min.js'/>"></script>
 <style>
 li {
 	padding-right: 15px;
 	padding-top: 3px;
 }
 </style>
+
 <script type="text/javascript">
-	$(function() {
+   $(function() {
+	   $('#appli-checkAll').click(function() {
+	         var chkAll = $('#appli-checkAll').prop('checked');
+	         if(chkAll){
+	            $('.chBox').prop("checked", true);
+	         }else{
+	            $('.chBox').prop("checked", false);
+	         }
+	      });
+	      
+	      $('.chBox').click(function(){
+	         $('#appli-checkAll').prop("checked",false);
+	      });
+	   
 
+	     //$('#appli-btn-statusChange').click(function(){
+	       $(document).on('click', '.appli-btn-statusChange', function(){ 
+	    	 //alert($('#modalStatus').val());
+	    	  
+	    	 //리스트로 받아와야함
+		         const applyNoArr=[]; //체크박스값을 담을 어레이
+		         var checkboxes=$('input:checkbox[name=chBox]');
+		         
+		         //선택한 체크박스의 회사코드를 추출하여 배열에 집어넣는 작업
+		         checkboxes.each(function(e){
+		            if($(this).is(':checked')){
+		               var applyNo=$(this).val();
+		               applyNoArr.push(applyNo);
+		            }
+		         });
+		         
+		 		var list= {
+		 			"modalStatus": $('#modalStatus').val(),		 		
+		 			"applyNoList":applyNoArr
+		 		};
+		 		
+		 		$.ajax({
+		 			url:"<c:url value='/company/changeStatus.do'/>",
+		 			type:"get",
+		 			dataType:"json",
+		 			data:list,
+		 			
+		 			success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
+							alert('상태 변경되었습니다!');
+							location.reload();
+						},
+						error:function(xhr, status, error){
+							alert('error!: '+error);
+						}
+		 		});  
+		 		
+		 		/* $.ajax({
+					url:"<c:url value='/admin/companyService/comInfoStatustoPass.do'/>",
+					type:"post",
+					dataType:"json",
+					data:data,
+					success:function(result){ //배열로 돌려받겠지 그럼 이 값을 페이지에 다시 세팅해주면 될거같아
+						//alert('성공!');
+						location.reload();
+					},
+					error:function(xhr, status, error){
+						alert('error!: '+error);
+					}
+				}); */
+	         
+	      });
+   	
+   });
 
-	});
-	
-	function pageFunc(curPage, statusflag,posNo){
-		$('input[name=statusflag]').val(statusflag);
-		$('input[name=posNo]').val(posNo);
-		$('input[name=currentPage]').val(curPage);
-		$('form[name=frmPage]').submit();
-	}
-	
-	/* $('#favo').click(function(){
-		alert('클릭');
-	}); */
-	
-	function favoFunc(applyNo){
-		alert(applyNo);
-		/* alert('#favo'+applyNo); */
-		$('#favo'+applyNo).css("color","gold");
-	}
-	 
-	/* //서류통과 클릭 시
-	$('input:radio[name=rd-appliPassedFilter_doc]').is(':checked'){
-		alret();
-	}
- 	*/
-	
+         //$('input[name=applyNoArr]').val(applyNoArr);
+ 
+      /* var status = $('#modalStatus option:selected').val();
+		
+		$("#modalStatus").change(function(){
+			status = $(this).val();
+			$('input[name=statusFlag]').val(status);
+		}); */
+
+		//$('input[name=statusFlag]').val(status);
+</script>
+<script>
+function pageFunc(curPage, statusflag,posNo){
+    $('input[name=statusflag]').val(statusflag);
+    $('input[name=posNo]').val(posNo);
+    $('input[name=currentPage]').val(curPage);
+    $('form[name=frmPage]').submit();
+ }
+ 
+ /* $('#favo').click(function(){
+    alert('클릭');
+ }); */
+ 
+ function favoFunc(applyNo){
+    //alert(applyNo);
+    alert('.favo'+applyNo);
+    $(this).css("color","gold");
+ }
 </script>
 <body>
 	<form
-		action="<c:url value='/company/applicants.do?statusFlag=${status}'/>"
+		action="<c:url value='/company/applicants.do?statusFlag=${status}&posNo=${posNo}'/>"
 		name="frmPage" method="post" style="display: none;">
 		<!--  style="display: none;" -->
 		<input type="text" name="currentPage"> <input type="text"
 			name="searchCondition" value="${param.searchCondition }"> <input
 			type="text" name="searchKeyword" value="${param.searchKeyword }">
-		<input type="text" name="statusflag">
-		<input type="text" name="posNo">
+		<input type="text" name="statusflag"> <input type="text"
+			name="posNo">
 	</form>
 
 	<div class="container">
@@ -67,11 +136,12 @@ li {
 					<!-- <ul style="font-size: 0.8em; "> -->
 					<p class="appli-positionList-pos appli-positionList-pos_selected"
 						style="font-size: 12px;">
-						<a href="#">전체 포지션</a>
+						<a href='<c:url value="/company/applicants.do"/>'>전체 포지션</a>
 						<c:if test="${!empty posList}">
 							<c:forEach var="pList" items="${posList}">
 								<p class="appli-positionList-pos " style="font-size: 12px;">
-									<a href='<c:url value="/company/applicants.do?statusFlag=${status}&posNo=${pList.posNo}"/>'> 
+									<a
+										href='<c:url value="/company/applicants.do?statusFlag=${status}&posNo=${pList.posNo}"/>'>
 										<c:out value="${pList.posName }"></c:out>
 									</a>
 							</c:forEach>
@@ -91,7 +161,10 @@ li {
 						<div class="appli-responseInfo">
 							<div class="appli-responseInfo_obj">
 								<span class="appli-span-allResponse">전체 응답률</span>&nbsp; <strong
-									class="appli-bigNumber-blue">${responPer}% </strong>
+									class="appli-bigNumber-blue"> <c:if
+										test="${responPer =='NaN' }">0%</c:if> <c:if
+										test="${responPer !='NaN' }">${responPer}%</c:if>
+								</strong>
 							</div>
 							<div class="appli-responseInfo_obj">
 								<span>응답 지연</span>&nbsp; <strong class="appli-bigNumber-red">0명</strong>
@@ -109,28 +182,6 @@ li {
 						<!-- 라디오버튼 필터 / 검색창 -->
 						<div>
 
-							<!-- <script>
-									$(function() {
-										if($('input:radio[name="rd-appliPassedFilter"]:checked').length < 1){
-										    alert('카테고리를 선택해주세요');                        
-										}
-										
-										if(radioVal == 1) {
-												$.ajax({
-													url:"<c:url value='/company/statusCheck.do'/>",
-													type:"GET",
-													data:"statusFlag=" + radioVal ,
-													dataType:"json",
-													success:function(list){
-													
-														alert(list);
-														
-													},
-													error:function(xhr, status, error){
-														alert("error!! : " + error);
-													}
-									});
-								</script> -->
 							<!-- 라디오버튼 필터 -->
 							<ul class="appli-ul-filter">
 								<!-- 클릭하면, 스타일 바뀌게 해야함 -->
@@ -140,7 +191,7 @@ li {
 									name="rd-appliPassedFilter" id="rd-appliPassedFilter_doc">
 									<label for="rd-appliPassedFilter_new"
 									class="lb-appliPassedFilter"> <a
-										href='<c:url value="/company/applicants.do?statusFlag=0&posNo=${posNo}"/>'">신규
+										href='<c:url value="/company/applicants.do?statusFlag=0&posNo=${posNo}"/>'>신규
 									</a>
 								</label></li>
 								<li class="appli-li-filter"><input type="radio"
@@ -171,13 +222,14 @@ li {
 						</div>
 						<div class="appli-searchDiv">
 							<form name="frmSearch" method="post"
-								action='<c:url value="/company/applicants.do"/>'>
+								action='<c:url value="/company/applicants.do?statusFlag=${status}&posNo=${posNo}"/>'>
 								<!-- 검색창 -->
 								<input type="text" placeholder="지원자, 포지션 검색"
 									value="${param.searchKeyword }" name="searchKeyword"
 									class="appli-searchInput" style="height: 33px;"> <input
-									type="submit" class="appli-btn-statusChange"
-									style="outline: none;" value="검색">
+									type="submit" class="appli-btn-search"
+									style="outline: none; border: 1px solid #c1c1c1; font-size: 0.8em; font-weight: bold; padding: 0px 10px; margin-right: 10px;"
+									value="검색">
 							</form>
 						</div>
 					</div>
@@ -189,36 +241,35 @@ li {
 							<div class="appli-statusChangeDiv">
 
 								<input type="checkbox" class="appli-checkAll"
-									id="appli-checkAll"><label for="appli-checkAll"></label>
-								<script>
-									$(function() {
-										$('#appli-checkAll').click(function() {
-											var chkAll = $('#appli-checkAll').prop('checked');
-											
-											if(chkAll){
-												$('.chBox').prop("checked", true);
-											}else{
-												$('.chBox').prop("checked", false);
-											}
-										});
-										
-										
-									});
-								</script>
+									id="appli-checkAll" style="    width: 25px"><label for="appli-checkAll"></label>
 
-								<button class="appli-btn-statusChange" data-toggle="modal"
-									data-target=".comServAppliStatusChangeMD"
-									style="outline: none;" data-cartNum="${aVo['APPLY_NO']}">상태변경</button>
+								<select name="modalStatus" id="modalStatus"
+									style="padding-right: 10px; font-size: 0.8em;
+										border: 1px solid #c1c1c1; margin: 0px 12px 0px 0px; FONT-WEIGHT: bold; background-color: rgba(0, 0, 0, 0);">
+									<option value="1">서류합격</option>
+									<option value="2">최종합격</option>
+									<option value="3">불합격</option>
+								</select>
+
+								<button class="appli-btn-statusChange"
+									name="appli-btn-statusChange" id="appli-btn-statusChange"
+									style="outline: none;">상태변경</button>
+
+								<%--                         <button class="appli-btn-statusChange" data-toggle="modal"
+                           name="appli-btn-statusChange" id="appli-btn-statusChange"
+                           data-target=".comServAppliStatusChangeMD" data-statusflag=""
+                           data-applyno="${aVo['APPLY_NO']}" style="outline: none;" type="submit">상태변경</button> --%>
 								<!-- 상태변경 모달 include -->
-								<%@ include file="../company/modal/statusChange.jsp"%>
+								<%-- <%@ include file="../company/modal/statusChange.jsp"%> --%>
 							</div>
 						</div>
 						<div>
 							<!-- 별표 지원자 모아보기 -->
 							<input type="checkbox" id="chkBox-staredApplis"> <label
-								for="chkBox-staredApplis" class="chkBox-staredApplis">별표
-								지원자 모아보기</label>
+								for="chkBox-staredApplis" class="chkBox-staredApplis"
+								onclick="favoAll()">별표 지원자 모아보기</label>
 						</div>
+
 					</div>
 					<div>
 						<!-- 리스트 뿌리기.. 디비에서 읽어온걸로, 틀만 잡아주어봅시다 -->
@@ -232,26 +283,24 @@ li {
 						<!-- 리스트에 값 있을 때, 1개 객체  -->
 						<c:if test="${!empty aList}">
 							<c:forEach var="aVo" items="${aList}">
-								<%-- <c:set var="StatusFlag" value="#{aVo.statusFlag }"></c:set>
-								<c:set target="${aVo }" property="statusFlag" value="${aVo['STATUS_FLAG']}"/> --%>
+								<%--<c:set target="${aVo }" property="statusFlag" value="${aVo['STATUS_FLAG']}"/> --%>
 								<div class="appli-list-object">
 									<div class="appli-list-object_info">
 										<div>
 											<input type="checkbox"
 												class="appli-object-ele appli-object-ele-chk chBox"
-												id="chBox" name="chBox" data-cartNum="${aVo['APPLY_NO']}">
+												id="chBox" name="chBox" value="${aVo['APPLY_NO']}">
+
 											<span
-												class="fas fa-star appli-object-ele appli-object-ele_gold favo"
-												id="favo+${aVo['APPLY_NO']}"
-												onclick="favoFunc(${aVo['APPLY_NO']})"></span> <span
-												style="display: none; color: gold;" id="colorChk">a</span>
+												class="fas fa-star appli-object-ele appli-object-ele_gold favo+${aVo['APPLY_NO']}"
+												id="favo" onclick="favoFunc(${aVo['APPLY_NO']})"></span>
+											<!-- id="favo+${aVo['APPLY_NO']} -->
+											<span style="display: none; color: gold;" id="colorChk">a</span>
 											<script>
-												$('.chBox').click(function(){
-													$('#appli-checkAll').prop("checked",false);
-												});
-												
-												/* $('input[name=chBox]:checked') */
-											</script>
+                                    
+                                    
+                                    /* $('input[name=chBox]:checked') */
+                                 </script>
 
 										</div>
 										<div class="appli-list-object_infoResume appli-object-ele">
@@ -269,23 +318,10 @@ li {
 										</div>
 									</div>
 									<div>
-										<%-- <fmt:formatDate value="${now }" pattern="yyMMddHHmmss"
-											var="nowtime" />
-										<fmt:parseNumber value="${now.time/(1000*60*60*24) }"
-											integerOnly="true" var="nowDate" scope="request"></fmt:parseNumber>
-										<fmt:parseNumber
-											value="${(aVo['APPLY_REGDATE']).time/(1000*60*60*24) }"
-											integerOnly="true" var="aRegdate" scope="page"></fmt:parseNumber>
-										<c:set value="${nowDate-aRegdate }" var="dateDiff"></c:set>
-										<i class="far fa-clock"></i><span class="appli-waitingDays">
-											
-											<c:out value="${dateDiff}"></c:out> 일째 기다림
-										</span>  --%>
-
 										<i class="far fa-clock"></i><span class="appli-waitingDays">
 											<c:if test="${aVo['APPLY_PERIOD']>=0 }">
-												${aVo['APPLY_PERIOD'] } 일째 기다림 
-											</c:if>
+                                    ${aVo['APPLY_PERIOD'] } 일째 기다림 
+                                 </c:if>
 										</span>
 									</div>
 								</div>
@@ -297,7 +333,8 @@ li {
 
 						<c:if test="${pagingInfo.firstPage>1 }">
 							<div class="appli-paging-div appli-paging-div_prev">
-								<button onclick="pageFunc(${pagingInfo.firstPage-1}, ${status}, ${posNo })">이전</button>
+								<button
+									onclick="pageFunc(${pagingInfo.firstPage-1}, ${status}, ${posNo })">이전</button>
 							</div>
 						</c:if>
 
@@ -321,7 +358,8 @@ li {
 						<!-- 다음 블럭으로 이동 -->
 						<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
 							<div class="appli-paging-div appli-paging-div_next">
-								<button onclick="pageFunc(${pagingInfo.lastPage+1},${status},${posNo })">다음</button>
+								<button
+									onclick="pageFunc(${pagingInfo.lastPage+1},${status},${posNo })">다음</button>
 							</div>
 						</c:if>
 						<!--  페이지 번호 끝 -->

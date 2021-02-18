@@ -231,12 +231,26 @@
 										href="<c:url value='/resume/resumeFileDown.do?resumeNo=${aVo.resumeNo}&resumeFile=${aVo.resumeFile}'/>">
 											${aVo.resumeTitle} <span class="RWName">
 												<h3>
+													<%-- <label for="resumeTitle"> 
+														<c:if test="${fn:length(aVo.resumeTitle)>=27}">
+															${fn:substring(aVo.resumeTitle, 0,27) } ...
+														</c:if>
+														<c:if test="${fn:length(aVo.resumeTitle)<27}">						
+															${aVo.resumeTitle}
+														</c:if>							
+													${rVo.resumeTitle}
+													<input type="hidden" name="resumeTitle" id="resumeTitleEdit_jy"+${aVo.resumeNo} readonly="readonly" value="${aVo.resumeTitle}" class="nameEdit_jy"></input>
+													<input type="hidden" name="resumeNo" id="resumeNo_jy" value="${aVo.resumeNo}"></input>
+												</label> --%>
+												
 													<input type="text" name="resumeTitle" style="display: none"
 														id="resumeTitleEdit_jy" +${aVo.resumeNo}
 														readonly="readonly" value="${aVo.resumeTitle}"
 														class="nameEdit_jy"></input> <input type="hidden"
 														name="resumeNo" id="resumeNo_jy" value="${aVo.resumeNo}"></input>
 												</h3>
+												
+												
 										</span>
 									</a>
 									</span>
@@ -275,7 +289,7 @@
 							</c:if>
 
 							<!-- 불합격/최종합격/기간만료에는, 버튼 비활성화 -->
-							<c:if test="${aVo.statusFlag==3 || aVo.statusFlag==4}">
+							<c:if test="${aVo.statusFlag==2 || aVo.statusFlag==3 || aVo.statusFlag==4}">
 								<a href='<c:url value='/company/applicants.do'/>'
 									class="btn-statusChange1" style="outline: none;"> 목록으로</a>
 							</c:if>

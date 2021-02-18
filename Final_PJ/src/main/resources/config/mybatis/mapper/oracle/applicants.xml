@@ -10,7 +10,6 @@
 			</if>
 		</where>	
 	</sql>
-	 
 	<select id="selectTotalRecord" parameterType="appliPagingVo"
 		resultType="int">
 		select count(*) 
@@ -18,10 +17,12 @@
 		on AP.POS_NO = B.POS_NO
 		where status_flag=#{statusFlag}
 		and B.com_code=#{comCode}
-		<if test="posNo!=0">
-		            and B.pos_no=#{posNo}    
-	    </if>
-		<include refid="searchWhere"></include>
+		<if test="posNo !=0 or posNo !=''">
+	            and B.pos_no=#{posNo}
+	            </if>
+	            <if test="searchKeyword != ''">
+	              and (ap.apply_name like '%' || #{searchKeyword} || '%' or b.pos_name like '%' || #{searchKeyword} || '%')
+	            </if> 
 	</select>
 
 	<select id="selectApplicants" parameterType="appliPagingVo" resultType="map">
@@ -36,9 +37,12 @@
 	            on AP.POS_NO = B.POS_NO
 	            where AP.status_flag=#{statusFlag}  
 	            and B.com_code=#{comCode}
-	            <if test="posNo!=0">
-		            and B.pos_no=#{posNo}    
+	            <if test="posNo !=0 or posNo !=''">
+	            and B.pos_no=#{posNo}
 	            </if>
+	            <if test="searchKeyword != ''">
+	              and (ap.apply_name like '%' || #{searchKeyword} || '%' or b.pos_name like '%' || #{searchKeyword} || '%')
+	            </if> 
 		        order by apply_no desc
 		    )A
 		)
@@ -47,31 +51,6 @@
 		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
 		]]>
 	</select>
-	
-<!-- 	<select id="selectApplicants" parameterType="appliPagingVo" resultType="map">
-		select *
-		from
-		(
-		    select A.*, rownum as RNUM
-		    from
-		    (
-		        select AP.*, B.pos_name
-	            from apply AP join position B
-	            on AP.POS_NO =
-	            B.POS_NO
-	            where AP.status_flag=#{statusFlag}
-	            <if test="searchKeyword != ''">
-	              and ap.apply_name like '%' || #{searchKeyword} || '%' or b.pos_name like '%' || #{searchKeyword} || '%'
-	            </if> 
-	            <include refid="searchWhere"></include>
-	              order by apply_no desc
-		    )A
-		)
-		<![CDATA[
-		where RNUM > #{firstRecordIndex} 
-		and RNUM <= #{firstRecordIndex} + #{recordCountPerPage}
-		]]>
-	</select> -->
 	
 	<select id="selectAllPositions" resultType="ApplicantsVO">
 		select
@@ -82,8 +61,6 @@
 		order by B.pos_name
 	</select>
 
-	
-
 	<select id="selectByNo" parameterType="int"
 		resultType="ApplicantsVO">
 		select *
@@ -91,13 +68,6 @@
 		inner join resume R on A.RESUME_NO = R.RESUME_NO
 		where apply_no = #{applyNo}
 	</select>
-
-	<!-- <update id="updatePeriod" parameterType="appliVo">
-		update apply
-		set apply_period=#{applyPeriod}
-		where apply_no=#{applyNo}
-
-	</update> -->
 	
 	<update id="updateByNo" parameterType="int">
 		update apply
@@ -223,6 +193,24 @@
 		on b.pos_no=c.pos_no
 		where c.mem_no=#{memNo}
 	</select>
+	
+	<update id="changeStatus1" parameterType="int">
+		update apply
+		set status_flag=1, doc_pass_regdate=sysdate
+		where apply_no=#{applyNo}
+	</update>
+	
+	<update id="changeStatus2" parameterType="int">
+		update apply
+		set status_flag=2, pass_regdate=sysdate
+		where apply_no=#{applyNo}
+	</update>
+	
+	<update id="changeStatus3" parameterType="int">
+		update apply
+		set status_flag=3, regect_regdate=sysdate
+		where apply_no=#{applyNo}
+	</update>
 </mapper>
 
 
