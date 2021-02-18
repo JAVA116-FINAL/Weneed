@@ -18,7 +18,7 @@ public interface ProgramDAO {
 	public ProgramVO selectProgramView(int programNo);
 	public List<ProgramVO2> selectProgramContentsView(int programNo);
 	public int updateProgramEditTotal(ProgramVO2 proVo2Con);
-	public int deleteOneProgram(ProgramVO proVo);
+	public int deleteOneProgram(int programNo);
 	public String selectMembersName(String email);
 	public List<ProgramVO> selectSimilarProgram();
 	public List<ProgramVO> selectAllProgramsForMain();
