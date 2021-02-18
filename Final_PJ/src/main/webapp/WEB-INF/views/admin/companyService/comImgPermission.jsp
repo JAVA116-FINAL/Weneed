@@ -30,7 +30,7 @@ $(function(){
 		};
 		
 		$.ajax({
-			url:"<c:url value='/admin/companyService/comImgStatustoPass.do'/>",
+			url:"<c:url value='/admin/comImgStatustoPass.do'/>",
 			type:"post",
 			dataType:"json",
 			data:data,
@@ -70,7 +70,7 @@ function pageFuncY(curPage){
 	var here = $('#weneedadmin-tbodyYet');
 	var here2 = $('#weneedAdmin-comInfoDivPageBefore');
 	$.ajax({
-		url:"<c:url value='/admin/companyService/comImgPermissionYet.do'/>",
+		url:"<c:url value='/admin/comImgPermissionYet.do'/>",
 		type:"get",
 		dataType:"json",
 		data:{
@@ -92,7 +92,7 @@ function pageFuncP(curPage){
 	var here2 = $('#weneedAdmin-comInfoDivPagePassed');
 	
 	$.ajax({
-		url:"<c:url value='/admin/companyService/comImgPermissionPassed.do'/>",
+		url:"<c:url value='/admin/comImgPermissionPassed.do'/>",
 		type:"get",
 		dataType:"json",
 		data:{

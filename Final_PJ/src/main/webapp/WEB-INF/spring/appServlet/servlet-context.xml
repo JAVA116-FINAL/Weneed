@@ -74,6 +74,7 @@
             <exclude-mapping path="/resume/resumeDown.do"/>
             <exclude-mapping path="/resume/resumeFileDown.do"/>
 			<exclude-mapping path="/resume/resumeDetailAdmin.do"/>
+			<exclude-mapping path="/resume/matchupPopupResumeDown.do"/>
             <exclude-mapping path="/matchupMem/matchupMemIntro.do"/>
 			<!-- 여기까지 -->
             <beans:ref bean="loginInterceptor"/>

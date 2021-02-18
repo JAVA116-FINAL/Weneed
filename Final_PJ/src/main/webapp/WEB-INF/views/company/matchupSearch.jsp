@@ -568,7 +568,9 @@ $.downResume=function(resumeNo){
 	$.ajax({
 		url:"<c:url value='/resume/matchupPopupResumeDown.do'/>",
 		type:"get",
-		data:"resumeNo="+resumeNo,
+		data:{
+			'resumeNo':resumeNo
+		},
 		dataType:"json",
 		success:function(resDown){
 			//alert(resDown);
@@ -603,6 +605,12 @@ function makeMemList(mcumem){
 		str+=mcumem.CAREER+'</span>';
 	}else{
 		str+=mcumem.CAREER+'년 경력</span>';
+	}
+	if(mcumem.EDUNAME==null){
+		mcumem.EDUNAME='';
+	}
+	if(mcumem.EDUMAJOR==null){
+		mcumem.EDUMAJOR='';
 	}
 	str+='<span>'+mcumem.EDUNAME+' '+mcumem.EDUMAJOR+'</span>';
 	str+='</div>';

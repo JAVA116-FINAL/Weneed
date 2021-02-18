@@ -197,12 +197,12 @@ function readURL(input) {
 					<span class="sizeInfoSpan">1080 X 790 이상</span>
 				</button>
 			</div>
-			<h2 class="comServTitle">로고 이미지</h2>
+			<!-- <h2 class="comServTitle">로고 이미지</h2>
 			<div class="imgBoxWrapper">
 				<div class="imgBox">
 					
 				</div>
-			</div>
+			</div> -->
 		</section>
 		<!-- 기업정보 수정 탭 -->
 		<section class="infoSection hide">
