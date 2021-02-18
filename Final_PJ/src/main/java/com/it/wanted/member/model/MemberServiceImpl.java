@@ -213,6 +213,17 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.updatePwd(pwd);
 	}
 
+	/* 2018자연 */
+	@Override
+	public int updateMemInfobyMemNo(MemberVO memberVo) {
+		return memberDao.updateMemInfobyMemNo(memberVo);
+	}
+
+	@Override
+	public int updateMemberImg(MemberVO memberVo) {
+		return memberDao.updateMemberImg(memberVo);
+	}
+
 
 	
 

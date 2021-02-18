@@ -36,12 +36,14 @@ import com.it.wanted.matchup.model.MatchupMemService;
 import com.it.wanted.matchup.model.MatchupMemVO;
 import com.it.wanted.matchupCom.model.MatchupComService;
 import com.it.wanted.matchupCom.model.MatchupComVO;
+import com.it.wanted.matchupStatus.model.MatchupStatusService;
 import com.it.wanted.matchupexcom.model.MatchupExComService;
 import com.it.wanted.matchupexcom.model.MatchupExComVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemJikmuVO;
 import com.it.wanted.matchupmemjikmu.model.MatchupMemjikmuService;
 import com.it.wanted.member.model.MemberService;
 import com.it.wanted.member.model.MemberVO;
+import com.it.wanted.proposal.model.ProposalService;
 import com.it.wanted.resume.model.ResumeAllVO;
 import com.it.wanted.resume.model.ResumeService;
 import com.it.wanted.resume.model.ResumeVO;
@@ -61,6 +63,8 @@ public class MatchupMemController {
 	@Autowired private ExpertiseService expertiseService;
 	@Autowired private MatchupComService matchupComService;
 	@Autowired private MatchupExComService matchupexcomService;
+	@Autowired private MatchupStatusService matchupStatusService;
+	@Autowired private ProposalService proposalService;
 	
 	//1.매치업 인트로
 	@RequestMapping("/matchupMemIntro.do")
@@ -95,6 +99,9 @@ public class MatchupMemController {
 			}
 		}
 			
+		int proposalCnt=proposalService.proposalCountbyMemNo(memVo.getMemNo());
+		int openResumeCnt=matchupStatusService.openResumeCountbyMemNo(memVo.getMemNo());
+		int likeCnt=matchupService.matchupLikeCountbyMemNo(memVo.getMemNo());
 		//회원 아니면 화면보여주기 회원정보와 직군리스트를 뿌려줘야함.
 		List<JikgunVO> jikgunList = jikgunService.selectAllJikgun();
 		logger.info("jikgunList={}",jikgunList);
@@ -102,6 +109,9 @@ public class MatchupMemController {
 		//3
 		model.addAttribute("jikgunList", jikgunList);
 		model.addAttribute("memVo", memVo);
+		model.addAttribute("proposalCnt", proposalCnt);
+		model.addAttribute("openResumeCnt", openResumeCnt);
+		model.addAttribute("likeCnt", likeCnt);
 
 		//4
 		return "matchupMem/matchupMemRegister";
@@ -149,7 +159,13 @@ public class MatchupMemController {
 				}
 			}
 		}
+		int proposalCnt=proposalService.proposalCountbyMemNo(memVo.getMemNo());
+		int openResumeCnt=matchupStatusService.openResumeCountbyMemNo(memVo.getMemNo());
+		int likeCnt=matchupService.matchupLikeCountbyMemNo(memVo.getMemNo());
 		//3
+		model.addAttribute("proposalCnt", proposalCnt);
+		model.addAttribute("openResumeCnt", openResumeCnt);
+		model.addAttribute("likeCnt", likeCnt);
 		model.addAttribute("memVo", memVo);
 		model.addAttribute("mcuVo", mcuVo);
 		//4
@@ -211,7 +227,13 @@ public class MatchupMemController {
 		logger.info("matchup 회원조회결과: jkimuList={}",jikmuList);
 		logger.info("matchup 회원조회결과: resumeList={}",resumeList);
 		
+		int proposalCnt=proposalService.proposalCountbyMemNo(memVo.getMemNo());
+		int openResumeCnt=matchupStatusService.openResumeCountbyMemNo(memVo.getMemNo());
+		int likeCnt=matchupService.matchupLikeCountbyMemNo(memVo.getMemNo());
 		//3
+		model.addAttribute("proposalCnt", proposalCnt);
+		model.addAttribute("openResumeCnt", openResumeCnt);
+		model.addAttribute("likeCnt", likeCnt);
 		model.addAttribute("memVo", memVo);
 		model.addAttribute("mDetailsList", mDetailsList);
 		model.addAttribute("jikmuList", jikmuList);
@@ -244,7 +266,13 @@ public class MatchupMemController {
 	    ResumeVO resumeVo = resumeService.selectResumeOnebyResumeNo(mViewVo.getResumeNo());
 	    logger.info("이력서 정보 resumeVo={}", resumeVo);
 	 
+	    int proposalCnt=proposalService.proposalCountbyMemNo(memVo.getMemNo());
+		int openResumeCnt=matchupStatusService.openResumeCountbyMemNo(memVo.getMemNo());
+		int likeCnt=matchupService.matchupLikeCountbyMemNo(memVo.getMemNo());
 		//3
+		model.addAttribute("proposalCnt", proposalCnt);
+		model.addAttribute("openResumeCnt", openResumeCnt);
+		model.addAttribute("likeCnt", likeCnt);
 		model.addAttribute("memVo", memVo);
 		model.addAttribute("eduVo", eduVo);
 		model.addAttribute("crrVo", crrVo);
@@ -283,8 +311,13 @@ public class MatchupMemController {
 		//뿌려줄 직군리스트(이중에 엑스퍼트등록된 직군은 체크되게한다.)
 		List<JikgunVO> jikgunList = jikgunService.selectAllJikgun();
 		List<JikmuVO> jikmuList = jikgunService.selectJikmuByJikgunCode(expertVo.getJikgunCode());
-
+		int proposalCnt=proposalService.proposalCountbyMemNo(memVo.getMemNo());
+		int openResumeCnt=matchupStatusService.openResumeCountbyMemNo(memVo.getMemNo());
+		int likeCnt=matchupService.matchupLikeCountbyMemNo(memVo.getMemNo());
 		//3
+		model.addAttribute("proposalCnt", proposalCnt);
+		model.addAttribute("openResumeCnt", openResumeCnt);
+		model.addAttribute("likeCnt", likeCnt);
 		model.addAttribute("memVo", memVo);
 		model.addAttribute("expertVo", expertVo);
 		model.addAttribute("mJikmuList", mJikmuList);

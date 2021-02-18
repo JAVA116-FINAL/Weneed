@@ -50,6 +50,10 @@
 		set proposal_date=sysdate, matchup_flag=2
 		where mcumem_no=#{mcumemNo} and mcucom_no=#{mcucomNo}
 	</update>
+	
+	<select id="openResumeCountbyMemNo" parameterType="int" resultType="int">
+		select count(*) from matchupStatus where mcumem_No=(select mcumem_No from matchupMem where mem_No=#{memNo}) and match_Date is not null
+	</select>
 </mapper>
 
 
