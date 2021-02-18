@@ -10,34 +10,20 @@ import org.springframework.stereotype.Service;
 
 import com.it.wanted.common.SearchVO;
 
+
 @Service
 public class ApplicantsServiceImpl implements ApplicantsService{
 	@Autowired
 	private ApplicantsDAO applicantsDao;
-	
-	private static final Logger logger= LoggerFactory.getLogger(ApplicantsServiceImpl.class);
-	
-//	@Override
-//	public List<Map<String, Object>> selectApplicants(String comCode) {
-//		return applicantsDao.selectApplicants(comCode);
-//	}
-//	@Override
-//	public List<Map<String, Object>> selectApplicants(ApplicantsVO appliVo) {
-//		return applicantsDao.selectApplicants(appliVo);
-//	}
+
 	@Override
-	public List<Map<String, Object>> selectApplicants(int statusFlag) {
-		return applicantsDao.selectApplicants(statusFlag);
+	public List<ApplicantsVO> selectAllPositions(String comCode) {
+		return applicantsDao.selectAllPositions(comCode);
 	}
 
 	@Override
-	public List<ApplicantsVO> selectAllPositions() {
-		return applicantsDao.selectAllPositions();
-	}
-
-	@Override
-	public int selectTotalRecord(SearchVO searchVo) {
-		return applicantsDao.selectTotalRecord(searchVo);
+	public int selectTotalRecord(AppliPagingVO appliPagingVo) {
+		return applicantsDao.selectTotalRecord(appliPagingVo);
 	}
 
 	@Override
@@ -45,10 +31,44 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 		return applicantsDao.selectByNo(no);
 	}
 
+
 	@Override
-	public List<Map<String, Object>> selectApplicants2() {
-		return applicantsDao.selectApplicants2();
+	public List<Map<String, Object>> selectApplicants(AppliPagingVO appliPagingVo) {
+		return applicantsDao.selectApplicants(appliPagingVo);
 	}
+
+	@Override
+	public int updateByNo(int no) {
+		return applicantsDao.updateByNo(no);
+	}
+
+
+
+	@Override
+	public int updateStatus(ApplicantsVO applicantsVo) {
+		return applicantsDao.updateStatus(applicantsVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAll() {
+		return applicantsDao.selectAll();
+	}
+
+	@Override
+	public int countBunmo(AppliPagingVO appliPagingVo) {
+		return applicantsDao.countBunmo(appliPagingVo);
+	}
+
+	@Override
+	public int countBunja(AppliPagingVO appliPagingVo) {
+		return applicantsDao.countBunja(appliPagingVo);
+	}
+
+//	@Override
+//	public int updatePeriod(ApplicantsVO appliVo) {
+//		// TODO Auto-generated method stub
+//		return applicantsDao.updatePeriod(appliVo);
+//	}
 
 	/* 자연 */
 	@Override
@@ -60,7 +80,7 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 	public List<Map<String, Object>> selectApplyAllbyAdmin(SearchVO searchVo) {
 		return applicantsDao.selectApplyAllbyAdmin(searchVo);
 	}
-
+ 
 	@Override
 	public int selectTotalRecordbyAdmin(SearchVO searchVo) {
 		return applicantsDao.selectTotalRecordbyAdmin(searchVo);
@@ -96,13 +116,5 @@ public class ApplicantsServiceImpl implements ApplicantsService{
 	public List<Map<String, Object>> selectApplyList(int memNo) {
 		return applicantsDao.selectApplyList(memNo);
 	}
-
-//	@Override
-//	public int updatePeriod(ApplicantsVO appliVo) {
-//		// TODO Auto-generated method stub
-//		return applicantsDao.updatePeriod(appliVo);
-//	}
-
-
 
 }

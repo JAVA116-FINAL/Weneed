@@ -51,12 +51,12 @@
 				<td>${map['NOTICE_DEPT1_INFO'] }</td>
 				<td>${map['NOTICE_DEPT2_INFO'] }</td>
  				<td>
-					<c:if test="${fn:length(map['NOTICE_TITLE'])>=30 }">
+					<c:if test="${fn:length(map['NOTICE_TITLE'])>=28 }">
 						<a href="<c:url value='/admin/noticeService/notice_detail.do?notice_no=${map["NOTICE_NO"] }'/>">
-							${fn:substring(map['NOTICE_TITLE'] , 0,30) } ...
+							${fn:substring(map['NOTICE_TITLE'] , 0, 28) } ...
 						</a>
 					</c:if>
-					<c:if test="${fn:length(map['NOTICE_TITLE'])<30 }">
+					<c:if test="${fn:length(map['NOTICE_TITLE'])<28 }">
 						<a href="<c:url value='/admin/noticeService/notice_detail.do?notice_no=${map["NOTICE_NO"] }'/>">
 							${map['NOTICE_TITLE'] }
 						</a>

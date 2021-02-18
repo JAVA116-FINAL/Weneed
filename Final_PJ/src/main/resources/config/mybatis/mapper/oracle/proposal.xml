@@ -13,6 +13,11 @@
 	<select id="checkProposalCount" parameterType="proposalVo" resultType="int">
 		select count(*) from proposal where pos_no=#{posNo} and mem_no=#{memNo}
 	</select>
+	
+	<select id="proposalCountbyMemNo" parameterType="int" resultType="int">
+		select count(*) from proposal where mem_No=#{memNo}		
+	</select>
+	
 </mapper>
 
 

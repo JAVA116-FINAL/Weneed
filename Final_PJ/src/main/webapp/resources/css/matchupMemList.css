@@ -28,9 +28,6 @@ i.icon-camera_icon.camerai_jy {
     border-radius: 20px;
 }
 
-input.inputimg_jy {
-    display: none;
-}
 
 .asideMe_jy {
     text-align: center;
@@ -907,4 +904,23 @@ i.icon-edit.pencilEdit_jy1 {
 a.pendil2-a_jy {
     top: 59%;
 }
+
+
+/* 0218자연 */
+
+img.img_member_jy {
+    width: 85px;
+    height: 85px;
+    border-radius: 70%;
+}
+
+i.icon-camera_icon.camerai_jy {
+    margin: 0;
+    margin-left: 68%;
+
+}
+ input.inputimg_jy {
+    display: none;
+} 
+
 

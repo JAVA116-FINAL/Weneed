@@ -7,20 +7,24 @@ import com.it.wanted.common.SearchVO;
 
 public interface ApplicantsDAO {
 
-	public List<ApplicantsVO> selectAllPositions();
+	public List<ApplicantsVO> selectAllPositions(String comCode);
 
-	public int selectTotalRecord(SearchVO searchVo);
+	public int selectTotalRecord(AppliPagingVO appliPagingVo);
 
 	public ApplicantsVO selectByNo(int no);
 
-	//	public List<Map<String, Object>> selectApplicants(String comCode);
-	public List<Map<String, Object>> selectApplicants(int statusFlag);
+	//public List<Map<String, Object>> selectApplicants(int statusFlag);
+ 
+	public List<Map<String, Object>> selectApplicants(AppliPagingVO appliPagingVo);
 
-	public List<Map<String, Object>> selectApplicants2();
+	public int updateByNo(int no);
 
-	//public List<Map<String, Object>> selectApplicants(ApplicantsVO appliVo);
+	public List<Map<String, Object>> selectAll();
 
-//	public int updatePeriod(ApplicantsVO appliVo);
+	public int updateStatus(ApplicantsVO applicantsVo);
+
+	public int countBunmo(AppliPagingVO appliPagingVo);
+	public int countBunja(AppliPagingVO appliPagingVo);
 	
 	/* 자연 */
 	public int insertApply(ApplicantsVO applyVo);

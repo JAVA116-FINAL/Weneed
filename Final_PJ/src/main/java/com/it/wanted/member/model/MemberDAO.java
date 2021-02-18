@@ -10,5 +10,6 @@ public interface MemberDAO {
 	public int updatePw(MemberVO vo);
 	public int withdrawMember(String email);
 	public int updatePwd(String pwd);
-	
+	public int updateMemInfobyMemNo(MemberVO memberVo);
+	public int updateMemberImg(MemberVO memberVo);
 }

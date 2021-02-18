@@ -27,7 +27,7 @@ public interface MatchupMemService {
 	public int updateMatchupjobFlag(MatchupMemVO mcuVo);
 	public List<Map<String, Object>> selectMatchupMemAllbyAdmin(SearchVO searchVo);
 	public int totalRecordbyAdmin(SearchVO searchVo);
-
+	public int matchupLikeCountbyMemNo(int memNo);
 	
 	/* 현빈 */
 	List<MatchupMemVO> selectOpen();

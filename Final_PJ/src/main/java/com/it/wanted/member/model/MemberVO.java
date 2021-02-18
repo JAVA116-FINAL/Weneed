@@ -12,7 +12,7 @@ public class MemberVO {
 	private Timestamp outdate;
 	private int point;
 	private String fileName;
-	private int fileSize;
+	private long fileSize;
 	private String originalFileName;
 	private String jikgun_code;
 	
@@ -71,10 +71,10 @@ public class MemberVO {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public int getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
-	public void setFileSize(int fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 	public String getOriginalFileName() {

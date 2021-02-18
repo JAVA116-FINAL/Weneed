@@ -464,3 +464,17 @@ input#salary {
  .col-lg-9.col-md-6.machupWrapperdiv_jy.paddingTop_jy{
     padding-top: 40px;
 } 
+
+/* 0218자연 */
+img.img_member_jy {
+    width: 85px;
+    height: 85px;
+    border-radius: 70%;
+}
+
+i.icon-camera_icon.camerai_jy {
+    margin: 0;
+    margin-left: 68%;
+    /* position: absolute; */
+    /* float: left; */
+}
