@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../inc/cssJsImports.jsp" %>
 <%@ include file="../inc/admin_top.jsp"%>
 <style type="text/css">
@@ -37,6 +38,14 @@ input.inputKeyword {
 th.th_jy {
     font: status-bar;
     font-weight: 700;
+}
+td.td_jy.title_td {
+    max-width: 246px;
+}
+
+
+td.td_jy {
+    max-width: 119px;
 }
 </style>
 
@@ -77,7 +86,7 @@ function pageFunc(curPage){
 				 	<thead>
 						<tr class="tr_jy"> 
 							<th class="th_jy">No.</th>
-							<th class="th_jy">회원번호</th>
+							<!-- <th class="th_jy">회원번호</th> -->
 							<th class="th_jy">이름</th>
 							<th class="th_jy">제목</th>
 							<th class="th_jy">경력</th>
@@ -91,24 +100,66 @@ function pageFunc(curPage){
 				<tbody>
 					<c:if test="${empty resumeList }">
 						<tr class="align_center"> 
-							<td colspan="10">이력서 등록내역이 없습니다.</td>
+							<td colspan="9">이력서 등록내역이 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty resumeList }">
 						<c:forEach var="map" items="${resumeList }">
 							<tr class="tr_jy">
 								<td class="td_jy">${map['RESUME_NO']} </td>
-								<td class="td_jy">${map['MEM_NO'] } </td>
+								<%-- <td class="td_jy">${map['MEM_NO'] } </td> --%>
 								<td class="td_jy">${map['RESUME_NAME'] } </td>
 								<td class="td_jy title_td">
 									<a href='<c:url value="/resume/resumeDetailAdmin.do?resumeNo=${map['RESUME_NO']}&memNo=${map['MEM_NO'] }"></c:url>'>
-										${map['RESUME_TITLE'] } 
+										<%-- <c:if test="${fn:length(map['RESUME_TITLE'])>=10}">
+											${fn:substring(map['RESUME_TITLE'] , 0,10) } ...
+										</c:if>
+										<c:if test="${fn:length(map['RESUME_TITLE'])<10}">						
+											${map['RESUME_TITLE']} 
+										</c:if> --%>		 
+										${map['RESUME_TITLE']}
 									</a>
 								</td>
-								<td class="td_jy">${map['CAREER_NAME'] } </td>
-								<td class="td_jy">${map['CAREER_DEP'] } </td>
-								<td class="td_jy">${map['EDU_NAME'] } </td>
-								<td class="td_jy">${map['EDU_MAJOR'] } </td>
+								
+								<td class="td_jy">
+									<%-- <c:if test="${fn:length(map['CAREER_NAME'])>=7}">
+											${fn:substring(map['CAREER_NAME'] , 0,7) } ...
+									</c:if>
+									<c:if test="${fn:length(map['CAREER_NAME'])<7}">						
+										${map['CAREER_NAME'] } 
+									</c:if> --%>
+									${map['CAREER_NAME'] }
+								</td>
+									
+								<td class="td_jy">
+									<%-- <c:if test="${fn:length(map['CAREER_DEP'])>=7}">
+											${fn:substring(map['CAREER_DEP'] , 0,7) } ...
+									</c:if>
+									<c:if test="${fn:length(map['CAREER_DEP'])<7}">						
+										${map['CAREER_DEP'] } 
+									</c:if> --%>
+									${map['CAREER_DEP'] }
+								 
+								</td>
+								<td class="td_jy">
+									<%-- <c:if test="${fn:length(map['EDU_NAME'])>=7}">
+											${fn:substring(map['EDU_NAME'] , 0,7) } ...
+									</c:if>
+									<c:if test="${fn:length(map['EDU_NAME'])<7}">						
+										${map['EDU_NAME'] } 
+									</c:if>		 --%>
+									${map['EDU_NAME'] }
+								</td>
+								
+								<td class="td_jy">
+									<%-- <c:if test="${fn:length(map['EDU_MAJOR'])>=7}">
+											${fn:substring(map['EDU_MAJOR'] , 0,7) } ...
+									</c:if>
+									<c:if test="${fn:length(map['EDU_MAJOR'])<7}">						
+										${map['EDU_MAJOR'] } 
+									</c:if>	 --%>	 
+									${map['EDU_MAJOR'] }
+								</td>
 								<td class="td_jy">${map['TEMP_FLAG'] } </td>
 								<td class="td_jy"> <fmt:formatDate value="${map['RESUME_REGDATE'] }" pattern="yyyy.MM.dd"/>   </td>
 							</tr>

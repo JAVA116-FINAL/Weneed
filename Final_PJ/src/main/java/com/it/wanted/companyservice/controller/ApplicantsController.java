@@ -25,6 +25,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import com.it.wanted.applicants.model.AppliPagingVO;
 import com.it.wanted.applicants.model.ApplicantsService;
 import com.it.wanted.applicants.model.ApplicantsVO;
+import com.it.wanted.comimginfo.model.ComImgInfoVO;
 import com.it.wanted.cominfo.model.ComInfoVO;
 import com.it.wanted.common.PaginationInfo;
 import com.it.wanted.common.Utility;
@@ -38,6 +39,34 @@ public class ApplicantsController {
 	@Autowired
 	private ApplicantsService applicantsService;
 
+	@ResponseBody
+	@RequestMapping("/changeStatus.do")
+	public boolean changeStatus(@RequestParam(value = "applyNoList[]") List<Integer> applyNoList,
+			@RequestParam(defaultValue="3") int modalStatus) {
+		
+		boolean bool = false;
+		logger.info("modal ={}", modalStatus);
+		int cnt = 0;
+		if(modalStatus==1) {
+			for(int applyNo:applyNoList) {
+				cnt = applicantsService.changeStatus1(applyNo);
+			}
+		}else if(modalStatus==2) {
+			for(int applyNo:applyNoList) {
+				cnt = applicantsService.changeStatus2(applyNo);
+			}
+		}else {
+			for(int applyNo:applyNoList) {
+				cnt = 	applicantsService.changeStatus3(applyNo);
+			}
+			
+		}
+		
+		if(cnt>0) {
+			bool =true;
+		}
+		return bool;
+	}
 
 	@RequestMapping("/applicants.do")
 	public String applicantsMain(HttpSession session, Model model, @ModelAttribute AppliPagingVO appliPagingVo
@@ -89,7 +118,7 @@ public class ApplicantsController {
 		appliPagingVo.setStatusFlag(statusFlag);
 		appliPagingVo.setComCode(comCode);
 		appliPagingVo.setPosNo(posNo);
-
+		
 		model.addAttribute("status",statusFlag);
 		model.addAttribute("posNo",posNo);
 
@@ -187,6 +216,14 @@ public class ApplicantsController {
 
 		//4
 		return "common/message";
+	}
+	
+	@RequestMapping(value="/sendStatus.do", method = RequestMethod.POST)
+	public String sendStatus(@ModelAttribute ApplicantsVO applicantsVo,
+			Model model) {
+		
+		//4
+		return "company/applicants";
 	}
 
 }

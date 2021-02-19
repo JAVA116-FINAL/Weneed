@@ -97,7 +97,7 @@ function fnAddLoginPage(page){
 		<div class="divheader">
 			<h1>매치업 현황 관리</h1>
 		</div>
-		<iframe src="<c:url value='/admin/adminMatchupStatus.do'/>" width="100%" height="67%"></iframe>
+		<iframe src="<c:url value='/admin/adminMatchupStatus.do'/>" width="100%" height="58%"></iframe>
 	</div>
 	<div id="matchupMemList">
 		<div class="divheader">
@@ -111,7 +111,7 @@ function fnAddLoginPage(page){
 		<div class="divheader">
 			<h1>매치업 기업회원 조회 관리</h1>
 		</div>
-		<iframe src="<c:url value='/admin/adminMatchupCom.do'/>"width="100%" height="67%">
+		<iframe src="<c:url value='/admin/adminMatchupCom.do'/>"width="100%" height="40%">
 		</iframe>
 	</div>
 	

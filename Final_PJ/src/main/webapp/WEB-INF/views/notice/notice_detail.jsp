@@ -10,10 +10,10 @@
         <ol class="breadcrumbs">
   
     <li title="위니드 고객센터">
-        <a href="<c:url value='notice.do'/>">위니드 고객센터</a>
+        <a href="<c:url value='/notice/notice.do'/>">위니드 고객센터</a>
     </li>
     <li title="${listDetail['notice_dept1_info'] }">
-        <a href='<c:url value="notice_dept1.do?notice_dept1=${listDetail['notice_dept1'] }"/>'>
+        <a href='<c:url value="/notice/notice_dept1.do?notice_dept1=${listDetail['notice_dept1'] }"/>'>
         	${listDetail['notice_dept1_info'] }
         </a>
     </li>
@@ -71,7 +71,7 @@
 
 <div class="container" id="new_request_container">
     <span id="article_new_request_label">또 다른 질문이 있으십니까?&nbsp;&nbsp;&nbsp;
-    	<a href="<c:url value='notice_qna.do'/>" id="article_new_request_button" > 
+    	<a href="<c:url value='/notice/notice_qna.do'/>" id="article_new_request_button" > 
     		다른 문의 등록하기 &gt;
     	</a>
     </span>

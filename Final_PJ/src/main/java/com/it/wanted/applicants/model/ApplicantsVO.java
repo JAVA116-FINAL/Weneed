@@ -31,6 +31,24 @@ public class ApplicantsVO {
 	private String comName;
 	
 	
+	
+	
+	public String getResumeTitle() {
+		return resumeTitle;
+	}
+
+	public void setResumeTitle(String resumeTitle) {
+		this.resumeTitle = resumeTitle;
+	}
+
+	public Timestamp getResumeRegdate() {
+		return resumeRegdate;
+	}
+
+	public void setResumeRegdate(Timestamp resumeRegdate) {
+		this.resumeRegdate = resumeRegdate;
+	}
+
 	public String getResumeUpfileflag() {
 		return resumeUpfileflag;
 	}
