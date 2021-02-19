@@ -91,7 +91,7 @@
 			set status_flag=#{statusFlag}, pass_regdate=sysdate
 		</if>
 		<if test="statusFlag==3">
-			set status_flag=#{statusFlag}, regect_pass_regdate=sysdate
+			set status_flag=#{statusFlag}, regect_regdate=sysdate
 		</if>
 		where apply_no = #{applyNo}
 	</update>

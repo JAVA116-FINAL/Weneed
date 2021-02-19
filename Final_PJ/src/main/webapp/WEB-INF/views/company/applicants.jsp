@@ -166,9 +166,7 @@ function pageFunc(curPage, statusflag,posNo){
 										test="${responPer !='NaN' }">${responPer}%</c:if>
 								</strong>
 							</div>
-							<div class="appli-responseInfo_obj">
-								<span>응답 지연</span>&nbsp; <strong class="appli-bigNumber-red">0명</strong>
-							</div>
+							
 						</div>
 						<div>
 							<p class="appli-notiGuide">지원자에게 15일 안에 합격/불합격 소식을 알려주세요. 좋은
